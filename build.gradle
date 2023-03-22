@@ -39,7 +39,7 @@ tasks.register("generateDiscordEmbed") {
                 ],
                 [
                         name  : "Mod Version",
-                        value : project.version,
+                        value : "1.0.6",
                         inline: true
                 ],
                 [
@@ -174,29 +174,8 @@ dependencies {
 	modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
 }
 
-sourceSets {
-		main {
-			compileClasspath += main.compileClasspath
-			runtimeClasspath += main.runtimeClasspath
-		}
-	}
-
 loom {
 	accessWidenerPath = file("src/main/resources/ad_astra.accesswidener")
-	runs {
-		datagen {
-			server()
-
-			runDir = "build/datagen"
-
-			vmArg("-Dfabric-api.datagen")
-			vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
-
-			ideConfigGenerated project.rootProject == project
-			name = "Datagen"
-			source sourceSets.main
-		}
-	}
 }
 
 processResources {

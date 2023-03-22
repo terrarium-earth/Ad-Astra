@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "flag",
+  "key": {
+    "#": {
+      "item": "minecraft:green_wool"
+    },
+    "|": {
+      "tag": "c:iron_sticks"
+    }
+  },
+  "pattern": [
+    "|##",
+    "|##",
+    "|  "
+  ],
+  "result": {
+    "item": "ad_astra:green_flag"
+  }
+}

@@ -1,59 +1,70 @@
 package com.github.alexnijjar.ad_astra.client.renderer.block.globe;
 
-import com.github.alexnijjar.ad_astra.registry.ModBlocks;
-import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
+import net.fabricmc.fabric.api.client.model.BakedModelManagerHelper;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.block.entity.BlockEntityRenderer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
+import net.minecraft.client.render.item.BuiltinModelItemRenderer;
+import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.registry.Registry;
 
 @Environment(EnvType.CLIENT)
-public class GlobeRenderer {
+public class GlobeRenderer implements BlockEntityRenderer<GlobeBlockEntity> {
 
-	// Textures
-	public static final Identifier EARTH_GLOBE = new ModIdentifier("textures/block/globes/earth_globe.png");
-	public static final Identifier MOON_GLOBE = new ModIdentifier("textures/block/globes/moon_globe.png");
-	public static final Identifier MARS_GLOBE = new ModIdentifier("textures/block/globes/mars_globe.png");
-	public static final Identifier MERCURY_GLOBE = new ModIdentifier("textures/block/globes/mercury_globe.png");
-	public static final Identifier VENUS_GLOBE = new ModIdentifier("textures/block/globes/venus_globe.png");
-	public static final Identifier GLACIO_GLOBE = new ModIdentifier("textures/block/globes/glacio_globe.png");
+    public GlobeRenderer(BlockEntityRendererFactory.Context ctx) {
+    }
 
-	// Render model
-	public static void render(Identifier id, GlobeModel model, Direction direction, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    @Override
+    public void render(GlobeBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        float yaw = MathHelper.lerp(tickDelta, entity.prevYaw, entity.getYaw());
+        render(entity.getCachedState(), yaw, matrices, vertexConsumers, light, overlay);
+    }
 
-		// Get the texture
-		VertexConsumer vertexConsumer;
-		if (id.equals(Registry.BLOCK.getId(ModBlocks.EARTH_GLOBE))) {
-			vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCullZOffset(EARTH_GLOBE));
-		} else if (id.equals(Registry.BLOCK.getId(ModBlocks.MOON_GLOBE))) {
-			vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCullZOffset(MOON_GLOBE));
-		} else if (id.equals(Registry.BLOCK.getId(ModBlocks.MARS_GLOBE))) {
-			vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCullZOffset(MARS_GLOBE));
-		} else if (id.equals(Registry.BLOCK.getId(ModBlocks.MERCURY_GLOBE))) {
-			vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCullZOffset(MERCURY_GLOBE));
-		} else if (id.equals(Registry.BLOCK.getId(ModBlocks.VENUS_GLOBE))) {
-			vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCullZOffset(VENUS_GLOBE));
-		} else {
-			vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCullZOffset(GLACIO_GLOBE));
-		}
+    private static void render(BlockState state, float yaw, MatrixStack poseStack, VertexConsumerProvider buffer, int packedLight, int packedOverlay) {
+        BakedModel blockModel = BakedModelManagerHelper.getModel(MinecraftClient.getInstance().getBakedModelManager(), new Identifier(AdAstra.MOD_ID, "block/" + Registry.BLOCK.getId(state.getBlock()).getPath() + "_cube"));
+        poseStack.push();
+        poseStack.translate(0.5, 0, 0.5);
+        poseStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-yaw));
+        poseStack.translate(-0.5, 0, -0.5);
+        MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer().render(poseStack.peek(), buffer.getBuffer(TexturedRenderLayers.getEntityCutout()), state, blockModel, 1f, 1f, 1f, packedLight, packedOverlay);
+        poseStack.pop();
+    }
 
-		matrices.push();
+    public static class ItemRenderer extends BuiltinModelItemRenderer {
+        private long prevWorldTime;
 
-		matrices.translate(0.5f, 1.5f, 0.5f);
-		matrices.scale(-1.0f, -1.0f, 1.0f);
-		matrices.multiply(direction.getRotationQuaternion());
+        public ItemRenderer() {
+            super(MinecraftClient.getInstance().getBlockEntityRenderDispatcher(), MinecraftClient.getInstance().getEntityModelLoader());
+        }
 
-		// Turn upright
-		matrices.multiply(Vec3f.NEGATIVE_X.getDegreesQuaternion(90));
+        @Override
+        public void render(ItemStack stack, ModelTransformation.Mode transformType, MatrixStack poseStack, VertexConsumerProvider buffer, int packedLight, int packedOverlay) {
+            BlockState state = Registry.BLOCK.get(Registry.ITEM.getId(stack.getItem())).getDefaultState();
 
-		model.render(matrices, vertexConsumer, light, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
+            MinecraftClient minecraft = MinecraftClient.getInstance();
+            if (minecraft.world == null) return;
+            float partialTicks = minecraft.getTickDelta();
+            float yaw = MathHelper.lerp(partialTicks, prevWorldTime, minecraft.world.getTime()) * -2.0f;
+            prevWorldTime = minecraft.world.getTime();
 
-		matrices.pop();
-	}
+            poseStack.push();
+            BakedModel blockModel = MinecraftClient.getInstance().getBlockRenderManager().getModel(state);
+            MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer().render(poseStack.peek(), buffer.getBuffer(TexturedRenderLayers.getEntityCutout()), state, blockModel, 1f, 1f, 1f, packedLight, packedOverlay);
+            GlobeRenderer.render(state, yaw, poseStack, buffer, packedLight, packedOverlay);
+            poseStack.pop();
+        }
+    }
 }

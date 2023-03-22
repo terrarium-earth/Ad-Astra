@@ -25,25 +25,20 @@ public class SulfurCreeperEntityModel<T extends Entity> extends EntityModel<T> {
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
-		ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(50, 9).cuboid(0.0F, -17.0F, 0.0F, 0.0F, 9.0F, 7.0F, new Dilation(0.0F)).uv(16, 16).cuboid(-4.0F, -18.0F, -2.0F, 8.0F, 12.0F, 4.0F, new Dilation(0.0F)),
-				ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 
-		ModelPartData sulfurcrystalbodyR_r1 = body.addChild("sulfurcrystalbodyR_r1",
-				ModelPartBuilder.create().uv(50, 0).cuboid(3.4317F, -7.4874F, -1.9048F, 10.0F, 7.0F, 0.0F, new Dilation(0.0F)).uv(50, 0).cuboid(14.4317F, -8.4874F, 0.0952F, 6.0F, 2.0F, 0.0F, new Dilation(0.0F)),
-				ModelTransform.of(11.0F, -17.0F, 2.0F, 0.0983F, 0.0831F, 2.9853F));
+		ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(0, 16).cuboid(-4.0F, -18.0F, -2.0F, 8.0F, 12.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 
-		ModelPartData head = body.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -18.0F, 0.0F));
+		ModelPartData head = body.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new Dilation(0.0F))
+		.uv(24, 0).cuboid(-6.0F, -12.0F, 0.0F, 12.0F, 6.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -18.0F, 0.0F));
 
-		ModelPartData sulfurcrystalhead_r1 = head.addChild("sulfurcrystalhead_r1", ModelPartBuilder.create().uv(50, 0).cuboid(-5.5F, -4.0F, -4.5F, 10.0F, 7.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(-4.0F, -7.0F, 1.0F, 0.1259F, -0.3419F, 0.4257F));
+		ModelPartData BackLeftLeg = body.addChild("BackLeftLeg", ModelPartBuilder.create().uv(24, 16).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(-2.0F, -6.0F, 4.0F));
 
-		ModelPartData BackLeftLeg = body.addChild("BackLeftLeg", ModelPartBuilder.create().uv(0, 16).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(-2.0F, -6.0F, 4.0F));
+		ModelPartData BackRightLeg = body.addChild("BackRightLeg", ModelPartBuilder.create().uv(24, 16).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(2.0F, -6.0F, 4.0F));
 
-		ModelPartData BackRightLeg = body.addChild("BackRightLeg", ModelPartBuilder.create().uv(0, 16).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(2.0F, -6.0F, 4.0F));
+		ModelPartData FrontLeftLeg = body.addChild("FrontLeftLeg", ModelPartBuilder.create().uv(24, 16).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(-2.0F, -6.0F, -4.0F));
 
-		ModelPartData FrontLeftLeg = body.addChild("FrontLeftLeg", ModelPartBuilder.create().uv(0, 16).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(-2.0F, -6.0F, -4.0F));
-
-		ModelPartData FrontRightLeg = body.addChild("FrontRightLeg", ModelPartBuilder.create().uv(0, 16).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(2.0F, -6.0F, -4.0F));
-		return TexturedModelData.of(modelData, 64, 32);
+		ModelPartData FrontRightLeg = body.addChild("FrontRightLeg", ModelPartBuilder.create().uv(24, 16).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(2.0F, -6.0F, -4.0F));
+		return TexturedModelData.of(modelData, 64, 64);
 	}
 
 	@Override

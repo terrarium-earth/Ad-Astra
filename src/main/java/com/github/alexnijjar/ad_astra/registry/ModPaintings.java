@@ -19,7 +19,7 @@ public class ModPaintings {
 		register("uranus", 48, 48);
 		register("saturn", 64, 48);
 		register("the_milky_way", 64, 48);
-		register("alpha_centaury_c", 64, 64);
+		register("alpha_centauri", 64, 64);
 		register("sun", 80, 80);
 	}
 

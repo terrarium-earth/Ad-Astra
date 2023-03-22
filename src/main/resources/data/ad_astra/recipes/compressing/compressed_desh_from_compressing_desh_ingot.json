@@ -4,7 +4,7 @@
     "tag": "c:desh_ingots"
   },
   "output": {
-    "item": "ad_astra:compressed_desh",
+    "item": "ad_astra:desh_plate",
     "count": 1
   },
   "cookTime": 200

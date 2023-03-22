@@ -1,10 +1,5 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
-import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Nullable;
-
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.ad_astra.recipes.OxygenConversionRecipe;
@@ -16,7 +11,6 @@ import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 import com.github.alexnijjar.ad_astra.util.algorithms.OxygenFillerAlgorithm;
 import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
-
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,6 +21,10 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Set;
 
 public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 

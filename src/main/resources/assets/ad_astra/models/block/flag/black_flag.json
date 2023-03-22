@@ -1,0 +1,6 @@
+{
+    "parent": "ad_astra:template/flag",
+    "textures": {
+        "flag": "ad_astra:block/flag/black_flag"
+    }
+}

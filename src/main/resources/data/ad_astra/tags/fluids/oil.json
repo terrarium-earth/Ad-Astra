@@ -2,6 +2,18 @@
   "replace": false,
   "values": [
     "ad_astra:oil",
-    "ad_astra:flowing_oil"
+    "ad_astra:flowing_oil",
+    {
+      "required": false,
+      "id": "techreborn:oil"
+    },
+    {
+      "required": false,
+      "id": "modern_industrialization:crude_oil"
+    },
+    {
+      "required": false,
+      "id": "#forge:crude_oil"
+    }
   ]
 }

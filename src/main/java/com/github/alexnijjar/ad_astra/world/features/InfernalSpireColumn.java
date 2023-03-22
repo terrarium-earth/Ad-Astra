@@ -12,8 +12,8 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.BasaltColumnsFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
 public class InfernalSpireColumn extends Feature<BasaltColumnsFeatureConfig> {

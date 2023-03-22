@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "vents",
+  "key": {
+    "#": {
+      "tag": "c:iron_sticks"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 4,
+    "item": "ad_astra:vent"
+  }
+}

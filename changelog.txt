@@ -1,4 +1,9 @@
-- backported some of the 1.19 sky rendering to 1.18 to hopefully fix some very specific GPU crashes people were experiencing, along with improving shader support
-- fixed the coal generator consuming lava buckets
-- Slightly reduced Corrupted Lunarian damage
-- updated the icon and creds
+- backported all 1.19 textures to 1.18
+
+- warning! some ids were changed:
+coal_lantern -> extinguished_lantern,
+coal_torch -> extinguished_torch,
+iron_stick -> iron_rod,
+blue_iron_pillar -> glowing_iron_pillar,
+all flags,
+all plates materials

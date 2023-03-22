@@ -31,12 +31,12 @@ public class CorruptedLunarianEntityModel extends EntityModel<CorruptedLunarianE
 		this.body = root.getChild("body");
 		this.leg0 = root.getChild("leg0");
 		this.leg1 = root.getChild("leg1");
-		this.arm1 = root.getChild("arm1");
-		this.arm2 = root.getChild("arm2");
-		this.monsterarm1 = root.getChild("monsterarm1");
-		this.monsterarm2 = root.getChild("monsterarm2");
-		this.monsterarm3 = root.getChild("monsterarm3");
-		this.monsterarm4 = root.getChild("monsterarm4");
+		this.arm1 = root.getChild("arms").getChild("arm1");
+        this.arm2 = root.getChild("arms").getChild("arm2");
+        this.monsterarm1 = root.getChild("extra_arms").getChild("backarm1");
+        this.monsterarm2 = root.getChild("extra_arms").getChild("backarm2");
+        this.monsterarm3 = root.getChild("extra_arms").getChild("backarm3");
+        this.monsterarm4 = root.getChild("extra_arms").getChild("backarm4");
 	}
 
 	@Override
@@ -82,74 +82,50 @@ public class CorruptedLunarianEntityModel extends EntityModel<CorruptedLunarianE
 		monsterarm4.render(matrices, vertices, light, overlay);
 	}
 
+	@SuppressWarnings("unused")
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
 
-		ModelPartData head = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 0).mirrored().cuboid(-4.0f, -9.0f, -4.0f, 8.0f, 9.0f, 8.0f, new Dilation(0.0f)).mirrored(false), ModelTransform.of(0.0f, 2.0f, -6.0f, -0.2182f, 0.0f, 0.0f));
+		ModelPartData head = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 19).mirrored().cuboid(-4.0F, -9.0F, -4.0F, 8.0F, 9.0F, 8.0F, new Dilation(0.0F)).mirrored(false)
+                .uv(0, 0).mirrored().cuboid(-4.5F, -18.0F, -4.5F, 9.0F, 10.0F, 9.0F, new Dilation(0.0F)).mirrored(false)
+                .uv(0, 20).mirrored().cuboid(-1.0F, -3.0F, -6.0F, 2.0F, 4.0F, 2.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
-		// cube_r1.
-		head.addChild("cube_r1", ModelPartBuilder.create().uv(88, 59).mirrored().cuboid(-0.5095f, -2.211f, -0.6496f, 2.0f, 3.0f, 2.0f, new Dilation(0.0f)).mirrored(false), ModelTransform.of(2.25f, 4.1027f, -5.534f, 1.0036f, 0.48f, -0.8727f));
+        ModelPartData extra_arms = modelPartData.addChild("extra_arms", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 3.0F));
 
-		// cube_r2.
-		head.addChild("cube_r2", ModelPartBuilder.create().uv(88, 59).cuboid(-1.7975f, -1.8508f, -0.9483f, 2.0f, 3.0f, 2.0f, new Dilation(0.0f)), ModelTransform.of(-1.75f, 4.1027f, -5.534f, 1.0036f, -0.48f, 0.8727f));
+        ModelPartData backarm1 = extra_arms.addChild("backarm1", ModelPartBuilder.create(), ModelTransform.pivot(-1.2968F, 6.4078F, 0.3907F));
 
-		// cube_r3.
-		head.addChild("cube_r3", ModelPartBuilder.create().uv(88, 54).cuboid(-1.5f, -1.75f, -0.75f, 3.0f, 3.0f, 1.0f, new Dilation(0.0f)), ModelTransform.of(0.0f, 1.8527f, -7.434f, -0.3927f, 0.0f, 0.0f));
+        ModelPartData body_r1 = backarm1.addChild("body_r1", ModelPartBuilder.create().uv(52, 0).cuboid(-11.5F, 0.0F, 9.5F, 10.0F, 2.0F, 2.0F, new Dilation(0.0F))
+                .uv(36, 0).cuboid(-1.5F, 0.0F, -0.5F, 2.0F, 2.0F, 12.0F, new Dilation(0.0F)), ModelTransform.of(0.2968F, -0.4078F, 0.1093F, -0.6109F, -0.6109F, 0.0F));
 
-		// head_r1.
-		head.addChild("head_r1", ModelPartBuilder.create().uv(33, 0).mirrored().cuboid(-4.5f, -3.9804f, -4.3483f, 9.0f, 10.0f, 9.0f, new Dilation(0.0f)).mirrored(false), ModelTransform.of(0.0f, -14.0f, 1.0f, -0.1745f, 0.0f, 0.0f));
+        ModelPartData backarm2 = extra_arms.addChild("backarm2", ModelPartBuilder.create(), ModelTransform.pivot(1.0F, 6.0F, 1.0F));
 
-		// head_r2.
-		head.addChild("head_r2", ModelPartBuilder.create().uv(40, 53).mirrored().cuboid(-3.0f, 2.8551f, 0.3492f, 7.0f, 6.0f, 5.0f, new Dilation(0.0f)).mirrored(false), ModelTransform.of(-0.5f, -5.0f, 0.0f, -1.0036f, 0.0f, 0.0f));
+        ModelPartData body_r2 = backarm2.addChild("body_r2", ModelPartBuilder.create().uv(52, 0).mirrored().cuboid(2.0F, 0.0F, 9.5F, 10.0F, 2.0F, 2.0F, new Dilation(0.0F)).mirrored(false)
+                .uv(36, 0).cuboid(0.0F, 0.0F, -0.5F, 2.0F, 2.0F, 12.0F, new Dilation(0.0F)), ModelTransform.of(-0.5F, 0.0F, -0.5F, -0.6109F, 0.6981F, 0.0F));
 
-		// nose.
-		ModelPartData nose = head.addChild("nose", ModelPartBuilder.create(), ModelTransform.pivot(0.0f, -3.1927f, 0.7599f));
+        ModelPartData backarm3 = extra_arms.addChild("backarm3", ModelPartBuilder.create(), ModelTransform.pivot(-1.0F, 4.0F, 1.0F));
 
-		// nose_r1.
-		nose.addChild("nose_r1", ModelPartBuilder.create().uv(24, 0).mirrored().cuboid(-1.0f, -0.5896f, 1.4131f, 2.0f, 4.0f, 2.0f, new Dilation(0.0f)).mirrored(false), ModelTransform.of(0.0f, -2.0f, -6.0f, -1.0036f, 0.0f, 0.0f));
+        ModelPartData body_r3 = backarm3.addChild("body_r3", ModelPartBuilder.create().uv(52, 0).cuboid(-11.5F, -2.0F, 9.5F, 10.0F, 2.0F, 2.0F, new Dilation(0.0F))
+                .uv(36, 0).cuboid(-1.5F, -2.0F, -0.5F, 2.0F, 2.0F, 12.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 1.0F, -0.5F, 0.6109F, -0.6109F, 0.0F));
 
-		// body.
-		modelPartData.addChild("body",
-				ModelPartBuilder.create().uv(16, 20).mirrored().cuboid(-4.0f, 0.0f, -3.0f, 8.0f, 12.0f, 6.0f, new Dilation(0.0f)).mirrored(false).uv(0, 38).mirrored().cuboid(-4.0f, 0.0f, -3.0f, 8.0f, 20.0f, 6.0f, new Dilation(0.5f)).mirrored(false),
-				ModelTransform.of(0.0f, 0.0f, -3.0f, 0.2182f, 0.0f, 0.0f));
+        ModelPartData backarm4 = extra_arms.addChild("backarm4", ModelPartBuilder.create(), ModelTransform.pivot(1.0F, 4.0F, 0.0F));
 
-		// leg0.
-		modelPartData.addChild("leg0", ModelPartBuilder.create().uv(0, 22).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, new Dilation(0.0f)).mirrored(false), ModelTransform.pivot(2.0f, 12.0f, 0.0f));
+        ModelPartData body_r4 = backarm4.addChild("body_r4", ModelPartBuilder.create().uv(52, 0).mirrored().cuboid(2.0F, -2.0F, 9.5F, 10.0F, 2.0F, 2.0F, new Dilation(0.0F)).mirrored(false)
+                .uv(36, 0).cuboid(0.0F, -2.0F, -0.5F, 2.0F, 2.0F, 12.0F, new Dilation(0.0F)), ModelTransform.of(-0.5F, 1.0F, 0.5F, 0.6109F, 0.6109F, 0.0F));
 
-		// leg1.
-		modelPartData.addChild("leg1", ModelPartBuilder.create().uv(0, 22).mirrored().cuboid(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, new Dilation(0.0f)).mirrored(false), ModelTransform.pivot(-2.0f, 12.0f, 0.0f));
+        ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(100, 0).mirrored().cuboid(0.0F, -12.0F, -5.0F, 8.0F, 12.0F, 6.0F, new Dilation(0.0F)).mirrored(false)
+                .uv(0, 36).mirrored().cuboid(0.0F, -12.0F, -5.0F, 8.0F, 19.0F, 6.0F, new Dilation(0.5F)).mirrored(false), ModelTransform.pivot(-4.0F, 12.0F, 2.0F));
 
-		// arm1.
-		modelPartData.addChild("arm1", ModelPartBuilder.create().uv(44, 22).mirrored().cuboid(-8.0f, -2.0f, -2.0f, 4.0f, 12.0f, 4.0f, new Dilation(0.0f)).mirrored(false), ModelTransform.of(0.0f, 4.0f, -1.5f, 0.0436f, 0.0f, 0.0f));
+        ModelPartData leg0 = modelPartData.addChild("leg0", ModelPartBuilder.create().uv(0, 81).mirrored().cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(2.0F, 12.0F, 0.0F));
 
-		// arm2.
-		modelPartData.addChild("arm2", ModelPartBuilder.create().uv(44, 22).mirrored().cuboid(4.0f, -2.0f, -5.0f, 4.0f, 12.0f, 4.0f, new Dilation(0.0f)).mirrored(false), ModelTransform.pivot(0.0f, 7.0f, -1.5f));
+        ModelPartData leg1 = modelPartData.addChild("leg1", ModelPartBuilder.create().uv(0, 81).cuboid(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(-2.0F, 12.0F, 0.0F));
 
-		// monsterarm1.
-		ModelPartData monsterarm1 = modelPartData.addChild("monsterarm1", ModelPartBuilder.create().uv(30, 46).cuboid(-17.0f, -1.0f, -1.0f, 17.0f, 2.0f, 2.0f, new Dilation(0.0f)), ModelTransform.of(-4.0f, 0.0f, -2.0f, 0.0f, 0.0f, 0.9599f));
+        ModelPartData arms = modelPartData.addChild("arms", ModelPartBuilder.create(), ModelTransform.of(0.0F, 2.0F, 0.0F, -1.5708F, 0.0F, 0.0F));
 
-		// cube_r4.
-		monsterarm1.addChild("cube_r4", ModelPartBuilder.create().uv(34, 46).cuboid(-15.0f, -1.0f, -1.0f, 15.0f, 2.0f, 2.0f, new Dilation(-0.1f)), ModelTransform.of(-16.25f, 0.0f, 0.75f, 0.0f, -1.1345f, 0.0f));
+        ModelPartData arm1 = arms.addChild("arm1", ModelPartBuilder.create().uv(30, 61).mirrored().cuboid(-2.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(6.0F, 0.1434F, 0.2048F));
 
-		// monsterarm2
-		ModelPartData monsterarm2 = modelPartData.addChild("monsterarm2", ModelPartBuilder.create().uv(30, 46).cuboid(-17.0f, -1.0f, -1.0f, 17.0f, 2.0f, 2.0f, new Dilation(0.0f)), ModelTransform.of(-3.0f, -0.25f, -3.0f, 0.0f, 0.0f, -0.3927f));
+        ModelPartData arm2 = arms.addChild("arm2", ModelPartBuilder.create().uv(30, 61).cuboid(-2.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(-6.0F, 0.1434F, 0.2048F));
 
-		// cube_r5.
-		monsterarm2.addChild("cube_r5", ModelPartBuilder.create().uv(34, 46).cuboid(-15.0f, -1.0f, -1.0f, 15.0f, 2.0f, 2.0f, new Dilation(-0.1f)), ModelTransform.of(-16.25f, 0.0f, 0.75f, 0.0f, -1.1345f, 0.0f));
-
-		// monsterarm3.
-		ModelPartData monsterarm3 = modelPartData.addChild("monsterarm3", ModelPartBuilder.create().uv(30, 46).cuboid(-17.0f, -1.0f, -1.0f, 17.0f, 2.0f, 2.0f, new Dilation(0.0f)), ModelTransform.of(4.0f, 0.0f, -2.0f, 0.0f, 0.0f, 2.1817f));
-
-		// cube_r6.
-		monsterarm3.addChild("cube_r6", ModelPartBuilder.create().uv(34, 46).cuboid(-15.0f, -1.0f, -1.0f, 15.0f, 2.0f, 2.0f, new Dilation(-0.1f)), ModelTransform.of(-16.25f, 0.0f, 0.75f, 0.0f, -1.1345f, 0.0f));
-
-		// monsterarm4.
-		ModelPartData monsterarm4 = modelPartData.addChild("monsterarm4", ModelPartBuilder.create().uv(30, 46).cuboid(-17.0f, -1.0f, -1.0f, 17.0f, 2.0f, 2.0f, new Dilation(0.0f)), ModelTransform.of(3.0f, -0.25f, -3.0f, 0.0f, 0.0f, -2.7489f));
-
-		// cube_r7.
-		monsterarm4.addChild("cube_r7", ModelPartBuilder.create().uv(30, 46).cuboid(-15.0f, -1.0f, -1.0f, 15.0f, 2.0f, 2.0f, new Dilation(-0.1f)), ModelTransform.of(-16.25f, 0.0f, 0.75f, 0.0f, -1.1345f, 0.0f));
-
-		return TexturedModelData.of(modelData, 96, 64);
+		return TexturedModelData.of(modelData, 128, 128);
 	}
 }

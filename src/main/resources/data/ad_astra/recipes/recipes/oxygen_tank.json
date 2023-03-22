@@ -10,7 +10,7 @@
       "tag": "c:compressed_steel"
     },
     "|": {
-      "item": "ad_astra:iron_stick"
+      "tag": "c:iron_sticks"
     }
   },
   "result": {

@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "ad_astra:fuel",
-    "ad_astra:flowing_fuel",
-    "ad_astra:cryo_fuel",
-    "ad_astra:flowing_cryo_fuel"
-  ]
-}

@@ -24,9 +24,9 @@ public class ModTags {
 	public static final TagKey<Item> CALORITE_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:calorite_nuggets"));
 	public static final TagKey<Item> CHEESES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:cheeses"));
 	public static final TagKey<Item> IRON_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:iron_plates"));
-	public static final TagKey<Item> STEEL_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:compressed_steel"));
-	public static final TagKey<Item> DESH_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:compressed_desh"));
-	public static final TagKey<Item> OSTRUM_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:compressed_ostrum"));
+	public static final TagKey<Item> STEEL_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:steel_plate"));
+	public static final TagKey<Item> DESH_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:desh_plate"));
+	public static final TagKey<Item> OSTRUM_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:ostrum_plate"));
 	public static final TagKey<Item> CALORITE_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:compressed_calorite"));
 	public static final TagKey<Item> DESH_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:desh_ingots"));
 	public static final TagKey<Item> DESH_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:desh_nuggets"));

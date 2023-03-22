@@ -1,23 +1,10 @@
 package com.github.alexnijjar.ad_astra.registry;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlock;
 import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlock;
 import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlock;
 import com.github.alexnijjar.ad_astra.blocks.launchpad.LaunchPad;
-import com.github.alexnijjar.ad_astra.blocks.machines.CoalGeneratorBlock;
-import com.github.alexnijjar.ad_astra.blocks.machines.CompressorBlock;
-import com.github.alexnijjar.ad_astra.blocks.machines.CryoFreezerBlock;
-import com.github.alexnijjar.ad_astra.blocks.machines.EnergizerBlock;
-import com.github.alexnijjar.ad_astra.blocks.machines.FuelRefineryBlock;
-import com.github.alexnijjar.ad_astra.blocks.machines.NasaWorkbenchBlock;
-import com.github.alexnijjar.ad_astra.blocks.machines.OxygenDistributorBlock;
-import com.github.alexnijjar.ad_astra.blocks.machines.OxygenLoaderBlock;
-import com.github.alexnijjar.ad_astra.blocks.machines.OxygenSensorBlock;
-import com.github.alexnijjar.ad_astra.blocks.machines.SolarPanelBlock;
-import com.github.alexnijjar.ad_astra.blocks.machines.WaterPumpBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.*;
 import com.github.alexnijjar.ad_astra.blocks.pipes.CableBlock;
 import com.github.alexnijjar.ad_astra.blocks.pipes.FluidPipeBlock;
 import com.github.alexnijjar.ad_astra.blocks.torches.CoalLanternBlock;
@@ -26,32 +13,8 @@ import com.github.alexnijjar.ad_astra.blocks.torches.WallCoalTorchBlock;
 import com.github.alexnijjar.ad_astra.mixin.SignTypeInvoker;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.FallingBlock;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.LadderBlock;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.Material;
-import net.minecraft.block.MushroomBlock;
-import net.minecraft.block.MushroomPlantBlock;
-import net.minecraft.block.OreBlock;
-import net.minecraft.block.PillarBlock;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.SignBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.StoneButtonBlock;
-import net.minecraft.block.TrapdoorBlock;
-import net.minecraft.block.WallBlock;
-import net.minecraft.block.WallSignBlock;
-import net.minecraft.block.WoodenButtonBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.SignType;
@@ -59,28 +22,31 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ModBlocks {
     public static final Set<Block> blocks = new HashSet<>();
 
     public static final Block LAUNCH_PAD = register("launch_pad", new LaunchPad(FabricBlockSettings.copy(Blocks.CUT_COPPER).nonOpaque()), true);
 
     // Flag Blocks
-    public static final Block WHITE_FLAG = register("flag", new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1)));
-    public static final Block BLACK_FLAG = register("flag_black", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block BLUE_FLAG = register("flag_blue", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block BROWN_FLAG = register("flag_brown", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block CYAN_FLAG = register("flag_cyan", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block GRAY_FLAG = register("flag_gray", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block GREEN_FLAG = register("flag_green", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block LIGHT_BLUE_FLAG = register("flag_light_blue", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block LIGHT_GRAY_FLAG = register("flag_light_gray", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block LIME_FLAG = register("flag_lime", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block MAGENTA_FLAG = register("flag_magenta", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block ORANGE_FLAG = register("flag_orange", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block PINK_FLAG = register("flag_pink", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block PURPLE_FLAG = register("flag_purple", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block RED_FLAG = register("flag_red", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
-    public static final Block YELLOW_FLAG = register("flag_yellow", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block WHITE_FLAG = register("white_flag", new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1)));
+    public static final Block BLACK_FLAG = register("black_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block BLUE_FLAG = register("blue_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block BROWN_FLAG = register("brown_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block CYAN_FLAG = register("cyan_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block GRAY_FLAG = register("gray_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block GREEN_FLAG = register("green_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block LIGHT_BLUE_FLAG = register("light_blue_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block LIGHT_GRAY_FLAG = register("light_gray_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block LIME_FLAG = register("lime_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block MAGENTA_FLAG = register("magenta_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block ORANGE_FLAG = register("orange_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block PINK_FLAG = register("pink_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block PURPLE_FLAG = register("purple_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block RED_FLAG = register("red_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+    public static final Block YELLOW_FLAG = register("yellow_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
 
     // Globes
     public static final Block EARTH_GLOBE = register("earth_globe", new GlobeBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(3.5f).nonOpaque().requiresTool()));
@@ -91,9 +57,9 @@ public class ModBlocks {
     public static final Block GLACIO_GLOBE = register("glacio_globe", new GlobeBlock(FabricBlockSettings.copy(EARTH_GLOBE)));
 
     // Torch blocks
-    public static final Block COAL_TORCH = register("coal_torch", new CoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)));
-    public static final Block WALL_COAL_TORCH = register("wall_coal_torch", new WallCoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)), true);
-    public static final Block COAL_LANTERN = register("coal_lantern", new CoalLanternBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.LANTERN).strength(3.5f).nonOpaque()));
+    public static final Block COAL_TORCH = register("extinguished_torch", new CoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)));
+    public static final Block WALL_COAL_TORCH = register("wall_extinguished_torch", new WallCoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)), true);
+    public static final Block COAL_LANTERN = register("extinguished_lantern", new CoalLanternBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.LANTERN).strength(3.5f).nonOpaque()));
 
     public static final Block STEEL_CABLE = register("steel_cable", new CableBlock(256, 2, 0.344, FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));
     public static final Block DESH_CABLE = register("desh_cable", new CableBlock(1024, 1, 0.312, FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));
@@ -132,6 +98,7 @@ public class ModBlocks {
     public static final Block RAW_OSTRUM_BLOCK = register("raw_ostrum_block", new Block(FabricBlockSettings.copy(Blocks.RAW_IRON_BLOCK)));
     public static final Block RAW_CALORITE_BLOCK = register("raw_calorite_block", new Block(FabricBlockSettings.copy(Blocks.RAW_IRON_BLOCK)));
 
+    public static final Block VENT = register("vent", new Block(FabricBlockSettings.copy(Blocks.CUT_COPPER).nonOpaque()));
     public static final Block IRON_PLATING = register("iron_plating", new Block(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
     public static final Block IRON_PLATING_STAIRS = register("iron_plating_stairs", new StairsBlock(IRON_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.CUT_COPPER)));
     public static final Block IRON_PLATING_SLAB = register("iron_plating_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
@@ -139,7 +106,7 @@ public class ModBlocks {
     public static final Block IRON_PLATING_BUTTON = register("iron_plating_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
     public static final Block IRON_PLATING_PRESSURE_PLATE = register("iron_plating_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.STONE_PRESSURE_PLATE)));
     public static final Block MARKED_IRON_PILLAR = register("marked_iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
-    public static final Block GLOWING_IRON_PILLAR = register("blue_iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER).luminance(state -> 15)));
+    public static final Block GLOWING_IRON_PILLAR = register("glowing_iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER).luminance(state -> 15)));
 
     public static final Block STEEL_PLATING = register("steel_plating", new Block(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
     public static final Block STEEL_PLATING_STAIRS = register("steel_plating_stairs", new StairsBlock(STEEL_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.CUT_COPPER)));

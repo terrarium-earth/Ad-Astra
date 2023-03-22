@@ -1,12 +1,9 @@
 package com.github.alexnijjar.ad_astra.client.renderer.block;
 
-import java.util.List;
-
 import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlock;
 import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlockEntity;
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.model.BakedModelManagerHelper;
@@ -18,7 +15,6 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.BakedModelManager;
 import net.minecraft.client.render.model.BakedQuad;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.screen.PlayerScreenHandler;
@@ -26,6 +22,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3f;
+
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<SlidingDoorBlockEntity> {
@@ -138,8 +136,7 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
     public void renderDoor(Identifier texture, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 
         MinecraftClient client = MinecraftClient.getInstance();
-        BakedModelManager manager = client.getBakedModelManager();
-        BakedModel model = BakedModelManagerHelper.getModel(manager, texture);
+        BakedModel model = BakedModelManagerHelper.getModel(client.getBakedModelManager(), texture);
 
         VertexConsumer vertexConsumer1 = vertexConsumers.getBuffer(RenderLayer.getEntityCutout(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE));
         List<BakedQuad> quads1 = model.getQuads(null, null, client.world.random);

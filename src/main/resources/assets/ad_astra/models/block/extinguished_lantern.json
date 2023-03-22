@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_lantern",
+  "textures": {
+    "lantern": "ad_astra:block/extinguished_lantern"
+  }
+}

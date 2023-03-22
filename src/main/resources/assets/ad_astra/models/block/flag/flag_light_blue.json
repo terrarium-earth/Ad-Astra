@@ -1,6 +1,0 @@
-{
-    "parent": "ad_astra:template/flag",
-    "textures": {
-        "flag": "ad_astra:block/flag/light_blue_flag"
-    }
-}

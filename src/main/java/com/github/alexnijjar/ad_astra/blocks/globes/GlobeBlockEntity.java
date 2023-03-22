@@ -7,63 +7,55 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 
 public class GlobeBlockEntity extends BlockEntity {
 
-	public static final float INERTIA = 0.0075f;
-	public static final float DECELERATION = 0.00003f;
+	private float torque;
+    private float yaw;
+    public float prevYaw;
 
-	private float angularVelocity = 0.0f;
-	private float yaw = 0.0f;
-	private float cachedYaw = 0.0f;
+    public GlobeBlockEntity(BlockPos blockPos, BlockState blockState) {
+        super(ModBlockEntities.GLOBE_BLOCK_ENTITY, blockPos, blockState);
+    }
 
-	public GlobeBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntities.GLOBE_BLOCK_ENTITY, pos, state);
-	}
+    public void serverTick() {
+        if (getCachedState().get(GlobeBlock.POWERED) && torque <= 3f) {
+            torque = 3f;
+        }
 
-	public void tick() {
-		if (this.getCachedState().get(GlobeBlock.POWERED) && this.getAngularVelocity() <= 0.05f) {
-			this.setAngularVelocity(0.05f);
-		}
+        if (torque > 0) {
+            torque -= 0.75f;
+            prevYaw = yaw;
+            yaw -= torque;
+        } else if (torque < 0) {
+            torque = 0;
+        }
+    }
 
-		if (this.getAngularVelocity() > 0) {
-			// Simulate an inertia effect.
-			this.setAngularVelocity(this.getAngularVelocity() - INERTIA);
+    public void rotateGlobe() {
+        torque = (float) ((MathHelper.PI * 15) / (1 + Math.pow(0.00003f, torque)));
+        markDirty();
+    }
 
-			this.setCachedYaw(this.getYaw());
-			this.setYaw(this.getYaw() - this.getAngularVelocity());
+    public float getYaw() {
+        return yaw;
+    }
 
-		} else if (this.getAngularVelocity() < 0) {
-			this.setAngularVelocity(0);
-		}
-	}
-
-	@Override
-	public void markDirty() {
-		super.markDirty();
-
-		// Update renderer.
-		if (this.world instanceof ServerWorld serverWorld) {
-			serverWorld.getChunkManager().markForUpdate(this.pos);
-		}
-	}
-
-	@Override
-	public void readNbt(NbtCompound nbt) {
-		super.readNbt(nbt);
-		this.angularVelocity = nbt.getFloat("angularVelocity");
-		this.yaw = nbt.getFloat("yaw");
-		this.cachedYaw = nbt.getFloat("cachedYaw");
+    @Override
+	public void readNbt(NbtCompound tag) {
+		super.readNbt(tag);
+		torque = tag.getFloat("Torque");
+		yaw = tag.getFloat("Yaw");
+        prevYaw = yaw;
 	}
 
 	@Override
-	public void writeNbt(NbtCompound nbt) {
-		super.writeNbt(nbt);
-		nbt.putFloat("angularVelocity", this.angularVelocity);
-		nbt.putFloat("yaw", this.yaw);
-		nbt.putFloat("cachedYaw", this.cachedYaw);
+	public void writeNbt(NbtCompound tag) {
+		super.writeNbt(tag);
+		tag.putFloat("Torque", torque);
+        tag.putFloat("Yaw", yaw);
 	}
 
 	@Override
@@ -74,29 +66,5 @@ public class GlobeBlockEntity extends BlockEntity {
 	@Override
 	public NbtCompound toInitialChunkDataNbt() {
 		return this.toNbt();
-	}
-
-	public float getAngularVelocity() {
-		return this.angularVelocity;
-	}
-
-	public void setAngularVelocity(float angularVelocity) {
-		this.angularVelocity = angularVelocity;
-	}
-
-	public float getYaw() {
-		return this.yaw;
-	}
-
-	public void setYaw(float yaw) {
-		this.yaw = yaw;
-	}
-
-	public float getCachedYaw() {
-		return this.cachedYaw;
-	}
-
-	public void setCachedYaw(float yaw) {
-		this.cachedYaw = yaw;
 	}
 }
