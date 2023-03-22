@@ -3,9 +3,11 @@ package earth.terrarium.ad_astra.common.config;
 import com.teamresourceful.resourcefulconfig.common.annotations.Category;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
+import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 
 @Category(id = "cryoFreezer", translation = "text.resourcefulconfig.ad_astra.option.cryoFreezer")
+@WebInfo(icon = "refrigerator")
 public final class CryoFreezerConfig {
 
     @ConfigEntry(
