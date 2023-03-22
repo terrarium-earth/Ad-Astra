@@ -1,10 +1,15 @@
 package earth.terrarium.ad_astra.common.config;
 
 import com.teamresourceful.resourcefulconfig.common.annotations.Category;
+import com.teamresourceful.resourcefulconfig.common.annotations.Config;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
+import com.teamresourceful.resourcefulconfig.web.annotations.Gradient;
+import com.teamresourceful.resourcefulconfig.web.annotations.Link;
+import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
 
 @Category(id = "coalGenerator", translation = "text.resourcefulconfig.ad_astra.option.coalGenerator")
+@WebInfo(icon = "flame")
 public final class CoalGeneratorConfig {
 
     @ConfigEntry(

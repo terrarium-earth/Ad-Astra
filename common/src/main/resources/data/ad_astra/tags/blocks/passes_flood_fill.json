@@ -4,6 +4,7 @@
     "#minecraft:fences",
     "minecraft:iron_bars",
     "minecraft:tnt",
-    "ad_astra:vent"
+    "ad_astra:vent",
+    "ad_astra:oxygen_distributor"
   ]
 }

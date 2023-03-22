@@ -26,25 +26,24 @@ public class SulfurCreeperModel<T extends Entity> extends EntityModel<T> {
 
     @SuppressWarnings("unused")
     public static LayerDefinition createBodyLayer() {
-        MeshDefinition modelData = new MeshDefinition();
-        PartDefinition modelPartData = modelData.getRoot();
-        PartDefinition body = modelPartData.addOrReplaceChild("body", CubeListBuilder.create().texOffs(50, 9).addBox(0.0F, -17.0F, 0.0F, 0.0F, 9.0F, 7.0F, new CubeDeformation(0.0F)).texOffs(16, 16).addBox(-4.0F, -18.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition sulfurcrystalbodyR_r1 = body.addOrReplaceChild("sulfurcrystalbodyR_r1", CubeListBuilder.create().texOffs(50, 0).addBox(3.4317F, -7.4874F, -1.9048F, 10.0F, 7.0F, 0.0F, new CubeDeformation(0.0F)).texOffs(50, 0).addBox(14.4317F, -8.4874F, 0.0952F, 6.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(11.0F, -17.0F, 2.0F, 0.0983F, 0.0831F, 2.9853F));
+		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 16).addBox(-4.0F, -18.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-        PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -18.0F, 0.0F));
+		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
+		.texOffs(24, 0).addBox(-6.0F, -12.0F, 0.0F, 12.0F, 6.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -18.0F, 0.0F));
 
-        PartDefinition sulfurcrystalhead_r1 = head.addOrReplaceChild("sulfurcrystalhead_r1", CubeListBuilder.create().texOffs(50, 0).addBox(-5.5F, -4.0F, -4.5F, 10.0F, 7.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.0F, -7.0F, 1.0F, 0.1259F, -0.3419F, 0.4257F));
+		PartDefinition BackLeftLeg = body.addOrReplaceChild("BackLeftLeg", CubeListBuilder.create().texOffs(24, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, -6.0F, 4.0F));
 
-        PartDefinition BackLeftLeg = body.addOrReplaceChild("BackLeftLeg", CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, -6.0F, 4.0F));
+		PartDefinition BackRightLeg = body.addOrReplaceChild("BackRightLeg", CubeListBuilder.create().texOffs(24, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -6.0F, 4.0F));
 
-        PartDefinition BackRightLeg = body.addOrReplaceChild("BackRightLeg", CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -6.0F, 4.0F));
+		PartDefinition FrontLeftLeg = body.addOrReplaceChild("FrontLeftLeg", CubeListBuilder.create().texOffs(24, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, -6.0F, -4.0F));
 
-        PartDefinition FrontLeftLeg = body.addOrReplaceChild("FrontLeftLeg", CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, -6.0F, -4.0F));
+		PartDefinition FrontRightLeg = body.addOrReplaceChild("FrontRightLeg", CubeListBuilder.create().texOffs(24, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -6.0F, -4.0F));
 
-        PartDefinition FrontRightLeg = body.addOrReplaceChild("FrontRightLeg", CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, -6.0F, -4.0F));
-        return LayerDefinition.create(modelData, 64, 32);
-    }
+		return LayerDefinition.create(meshdefinition, 64, 64);
+	}
 
     @Override
     public void setupAnim(Entity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {

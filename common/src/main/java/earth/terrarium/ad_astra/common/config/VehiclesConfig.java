@@ -4,9 +4,11 @@ import com.teamresourceful.resourcefulconfig.common.annotations.Category;
 import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
+import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 
 @Category(id = "vehicles", translation = "text.resourcefulconfig.ad_astra.option.vehicles")
+@WebInfo(icon = "rocket")
 public final class VehiclesConfig {
 
     @ConfigEntry(

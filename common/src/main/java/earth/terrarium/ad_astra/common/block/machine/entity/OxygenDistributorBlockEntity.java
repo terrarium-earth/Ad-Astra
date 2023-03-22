@@ -199,7 +199,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
             }
         }
 
-        Set<BlockPos> positions = FloodFiller3D.run(level, worldPosition.above());
+        Set<BlockPos> positions = FloodFiller3D.run(level, worldPosition);
 
         if (this.canDistribute(positions.size())) {
             OxygenUtils.setEntry(this.level, worldPosition, positions);

@@ -98,8 +98,7 @@ public class ModLangProvider extends LanguageProvider {
         add("gauge.ad_astra.fuel", "Fuel");
         add("gauge.ad_astra.oxygen", "Oxygen");
         add("gauge_text.ad_astra.blocked_warning[0]", "§4No Oxygen is Being Generated!");
-        add("gauge_text.ad_astra.blocked_warning[1]", "Ensure that there is no block above the distributor");
-        add("gauge_text.ad_astra.blocked_warning[2]", "and enough oxygen and power is being supplied.");
+        add("gauge_text.ad_astra.blocked_warning[1]", "Ensure that enough oxygen and power is being supplied.");
         add("gauge_text.ad_astra.energy_per_tick", "%s ⚡ / tick");
         add("gauge_text.ad_astra.fluid_per_tick", "%s 🪣 / sec");
         add("gauge_text.ad_astra.liquid_storage", "%s 🪣 / %d 🪣");
@@ -110,6 +109,9 @@ public class ModLangProvider extends LanguageProvider {
         add("gauge_text.ad_astra.oxygen_leak_warning[2]", "the structure is too large for this distributor");
         add("gauge_text.ad_astra.oxygen_leak_warning[3]", "to handle. Ensure that the entire structure is");
         add("gauge_text.ad_astra.oxygen_leak_warning[4]", "completely sealed.");
+        add("gauge_text.ad_astra.oxygen_leak_warning[5]", "");
+        add("gauge_text.ad_astra.oxygen_leak_warning[6]", "If you've got multiple distributors set up in");
+        add("gauge_text.ad_astra.oxygen_leak_warning[7]", "a large structure, you can ignore this warning.");
         add("gauge_text.ad_astra.storage", "§eEnergy: %s ⚡ / %d ⚡");
         add("gui.ad_astra.text.back", "Back");
         add("gui.ad_astra.text.catalog", "CATALOG");

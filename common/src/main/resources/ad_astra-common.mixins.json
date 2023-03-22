@@ -6,6 +6,7 @@
   "mixins": [
     "ArmorDyeRecipeMixin",
     "BlockMixin",
+    "BucketItemMixin",
     "EntityInvoker",
     "EntityMixin",
     "FireworkRocketItemMixin",
