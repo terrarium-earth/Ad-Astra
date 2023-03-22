@@ -1,7 +1,5 @@
 package earth.terrarium.ad_astra.datagen;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.JsonOps;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.datagen.provider.client.ModBlockStateProvider;
 import earth.terrarium.ad_astra.datagen.provider.client.ModItemModelProvider;
@@ -15,13 +13,8 @@ import earth.terrarium.ad_astra.datagen.provider.server.ModLootTableProvider;
 import earth.terrarium.ad_astra.datagen.provider.server.ModPlanetProvider;
 import earth.terrarium.ad_astra.datagen.provider.server.ModRecipeProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.Registry;
-import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -53,16 +46,5 @@ public final class AdAstraDataGenerator {
         generator.addProvider(event.includeServer(), new ModPlanetProvider(packOutput));
         generator.addProvider(event.includeServer(), new ModConfiguredCarverProvider(packOutput));
         generator.addProvider(event.includeServer(), new ModDensityFunctionProvider(packOutput));
-    }
-
-    public static <T> CompletableFuture<?> saveCodecValue(CachedOutput output, ResourceLocation key, T value, Codec<T> codec, ResourceKey<Registry<T>> registry, PackOutput packOutput) {
-        return DataProvider.saveStable(
-                output,
-                codec.encodeStart(JsonOps.INSTANCE, value).getOrThrow(false, error -> {
-                }),
-                packOutput
-                        .createPathProvider(PackOutput.Target.DATA_PACK, registry.location().getPath())
-                        .json(key)
-        );
     }
 }

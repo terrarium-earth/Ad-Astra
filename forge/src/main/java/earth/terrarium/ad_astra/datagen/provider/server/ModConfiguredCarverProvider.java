@@ -4,6 +4,7 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.ad_astra.common.registry.ModWorldCarvers;
 import earth.terrarium.ad_astra.datagen.AdAstraDataGenerator;
+import earth.terrarium.ad_astra.datagen.provider.base.ModCodecProvider;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
@@ -18,16 +19,15 @@ import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.BiConsumer;
 
-public class ModConfiguredCarverProvider implements DataProvider {
-    private final PackOutput packOutput;
-
+public class ModConfiguredCarverProvider extends ModCodecProvider<ConfiguredWorldCarver<?>> {
     public ModConfiguredCarverProvider(PackOutput packOutput) {
-        this.packOutput = packOutput;
+        super(packOutput, ConfiguredWorldCarver.DIRECT_CODEC, Registries.CONFIGURED_CARVER);
     }
 
     @Override
-    public CompletableFuture<?> run(CachedOutput output) {
+    protected void build(BiConsumer<ResourceLocation, ConfiguredWorldCarver<?>> consumer) {
         @SuppressWarnings("deprecation")
         var carver = new ConfiguredWorldCarver<>(
                 ModWorldCarvers.CRATER.get(),
@@ -41,14 +41,7 @@ public class ModConfiguredCarverProvider implements DataProvider {
                 )
         );
 
-        return AdAstraDataGenerator.saveCodecValue(
-                output,
-                new ResourceLocation(AdAstra.MOD_ID, "moon_crater"),
-                carver,
-                ConfiguredWorldCarver.DIRECT_CODEC,
-                Registries.CONFIGURED_CARVER,
-                packOutput
-        );
+        consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "moon_crater"), carver);
     }
 
     @Override

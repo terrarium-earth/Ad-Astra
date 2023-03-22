@@ -2,32 +2,22 @@ package earth.terrarium.ad_astra.datagen.provider.server;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.world.biome.CratersDensityFunction;
-import earth.terrarium.ad_astra.datagen.AdAstraDataGenerator;
+import earth.terrarium.ad_astra.datagen.provider.base.ModCodecProvider;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.DensityFunction;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.function.BiConsumer;
 
-public class ModDensityFunctionProvider implements DataProvider {
-    private final PackOutput packOutput;
-
+public class ModDensityFunctionProvider extends ModCodecProvider<DensityFunction> {
     public ModDensityFunctionProvider(PackOutput packOutput) {
-        this.packOutput = packOutput;
+        super(packOutput, CratersDensityFunction.DIRECT_CODEC, Registries.DENSITY_FUNCTION);
     }
 
     @Override
-    public CompletableFuture<?> run(CachedOutput output) {
-        return AdAstraDataGenerator.saveCodecValue(
-                output,
-                new ResourceLocation(AdAstra.MOD_ID, "craters"),
-                new CratersDensityFunction(1f),
-                CratersDensityFunction.DIRECT_CODEC,
-                Registries.DENSITY_FUNCTION,
-                packOutput
-        );
+    protected void build(BiConsumer<ResourceLocation, DensityFunction> consumer) {
+        consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "craters"), new CratersDensityFunction(1));
     }
 
     @Override
