@@ -1,38 +1,23 @@
 package com.github.alexnijjar.ad_astra;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.github.alexnijjar.ad_astra.config.AdAstraConfig;
 import com.github.alexnijjar.ad_astra.data.Planet;
 import com.github.alexnijjar.ad_astra.data.PlanetData;
 import com.github.alexnijjar.ad_astra.networking.ModC2SPackets;
-import com.github.alexnijjar.ad_astra.registry.ModArmour;
-import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
-import com.github.alexnijjar.ad_astra.registry.ModCommands;
-import com.github.alexnijjar.ad_astra.registry.ModCriteria;
-import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
-import com.github.alexnijjar.ad_astra.registry.ModFeatures;
-import com.github.alexnijjar.ad_astra.registry.ModFluids;
-import com.github.alexnijjar.ad_astra.registry.ModItems;
-import com.github.alexnijjar.ad_astra.registry.ModPaintings;
-import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
-import com.github.alexnijjar.ad_astra.registry.ModRecipes;
-import com.github.alexnijjar.ad_astra.registry.ModScreenHandlers;
-import com.github.alexnijjar.ad_astra.registry.ModSoundEvents;
-import com.github.alexnijjar.ad_astra.registry.ModStructures;
+import com.github.alexnijjar.ad_astra.registry.*;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.world.chunk.PlanetChunkGenerator;
-
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class AdAstra implements ModInitializer {
 

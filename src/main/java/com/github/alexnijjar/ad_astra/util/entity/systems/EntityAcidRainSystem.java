@@ -6,7 +6,6 @@ import com.github.alexnijjar.ad_astra.mixin.EntityInvoker;
 import com.github.alexnijjar.ad_astra.registry.ModDamageSource;
 import com.github.alexnijjar.ad_astra.registry.ModTags;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
-
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.world.ServerWorld;
 
@@ -26,7 +25,7 @@ public class EntityAcidRainSystem {
         }
 
         // Let the entity survive in a fully sealed vehicle
-        if (entity.getVehicle() instanceof VehicleEntity vehicle && !vehicle.fullyConcealsRider()) {
+        if (entity.getVehicle() instanceof VehicleEntity vehicle && vehicle.fullyConcealsRider()) {
             return;
         }
 

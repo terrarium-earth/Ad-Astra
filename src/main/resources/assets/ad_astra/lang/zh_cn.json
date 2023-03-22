@@ -163,25 +163,25 @@
 
 	"block.ad_astra.energizer": "能源站",
 
-	"block.ad_astra.coal_lantern": "熄灭的灯笼",
-	"block.ad_astra.coal_torch"  : "熄灭的火把",
+	"block.ad_astra.extinguished_lantern": "熄灭的灯笼",
+	"block.ad_astra.extinguished_torch"  : "熄灭的火把",
 
-	"block.ad_astra.flag"           : "浅色基地旗帜",
-	"block.ad_astra.flag_blue"      : "蓝色基地旗帜",
-	"block.ad_astra.flag_brown"     : "棕色基地旗帜",
-	"block.ad_astra.flag_cyan"      : "青色基地旗帜",
-	"block.ad_astra.flag_gray"      : "深色基地旗帜",
-	"block.ad_astra.flag_green"     : "绿色基地旗帜",
-	"block.ad_astra.flag_light_blue": "浅蓝色基地旗帜",
-	"block.ad_astra.flag_lime"      : "黄绿色基地旗帜",
-	"block.ad_astra.flag_magenta"   : "品红色基地旗帜",
-	"block.ad_astra.flag_orange"    : "橙色基地旗帜",
-	"block.ad_astra.flag_pink"      : "粉色基地旗帜",
-	"block.ad_astra.flag_purple"    : "紫色基地旗帜",
-	"block.ad_astra.flag_red"       : "红色基地旗帜",
-	"block.ad_astra.flag_yellow"    : "黄色基地旗帜",
-	"block.ad_astra.flag_light_gray": "浅灰色基地旗帜",
-	"block.ad_astra.flag_black"     : "深色基地旗帜",
+	"block.ad_astra.white_flag"           : "浅色基地旗帜",
+	"block.ad_astra.blue_flag"      : "蓝色基地旗帜",
+	"block.ad_astra.brown_flag"     : "棕色基地旗帜",
+	"block.ad_astra.cyan_flag"      : "青色基地旗帜",
+	"block.ad_astra.gray_flag"      : "深色基地旗帜",
+	"block.ad_astra.green_flag"     : "绿色基地旗帜",
+	"block.ad_astra.light_blue_flag": "浅蓝色基地旗帜",
+	"block.ad_astra.lime_flag"      : "黄绿色基地旗帜",
+	"block.ad_astra.magenta_flag"   : "品红色基地旗帜",
+	"block.ad_astra.orange_flag"    : "橙色基地旗帜",
+	"block.ad_astra.pink_flag"      : "粉色基地旗帜",
+	"block.ad_astra.purple_flag"    : "紫色基地旗帜",
+	"block.ad_astra.red_flag"       : "红色基地旗帜",
+	"block.ad_astra.yellow_flag"    : "黄色基地旗帜",
+	"block.ad_astra.light_gray_flag": "浅灰色基地旗帜",
+	"block.ad_astra.black_flag"     : "深色基地旗帜",
 
 	"block.ad_astra.fuel"         : "燃油",
 	"block.ad_astra.fuel_refinery": "燃油精炼厂",
@@ -221,7 +221,7 @@
 
 	"block.ad_astra.glowing_calorite_pillar": "上漆耐热金属柱",
 	"block.ad_astra.glowing_desh_pillar"    : "上漆戴斯柱",
-	"block.ad_astra.blue_iron_pillar"       : "上漆铁柱",
+	"block.ad_astra.glowing_iron_pillar"       : "上漆铁柱",
 	"block.ad_astra.glowing_ostrum_pillar"  : "上漆紫金柱",
 	"block.ad_astra.glowing_steel_pillar"   : "上漆钢柱",
 
@@ -399,7 +399,7 @@
 	"block.ad_astra.venus_stone_slab"            : "锃金岩台阶",
 	"block.ad_astra.venus_stone_stairs"          : "锃金岩楼梯",
 
-	"block.ad_astra.wall_coal_torch": "熄灭的火把",
+	"block.ad_astra.wall_extinguished_torch": "熄灭的火把",
 
 	"block.ad_astra.water_pump": "水泵",
 
@@ -589,7 +589,7 @@
 	"item.ad_astra.ice_shard": "冰晶",
 
 	"item.ad_astra.iron_plate": "铁板",
-	"item.ad_astra.iron_stick": "铁棍",
+	"item.ad_astra.iron_rod": "铁棍",
 
 	"item.ad_astra.jet_suit"       : "喷气式宇航服",
 	"item.ad_astra.jet_suit_boots" : "喷气式重靴",
@@ -619,7 +619,7 @@
 	"item.ad_astra.ostrum_engine"    : "紫金火箭引擎",
 	"item.ad_astra.ostrum_ingot"     : "紫金锭",
 	"item.ad_astra.ostrum_nugget"    : "紫金粒",
-	"item.ad_astra.compressed_ostrum": "紫金板",
+	"item.ad_astra.ostrum_plate": "紫金板",
 	"item.ad_astra.ostrum_tank"      : "紫金燃料储罐",
 
 	"item.ad_astra.oxygen_bucket"                : "氧气桶",
@@ -658,7 +658,7 @@
 	"item.ad_astra.steel_engine"    : "钢火箭引擎",
 	"item.ad_astra.steel_ingot"     : "钢锭",
 	"item.ad_astra.steel_nugget"    : "钢粒",
-	"item.ad_astra.compressed_steel": "钢板",
+	"item.ad_astra.steel_plate": "钢板",
 	"item.ad_astra.steel_tank"      : "钢燃料储罐",
 
 	"item.ad_astra.sulfur_creeper_spawn_egg": "硫力怕刷怪蛋",
