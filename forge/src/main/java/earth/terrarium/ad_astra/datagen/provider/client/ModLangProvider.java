@@ -128,6 +128,7 @@ public class ModLangProvider extends LanguageProvider {
         add("gui.ad_astra.text.moon", "Moon");
         add("gui.ad_astra.text.name", "Planet Selection");
         add("gui.ad_astra.text.no_gravity", "No Gravity");
+        add("gui.ad_astra.text.open", "Open");
         add("gui.ad_astra.text.orbit", "Orbit");
         add("gui.ad_astra.text.overlay_config1", "Drag to move overlays");
         add("gui.ad_astra.text.overlay_config2", "Scroll to scale up/down overlays");
@@ -155,6 +156,7 @@ public class ModLangProvider extends LanguageProvider {
         add("message.ad_astra.hold_space", "§7Hold §cSpace!");
         add("message.ad_astra.no_fuel", "§cNO FUEL! §7Fill the Rocket with §cFuel§7. (§6Sneak and Right Click§7)");
         add("message.ad_astra.speed", "%s m/s");
+        add("options.ad_astra.overlay_config", "Space Suit Overlay Settings");
         add("rei.category.ad_astra.space_station", "Space Station");
         add("rei.text.ad_astra.amount", "Amount: %s 🪣");
         add("rei.text.ad_astra.conversion_ratio", "Conversion Ratio: %s%%");

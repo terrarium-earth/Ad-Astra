@@ -19,6 +19,8 @@ import net.minecraft.world.phys.Vec2;
 
 public class OverlayConfigScreen extends Screen {
 
+    private final Screen parent;
+
     private List<Overlay> overlays;
 
     private double clickedX;
@@ -28,8 +30,9 @@ public class OverlayConfigScreen extends Screen {
     private boolean dragging;
     private Overlay selectdOverlay;
 
-    public OverlayConfigScreen() {
+    public OverlayConfigScreen(Screen parent) {
         super(Component.empty());
+        this.parent = parent;
 
         this.overlays = new ArrayList<>();
         this.overlays.add(new OxygenTankOverlay());
@@ -52,7 +55,7 @@ public class OverlayConfigScreen extends Screen {
         int totalWidth = buttonCount * buttonWidth + (buttonCount - 1) * buttonMargin;
         int buttonOffset = buttonWidth + buttonMargin;
         int x = (this.width - totalWidth) / 2;
-        int y = this.height - 60;
+        int y = this.height - 27;
 
         addRenderableWidget(new Button(x + buttonOffset * 0, y, buttonWidth, buttonHeight, Component.translatable("gui.ad_astra.text.save"), (button) -> {
             for (Overlay overlay : this.overlays) {
@@ -73,7 +76,7 @@ public class OverlayConfigScreen extends Screen {
 
     @Override
     public void onClose() {
-        super.onClose();
+        this.minecraft.setScreen(this.getParent());
 
         for (Overlay overlay : this.overlays) {
             overlay.revert(this.minecraft);
@@ -87,10 +90,8 @@ public class OverlayConfigScreen extends Screen {
         this.drag(mouseX, mouseY);
 
         for (Overlay overlay : this.overlays) {
-            if (overlay.shouldRender()) {
-                overlay.apply(this.minecraft);
-                overlay.render(poseStack, this.minecraft);
-            }
+            overlay.apply(this.minecraft);
+            overlay.render(poseStack, this.minecraft);
         }
 
         super.render(poseStack, mouseX, mouseY, delta);
@@ -146,16 +147,13 @@ public class OverlayConfigScreen extends Screen {
     private Overlay getOverlay(double mouseX, double mouseY) {
 
         for (Overlay overlay : this.overlays) {
-            if (overlay.shouldRender()) {
+            float scale = overlay.getScale();
+            double unscaledMouseX = mouseX / scale;
+            double unscaledMouseY = mouseY / scale;
+            Rect2i renderRect = overlay.getUnscaledRenderRect(this.minecraft);
 
-                float scale = overlay.getScale();
-                double unscaledMouseX = mouseX / scale;
-                double unscaledMouseY = mouseY / scale;
-                Rect2i renderRect = overlay.getUnscaledRenderRect(this.minecraft);
-
-                if (renderRect.contains((int) unscaledMouseX, (int) unscaledMouseY)) {
-                    return overlay;
-                }
+            if (renderRect.contains((int) unscaledMouseX, (int) unscaledMouseY)) {
+                return overlay;
             }
         }
         return null;
@@ -230,7 +228,11 @@ public class OverlayConfigScreen extends Screen {
 
     @Override
     public boolean isPauseScreen() {
-        return false;
+        return this.getParent().isPauseScreen();
+    }
+
+    public Screen getParent() {
+        return this.parent;
     }
 
     public abstract class Overlay {
@@ -300,8 +302,6 @@ public class OverlayConfigScreen extends Screen {
 
         public abstract void apply(Minecraft minecraft);
 
-        public abstract boolean shouldRender();
-
         public abstract void render(PoseStack poseStack, Minecraft minecraft);
 
         public abstract Rect2i getUnscaledRenderRect(Minecraft minecraft);
@@ -352,11 +352,6 @@ public class OverlayConfigScreen extends Screen {
         }
 
         @Override
-        public boolean shouldRender() {
-            return PlayerOverlayScreen.shouldRenderOxygen;
-        }
-
-        @Override
         public void render(PoseStack poseStack, Minecraft minecraft) {
             PlayerOverlayScreen.renderOxygenTank(poseStack, minecraft);
         }
@@ -391,11 +386,6 @@ public class OverlayConfigScreen extends Screen {
             config.getEntry("energyBarXOffset").get().reset();
             config.getEntry("energyBarYOffset").get().reset();
             config.getEntry("energyBarScale").get().reset();
-        }
-
-        @Override
-        public boolean shouldRender() {
-            return PlayerOverlayScreen.shouldRenderBattery;
         }
 
         @Override
