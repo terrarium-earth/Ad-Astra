@@ -1,22 +1,15 @@
 package com.github.alexnijjar.ad_astra.entities.vehicles;
 
-import java.util.List;
-
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.blocks.door.LocationState;
 import com.github.alexnijjar.ad_astra.blocks.launchpad.LaunchPad;
 import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
-import com.github.alexnijjar.ad_astra.registry.ModCriteria;
-import com.github.alexnijjar.ad_astra.registry.ModDamageSource;
-import com.github.alexnijjar.ad_astra.registry.ModFluids;
-import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
-import com.github.alexnijjar.ad_astra.registry.ModSoundEvents;
+import com.github.alexnijjar.ad_astra.registry.*;
 import com.github.alexnijjar.ad_astra.screen.PlanetSelectionScreenHandlerFactory;
 import com.github.alexnijjar.ad_astra.screen.handler.PlanetSelectionScreenHandler;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
-
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.BlockState;
@@ -41,6 +34,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class RocketEntity extends VehicleEntity {
 
@@ -243,7 +238,7 @@ public class RocketEntity extends VehicleEntity {
 	}
 
 	private void travel() {
-		double multiplier = (this.inputTank.getResource().equals(FluidVariant.of(ModFluids.CRYO_FUEL_STILL)) ? 2.5 : 1.0);
+		double multiplier = (this.inputTank.getResource().getFluid().isIn(ModTags.EFFICIENT_FUELS) ? 2.5 : 1.0);
 		if (!this.hasNoGravity()) {
 			this.setVelocity(this.getVelocity().add(0.0, AdAstra.CONFIG.rocket.acceleration * multiplier, 0.0));
 		}
@@ -382,7 +377,7 @@ public class RocketEntity extends VehicleEntity {
 	}
 
 	public static long getRequiredAmountForLaunch(FluidVariant variant) {
-		if (variant.isOf(ModFluids.CRYO_FUEL_STILL)) {
+		if (variant.getFluid().isIn(ModTags.EFFICIENT_FUELS)) {
 			return FluidConstants.BUCKET;
 		} else {
 			return FluidConstants.BUCKET * 3;
