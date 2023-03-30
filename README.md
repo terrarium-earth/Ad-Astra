@@ -1,4 +1,4 @@
-<center>
+<div align="center">
 
 ## Ad Astra
 
@@ -8,42 +8,41 @@
 
 [![Made by Terrarium](https://cdn.discordapp.com/attachments/1073717602880327761/1073718144910233691/Terrarium_vector.svg)](https://discord.terrarium.earth)
 [![Modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/ad-astra)
-[![Curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg)](https://www.curseforge.com/minecraft/mc-mods/ad-astra)
+[![CurseForge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg)](https://www.curseforge.com/minecraft/mc-mods/ad-astra)
 <hr>
 
 ### 📖About 📖
+
 <hr>
-</center>
+</div>
 
 Ad Astra! (translation: "To the Stars!") is a space mod for Fabric and Forge with a focus on technology, travel and
 exploration. We've got everything you need to become an astronaut: rockets, space suits, space stations and machines.
 Why not take a stroll on the Moon? Build a self-sustaining bunker on Mars? Go mining on Venus? The entire Solar System,
 better yet, Milky Way, is at your disposal!
 
-- Five celestial bodies: The Moon, Mars, Venus, Mercury and Glacio, in two different solar systems. Each planet expresses a distinctive flair, with specific mobs and unique materials.
+- Five celestial bodies: The Moon, Mars, Venus, Mercury and Glacio, in two different solar systems. Each planet
+  expresses a distinctive flair, with specific mobs and unique materials.
 - Vehicles: Four rocket tiers for interplanetary travel and a rover for traversing the rough, alien terrain ahead.
-- Technology: Standard processing machines and generators, along with oxygen generation and distribution, fuel refining, water pumping, cable, fluid pipes and a rocket workbench.
-- Building: Spruce up your builds with over 250 building blocks, ranging from planet-specific bricks and stones to space station deco and metal plating.
+- Technology: Standard processing machines and generators, along with oxygen generation and distribution, fuel refining,
+  water pumping, cable, fluid pipes and a rocket workbench.
+- Building: Spruce up your builds with over 250 building blocks, ranging from planet-specific bricks and stones to space
+  station deco and metal plating.
 - An in-game guidebook, explaining everything you need to progress and prosper in Ad Astra!
 
-<center>
-<hr>
-
-[![Use code "Terrarium" for 25% off at BisectHosting](https://www.bisecthosting.com/images/CF/RiseNFall_Kingdom/BH_RNF_PromoCard.png)](http://bisecthosting.com/terrarium)
-
-<hr>
+<div align="center">
 
 ## ✨Socials✨
 
-[![youtube-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/youtube-plural_vector.svg)](https://youtube.terrarium.earth)
-[![twitch-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/twitch-plural_vector.svg)](https://www.twitch.tv/terrariumearth)
-[![twitter-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/twitter-plural_vector.svg)](https://twitter.terrarium.earth)
-[![kofi-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/donate/kofi-plural_vector.svg)](https://kofi.terrarium.earth)
-[![discord-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/discord-plural_vector.svg)](https://discord.terrarium.earth)
-[![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/modrinth_vector.svg)](https://modrinth.com/user/Terrarium)
-[![curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/curseforge_vector.svg)](https://www.curseforge.com/members/terrariumearth/projects)
+[![YouTube](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/youtube-plural_vector.svg)](https://youtube.terrarium.earth)
+[![Twitch](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/twitch-plural_vector.svg)](https://www.twitch.tv/terrariumearth)
+[![Twitter](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/twitter-plural_vector.svg)](https://twitter.terrarium.earth)
+[![Kofi](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/donate/kofi-plural_vector.svg)](https://kofi.terrarium.earth)
+[![Discord-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/discord-plural_vector.svg)](https://discord.terrarium.earth)
+[![Modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/modrinth_vector.svg)](https://modrinth.com/user/Terrarium)
+[![CurseForge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/curseforge_vector.svg)](https://www.curseforge.com/members/terrariumearth/projects)
 <hr>
-</center>
+</div>
 
 ## Developers
 
