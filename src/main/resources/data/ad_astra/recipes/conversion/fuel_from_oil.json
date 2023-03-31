@@ -1,7 +1,7 @@
 {
    "type": "ad_astra:fuel_conversion",
    "input": {
-      "tag": "ad_astra:oil"
+      "fluid": "ad_astra:oil"
    },
    "output": {
       "name": "ad_astra:fuel"

@@ -29,7 +29,7 @@ public class FuelConversionRecipe extends ConversionRecipe {
 
 		@Override
 		public FuelConversionRecipe read(Identifier id, JsonObject json) {
-			Fluid input = Registry.FLUID.get(new Identifier(json.get("input").getAsJsonObject().get("tag").getAsString()));
+			Fluid input = Registry.FLUID.get(new Identifier(json.get("input").getAsJsonObject().get("fluid").getAsString()));
 			Fluid output = Registry.FLUID.get(new Identifier(json.get("output").getAsJsonObject().get("name").getAsString()));
 			double conversionRatio = json.get("conversion_ratio").getAsDouble();
 			return new FuelConversionRecipe(id, input, output, conversionRatio);

@@ -1,0 +1,36 @@
+{
+  "name": "루나리안",
+  "icon": "ad_astra:moon_stone_bricks",
+  "sortnum": 5,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "루나리안",
+      "item": "ad_astra:moon_stone_bricks",
+      "text": "달에는 생명체가 살고 있는 거대한 지하 마을이 있습니다. 이 마을에는 자신들을 루나리안이라고 부르는 외계인 형태의 주민이 살고 있습니다. 지구의 주민과 달리 루나리안들은 산소가 필요하지 않으며, 달의 차가운 환경에서도 생존 가능합니다."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "ad_astra:lunarian",
+      "default_rotation": 45
+    },
+    {
+      "type": "patchouli:text",
+      "text": "루나리안들은 지구 주민들과 다른 물품들을 팝니다. 행성 고유의 재료, 우주복, 산소 장비 들을 판매합니다."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "떠돌이 상인",
+      "item": "ad_astra:lunarian_wandering_trader_spawn_egg",
+      "text": "루나리안 떠돌이 상인들은 달과 다른 행성들에서 가끔 나타납니다. 그들은 발사대, 산소, 연료, 영혼 횟불, 물 등을 포함한 생명을 구할 수 있는 로켓 관련 품목들을 판매합니다. 그들은 달과 다른 행성들의 여러 구조물에서 일반적으로 발견되는 에메랄드를 받습니다."
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "떠돌이 상인",
+      "entity": "ad_astra:lunarian_wandering_trader",
+      "default_rotation": 45,
+      "scale": 0.8
+    }
+  ]
+}

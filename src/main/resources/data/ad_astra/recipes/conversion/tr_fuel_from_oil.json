@@ -1,0 +1,10 @@
+{
+   "type": "ad_astra:fuel_conversion",
+   "input": {
+      "fluid": "techreborn:oil"
+   },
+   "output": {
+      "name": "ad_astra:fuel"
+   },
+   "conversion_ratio": 1.0
+}

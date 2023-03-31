@@ -1,0 +1,18 @@
+{
+  "name": "空间站",
+  "icon": "ad_astra:/textures/gui/space_station_icon.png",
+  "sortnum": 0,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "空间站",
+      "text": "空间站是一个预制结构，当你有足够的材料后，就可以在行星选择屏幕中生成它们。空间站会生成于目标天体的近地轨道上，有了空间站以后，探索近地轨道也就不是什么难事了。"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "空间站",
+      "text": "空间站作为基础结构，允许你对其进行最大幅度的扩展，以实现你的太空梦。它们总会在你发射火箭的相同位置生成，所以牢记坐标，以防迷路。"
+    }
+  ]
+}

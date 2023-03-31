@@ -1,0 +1,24 @@
+{
+  "name": "流体运输",
+  "icon": "ad_astra:ostrum_fluid_pipe",
+  "sortnum": 1,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "流体管道",
+      "item": "ad_astra:ostrum_fluid_pipe",
+      "text": "流体管道和线缆相似，但是只能用于传输流体。手持扳手右击流体管道可以切换传输模式：“无”“标准”“分流”和“并流”。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "“分流”管道会从网络中抽出流体，而“并流”管道会将流体并入网络中。",
+      "recipe": "ad_astra:recipes/desh_fluid_pipe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/ostrum_fluid_pipe",
+      "recipe2": "ad_astra:recipes/wrench"
+    }
+  ]
+}

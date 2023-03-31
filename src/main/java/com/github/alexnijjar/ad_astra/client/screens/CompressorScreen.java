@@ -18,10 +18,10 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 
 	private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/compressor.png");
 
-	public static final int ENERGY_LEFT = 147;
-	public static final int ENERGY_TOP = 30;
-	public static final int HAMMER_LEFT = 67;
-	public static final int HAMMER_TOP = 63;
+    public static final int ENERGY_LEFT = 147;
+    public static final int ENERGY_TOP = 30;
+    public static final int HAMMER_LEFT = 78;
+    public static final int HAMMER_TOP = 57;
 
 	public CompressorScreen(CompressorScreenHandler handler, PlayerInventory inventory, Text title) {
 		super(handler, inventory, title, TEXTURE);

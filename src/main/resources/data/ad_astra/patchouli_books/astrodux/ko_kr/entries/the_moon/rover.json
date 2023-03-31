@@ -1,0 +1,19 @@
+{
+  "name": "로버",
+  "icon": "ad_astra:tier_1_rover",
+  "sortnum": 3,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "로버",
+      "item": "ad_astra:tier_1_rover",
+      "text": "로버는 달과 행성의 거친 지형을 주행할 수 있는 육상 차량입니다. 그것은 매우 빠르며, 8칸의 인벤토리가 있으며 2명까지 탈 수 있는 좌석이 있습니다. 로버를 사용하려면 로버에 연료를 채우세요.(연료 양동이를 들고 shift 키를 누른 상태에서 왼쪽 연료 투입구를 클릭하세요.)"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "ad_astra:tier_1_rover",
+      "scale": 0.36
+    }
+  ]
+}

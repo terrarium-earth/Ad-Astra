@@ -16,52 +16,52 @@ import java.awt.*;
 @Environment(EnvType.CLIENT)
 public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorScreenHandler> {
 
-	private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/coal_generator.png");
+    private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/coal_generator.png");
 
-	public static final int FIRE_LEFT = 81;
-	public static final int FIRE_TOP = 57;
+    public static final int FIRE_LEFT = 78;
+    public static final int FIRE_TOP = 53;
 
-	public static final int ENERGY_LEFT = 146;
-	public static final int ENERGY_TOP = 28;
+    public static final int ENERGY_LEFT = 146;
+    public static final int ENERGY_TOP = 32;
 
-	public CoalGeneratorScreen(CoalGeneratorScreenHandler handler, PlayerInventory inventory, Text title) {
-		super(handler, inventory, title, TEXTURE);
-		this.backgroundWidth = 176;
-		this.backgroundHeight = 177;
-		this.playerInventoryTitleY = this.backgroundHeight - 93;
-	}
+    public CoalGeneratorScreen(CoalGeneratorScreenHandler handler, PlayerInventory inventory, Text title) {
+        super(handler, inventory, title, TEXTURE);
+        this.backgroundWidth = 176;
+        this.backgroundHeight = 189;
+        this.playerInventoryTitleY = this.backgroundHeight - 93;
+    }
 
-	@Override
-	protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-		super.drawBackground(matrices, delta, mouseX, mouseY);
+    @Override
+    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
+        super.drawBackground(matrices, delta, mouseX, mouseY);
 
-		CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) blockEntity;
+        CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) blockEntity;
 
-		GuiUtil.drawFire(matrices, this.x + FIRE_LEFT, this.y + FIRE_TOP, entity.getCookTime(), entity.getCookTimeTotal());
-		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration());
-	}
+        GuiUtil.drawFire(matrices, this.x + FIRE_LEFT, this.y + FIRE_TOP, entity.getCookTime(), entity.getCookTimeTotal());
+        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration());
+    }
 
-	@Override
-	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-		super.render(matrices, mouseX, mouseY, delta);
+    @Override
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        super.render(matrices, mouseX, mouseY, delta);
 
-		CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) blockEntity;
+        CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) blockEntity;
 
-		if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-			GuiUtil.drawEnergyTooltip(this, matrices, entity, mouseX, mouseY);
-		}
+        if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
+            GuiUtil.drawEnergyTooltip(this, matrices, entity, mouseX, mouseY);
+        }
 
-		// Burn time tooltip.
-		if (GuiUtil.isHovering(this.getFireBounds(), mouseX, mouseY)) {
-			this.renderTooltip(matrices, new TranslatableText("gauge.ad_astra.burn_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
-		}
-	}
+        // Burn time tooltip.
+        if (GuiUtil.isHovering(this.getFireBounds(), mouseX, mouseY)) {
+            this.renderTooltip(matrices, new TranslatableText("gauge.ad_astra.burn_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
+        }
+    }
 
-	public Rectangle getEnergyBounds() {
-		return GuiUtil.getEnergyBounds(this.x + ENERGY_LEFT, this.y + ENERGY_TOP);
-	}
+    public Rectangle getEnergyBounds() {
+        return GuiUtil.getEnergyBounds(this.x + ENERGY_LEFT, this.y + ENERGY_TOP);
+    }
 
-	public Rectangle getFireBounds() {
-		return GuiUtil.getFireBounds(this.x + FIRE_LEFT, this.y + FIRE_TOP);
-	}
+    public Rectangle getFireBounds() {
+        return GuiUtil.getFireBounds(this.x + FIRE_LEFT, this.y + FIRE_TOP);
+    }
 }

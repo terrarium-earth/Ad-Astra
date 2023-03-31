@@ -1,9 +1,4 @@
-- backported all 1.19 textures to 1.18
-
-- warning! some ids were changed:
-coal_lantern -> extinguished_lantern,
-coal_torch -> extinguished_torch,
-iron_stick -> iron_rod,
-blue_iron_pillar -> glowing_iron_pillar,
-all flags,
-all plates materials
+- fixed guidebook not opening #256
+- fixed broken guis of some of the machine screens due to changed textures
+- allow tech reborn and modern industrialization oil to be used in the fuel refinery #258
+- fixed "Secrets Beneath" achievement #257

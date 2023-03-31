@@ -1,0 +1,18 @@
+{
+  "name": "金星和水星",
+  "icon": "ad_astra:/textures/sky/venus.png",
+  "sortnum": 5,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "耐热金属",
+      "item": "ad_astra:calorite_ingot",
+      "text": "一旦你准备好一整套的合金宇航服和一枚三级火箭后，你便可以再度起航——这次目标是金星和水星。它们的地表温度高达400摄氏度，这不仅能够融化你的肉体，还能吞噬你的灵魂..."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "在金星和水星的极端自然环境中，你需要寻找一种新的材料，名为耐热金属。使用耐热金属制造的火箭可以载着你前往另一个星系..."
+    }
+  ]
+}
