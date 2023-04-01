@@ -1,9 +1,1 @@
-- Added Resourceful Config Web Support! you can now edit the Ad Astra config file from a web interface in: https://config.teamresourceful.com. more info can be found here: https://config.teamresourceful.com/about
-
-- water will no longer freeze if the block above it has oxygen
-- fixed being able to place water on waterloggable blocks in space
-- the oxygen leak warning now has some additional info.
-- fixed the water pump still consuming power with a full tank
-- fixed stophar and aeronos doors having no loot tables.
-- fixed jet suit randomly crashing (#239)
-- fixed broken netherite space suit texture (#247)
+- fixed water buckets evaporating when placing water in side of an oxygenated area on venus and mercury

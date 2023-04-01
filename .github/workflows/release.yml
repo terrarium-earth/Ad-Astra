@@ -24,9 +24,7 @@ jobs:
         run: ./gradlew :fabric:modrinth :forge:modrinth :fabric:curseforge :forge:curseforge
         env:
           CURSE_TOKEN: ${{ secrets.CURSE_TOKEN }}
-          CURSE_PROJECT: ${{ secrets.CURSE_PROJECT }}
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-          MODRINTH_PROJECT: ${{ secrets.MODRINTH_PROJECT }}
 
       - run: ./gradlew generateDiscordEmbed
         env:

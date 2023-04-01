@@ -9,8 +9,6 @@ loom {
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
 
-    modImplementation "vazkii.patchouli:Patchouli-xplat:1.19.3-$rootProject.patchouli_version"
-
     modCompileOnly "mezz.jei:jei-1.19.3-common-api:$rootProject.jei_version"
     modRuntimeOnly "mezz.jei:jei-1.19.3-common:$rootProject.jei_version"
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:$rootProject.rei_version"
@@ -19,53 +17,14 @@ dependencies {
     modApi "com.teamresourceful.resourcefullib:resourcefullib-common-$rootProject.minecraft_version:$rootProject.resourcefullib_version"
     modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-$rootProject.minecraft_version:$rootProject.resourcefulconfig_version"
     modApi "earth.terrarium:botarium-common-$rootProject.minecraft_version:$rootProject.botarium_version"
+
+    modImplementation "vazkii.patchouli:Patchouli-xplat:1.19.3-$rootProject.patchouli_version"
 }
 
 processResources {
     inputs.property "version", rootProject.version
+    inputs.property "github_name", rootProject.github_name
     inputs.property "resourcefullib_version", rootProject.resourcefullib_version
     inputs.property "resourcefulconfig_version", rootProject.resourcefulconfig_version
     inputs.property "botarium_version", rootProject.botarium_version
-}
-
-def ENV = System.getenv()
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact remapJar
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-
-            artifactId = "$rootProject.mod_id-common-$rootProject.minecraft_version"
-
-            pom {
-                name = 'Ad Astra'
-                description = 'Live long and prosper, Ad Astra!'
-                url = 'https://github.com/terrarium-earth/Ad-Astra'
-
-                scm {
-                    connection = 'git:https://github.com/terrarium-earth/Ad-Astra.git'
-                    developerConnection = 'git:https://github.com/terrarium-earth/Ad-Astra.git'
-                    url = 'https://github.com/terrarium-earth/Ad-Astra'
-                }
-
-                licenses {
-                    license {
-                        name = 'Terrarium Licence'
-                    }
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            url = "https://maven.resourcefulbees.com/repository/terrarium/"
-            credentials {
-                username ENV.MAVEN_USER
-                password ENV.MAVEN_PASS
-            }
-        }
-    }
 }

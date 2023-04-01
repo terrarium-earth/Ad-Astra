@@ -19,7 +19,6 @@ sourceSets {
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
     forge {
-        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
         mixinConfig "$project.mod_id-common.mixins.json"
         mixinConfig "${project.mod_id}.mixins.json"
         dataGen {
@@ -47,20 +46,24 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
-//    modImplementation "vazkii.patchouli:Patchouli:$rootProject.minecraft_version-$rootProject.patchouli_version"
-
 //    modCompileOnly "mezz.jei:jei-$rootProject.minecraft_version-forge-api:$rootProject.jei_version"
 //    modLocalRuntime("mezz.jei:jei-$rootProject.minecraft_version-forge:$rootProject.jei_version") { transitive = false }
 
     modApi "com.teamresourceful.resourcefullib:resourcefullib-forge-$rootProject.minecraft_version:$rootProject.resourcefullib_version"
     modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-$rootProject.minecraft_version:$rootProject.resourcefulconfig_version"
     modApi "earth.terrarium:botarium-forge-$rootProject.minecraft_version:$rootProject.botarium_version"
+
+    //    modImplementation "vazkii.patchouli:Patchouli:$rootProject.minecraft_version-$rootProject.patchouli_version"
 }
 
 processResources {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     filesMatching("META-INF/mods.toml") {
-        expand "version": rootProject.version, "resourcefullib_version": rootProject.resourcefullib_version, "resourcefulconfig_version": rootProject.resourcefulconfig_version, "botarium_version": rootProject.botarium_version
+        expand "version": rootProject.version,
+                "github_name": rootProject.github_name,
+                "resourcefullib_version": rootProject.resourcefullib_version,
+                "resourcefulconfig_version": rootProject.resourcefulconfig_version,
+                "botarium_version": rootProject.botarium_version
     }
 }
 
@@ -68,17 +71,17 @@ shadowJar {
     exclude "fabric.mod.json"
 
     configurations = [project.configurations.shadowCommon]
-    archiveClassifier.set  "dev-shadow"
+    archiveClassifier.set "dev-shadow"
 }
 
 remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
-    archiveClassifier.set  null
+    archiveClassifier.set null
 }
 
 jar {
-    archiveClassifier.set  "dev"
+    archiveClassifier.set "dev"
     archivesBaseName = "$mod_id-forge-$minecraft_version"
 }
 
@@ -92,47 +95,5 @@ sourcesJar {
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
-    }
-}
-
-def ENV = System.getenv()
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact remapJar
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-
-            artifactId = "$rootProject.mod_id-forge-$rootProject.minecraft_version"
-
-            pom {
-                name = 'Ad Astra'
-                description = 'Live long and prosper, Ad Astra!'
-                url = 'https://github.com/terrarium-earth/Ad-Astra'
-
-                scm {
-                    connection = 'git:https://github.com/terrarium-earth/Ad-Astra.git'
-                    developerConnection = 'git:https://github.com/terrarium-earth/Ad-Astra.git'
-                    url = 'https://github.com/terrarium-earth/Ad-Astra'
-                }
-
-                licenses {
-                    license {
-                        name = 'Terrarium Licence'
-                    }
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            url = "https://maven.resourcefulbees.com/repository/terrarium/"
-            credentials {
-                username ENV.MAVEN_USER
-                password ENV.MAVEN_PASS
-            }
-        }
     }
 }

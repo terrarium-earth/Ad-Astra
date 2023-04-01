@@ -60,7 +60,10 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
         ItemStackHolder chest = new ItemStackHolder(entity.getItemBySlot(EquipmentSlot.CHEST));
         if (chest.getStack().getItem() instanceof SpaceSuit suit) {
             suit.extract(chest, FluidHooks.newFluidHolder(suit.getFluid(chest.getStack()), amount, null));
+            var wasSilent = entity.isSilent();
+            if (!wasSilent) entity.setSilent(true);
             if (chest.isDirty()) entity.setItemSlot(EquipmentSlot.CHEST, chest.getStack());
+            if (!wasSilent) entity.setSilent(false);
         }
     }
 

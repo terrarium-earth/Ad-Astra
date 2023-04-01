@@ -94,9 +94,9 @@ public class ModBlocks {
     public static final RegistryEntry<Block> AERONOS_MUSHROOM = BLOCKS.register("aeronos_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).sound(SoundType.STEM).lightLevel(state -> 6), TreeFeatures.HUGE_RED_MUSHROOM));
     public static final RegistryEntry<Block> STROPHAR_MUSHROOM = BLOCKS.register("strophar_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).sound(SoundType.STEM).lightLevel(state -> 6), TreeFeatures.HUGE_RED_MUSHROOM));
 
-    public static final RegistryEntry<Block> EXTINGUISHED_TORCH = BLOCKS.register("extinguished_torch", () -> new ExtinguishedTorchBlock(BlockBehaviour.Properties.copy(Blocks.TORCH)));
-    public static final RegistryEntry<Block> WALL_EXTINGUISHED_TORCH = BLOCKS.register("wall_extinguished_torch", () -> new WallExtinguishedTorchBlock(BlockBehaviour.Properties.copy(Blocks.WALL_TORCH)));
-    public static final RegistryEntry<Block> EXTINGUISHED_LANTERN = BLOCKS.register("extinguished_lantern", () -> new ExtinguishedLanternBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN)));
+    public static final RegistryEntry<Block> EXTINGUISHED_TORCH = BLOCKS.register("extinguished_torch", () -> new ExtinguishedTorchBlock(BlockBehaviour.Properties.copy(Blocks.TORCH).lightLevel(state -> 0)));
+    public static final RegistryEntry<Block> WALL_EXTINGUISHED_TORCH = BLOCKS.register("wall_extinguished_torch", () -> new WallExtinguishedTorchBlock(BlockBehaviour.Properties.copy(Blocks.WALL_TORCH).lightLevel(state -> 0)));
+    public static final RegistryEntry<Block> EXTINGUISHED_LANTERN = BLOCKS.register("extinguished_lantern", () -> new ExtinguishedLanternBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel(state -> 0)));
 
     public static final RegistryEntry<Block> CHEESE_BLOCK = BLOCKS.register("cheese_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SPONGE).sound(SoundType.SLIME_BLOCK)));
     public static final RegistryEntry<Block> SKY_STONE = BLOCKS.register("sky_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));

@@ -19,9 +19,9 @@
     "ThatGravyBoat"
   ],
   "contact": {
-    "website": "https://www.curseforge.com/minecraft/mc-mods/ad-astra",
-    "repo": "https://github.com/terrarium-earth/Ad-Astra",
-    "issues": "https://github.com/terrarium-earth/Ad-Astra/issues"
+    "website": "https://modrinth.com/mod/ad-astra",
+    "repo": "https://github.com/terrarium-earth/${github_name}",
+    "issues": "https://github.com/terrarium-earth/${github_name}/issues"
   },
   "license": "Terrarium Licence",
   "icon": "icon.png",

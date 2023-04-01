@@ -28,9 +28,10 @@ Also uses [Botarium](https://modrinth.com/mod/botarium)
 </a>
 
 Ad Astra! (translation: "To the Stars!") is a space mod for Fabric and Forge with a focus on technology, travel and
-exploration. We've got everything you need to become an astronaut: rockets, space suits, space stations and machines.
-Why not take a stroll on the Moon? Build a self-sustaining bunker on Mars? Go mining on Venus? The entire Solar System,
-better yet, Milky Way, is at your disposal!
+exploration. We've got
+everything you need to become an astronaut: rockets, space suits, space stations and machines. Why not take a stroll on
+the Moon? Build a self-sustaining bunker on Mars? Go mining on Venus? The entire Solar System, better yet, Milky Way, is
+at your disposal!
 
 <a>
     <p align="center">
@@ -53,11 +54,11 @@ To add this library to your project, do the following:
 
 ```groovy
 repositories {
-    maven {
-        // Location of the maven that hosts Terrarium and Team Resourceful's files.
-        name = "Resourceful Bees Maven"
-        url = "https://nexus.resourcefulbees.com/repository/maven-public/"
-    }
+  maven {
+    // Location of the maven that hosts Terrarium and Team Resourceful's files.
+    name = "Resourceful Bees Maven"
+    url = "https://nexus.resourcefulbees.com/repository/maven-public/"
+  }
 }
 ```
 
@@ -91,5 +92,5 @@ dependencies {
 
 <div align="center">
 
-![Version](https://img.shields.io/maven-metadata/v?label=Ad%20Astra%20Version&metadataUrl=https%3A%2F%2Fnexus.resourcefulbees.com%2Frepository%2Fmaven-public%2Fearth%2Fterrarium%2Fad_astra-common-1.19.3%2Fmaven-metadata.xml)
+![Version](https://img.shields.io/maven-metadata/v?label=Ad%20Astra%20Version&metadataUrl=https%3A%2F%2Fnexus.resourcefulbees.com%2Frepository%2Fmaven-public%2Fearth%2Fterrarium%2Fad_astra-common-1.19.4%2Fmaven-metadata.xml)
 </div>

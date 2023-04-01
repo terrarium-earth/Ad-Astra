@@ -65,7 +65,7 @@ public class PlanetWeatherSoundPlayer implements AmbientSoundHandler {
             Minecraft minecraft = Minecraft.getInstance();
 
             double height = 80.0;
-            double max = 0.1;
+            double max = 0.01;
             if (level.isRaining()) {
                 height -= 10.0;
                 max += 0.1;
