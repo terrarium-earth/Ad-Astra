@@ -1,0 +1,30 @@
+{
+  "name": "燃料",
+  "icon": "ad_astra:fuel_bucket",
+  "sortnum": 2,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "ロケットを設置しても、まだ宇宙にはいけません。 発射するためには、ロケットに燃料を入れる必要があります。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "石油の入手",
+      "item": "ad_astra:oil_bucket",
+      "text": "まずは海面に噴出している石油を集めてくる必要があります。 石油は使い切りの素材で、ロケット発射のたびに大量の石油が必要になるので、できるだけたくさん集めてください。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "石油の入手",
+      "item": "ad_astra:fuel_bucket",
+      "text": "十分な量の石油を集めたら(発射と帰還のために最低6バケツ分)、石油を燃料に精製します。 そのためには、燃料精製機が必要です。 石油を左のスロットに置くと、燃料に精製されます。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "燃料を精製",
+      "recipe": "ad_astra:recipes/fuel_refinery",
+      "text": "SHIFTキーを押しながらロケットを右クリックすると、ロケットのインベントリが開きます。 左のスロットに燃料バケツを置くと補給でき、3杯分で満タンになります。帰還用に残りの3つのバケツを右側のインベントリに入れておきましょう。"
+    }
+  ]
+}
