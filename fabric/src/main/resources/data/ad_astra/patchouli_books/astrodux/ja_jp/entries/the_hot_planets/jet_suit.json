@@ -1,0 +1,28 @@
+{
+  "name": "ジェットスーツ",
+  "icon": "ad_astra:jet_suit_helmet",
+  "sortnum": 0,
+  "category": "ad_astra:the_hot_planets",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "ジェットスーツ",
+      "item": "ad_astra:jet_suit_helmet",
+      "text": "ジェットスーツは、ネザライト宇宙服のアップグレード版で、より強力な防御、追加の酸素貯蔵、そして飛行機能を備えています。素材は重いですが、高速飛行が可能で、旅行が楽になります。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "ジェットスーツには、上昇($(k:jump))と、ブースト($(k:jump)＋$(k:sprint))のふたつのモードがあります。上昇は着用者を上空に飛ばし、ブーストはエリトラのようなものです。ジェットスーツは電力で動くので、飛ぶためには充電が必要です。ジェットスーツと一緒に右クリックすることでエナジャイザーで充電することができます。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/jet_suit_helmet",
+      "recipe2": "ad_astra:recipes/jet_suit"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/jet_suit_pants",
+      "recipe2": "ad_astra:recipes/jet_suit_boots"
+    }
+  ]
+}
