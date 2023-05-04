@@ -1,0 +1,42 @@
+{
+  "name": "ロケットを作成",
+  "icon": "ad_astra:nasa_workbench",
+  "sortnum": 1,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "NASA作業台",
+      "item": "ad_astra:nasa_workbench",
+      "text": "ロケットを作るには、ノーズコーン、本体、フィン、燃料タンク、エンジンが必要です。それらをロケット専用のNASA作業台で組み合わせることで完成します。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "NASA作業台",
+      "recipe": "ad_astra:recipes/nasa_workbench"
+    },
+    {
+      "type": "multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "   ",
+            " 0 ",
+            "   "
+          ]
+        ],
+        "mapping": {
+          "0": "ad_astra:launch_pad"
+        },
+        "symmetrical": true
+      },
+      "text": "ロケットを設置するには発射台が必要です。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "発射台",
+      "recipe": "ad_astra:recipes/launch_pad",
+      "text": "発射台を設置したらロケットを中央にセットします。"
+    }
+  ]
+}
