@@ -1,0 +1,18 @@
+{
+  "name": "充電器",
+  "icon": "ad_astra:energizer",
+  "sortnum": 2,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "充電器",
+      "item": "ad_astra:energizer",
+      "text": "充電器は、アイテムに電力を供給し、大量の電力を蓄えることができる機械です。アイテムを充電するには、充電器に電力を供給し、そのアイテムで充電器を右クリックします。200万もの電力を蓄えることができるので、非常に長い時間、機械を充電することができます。また、壊れてもエネルギーは保持されます。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/energizer"
+    }
+  ]
+}
