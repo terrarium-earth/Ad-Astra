@@ -1,0 +1,24 @@
+{
+  "name": "液体パイプ",
+  "icon": "ad_astra:ostrum_fluid_pipe",
+  "sortnum": 1,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "液体パイプ",
+      "item": "ad_astra:ostrum_fluid_pipe",
+      "text": "流体パイプは、ケーブルに似ていますが、電力の代わりに液体の伝達を行うものです。使うには流体パイプとレンチをクラフトします。そして、レンチでパイプを右クリックすると、パイプのモードが「無効」「普通」「搬入のみ」「搬出のみ」に切り替わります。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "「搬入のみ」が設定されたパイプはネットワークから液体を受け取り、「搬出のみ」が設定されたパイプはネットワークに液体を送り込みます。",
+      "recipe": "ad_astra:recipes/desh_fluid_pipe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/ostrum_fluid_pipe",
+      "recipe2": "ad_astra:recipes/wrench"
+    }
+  ]
+}

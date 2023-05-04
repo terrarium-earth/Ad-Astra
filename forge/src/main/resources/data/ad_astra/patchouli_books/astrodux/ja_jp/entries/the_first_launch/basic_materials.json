@@ -1,0 +1,32 @@
+{
+  "name": "基本素材",
+  "icon": "ad_astra:steel_plate",
+  "sortnum": 0,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "鉄板",
+      "item": "ad_astra:iron_plate",
+      "text": "鉄板はAd Astraで最も基本的な素材です。作業台で鉄のインゴットとハンマーをクラフトして作ります。宇宙に行くために必要な最低限の機械を作るために使います。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "ハンマーと鉄板のレシピ",
+      "recipe": "ad_astra:recipes/hammer",
+      "recipe2": "ad_astra:hammering/iron_plate"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "鋼板",
+      "item": "ad_astra:steel_plate",
+      "text": ""
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "発電機と金属圧縮機",
+      "recipe": "ad_astra:recipes/coal_generator",
+      "recipe2": "ad_astra:recipes/compressor"
+    }
+  ]
+}

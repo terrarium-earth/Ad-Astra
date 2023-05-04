@@ -1,0 +1,36 @@
+{
+  "name": "月星人",
+  "icon": "ad_astra:moon_stone_bricks",
+  "sortnum": 5,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "月星人",
+      "item": "ad_astra:moon_stone_bricks",
+      "text": "月のあちこちの地下に、宇宙人が住む大きな村があります。これらの村には、地球の村人の異形である月星人という人々が住んでいます。地球人とは異なり、月星人は酸素を必要とせず、月の寒冷な環境でも生き延びることができます。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "ad_astra:lunarian",
+      "default_rotation": 45
+    },
+    {
+      "type": "patchouli:text",
+      "text": "月星人は地球の村人とは違う商売をしていて、月特有の素材や宇宙服、酸素などが取引できます。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "行商人",
+      "item": "ad_astra:lunarian_wandering_trader_spawn_egg",
+      "text": "行商人は、すべての衛星と惑星に出現します。彼らは、発射台、酸素、燃料、ソウルトーチ、水など、あなたの命を救うかもしれないロケット関連の取引を多く行っています。また、月や惑星にある様々な建造物でよく見られるエメラルドも扱っています。"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "行商人",
+      "entity": "ad_astra:lunarian_wandering_trader",
+      "default_rotation": 45,
+      "scale": 0.8
+    }
+  ]
+}
