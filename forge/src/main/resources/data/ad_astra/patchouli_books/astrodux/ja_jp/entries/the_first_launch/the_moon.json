@@ -1,0 +1,19 @@
+{
+  "name": "月へ",
+  "icon": "ad_astra:/textures/sky/moon.png",
+  "sortnum": 5,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "月面探索",
+      "item": "ad_astra:desh_ingot",
+      "text": "月への到達、おめでとうございます！月は見渡す限り灰色で、不毛の荒れ地が広がっています。しかし、地下には次の主要資源である「デッシュ」が存在するのだ！デッシュは、高性能な機械や宇宙ステーション、Tier2ロケットの製造に使用されます。"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "地球への帰還",
+      "text": "地球に戻るには、着陸船をSHIFT＋右クリックで開いてロケットと燃料と発射台を回収します。着陸船は素手で叩くと取り外せます。発射台を設置し、ロケットを置き、燃料を入れたら、$(k:jump)キーを押して、地球へ帰りましょう。"
+    }
+  ]
+}
