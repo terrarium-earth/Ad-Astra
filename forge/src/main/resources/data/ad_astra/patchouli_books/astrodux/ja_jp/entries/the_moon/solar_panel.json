@@ -1,0 +1,20 @@
+{
+  "name": "ソーラーパネル",
+  "icon": "ad_astra:solar_panel",
+  "sortnum": 1,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "ソーラーパネル",
+      "item": "ad_astra:solar_panel",
+      "text": "ソーラーパネルは石炭発電機をグレードアップさせたもので、燃料不要ながら1tickあたりの発電量が多いです。その発電量は、太陽からの距離と大気の透過性に依存します。そのため、ソーラーパネルは太陽に近い場所に設置するのが効率的です。また、軌道上では光を遮る大気がないため、ソーラーパネルがより多くのエネルギーを生み出します。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "ソーラーパネル",
+      "text": "ソーラーパネルのツールチップやGUIで、現在の発電量を確認できます。",
+      "recipe": "ad_astra:recipes/solar_panel"
+    }
+  ]
+}

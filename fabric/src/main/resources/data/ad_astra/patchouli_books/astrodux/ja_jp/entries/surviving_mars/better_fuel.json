@@ -1,0 +1,28 @@
+{
+  "name": "高性能な燃料",
+  "icon": "ad_astra:cryo_freezer",
+  "sortnum": 3,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "冷却燃料精製機",
+      "item": "ad_astra:cryo_freezer",
+      "text": "燃料を手に入れるには、海に出て油田を探さなければならないので大変です。冷却燃料精製機は、高性能な燃料「冷却燃料」が作れるようになります。石油から作った燃料よりもはるかに効率的で、バケツ1杯でロケットを打ち上げることができます。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "寒い惑星の地下に鉱石として存在するアイスシャードが素材になります。アイスシャードを冷却燃料精製機に挿入すると、25mBの冷却燃料に変換されます。また、氷、氷塊、青氷を燃料に変換することも可能です。少なくとも2つのバケツ（1つは打ち上げ用、もう1つは帰還用）を作ったら、バケツをロケット燃料スロットにセットしましょう。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/cryo_freezer"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "冷却燃料",
+      "item": "ad_astra:cryo_fuel_bucket",
+      "text": "高性能な燃料であることに加え、冷却燃料にはいくつかの特徴があります。設置すると、溶岩のように中のものにダメージを与える。また、水を凍らせるので、無限に氷の供給源を確保することができます。"
+    }
+  ]
+}
