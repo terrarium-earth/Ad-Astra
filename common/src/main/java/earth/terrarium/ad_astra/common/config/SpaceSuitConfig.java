@@ -102,5 +102,6 @@ public final class SpaceSuitConfig {
         type = EntryType.BOOLEAN,
         translation = "text.resourcefulconfig.ad_astra.option.spaceSuit.renderCustomFirstPersonHand"
     )
+    @Comment(value = "Custom hand rendering may interfere with Shaders", translation = "text.resourcefulconfig.ad_astra.option.spaceSuit.renderCustomFirstPersonHand.tooltip")
     public static boolean renderCustomFirstPersonHand = true;
 }
