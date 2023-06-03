@@ -1,3 +1,9 @@
+# Neovim (nvim-jdtls) generated files
+.project
+.factorypath
+.classpath
+.settings
+
 # User-specific stuff
 .idea/
 
