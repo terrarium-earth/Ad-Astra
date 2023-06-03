@@ -96,4 +96,11 @@ public final class SpaceSuitConfig {
         translation = "text.resourcefulconfig.ad_astra.option.spaceSuit.spawnJetSuitParticles"
     )
     public static boolean spawnJetSuitParticles = true;
+
+    @ConfigEntry(
+        id = "renderCustomFirstPersonHand",
+        type = EntryType.BOOLEAN,
+        translation = "text.resourcefulconfig.ad_astra.option.spaceSuit.renderCustomFirstPersonHand"
+    )
+    public static boolean renderCustomFirstPersonHand = true;
 }
