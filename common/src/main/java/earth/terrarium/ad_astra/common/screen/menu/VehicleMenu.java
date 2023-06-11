@@ -12,46 +12,46 @@ import net.minecraft.world.item.ItemStack;
 public class VehicleMenu extends AbstractVehicleMenu {
 
     public VehicleMenu(int syncId, Inventory inventory, FriendlyByteBuf buf) {
-        this(syncId, inventory, (Vehicle) inventory.player.level.getEntity(buf.readInt()));
+        this(syncId, inventory, (Vehicle) inventory.player.level().getEntity(buf.readInt()));
     }
 
     public VehicleMenu(int syncId, Inventory inventory, Vehicle entity) {
         super(ModMenus.VEHICLE_MENU.get(), syncId, inventory, entity, new Slot[]{
 
-                // Left input slot.
-                new NoInventorySlot(entity.getInventory(), 0, 20, 24) {
-                    @Override
-                    public boolean mayPlace(ItemStack stack) {
-                        if (!super.mayPlace(stack)) {
-                            return false;
-                        }
-                        return FluidHooks.isFluidContainingItem(stack);
-                    }
-                },
-                // Left output slot.
-                new Slot(entity.getInventory(), 1, 20, 54) {
-                    @Override
-                    public boolean mayPlace(ItemStack stack) {
+            // Left input slot.
+            new NoInventorySlot(entity.getInventory(), 0, 20, 24) {
+                @Override
+                public boolean mayPlace(ItemStack stack) {
+                    if (!super.mayPlace(stack)) {
                         return false;
                     }
-                },
+                    return FluidHooks.isFluidContainingItem(stack);
+                }
+            },
+            // Left output slot.
+            new Slot(entity.getInventory(), 1, 20, 54) {
+                @Override
+                public boolean mayPlace(ItemStack stack) {
+                    return false;
+                }
+            },
 
-                // Inventory
-                new NoInventorySlot(entity.getInventory(), 2, 86, 31),
-                //
-                new NoInventorySlot(entity.getInventory(), 3, 86 + 18, 31),
-                //
-                new NoInventorySlot(entity.getInventory(), 4, 86 + 18 * 2, 31),
-                //
-                new NoInventorySlot(entity.getInventory(), 5, 86 + 18 * 3, 31),
-                //
-                new NoInventorySlot(entity.getInventory(), 6, 86, 49),
-                //
-                new NoInventorySlot(entity.getInventory(), 7, 86 + 18, 49),
-                //
-                new NoInventorySlot(entity.getInventory(), 8, 86 + 18 * 2, 49),
-                //
-                new NoInventorySlot(entity.getInventory(), 9, 86 + 18 * 3, 49)});
+            // Inventory
+            new NoInventorySlot(entity.getInventory(), 2, 86, 31),
+            //
+            new NoInventorySlot(entity.getInventory(), 3, 86 + 18, 31),
+            //
+            new NoInventorySlot(entity.getInventory(), 4, 86 + 18 * 2, 31),
+            //
+            new NoInventorySlot(entity.getInventory(), 5, 86 + 18 * 3, 31),
+            //
+            new NoInventorySlot(entity.getInventory(), 6, 86, 49),
+            //
+            new NoInventorySlot(entity.getInventory(), 7, 86 + 18, 49),
+            //
+            new NoInventorySlot(entity.getInventory(), 8, 86 + 18 * 2, 49),
+            //
+            new NoInventorySlot(entity.getInventory(), 9, 86 + 18 * 3, 49)});
     }
 
     @Override

@@ -168,7 +168,7 @@ public abstract class Vehicle extends Entity {
     @SuppressWarnings("deprecation")
     public void doGravity() {
 
-        if (!level.hasChunkAt(this.blockPosition())) {
+        if (!level().hasChunkAt(this.blockPosition())) {
             return;
         }
 
@@ -198,7 +198,7 @@ public abstract class Vehicle extends Entity {
         if (player.isSecondaryUseActive()) {
             return InteractionResult.PASS;
         }
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             if (this.getPassengers().size() > this.getMaxPassengers()) {
                 return InteractionResult.PASS;
             }
@@ -214,7 +214,7 @@ public abstract class Vehicle extends Entity {
     }
 
     public void openInventory(Player player, ExtraDataMenuProvider handler) {
-        if (!player.level.isClientSide) {
+        if (!player.level().isClientSide) {
             if (player.isShiftKeyDown()) {
                 MenuHooks.openMenu((ServerPlayer) player, handler);
             }
@@ -235,7 +235,7 @@ public abstract class Vehicle extends Entity {
     }
 
     public void drop() {
-        if (this.level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
+        if (this.level().getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
             BlockPos pos = this.blockPosition();
             if (!this.getDropStack().isEmpty()) {
                 ItemStackHolder dropStack = new ItemStackHolder(this.getDropStack());
@@ -245,19 +245,19 @@ public abstract class Vehicle extends Entity {
                 // Set the inventory in the dropped item.
                 nbt.put("Inventory", this.inventory.createTag());
 
-                level.playSound(null, pos, SoundEvents.NETHERITE_BLOCK_BREAK, SoundSource.BLOCKS, 1, 1);
-                this.level.addFreshEntity(new ItemEntity(this.level, pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack.getStack()));
+                level().playSound(null, pos, SoundEvents.NETHERITE_BLOCK_BREAK, SoundSource.BLOCKS, 1, 1);
+                this.level().addFreshEntity(new ItemEntity(this.level(), pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack.getStack()));
             }
         }
 
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             this.discard();
         }
     }
 
     public void explode(float powerMultiplier) {
-        if (!this.level.isClientSide) {
-            level.explode(this, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, OxygenUtils.levelHasOxygen(this.level), Level.ExplosionInteraction.TNT);
+        if (!this.level().isClientSide) {
+            level().explode(this, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, OxygenUtils.levelHasOxygen(this.level()), Level.ExplosionInteraction.TNT);
         }
         this.discard();
     }
@@ -265,7 +265,7 @@ public abstract class Vehicle extends Entity {
     @Override
     public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
         if (this.getDeltaMovement().y() < VehiclesConfig.fallingExplosionThreshold) {
-            if (this.isOnGround()) {
+            if (this.onGround()) {
                 this.explode(VehiclesConfig.fallingExplosionMultiplier);
                 return true;
             }
@@ -356,7 +356,7 @@ public abstract class Vehicle extends Entity {
     @SuppressWarnings("deprecation")
     public void tryInsertingIntoTank() {
         if (this.getInventorySize() > 1 && !this.getInventory().getItem(0).isEmpty()) {
-            if (!this.level.isClientSide) {
+            if (!this.level().isClientSide) {
                 FluidUtils.insertItemFluidToTank(this.tank, this.getInventory(), 0, 1, 0, f -> f.is(ModTags.FUELS));
                 FluidUtils.extractTankFluidToItem(this.tank, this.getInventory(), 0, 1, 0, f -> true);
             }
@@ -380,7 +380,7 @@ public abstract class Vehicle extends Entity {
     }
 
     public void consumeFuel() {
-        if (this.level.getGameTime() % 20 == 0) {
+        if (this.level().getGameTime() % 20 == 0) {
             getTank().extractFluid(FluidHooks.newFluidHolder(getTankFluid(), this.getFuelPerTick(), null), false);
         }
     }

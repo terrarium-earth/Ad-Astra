@@ -16,7 +16,7 @@ public class PlanetSelectionMenu extends AbstractContainerMenu {
     public PlanetSelectionMenu(int syncId, Player player, FriendlyByteBuf buf) {
         this(syncId, player, buf.readInt());
         PlanetData.readPlanetData(buf);
-        if (player.level.isClientSide) {
+        if (player.level().isClientSide) {
             AdAstraClient.hasUpdatedPlanets = true;
         }
     }

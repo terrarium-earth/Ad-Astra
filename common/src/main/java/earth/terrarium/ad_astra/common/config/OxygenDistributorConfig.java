@@ -27,9 +27,9 @@ public final class OxygenDistributorConfig {
     public static long fluidConversionEnergyPerTick = 5L;
 
     @ConfigEntry(
-            id = "tankSize",
-            type = EntryType.LONG,
-            translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.tankSize"
+        id = "tankSize",
+        type = EntryType.LONG,
+        translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.tankSize"
     )
     public static long tankSize = FluidHooks.buckets(6f);
 
@@ -52,17 +52,17 @@ public final class OxygenDistributorConfig {
     public static int refreshTicks = 60;
 
     @ConfigEntry(
-            id = "oxygenMultiplier",
-            type = EntryType.DOUBLE,
-            translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.oxygenMultiplier"
+        id = "oxygenMultiplier",
+        type = EntryType.DOUBLE,
+        translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.oxygenMultiplier"
     )
     @Comment("Increases the oxygen requirements as the distributor covers more blocks.")
     public static double oxygenMultiplier = 1.0;
 
     @ConfigEntry(
-            id = "energyMultiplier",
-            type = EntryType.DOUBLE,
-            translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.energyMultiplier"
+        id = "energyMultiplier",
+        type = EntryType.DOUBLE,
+        translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.energyMultiplier"
     )
     @Comment("Increases the energy requirements as the distributor covers more blocks.")
     public static double energyMultiplier = 3.0;

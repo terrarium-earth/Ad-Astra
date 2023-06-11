@@ -23,7 +23,7 @@ public abstract class ServerGamePacketListenerImplMixin {
         ServerPlayer player = ((ServerGamePacketListenerImpl) (Object) this).player;
 
         // Prevent the player from being kicked for flying a jet suit
-        if (!player.isOnGround() && JetSuit.hasFullSet(player)) {
+        if (!player.onGround() && JetSuit.hasFullSet(player)) {
             this.aboveGroundTickCount = 0;
         }
 

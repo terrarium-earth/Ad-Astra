@@ -18,7 +18,7 @@ public class RocketDestroyedCriterion extends SimpleCriterionTrigger<Conditions>
     }
 
     @Override
-    public Conditions createInstance(JsonObject jsonObject, EntityPredicate.Composite extended, DeserializationContext advancementEntityPredicateDeserializer) {
+    public Conditions createInstance(JsonObject jsonObject, ContextAwarePredicate extended, DeserializationContext advancementEntityPredicateDeserializer) {
         return new Conditions(extended);
     }
 
@@ -28,7 +28,7 @@ public class RocketDestroyedCriterion extends SimpleCriterionTrigger<Conditions>
 
     public static class Conditions extends AbstractCriterionTriggerInstance {
 
-        public Conditions(EntityPredicate.Composite player) {
+        public Conditions(ContextAwarePredicate player) {
             super(ID, player);
         }
 

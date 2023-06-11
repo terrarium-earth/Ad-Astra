@@ -10,11 +10,11 @@ import java.util.Random;
 public class StarInformation {
     public static final Color BASE_COLOUR = new Color(255, 255, 255, 255);
     public static final Color[] STAR_COLOURS = new Color[]{
-            BASE_COLOUR,
-            new Color(204, 238, 255, 255),
-            new Color(204, 153, 255, 255),
-            new Color(255, 255, 153, 255),
-            new Color(255, 204, 102, 255)
+        BASE_COLOUR,
+        new Color(204, 238, 255, 255),
+        new Color(204, 153, 255, 255),
+        new Color(255, 255, 153, 255),
+        new Color(255, 204, 102, 255)
     };
     public static final CacheableBiFunction<Long, Integer, StarInformation> STAR_CACHE = new CacheableBiFunction<>(StarInformation::new);
     private final Vector3f[] param1;

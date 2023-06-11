@@ -36,9 +36,9 @@ public class FlagTexture extends SimpleTexture {
     public FlagTexture(String url) {
         super(DEFAULT_FLAG);
         this.request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("User-Agent", "Ad Astra (Minecraft Mod)")
-                .build();
+            .uri(URI.create(url))
+            .header("User-Agent", "Ad Astra (Minecraft Mod)")
+            .build();
     }
 
     @SuppressWarnings({"UnstableApiUsage", "deprecation"})

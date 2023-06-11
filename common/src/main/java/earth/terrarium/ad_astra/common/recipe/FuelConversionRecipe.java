@@ -6,7 +6,6 @@ import com.teamresourceful.resourcefullib.common.codecs.tags.HolderSetCodec;
 import earth.terrarium.ad_astra.common.registry.ModRecipeSerializers;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
 import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -25,10 +24,10 @@ public class FuelConversionRecipe extends ConversionRecipe {
 
     public static Codec<FuelConversionRecipe> codec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
-                RecordCodecBuilder.point(id),
-                HolderSetCodec.of(BuiltInRegistries.FLUID).fieldOf("input").forGetter(ConversionRecipe::getFluidInput),
-                BuiltInRegistries.FLUID.byNameCodec().fieldOf("output").forGetter(ConversionRecipe::getFluidOutput),
-                Codec.DOUBLE.fieldOf("conversion_ratio").orElse(1.0).forGetter(ConversionRecipe::getConversionRatio)
+            RecordCodecBuilder.point(id),
+            HolderSetCodec.of(BuiltInRegistries.FLUID).fieldOf("input").forGetter(ConversionRecipe::getFluidInput),
+            BuiltInRegistries.FLUID.byNameCodec().fieldOf("output").forGetter(ConversionRecipe::getFluidOutput),
+            Codec.DOUBLE.fieldOf("conversion_ratio").orElse(1.0).forGetter(ConversionRecipe::getConversionRatio)
         ).apply(instance, FuelConversionRecipe::new));
     }
 

@@ -17,12 +17,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class LiquidBlockMixin {
 
     @Inject(method = "onPlace", at = @At("TAIL"))
-     private void ad_astra$onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving, CallbackInfo ci) {
-         if (ModUtils.getWorldTemperature(level) < 0 && !OxygenUtils.posHasOxygen(level, pos)) {
-             for (var dir : Direction.values()) {
-                 if (OxygenUtils.posHasOxygen(level, pos.relative(dir))) return;
-             }
-             level.setBlockAndUpdate(pos, Blocks.ICE.defaultBlockState());
-         }
-     }
+    private void ad_astra$onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving, CallbackInfo ci) {
+        if (ModUtils.getWorldTemperature(level) < 0 && !OxygenUtils.posHasOxygen(level, pos)) {
+            for (var dir : Direction.values()) {
+                if (OxygenUtils.posHasOxygen(level, pos.relative(dir))) return;
+            }
+            level.setBlockAndUpdate(pos, Blocks.ICE.defaultBlockState());
+        }
+    }
 }

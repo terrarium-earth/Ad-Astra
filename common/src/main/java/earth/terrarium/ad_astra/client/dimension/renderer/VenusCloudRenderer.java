@@ -66,7 +66,7 @@ public class VenusCloudRenderer {
                     renderer.getCloudBuffer().close();
                 }
 
-                renderer.setCloudBuffer(new VertexBuffer());
+                renderer.setCloudBuffer(new VertexBuffer(VertexBuffer.Usage.STATIC));
                 BufferBuilder.RenderedBuffer renderedBuffer = renderer.invokeBuildClouds(bufferBuilder, i, j, k, colour);
                 renderer.getCloudBuffer().bind();
                 renderer.getCloudBuffer().upload(renderedBuffer);

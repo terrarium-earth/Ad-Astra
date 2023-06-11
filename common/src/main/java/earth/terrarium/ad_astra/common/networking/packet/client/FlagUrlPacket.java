@@ -40,10 +40,10 @@ public record FlagUrlPacket(BlockPos pos, String url) implements Packet<FlagUrlP
         @Override
         public PacketContext handle(FlagUrlPacket packet) {
             return (player, level) -> {
-                if (player.level.getBlockEntity(packet.pos()) instanceof FlagBlockEntity flag && flag.getOwner() != null && player.getUUID().equals(flag.getOwner().getId())) {
+                if (player.level().getBlockEntity(packet.pos()) instanceof FlagBlockEntity flag && flag.getOwner() != null && player.getUUID().equals(flag.getOwner().getId())) {
                     flag.setId(packet.url());
-                    var blockState = player.level.getBlockState(packet.pos());
-                    player.level.sendBlockUpdated(packet.pos(), blockState, blockState, Block.UPDATE_ALL);
+                    var blockState = player.level().getBlockState(packet.pos());
+                    player.level().sendBlockUpdated(packet.pos(), blockState, blockState, Block.UPDATE_ALL);
                 }
             };
         }

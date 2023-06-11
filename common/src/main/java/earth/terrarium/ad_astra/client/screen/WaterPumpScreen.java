@@ -1,11 +1,11 @@
 package earth.terrarium.ad_astra.client.screen;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.block.machine.entity.WaterPumpBlockEntity;
 import earth.terrarium.ad_astra.common.screen.menu.WaterPumpMenu;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -29,23 +29,23 @@ public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpBlockEntity,
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float delta, int mouseX, int mouseY) {
-        super.renderBg(poseStack, delta, mouseX, mouseY);
+    protected void renderBg(GuiGraphics graphics, float delta, int mouseX, int mouseY) {
+        super.renderBg(graphics, delta, mouseX, mouseY);
 
-        GuiUtil.drawEnergy(poseStack, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, this.menu.getEnergyAmount(), this.machine.getMaxCapacity());
-        GuiUtil.drawFluidTank(poseStack, this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP, this.machine.getFluidContainer(machine).getTankCapacity(0), this.menu.getFluids().get(0));
+        GuiUtil.drawEnergy(graphics, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, this.menu.getEnergyAmount(), this.machine.getMaxCapacity());
+        GuiUtil.drawFluidTank(graphics, this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP, this.machine.getFluidContainer(machine).getTankCapacity(0), this.menu.getFluids().get(0));
     }
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
-        super.render(poseStack, mouseX, mouseY, delta);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+        super.render(graphics, mouseX, mouseY, delta);
 
         if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-            GuiUtil.drawEnergyTooltip(this, poseStack, this.menu.getEnergyAmount(), this.machine.getMaxCapacity(), mouseX, mouseY);
+            GuiUtil.drawEnergyTooltip(graphics, this.menu.getEnergyAmount(), this.machine.getMaxCapacity(), mouseX, mouseY);
         }
 
         if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-            GuiUtil.drawTankTooltip(this, poseStack, this.menu.getFluids().get(0), this.machine.getFluidContainer(machine).getTankCapacity(0), mouseX, mouseY);
+            GuiUtil.drawTankTooltip(graphics, this.menu.getFluids().get(0), this.machine.getFluidContainer(machine).getTankCapacity(0), mouseX, mouseY);
         }
     }
 

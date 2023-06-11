@@ -16,7 +16,7 @@ public class EntityAcidRainSystem {
             return;
         }
 
-        if (!entity.level.dimension().equals(ModUtils.VENUS_KEY)) {
+        if (!entity.level().dimension().equals(ModUtils.VENUS_KEY)) {
             return;
         }
 

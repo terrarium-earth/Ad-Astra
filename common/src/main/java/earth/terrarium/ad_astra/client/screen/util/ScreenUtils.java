@@ -1,14 +1,17 @@
 package earth.terrarium.ad_astra.client.screen.util;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.AdAstra;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -24,12 +27,11 @@ public class ScreenUtils {
         return Component.translatable("gui." + text.getNamespace() + ".text." + text.getPath());
     }
 
-    public static void addTexture(PoseStack poseStack, int x, int y, int width, int height, ResourceLocation texture) {
-        RenderSystem.setShaderTexture(0, texture);
-        GuiComponent.blit(poseStack, x, y, 0, 0, width, height, width, height);
+    public static void addTexture(GuiGraphics graphics, int x, int y, int width, int height, ResourceLocation texture) {
+        graphics.blit(texture, x, y, 0, 0, width, height, width, height);
     }
 
-    public static void addRotatingTexture(PlanetSelectionScreen screen, PoseStack poseStack, int x, int y, int width, int height, ResourceLocation texture, float speed) {
+    public static void addRotatingTexture(PlanetSelectionScreen screen, GuiGraphics graphics, int x, int y, int width, int height, ResourceLocation texture, float speed) {
 
         double scale = Minecraft.getInstance().getWindow().getGuiScaledHeight() / 400.0;
 
@@ -41,14 +43,14 @@ public class ScreenUtils {
         width *= scale;
         height *= scale;
 
-        poseStack.pushPose();
+        graphics.pose().pushPose();
 
-        poseStack.translate(screen.width / 2.0f, screen.height / 2.0f, 0);
-        poseStack.mulPose(Axis.ZP.rotationDegrees(screen.getGuiTime() * (speed / 3.0f)));
+        graphics.pose().translate(screen.width / 2.0f, screen.height / 2.0f, 0);
+        graphics.pose().mulPose(Axis.ZP.rotationDegrees(screen.getGuiTime() * (speed / 3.0f)));
 
-        addTexture(poseStack, x, y, width, height, texture);
+        addTexture(graphics, x, y, width, height, texture);
 
-        poseStack.popPose();
+        graphics.pose().popPose();
     }
 
     public static void drawCircle(double x, double y, double radius, int sides, Color ringColour) {
@@ -66,8 +68,8 @@ public class ScreenUtils {
             for (int j = 0; j <= sides; j++) {
                 double angle = (Math.PI * 2 * j / sides) + Math.toRadians(180);
                 bufferBuilder.vertex(x + Math.sin(angle) * i, y + Math.cos(angle) * i, 0)
-                        .color(ringColour.getIntRed(), ringColour.getIntGreen(), ringColour.getIntBlue(), ringColour.getIntAlpha())
-                        .endVertex();
+                    .color(ringColour.getIntRed(), ringColour.getIntGreen(), ringColour.getIntBlue(), ringColour.getIntAlpha())
+                    .endVertex();
             }
             tessellator.end();
         }

@@ -97,11 +97,11 @@ public class GlacianRam extends Animal implements Shearable {
             player.playSound(this.getMilkingSound(), 1.0f, 1.0f);
             ItemStack itemStack2 = ItemUtils.createFilledResult(itemStack, player, Items.MILK_BUCKET.getDefaultInstance());
             player.setItemInHand(hand, itemStack2);
-            return InteractionResult.sidedSuccess(this.level.isClientSide);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
         } else {
             InteractionResult actionResult = super.mobInteract(player, hand);
             if (actionResult.consumesAction() && this.isFood(itemStack)) {
-                this.level.playSound(null, this, this.getEatingSound(itemStack), SoundSource.NEUTRAL, 1.0f, Mth.randomBetween(this.level.random, 0.8f, 1.2f));
+                this.level().playSound(null, this, this.getEatingSound(itemStack), SoundSource.NEUTRAL, 1.0f, Mth.randomBetween(this.level().random, 0.8f, 1.2f));
             }
 
             return this.shear(player, hand);
@@ -116,7 +116,7 @@ public class GlacianRam extends Animal implements Shearable {
 
     @Override
     public void aiStep() {
-        if (this.level.isClientSide) {
+        if (this.level().isClientSide) {
             this.eatPermafrostTimer = Math.max(0, this.eatPermafrostTimer - 1);
         }
 
@@ -126,7 +126,7 @@ public class GlacianRam extends Animal implements Shearable {
     public InteractionResult shear(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
         if (itemStack.is(Items.SHEARS)) {
-            if (!this.level.isClientSide && this.readyForShearing()) {
+            if (!this.level().isClientSide && this.readyForShearing()) {
                 this.shear(player, SoundSource.PLAYERS);
                 itemStack.hurtAndBreak(1, player, playerx -> playerx.broadcastBreakEvent(hand));
                 return InteractionResult.SUCCESS;
@@ -153,7 +153,7 @@ public class GlacianRam extends Animal implements Shearable {
     }
 
     public List<ItemStack> onSheared(@Nullable Player player, SoundSource shearedSoundCategory) {
-        this.level.playSound(null, this, SoundEvents.SHEEP_SHEAR, shearedSoundCategory, 1.0F, 1.0F);
+        this.level().playSound(null, this, SoundEvents.SHEEP_SHEAR, shearedSoundCategory, 1.0F, 1.0F);
         if (player != null) this.gameEvent(GameEvent.SHEAR, player);
         this.setSheared(true);
         int i = 1 + this.random.nextInt(3);

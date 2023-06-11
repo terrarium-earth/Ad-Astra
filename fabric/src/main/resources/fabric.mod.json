@@ -43,9 +43,6 @@
     "rei_common": [
       "earth.terrarium.ad_astra.common.compat.rei.AdAstraReiCommonPlugin"
     ],
-    "emi": [
-      "earth.terrarium.ad_astra.common.compat.emi.AdAstraEmiPlugin"
-    ],
     "modmenu": [
       "earth.terrarium.ad_astra.common.config.fabric.ModMenuConfig"
     ]
@@ -56,7 +53,7 @@
   ],
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.19",
+    "minecraft": ">=1.20",
     "resourcefullib": ">=${resourcefullib_version}",
     "resourcefulconfig": ">=${resourcefulconfig_version}",
     "botarium": ">=${botarium_version}"

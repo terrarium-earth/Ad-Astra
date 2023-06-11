@@ -43,8 +43,8 @@ public class IceSpit extends ThrowableItemProjectile {
         double z = this.getZ();
         Vec3 vec = this.getDeltaMovement();
 
-        this.level.addParticle(ParticleTypes.SPIT, x - vec.x(), y - vec.y(), z - vec.z(), 0, 0.001, 0);
-        this.level.addParticle(ParticleTypes.ITEM_SNOWBALL, x - vec.x(), y - vec.y(), z - vec.z(), 0, 0.001, 0);
+        this.level().addParticle(ParticleTypes.SPIT, x - vec.x(), y - vec.y(), z - vec.z(), 0, 0.001, 0);
+        this.level().addParticle(ParticleTypes.ITEM_SNOWBALL, x - vec.x(), y - vec.y(), z - vec.z(), 0, 0.001, 0);
     }
 
     @Override
@@ -57,8 +57,8 @@ public class IceSpit extends ThrowableItemProjectile {
     @Override
     protected void onHit(HitResult hitResult) {
         super.onHit(hitResult);
-        if (!this.level.isClientSide) {
-            this.level.broadcastEntityEvent(this, (byte) 3);
+        if (!this.level().isClientSide) {
+            this.level().broadcastEntityEvent(this, (byte) 3);
             this.discard();
         }
     }

@@ -34,7 +34,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.Optional;
@@ -44,13 +43,13 @@ import java.util.function.ToIntFunction;
 @MethodsReturnNonnullByDefault
 public abstract class AbstractMachineBlock extends BaseEntityBlock {
     private static final CacheableFunction<Block, BlockEntityType<?>> BLOCK_TO_ENTITY = new CacheableFunction<>(block ->
-            ModBlockEntityTypes.BLOCK_ENTITY_TYPES
-                    .getEntries()
-                    .stream()
-                    .map(RegistryEntry::get)
-                    .filter(type -> type.isValid(block.defaultBlockState()))
-                    .findFirst()
-                    .orElse(null)
+        ModBlockEntityTypes.BLOCK_ENTITY_TYPES
+            .getEntries()
+            .stream()
+            .map(RegistryEntry::get)
+            .filter(type -> type.isValid(block.defaultBlockState()))
+            .findFirst()
+            .orElse(null)
     );
     private BlockEntityType<?> entity;
 
@@ -165,11 +164,6 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock {
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
-    }
-
-    @Override
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.BLOCK;
     }
 
     @Override

@@ -70,12 +70,12 @@ public class AdAstraClientForge {
     }
 
     private static void onRegisterClientHud(RenderGuiEvent.Post event) {
-        AdAstraClient.onRegisterHud(hud -> hud.renderHud(event.getPoseStack(), event.getPartialTick()));
+        AdAstraClient.onRegisterHud(hud -> hud.renderHud(event.getGuiGraphics(), event.getPartialTick()));
 
     }
 
     private static void onRegisterParticles(RegisterParticleProvidersEvent event) {
-        ClientModParticles.onRegisterParticles((type, provider) -> event.register(type, provider::create));
+        ClientModParticles.onRegisterParticles((type, provider) -> event.registerSpriteSet(type, provider::create));
     }
 
     private static void onRegisterFluidRenderTypes(RenderType type, Fluid fluid1, Fluid fluid2) {

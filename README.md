@@ -57,7 +57,7 @@ repositories {
   maven {
     // Location of the maven that hosts Terrarium and Team Resourceful's files.
     name = "Resourceful Bees Maven"
-    url = "https://nexus.resourcefulbees.com/repository/maven-public/"
+    url = "https://maven.resourcefulbees.com/repository/maven-public/"
   }
 }
 ```
@@ -68,7 +68,7 @@ Common
 
 ```groovy
 dependencies {
-    modImplementation "earth.terrarium:ad_astra-common-$rootProject.minecraft_version:$rootProject.ad_astra_version"
+    modImplementation "earth.terrarium.adastra:ad_astra-common-$rootProject.minecraft_version:$rootProject.ad_astra_version"
 }
 ```
 
@@ -76,7 +76,7 @@ Fabric
 
 ```groovy
 dependencies {
-    modImplementation "earth.terrarium:ad_astra-fabric-$rootProject.minecraft_version:$rootProject.ad_astra_version"
+    modImplementation "earth.terrarium.adastra:ad_astra-fabric-$rootProject.minecraft_version:$rootProject.ad_astra_version"
 }
 ```
 
@@ -84,7 +84,7 @@ Forge
 
 ```groovy
 dependencies {
-    modImplementation "earth.terrarium:ad_astra-forge-$rootProject.minecraft_version:$rootProject.ad_astra_version"
+    modImplementation "earth.terrarium.adastra:ad_astra-forge-$rootProject.minecraft_version:$rootProject.ad_astra_version"
 }
 ```
 
@@ -92,5 +92,5 @@ dependencies {
 
 <div align="center">
 
-![Version](https://img.shields.io/maven-metadata/v?label=Ad%20Astra%20Version&metadataUrl=https%3A%2F%2Fnexus.resourcefulbees.com%2Frepository%2Fmaven-public%2Fearth%2Fterrarium%2Fad_astra-common-1.19.4%2Fmaven-metadata.xml)
+![Version](https://img.shields.io/maven-metadata/v?label=Ad%20Astra%20Version&metadataUrl=https%3A%2F%2Fmaven.resourcefulbees.com%2Frepository%2Fmaven-public%2Fearth%2Fterrarium%2adastra%2Fad_astra-common-1.20%2Fmaven-metadata.xml)
 </div>

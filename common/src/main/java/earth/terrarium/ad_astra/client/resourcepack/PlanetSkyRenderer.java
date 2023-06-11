@@ -24,14 +24,14 @@ public record PlanetSkyRenderer(ResourceKey<Level> dimension, PlanetSkyRenderer.
                                 List<PlanetSkyRenderer.SkyObject> skyObjects) {
 
     public static final Codec<PlanetSkyRenderer> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ResourceKey.codec(Registries.DIMENSION).fieldOf("world").forGetter(PlanetSkyRenderer::dimension),
-            StarsRenderer.CODEC.fieldOf("stars").forGetter(PlanetSkyRenderer::starsRenderer),
-            SunsetColour.CODEC.fieldOf("sunset_color").forGetter(PlanetSkyRenderer::sunsetColour),
-            DimensionEffects.CODEC.fieldOf("dimension_effects").forGetter(PlanetSkyRenderer::effects),
-            CloudEffects.CODEC.fieldOf("cloud_effects").forGetter(PlanetSkyRenderer::cloudEffects),
-            WeatherEffects.CODEC.fieldOf("weather_effects").forGetter(PlanetSkyRenderer::weatherEffects),
-            Codec.INT.fieldOf("horizon_angle").forGetter(PlanetSkyRenderer::horizonAngle),
-            SkyObject.CODEC.listOf().fieldOf("sky_objects").forGetter(PlanetSkyRenderer::skyObjects)
+        ResourceKey.codec(Registries.DIMENSION).fieldOf("world").forGetter(PlanetSkyRenderer::dimension),
+        StarsRenderer.CODEC.fieldOf("stars").forGetter(PlanetSkyRenderer::starsRenderer),
+        SunsetColour.CODEC.fieldOf("sunset_color").forGetter(PlanetSkyRenderer::sunsetColour),
+        DimensionEffects.CODEC.fieldOf("dimension_effects").forGetter(PlanetSkyRenderer::effects),
+        CloudEffects.CODEC.fieldOf("cloud_effects").forGetter(PlanetSkyRenderer::cloudEffects),
+        WeatherEffects.CODEC.fieldOf("weather_effects").forGetter(PlanetSkyRenderer::weatherEffects),
+        Codec.INT.fieldOf("horizon_angle").forGetter(PlanetSkyRenderer::horizonAngle),
+        SkyObject.CODEC.listOf().fieldOf("sky_objects").forGetter(PlanetSkyRenderer::skyObjects)
     ).apply(instance, PlanetSkyRenderer::new));
 
 
@@ -79,31 +79,32 @@ public record PlanetSkyRenderer(ResourceKey<Level> dimension, PlanetSkyRenderer.
     public record StarsRenderer(int fancyStars, int fastStars, boolean colouredStars, boolean daylightVisible) {
 
         public static final Codec<StarsRenderer> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Codec.INT.fieldOf("fancy_count").forGetter(StarsRenderer::fancyStars),
-                Codec.INT.fieldOf("fast_count").forGetter(StarsRenderer::fastStars),
-                Codec.BOOL.fieldOf("colored_stars").forGetter(StarsRenderer::colouredStars),
-                Codec.BOOL.fieldOf("daylight_visible").forGetter(StarsRenderer::daylightVisible)
+            Codec.INT.fieldOf("fancy_count").forGetter(StarsRenderer::fancyStars),
+            Codec.INT.fieldOf("fast_count").forGetter(StarsRenderer::fastStars),
+            Codec.BOOL.fieldOf("colored_stars").forGetter(StarsRenderer::colouredStars),
+            Codec.BOOL.fieldOf("daylight_visible").forGetter(StarsRenderer::daylightVisible)
         ).apply(instance, StarsRenderer::new));
     }
 
-    public record SkyObject(ResourceLocation texture, boolean blending, RenderType renderType, float scale, Color colour,
+    public record SkyObject(ResourceLocation texture, boolean blending, RenderType renderType, float scale,
+                            Color colour,
                             Vector3f rotation) {
 
         public static final Codec<SkyObject> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                ResourceLocation.CODEC.fieldOf("texture").forGetter(SkyObject::texture),
-                Codec.BOOL.fieldOf("blending").forGetter(SkyObject::blending),
-                RenderType.CODEC.fieldOf("render_type").forGetter(SkyObject::renderType),
-                Codec.FLOAT.fieldOf("scale").forGetter(SkyObject::scale),
-                Color.CODEC.fieldOf("color").orElse(StarInformation.BASE_COLOUR).forGetter(SkyObject::colour),
-                ExtraCodecs.VECTOR3F.fieldOf("rotation").forGetter(SkyObject::rotation)
+            ResourceLocation.CODEC.fieldOf("texture").forGetter(SkyObject::texture),
+            Codec.BOOL.fieldOf("blending").forGetter(SkyObject::blending),
+            RenderType.CODEC.fieldOf("render_type").forGetter(SkyObject::renderType),
+            Codec.FLOAT.fieldOf("scale").forGetter(SkyObject::scale),
+            Color.CODEC.fieldOf("color").orElse(StarInformation.BASE_COLOUR).forGetter(SkyObject::colour),
+            ExtraCodecs.VECTOR3F.fieldOf("rotation").forGetter(SkyObject::rotation)
         ).apply(instance, SkyObject::new));
     }
 
     public record DimensionEffects(DimensionEffectType type, Color colour) {
 
         public static final Codec<DimensionEffects> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                DimensionEffectType.CODEC.fieldOf("type").forGetter(DimensionEffects::type),
-                Color.CODEC.fieldOf("color").orElse(StarInformation.BASE_COLOUR).forGetter(DimensionEffects::colour)
+            DimensionEffectType.CODEC.fieldOf("type").forGetter(DimensionEffects::type),
+            Color.CODEC.fieldOf("color").orElse(StarInformation.BASE_COLOUR).forGetter(DimensionEffects::colour)
         ).apply(instance, DimensionEffects::new));
     }
 }

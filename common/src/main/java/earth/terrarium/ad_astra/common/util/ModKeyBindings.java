@@ -25,27 +25,27 @@ public class ModKeyBindings {
     private boolean clickingRight;
 
     public static boolean jumpKeyDown(Player player) {
-        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.JUMP) : getServerKeyPressed(player, KeybindPacket.Keybind.JUMP);
+        return player.level().isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.JUMP) : getServerKeyPressed(player, KeybindPacket.Keybind.JUMP);
     }
 
     public static boolean sprintKeyDown(Player player) {
-        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.SPRINT) : getServerKeyPressed(player, KeybindPacket.Keybind.SPRINT);
+        return player.level().isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.SPRINT) : getServerKeyPressed(player, KeybindPacket.Keybind.SPRINT);
     }
 
     public static boolean forwardKeyDown(Player player) {
-        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.FORWARD) : getServerKeyPressed(player, KeybindPacket.Keybind.FORWARD);
+        return player.level().isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.FORWARD) : getServerKeyPressed(player, KeybindPacket.Keybind.FORWARD);
     }
 
     public static boolean backKeyDown(Player player) {
-        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.BACK) : getServerKeyPressed(player, KeybindPacket.Keybind.BACK);
+        return player.level().isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.BACK) : getServerKeyPressed(player, KeybindPacket.Keybind.BACK);
     }
 
     public static boolean leftKeyDown(Player player) {
-        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.LEFT) : getServerKeyPressed(player, KeybindPacket.Keybind.LEFT);
+        return player.level().isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.LEFT) : getServerKeyPressed(player, KeybindPacket.Keybind.LEFT);
     }
 
     public static boolean rightKeyDown(Player player) {
-        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.RIGHT) : getServerKeyPressed(player, KeybindPacket.Keybind.RIGHT);
+        return player.level().isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.RIGHT) : getServerKeyPressed(player, KeybindPacket.Keybind.RIGHT);
     }
 
     private static boolean getServerKeyPressed(Player player, KeybindPacket.Keybind key) {

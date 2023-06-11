@@ -138,6 +138,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyAttachment.Item
             long tickEnergy = SpaceSuitConfig.jetSuitEnergyPerTick;
             if (!player.isCreative()) {
                 energy.extract(stack, tickEnergy, false);
+                makeSilent(player, stack);
             }
             isFallFlying = false;
 
@@ -150,13 +151,14 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyAttachment.Item
     }
 
     public void fallFly(Player player, ItemStackHolder stack) {
-        if (player.isOnGround()) {
+        if (player.onGround()) {
             player.fallDistance /= 2;
         }
         var energy = EnergyHooks.getItemEnergyManager(stack.getStack());
         long tickEnergy = SpaceSuitConfig.jetSuitEnergyPerTick;
         if (!player.isCreative()) {
             energy.extract(stack, tickEnergy, false);
+            makeSilent(player, stack);
         }
         isFallFlying = true;
 
@@ -164,6 +166,13 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyAttachment.Item
         Vec3 rotationVector = player.getLookAngle().scale(speed);
         Vec3 velocity = player.getDeltaMovement();
         player.setDeltaMovement(velocity.add(rotationVector.x() * 0.1 + (rotationVector.x() * 1.5 - velocity.x()) * 0.5, rotationVector.y() * 0.1 + (rotationVector.y() * 1.5 - velocity.y()) * 0.5, rotationVector.z() * 0.1 + (rotationVector.z() * 1.5 - velocity.z()) * 0.5));
+    }
+
+    private void makeSilent(Player player, ItemStackHolder stack) {
+        var wasSilent = player.isSilent();
+        if (!wasSilent) player.setSilent(true);
+        if (stack.isDirty()) player.setItemSlot(EquipmentSlot.CHEST, stack.getStack());
+        if (!wasSilent) player.setSilent(false);
     }
 
     @Override
@@ -203,7 +212,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyAttachment.Item
 
     @PlatformOnly("forge")
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
-        if (!entity.level.isClientSide) {
+        if (!entity.level().isClientSide) {
             ItemStack chest = entity.getItemBySlot(EquipmentSlot.CHEST);
             if (chest.getItem() instanceof JetSuit) {
                 int nextFlightTick = flightTicks + 1;

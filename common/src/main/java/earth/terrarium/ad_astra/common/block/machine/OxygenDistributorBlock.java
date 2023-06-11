@@ -7,7 +7,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.PushReaction;
 
 public class OxygenDistributorBlock extends AbstractMachineBlock {
 
@@ -41,10 +40,5 @@ public class OxygenDistributorBlock extends AbstractMachineBlock {
     public void wasExploded(Level level, BlockPos pos, Explosion explosion) {
         removeOxygen(level, pos);
         super.wasExploded(level, pos, explosion);
-    }
-
-    @Override
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.BLOCK;
     }
 }

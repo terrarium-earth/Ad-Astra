@@ -57,7 +57,7 @@ public class LocalPlayerMixin {
 
                 // Render oxygen info
                 PlayerOverlayScreen.oxygenRatio = Mth.clamp(oxygen.getFluidInTank(0).getFluidAmount() / (double) suit.getTankSize(), 0.0, 1.0);
-                PlayerOverlayScreen.doesNotNeedOxygen = OxygenUtils.entityHasOxygen(player.level, player) && !player.isUnderWater();
+                PlayerOverlayScreen.doesNotNeedOxygen = OxygenUtils.entityHasOxygen(player.level(), player) && !player.isUnderWater();
             }
         } else {
             PlayerOverlayScreen.shouldRenderOxygen = false;
@@ -87,7 +87,7 @@ public class LocalPlayerMixin {
             if (vehicle instanceof Lander lander) {
 
                 double speed = lander.getDeltaMovement().y();
-                if (speed != 0.0 && lander.level.getBlockState(lander.getOnPos().below()).isAir()) {
+                if (speed != 0.0 && lander.level().getBlockState(lander.getOnPos().below()).isAir()) {
                     PlayerOverlayScreen.shouldRenderWarning = true;
                     PlayerOverlayScreen.speed = speed * 55;
                 } else {

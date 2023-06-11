@@ -21,12 +21,12 @@ import static net.minecraft.commands.Commands.argument;
 public class PlanetGuiCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("planetgui")
-                .requires(source -> source.hasPermission(2))
-                .executes(PlanetGuiCommand::executeSimple)
-                .then(argument("target", EntityArgument.entities())
-                        .executes(PlanetGuiCommand::executePartial)
-                        .then(argument("tier", IntegerArgumentType.integer())
-                                .executes(PlanetGuiCommand::executeFull))));
+            .requires(source -> source.hasPermission(2))
+            .executes(PlanetGuiCommand::executeSimple)
+            .then(argument("target", EntityArgument.entities())
+                .executes(PlanetGuiCommand::executePartial)
+                .then(argument("tier", IntegerArgumentType.integer())
+                    .executes(PlanetGuiCommand::executeFull))));
     }
 
     private static int executeSimple(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

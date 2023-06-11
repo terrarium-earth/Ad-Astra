@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -59,11 +58,6 @@ public class LaunchPad extends Block implements SimpleWaterloggedBlock {
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-    }
-
-    @Override
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.BLOCK;
     }
 
     @Override
@@ -117,7 +111,7 @@ public class LaunchPad extends Block implements SimpleWaterloggedBlock {
     }
 
     private boolean canReplace(BlockGetter world, BlockPos pos) {
-        return world.getBlockState(pos).getMaterial().isReplaceable();
+        return world.getBlockState(pos).canBeReplaced();
     }
 
     public List<BlockPos> getBlockPosAround(BlockPos pos) {

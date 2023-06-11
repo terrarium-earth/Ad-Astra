@@ -25,36 +25,31 @@ configurations {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
-    modApi "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version+$rootProject.minecraft_version"
+    modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
+    modApi "net.fabricmc.fabric-api:fabric-api:$fabric_api_version+$minecraft_version"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    modApi "com.terraformersmc:modmenu:$rootProject.modmenu_version"
+    modApi "com.terraformersmc:modmenu:$modmenu_version"
 
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$rootProject.rei_version"
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:$rootProject.rei_version"
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rootProject.rei_version"
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:$rei_version"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rei_version"
     modLocalRuntime "dev.architectury:architectury-fabric:8.1.75"
 
-    modApi "com.teamresourceful.resourcefullib:resourcefullib-fabric-$rootProject.minecraft_version:$rootProject.resourcefullib_version"
-    modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-$rootProject.minecraft_version:$rootProject.resourcefulconfig_version"
-    modApi "earth.terrarium:botarium-fabric-$rootProject.minecraft_version:$rootProject.botarium_version"
-
-    modCompileOnly "dev.emi:emi:$rootProject.emi_version+$rootProject.minecraft_version"
-//        modImplementation "vazkii.patchouli:Patchouli:$rootProject.minecraft_version-$rootProject.patchouli_version-FABRIC"
+//        modImplementation "vazkii.patchouli:Patchouli:$minecraft_version-$patchouli_version-FABRIC"
 }
 
 processResources {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     filesMatching("fabric.mod.json") {
-        expand "version": rootProject.version,
-                "fabric_loader_version": rootProject.fabric_loader_version,
-                "github_name": rootProject.github_name,
-                "resourcefullib_version": rootProject.resourcefullib_version,
-                "resourcefulconfig_version": rootProject.resourcefulconfig_version,
-                "botarium_version": rootProject.botarium_version
+        expand "version": version,
+                "fabric_loader_version": fabric_loader_version,
+                "github_name": github_name,
+                "resourcefullib_version": resourcefullib_version,
+                "resourcefulconfig_version": resourcefulconfig_version,
+                "botarium_version": botarium_version
     }
 }
 

@@ -60,7 +60,7 @@ public class EntityTemperatureSystem {
     private static void freezeEntity(LivingEntity entity, ServerLevel level) {
         entity.hurt(entity.damageSources().freeze(), AdAstraConfig.freezeDamage);
         entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze() + 20, entity.getTicksFrozen() + 5 * 10));
-        RandomSource random = entity.level.getRandom();
+        RandomSource random = entity.level().getRandom();
         ModUtils.spawnForcedParticles((level), ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), 1, Mth.randomBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05, (double) Mth.randomBetween(random, -1.0f, 1.0f) * 0.083333336, 0);
 
         // Turn skeletons into strays

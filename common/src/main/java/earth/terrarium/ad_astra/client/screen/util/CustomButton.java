@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.client.screen.util;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screen.util.PlanetSelectionScreen.TooltipType;
@@ -12,7 +11,7 @@ import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -74,7 +73,7 @@ public class CustomButton extends Button {
     }
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         if (this.visible) {
             Minecraft minecraft = Minecraft.getInstance();
             double scale = minecraft.getWindow().getGuiScale();
@@ -84,8 +83,8 @@ public class CustomButton extends Button {
             boolean over = this.isMouseOver(mouseX, mouseY);
             Color color = over ? this.buttonColourLightened : this.buttonColour;
 
-            poseStack.pushPose();
-            poseStack.translate(5, 0, 0);
+            graphics.pose().pushPose();
+            graphics.pose().translate(5, 0, 0);
             RenderSystem.enableBlend();
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableDepthTest();
@@ -95,47 +94,46 @@ public class CustomButton extends Button {
             }
 
             RenderSystem.setShaderColor(color.getFloatRed(), color.getFloatGreen(), color.getFloatBlue(), this.buttonColour.getFloatAlpha());
-            RenderSystem.setShaderTexture(0, switch (this.buttonSize) {
+            var texture = switch (this.buttonSize) {
                 case LARGE -> LARGE_BUTTON_TEXTURE;
                 case NORMAL -> BUTTON_TEXTURE;
                 case SMALL -> SMALL_BUTTON_TEXTURE;
                 case STEEL -> STEEL_BUTTON_TEXTURE;
-            });
+            };
 
-            blit(poseStack, (this.buttonSize.equals(ButtonType.LARGE) ? this.getX() - 2 : this.getX()), this.getY(), 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
-            drawText(poseStack, minecraft);
+            graphics.blit(texture, (this.buttonSize.equals(ButtonType.LARGE) ? this.getX() - 2 : this.getX()), this.getY(), 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
+            drawText(graphics, minecraft);
 
             if (this.doScissor) {
                 RenderSystem.disableScissor();
             }
 
             if (this.isMouseOver(mouseX, mouseY)) {
-                renderTooltips(poseStack, mouseX, mouseY, minecraft);
+                renderTooltips(graphics, mouseX, mouseY, minecraft);
             }
 
-            poseStack.popPose();
+            graphics.pose().popPose();
             RenderSystem.disableDepthTest();
         }
     }
 
-    public void drawText(PoseStack poseStack, Minecraft minecraft) {
-        Font textRenderer = minecraft.font;
+    public void drawText(GuiGraphics graphics, Minecraft minecraft) {
         int colour = this.active ? 16777215 : 10526880;
-        poseStack.pushPose();
+        graphics.pose().pushPose();
         float scale = 0.9f;
-        poseStack.scale(scale, scale, scale);
+        graphics.pose().scale(scale, scale, scale);
         int x = (this.buttonSize.equals(ButtonType.LARGE) ? this.getX() - 2 : this.getX());
-        poseStack.translate(4 + (x / 9.5f), this.getY() / 8.5f, 0);
+        graphics.pose().translate(4 + (x / 9.5f), this.getY() / 8.5f, 0);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        drawCenteredString(poseStack, textRenderer, this.getMessage(), x + this.width / 2, this.getY() + (this.height - 8) / 2, colour | Mth.ceil(this.alpha * 255.0f) << 24);
-        poseStack.popPose();
+        graphics.drawCenteredString(minecraft.font, this.getMessage(), x + this.width / 2, this.getY() + (this.height - 8) / 2, colour | Mth.ceil(this.alpha * 255.0f) << 24);
+        graphics.pose().popPose();
     }
 
     public int getStartY() {
         return this.startY;
     }
 
-    private void renderTooltips(PoseStack poseStack, int mouseX, int mouseY, Minecraft minecraft) {
+    private void renderTooltips(GuiGraphics graphics, int mouseX, int mouseY, Minecraft minecraft) {
 
         Screen screen = minecraft.screen;
         List<Component> textEntries = new LinkedList<>();
@@ -195,6 +193,6 @@ public class CustomButton extends Button {
             textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.TEMPERATURE_TEXT.getString() + ": §1 " + ModUtils.ORBIT_TEMPERATURE + " °C"));
         }
 
-        screen.renderComponentTooltip(poseStack, textEntries, mouseX, mouseY);
+        graphics.renderComponentTooltip(minecraft.font, textEntries, mouseX, mouseY);
     }
 }

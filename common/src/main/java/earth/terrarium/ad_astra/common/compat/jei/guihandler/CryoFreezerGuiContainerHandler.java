@@ -1,10 +1,10 @@
 package earth.terrarium.ad_astra.common.compat.jei.guihandler;
 
-import java.awt.Rectangle;
-
 import earth.terrarium.ad_astra.client.screen.CryoFreezerScreen;
 import earth.terrarium.ad_astra.common.compat.jei.category.CryoFuelConversionCategory;
 import mezz.jei.api.recipe.RecipeType;
+
+import java.awt.*;
 
 public class CryoFreezerGuiContainerHandler extends BaseGuiContainerHandler<CryoFreezerScreen> {
 

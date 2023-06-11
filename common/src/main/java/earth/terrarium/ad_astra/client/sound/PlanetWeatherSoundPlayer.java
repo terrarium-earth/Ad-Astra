@@ -34,7 +34,7 @@ public class PlanetWeatherSoundPlayer implements AmbientSoundHandler {
     public void tick() {
         this.soundLoops.removeIf(AbstractTickableSoundInstance::isStopped);
         if (soundLoops.isEmpty()) {
-            if (ModUtils.isPlanet(this.player.level) && ModUtils.planetHasAtmosphere(this.player.level)) {
+            if (ModUtils.isPlanet(this.player.level()) && ModUtils.planetHasAtmosphere(this.player.level())) {
                 MusicLoop loop = new MusicLoop(this.player, ModSoundEvents.WINDY.get());
                 soundLoops.add(loop);
                 this.soundManager.play(loop);
@@ -61,11 +61,11 @@ public class PlanetWeatherSoundPlayer implements AmbientSoundHandler {
                 this.stop();
                 return;
             }
-            ClientLevel level = (ClientLevel) player.getLevel();
+            ClientLevel level = (ClientLevel) player.level();
             Minecraft minecraft = Minecraft.getInstance();
 
             double height = 80.0;
-            double max = 0.01;
+            double max = 0.001;
             if (level.isRaining()) {
                 height -= 10.0;
                 max += 0.1;

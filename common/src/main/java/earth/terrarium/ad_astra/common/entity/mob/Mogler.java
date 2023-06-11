@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.common.entity.mob;
 
-import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.config.SpawnConfig;
+import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;

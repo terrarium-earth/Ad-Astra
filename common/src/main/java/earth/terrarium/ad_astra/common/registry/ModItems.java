@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.common.registry;
 
+import com.teamresourceful.resourcefullib.common.item.tabs.ResourcefulCreativeTab;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
@@ -16,16 +17,18 @@ import earth.terrarium.botarium.common.registry.fluid.FluidBucketItem;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import org.apache.logging.log4j.util.TriConsumer;
 
-import java.util.List;
+import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class ModItems {
     public static final ResourcefulRegistry<Item> ITEMS = ResourcefulRegistries.create(BuiltInRegistries.ITEM, AdAstra.MOD_ID);
+    public static final Supplier<CreativeModeTab> TAB = new ResourcefulCreativeTab(new ResourceLocation(AdAstra.MOD_ID, "main"))
+        .setItemIcon(() -> ModItems.TIER_1_ROCKET.get())
+        .addRegistry(ITEMS)
+        .build();
 
     public static final ResourcefulRegistry<Item> VEHICLES = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> FLAGS = ResourcefulRegistries.create(ITEMS);
@@ -413,8 +416,4 @@ public class ModItems {
     public static final RegistryEntry<Item> SULFUR_CREEPER_SPAWN_EGG = ITEMS.register("sulfur_creeper_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.SULFUR_CREEPER, 13930288, 11303196, new Item.Properties()));
     public static final RegistryEntry<Item> GLACIAN_RAM_SPAWN_EGG = ITEMS.register("glacian_ram_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.GLACIAN_RAM, 16770815, 4406589, new Item.Properties()));
     public static final RegistryEntry<Item> LUNARIAN_WANDERING_TRADER_SPAWN_EGG = ITEMS.register("lunarian_wandering_trader_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.LUNARIAN_WANDERING_TRADER, 5993415, 8537301, new Item.Properties()));
-
-    public static void onRegisterCreativeTabs(TriConsumer<ResourceLocation, RegistryEntry<Item>, List<Item>> consumer) {
-        consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "main"), ModItems.TIER_1_ROCKET, BuiltInRegistries.ITEM.stream().filter(i -> BuiltInRegistries.ITEM.getKey(i).getNamespace().equals(AdAstra.MOD_ID)).toList());
-    }
 }

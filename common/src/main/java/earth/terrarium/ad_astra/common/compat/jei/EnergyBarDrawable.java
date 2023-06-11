@@ -1,11 +1,11 @@
 package earth.terrarium.ad_astra.common.compat.jei;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
 import earth.terrarium.ad_astra.client.screen.util.ScreenUtils;
 import earth.terrarium.ad_astra.common.compat.rei.util.REIUtils;
 import mezz.jei.api.gui.drawable.IDrawable;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
 
 public class EnergyBarDrawable implements IDrawable {
@@ -27,20 +27,20 @@ public class EnergyBarDrawable implements IDrawable {
     }
 
     @Override
-    public void draw(PoseStack poseStack, int xOffset, int yOffset) {
+    public void draw(GuiGraphics graphics, int xOffset, int yOffset) {
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         RenderSystem.enableBlend();
         RenderSystem.blendFuncSeparate(770, 771, 1, 0);
         RenderSystem.blendFunc(770, 771);
 
-        ScreenUtils.addTexture(poseStack, xOffset - 2, yOffset - 6, (int) (19 * 0.9), (int) (64 * 0.96), REIUtils.ENERGY_EMPTY_TEXTURE);
+        ScreenUtils.addTexture(graphics, xOffset - 2, yOffset - 6, (int) (19 * 0.9), (int) (64 * 0.96), REIUtils.ENERGY_EMPTY_TEXTURE);
 
         double ratio = (getHeight() - Mth.ceil((System.currentTimeMillis() / (animationDuration / getHeight()) % getHeight()))) / (double) getHeight();
         if (this.increasing) {
-            GuiUtil.drawVertical(poseStack, xOffset, yOffset, getWidth(), getHeight(), GuiUtil.ENERGY_TEXTURE, 1.0f - ratio);
+            GuiUtil.drawVertical(graphics, xOffset, yOffset, getWidth(), getHeight(), GuiUtil.ENERGY_TEXTURE, 1.0f - ratio);
         } else {
-            GuiUtil.drawVertical(poseStack, xOffset, yOffset, getWidth(), getHeight(), GuiUtil.ENERGY_TEXTURE, ratio);
+            GuiUtil.drawVertical(graphics, xOffset, yOffset, getWidth(), getHeight(), GuiUtil.ENERGY_TEXTURE, ratio);
         }
 
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

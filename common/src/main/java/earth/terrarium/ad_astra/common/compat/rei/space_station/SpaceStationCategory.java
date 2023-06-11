@@ -1,6 +1,5 @@
 package earth.terrarium.ad_astra.common.compat.rei.space_station;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screen.util.ScreenUtils;
 import earth.terrarium.ad_astra.common.compat.rei.REICategories;
@@ -27,22 +26,7 @@ public class SpaceStationCategory implements DisplayCategory<SpaceStationDisplay
 
     @Override
     public Renderer getIcon() {
-        return new Renderer() {
-
-            @Override
-            public void render(PoseStack poseStack, Rectangle bounds, int mouseX, int mouseY, float delta) {
-                ScreenUtils.addTexture(poseStack, bounds.x, bounds.y, 16, 16, ICON);
-            }
-
-            @Override
-            public int getZ() {
-                return 0;
-            }
-
-            @Override
-            public void setZ(int z) {
-            }
-        };
+        return (graphics, bounds, mouseX, mouseY, delta) -> ScreenUtils.addTexture(graphics, bounds.x, bounds.y, 16, 16, ICON);
     }
 
     @Override

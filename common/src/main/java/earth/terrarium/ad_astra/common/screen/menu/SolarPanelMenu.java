@@ -12,7 +12,7 @@ import java.util.List;
 public class SolarPanelMenu extends AbstractMachineMenu<SolarPanelBlockEntity> {
 
     public SolarPanelMenu(int syncId, Inventory inventory, FriendlyByteBuf buf) {
-        this(syncId, inventory, (SolarPanelBlockEntity) inventory.player.level.getBlockEntity(buf.readBlockPos()));
+        this(syncId, inventory, (SolarPanelBlockEntity) inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
     public SolarPanelMenu(int syncId, Inventory inventory, SolarPanelBlockEntity entity) {

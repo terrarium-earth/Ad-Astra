@@ -1,11 +1,5 @@
 package earth.terrarium.ad_astra.common.compat.jei.guihandler;
 
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
 import earth.terrarium.ad_astra.client.screen.AbstractMachineScreen;
 import mezz.jei.api.gui.handlers.IGuiClickableArea;
 import mezz.jei.api.gui.handlers.IGuiContainerHandler;
@@ -14,6 +8,12 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.runtime.IRecipesGui;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class BaseGuiContainerHandler<T extends AbstractMachineScreen<?, ?>> implements IGuiContainerHandler<T> {
 

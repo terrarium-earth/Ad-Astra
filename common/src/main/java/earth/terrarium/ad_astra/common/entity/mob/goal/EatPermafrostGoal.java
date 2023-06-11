@@ -22,7 +22,7 @@ public class EatPermafrostGoal extends Goal {
 
     public EatPermafrostGoal(Mob mobEntity) {
         this.mob = mobEntity;
-        this.level = mobEntity.level;
+        this.level = mobEntity.level();
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
     }
 

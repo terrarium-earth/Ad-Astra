@@ -10,13 +10,13 @@ import net.minecraftforge.fml.ModLoadingContext;
 public class ForgeMenuConfig {
     public static void register() {
         ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
-                () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> {
-                    ResourcefulConfig config = AdAstra.CONFIGURATOR.getConfig(AdAstraConfig.class);
-                    if (config == null) {
-                        return null;
-                    }
-                    return new ConfigScreen(null, config);
-                })
+            () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> {
+                ResourcefulConfig config = AdAstra.CONFIGURATOR.getConfig(AdAstraConfig.class);
+                if (config == null) {
+                    return null;
+                }
+                return new ConfigScreen(null, config);
+            })
         );
     }
 }

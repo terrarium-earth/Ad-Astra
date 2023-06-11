@@ -1,14 +1,13 @@
 package earth.terrarium.ad_astra.common.compat.jei.category;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.ClientPlatformUtils;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.compat.jei.EnergyBarDrawable;
 import earth.terrarium.ad_astra.common.compat.jei.FluidBarDrawable;
 import earth.terrarium.ad_astra.common.config.OxygenLoaderConfig;
 import earth.terrarium.ad_astra.common.recipe.OxygenConversionRecipe;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
@@ -17,6 +16,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -31,10 +31,10 @@ public class OxygenConversionCategory extends BaseCategory<OxygenConversionRecip
 
     public OxygenConversionCategory(IGuiHelper guiHelper) {
         super(guiHelper,
-                RECIPE,
-                Component.translatable(ModItems.OXYGEN_LOADER.get().getDescriptionId()),
-                guiHelper.createBlankDrawable(144, 90),
-                guiHelper.createDrawableItemStack(ModItems.OXYGEN_LOADER.get().getDefaultInstance())
+            RECIPE,
+            Component.translatable(ModItems.OXYGEN_LOADER.get().getDescriptionId()),
+            guiHelper.createBlankDrawable(144, 90),
+            guiHelper.createDrawableItemStack(ModItems.OXYGEN_LOADER.get().getDefaultInstance())
         );
         arrow = guiHelper.drawableBuilder(GuiUtil.ARROW_TEXTURE, 0, 0, GuiUtil.ARROW_WIDTH, GuiUtil.ARROW_HEIGHT).setTextureSize(GuiUtil.ARROW_WIDTH, GuiUtil.ARROW_HEIGHT).buildAnimated(100, IDrawableAnimated.StartDirection.LEFT, false);
     }
@@ -47,12 +47,12 @@ public class OxygenConversionCategory extends BaseCategory<OxygenConversionRecip
     }
 
     @Override
-    public void draw(OxygenConversionRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
-        new FluidBarDrawable(FluidHooks.newFluidHolder(recipe.getFluidInput().get(0).value(), FluidHooks.buckets(1), null), false, 10000).draw(poseStack, 15, 15);
-        new FluidBarDrawable(FluidHooks.newFluidHolder(recipe.getFluidOutput(), FluidHooks.buckets(1), null), true, 10000).draw(poseStack, 80, 15);
+    public void draw(OxygenConversionRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+        new FluidBarDrawable(FluidHooks.newFluidHolder(recipe.getFluidInput().get(0).value(), FluidHooks.buckets(1), null), false, 10000).draw(graphics, 15, 15);
+        new FluidBarDrawable(FluidHooks.newFluidHolder(recipe.getFluidOutput(), FluidHooks.buckets(1), null), true, 10000).draw(graphics, 80, 15);
         guiHelper.createDrawable(GuiUtil.HAMMER_TEXTURE, 13, 13, 13, 13);
-        new EnergyBarDrawable(false, 10000).draw(poseStack, 120, 15);
-        arrow.draw(poseStack, 40, 30);
+        new EnergyBarDrawable(false, 10000).draw(graphics, 120, 15);
+        arrow.draw(graphics, 40, 30);
     }
 
     @Override

@@ -145,12 +145,8 @@ public class Rover extends Vehicle {
     }
 
     @Override
-    public void positionRider(Entity passenger) {
+    public void positionRider(Entity passenger, MoveFunction positionUpdater) {
         this.copyEntityData(passenger);
-        this.positionRider(passenger, Entity::setPos);
-    }
-
-    private void positionRider(Entity passenger, MoveFunction positionUpdater) {
         if (!this.hasPassenger(passenger)) {
             return;
         }

@@ -7,24 +7,20 @@ loom {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
 
-    modCompileOnly "mezz.jei:jei-1.19.3-common-api:$rootProject.jei_version"
-    modRuntimeOnly "mezz.jei:jei-1.19.3-common:$rootProject.jei_version"
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:$rootProject.rei_version"
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin:$rootProject.rei_version"
+    modCompileOnly "mezz.jei:jei-$minecraft_version-common-api:$jei_version"
+    modRuntimeOnly "mezz.jei:jei-$minecraft_version-common:$jei_version"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:$rei_version"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin:$rei_version"
 
-    modApi "com.teamresourceful.resourcefullib:resourcefullib-common-$rootProject.minecraft_version:$rootProject.resourcefullib_version"
-    modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-$rootProject.minecraft_version:$rootProject.resourcefulconfig_version"
-    modApi "earth.terrarium:botarium-common-$rootProject.minecraft_version:$rootProject.botarium_version"
-
-    modImplementation "vazkii.patchouli:Patchouli-xplat:1.19.3-$rootProject.patchouli_version"
+    modImplementation "vazkii.patchouli:Patchouli-xplat:1.19.3-$patchouli_version"
 }
 
 processResources {
-    inputs.property "version", rootProject.version
-    inputs.property "github_name", rootProject.github_name
-    inputs.property "resourcefullib_version", rootProject.resourcefullib_version
-    inputs.property "resourcefulconfig_version", rootProject.resourcefulconfig_version
-    inputs.property "botarium_version", rootProject.botarium_version
+    inputs.property "version", version
+    inputs.property "github_name", github_name
+    inputs.property "resourcefullib_version", resourcefullib_version
+    inputs.property "resourcefulconfig_version", resourcefulconfig_version
+    inputs.property "botarium_version", botarium_version
 }

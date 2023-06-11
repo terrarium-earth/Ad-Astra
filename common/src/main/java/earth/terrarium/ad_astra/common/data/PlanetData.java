@@ -77,17 +77,17 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
 
     public static void writePlanetData(FriendlyByteBuf buf) {
         PacketHelper.writeWithYabn(buf, Planet.CODEC.listOf(), PlanetData.planets().stream().toList(), true)
-                .get()
-                .mapRight(DataResult.PartialResult::message)
-                .ifRight(AdAstra.LOGGER::error);
+            .get()
+            .mapRight(DataResult.PartialResult::message)
+            .ifRight(AdAstra.LOGGER::error);
     }
 
     public static void readPlanetData(FriendlyByteBuf buf) {
         PacketHelper.readWithYabn(buf, Planet.CODEC.listOf(), true)
-                .get()
-                .ifLeft(PlanetData::updatePlanets)
-                .mapRight(DataResult.PartialResult::message)
-                .ifRight(AdAstra.LOGGER::error);
+            .get()
+            .ifLeft(PlanetData::updatePlanets)
+            .mapRight(DataResult.PartialResult::message)
+            .ifRight(AdAstra.LOGGER::error);
     }
 
     public static Set<Planet> planets() {

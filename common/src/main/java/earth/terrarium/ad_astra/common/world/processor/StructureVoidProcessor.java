@@ -21,10 +21,10 @@ public class StructureVoidProcessor extends StructureProcessor {
     @Nullable
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader level, BlockPos pos, BlockPos pivot, StructureTemplate.StructureBlockInfo structureBlockInfo, StructureTemplate.StructureBlockInfo structureBlockInfo2, StructurePlaceSettings data) {
-        if (structureBlockInfo2.state.getBlock().equals(Blocks.STRUCTURE_VOID)) {
+        if (structureBlockInfo2.state().getBlock().equals(Blocks.STRUCTURE_VOID)) {
             return null;
         }
-        if (level.getBlockState(structureBlockInfo2.pos).isAir()) {
+        if (level.getBlockState(structureBlockInfo2.pos()).isAir()) {
             return null;
         }
 

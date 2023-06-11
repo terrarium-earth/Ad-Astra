@@ -33,10 +33,10 @@ public class SulfurCreeper extends Creeper {
 
     @Override
     protected void explodeCreeper() {
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             float f = this.isPowered() ? 2.0F : 1.0F;
             this.dead = true;
-            Explosion explosion = this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3 * f, Level.ExplosionInteraction.MOB);
+            Explosion explosion = this.level().explode(this, this.getX(), this.getY(), this.getZ(), 3 * f, Level.ExplosionInteraction.MOB);
             this.discard();
 
             for (Player player : explosion.getHitPlayers().keySet()) {
@@ -49,7 +49,7 @@ public class SulfurCreeper extends Creeper {
 
             Collection<MobEffectInstance> collection = this.getActiveEffects();
             if (!collection.isEmpty()) {
-                AreaEffectCloud areaEffectCloud = new AreaEffectCloud(this.level, this.getX(), this.getY(), this.getZ());
+                AreaEffectCloud areaEffectCloud = new AreaEffectCloud(this.level(), this.getX(), this.getY(), this.getZ());
                 areaEffectCloud.setRadius(2.5F);
                 areaEffectCloud.setRadiusOnUse(-0.5F);
                 areaEffectCloud.setWaitTime(10);
@@ -60,7 +60,7 @@ public class SulfurCreeper extends Creeper {
                     areaEffectCloud.addEffect(new MobEffectInstance(mobEffectInstance));
                 }
 
-                this.level.addFreshEntity(areaEffectCloud);
+                this.level().addFreshEntity(areaEffectCloud);
             }
         }
     }

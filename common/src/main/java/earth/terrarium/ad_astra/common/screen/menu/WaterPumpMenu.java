@@ -11,7 +11,7 @@ import net.minecraft.world.inventory.Slot;
 public class WaterPumpMenu extends AbstractMachineMenu<WaterPumpBlockEntity> {
 
     public WaterPumpMenu(int syncId, Inventory inventory, FriendlyByteBuf buf) {
-        this(syncId, inventory, (WaterPumpBlockEntity) inventory.player.level.getBlockEntity(buf.readBlockPos()));
+        this(syncId, inventory, (WaterPumpBlockEntity) inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
     public WaterPumpMenu(int syncId, Inventory inventory, WaterPumpBlockEntity entity) {

@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.common.entity.vehicle;
 
-import earth.terrarium.ad_astra.common.util.ModKeyBindings;
-import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.config.VehiclesConfig;
 import earth.terrarium.ad_astra.common.screen.LanderMenuProvider;
+import earth.terrarium.ad_astra.common.util.ModKeyBindings;
+import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
@@ -41,7 +41,7 @@ public class Lander extends Vehicle {
     // Drop inventory contents instead of dropping itself.
     @Override
     public void drop() {
-        Containers.dropContents(this.level, this.blockPosition(), this.getInventory());
+        Containers.dropContents(this.level(), this.blockPosition(), this.getInventory());
         super.drop();
     }
 
@@ -72,7 +72,7 @@ public class Lander extends Vehicle {
 
     @Override
     public void doGravity() {
-        if (!(this.level.getBlockState(this.getOnPos()).getBlock() instanceof LiquidBlock)) {
+        if (!(this.level().getBlockState(this.getOnPos()).getBlock() instanceof LiquidBlock)) {
             super.doGravity();
         } else {
             Vec3 velocity = this.getDeltaMovement();
@@ -86,7 +86,7 @@ public class Lander extends Vehicle {
 
         // Player is clicking 'space' to move upward.
         if (this.getFirstPassenger() instanceof Player player) {
-            if (!this.isOnGround()) {
+            if (!this.onGround()) {
                 if (ModKeyBindings.jumpKeyDown(player)) {
                     this.applyBoosters();
                 }
@@ -102,8 +102,8 @@ public class Lander extends Vehicle {
         }
 
         // Particles
-        if (!this.level.isClientSide) {
-            ModUtils.spawnForcedParticles((ServerLevel) this.getLevel(), ParticleTypes.SPIT, this.getX(), this.getY() - 0.3, this.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
+        if (!this.level().isClientSide) {
+            ModUtils.spawnForcedParticles((ServerLevel) this.level(), ParticleTypes.SPIT, this.getX(), this.getY() - 0.3, this.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
         }
     }
 }

@@ -10,7 +10,7 @@ import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -58,7 +58,8 @@ public class PlayerOverlayScreen {
     public static boolean shouldRenderBattery;
     public static double batteryRatio;
 
-    public static void render(PoseStack poseStack, float delta) {
+    public static void render(GuiGraphics graphics, float delta) {
+        PoseStack poseStack = graphics.pose();
         Minecraft minecraft = Minecraft.getInstance();
         int screenWidth = minecraft.getWindow().getGuiScaledWidth();
         int screenHeight = minecraft.getWindow().getGuiScaledHeight();
@@ -80,17 +81,17 @@ public class PlayerOverlayScreen {
             int textureWidth = 62;
             int textureHeight = 52;
 
-            GuiUtil.drawVerticalReverse(poseStack, x, y, textureWidth, textureHeight, OXYGEN_TANK_EMPTY_TEXTURE, oxygenRatio);
-            GuiUtil.drawVertical(poseStack, x, y, textureWidth, textureHeight, OXYGEN_TANK_FULL_TEXTURE, oxygenRatio);
+            GuiUtil.drawVerticalReverse(graphics, x, y, textureWidth, textureHeight, OXYGEN_TANK_EMPTY_TEXTURE, oxygenRatio);
+            GuiUtil.drawVertical(graphics, x, y, textureWidth, textureHeight, OXYGEN_TANK_FULL_TEXTURE, oxygenRatio);
 
             // Oxygen text
             double oxygen = Math.round(oxygenRatio * 1000) / 10.0;
             Component text = Component.nullToEmpty((oxygen) + "%");
             int textWidth = minecraft.font.width(text);
             if (doesNotNeedOxygen) {
-                minecraft.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x7FFF00);
+                graphics.drawString(minecraft.font, text, (int) (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x7FFF00);
             } else {
-                minecraft.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
+                graphics.drawString(minecraft.font, text, (int) (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
             }
             poseStack.popPose();
         }
@@ -105,13 +106,13 @@ public class PlayerOverlayScreen {
 
             int textureWidth = (int) (49 * 1.4);
             int textureHeight = (int) (27 * 1.4);
-            GuiUtil.drawHorizontal(poseStack, x, y, textureWidth, textureHeight, BATTERY_EMPTY_TEXTURE, 1.0);
-            GuiUtil.drawHorizontal(poseStack, x, y, textureWidth, textureHeight, BATTERY_TEXTURE, batteryRatio);
+            GuiUtil.drawHorizontal(graphics, x, y, textureWidth, textureHeight, BATTERY_EMPTY_TEXTURE, 1.0);
+            GuiUtil.drawHorizontal(graphics, x, y, textureWidth, textureHeight, BATTERY_TEXTURE, batteryRatio);
 
             double energy = Math.round(batteryRatio * 1000) / 10.0;
             Component text = Component.nullToEmpty((energy) + "%");
             int textWidth = minecraft.font.width(text);
-            minecraft.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x6082B6);
+            graphics.drawString(minecraft.font, text, (int) (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x6082B6);
             poseStack.popPose();
         }
 
@@ -124,7 +125,7 @@ public class PlayerOverlayScreen {
             poseStack.pushPose();
             poseStack.scale(4.0F, 4.0F, 4.0F);
             var m = minecraft.font.width(countdownSeconds + "");
-            minecraft.font.drawShadow(poseStack, countdownSeconds + "", (float) (-m / 2), -10.0F, 0xe53253);
+            graphics.drawString(minecraft.font, countdownSeconds + "", (int) (-m / 2), (int) -10.0F, 0xe53253);
             poseStack.popPose();
             RenderSystem.disableBlend();
             poseStack.popPose();
@@ -139,7 +140,7 @@ public class PlayerOverlayScreen {
             int y = screenHeight / 2 - 128 / 2;
 
             ResourceLocation planet;
-            ResourceKey<Level> currentWorld = player.getLevel().dimension();
+            ResourceKey<Level> currentWorld = player.level().dimension();
             if (currentWorld.equals(Level.OVERWORLD)) {
                 planet = EARTH_PLANET_BAR_TEXTURE;
             } else if (currentWorld.equals(ModUtils.MOON_KEY)) {
@@ -157,12 +158,11 @@ public class PlayerOverlayScreen {
             }
 
             // Draw planet
-            RenderSystem.setShaderTexture(0, planet);
-            GuiComponent.blit(poseStack, x, y, 0, 0, 16, 128, 16, 128);
+            graphics.blit(planet, x, y, 0, 0, 16, 128, 16, 128);
 
             // Draw rocket indicator
             RenderSystem.setShaderTexture(0, ROCKET_PLANET_BAR_TEXTURE);
-            FloatGuiComponent.drawTexture(poseStack, 4.0f, (screenHeight / 2.0f) + (103 / 2.0f) - rocketHeight, 0, 0, 8, 11, 8, 11);
+            FloatGuiComponent.drawTexture(graphics, 4.0f, (screenHeight / 2.0f) + (103 / 2.0f) - rocketHeight, 0, 0, 8, 11, 8, 11);
         }
 
         // Warning screen
@@ -185,10 +185,11 @@ public class PlayerOverlayScreen {
             poseStack.pushPose();
             poseStack.scale(4.0F, 4.0F, 4.0F);
             var m = minecraft.font.width(WARNING_TEXT);
-            minecraft.font.drawShadow(poseStack, WARNING_TEXT, (float) (-m / 2), -10.0F, FastColor.ARGB32.color((int) (sine * 255), (int) (sine * 255), (int) (sine * 255), (int) (sine * 255)));
+            graphics.drawString(minecraft.font, WARNING_TEXT, -m / 2, (int) -10.0F, FastColor.ARGB32.color((int) (sine * 255), (int) (sine * 255), (int) (sine * 255), (int) (sine * 255)));
             poseStack.popPose();
             RenderSystem.disableBlend();
             poseStack.popPose();
+            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         }
     }
 

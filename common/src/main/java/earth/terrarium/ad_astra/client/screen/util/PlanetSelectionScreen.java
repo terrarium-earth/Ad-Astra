@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.client.screen.util;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
@@ -22,7 +21,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
@@ -89,10 +88,10 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
         }
 
         // Set the initial gui time to the level time. This creates a random start position for each rotating object.
-        guiTime = handler.getPlayer().level.getRandom().nextFloat() * 100000.0f;
+        guiTime = handler.getPlayer().level().getRandom().nextFloat() * 100000.0f;
 
         // Get recipe.
-        SpaceStationRecipe.getRecipes(handler.getPlayer().level).forEach(recipe -> {
+        SpaceStationRecipe.getRecipes(handler.getPlayer().level()).forEach(recipe -> {
             if (recipe != null) {
                 for (int i = 0; i < recipe.getIngredients().size(); i++) {
                     if (recipe.getIngredients().get(i).getItems().length == 0) return;
@@ -116,19 +115,19 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
     }
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
 
         // For rotations
         this.guiTime += delta;
-        this.renderBackground(poseStack, mouseX, mouseY, delta);
-        super.render(poseStack, mouseX, mouseY, delta);
+        this.renderBackground(graphics, mouseX, mouseY, delta);
+        super.render(graphics, mouseX, mouseY, delta);
 
-        // Catalog text.
-        this.font.draw(poseStack, CATALOG_TEXT, 29, (this.height / 2.0f) - 143.0f / 2.0f, -1);
+        // Catalog text
+        graphics.drawString(this.font, CATALOG_TEXT, 29, (int) ((this.height / 2.0f) - 143.0f / 2.0f), -1);
     }
 
-    private void drawBackground(PoseStack poseStack) {
-        GuiComponent.fill(poseStack, 0, 0, this.width, this.height, 0xff000419);
+    private void drawBackground(GuiGraphics graphics) {
+        graphics.fill(0, 0, this.width, this.height, 0xff000419);
         for (int i = 0; i < this.width / 24; i++) {
             ScreenUtils.drawLine(i * 24, this.width + i * 24, 0, this.width, 0xff0f2559);
             ScreenUtils.drawLine(0, this.width - i * 24, i * 24, this.width, 0xff0f2559);
@@ -139,8 +138,8 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
         RenderSystem.enableBlend();
     }
 
-    private void renderBackground(PoseStack poseStack, int mouseX, int mouseY, float delta) {
-        super.renderBackground(poseStack);
+    private void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+        super.renderBackground(graphics);
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -148,7 +147,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
         RenderSystem.defaultBlendFunc();
 
         // Planet selection background
-        drawBackground(poseStack);
+        drawBackground(graphics);
 
         int currentPage = this.getPage();
 
@@ -169,15 +168,15 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
 
         if (currentPage == 1) {
             AdAstraClient.galaxies.stream().filter(g -> g.galaxy().equals(this.currentCategory.id()))
-                    .findFirst()
-                    .ifPresent(galaxy -> ScreenUtils.addRotatingTexture(this, poseStack, -125, -125, galaxy.scale(), galaxy.scale(), galaxy.texture(), 0.6f));
+                .findFirst()
+                .ifPresent(galaxy -> ScreenUtils.addRotatingTexture(this, graphics, -125, -125, galaxy.scale(), galaxy.scale(), galaxy.texture(), 0.6f));
         }
         // Render the Solar System when inside the Solar System category
         else {
             if (solarSystem != null) {
 
                 // Sun
-                ScreenUtils.addTexture(poseStack, (this.width - solarSystem.sunScale()) / 2, (this.height - solarSystem.sunScale()) / 2, solarSystem.sunScale(), solarSystem.sunScale(), solarSystem.sun());
+                ScreenUtils.addTexture(graphics, (this.width - solarSystem.sunScale()) / 2, (this.height - solarSystem.sunScale()) / 2, solarSystem.sunScale(), solarSystem.sunScale(), solarSystem.sun());
 
                 for (PlanetRing ring : planetRings) {
                     ScreenUtils.drawCircle(this.width / 2f, this.height / 2f, ring.radius() * 24, 75, solarSystem.ringColour());
@@ -185,17 +184,17 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
 
                 for (PlanetRing ring : planetRings) {
                     int coordinates = (int) (ring.radius() * 17 - (ring.scale() / 1.9));
-                    ScreenUtils.addRotatingTexture(this, poseStack, coordinates, coordinates, ring.scale(), ring.scale(), ring.texture(), 365 / (float) ring.speed());
+                    ScreenUtils.addRotatingTexture(this, graphics, coordinates, coordinates, ring.scale(), ring.scale(), ring.texture(), 365 / (float) ring.speed());
                 }
             }
         }
 
         // Display either the small or large menu when a planet category is opened.
         if (currentPage == 3) {
-            ScreenUtils.addTexture(poseStack, 0, (this.height / 2) - 177 / 2, 215, 177, LARGE_MENU_TEXTURE);
+            ScreenUtils.addTexture(graphics, 0, (this.height / 2) - 177 / 2, 215, 177, LARGE_MENU_TEXTURE);
             this.scrollBar.setX(210);
         } else {
-            ScreenUtils.addTexture(poseStack, 0, (this.height / 2) - 177 / 2, 105, 177, SMALL_MENU_LIST);
+            ScreenUtils.addTexture(graphics, 0, (this.height / 2) - 177 / 2, 105, 177, SMALL_MENU_LIST);
             this.scrollBar.setX(SCROLL_BAR_X);
         }
 
@@ -266,15 +265,14 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
         this.scrollBar = new Button(SCROLL_BAR_X, minScrollY, 4, 8, Component.nullToEmpty(""), pressed -> {
         }, Supplier::get) {
             @Override
-            public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
+            public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
                 if (this.visible) {
                     RenderSystem.setShader(GameRenderer::getPositionTexShader);
-                    RenderSystem.setShaderTexture(0, SCROLL_BAR);
                     RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
                     RenderSystem.enableBlend();
                     RenderSystem.defaultBlendFunc();
                     RenderSystem.enableDepthTest();
-                    GuiComponent.blit(poseStack, this.getX(), this.getY(), 0, 0, this.width, this.height, this.width, this.height);
+                    graphics.blit(SCROLL_BAR, this.getX(), this.getY(), 0, 0, this.width, this.height, this.width, this.height);
                 }
             }
         };

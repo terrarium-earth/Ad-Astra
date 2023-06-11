@@ -62,7 +62,7 @@ public class HammerShapelessRecipe extends ShapelessRecipe {
         public HammerShapelessRecipe fromJson(ResourceLocation id, JsonObject json) {
             ShapelessRecipe shapelessRecipe = super.fromJson(id, json);
             String group = GsonHelper.getAsString(json, "group", "");
-            return new HammerShapelessRecipe(shapelessRecipe.getId(), group,  shapelessRecipe.category(), shapelessRecipe.getResultItem(null), shapelessRecipe.getIngredients());
+            return new HammerShapelessRecipe(shapelessRecipe.getId(), group, shapelessRecipe.category(), shapelessRecipe.getResultItem(null), shapelessRecipe.getIngredients());
         }
 
         @Override

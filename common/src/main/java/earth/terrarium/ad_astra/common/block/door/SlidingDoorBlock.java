@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -190,22 +189,22 @@ public class SlidingDoorBlock extends BaseEntityBlock {
 
         // Bottom
         return level.getBlockState(mainPos).isAir() &&
-                // Bottom Left
-                level.getBlockState(mainPos.relative(direction)).isAir() &&
-                // Bottom Right
-                level.getBlockState(mainPos.relative(direction.getOpposite())).isAir() &&
-                // Center
-                level.getBlockState(mainPos.above()).isAir() &&
-                // Left
-                level.getBlockState(mainPos.above().relative(direction)).isAir() &&
-                // Right
-                level.getBlockState(mainPos.above().relative(direction.getOpposite())).isAir() &&
-                // Top
-                level.getBlockState(mainPos.above().above()).isAir() &&
-                // Top Left
-                level.getBlockState(mainPos.above().above().relative(direction)).isAir() &&
-                // Top Right
-                level.getBlockState(mainPos.above().above().relative(direction.getOpposite())).isAir();
+            // Bottom Left
+            level.getBlockState(mainPos.relative(direction)).isAir() &&
+            // Bottom Right
+            level.getBlockState(mainPos.relative(direction.getOpposite())).isAir() &&
+            // Center
+            level.getBlockState(mainPos.above()).isAir() &&
+            // Left
+            level.getBlockState(mainPos.above().relative(direction)).isAir() &&
+            // Right
+            level.getBlockState(mainPos.above().relative(direction.getOpposite())).isAir() &&
+            // Top
+            level.getBlockState(mainPos.above().above()).isAir() &&
+            // Top Left
+            level.getBlockState(mainPos.above().above().relative(direction)).isAir() &&
+            // Top Right
+            level.getBlockState(mainPos.above().above().relative(direction.getOpposite())).isAir();
 
     }
 
@@ -246,11 +245,6 @@ public class SlidingDoorBlock extends BaseEntityBlock {
             return new SlidingDoorBlockEntity(pos, state);
         }
         return null;
-    }
-
-    @Override
-    public PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.BLOCK;
     }
 
     @Override

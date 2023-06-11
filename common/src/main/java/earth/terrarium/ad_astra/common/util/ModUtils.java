@@ -65,7 +65,7 @@ public class ModUtils {
      * @see #teleportPlayer(ResourceKey, ServerPlayer)
      */
     public static void teleportToLevel(ResourceKey<Level> targetWorld, Entity entity) {
-        if (entity.getLevel() instanceof ServerLevel oldWorld) {
+        if (entity.level() instanceof ServerLevel oldWorld) {
             ServerLevel level = oldWorld.getServer().getLevel(targetWorld);
             if (level == null) return;
             Set<Entity> entitiesToTeleport = new LinkedHashSet<>();
@@ -112,13 +112,13 @@ public class ModUtils {
 
             // Move the lander to the closest land
             if (first instanceof Lander) {
-                Vec3 nearestLand = LandFinder.findNearestLand(first.getLevel(), new Vec3(first.getX(), VehiclesConfig.RocketConfig.atmosphereLeave, first.getZ()), 70);
+                Vec3 nearestLand = LandFinder.findNearestLand(first.level(), new Vec3(first.getX(), VehiclesConfig.RocketConfig.atmosphereLeave, first.getZ()), 70);
                 first.moveTo(nearestLand.x(), nearestLand.y(), nearestLand.z(), first.getYRot(), first.getXRot());
             }
 
             for (Entity teleportedEntity : teleportedEntities) {
                 if (first instanceof Lander) {
-                    Vec3 nearestLand = LandFinder.findNearestLand(teleportedEntity.getLevel(), new Vec3(teleportedEntity.getX(), VehiclesConfig.RocketConfig.atmosphereLeave, teleportedEntity.getZ()), 70);
+                    Vec3 nearestLand = LandFinder.findNearestLand(teleportedEntity.level(), new Vec3(teleportedEntity.getX(), VehiclesConfig.RocketConfig.atmosphereLeave, teleportedEntity.getZ()), 70);
                     teleportedEntity.moveTo(nearestLand.x(), nearestLand.y(), nearestLand.z(), teleportedEntity.getYRot(), teleportedEntity.getXRot());
                 }
                 if (teleportedEntity != null) {
@@ -172,10 +172,10 @@ public class ModUtils {
         ItemStack stack = itemEntity.getItem();
         ItemStack foodOutput = ItemStack.EMPTY;
 
-        for (SmokingRecipe recipe : itemEntity.getLevel().getRecipeManager().getAllRecipesFor(RecipeType.SMOKING)) {
+        for (SmokingRecipe recipe : itemEntity.level().getRecipeManager().getAllRecipesFor(RecipeType.SMOKING)) {
             for (Ingredient ingredient : recipe.getIngredients()) {
                 if (ingredient.test(stack)) {
-                    foodOutput = recipe.getResultItem(itemEntity.getLevel().registryAccess());
+                    foodOutput = recipe.getResultItem(itemEntity.level().registryAccess());
                 }
             }
         }
@@ -199,7 +199,7 @@ public class ModUtils {
     }
 
     public static float getEntityGravity(Entity entity) {
-        return getPlanetGravity(entity.getLevel());
+        return getPlanetGravity(entity.level());
     }
 
     /**

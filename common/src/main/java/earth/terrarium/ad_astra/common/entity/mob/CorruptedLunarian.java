@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.common.entity.mob;
 
+import earth.terrarium.ad_astra.common.config.SpawnConfig;
 import earth.terrarium.ad_astra.common.entity.projectile.IceSpit;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
-import earth.terrarium.ad_astra.common.config.SpawnConfig;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -72,17 +72,17 @@ public class CorruptedLunarian extends Monster implements RangedAttackMob {
 
     @Override
     public void performRangedAttack(LivingEntity target, float pullProgress) {
-        IceSpit projectile = new IceSpit(ModEntityTypes.ICE_SPIT.get(), this, this.level);
+        IceSpit projectile = new IceSpit(ModEntityTypes.ICE_SPIT.get(), this, this.level());
 
         double targetX = target.getX() - this.getX();
         double targetY = target.getY(0.3333333333333333) - projectile.getY() - 1.1f;
         double targetZ = target.getZ() - this.getZ();
         double calculated = Math.sqrt(targetX * targetX + targetZ * targetZ);
-        projectile.shoot(targetX, targetY + calculated * (double) 0.2f, targetZ, 1.6f, 14 - this.level.getDifficulty().getId() * 4);
+        projectile.shoot(targetX, targetY + calculated * (double) 0.2f, targetZ, 1.6f, 14 - this.level().getDifficulty().getId() * 4);
 
         projectile.setSilent(true);
-        this.level.addFreshEntity(projectile);
-        this.level.playSound(null, this.blockPosition(), SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 1, 1);
+        this.level().addFreshEntity(projectile);
+        this.level().playSound(null, this.blockPosition(), SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 1, 1);
     }
 
     @Override

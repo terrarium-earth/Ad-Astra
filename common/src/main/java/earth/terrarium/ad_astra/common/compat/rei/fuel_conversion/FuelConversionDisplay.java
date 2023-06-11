@@ -13,18 +13,18 @@ import java.util.stream.Collectors;
 
 public record FuelConversionDisplay(FuelConversionRecipe recipe) implements Display {
 
-	@Override
-	public List<EntryIngredient> getInputEntries() {
-		return recipe.getFluidInput().stream().map(Holder::value).map(EntryIngredients::of).collect(Collectors.toList());
-	}
+    @Override
+    public List<EntryIngredient> getInputEntries() {
+        return recipe.getFluidInput().stream().map(Holder::value).map(EntryIngredients::of).collect(Collectors.toList());
+    }
 
-	@Override
-	public List<EntryIngredient> getOutputEntries() {
-		return List.of(EntryIngredients.of(recipe.getFluidOutput()));
-	}
+    @Override
+    public List<EntryIngredient> getOutputEntries() {
+        return List.of(EntryIngredients.of(recipe.getFluidOutput()));
+    }
 
-	@Override
-	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return REICategories.FUEL_CONVERSION_CATEGORY;
-	}
+    @Override
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return REICategories.FUEL_CONVERSION_CATEGORY;
+    }
 }

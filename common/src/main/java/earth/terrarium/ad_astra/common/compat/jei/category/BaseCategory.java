@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * This class was largely inspired by or taken from the Resourceful Bees repository with
  * the expressed permission from @ThatGravyBoat.
+ *
  * @author Team Resourceful
  */
 public abstract class BaseCategory<T> implements IRecipeCategory<T> {

@@ -48,7 +48,7 @@ public class SpacePainting extends Painting {
         paintingEntity.setDirection(facing);
         spacePaintings.removeIf(variant -> {
             ((PaintingInvoker) paintingEntity).ad_astra$invokeSetVariant(variant);
-            
+
             return !paintingEntity.survives();
         });
 

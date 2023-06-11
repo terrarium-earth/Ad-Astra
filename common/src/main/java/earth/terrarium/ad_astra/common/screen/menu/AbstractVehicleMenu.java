@@ -34,7 +34,7 @@ public abstract class AbstractVehicleMenu extends AbstractContainerMenu {
         super(type, syncId);
         this.vehicle = entity;
         this.inventory = entity.getInventory();
-        this.level = entity.getLevel();
+        this.level = entity.level();
         this.player = inventory.player;
 
         checkContainerSize(inventory, this.vehicle.getInventorySize());

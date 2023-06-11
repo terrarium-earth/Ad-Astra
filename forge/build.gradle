@@ -41,29 +41,25 @@ configurations {
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:$rootProject.minecraft_version-$rootProject.forge_version"
+    forge "net.minecraftforge:forge:$minecraft_version-$forge_version"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
-//    modCompileOnly "mezz.jei:jei-$rootProject.minecraft_version-forge-api:$rootProject.jei_version"
-//    modLocalRuntime("mezz.jei:jei-$rootProject.minecraft_version-forge:$rootProject.jei_version") { transitive = false }
+    modCompileOnly "mezz.jei:jei-$minecraft_version-forge-api:$jei_version"
+    modLocalRuntime("mezz.jei:jei-$minecraft_version-forge:$jei_version") { transitive = false }
 
-    modApi "com.teamresourceful.resourcefullib:resourcefullib-forge-$rootProject.minecraft_version:$rootProject.resourcefullib_version"
-    modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-$rootProject.minecraft_version:$rootProject.resourcefulconfig_version"
-    modApi "earth.terrarium:botarium-forge-$rootProject.minecraft_version:$rootProject.botarium_version"
-
-    //    modImplementation "vazkii.patchouli:Patchouli:$rootProject.minecraft_version-$rootProject.patchouli_version"
+    //    modImplementation "vazkii.patchouli:Patchouli:$minecraft_version-$patchouli_version"
 }
 
 processResources {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     filesMatching("META-INF/mods.toml") {
-        expand "version": rootProject.version,
-                "github_name": rootProject.github_name,
-                "resourcefullib_version": rootProject.resourcefullib_version,
-                "resourcefulconfig_version": rootProject.resourcefulconfig_version,
-                "botarium_version": rootProject.botarium_version
+        expand "version": version,
+                "github_name": github_name,
+                "resourcefullib_version": resourcefullib_version,
+                "resourcefulconfig_version": resourcefulconfig_version,
+                "botarium_version": botarium_version
     }
 }
 

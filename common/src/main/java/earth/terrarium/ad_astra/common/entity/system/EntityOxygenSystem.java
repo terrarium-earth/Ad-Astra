@@ -47,7 +47,7 @@ public class EntityOxygenSystem {
     }
 
     private static void consumeOxygen(LivingEntity entity) {
-        if (entity.getLevel().getGameTime() % 3 == 0) {
+        if (entity.level().getGameTime() % 3 == 0) {
             entity.setAirSupply(Math.min(entity.getMaxAirSupply(), entity.getAirSupply() + 4 * 10));
             SpaceSuit.consumeSpaceSuitOxygen(entity, FluidHooks.buckets(1) / 1000);
         }

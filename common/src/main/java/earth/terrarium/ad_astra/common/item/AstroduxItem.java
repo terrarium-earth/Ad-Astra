@@ -21,7 +21,7 @@ public class AstroduxItem extends Item {
 
     // Give guidebook at spawn
     public static void onPlayerJoin(Player player) {
-        if (player.level.isClientSide) return;
+        if (player.level().isClientSide) return;
         if (AdAstraConfig.giveAstroduxAtSpawn) {
             if (((ServerPlayer) player).getStats().getValue(Stats.CUSTOM.get(Stats.TOTAL_WORLD_TIME)) <= 0) {
                 player.addItem(ModItems.ASTRODUX.get().getDefaultInstance());

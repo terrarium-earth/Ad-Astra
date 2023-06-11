@@ -33,21 +33,21 @@ public class PlanetSoundPlayer implements AmbientSoundHandler {
 
         --this.ticksUntilPlay;
         if (this.ticksUntilPlay <= 0) {
-            double randomVal = this.player.level.random.nextDouble();
+            double randomVal = this.player.level().random.nextDouble();
             // 1 in 100 per tick
             if (randomVal < 0.000015) {
                 SoundEvent randomSpaceSound;
                 this.ticksUntilPlay = 5000;
 
-                if (ModUtils.isOrbitlevel(this.player.level)) {
+                if (ModUtils.isOrbitlevel(this.player.level())) {
                     List<RegistryEntry<SoundEvent>> sounds = Stream.concat(ModSoundEvents.SPACE_SOUNDS.stream(), ModSoundEvents.PLANET_SOUNDS.stream()).toList();
-                    randomSpaceSound = sounds.get(this.player.level.random.nextInt(sounds.size())).get();
-                } else if (ModUtils.isPlanet(this.player.level)) {
+                    randomSpaceSound = sounds.get(this.player.level().random.nextInt(sounds.size())).get();
+                } else if (ModUtils.isPlanet(this.player.level())) {
                     if (this.player.getY() > 80) {
                         return;
                     }
                     List<RegistryEntry<SoundEvent>> sounds = ModSoundEvents.PLANET_SOUNDS.stream().toList();
-                    randomSpaceSound = sounds.get(this.player.level.random.nextInt(sounds.size())).get();
+                    randomSpaceSound = sounds.get(this.player.level().random.nextInt(sounds.size())).get();
                 } else {
                     return;
                 }

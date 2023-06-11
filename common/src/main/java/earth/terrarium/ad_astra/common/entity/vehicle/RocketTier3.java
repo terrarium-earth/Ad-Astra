@@ -39,7 +39,7 @@ public class RocketTier3 extends Rocket {
     @Override
     public void spawnAfterburnerParticles() {
         super.spawnAfterburnerParticles();
-        if (this.level instanceof ServerLevel serverWorld) {
+        if (this.level() instanceof ServerLevel serverWorld) {
             Vec3 pos = this.position();
 
             float xRotator = Mth.cos(this.getYRot() * ((float) Math.PI / 180.0f)) * 0.98f;

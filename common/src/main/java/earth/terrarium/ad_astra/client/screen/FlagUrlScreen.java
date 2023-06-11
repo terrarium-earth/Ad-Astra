@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.client.screen;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.common.networking.NetworkHandling;
 import earth.terrarium.ad_astra.common.networking.packet.client.FlagUrlPacket;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
@@ -56,12 +56,12 @@ public class FlagUrlScreen extends Screen {
     }
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
-        this.renderBackground(poseStack);
-        super.render(poseStack, mouseX, mouseY, delta);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+        this.renderBackground(graphics);
+        super.render(graphics, mouseX, mouseY, delta);
         int x = this.width / 2 - 100;
         int y = this.height / 2 - 20;
-        drawString(poseStack, font, Component.translatable("gui.ad_astra.text.flag_url"), x, y - 10, 0xFFFFFF);
+        graphics.drawString(font, Component.translatable("gui.ad_astra.text.flag_url"), x, y - 10, 0xFFFFFF);
     }
 
     @Override

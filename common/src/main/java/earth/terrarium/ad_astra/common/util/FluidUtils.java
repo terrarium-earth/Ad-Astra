@@ -72,7 +72,7 @@ public class FluidUtils {
                     if (item.isDirty()) {
                         ItemStack copy = item.getStack().copy();
                         ItemStack stack1 = inventory.getItem(outputSlot);
-                        if ((stack1.isEmpty() && (!copy.hasTag() || !ItemStack.tagMatches(copy, inventory.getItem(inputSlot)))) || ItemStack.tagMatches(copy, stack1) && ItemStack.isSame(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
+                        if ((stack1.isEmpty() && (!copy.hasTag() || !ItemStack.isSameItemSameTags(copy, inventory.getItem(inputSlot)))) || ItemStack.isSameItemSameTags(copy, stack1) && ItemStack.isSameItem(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
                             copy.setCount(copy.getCount() + stack1.getCount());
                             inventory.setItem(outputSlot, copy);
                             inventory.getItem(inputSlot).setCount(originalCount - 1);
@@ -115,7 +115,7 @@ public class FluidUtils {
                     if (item.isDirty()) {
                         ItemStack copy = item.getStack().copy();
                         ItemStack stack1 = inventory.getItem(outputSlot);
-                        if ((stack1.isEmpty() && (!copy.hasTag() || !ItemStack.tagMatches(copy, inventory.getItem(inputSlot)))) || ItemStack.tagMatches(copy, stack1) && ItemStack.isSame(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
+                        if ((stack1.isEmpty() && (!copy.hasTag() || !ItemStack.isSameItemSameTags(copy, inventory.getItem(inputSlot)))) || ItemStack.isSameItemSameTags(copy, stack1) && ItemStack.isSameItem(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
                             copy.setCount(copy.getCount() + stack1.getCount());
                             inventory.setItem(outputSlot, copy);
                             inventory.getItem(inputSlot).setCount(originalCount - 1);

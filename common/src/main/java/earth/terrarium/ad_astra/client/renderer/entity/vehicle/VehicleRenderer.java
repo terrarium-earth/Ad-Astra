@@ -80,9 +80,9 @@ public abstract class VehicleRenderer<T extends Vehicle, M extends EntityModel<T
 
     private void shakeVehicle(T entity, float tickDelta, PoseStack poseStack) {
         if (!Minecraft.getInstance().isPaused()) {
-            double shakeDirection1 = (tickDelta * (entity.level.random.nextBoolean() ? 1 : -1)) / 150;
-            double shakeDirection2 = (tickDelta * (entity.level.random.nextBoolean() ? 1 : -1)) / 150;
-            double shakeDirection3 = (tickDelta * (entity.level.random.nextBoolean() ? 1 : -1)) / 150;
+            double shakeDirection1 = (tickDelta * (entity.level().random.nextBoolean() ? 1 : -1)) / 150;
+            double shakeDirection2 = (tickDelta * (entity.level().random.nextBoolean() ? 1 : -1)) / 150;
+            double shakeDirection3 = (tickDelta * (entity.level().random.nextBoolean() ? 1 : -1)) / 150;
             poseStack.translate(shakeDirection1, shakeDirection2, shakeDirection3);
         }
     }

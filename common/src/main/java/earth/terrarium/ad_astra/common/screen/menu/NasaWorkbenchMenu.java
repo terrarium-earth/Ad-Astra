@@ -21,53 +21,54 @@ public class NasaWorkbenchMenu extends AbstractMachineMenu<NasaWorkbenchBlockEnt
     private NasaWorkbenchRecipe recipe;
 
     public NasaWorkbenchMenu(int syncId, Inventory inventory, FriendlyByteBuf buf) {
-        this(syncId, inventory, (NasaWorkbenchBlockEntity) inventory.player.level.getBlockEntity(buf.readBlockPos()));
+        this(syncId, inventory, (NasaWorkbenchBlockEntity) inventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
     public NasaWorkbenchMenu(int syncId, Inventory inventory, NasaWorkbenchBlockEntity entity) {
         super(ModMenus.NASA_WORKBENCH_MENU.get(), syncId, inventory, entity, new Slot[]{
 
-                // Nose
-                new Slot(entity, 0, 56, 20),
+            // Nose
+            new Slot(entity, 0, 56, 20),
 
-                // Body
-                new Slot(entity, 1, 47, 18 * 2 + 2), //
-                new Slot(entity, 2, 65, 18 * 2 + 2), //
-                new Slot(entity, 3, 47, 18 * 3 + 2), //
-                new Slot(entity, 4, 65, 18 * 3 + 2), //
-                new Slot(entity, 5, 47, 18 * 4 + 2), //
-                new Slot(entity, 6, 65, 18 * 4 + 2), //
+            // Body
+            new Slot(entity, 1, 47, 18 * 2 + 2), //
+            new Slot(entity, 2, 65, 18 * 2 + 2), //
+            new Slot(entity, 3, 47, 18 * 3 + 2), //
+            new Slot(entity, 4, 65, 18 * 3 + 2), //
+            new Slot(entity, 5, 47, 18 * 4 + 2), //
+            new Slot(entity, 6, 65, 18 * 4 + 2), //
 
-                // Left fin
-                new Slot(entity, 7, 29, 18 * 5 + 2),
+            // Left fin
+            new Slot(entity, 7, 29, 18 * 5 + 2),
 
-                // Tank
-                new Slot(entity, 8, 47, 18 * 5 + 2), //
-                new Slot(entity, 9, 65, 18 * 5 + 2), //
+            // Tank
+            new Slot(entity, 8, 47, 18 * 5 + 2), //
+            new Slot(entity, 9, 65, 18 * 5 + 2), //
 
-                // Right fin
-                new Slot(entity, 10, 83, 18 * 5 + 2),
+            // Right fin
+            new Slot(entity, 10, 83, 18 * 5 + 2),
 
-                // Left fin
-                new Slot(entity, 11, 29, 18 * 6 + 2),
+            // Left fin
+            new Slot(entity, 11, 29, 18 * 6 + 2),
 
-                // Engine
-                new Slot(entity, 12, 56, 18 * 6 + 2),
+            // Engine
+            new Slot(entity, 12, 56, 18 * 6 + 2),
 
-                // Right fin
-                new Slot(entity, 13, 83, 18 * 6 + 2),
+            // Right fin
+            new Slot(entity, 13, 83, 18 * 6 + 2),
 
-                // Output
-                new Slot(entity, 14, 129, 56) {
-                    @Override
-                    public boolean mayPlace(ItemStack stack) {
-                        return false;
-                    }
-                    @Override
-                    public boolean mayPickup(Player player) {
-                        return false;
-                    }
-                }});
+            // Output
+            new Slot(entity, 14, 129, 56) {
+                @Override
+                public boolean mayPlace(ItemStack stack) {
+                    return false;
+                }
+
+                @Override
+                public boolean mayPickup(Player player) {
+                    return false;
+                }
+            }});
         this.updateContent();
     }
 
@@ -79,7 +80,7 @@ public class NasaWorkbenchMenu extends AbstractMachineMenu<NasaWorkbenchBlockEnt
     @Override
     public void clicked(int slotIndex, int button, @NotNull ClickType actionType, @NotNull Player player) {
 
-        if (player.level.isClientSide) return;
+        if (player.level().isClientSide) return;
         if (slotIndex == 14) {
             if (!machine.getItems().get(14).isEmpty()) {
                 machine.spawnResultParticles();

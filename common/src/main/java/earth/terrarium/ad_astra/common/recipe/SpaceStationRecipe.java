@@ -20,15 +20,15 @@ public class SpaceStationRecipe extends ModRecipe {
 
     public static Codec<SpaceStationRecipe> codec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
-                RecordCodecBuilder.point(id),
-                IngredientHolder.CODEC.listOf().fieldOf("ingredients").forGetter(SpaceStationRecipe::getHolders)
+            RecordCodecBuilder.point(id),
+            IngredientHolder.CODEC.listOf().fieldOf("ingredients").forGetter(SpaceStationRecipe::getHolders)
         ).apply(instance, SpaceStationRecipe::new));
     }
 
     public static Codec<SpaceStationRecipe> networkingCodec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
-                RecordCodecBuilder.point(id),
-                IngredientHolder.NETWORK_CODEC.listOf().fieldOf("ingredients").forGetter(SpaceStationRecipe::getHolders)
+            RecordCodecBuilder.point(id),
+            IngredientHolder.NETWORK_CODEC.listOf().fieldOf("ingredients").forGetter(SpaceStationRecipe::getHolders)
         ).apply(instance, SpaceStationRecipe::new));
     }
 

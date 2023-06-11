@@ -16,21 +16,21 @@ public record Planet(String translation, ResourceLocation galaxy, ResourceLocati
                      boolean hasOxygen, ButtonColor buttonColor) {
 
     public static final Codec<Planet> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.STRING.fieldOf("translation").forGetter(Planet::translation),
-            ResourceLocation.CODEC.fieldOf("galaxy").forGetter(Planet::galaxy),
-            ResourceLocation.CODEC.fieldOf("solar_system").forGetter(Planet::solarSystem),
-            ResourceKey.codec(Registries.DIMENSION).fieldOf("world").forGetter(Planet::level),
-            ResourceKey.codec(Registries.DIMENSION).fieldOf("orbit_world").forGetter(Planet::orbitWorld),
-            ResourceKey.codec(Registries.DIMENSION).optionalFieldOf("parent_world").forGetter(Planet::getParentlevel),
-            Codec.INT.fieldOf("rocket_tier").forGetter(Planet::rocketTier),
-            Codec.FLOAT.fieldOf("gravity").forGetter(Planet::gravity),
-            Codec.BOOL.fieldOf("has_atmosphere").forGetter(Planet::hasAtmosphere),
-            Codec.INT.fieldOf("days_in_year").forGetter(Planet::daysInYear),
-            Codec.FLOAT.fieldOf("temperature").forGetter(Planet::temperature),
-            Codec.LONG.fieldOf("solar_power").forGetter(Planet::solarPower),
-            Codec.LONG.fieldOf("orbit_solar_power").forGetter(Planet::orbitSolarPower),
-            Codec.BOOL.fieldOf("has_oxygen").forGetter(Planet::hasOxygen),
-            ButtonColor.CODEC.fieldOf("button_color").forGetter(Planet::buttonColor)
+        Codec.STRING.fieldOf("translation").forGetter(Planet::translation),
+        ResourceLocation.CODEC.fieldOf("galaxy").forGetter(Planet::galaxy),
+        ResourceLocation.CODEC.fieldOf("solar_system").forGetter(Planet::solarSystem),
+        ResourceKey.codec(Registries.DIMENSION).fieldOf("world").forGetter(Planet::level),
+        ResourceKey.codec(Registries.DIMENSION).fieldOf("orbit_world").forGetter(Planet::orbitWorld),
+        ResourceKey.codec(Registries.DIMENSION).optionalFieldOf("parent_world").forGetter(Planet::getParentlevel),
+        Codec.INT.fieldOf("rocket_tier").forGetter(Planet::rocketTier),
+        Codec.FLOAT.fieldOf("gravity").forGetter(Planet::gravity),
+        Codec.BOOL.fieldOf("has_atmosphere").forGetter(Planet::hasAtmosphere),
+        Codec.INT.fieldOf("days_in_year").forGetter(Planet::daysInYear),
+        Codec.FLOAT.fieldOf("temperature").forGetter(Planet::temperature),
+        Codec.LONG.fieldOf("solar_power").forGetter(Planet::solarPower),
+        Codec.LONG.fieldOf("orbit_solar_power").forGetter(Planet::orbitSolarPower),
+        Codec.BOOL.fieldOf("has_oxygen").forGetter(Planet::hasOxygen),
+        ButtonColor.CODEC.fieldOf("button_color").forGetter(Planet::buttonColor)
     ).apply(instance, Planet::new));
 
     public Planet(String translation, ResourceLocation galaxy, ResourceLocation solarSystem, ResourceKey<Level> level, ResourceKey<Level> orbitWorld, Optional<ResourceKey<Level>> parentWorld, int rocketTier, float gravity, boolean hasAtmosphere, int daysInYear, float temperature, long solarPower, long orbitSolarPower, boolean hasOxygen, ButtonColor buttonColor) {

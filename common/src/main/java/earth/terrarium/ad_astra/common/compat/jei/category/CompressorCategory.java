@@ -1,6 +1,5 @@
 package earth.terrarium.ad_astra.common.compat.jei.category;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
 import earth.terrarium.ad_astra.common.compat.jei.EnergyBarDrawable;
@@ -15,6 +14,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -30,10 +30,10 @@ public class CompressorCategory extends BaseCategory<CompressingRecipe> {
 
     public CompressorCategory(IGuiHelper guiHelper) {
         super(guiHelper,
-                RECIPE,
-                Component.translatable(ModItems.COMPRESSOR.get().getDescriptionId()),
-                guiHelper.createBlankDrawable(144, 90),
-                guiHelper.createDrawableItemStack(ModItems.COMPRESSOR.get().getDefaultInstance())
+            RECIPE,
+            Component.translatable(ModItems.COMPRESSOR.get().getDescriptionId()),
+            guiHelper.createBlankDrawable(144, 90),
+            guiHelper.createDrawableItemStack(ModItems.COMPRESSOR.get().getDefaultInstance())
         );
         slot = guiHelper.getSlotDrawable();
         hammer = guiHelper.drawableBuilder(GuiUtil.HAMMER_TEXTURE, 0, 0, GuiUtil.HAMMER_WIDTH, GuiUtil.HAMMER_HEIGHT).setTextureSize(GuiUtil.HAMMER_WIDTH, GuiUtil.HAMMER_HEIGHT).buildAnimated(100, IDrawableAnimated.StartDirection.LEFT, false);
@@ -47,11 +47,11 @@ public class CompressorCategory extends BaseCategory<CompressingRecipe> {
     }
 
     @Override
-    public void draw(CompressingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
-        slot.draw(poseStack, 10, 35);
-        slot.draw(poseStack, 70, 35);
-        hammer.draw(poseStack, 40, 35);
-        new EnergyBarDrawable(false, 10000).draw(poseStack, 120, 15);
+    public void draw(CompressingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+        slot.draw(graphics, 10, 35);
+        slot.draw(graphics, 70, 35);
+        hammer.draw(graphics, 40, 35);
+        new EnergyBarDrawable(false, 10000).draw(graphics, 120, 15);
     }
 
     @Override

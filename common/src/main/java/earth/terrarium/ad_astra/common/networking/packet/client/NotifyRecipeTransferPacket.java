@@ -3,7 +3,6 @@ package earth.terrarium.ad_astra.common.networking.packet.client;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
-
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.screen.menu.AbstractMachineMenu;
 import net.minecraft.network.FriendlyByteBuf;

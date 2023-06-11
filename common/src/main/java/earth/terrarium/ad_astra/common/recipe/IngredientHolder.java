@@ -7,13 +7,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public record IngredientHolder(Ingredient ingredient, int count) {
     public static final Codec<IngredientHolder> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            IngredientCodec.CODEC.fieldOf("ingredient").forGetter(IngredientHolder::ingredient),
-            Codec.INT.fieldOf("count").orElse(1).forGetter(IngredientHolder::count)
+        IngredientCodec.CODEC.fieldOf("ingredient").forGetter(IngredientHolder::ingredient),
+        Codec.INT.fieldOf("count").orElse(1).forGetter(IngredientHolder::count)
     ).apply(instance, IngredientHolder::new));
 
     public static final Codec<IngredientHolder> NETWORK_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            IngredientCodec.NETWORK_CODEC.fieldOf("ingredient").forGetter(IngredientHolder::ingredient),
-            Codec.INT.fieldOf("count").orElse(1).forGetter(IngredientHolder::count)
+        IngredientCodec.NETWORK_CODEC.fieldOf("ingredient").forGetter(IngredientHolder::ingredient),
+        Codec.INT.fieldOf("count").orElse(1).forGetter(IngredientHolder::count)
     ).apply(instance, IngredientHolder::new));
 
     public static IngredientHolder of(Ingredient ingredient) {

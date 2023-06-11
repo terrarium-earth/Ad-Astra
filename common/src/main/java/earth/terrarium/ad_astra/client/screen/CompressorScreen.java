@@ -1,11 +1,11 @@
 package earth.terrarium.ad_astra.client.screen;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.block.machine.entity.CompressorBlockEntity;
 import earth.terrarium.ad_astra.common.screen.menu.CompressorMenu;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -29,25 +29,25 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorBlockEntit
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float delta, int mouseX, int mouseY) {
-        super.renderBg(poseStack, delta, mouseX, mouseY);
+    protected void renderBg(GuiGraphics graphics, float delta, int mouseX, int mouseY) {
+        super.renderBg(graphics, delta, mouseX, mouseY);
 
 
-        GuiUtil.drawHammer(poseStack, this.leftPos + HAMMER_LEFT, this.topPos + HAMMER_TOP, this.menu.getCookTime(), this.menu.getCookTimeTotal());
-        GuiUtil.drawEnergy(poseStack, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, this.menu.getEnergyAmount(), this.machine.getMaxCapacity());
+        GuiUtil.drawHammer(graphics, this.leftPos + HAMMER_LEFT, this.topPos + HAMMER_TOP, this.menu.getCookTime(), this.menu.getCookTimeTotal());
+        GuiUtil.drawEnergy(graphics, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, this.menu.getEnergyAmount(), this.machine.getMaxCapacity());
     }
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
-        super.render(poseStack, mouseX, mouseY, delta);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+        super.render(graphics, mouseX, mouseY, delta);
 
         if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-            GuiUtil.drawEnergyTooltip(this, poseStack, this.menu.getEnergyAmount(), this.machine.getMaxCapacity(), mouseX, mouseY);
+            GuiUtil.drawEnergyTooltip(graphics, this.menu.getEnergyAmount(), this.machine.getMaxCapacity(), mouseX, mouseY);
         }
 
         // Burn time tooltip.
         if (GuiUtil.isHovering(this.getHammerBounds(), mouseX, mouseY)) {
-            this.renderTooltip(poseStack, this.getHammerTooltip(), mouseX, mouseY);
+            graphics.renderTooltip(font, this.getHammerTooltip(), mouseX, mouseY);
         }
     }
 

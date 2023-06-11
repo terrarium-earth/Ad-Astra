@@ -13,14 +13,14 @@ import java.util.List;
 public class CoalGeneratorMenu extends ProcessingMachineMenu<CoalGeneratorBlockEntity> {
 
     public CoalGeneratorMenu(int syncId, Inventory inventory, FriendlyByteBuf buf) {
-        this(syncId, inventory, (CoalGeneratorBlockEntity) inventory.player.level.getBlockEntity(buf.readBlockPos()));
+        this(syncId, inventory, (CoalGeneratorBlockEntity) inventory.player.level().getBlockEntity(buf.readBlockPos()));
 
     }
 
     public CoalGeneratorMenu(int syncId, Inventory inventory, CoalGeneratorBlockEntity entity) {
         super(ModMenus.COAL_GENERATOR_MENU.get(), syncId, inventory, entity,
-                new Slot[]{new Slot(entity, 0, 77, 71)
-                });
+            new Slot[]{new Slot(entity, 0, 77, 71)
+            });
     }
 
     @Override

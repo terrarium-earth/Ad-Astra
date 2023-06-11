@@ -1,14 +1,13 @@
 package earth.terrarium.ad_astra.common.compat.jei.category;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.ClientPlatformUtils;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.compat.jei.EnergyBarDrawable;
 import earth.terrarium.ad_astra.common.compat.jei.FluidBarDrawable;
 import earth.terrarium.ad_astra.common.config.CryoFreezerConfig;
 import earth.terrarium.ad_astra.common.recipe.CryoFuelConversionRecipe;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -20,6 +19,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -35,10 +35,10 @@ public class CryoFuelConversionCategory extends BaseCategory<CryoFuelConversionR
 
     public CryoFuelConversionCategory(IGuiHelper guiHelper) {
         super(guiHelper,
-                RECIPE,
-                Component.translatable(ModItems.CRYO_FREEZER.get().getDescriptionId()),
-                guiHelper.createBlankDrawable(144, 90),
-                guiHelper.createDrawableItemStack(ModItems.CRYO_FREEZER.get().getDefaultInstance())
+            RECIPE,
+            Component.translatable(ModItems.CRYO_FREEZER.get().getDescriptionId()),
+            guiHelper.createBlankDrawable(144, 90),
+            guiHelper.createDrawableItemStack(ModItems.CRYO_FREEZER.get().getDefaultInstance())
         );
         slot = guiHelper.getSlotDrawable();
         arrow = guiHelper.drawableBuilder(GuiUtil.ARROW_TEXTURE, 0, 0, GuiUtil.ARROW_WIDTH, GuiUtil.ARROW_HEIGHT).setTextureSize(GuiUtil.ARROW_WIDTH, GuiUtil.ARROW_HEIGHT).buildAnimated(100, IDrawableAnimated.StartDirection.LEFT, false);
@@ -52,14 +52,14 @@ public class CryoFuelConversionCategory extends BaseCategory<CryoFuelConversionR
     }
 
     @Override
-    public void draw(CryoFuelConversionRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
-        slot.draw(poseStack, 10, 30);
-        new FluidBarDrawable(FluidHooks.newFluidHolder(recipe.getFluidOutput(), FluidHooks.buckets(1), null), true, 10000).draw(poseStack, 80, 15);
-        new EnergyBarDrawable(false, 10000).draw(poseStack, 120, 15);
-        arrow.draw(poseStack, 35, 30);
+    public void draw(CryoFuelConversionRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+        slot.draw(graphics, 10, 30);
+        new FluidBarDrawable(FluidHooks.newFluidHolder(recipe.getFluidOutput(), FluidHooks.buckets(1), null), true, 10000).draw(graphics, 80, 15);
+        new EnergyBarDrawable(false, 10000).draw(graphics, 120, 15);
+        arrow.draw(graphics, 35, 30);
         Component ratioText = Component.translatable("rei.text.ad_astra.amount", 1000 * recipe.getConversionRatio());
         Font font = Minecraft.getInstance().font;
-        font.draw(poseStack, ratioText, 70 - font.width(ratioText) / 2f, 80, 0x404040);
+        graphics.drawString(font, ratioText, (int) (70 - font.width(ratioText) / 2f), 80, 0x404040);
 
     }
 

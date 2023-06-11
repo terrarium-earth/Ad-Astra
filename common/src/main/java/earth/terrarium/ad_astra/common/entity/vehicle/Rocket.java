@@ -113,16 +113,16 @@ public class Rocket extends Vehicle {
         // Place the rider up to 3 blocks below the rocket
         int checks = 3;
         BlockPos exitBlockPos = BlockPos.containing(exitPos);
-        while (!this.level.getBlockState(exitBlockPos).isRedstoneConductor(this.level, exitBlockPos) && checks > 0) {
+        while (!this.level().getBlockState(exitBlockPos).isRedstoneConductor(this.level(), exitBlockPos) && checks > 0) {
             exitBlockPos = exitBlockPos.below();
             checks--;
         }
 
-        BlockState exitBlockState = this.level.getBlockState(exitBlockPos.above());
-        VoxelShape collisionShape = exitBlockState.getCollisionShape(this.level, exitBlockPos);
+        BlockState exitBlockState = this.level().getBlockState(exitBlockPos.above());
+        VoxelShape collisionShape = exitBlockState.getCollisionShape(this.level(), exitBlockPos);
         double yOffset = 0.0;
         if (!collisionShape.isEmpty()) {
-            yOffset = exitBlockState.getCollisionShape(this.level, exitBlockPos).bounds().getYsize();
+            yOffset = exitBlockState.getCollisionShape(this.level(), exitBlockPos).bounds().getYsize();
         }
         return new Vec3(exitBlockPos.getX(), exitBlockPos.above().getY() + yOffset, exitBlockPos.getZ());
     }
@@ -151,7 +151,7 @@ public class Rocket extends Vehicle {
         }
         if (!this.isFlying()) {
             if (this.hasLaunchPad()) {
-                BlockState below = level.getBlockState(this.blockPosition());
+                BlockState below = level().getBlockState(this.blockPosition());
                 if (!(below.getBlock() instanceof LaunchPad)) {
                     this.drop();
                 } else if (below.getBlock() instanceof LaunchPad) {
@@ -196,7 +196,7 @@ public class Rocket extends Vehicle {
 
     public void openPlanetSelectionGui() {
         if (!this.isVehicle()) {
-            if (!this.level.isClientSide) {
+            if (!this.level().isClientSide) {
                 if (this.lastRider != null) {
                     ModCriteria.ROCKET_DESTROYED.trigger((ServerPlayer) this.lastRider);
                 }
@@ -208,7 +208,7 @@ public class Rocket extends Vehicle {
             if (passenger instanceof ServerPlayer player) {
                 if (!(player.containerMenu instanceof PlanetSelectionMenu)) {
                     player.closeContainer();
-                    if (!this.level.isClientSide) {
+                    if (!this.level().isClientSide) {
                         MenuHooks.openMenu(player, new PlanetSelectionMenuProvider(this.getTier()));
                         stopRocketSoundForRider(player);
                     }
@@ -219,7 +219,7 @@ public class Rocket extends Vehicle {
 
     // When the countdown is in progress and the rocket engine is warming up, releasing smoke.
     public void spawnSmokeParticles() {
-        if (this.level instanceof ServerLevel serverWorld) {
+        if (this.level() instanceof ServerLevel serverWorld) {
             Vec3 pos = this.position();
             ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.x(), pos.y(), pos.z(), 6, 0.1, 0.1, 0.1, 0.023);
         }
@@ -227,7 +227,7 @@ public class Rocket extends Vehicle {
 
     // When the rocket launches and is burning fuel.
     public void spawnAfterburnerParticles() {
-        if (this.level instanceof ServerLevel serverWorld) {
+        if (this.level() instanceof ServerLevel serverWorld) {
             Vec3 pos = this.position();
 
             ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.LARGE_FLAME.get(), pos.x(), pos.y(), pos.z(), 20, 0.1, 0.1, 0.1, 0.001);
@@ -237,17 +237,17 @@ public class Rocket extends Vehicle {
 
     // Burn entities under the rocket flames.
     private void burnEntitiesUnderRocket() {
-        List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2, 30, 2).move(0, -37, 0), entity -> true);
+        List<LivingEntity> entities = level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2, 30, 2).move(0, -37, 0), entity -> true);
         for (LivingEntity entity : entities) {
             if (NetheriteSpaceSuit.hasFullSet(entity) || (entity.getVehicle() != null && entity.getVehicle().equals(this))) {
                 continue;
             }
             if (VehiclesConfig.RocketConfig.entitiesBurnUnderRocket && !entity.fireImmune()) {
                 entity.setSecondsOnFire(10);
-                entity.hurt(ModDamageSources.of(level, ModDamageSources.ROCKET_FLAMES), 10);
-                BlockState belowBlock = this.level.getBlockState(entity.blockPosition().below());
-                if (belowBlock.isCollisionShapeFullBlock(level, entity.blockPosition().below()) && belowBlock.isAir()) {
-                    this.level.setBlockAndUpdate(entity.blockPosition(), Blocks.FIRE.defaultBlockState());
+                entity.hurt(ModDamageSources.of(level(), ModDamageSources.ROCKET_FLAMES), 10);
+                BlockState belowBlock = this.level().getBlockState(entity.blockPosition().below());
+                if (belowBlock.isCollisionShapeFullBlock(level(), entity.blockPosition().below()) && belowBlock.isAir()) {
+                    this.level().setBlockAndUpdate(entity.blockPosition(), Blocks.FIRE.defaultBlockState());
                 }
             }
         }
@@ -269,7 +269,7 @@ public class Rocket extends Vehicle {
 
     public void initiateLaunchSequenceFromServer() {
         initiateLaunchSequence();
-        level.playSound(null, this.blockPosition(), ModSoundEvents.ROCKET_LAUNCH_SOUND_EVENT.get(), SoundSource.AMBIENT, 1, 1);
+        level().playSound(null, this.blockPosition(), ModSoundEvents.ROCKET_LAUNCH_SOUND_EVENT.get(), SoundSource.AMBIENT, 1, 1);
     }
 
     // Synonymous on client and server.
@@ -348,7 +348,7 @@ public class Rocket extends Vehicle {
 
     @Override
     public void doGravity() {
-        BlockState belowBlock = this.level.getBlockState(this.blockPosition());
+        BlockState belowBlock = this.level().getBlockState(this.blockPosition());
 
         if (belowBlock.getBlock() instanceof LaunchPad && belowBlock.getValue(LaunchPad.LOCATION).equals(LocationState.CENTER)) {
             return;
@@ -367,7 +367,7 @@ public class Rocket extends Vehicle {
     }
 
     public void explode() {
-        if (this.level instanceof ServerLevel serverWorld) {
+        if (this.level() instanceof ServerLevel serverWorld) {
             // Increase explosion power the higher the tier.
             float tierMultiplier = 1 + this.getTier() * 0.25f;
             if (this.getDeltaMovement().y() > 4) {

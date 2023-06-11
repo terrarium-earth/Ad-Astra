@@ -18,7 +18,7 @@ public class FoodCookedInAtmosphereCriterion extends SimpleCriterionTrigger<Cond
     }
 
     @Override
-    public Conditions createInstance(JsonObject jsonObject, EntityPredicate.Composite extended, DeserializationContext advancementEntityPredicateDeserializer) {
+    public Conditions createInstance(JsonObject jsonObject, ContextAwarePredicate extended, DeserializationContext advancementEntityPredicateDeserializer) {
         return new Conditions(extended);
     }
 
@@ -28,7 +28,7 @@ public class FoodCookedInAtmosphereCriterion extends SimpleCriterionTrigger<Cond
 
     public static class Conditions extends AbstractCriterionTriggerInstance {
 
-        public Conditions(EntityPredicate.Composite player) {
+        public Conditions(ContextAwarePredicate player) {
             super(ID, player);
         }
 

@@ -55,7 +55,7 @@ public abstract class LivingEntityMixin {
     public void ad_astra$tick(CallbackInfo ci) {
 
         LivingEntity entity = ((LivingEntity) (Object) this);
-        Level level = entity.level;
+        Level level = entity.level();
         if (!level.isClientSide) {
             if (level.getGameTime() % 10 == 0) {
                 if (entity instanceof Player player && (player.isCreative() || player.isSpectator())) {

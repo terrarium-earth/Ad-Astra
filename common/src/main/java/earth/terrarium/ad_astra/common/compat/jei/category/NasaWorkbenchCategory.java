@@ -1,6 +1,5 @@
 package earth.terrarium.ad_astra.common.compat.jei.category;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
 import earth.terrarium.ad_astra.common.recipe.NasaWorkbenchRecipe;
@@ -12,6 +11,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -24,10 +24,10 @@ public class NasaWorkbenchCategory extends BaseCategory<NasaWorkbenchRecipe> {
 
     public NasaWorkbenchCategory(IGuiHelper guiHelper) {
         super(guiHelper,
-                RECIPE,
-                Component.translatable(ModItems.NASA_WORKBENCH.get().getDescriptionId()),
-                guiHelper.createBlankDrawable(144, 110),
-                guiHelper.createDrawableItemStack(ModItems.NASA_WORKBENCH.get().getDefaultInstance())
+            RECIPE,
+            Component.translatable(ModItems.NASA_WORKBENCH.get().getDescriptionId()),
+            guiHelper.createBlankDrawable(144, 110),
+            guiHelper.createDrawableItemStack(ModItems.NASA_WORKBENCH.get().getDefaultInstance())
         );
         slot = guiHelper.getSlotDrawable();
         arrow = guiHelper.drawableBuilder(GuiUtil.ARROW_TEXTURE, 0, 0, GuiUtil.ARROW_WIDTH, GuiUtil.ARROW_HEIGHT).setTextureSize(GuiUtil.ARROW_WIDTH, GuiUtil.ARROW_HEIGHT).build();
@@ -54,22 +54,22 @@ public class NasaWorkbenchCategory extends BaseCategory<NasaWorkbenchRecipe> {
     }
 
     @Override
-    public void draw(NasaWorkbenchRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
-        slot.draw(poseStack, 40, 0);
-        slot.draw(poseStack, 31, 18);
-        slot.draw(poseStack, 49, 18);
-        slot.draw(poseStack, 31, 18 * 2);
-        slot.draw(poseStack, 49, 18 * 2);
-        slot.draw(poseStack, 31, 18 * 3);
-        slot.draw(poseStack, 49, 18 * 3);
-        slot.draw(poseStack, 31 - 18, 18 * 4);
-        slot.draw(poseStack, 31, 18 * 4);
-        slot.draw(poseStack, 49, 18 * 4);
-        slot.draw(poseStack, 49 + 18, 18 * 4);
-        slot.draw(poseStack, 31 - 18, 18 * 5);
-        slot.draw(poseStack, 40, 18 * 5);
-        slot.draw(poseStack, 49 + 18, 18 * 5);
-        arrow.draw(poseStack, 90, 90);
-        slot.draw(poseStack, 123, 90);
+    public void draw(NasaWorkbenchRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+        slot.draw(graphics, 40, 0);
+        slot.draw(graphics, 31, 18);
+        slot.draw(graphics, 49, 18);
+        slot.draw(graphics, 31, 18 * 2);
+        slot.draw(graphics, 49, 18 * 2);
+        slot.draw(graphics, 31, 18 * 3);
+        slot.draw(graphics, 49, 18 * 3);
+        slot.draw(graphics, 31 - 18, 18 * 4);
+        slot.draw(graphics, 31, 18 * 4);
+        slot.draw(graphics, 49, 18 * 4);
+        slot.draw(graphics, 49 + 18, 18 * 4);
+        slot.draw(graphics, 31 - 18, 18 * 5);
+        slot.draw(graphics, 40, 18 * 5);
+        slot.draw(graphics, 49 + 18, 18 * 5);
+        arrow.draw(graphics, 90, 90);
+        slot.draw(graphics, 123, 90);
     }
 }

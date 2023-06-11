@@ -41,7 +41,7 @@ public abstract class PlayerMixin {
     public void ad_astra$tick(CallbackInfo ci) {
         if (SpaceSuitConfig.enableJetSuitFlight) {
             Player player = ((Player) (Object) this);
-            if (!player.level.isClientSide && !player.isPassenger()) {
+            if (!player.level().isClientSide && !player.isPassenger()) {
                 ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
                 if (chest.getItem() instanceof JetSuit jetSuit) {
                     if (ModKeyBindings.jumpKeyDown(player)) {
@@ -51,7 +51,7 @@ public abstract class PlayerMixin {
                     } else {
                         jetSuit.setFallFlying(false);
                         jetSuit.setEmitParticles(false);
-                        if (!player.level.isClientSide) {
+                        if (!player.level().isClientSide) {
                             chest.getOrCreateTag().putBoolean("SpawnParticles", false);
                         }
                     }
