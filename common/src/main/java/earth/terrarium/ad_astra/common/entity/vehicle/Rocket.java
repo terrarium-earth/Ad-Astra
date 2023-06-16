@@ -387,4 +387,12 @@ public class Rocket extends Vehicle {
             passenger.setYRot(passenger.getYRot() + rotation);
         }
     }
+
+    @Override
+    public boolean cautionForDismount(Entity passenger) {
+        if (this.isFlying()) {
+            return true;
+        }
+        return super.cautionForDismount(passenger);
+    }
 }
