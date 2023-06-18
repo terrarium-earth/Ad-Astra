@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -105,5 +106,13 @@ public class Lander extends Vehicle {
         if (!this.level.isClientSide) {
             ModUtils.spawnForcedParticles((ServerLevel) this.getLevel(), ParticleTypes.SPIT, this.getX(), this.getY() - 0.3, this.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
         }
+    }
+
+    @Override
+    public boolean cautionForDismount(Entity passenger) {
+        if (!this.isOnGround()) {
+            return true;
+        }
+        return super.cautionForDismount(passenger);
     }
 }
