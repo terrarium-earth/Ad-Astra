@@ -6,10 +6,10 @@ import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModParticleTypes;
 import earth.terrarium.ad_astra.common.screen.menu.WaterPumpMenu;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
+import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import earth.terrarium.botarium.common.fluid.base.FluidAttachment;
+import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
@@ -22,7 +22,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
@@ -31,7 +30,7 @@ import net.minecraft.world.level.material.WaterFluid;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements FluidAttachment.Block, EnergyAttachment.Block {
+public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements BotariumFluidBlock<WrappedBlockFluidContainer>, BotariumEnergyBlock<WrappedBlockEnergyContainer> {
     private WrappedBlockEnergyContainer energyContainer;
     private long waterExtracted;
     private WrappedBlockFluidContainer tank;
@@ -64,17 +63,17 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
         if (!level.isClientSide()) {
             BlockPos below = this.getBlockPos().below();
             FluidState water = this.level.getFluidState(below);
-            if (getFluidContainer(this).getFluids().get(0).getFluidAmount() < getFluidContainer(this).getTankCapacity(0)) {
+            if (getFluidContainer().getFluids().get(0).getFluidAmount() < getFluidContainer().getTankCapacity(0)) {
                 if (water.getType() instanceof WaterFluid.Source) {
 
                     // Drain the water block and add it to the tank.
                     FluidHolder waterFluid = FluidHooks.newFluidHolder(Fluids.WATER, WaterPumpConfig.transferPerTick, null);
-                    if (!this.getBlockState().getValue(AbstractMachineBlock.POWERED) && this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0 && getFluidContainer(this).insertFluid(waterFluid, true) > 0) {
+                    if (!this.getBlockState().getValue(AbstractMachineBlock.POWERED) && this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0 && getFluidContainer().insertFluid(waterFluid, true) > 0) {
                         this.setActive(true);
                         ModUtils.spawnForcedParticles((ServerLevel) this.level, ModParticleTypes.OXYGEN_BUBBLE.get(), this.getBlockPos().getX() + 0.5, this.getBlockPos().getY() - 0.5, this.getBlockPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.01);
-                        this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), false);
+                        this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                         waterExtracted += WaterPumpConfig.transferPerTick;
-                        getFluidContainer(this).insertFluid(waterFluid, false);
+                        getFluidContainer().insertFluid(waterFluid, false);
                     } else {
                         this.setActive(false);
                     }
@@ -97,11 +96,11 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
             }
 
             // Insert the fluid into nearby tanks.
-            if (this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0 && !getFluidContainer(this).isEmpty()) {
-                FluidHolder fluid = FluidHooks.newFluidHolder(getFluidContainer(this).getFluids().get(0).getFluid(), WaterPumpConfig.transferPerTick * 2, getFluidContainer(this).getFluids().get(0).getCompound());
+            if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0 && !getFluidContainer().isEmpty()) {
+                FluidHolder fluid = FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), WaterPumpConfig.transferPerTick * 2, getFluidContainer().getFluids().get(0).getCompound());
                 for (Direction direction : Direction.values()) {
                     if (FluidHooks.moveBlockToBlockFluid(this, direction.getOpposite(), level.getBlockEntity(worldPosition.relative(direction)), direction, fluid) > 0) {
-                        this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), false);
+                        this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                         break;
                     }
                 }
@@ -114,16 +113,16 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
     }
 
     public long getMaxCapacity() {
-        return this.getEnergyStorage(this).getMaxCapacity();
+        return this.getEnergyStorage().getMaxCapacity();
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
+    public WrappedBlockEnergyContainer getEnergyStorage() {
         return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(WaterPumpConfig.maxEnergy)) : this.energyContainer;
     }
 
     @Override
-    public WrappedBlockFluidContainer getFluidContainer(BlockEntity holder) {
+    public WrappedBlockFluidContainer getFluidContainer() {
         return tank == null ? tank = new WrappedBlockFluidContainer(this, new SimpleFluidContainer(i -> WaterPumpConfig.tankSize, 1, (amount, fluid) -> true)) : this.tank;
     }
 }

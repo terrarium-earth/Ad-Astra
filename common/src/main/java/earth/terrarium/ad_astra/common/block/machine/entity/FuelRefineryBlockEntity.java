@@ -5,7 +5,7 @@ import earth.terrarium.ad_astra.common.recipe.FuelConversionRecipe;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.menu.ConversionMenu;
 import earth.terrarium.ad_astra.common.util.FluidUtils;
-import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
+import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
@@ -16,7 +16,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements EnergyAttachment.Block {
+public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer> {
 
     public FuelRefineryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.FUEL_REFINERY.get(), blockPos, blockState);
@@ -83,10 +82,10 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
                 FluidUtils.extractTankFluidToItem(getDoubleFluidTank().getOutput(), this, 2, 3, 0, f -> true);
             }
 
-            if (this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0) {
+            if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<FuelConversionRecipe> recipes = FuelConversionRecipe.getRecipes(this.level);
                 if (FluidUtils.convertFluid(getDoubleFluidTank(), recipes, FluidHooks.buckets(1) / 50)) {
-                    this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), false);
+                    this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                     this.setActive(true);
                 } else {
                     this.setActive(false);
@@ -103,7 +102,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
+    public WrappedBlockEnergyContainer getEnergyStorage() {
         return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(FuelRefineryConfig.maxEnergy)) : this.energyContainer;
     }
 }

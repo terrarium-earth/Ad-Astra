@@ -60,7 +60,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         if (oxygenLeak) {
             graphics.drawCenteredString(this.font, "⚠", this.width / 2 - 85 + 7, this.height / 2 - 137, Color.YELLOW.getRGB());
         }
-        if (OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos()) <= 0 && this.machine.getEnergyStorage(machine).getStoredEnergy() > 0 && this.menu.getFluids().get(1).getFluidAmount() > 0) {
+        if (OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos()) <= 0 && this.machine.getEnergyStorage().getStoredEnergy() > 0 && this.menu.getFluids().get(1).getFluidAmount() > 0) {
             graphics.drawCenteredString(this.font, "⚠", this.width / 2 - 67 + 7, this.height / 2 - 137, Color.YELLOW.getRGB());
         }
     }
@@ -89,7 +89,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
             }
         }
 
-        if (oxygenBlocksCount <= 0 && this.machine.getEnergyStorage(machine).getStoredEnergy() > 0 && this.menu.getFluids().get(1).getFluidAmount() > 0) {
+        if (oxygenBlocksCount <= 0 && this.machine.getEnergyStorage().getStoredEnergy() > 0 && this.menu.getFluids().get(1).getFluidAmount() > 0) {
             if (GuiUtil.isHovering(getBlockedWarningSignBounds(), mouseX, mouseY)) {
                 graphics.renderComponentTooltip(font, Arrays.asList(Component.translatable("gauge_text.ad_astra.blocked_warning[0]"), Component.translatable("gauge_text.ad_astra.blocked_warning[1]")), mouseX, mouseY);
             }

@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.common.item;
 import earth.terrarium.ad_astra.common.block.machine.entity.AbstractMachineBlockEntity;
 import earth.terrarium.ad_astra.common.block.machine.entity.FluidMachineBlockEntity;
 import earth.terrarium.ad_astra.common.block.machine.entity.OxygenDistributorBlockEntity;
-import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
+import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
@@ -37,8 +37,8 @@ public class MachineBlockItem extends BlockItem {
             if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
                 CompoundTag tag = stack.getOrCreateTag();
                 ContainerHelper.loadAllItems(tag, machineBlock.getItems());
-                if (tag.contains("Energy") && machineBlock instanceof EnergyAttachment.Block energyBlock) {
-                    energyBlock.getEnergyStorage(machineBlock).setEnergy((long) Mth.clamp(tag.getLong("Energy"), 0, energyBlock.getEnergyStorage(machineBlock).getMaxCapacity()));
+                if (tag.contains("Energy") && machineBlock instanceof BotariumEnergyBlock<?> energyBlock) {
+                    energyBlock.getEnergyStorage().setEnergy((long) Mth.clamp(tag.getLong("Energy"), 0, energyBlock.getEnergyStorage().getMaxCapacity()));
                 }
 
                 if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {

@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.common.item;
 
 
-import earth.terrarium.botarium.common.fluid.base.FluidAttachment;
+import earth.terrarium.botarium.common.fluid.base.BotariumFluidItem;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedItemFluidContainer;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.material.Fluid;
 
 import java.util.function.BiPredicate;
 
-public interface FluidContainingItem extends FluidAttachment.Item {
+public interface FluidContainingItem extends BotariumFluidItem<WrappedItemFluidContainer> {
 
     long getTankSize();
 

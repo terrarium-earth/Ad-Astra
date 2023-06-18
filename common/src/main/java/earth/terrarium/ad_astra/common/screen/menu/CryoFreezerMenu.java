@@ -39,6 +39,6 @@ public class CryoFreezerMenu extends AbstractMachineMenu<CryoFreezerBlockEntity>
 
     @Override
     public void syncClientScreen() {
-        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage(machine).getStoredEnergy(), machine.getFluidContainer(machine).getFluids()), this.player);
+        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage().getStoredEnergy(), machine.getFluidContainer().getFluids()), this.player);
     }
 }

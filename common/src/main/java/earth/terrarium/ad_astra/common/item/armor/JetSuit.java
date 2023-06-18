@@ -7,7 +7,7 @@ import earth.terrarium.ad_astra.common.config.SpaceSuitConfig;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
+import earth.terrarium.botarium.common.energy.base.BotariumEnergyItem;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
 import earth.terrarium.botarium.common.energy.util.EnergyHooks;
@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class JetSuit extends NetheriteSpaceSuit implements EnergyAttachment.Item {
+public class JetSuit extends NetheriteSpaceSuit implements BotariumEnergyItem<WrappedItemEnergyContainer> {
 
     private boolean isFallFlying;
     private boolean emitParticles;

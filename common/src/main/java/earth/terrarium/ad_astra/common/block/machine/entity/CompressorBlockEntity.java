@@ -5,7 +5,7 @@ import earth.terrarium.ad_astra.common.recipe.CompressingRecipe;
 import earth.terrarium.ad_astra.common.recipe.CookingRecipe;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.menu.CompressorMenu;
-import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
+import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import net.minecraft.core.BlockPos;
@@ -15,12 +15,11 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class CompressorBlockEntity extends ProcessingMachineBlockEntity implements EnergyAttachment.Block {
+public class CompressorBlockEntity extends ProcessingMachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer> {
     private WrappedBlockEnergyContainer energyContainer;
 
     public CompressorBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -52,13 +51,13 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
     @Override
     public void tick() {
         if (!this.level.isClientSide()) {
-            if (this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0) {
+            if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 ItemStack input = this.getItem(0);
                 if (!input.isEmpty() && (input.is(this.inputStack.getItem()) || this.inputStack.isEmpty())) {
                     this.setActive(true);
                     if (this.cookTime < this.cookTimeTotal) {
                         this.cookTime++;
-                        this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), false);
+                        this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
 
                     } else if (!this.outputStack.isEmpty()) {
                         input.shrink(1);
@@ -109,11 +108,11 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
     }
 
     public long getMaxCapacity() {
-        return this.getEnergyStorage(this).getMaxCapacity();
+        return this.getEnergyStorage().getMaxCapacity();
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
+    public WrappedBlockEnergyContainer getEnergyStorage() {
         return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(CompressorConfig.maxEnergy)) : this.energyContainer;
     }
 }

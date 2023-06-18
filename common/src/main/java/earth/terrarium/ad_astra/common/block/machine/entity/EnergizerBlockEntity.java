@@ -5,7 +5,7 @@ import earth.terrarium.ad_astra.common.block.machine.EnergizerBlock;
 import earth.terrarium.ad_astra.common.config.EnergizerConfig;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
+import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.energy.util.EnergyHooks;
@@ -15,10 +15,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class EnergizerBlockEntity extends AbstractMachineBlockEntity implements EnergyAttachment.Block {
+public class EnergizerBlockEntity extends AbstractMachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer> {
     private WrappedBlockEnergyContainer energyContainer;
 
     public EnergizerBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -47,7 +46,7 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity implements 
                 ItemStackHolder stack = new ItemStackHolder(this.getItem(0));
                 this.setActive(true);
                 if (!stack.getStack().isEmpty()) {
-                    if (this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0) {
+                    if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                         long moved = EnergyHooks.safeMoveBlockToItemEnergy(this, null, stack, this.getEnergyPerTick());
                         if (moved > 0) {
                             if (stack.isDirty()) {
@@ -62,7 +61,7 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity implements 
                 }
             }
 
-            float ratio = (float) this.getEnergyStorage(this).getStoredEnergy() / (float) this.getMaxCapacity();
+            float ratio = (float) this.getEnergyStorage().getStoredEnergy() / (float) this.getMaxCapacity();
             // convert the ratio into an int between 0 and 4
             int level = (int) (ratio * 4);
             if (ratio > 0.0002f) {
@@ -79,11 +78,11 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity implements 
     }
 
     public long getMaxCapacity() {
-        return this.getEnergyStorage(this).getMaxCapacity();
+        return this.getEnergyStorage().getMaxCapacity();
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
+    public WrappedBlockEnergyContainer getEnergyStorage() {
         return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new SimpleEnergyContainer(EnergizerConfig.maxEnergy)) : this.energyContainer;
     }
 }

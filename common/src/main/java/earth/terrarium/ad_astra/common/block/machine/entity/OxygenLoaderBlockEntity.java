@@ -15,7 +15,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -82,10 +81,10 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
                 FluidUtils.extractTankFluidToItem(getDoubleFluidTank().getOutput(), this, 2, 3, 0, f -> true);
             }
 
-            if (this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0) {
+            if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<OxygenConversionRecipe> recipes = OxygenConversionRecipe.getRecipes(this.level);
                 if (FluidUtils.convertFluid(getDoubleFluidTank(), recipes, FluidHooks.buckets(1f) / 50)) {
-                    this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), false);
+                    this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                     this.setActive(true);
                 } else {
                     this.setActive(false);
@@ -102,7 +101,7 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
+    public WrappedBlockEnergyContainer getEnergyStorage() {
         return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(OxygenLoaderConfig.maxEnergy)) : this.energyContainer;
     }
 }

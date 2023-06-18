@@ -33,7 +33,7 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerBlockEnt
         super.renderBg(graphics, delta, mouseX, mouseY);
 
         GuiUtil.drawEnergy(graphics, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, this.menu.getEnergyAmount(), this.machine.getMaxCapacity());
-        GuiUtil.drawFluidTank(graphics, this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP, this.machine.getFluidContainer(machine).getTankCapacity(0), this.menu.getFluids().get(0));
+        GuiUtil.drawFluidTank(graphics, this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP, this.machine.getFluidContainer().getTankCapacity(0), this.menu.getFluids().get(0));
         GuiUtil.drawSnowflake(graphics, this.leftPos + SNOWFLAKE_LEFT, this.topPos + SNOWFLAKE_TOP, this.machine.getCookTime(), this.machine.getCookTimeTotal());
     }
 
@@ -46,7 +46,7 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerBlockEnt
         }
 
         if (GuiUtil.isHovering(this.getOutputTankBounds(), mouseX, mouseY)) {
-            GuiUtil.drawTankTooltip(graphics, this.menu.getFluids().get(0), this.machine.getFluidContainer(machine).getTankCapacity(0), mouseX, mouseY);
+            GuiUtil.drawTankTooltip(graphics, this.menu.getFluids().get(0), this.machine.getFluidContainer().getTankCapacity(0), mouseX, mouseY);
         }
     }
 
