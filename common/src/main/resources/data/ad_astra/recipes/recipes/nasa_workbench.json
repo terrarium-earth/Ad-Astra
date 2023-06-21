@@ -8,7 +8,7 @@
       "tag": "ad_astra_platform:steel_blocks"
     },
     "C": {
-      "item": "minecraft:crafting_table"
+      "tag": "forge:crafting_tables"
     },
     "L": {
       "item": "minecraft:lever"
