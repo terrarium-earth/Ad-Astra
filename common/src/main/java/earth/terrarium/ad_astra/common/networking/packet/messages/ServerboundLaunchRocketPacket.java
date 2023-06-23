@@ -1,19 +1,18 @@
-package earth.terrarium.ad_astra.common.networking.packet.client;
+package earth.terrarium.ad_astra.common.networking.packet.messages;
 
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.entity.vehicle.Rocket;
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
-import earth.terrarium.ad_astra.common.networking.packet.server.StartRocketPacket;
+import earth.terrarium.ad_astra.common.networking.NetworkHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-public record LaunchRocketPacket() implements Packet<LaunchRocketPacket> {
+public record ServerboundLaunchRocketPacket() implements Packet<ServerboundLaunchRocketPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "launch_rocket_packet");
+    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "launch_rocket");
     public static final Handler HANDLER = new Handler();
 
     @Override
@@ -22,29 +21,29 @@ public record LaunchRocketPacket() implements Packet<LaunchRocketPacket> {
     }
 
     @Override
-    public PacketHandler<LaunchRocketPacket> getHandler() {
+    public PacketHandler<ServerboundLaunchRocketPacket> getHandler() {
         return HANDLER;
     }
 
-    private static class Handler implements PacketHandler<LaunchRocketPacket> {
+    private static class Handler implements PacketHandler<ServerboundLaunchRocketPacket> {
         @Override
-        public void encode(LaunchRocketPacket packet, FriendlyByteBuf buf) {
+        public void encode(ServerboundLaunchRocketPacket packet, FriendlyByteBuf buf) {
         }
 
         @Override
-        public LaunchRocketPacket decode(FriendlyByteBuf buf) {
-            return new LaunchRocketPacket();
+        public ServerboundLaunchRocketPacket decode(FriendlyByteBuf buf) {
+            return new ServerboundLaunchRocketPacket();
         }
 
         @Override
-        public PacketContext handle(LaunchRocketPacket packet) {
+        public PacketContext handle(ServerboundLaunchRocketPacket packet) {
             return (player, level) -> {
                 if (player.getVehicle() instanceof Rocket rocket) {
                     if (!rocket.isFlying()) {
                         if (rocket.getTankAmount() >= Rocket.getRequiredAmountForLaunch(rocket.getTankFluid())) {
                             rocket.initiateLaunchSequenceFromServer();
                             // Tell all clients to start rendering the rocket launch
-                            NetworkHandling.CHANNEL.sendToAllLoaded(new StartRocketPacket(rocket.getId()), level, rocket.getOnPos());
+                            NetworkHandler.CHANNEL.sendToAllLoaded(new ClientboundStartRocketPacket(rocket.getId()), level, rocket.getOnPos());
                         } else {
                             player.displayClientMessage(Component.translatable("message.ad_astra.no_fuel"), false);
                         }

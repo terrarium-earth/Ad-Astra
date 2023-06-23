@@ -4,8 +4,6 @@ import earth.terrarium.ad_astra.client.particle.LargeFlameParticle;
 import earth.terrarium.ad_astra.client.particle.OxygenBubbleParticle;
 import earth.terrarium.ad_astra.client.particle.SmallFlameParticle;
 import earth.terrarium.ad_astra.common.registry.ModParticleTypes;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SplashParticle;
 import net.minecraft.client.particle.SpriteSet;
@@ -15,7 +13,6 @@ import net.minecraft.core.particles.SimpleParticleType;
 
 import java.util.function.BiConsumer;
 
-@Environment(EnvType.CLIENT)
 public class ClientModParticles {
 
     public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientModParticles.SpriteParticleRegistration<SimpleParticleType>> register) {
@@ -28,7 +25,6 @@ public class ClientModParticles {
     }
 
     @FunctionalInterface
-    @Environment(EnvType.CLIENT)
     public interface SpriteParticleRegistration<T extends ParticleOptions> {
         ParticleProvider<T> create(SpriteSet spriteSet);
     }

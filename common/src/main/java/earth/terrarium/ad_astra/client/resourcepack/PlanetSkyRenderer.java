@@ -5,8 +5,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.client.dimension.renderer.StarInformation;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -16,7 +14,6 @@ import org.joml.Vector3f;
 
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
 public record PlanetSkyRenderer(ResourceKey<Level> dimension, PlanetSkyRenderer.StarsRenderer starsRenderer,
                                 PlanetSkyRenderer.SunsetColour sunsetColour, PlanetSkyRenderer.DimensionEffects effects,
                                 PlanetSkyRenderer.CloudEffects cloudEffects,

@@ -4,10 +4,7 @@ import earth.terrarium.ad_astra.client.ClientPlatformUtils;
 import earth.terrarium.ad_astra.client.screen.*;
 import earth.terrarium.ad_astra.client.screen.util.PlanetSelectionScreen;
 import earth.terrarium.ad_astra.common.registry.ModMenus;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
-@Environment(EnvType.CLIENT)
 public class ClientModScreens {
     public static void init() {
         ClientPlatformUtils.registerScreen(ModMenus.SOLAR_PANEL_SCREEN_HANDLER.get(), SolarPanelScreen::new);

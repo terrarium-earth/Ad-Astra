@@ -1,5 +1,5 @@
 architectury {
-    common(rootProject.enabled_platforms.split(","))
+    common(enabled_platforms.split(","))
 }
 
 loom {
@@ -8,6 +8,7 @@ loom {
 
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
+    implementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:$mixinextras_version"))
 
     modCompileOnly "mezz.jei:jei-$minecraft_version-common-api:$jei_version"
     modRuntimeOnly "mezz.jei:jei-$minecraft_version-common:$jei_version"

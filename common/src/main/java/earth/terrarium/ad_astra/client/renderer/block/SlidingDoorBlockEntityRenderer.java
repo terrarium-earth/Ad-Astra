@@ -7,8 +7,6 @@ import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.common.block.door.SlidingDoorBlock;
 import earth.terrarium.ad_astra.common.block.door.SlidingDoorBlockEntity;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -17,7 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Block;
 
-@Environment(EnvType.CLIENT)
 public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<SlidingDoorBlockEntity> {
 
     public static final ResourceLocation IRON_SLIDING_DOOR_MODEL = new ResourceLocation(AdAstra.MOD_ID, "block/door/iron_sliding_door");

@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.common.compat.jei.transfer;
 
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
-import earth.terrarium.ad_astra.common.networking.packet.client.NotifyRecipeTransferPacket;
+import earth.terrarium.ad_astra.common.networking.NetworkHandler;
+import earth.terrarium.ad_astra.common.networking.packet.messages.ServerboundNotifyRecipeTransferPacket;
 import earth.terrarium.ad_astra.common.recipe.ModRecipe;
 import earth.terrarium.ad_astra.common.screen.menu.AbstractMachineMenu;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -42,7 +42,7 @@ public class NotifyableTransferHandler<MENU extends AbstractMachineMenu<?>, RECI
 
         IRecipeTransferError transferError = this.internal.transferRecipe(container, recipe, recipeSlots, player, maxTransfer, doTransfer);
         if (transferError == null && doTransfer) {
-            NetworkHandling.CHANNEL.sendToServer(new NotifyRecipeTransferPacket(recipe.id()));
+            NetworkHandler.CHANNEL.sendToServer(new ServerboundNotifyRecipeTransferPacket(recipe.id()));
         }
 
         return transferError;

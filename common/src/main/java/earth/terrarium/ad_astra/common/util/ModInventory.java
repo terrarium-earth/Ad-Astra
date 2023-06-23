@@ -6,7 +6,6 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-// From tutorial.
 public interface ModInventory extends Container {
 
     static ModInventory of(NonNullList<ItemStack> items) {

@@ -3,8 +3,6 @@ package earth.terrarium.ad_astra.client.screen;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.block.machine.entity.WaterPumpBlockEntity;
 import earth.terrarium.ad_astra.common.screen.menu.WaterPumpMenu;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -12,7 +10,6 @@ import net.minecraft.world.entity.player.Inventory;
 
 import java.awt.*;
 
-@Environment(EnvType.CLIENT)
 public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpBlockEntity, WaterPumpMenu> {
 
     public static final int INPUT_TANK_LEFT = 80;

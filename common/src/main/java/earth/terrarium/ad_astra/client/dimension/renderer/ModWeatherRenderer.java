@@ -7,8 +7,6 @@ import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.mixin.client.LevelRendererAccessor;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
@@ -22,7 +20,6 @@ import net.minecraft.world.level.levelgen.Heightmap;
 
 import java.util.Random;
 
-@Environment(EnvType.CLIENT)
 public class ModWeatherRenderer {
 
     private static final ResourceLocation VENUS_RAIN_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/sky/venus/rain.png");

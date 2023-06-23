@@ -1,4 +1,4 @@
-package earth.terrarium.ad_astra.common.networking.packet.server;
+package earth.terrarium.ad_astra.common.networking.packet.messages;
 
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
@@ -9,9 +9,9 @@ import earth.terrarium.ad_astra.common.data.PlanetData;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
-public record ReturnPlanetDataPacket() implements Packet<ReturnPlanetDataPacket> {
+public record ClientboundReturnPlanetDataPacket() implements Packet<ClientboundReturnPlanetDataPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "return_planet_data_packet");
+    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "return_planet_data");
     public static final Handler HANDLER = new Handler();
 
     @Override
@@ -20,25 +20,25 @@ public record ReturnPlanetDataPacket() implements Packet<ReturnPlanetDataPacket>
     }
 
     @Override
-    public PacketHandler<ReturnPlanetDataPacket> getHandler() {
+    public PacketHandler<ClientboundReturnPlanetDataPacket> getHandler() {
         return HANDLER;
     }
 
-    private static class Handler implements PacketHandler<ReturnPlanetDataPacket> {
+    private static class Handler implements PacketHandler<ClientboundReturnPlanetDataPacket> {
         @Override
-        public void encode(ReturnPlanetDataPacket packet, FriendlyByteBuf buf) {
+        public void encode(ClientboundReturnPlanetDataPacket packet, FriendlyByteBuf buf) {
             PlanetData.writePlanetData(buf);
         }
 
         @Override
-        public ReturnPlanetDataPacket decode(FriendlyByteBuf buf) {
+        public ClientboundReturnPlanetDataPacket decode(FriendlyByteBuf buf) {
             PlanetData.readPlanetData(buf);
             AdAstraClient.hasUpdatedPlanets = true;
-            return new ReturnPlanetDataPacket();
+            return new ClientboundReturnPlanetDataPacket();
         }
 
         @Override
-        public PacketContext handle(ReturnPlanetDataPacket packet) {
+        public PacketContext handle(ClientboundReturnPlanetDataPacket packet) {
             return (player, level) -> {
             };
         }

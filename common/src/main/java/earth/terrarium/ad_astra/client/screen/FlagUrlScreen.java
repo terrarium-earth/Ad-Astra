@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.client.screen;
 
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
-import earth.terrarium.ad_astra.common.networking.packet.client.FlagUrlPacket;
+import earth.terrarium.ad_astra.common.networking.NetworkHandler;
+import earth.terrarium.ad_astra.common.networking.packet.messages.ServerboundFlagUrlPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -37,7 +37,7 @@ public class FlagUrlScreen extends Screen {
         this.button = addRenderableWidget(new Button(x + 50, y + 30, 100, 20, Component.translatable("gui.ad_astra.text.confirm"), (button) -> {
             var matcher = URL_REGEX.matcher(this.urlField.getValue());
             if (matcher.matches()) {
-                NetworkHandling.CHANNEL.sendToServer(new FlagUrlPacket(this.pos, matcher.group(1)));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundFlagUrlPacket(this.pos, matcher.group(1)));
                 this.onClose();
             }
         }, Supplier::get) {

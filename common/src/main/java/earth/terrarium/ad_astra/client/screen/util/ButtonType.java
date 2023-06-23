@@ -1,9 +1,5 @@
 package earth.terrarium.ad_astra.client.screen.util;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-
-@Environment(EnvType.CLIENT)
 public enum ButtonType {
     LARGE(75, 20), NORMAL(71, 20), SMALL(37, 20), STEEL(71, 20);
 

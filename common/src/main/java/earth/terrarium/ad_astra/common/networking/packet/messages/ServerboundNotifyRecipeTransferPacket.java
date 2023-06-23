@@ -1,4 +1,4 @@
-package earth.terrarium.ad_astra.common.networking.packet.client;
+package earth.terrarium.ad_astra.common.networking.packet.messages;
 
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
@@ -9,9 +9,10 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 
-public record NotifyRecipeTransferPacket(ResourceLocation recipeId) implements Packet<NotifyRecipeTransferPacket> {
+public record ServerboundNotifyRecipeTransferPacket(
+    ResourceLocation recipeId) implements Packet<ServerboundNotifyRecipeTransferPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "notify_recipe_transfer_packet");
+    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "notify_recipe_transfer");
     public static final Handler HANDLER = new Handler();
 
     @Override
@@ -20,23 +21,23 @@ public record NotifyRecipeTransferPacket(ResourceLocation recipeId) implements P
     }
 
     @Override
-    public PacketHandler<NotifyRecipeTransferPacket> getHandler() {
+    public PacketHandler<ServerboundNotifyRecipeTransferPacket> getHandler() {
         return HANDLER;
     }
 
-    private static class Handler implements PacketHandler<NotifyRecipeTransferPacket> {
+    private static class Handler implements PacketHandler<ServerboundNotifyRecipeTransferPacket> {
         @Override
-        public void encode(NotifyRecipeTransferPacket packet, FriendlyByteBuf buf) {
+        public void encode(ServerboundNotifyRecipeTransferPacket packet, FriendlyByteBuf buf) {
             buf.writeResourceLocation(packet.recipeId());
         }
 
         @Override
-        public NotifyRecipeTransferPacket decode(FriendlyByteBuf buf) {
-            return new NotifyRecipeTransferPacket(buf.readResourceLocation());
+        public ServerboundNotifyRecipeTransferPacket decode(FriendlyByteBuf buf) {
+            return new ServerboundNotifyRecipeTransferPacket(buf.readResourceLocation());
         }
 
         @Override
-        public PacketContext handle(NotifyRecipeTransferPacket packet) {
+        public PacketContext handle(ServerboundNotifyRecipeTransferPacket packet) {
             return (player, level) -> {
                 if (player.containerMenu instanceof AbstractMachineMenu<?> menu) {
                     Recipe<?> recipe = level.getRecipeManager().byKey(packet.recipeId()).get();

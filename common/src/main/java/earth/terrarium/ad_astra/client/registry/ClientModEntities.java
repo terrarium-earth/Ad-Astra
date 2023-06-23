@@ -20,8 +20,6 @@ import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rover.RoverModel;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rover.RoverRenderer;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.botarium.client.ClientHooks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.PaintingRenderer;
@@ -29,7 +27,6 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 
 import java.util.function.Supplier;
 
-@Environment(EnvType.CLIENT)
 public class ClientModEntities {
 
     public static void registerEntityRenderers() {

@@ -1,11 +1,8 @@
 package earth.terrarium.ad_astra.client.screen.util;
 
 import earth.terrarium.ad_astra.AdAstra;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 
-@Environment(EnvType.CLIENT)
 public record Category(ResourceLocation id, Category parent) {
 
     public static final Category BACK = new Category(new ResourceLocation(AdAstra.MOD_ID, "back"), null);

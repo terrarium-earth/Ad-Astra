@@ -3,8 +3,6 @@ package earth.terrarium.ad_astra.client.sound;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.ad_astra.common.registry.ModSoundEvents;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.AmbientSoundHandler;
@@ -16,7 +14,6 @@ import net.minecraft.sounds.SoundSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-@Environment(EnvType.CLIENT)
 public class PlanetSoundPlayer implements AmbientSoundHandler {
 
     private final LocalPlayer player;

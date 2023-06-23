@@ -1,9 +1,7 @@
 package earth.terrarium.ad_astra.common.util;
 
 import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
-import earth.terrarium.ad_astra.common.networking.packet.client.KeybindPacket;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import earth.terrarium.ad_astra.common.networking.packet.messages.ServerboundKeybindPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 
@@ -25,30 +23,30 @@ public class ModKeyBindings {
     private boolean clickingRight;
 
     public static boolean jumpKeyDown(Player player) {
-        return player.level().isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.JUMP) : getServerKeyPressed(player, KeybindPacket.Keybind.JUMP);
+        return player.level().isClientSide ? getClientKeyPressed(player, ServerboundKeybindPacket.Keybind.JUMP) : getServerKeyPressed(player, ServerboundKeybindPacket.Keybind.JUMP);
     }
 
     public static boolean sprintKeyDown(Player player) {
-        return player.level().isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.SPRINT) : getServerKeyPressed(player, KeybindPacket.Keybind.SPRINT);
+        return player.level().isClientSide ? getClientKeyPressed(player, ServerboundKeybindPacket.Keybind.SPRINT) : getServerKeyPressed(player, ServerboundKeybindPacket.Keybind.SPRINT);
     }
 
     public static boolean forwardKeyDown(Player player) {
-        return player.level().isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.FORWARD) : getServerKeyPressed(player, KeybindPacket.Keybind.FORWARD);
+        return player.level().isClientSide ? getClientKeyPressed(player, ServerboundKeybindPacket.Keybind.FORWARD) : getServerKeyPressed(player, ServerboundKeybindPacket.Keybind.FORWARD);
     }
 
     public static boolean backKeyDown(Player player) {
-        return player.level().isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.BACK) : getServerKeyPressed(player, KeybindPacket.Keybind.BACK);
+        return player.level().isClientSide ? getClientKeyPressed(player, ServerboundKeybindPacket.Keybind.BACK) : getServerKeyPressed(player, ServerboundKeybindPacket.Keybind.BACK);
     }
 
     public static boolean leftKeyDown(Player player) {
-        return player.level().isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.LEFT) : getServerKeyPressed(player, KeybindPacket.Keybind.LEFT);
+        return player.level().isClientSide ? getClientKeyPressed(player, ServerboundKeybindPacket.Keybind.LEFT) : getServerKeyPressed(player, ServerboundKeybindPacket.Keybind.LEFT);
     }
 
     public static boolean rightKeyDown(Player player) {
-        return player.level().isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.RIGHT) : getServerKeyPressed(player, KeybindPacket.Keybind.RIGHT);
+        return player.level().isClientSide ? getClientKeyPressed(player, ServerboundKeybindPacket.Keybind.RIGHT) : getServerKeyPressed(player, ServerboundKeybindPacket.Keybind.RIGHT);
     }
 
-    private static boolean getServerKeyPressed(Player player, KeybindPacket.Keybind key) {
+    private static boolean getServerKeyPressed(Player player, ServerboundKeybindPacket.Keybind key) {
         PLAYER_KEYS.putIfAbsent(player.getUUID(), new ModKeyBindings());
         return switch (key) {
             case JUMP -> PLAYER_KEYS.get(player.getUUID()).clickingJump;
@@ -65,8 +63,8 @@ public class ModKeyBindings {
         };
     }
 
-    @Environment(EnvType.CLIENT)
-    private static boolean getClientKeyPressed(Player player, KeybindPacket.Keybind key) {
+
+    private static boolean getClientKeyPressed(Player player, ServerboundKeybindPacket.Keybind key) {
         if (!player.getUUID().equals(Minecraft.getInstance().player.getUUID())) {
             return false;
         }
@@ -86,7 +84,7 @@ public class ModKeyBindings {
         };
     }
 
-    public static void pressedKeyOnServer(UUID uuid, KeybindPacket.Keybind key, boolean keyDown) {
+    public static void pressedKeyOnServer(UUID uuid, ServerboundKeybindPacket.Keybind key, boolean keyDown) {
         PLAYER_KEYS.putIfAbsent(uuid, new ModKeyBindings());
 
         switch (key) {

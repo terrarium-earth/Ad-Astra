@@ -25,10 +25,7 @@ import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModFluids;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.botarium.client.ClientHooks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -55,7 +52,6 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-@Environment(EnvType.CLIENT)
 public class AdAstraClient {
 
     public static boolean hasUpdatedPlanets;
@@ -122,26 +118,6 @@ public class AdAstraClient {
         registry.accept(new ResourceLocation(AdAstra.MOD_ID, "planet_resources"), new PlanetResources());
     }
 
-    public static void onRegisterChestSprites(Consumer<ResourceLocation> register) {
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "entity/chest/aeronos_chest"));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "entity/chest/aeronos_chest_right"));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "entity/chest/aeronos_chest_left"));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "entity/chest/strophar_chest"));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "entity/chest/strophar_chest_right"));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "entity/chest/strophar_chest_left"));
-    }
-
-    public static void onRegisterSprites(Consumer<ResourceLocation> register) {
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "particle/flame_1"));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "particle/flame_2"));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "particle/flame_3"));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "particle/flame_4"));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "particle/venus_rain_1"));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "particle/venus_rain_2"));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "particle/venus_rain_3"));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "particle/venus_rain_4"));
-    }
-
     public static void onRegisterModels(Consumer<ResourceLocation> register) {
         ModBlocks.GLOBES.stream().forEach(b -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/" + b.getId().getPath() + "_cube")));
         ModBlocks.FLAGS.stream().forEach(block -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/flag/" + block.getId().getPath())));
@@ -167,10 +143,6 @@ public class AdAstraClient {
         register.accept((itemStack, i) -> ((DyeableArmorItem) itemStack.getItem()).getColor(itemStack), new ItemLike[]{ModItems.SPACE_HELMET.get(), ModItems.SPACE_SUIT.get(), ModItems.SPACE_PANTS.get(), ModItems.SPACE_BOOTS.get()});
         register.accept((itemStack, i) -> ((DyeableArmorItem) itemStack.getItem()).getColor(itemStack), new ItemLike[]{ModItems.NETHERITE_SPACE_HELMET.get(), ModItems.NETHERITE_SPACE_SUIT.get(), ModItems.NETHERITE_SPACE_PANTS.get(), ModItems.NETHERITE_SPACE_BOOTS.get()});
         register.accept((itemStack, i) -> ((DyeableArmorItem) itemStack.getItem()).getColor(itemStack), new ItemLike[]{ModItems.JET_SUIT_HELMET.get(), ModItems.JET_SUIT.get(), ModItems.JET_SUIT_PANTS.get(), ModItems.JET_SUIT_BOOTS.get()});
-    }
-
-    public static void onAddBlockColors(BiConsumer<BlockColor, Block[]> register) {
-
     }
 
     @FunctionalInterface

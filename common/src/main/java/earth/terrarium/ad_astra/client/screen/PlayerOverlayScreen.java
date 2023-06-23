@@ -7,8 +7,6 @@ import earth.terrarium.ad_astra.client.screen.GuiUtil.FloatGuiComponent;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.config.VehiclesConfig;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
@@ -20,7 +18,6 @@ import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 
-@Environment(EnvType.CLIENT)
 public class PlayerOverlayScreen {
 
     private static final ResourceLocation OXYGEN_TANK_EMPTY_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/overlay/oxygen_tank_empty.png");

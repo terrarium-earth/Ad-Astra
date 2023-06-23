@@ -3,8 +3,6 @@ package earth.terrarium.ad_astra.client.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import earth.terrarium.ad_astra.common.block.machine.entity.AbstractMachineBlockEntity;
 import earth.terrarium.ad_astra.common.screen.menu.AbstractMachineMenu;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -12,7 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-@Environment(EnvType.CLIENT)
 public abstract class AbstractMachineScreen<M extends AbstractMachineBlockEntity, H extends AbstractMachineMenu<M>> extends AbstractContainerScreen<H> {
 
     final M machine;

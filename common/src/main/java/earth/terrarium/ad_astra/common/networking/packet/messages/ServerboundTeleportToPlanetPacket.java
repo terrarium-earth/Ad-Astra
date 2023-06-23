@@ -1,4 +1,4 @@
-package earth.terrarium.ad_astra.common.networking.packet.client;
+package earth.terrarium.ad_astra.common.networking.packet.messages;
 
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
@@ -16,9 +16,10 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public record TeleportToPlanetPacket(ResourceLocation id) implements Packet<TeleportToPlanetPacket> {
+public record ServerboundTeleportToPlanetPacket(
+    ResourceLocation id) implements Packet<ServerboundTeleportToPlanetPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "teleport_to_planet_packet");
+    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "teleport_to_planet");
     public static final Handler HANDLER = new Handler();
 
     private static ResourceKey<Level> getlevel(ResourceLocation id) {
@@ -36,23 +37,23 @@ public record TeleportToPlanetPacket(ResourceLocation id) implements Packet<Tele
     }
 
     @Override
-    public PacketHandler<TeleportToPlanetPacket> getHandler() {
+    public PacketHandler<ServerboundTeleportToPlanetPacket> getHandler() {
         return HANDLER;
     }
 
-    private static class Handler implements PacketHandler<TeleportToPlanetPacket> {
+    private static class Handler implements PacketHandler<ServerboundTeleportToPlanetPacket> {
         @Override
-        public void encode(TeleportToPlanetPacket packet, FriendlyByteBuf buf) {
+        public void encode(ServerboundTeleportToPlanetPacket packet, FriendlyByteBuf buf) {
             buf.writeResourceLocation(packet.id);
         }
 
         @Override
-        public TeleportToPlanetPacket decode(FriendlyByteBuf buf) {
-            return new TeleportToPlanetPacket(buf.readResourceLocation());
+        public ServerboundTeleportToPlanetPacket decode(FriendlyByteBuf buf) {
+            return new ServerboundTeleportToPlanetPacket(buf.readResourceLocation());
         }
 
         @Override
-        public PacketContext handle(TeleportToPlanetPacket packet) {
+        public PacketContext handle(ServerboundTeleportToPlanetPacket packet) {
             return (player, level) -> {
                 List<String> disabledPlanets = List.of(AdAstraConfig.disabledPlanets.split(","));
 

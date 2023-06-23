@@ -8,8 +8,6 @@ import earth.terrarium.ad_astra.common.data.ButtonColor;
 import earth.terrarium.ad_astra.common.data.Planet;
 import earth.terrarium.ad_astra.common.util.ColourUtils;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -22,7 +20,6 @@ import net.minecraft.util.Mth;
 import java.util.LinkedList;
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
 public class CustomButton extends Button {
 
     public static final ResourceLocation LARGE_BUTTON_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/buttons/large_button.png");

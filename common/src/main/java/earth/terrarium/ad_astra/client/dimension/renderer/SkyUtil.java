@@ -8,8 +8,6 @@ import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer;
 import earth.terrarium.ad_astra.common.world.LevelSeed;
 import earth.terrarium.ad_astra.mixin.client.LevelRendererAccessor;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -25,7 +23,6 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
-@Environment(EnvType.CLIENT)
 public class SkyUtil {
 
     // Scales the planet as you fall closer to it.

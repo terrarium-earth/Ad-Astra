@@ -9,8 +9,8 @@ import com.mojang.serialization.JsonOps;
 import com.teamresourceful.resourcefullib.common.networking.PacketHelper;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
-import earth.terrarium.ad_astra.common.networking.packet.client.RequestPlanetDataPacket;
+import earth.terrarium.ad_astra.common.networking.NetworkHandler;
+import earth.terrarium.ad_astra.common.networking.packet.messages.ServerboundRequestPlanetDataPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -108,7 +108,7 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
 
     public static boolean isPlanetLevel(Level level) {
         if (level.isClientSide && !AdAstraClient.hasUpdatedPlanets) {
-            NetworkHandling.CHANNEL.sendToServer(new RequestPlanetDataPacket());
+            NetworkHandler.CHANNEL.sendToServer(new ServerboundRequestPlanetDataPacket());
             AdAstraClient.hasUpdatedPlanets = true;
         }
         return PLANET_LEVELS.contains(level.dimension());

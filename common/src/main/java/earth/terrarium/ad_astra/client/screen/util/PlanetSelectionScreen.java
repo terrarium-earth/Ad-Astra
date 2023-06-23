@@ -11,14 +11,12 @@ import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.data.ButtonColor;
 import earth.terrarium.ad_astra.common.data.Planet;
 import earth.terrarium.ad_astra.common.data.PlanetData;
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
-import earth.terrarium.ad_astra.common.networking.packet.client.CreateSpaceStationPacket;
-import earth.terrarium.ad_astra.common.networking.packet.client.TeleportToPlanetPacket;
+import earth.terrarium.ad_astra.common.networking.NetworkHandler;
+import earth.terrarium.ad_astra.common.networking.packet.messages.ServerboundCreateSpaceStationPacket;
+import earth.terrarium.ad_astra.common.networking.packet.messages.ServerboundTeleportToPlanetPacket;
 import earth.terrarium.ad_astra.common.recipe.SpaceStationRecipe;
 import earth.terrarium.ad_astra.common.screen.menu.PlanetSelectionMenu;
 import earth.terrarium.ad_astra.common.util.MathUtil;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -38,7 +36,6 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-@Environment(EnvType.CLIENT)
 @MethodsReturnNonnullByDefault
 public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSelectionMenu> {
 
@@ -319,7 +316,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
             }
             if (minecraft != null && minecraft.player != null) {
                 this.minecraft.player.closeContainer();
-                NetworkHandling.CHANNEL.sendToServer(new CreateSpaceStationPacket(level.location()));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundCreateSpaceStationPacket(level.location()));
                 teleportPlayer(level);
             }
         });
@@ -347,7 +344,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
     public void teleportPlayer(ResourceKey<Level> level) {
         this.minecraft.player.closeContainer();
         // Tell the server to teleport the player after the button has been pressed.
-        NetworkHandling.CHANNEL.sendToServer(new TeleportToPlanetPacket(level.location()));
+        NetworkHandler.CHANNEL.sendToServer(new ServerboundTeleportToPlanetPacket(level.location()));
     }
 
     public CustomButton createButton(Component label, Category category, ButtonType size, ButtonColor colour, TooltipType tooltip, Planet planetInfo, Consumer<Button> onClick) {

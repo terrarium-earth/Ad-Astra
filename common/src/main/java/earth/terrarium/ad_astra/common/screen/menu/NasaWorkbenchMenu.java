@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.common.screen.menu;
 
 import earth.terrarium.ad_astra.common.block.machine.entity.NasaWorkbenchBlockEntity;
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
-import earth.terrarium.ad_astra.common.networking.packet.server.MachineInfoPacket;
+import earth.terrarium.ad_astra.common.networking.NetworkHandler;
+import earth.terrarium.ad_astra.common.networking.packet.messages.ClientboundMachineInfoPacket;
 import earth.terrarium.ad_astra.common.recipe.NasaWorkbenchRecipe;
 import earth.terrarium.ad_astra.common.registry.ModMenus;
 import net.minecraft.network.FriendlyByteBuf;
@@ -118,6 +118,6 @@ public class NasaWorkbenchMenu extends AbstractMachineMenu<NasaWorkbenchBlockEnt
 
     @Override
     public void syncClientScreen() {
-        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(0L, List.of()), this.player);
+        NetworkHandler.CHANNEL.sendToPlayer(new ClientboundMachineInfoPacket(0L, List.of()), this.player);
     }
 }

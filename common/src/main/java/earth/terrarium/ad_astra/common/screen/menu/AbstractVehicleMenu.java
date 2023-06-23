@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.common.screen.menu;
 
 import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
-import earth.terrarium.ad_astra.common.networking.packet.server.MachineInfoPacket;
+import earth.terrarium.ad_astra.common.networking.NetworkHandler;
+import earth.terrarium.ad_astra.common.networking.packet.messages.ClientboundMachineInfoPacket;
 import earth.terrarium.ad_astra.common.util.CustomInventory;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
@@ -120,6 +120,6 @@ public abstract class AbstractVehicleMenu extends AbstractContainerMenu {
     }
 
     public void syncClientScreen() {
-        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(0, vehicle.getTank().getFluids()), this.player);
+        NetworkHandler.CHANNEL.sendToPlayer(new ClientboundMachineInfoPacket(0, vehicle.getTank().getFluids()), this.player);
     }
 }

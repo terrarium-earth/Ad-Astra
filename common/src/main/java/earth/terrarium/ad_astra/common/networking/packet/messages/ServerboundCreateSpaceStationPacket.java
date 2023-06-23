@@ -1,4 +1,4 @@
-package earth.terrarium.ad_astra.common.networking.packet.client;
+package earth.terrarium.ad_astra.common.networking.packet.messages;
 
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
@@ -20,9 +20,10 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
-public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements Packet<CreateSpaceStationPacket> {
+public record ServerboundCreateSpaceStationPacket(
+    ResourceLocation targetWorld) implements Packet<ServerboundCreateSpaceStationPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "create_space_station_packet");
+    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "create_space_station");
     public static final Handler HANDLER = new Handler();
 
     @Override
@@ -31,11 +32,11 @@ public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements 
     }
 
     @Override
-    public PacketHandler<CreateSpaceStationPacket> getHandler() {
+    public PacketHandler<ServerboundCreateSpaceStationPacket> getHandler() {
         return HANDLER;
     }
 
-    private static class Handler implements PacketHandler<CreateSpaceStationPacket> {
+    private static class Handler implements PacketHandler<ServerboundCreateSpaceStationPacket> {
         private static boolean hasItem(Player player, Ingredient ingredient, int count) {
             int found = 0;
             for (ItemStack stack : player.getInventory().items) {
@@ -47,17 +48,17 @@ public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements 
         }
 
         @Override
-        public void encode(CreateSpaceStationPacket packet, FriendlyByteBuf buf) {
+        public void encode(ServerboundCreateSpaceStationPacket packet, FriendlyByteBuf buf) {
             buf.writeResourceLocation(packet.targetWorld());
         }
 
         @Override
-        public CreateSpaceStationPacket decode(FriendlyByteBuf buf) {
-            return new CreateSpaceStationPacket(buf.readResourceLocation());
+        public ServerboundCreateSpaceStationPacket decode(FriendlyByteBuf buf) {
+            return new ServerboundCreateSpaceStationPacket(buf.readResourceLocation());
         }
 
         @Override
-        public PacketContext handle(CreateSpaceStationPacket packet) {
+        public PacketContext handle(ServerboundCreateSpaceStationPacket packet) {
             return (player, level) -> {
                 if (!player.isCreative() && !player.isSpectator()) {
                     for (SpaceStationRecipe recipe : SpaceStationRecipe.getRecipes(player.level())) {

@@ -4,8 +4,6 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.block.machine.AbstractMachineBlock;
 import earth.terrarium.ad_astra.common.block.machine.entity.SolarPanelBlockEntity;
 import earth.terrarium.ad_astra.common.screen.menu.SolarPanelMenu;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +11,6 @@ import net.minecraft.world.entity.player.Inventory;
 
 import java.awt.*;
 
-@Environment(EnvType.CLIENT)
 public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelBlockEntity, SolarPanelMenu> {
 
     public static final int SUN_LEFT = 35;

@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[46,)"
+loaderVersion = "[47,)"
 license = "Terrarium Licence"
 issueTrackerURL = "https://github.com/terrarium-earth/${github_name}/issues"
 
@@ -10,13 +10,13 @@ displayName = "Ad Astra"
 displayURL = "https://modrinth.com/mod/ad-astra"
 logoFile = "icon.png"
 authors = "Alex Nijjar"
-credits = "CodexAdrian, Facu, Fizz, Giselle, Kekie6, Shrimp, SpaceStar, Squishy, ThatGravyBoat"
+credits = "CodexAdrian, Facu, Fizz, Giselle, Kekie6, Shrimp, Squishy, ThatGravyBoat"
 description = "Live long and prosper, Ad Astra!"
 
 [[dependencies.ad_astra]]
 modId = "forge"
 mandatory = true
-versionRange = "[46,)"
+versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
 

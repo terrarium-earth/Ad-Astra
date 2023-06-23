@@ -8,13 +8,11 @@ import earth.terrarium.ad_astra.client.screen.util.ScreenUtils;
 import earth.terrarium.ad_astra.common.block.machine.entity.OxygenDistributorBlockEntity;
 import earth.terrarium.ad_astra.common.config.OxygenDistributorConfig;
 import earth.terrarium.ad_astra.common.data.ButtonColor;
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
-import earth.terrarium.ad_astra.common.networking.packet.client.ToggleDistributorPacket;
+import earth.terrarium.ad_astra.common.networking.NetworkHandler;
+import earth.terrarium.ad_astra.common.networking.packet.messages.ServerboundToggleDistributorPacket;
 import earth.terrarium.ad_astra.common.screen.menu.OxygenDistributorMenu;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -23,7 +21,6 @@ import net.minecraft.world.entity.player.Inventory;
 import java.awt.*;
 import java.util.Arrays;
 
-@Environment(EnvType.CLIENT)
 public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistributorBlockEntity, OxygenDistributorMenu> {
 
     public static final int INPUT_TANK_LEFT = 50;
@@ -49,6 +46,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 
     @Override
     protected void renderBg(GuiGraphics graphics, float delta, int mouseX, int mouseY) {
+        super.renderBg(graphics, delta, mouseX, mouseY);
         GuiUtil.drawEnergy(graphics, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, this.menu.getEnergyAmount(), this.machine.getMaxCapacity());
         GuiUtil.drawFluidTank(graphics, this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP, this.machine.getInputTankCapacity(), this.menu.getFluids().get(0));
         GuiUtil.drawFluidTank(graphics, this.leftPos + OUTPUT_TANK_LEFT, this.topPos + OUTPUT_TANK_TOP, this.machine.getOutputTankCapacity(), this.menu.getFluids().get(1));
@@ -136,7 +134,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         super.init();
         OxygenDistributorBlockEntity oxygenDistributor = this.machine;
         visibleButton = new CustomButton(this.width / 2 + 10, this.height / 2 - 83, oxygenDistributor.shouldShowOxygen() ? HIDE_TEXT : SHOW_TEXT, ButtonType.STEEL, ButtonColor.WHITE, TooltipType.NONE, null, pressed -> {
-            NetworkHandling.CHANNEL.sendToServer(new ToggleDistributorPacket(this.machine.getBlockPos()));
+            NetworkHandler.CHANNEL.sendToServer(new ServerboundToggleDistributorPacket(this.machine.getBlockPos()));
             this.machine.setShowOxygen(!oxygenDistributor.shouldShowOxygen());
         });
         visibleButton.doScissor = false;
@@ -169,6 +167,6 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 
     @Override
     public int getTextColour() {
-        return 0xFFFFFF;
+        return 0x2C282E;
     }
 }

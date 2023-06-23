@@ -1,4 +1,4 @@
-package earth.terrarium.ad_astra.common.networking.packet.client;
+package earth.terrarium.ad_astra.common.networking.packet.messages;
 
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
@@ -10,9 +10,9 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
-public record FlagUrlPacket(BlockPos pos, String url) implements Packet<FlagUrlPacket> {
+public record ServerboundFlagUrlPacket(BlockPos pos, String url) implements Packet<ServerboundFlagUrlPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "flag_url_packet");
+    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "flag_url");
     public static final Handler HANDLER = new Handler();
 
     @Override
@@ -21,24 +21,24 @@ public record FlagUrlPacket(BlockPos pos, String url) implements Packet<FlagUrlP
     }
 
     @Override
-    public PacketHandler<FlagUrlPacket> getHandler() {
+    public PacketHandler<ServerboundFlagUrlPacket> getHandler() {
         return HANDLER;
     }
 
-    private static class Handler implements PacketHandler<FlagUrlPacket> {
+    private static class Handler implements PacketHandler<ServerboundFlagUrlPacket> {
         @Override
-        public void encode(FlagUrlPacket packet, FriendlyByteBuf buf) {
+        public void encode(ServerboundFlagUrlPacket packet, FriendlyByteBuf buf) {
             buf.writeBlockPos(packet.pos());
             buf.writeUtf(packet.url());
         }
 
         @Override
-        public FlagUrlPacket decode(FriendlyByteBuf buf) {
-            return new FlagUrlPacket(buf.readBlockPos(), buf.readUtf());
+        public ServerboundFlagUrlPacket decode(FriendlyByteBuf buf) {
+            return new ServerboundFlagUrlPacket(buf.readBlockPos(), buf.readUtf());
         }
 
         @Override
-        public PacketContext handle(FlagUrlPacket packet) {
+        public PacketContext handle(ServerboundFlagUrlPacket packet) {
             return (player, level) -> {
                 if (player.level().getBlockEntity(packet.pos()) instanceof FlagBlockEntity flag && flag.getOwner() != null && player.getUUID().equals(flag.getOwner().getId())) {
                     flag.setId(packet.url());

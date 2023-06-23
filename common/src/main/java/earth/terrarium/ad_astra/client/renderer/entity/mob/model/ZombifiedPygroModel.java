@@ -2,8 +2,6 @@ package earth.terrarium.ad_astra.client.renderer.entity.mob.model;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.entity.mob.ZombifiedPygro;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -12,7 +10,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 
-@Environment(EnvType.CLIENT)
+
 public class ZombifiedPygroModel extends HumanoidModel<ZombifiedPygro> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "zombified_pygro"), "main");
 

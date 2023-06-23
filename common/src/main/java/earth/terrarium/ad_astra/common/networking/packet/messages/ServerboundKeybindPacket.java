@@ -1,4 +1,4 @@
-package earth.terrarium.ad_astra.common.networking.packet.client;
+package earth.terrarium.ad_astra.common.networking.packet.messages;
 
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
@@ -8,9 +8,9 @@ import earth.terrarium.ad_astra.common.util.ModKeyBindings;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
-public record KeybindPacket(Keybind keybind, boolean pressed) implements Packet<KeybindPacket> {
+public record ServerboundKeybindPacket(Keybind keybind, boolean pressed) implements Packet<ServerboundKeybindPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "keybind_packet");
+    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "keybind");
     public static final Handler HANDLER = new Handler();
 
     @Override
@@ -19,7 +19,7 @@ public record KeybindPacket(Keybind keybind, boolean pressed) implements Packet<
     }
 
     @Override
-    public PacketHandler<KeybindPacket> getHandler() {
+    public PacketHandler<ServerboundKeybindPacket> getHandler() {
         return HANDLER;
     }
 
@@ -27,20 +27,20 @@ public record KeybindPacket(Keybind keybind, boolean pressed) implements Packet<
         JUMP, SPRINT, FORWARD, BACK, LEFT, RIGHT
     }
 
-    private static class Handler implements PacketHandler<KeybindPacket> {
+    private static class Handler implements PacketHandler<ServerboundKeybindPacket> {
         @Override
-        public void encode(KeybindPacket packet, FriendlyByteBuf buf) {
+        public void encode(ServerboundKeybindPacket packet, FriendlyByteBuf buf) {
             buf.writeEnum(packet.keybind);
             buf.writeBoolean(packet.pressed);
         }
 
         @Override
-        public KeybindPacket decode(FriendlyByteBuf buf) {
-            return new KeybindPacket(buf.readEnum(Keybind.class), buf.readBoolean());
+        public ServerboundKeybindPacket decode(FriendlyByteBuf buf) {
+            return new ServerboundKeybindPacket(buf.readEnum(Keybind.class), buf.readBoolean());
         }
 
         @Override
-        public PacketContext handle(KeybindPacket packet) {
+        public PacketContext handle(ServerboundKeybindPacket packet) {
             return (player, level) -> ModKeyBindings.pressedKeyOnServer(player.getUUID(), packet.keybind, packet.pressed());
         }
     }

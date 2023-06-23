@@ -4,7 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.teamresourceful.resourcefulconfig.common.config.Configurator;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.data.PlanetData;
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
+import earth.terrarium.ad_astra.common.networking.NetworkHandler;
 import earth.terrarium.ad_astra.common.registry.*;
 import earth.terrarium.ad_astra.common.util.PlatformUtils;
 import net.minecraft.core.cauldron.CauldronInteraction;
@@ -38,7 +38,7 @@ public class AdAstra {
         ModStructures.STRUCTURE_TYPES.init();
         ModStructures.STRUCTURE_PROCESSORS.init();
         ModCriteria.init();
-        NetworkHandling.init();
+        NetworkHandler.init();
     }
 
     public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {

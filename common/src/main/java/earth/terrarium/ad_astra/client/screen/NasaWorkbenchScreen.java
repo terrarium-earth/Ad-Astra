@@ -3,15 +3,12 @@ package earth.terrarium.ad_astra.client.screen;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.block.machine.entity.NasaWorkbenchBlockEntity;
 import earth.terrarium.ad_astra.common.screen.menu.NasaWorkbenchMenu;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 import java.awt.*;
 
-@Environment(EnvType.CLIENT)
 public class NasaWorkbenchScreen extends AbstractMachineScreen<NasaWorkbenchBlockEntity, NasaWorkbenchMenu> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/screens/nasa_workbench.png");

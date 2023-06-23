@@ -3,15 +3,13 @@ package earth.terrarium.ad_astra.client.renderer.entity.vehicle.rocket.tier_4;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.VehicleModel;
 import earth.terrarium.ad_astra.common.entity.vehicle.RocketTier4;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 
-@Environment(EnvType.CLIENT)
+
 public class RocketModelTier4 extends VehicleModel<RocketTier4> {
 
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "tier_4_rocket"), "main");

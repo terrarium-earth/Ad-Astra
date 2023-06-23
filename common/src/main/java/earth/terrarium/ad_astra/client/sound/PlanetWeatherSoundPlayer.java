@@ -18,7 +18,6 @@ import net.minecraft.util.Mth;
 import java.util.LinkedList;
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
 public class PlanetWeatherSoundPlayer implements AmbientSoundHandler {
 
     private final LocalPlayer player;

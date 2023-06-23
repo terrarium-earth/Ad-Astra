@@ -1,4 +1,4 @@
-package earth.terrarium.ad_astra.common.networking.packet.client;
+package earth.terrarium.ad_astra.common.networking.packet.messages;
 
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
@@ -9,9 +9,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
-public record ToggleDistributorPacket(BlockPos pos) implements Packet<ToggleDistributorPacket> {
+public record ServerboundToggleDistributorPacket(BlockPos pos) implements Packet<ServerboundToggleDistributorPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "toggle_distributor_packet");
+    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "toggle_distributor");
     public static final Handler HANDLER = new Handler();
 
     @Override
@@ -20,23 +20,23 @@ public record ToggleDistributorPacket(BlockPos pos) implements Packet<ToggleDist
     }
 
     @Override
-    public PacketHandler<ToggleDistributorPacket> getHandler() {
+    public PacketHandler<ServerboundToggleDistributorPacket> getHandler() {
         return HANDLER;
     }
 
-    private static class Handler implements PacketHandler<ToggleDistributorPacket> {
+    private static class Handler implements PacketHandler<ServerboundToggleDistributorPacket> {
         @Override
-        public void encode(ToggleDistributorPacket packet, FriendlyByteBuf buf) {
+        public void encode(ServerboundToggleDistributorPacket packet, FriendlyByteBuf buf) {
             buf.writeBlockPos(packet.pos());
         }
 
         @Override
-        public ToggleDistributorPacket decode(FriendlyByteBuf buf) {
-            return new ToggleDistributorPacket(buf.readBlockPos());
+        public ServerboundToggleDistributorPacket decode(FriendlyByteBuf buf) {
+            return new ServerboundToggleDistributorPacket(buf.readBlockPos());
         }
 
         @Override
-        public PacketContext handle(ToggleDistributorPacket packet) {
+        public PacketContext handle(ServerboundToggleDistributorPacket packet) {
             return (player, level) -> {
                 if (level.getBlockEntity(packet.pos()) instanceof OxygenDistributorBlockEntity oxygenDistributor) {
                     oxygenDistributor.setShowOxygen(!oxygenDistributor.shouldShowOxygen());

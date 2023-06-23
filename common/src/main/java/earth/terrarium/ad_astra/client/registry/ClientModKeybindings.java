@@ -1,14 +1,11 @@
 package earth.terrarium.ad_astra.client.registry;
 
 import earth.terrarium.ad_astra.common.entity.vehicle.Rocket;
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
-import earth.terrarium.ad_astra.common.networking.packet.client.KeybindPacket;
-import earth.terrarium.ad_astra.common.networking.packet.client.LaunchRocketPacket;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import earth.terrarium.ad_astra.common.networking.NetworkHandler;
+import earth.terrarium.ad_astra.common.networking.packet.messages.ServerboundKeybindPacket;
+import earth.terrarium.ad_astra.common.networking.packet.messages.ServerboundLaunchRocketPacket;
 import net.minecraft.client.Minecraft;
 
-@Environment(EnvType.CLIENT)
 public class ClientModKeybindings {
 
     public static boolean clickingJump;
@@ -37,62 +34,62 @@ public class ClientModKeybindings {
         if (minecraft.level != null) {
 
             if (clickingJump && sentJumpPacket) {
-                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.JUMP, true));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundKeybindPacket(ServerboundKeybindPacket.Keybind.JUMP, true));
                 sentJumpPacket = false;
             }
 
             if (clickingSprint && sentSprintPacket) {
-                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.SPRINT, true));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundKeybindPacket(ServerboundKeybindPacket.Keybind.SPRINT, true));
                 sentSprintPacket = false;
             }
 
             if (clickingForward && sentForwardPacket) {
-                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.FORWARD, true));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundKeybindPacket(ServerboundKeybindPacket.Keybind.FORWARD, true));
                 sentForwardPacket = false;
             }
 
             if (clickingBack && sentBackPacket) {
-                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.BACK, true));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundKeybindPacket(ServerboundKeybindPacket.Keybind.BACK, true));
                 sentBackPacket = false;
             }
 
             if (clickingLeft && sentLeftPacket) {
-                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.LEFT, true));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundKeybindPacket(ServerboundKeybindPacket.Keybind.LEFT, true));
                 sentLeftPacket = false;
             }
 
             if (clickingRight && sentRightPacket) {
-                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.RIGHT, true));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundKeybindPacket(ServerboundKeybindPacket.Keybind.RIGHT, true));
                 sentRightPacket = false;
             }
 
             if (!clickingJump && !sentJumpPacket) {
-                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.JUMP, false));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundKeybindPacket(ServerboundKeybindPacket.Keybind.JUMP, false));
                 sentJumpPacket = true;
             }
 
             if (!clickingSprint && !sentSprintPacket) {
-                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.SPRINT, false));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundKeybindPacket(ServerboundKeybindPacket.Keybind.SPRINT, false));
                 sentSprintPacket = true;
             }
 
             if (!clickingForward && !sentForwardPacket) {
-                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.FORWARD, false));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundKeybindPacket(ServerboundKeybindPacket.Keybind.FORWARD, false));
                 sentForwardPacket = true;
             }
 
             if (!clickingBack && !sentBackPacket) {
-                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.BACK, false));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundKeybindPacket(ServerboundKeybindPacket.Keybind.BACK, false));
                 sentBackPacket = true;
             }
 
             if (!clickingLeft && !sentLeftPacket) {
-                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.LEFT, false));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundKeybindPacket(ServerboundKeybindPacket.Keybind.LEFT, false));
                 sentLeftPacket = true;
             }
 
             if (!clickingRight && !sentRightPacket) {
-                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.RIGHT, false));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundKeybindPacket(ServerboundKeybindPacket.Keybind.RIGHT, false));
                 sentRightPacket = true;
             }
         }
@@ -102,7 +99,7 @@ public class ClientModKeybindings {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.level != null && minecraft.player != null) {
             if (minecraft.player.getVehicle() instanceof Rocket rocket && !rocket.isFlying()) {
-                NetworkHandling.CHANNEL.sendToServer(new LaunchRocketPacket());
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundLaunchRocketPacket());
             }
         }
     }

@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.common.screen.menu;
 
 import earth.terrarium.ad_astra.common.block.machine.entity.SolarPanelBlockEntity;
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
-import earth.terrarium.ad_astra.common.networking.packet.server.MachineInfoPacket;
+import earth.terrarium.ad_astra.common.networking.NetworkHandler;
+import earth.terrarium.ad_astra.common.networking.packet.messages.ClientboundMachineInfoPacket;
 import earth.terrarium.ad_astra.common.registry.ModMenus;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -26,6 +26,6 @@ public class SolarPanelMenu extends AbstractMachineMenu<SolarPanelBlockEntity> {
 
     @Override
     public void syncClientScreen() {
-        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage().getStoredEnergy(), List.of()), this.player);
+        NetworkHandler.CHANNEL.sendToPlayer(new ClientboundMachineInfoPacket(machine.getEnergyStorage().getStoredEnergy(), List.of()), this.player);
     }
 }

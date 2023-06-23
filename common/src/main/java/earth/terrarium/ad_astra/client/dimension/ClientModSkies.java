@@ -4,13 +4,10 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.dimension.renderer.DimensionEffects;
 import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.NotImplementedException;
 
-@Environment(EnvType.CLIENT)
 public class ClientModSkies {
 
     public static void register() {

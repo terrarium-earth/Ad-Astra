@@ -9,8 +9,6 @@ import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer;
 import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer.SkyObject;
 import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer.StarsRenderer;
 import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer.SunsetColour;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
 import net.minecraft.client.GraphicsStatus;
 import net.minecraft.client.Minecraft;
@@ -22,7 +20,6 @@ import org.joml.Vector3f;
 
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
 public class ModSkyRenderer {
 
     private final StarsRenderer starsRenderer;

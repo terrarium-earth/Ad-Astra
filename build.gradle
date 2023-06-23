@@ -9,13 +9,13 @@ plugins {
 }
 
 architectury {
-    minecraft = rootProject.minecraft_version
+    minecraft = minecraft_version
 }
 
 tasks.register("generateDiscordEmbed") {
     doFirst {
         var env = System.getenv()
-        var changelogFile = rootProject.file("changelog.txt")
+        var changelogFile = file("changelog.txt")
 
         var fields = []
 
@@ -68,19 +68,19 @@ allprojects {
     apply plugin: "java"
     apply plugin: "architectury-plugin"
 
-    archivesBaseName = rootProject.archives_base_name
-    version = rootProject.mod_version
-    group = rootProject.maven_group
+    archivesBaseName = archives_base_name
+    version = mod_version
+    group = maven_group
 
     repositories {
+        maven { url = "https://maven.resourcefulbees.com/repository/maven-public/" }
         maven {
-            url "https://cursemaven.com"
+            url = 'https://jitpack.io'
             content {
-                includeGroup "curse.maven"
+                includeGroup 'com.github.LlamaLad7'
+                includeGroup 'com.github.llamalad7.mixinextras'
             }
         }
-        maven { url = "https://maven.resourcefulbees.com/repository/maven-public/" }
-        mavenLocal()
     }
 
     tasks.withType(JavaCompile).tap {
@@ -106,21 +106,21 @@ subprojects {
     }
 
     dependencies {
-        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+        minecraft "com.mojang:minecraft:${minecraft_version}"
         mappings loom.layered() {
             officialMojangMappings()
-//            parchment("org.parchmentmc.data:parchment-$rootProject.minecraft_version:$rootProject.parchment_version@zip")
+//            parchment("org.parchmentmc.data:parchment-$minecraft_version:$parchment_version@zip")
         }
 
         modApi "com.teamresourceful.resourcefullib:resourcefullib-$name-$minecraft_version:$resourcefullib_version"
-        modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-$name-$minecraft_version:$resourcefulconfig_version"
-        modApi "earth.terrarium:botarium-$name-$minecraft_version:$botarium_version"
+        modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-$name-1.20:$resourcefulconfig_version"
+        modApi "earth.terrarium:botarium-$name-1.20:$botarium_version"
     }
 
     var env = System.getenv()
     var modLoader = name
 
-    var changelogFile = rootProject.file("changelog.txt")
+    var changelogFile = file("changelog.txt")
     var changelogText = changelogFile.exists() ? changelogFile.text : ""
 
     if (env.MODRINTH_TOKEN) {
@@ -202,7 +202,7 @@ subprojects {
                     builtBy remapSourcesJar
                 }
 
-                artifactId = "$rootProject.mod_id-$modLoader-$rootProject.minecraft_version"
+                artifactId = "$mod_id-$modLoader-$minecraft_version"
 
                 pom {
                     name = github_name

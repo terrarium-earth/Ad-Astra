@@ -8,8 +8,6 @@ import earth.terrarium.ad_astra.client.ClientPlatformUtils;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -24,7 +22,6 @@ import org.joml.Matrix4f;
 
 import java.awt.*;
 
-@Environment(EnvType.CLIENT)
 public class GuiUtil {
 
     public static final int FIRE_WIDTH = 14;

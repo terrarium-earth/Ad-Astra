@@ -1,4 +1,4 @@
-package earth.terrarium.ad_astra.common.networking.packet.server;
+package earth.terrarium.ad_astra.common.networking.packet.messages;
 
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
@@ -14,9 +14,10 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
-public record MachineInfoPacket(long energy, List<FluidHolder> fluidHolders) implements Packet<MachineInfoPacket> {
+public record ClientboundMachineInfoPacket(long energy,
+                                           List<FluidHolder> fluidHolders) implements Packet<ClientboundMachineInfoPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "machine_info_packet");
+    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "machine_info");
     public static final Handler HANDLER = new Handler();
 
     @Override
@@ -25,13 +26,13 @@ public record MachineInfoPacket(long energy, List<FluidHolder> fluidHolders) imp
     }
 
     @Override
-    public PacketHandler<MachineInfoPacket> getHandler() {
+    public PacketHandler<ClientboundMachineInfoPacket> getHandler() {
         return HANDLER;
     }
 
-    private static class Handler implements PacketHandler<MachineInfoPacket> {
+    private static class Handler implements PacketHandler<ClientboundMachineInfoPacket> {
         @Override
-        public void encode(MachineInfoPacket packet, FriendlyByteBuf buf) {
+        public void encode(ClientboundMachineInfoPacket packet, FriendlyByteBuf buf) {
             buf.writeLong(packet.energy());
             buf.writeCollection(packet.fluidHolders, (buf2, fluid) -> {
                 buf2.writeResourceLocation(BuiltInRegistries.FLUID.getKey(fluid.getFluid()));
@@ -40,12 +41,12 @@ public record MachineInfoPacket(long energy, List<FluidHolder> fluidHolders) imp
         }
 
         @Override
-        public MachineInfoPacket decode(FriendlyByteBuf buf) {
-            return new MachineInfoPacket(buf.readLong(), buf.readList(buf2 -> FluidHooks.newFluidHolder(BuiltInRegistries.FLUID.get(buf2.readResourceLocation()), buf2.readLong(), null)));
+        public ClientboundMachineInfoPacket decode(FriendlyByteBuf buf) {
+            return new ClientboundMachineInfoPacket(buf.readLong(), buf.readList(buf2 -> FluidHooks.newFluidHolder(BuiltInRegistries.FLUID.get(buf2.readResourceLocation()), buf2.readLong(), null)));
         }
 
         @Override
-        public PacketContext handle(MachineInfoPacket packet) {
+        public PacketContext handle(ClientboundMachineInfoPacket packet) {
             return (player, level) -> {
                 if (player.containerMenu instanceof AbstractMachineMenu<?> handler) {
                     handler.setEnergyAmount(packet.energy());

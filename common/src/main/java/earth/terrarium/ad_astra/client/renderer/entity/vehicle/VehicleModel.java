@@ -3,13 +3,11 @@ package earth.terrarium.ad_astra.client.renderer.entity.vehicle;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
 
-@Environment(EnvType.CLIENT)
+
 public class VehicleModel<T extends Vehicle> extends EntityModel<T> {
 
     protected final ModelPart frame;

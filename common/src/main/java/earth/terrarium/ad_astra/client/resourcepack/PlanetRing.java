@@ -2,11 +2,8 @@ package earth.terrarium.ad_astra.client.resourcepack;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;
 
-@Environment(EnvType.CLIENT)
 public record PlanetRing(ResourceLocation galaxy, ResourceLocation solarSystem, ResourceLocation texture, int speed,
                          int scale,
                          double radius) {

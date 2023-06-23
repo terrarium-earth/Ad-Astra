@@ -3,8 +3,6 @@ package earth.terrarium.ad_astra.client.renderer.armor;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import earth.terrarium.ad_astra.common.item.armor.JetSuit;
 import earth.terrarium.ad_astra.common.registry.ModItems;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelPart;
@@ -12,7 +10,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import org.apache.commons.lang3.NotImplementedException;
 
-@Environment(EnvType.CLIENT)
 public class ArmourRenderers {
 
     public static void init() {

@@ -8,8 +8,6 @@ import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexBuffer;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.mixin.client.LevelRendererAccessor;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.CloudStatus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -21,7 +19,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 
-@Environment(EnvType.CLIENT)
 public class VenusCloudRenderer {
     private static final ResourceLocation VENUS_CLOUD_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/sky/venus/clouds.png");
 

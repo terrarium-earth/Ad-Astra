@@ -45,7 +45,6 @@ public class AdAstraClientFabric implements ClientModInitializer {
         AdAstraClient.onRegisterItemRenderers(AdAstraClientFabric::registerItemRenderer);
         ClientModParticles.onRegisterParticles(AdAstraClientFabric::registerParticles);
         AdAstraClient.onAddItemColors(ColorProviderRegistry.ITEM::register);
-        AdAstraClient.onAddBlockColors(ColorProviderRegistry.BLOCK::register);
         registerRenderers();
         initEvents();
         AdAstraClient.onRegisterReloadListeners((id, listener) -> ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new IdentifiableResourceReloadListener() {
