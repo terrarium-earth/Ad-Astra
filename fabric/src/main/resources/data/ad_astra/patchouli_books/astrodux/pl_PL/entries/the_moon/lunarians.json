@@ -1,0 +1,36 @@
+{
+  "name": "Lunarianie",
+  "icon": "ad_astra:moon_stone_bricks",
+  "sortnum": 5,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Lunarianin",
+      "item": "ad_astra:moon_stone_bricks",
+      "text": "Lunarianie to mieszkańcy dużych podziemnych wsi rozsianych po Księżycu. W tych wsiach znajduje się forma obcej rasy, podobnej do ziemskich osadników, którzy nazywają siebie Lunarianami. W przeciwieństwie do swoich ziemskich odpowiedników, Lunarianie nie potrzebują tlenu i potrafią przetrwać w mroźnym środowisku Księżyca."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "ad_astra:lunarian",
+      "default_rotation": 45
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Lunarianie mają inne profesje niż ziemscy osadnicy i oferują materiały charakterystyczne dla danej planety, skafandry kosmiczne i sprzęt do oddychania tlenem."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Wędrujący Handlarz",
+      "item": "ad_astra:lunarian_wandering_trader_spawn_egg",
+      "text": "Wędrujący Handlarze Lunarianie pojawiają się na każdym księżycu i planecie. Posiadają wiele propozycji związanych z rakietami, które mogą uratować ci życie, w tym platformy startowe, tlen, paliwo, eteryczne pochodnie i wodę. Akceptują szmaragdy, które można często znaleźć w różnych strukturach na Księżycu i planetach."
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Wędrujący Handlarz",
+      "entity": "ad_astra:lunarian_wandering_trader",
+      "default_rotation": 45,
+      "scale": 0.8
+    }
+  ]
+}
