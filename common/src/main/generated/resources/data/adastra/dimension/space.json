@@ -1,0 +1,11 @@
+{
+  "type": "adastra:space",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "adastra:space"
+    },
+    "settings": "adastra:space"
+  }
+}

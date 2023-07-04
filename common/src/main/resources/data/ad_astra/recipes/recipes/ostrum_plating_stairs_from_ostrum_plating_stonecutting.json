@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "ad_astra:ostrum_plating"
-  },
-  "result": "ad_astra:ostrum_plating_stairs"
-}

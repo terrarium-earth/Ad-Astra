@@ -1,0 +1,14 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "earth.terrarium.adastra.mixins.forge",
+    "compatibilityLevel": "JAVA_17",
+    "mixins": [
+        "common.CustomGeoBlockItemMixin"
+    ],
+    "client": [
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

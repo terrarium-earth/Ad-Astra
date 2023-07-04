@@ -1,6 +1,8 @@
 {
-  "pack": {
-    "description": "Live long and prosper, Ad Astra!",
-    "pack_format": 9
-  }
+    "pack": {
+        "description": "adastra resources",
+        "pack_format": 12,
+        "forge:resource_pack_format": 12,
+        "forge:data_pack_format": 10
+    }
 }

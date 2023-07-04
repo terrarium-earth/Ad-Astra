@@ -1,0 +1,6 @@
+// 1.20.1	2023-07-04T03:21:05.753349	Registries
+a01ddce420ff2235fcbe262415985c4326d85f83 data/adastra/damage_type/oxygen.json
+f5018f5d74fb5c0b457517413d76c019c0223d46 data/adastra/dimension/space.json
+ab695f43f64233ec98ef374577055ecae0fe20c1 data/adastra/dimension_type/space.json
+ff7166ee247d06154dcffdb5c63807228bcf043d data/adastra/worldgen/biome/space.json
+84e423f0064f0e51ec51c4a3909ca4a6e7a02e12 data/adastra/worldgen/noise_settings/space.json

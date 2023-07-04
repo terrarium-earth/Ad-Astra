@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "ad_astra:block/desh_plating",
-    "side": "ad_astra:block/desh_plating",
-    "top": "ad_astra:block/desh_plating"
-  }
-}

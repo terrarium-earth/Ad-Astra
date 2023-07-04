@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "ad_astra:item/cryo_fuel_bucket"
-  }
-}
