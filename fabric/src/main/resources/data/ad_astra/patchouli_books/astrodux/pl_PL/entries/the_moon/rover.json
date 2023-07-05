@@ -1,0 +1,19 @@
+{
+  "name": "Rover",
+  "icon": "ad_astra:tier_1_rover",
+  "sortnum": 3,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Rover",
+      "item": "ad_astra:tier_1_rover",
+      "text": "Rover to pojazd lądowy zdolny do poruszania się po trudnym terenie księżyców i planet. Jest wyjątkowo szybki, posiada magazyn o pojemności ośmiu przedmiotów i dwa miejsca dla wielu pasażerów. Aby go użyć, wypełnij Rover paliwem (przytrzymaj klawisz shift i umieść wiadra z paliwem w lewym slocie wejściowym)."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "ad_astra:tier_1_rover",
+      "scale": 0.36
+    }
+  ]
+}
