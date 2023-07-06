@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.common.blockentities.HydraulicPressBlockEntity;
 import earth.terrarium.adastra.common.blockentities.OxygenDistributorBlockEntity;
 import earth.terrarium.adastra.common.blockentities.SolarPanelBlockEntity;
 import earth.terrarium.adastra.common.items.base.CustomGeoBlockItem;
@@ -41,6 +42,11 @@ public class ModItems {
         ModBlocks.VESNIUM_SOLAR_PANEL.get(),
         new Item.Properties(),
         SolarPanelBlockEntity.CLOSE));
+
+    public static final RegistryEntry<Item> HYDRAULIC_PRESS = MACHINES.register("hydraulic_press", () -> new CustomGeoBlockItem(
+        ModBlocks.HYDRAULIC_PRESS.get(),
+        new Item.Properties(),
+        HydraulicPressBlockEntity.BONK));
 
     public static final RegistryEntry<Item> BATTERY = MACHINES.register("battery", () -> new BlockItem(ModBlocks.BATTERY.get(), new Item.Properties()));
 

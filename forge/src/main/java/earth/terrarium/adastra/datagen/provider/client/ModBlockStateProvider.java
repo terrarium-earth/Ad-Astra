@@ -22,6 +22,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         basicRenderedBlock(ModBlocks.OXYGEN_DISTRIBUTOR.get());
         basicRenderedBlock(ModBlocks.ETRIONIC_SOLAR_PANEL.get(), ModItemModelProvider.SOLAR_PANEL);
         basicRenderedBlock(ModBlocks.VESNIUM_SOLAR_PANEL.get(), ModItemModelProvider.SOLAR_PANEL);
+        basicRenderedBlock(ModBlocks.HYDRAULIC_PRESS.get(), ModItemModelProvider.SMALL_RENDERED_ITEM);
         batteryBlock((BatteryBlock) ModBlocks.BATTERY.get());
     }
 

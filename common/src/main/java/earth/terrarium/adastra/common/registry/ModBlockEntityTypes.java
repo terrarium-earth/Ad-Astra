@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.BatteryBlockEntity;
+import earth.terrarium.adastra.common.blockentities.HydraulicPressBlockEntity;
 import earth.terrarium.adastra.common.blockentities.OxygenDistributorBlockEntity;
 import earth.terrarium.adastra.common.blockentities.SolarPanelBlockEntity;
 import earth.terrarium.botarium.common.registry.RegistryHelpers;
@@ -27,6 +28,12 @@ public class ModBlockEntityTypes {
             ModBlocks.ETRIONIC_SOLAR_PANEL.get(),
             ModBlocks.VESNIUM_SOLAR_PANEL.get()
         ));
+
+    public static final RegistryEntry<BlockEntityType<HydraulicPressBlockEntity>> HYDRAULIC_PRESS = BLOCK_ENTITY_TYPES.register(
+        "hydraulic_press",
+        () -> RegistryHelpers.createBlockEntityType(
+            HydraulicPressBlockEntity::new,
+            ModBlocks.HYDRAULIC_PRESS.get()));
 
     public static final RegistryEntry<BlockEntityType<BatteryBlockEntity>> BATTERY = BLOCK_ENTITY_TYPES.register(
         "battery",

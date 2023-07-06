@@ -10,6 +10,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public static final ResourceLocation RENDERED_ITEM = new ResourceLocation(AdAstra.MOD_ID, "item/rendered_item");
+    public static final ResourceLocation SMALL_RENDERED_ITEM = new ResourceLocation(AdAstra.MOD_ID, "item/small_rendered_item");
     public static final ResourceLocation SOLAR_PANEL = new ResourceLocation(AdAstra.MOD_ID, "item/solar_panel");
 
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {

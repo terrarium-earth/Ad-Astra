@@ -2,8 +2,8 @@ package earth.terrarium.adastra.common.systems;
 
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
-import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.planets.AdAstraData;
+import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
 import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
