@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "facing=east,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace",
+      "y": 270
+    },
+    "facing=east,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace",
+      "y": 270
+    },
+    "facing=east,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace_on",
+      "y": 270
+    },
+    "facing=east,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace_on",
+      "y": 270
+    },
+    "facing=east,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace",
+      "y": 270
+    },
+    "facing=east,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace",
+      "y": 270
+    },
+    "facing=east,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace_on",
+      "y": 270
+    },
+    "facing=east,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace_on",
+      "y": 270
+    },
+    "facing=north,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace",
+      "y": 180
+    },
+    "facing=north,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace",
+      "y": 180
+    },
+    "facing=north,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace_on",
+      "y": 180
+    },
+    "facing=north,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace_on",
+      "y": 180
+    },
+    "facing=north,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace",
+      "y": 180
+    },
+    "facing=north,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace",
+      "y": 180
+    },
+    "facing=north,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace_on",
+      "y": 180
+    },
+    "facing=north,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace_on",
+      "y": 180
+    },
+    "facing=south,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace"
+    },
+    "facing=south,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace"
+    },
+    "facing=south,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace_on"
+    },
+    "facing=south,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace_on"
+    },
+    "facing=south,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace"
+    },
+    "facing=south,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace"
+    },
+    "facing=south,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace_on"
+    },
+    "facing=south,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace_on"
+    },
+    "facing=west,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace",
+      "y": 90
+    },
+    "facing=west,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace",
+      "y": 90
+    },
+    "facing=west,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace_on",
+      "y": 90
+    },
+    "facing=west,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace_on",
+      "y": 90
+    },
+    "facing=west,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace",
+      "y": 90
+    },
+    "facing=west,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace",
+      "y": 90
+    },
+    "facing=west,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/etrionic_blast_furnace_on",
+      "y": 90
+    },
+    "facing=west,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/etrionic_blast_furnace_on",
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "adastra:block/etrionic_blast_furnace_base",
+  "textures": {
+    "0": "adastra:block/etrionic_blast_furnace/etrionic_blast_furnace",
+    "particle": "adastra:block/etrionic_blast_furnace/etrionic_blast_furnace"
+  }
+}

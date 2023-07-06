@@ -19,6 +19,8 @@ public class ModBlocks {
 
     public static final RegistryEntry<Block> BATTERY = MACHINES.register("battery", () -> new BatteryBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
+    public static final RegistryEntry<Block> ETRIONIC_BLAST_FURNACE = MACHINES.register("etreonic_blast_furnace", () -> new EtrionicBlastFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+
     public static final RegistryEntry<Block> ETRIONIC_SOLAR_PANEL = MACHINES.register("etreonic_solar_panel", () -> new SolarPanelBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK), 32, 100000));
 
     public static final RegistryEntry<Block> VESNIUM_SOLAR_PANEL = MACHINES.register("vesnium_solar_panel", () -> new SolarPanelBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK), 128, 1000000));

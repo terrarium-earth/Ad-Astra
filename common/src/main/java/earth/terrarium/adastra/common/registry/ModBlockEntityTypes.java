@@ -43,4 +43,10 @@ public class ModBlockEntityTypes {
         () -> RegistryHelpers.createBlockEntityType(
             BatteryBlockEntity::new,
             ModBlocks.BATTERY.get()));
+
+    public static final RegistryEntry<BlockEntityType<EtrionicBlastFurnaceBlockEntity>> ETRIONIC_BLAST_FURNACE = BLOCK_ENTITY_TYPES.register(
+        "etreonic_blast_furnace",
+        () -> RegistryHelpers.createBlockEntityType(
+            EtrionicBlastFurnaceBlockEntity::new,
+            ModBlocks.ETRIONIC_BLAST_FURNACE.get()));
 }

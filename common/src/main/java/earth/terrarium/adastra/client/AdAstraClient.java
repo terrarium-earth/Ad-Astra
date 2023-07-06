@@ -10,6 +10,8 @@ import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.botarium.client.ClientHooks;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
@@ -31,6 +33,8 @@ public class AdAstraClient {
     }
 
     private static void registerBlockRenderTypes() {
+        ClientHooks.setRenderLayer(ModBlocks.BATTERY.get(), RenderType.cutout());
+        ClientHooks.setRenderLayer(ModBlocks.ETRIONIC_BLAST_FURNACE.get(), RenderType.cutout());
     }
 
     private static void registerBlockEntityRenderers() {

@@ -3,6 +3,7 @@ package earth.terrarium.adastra.datagen.provider.client;
 
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blocks.BatteryBlock;
+import earth.terrarium.adastra.common.blocks.EtrionicBlastFurnaceBlock;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
@@ -26,6 +27,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         basicRenderedBlock(ModBlocks.HYDRAULIC_PRESS.get(), ModItemModelProvider.SMALL_RENDERED_ITEM);
         basicRenderedBlock(ModBlocks.STEAM_GENERATOR.get(), ModItemModelProvider.SMALL_RENDERED_ITEM, modLoc("block/steam_generator/steam_generator"));
         batteryBlock((BatteryBlock) ModBlocks.BATTERY.get());
+        etrionicBlastFurnaceBlock((EtrionicBlastFurnaceBlock) ModBlocks.ETRIONIC_BLAST_FURNACE.get());
     }
 
     public void basicRenderedBlock(Block block) {
@@ -53,6 +55,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .texture("0", modLoc("block/battery/battery_%s".formatted(charge * 25)))
                     .texture("particle", modLoc("block/battery/battery_%s".formatted(charge * 25)))
                     .parent(models().getExistingFile(modLoc("block/battery"))))
+                .rotationY((int) facing.toYRot())
+                .build();
+        });
+    }
+
+    public void etrionicBlastFurnaceBlock(EtrionicBlastFurnaceBlock block) {
+        getVariantBuilder(block).forAllStates(state -> {
+            Direction facing = state.getValue(BatteryBlock.FACING);
+            boolean lit = state.getValue(EtrionicBlastFurnaceBlock.LIT);
+            ResourceLocation texture = lit ? modLoc("block/etrionic_blast_furnace/etrionic_blast_furnace_on") : modLoc("block/etrionic_blast_furnace/etrionic_blast_furnace");
+
+            simpleBlockItem(block, models().getBuilder("block/etrionic_blast_furnace_on"));
+            return ConfiguredModel.builder()
+                .modelFile(models().getBuilder("etrionic_blast_furnace" + (lit ? "_on" : ""))
+                    .texture("0", texture)
+                    .texture("particle", texture)
+                    .parent(models().getExistingFile(modLoc("block/etrionic_blast_furnace_base"))))
                 .rotationY((int) facing.toYRot())
                 .build();
         });
