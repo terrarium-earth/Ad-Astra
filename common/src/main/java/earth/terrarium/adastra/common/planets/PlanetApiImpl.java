@@ -14,7 +14,7 @@ public class PlanetApiImpl implements PlanetApi {
 
     @Override
     public boolean isPlanet(ResourceKey<Level> level) {
-        return PlanetData.isPlanet(level);
+        return AdAstraData.isPlanet(level);
     }
 
     @Override
@@ -44,6 +44,6 @@ public class PlanetApiImpl implements PlanetApi {
 
     @Override
     public int getSolarPower(ResourceKey<Level> level) {
-        return Optionull.mapOrDefault(PlanetData.getPlanet(level), Planet::solarPower, PlanetConstants.EARTH_SOLAR_POWER);
+        return Optionull.mapOrDefault(AdAstraData.getPlanet(level), Planet::solarPower, PlanetConstants.EARTH_SOLAR_POWER);
     }
 }

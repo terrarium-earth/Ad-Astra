@@ -21,10 +21,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PlanetData extends SimpleJsonResourceReloadListener {
+public class AdAstraData extends SimpleJsonResourceReloadListener {
     private static final Map<ResourceKey<Level>, Planet> PLANETS = new HashMap<>();
 
-    public PlanetData() {
+    public AdAstraData() {
         super(Constants.GSON, "planets");
     }
 

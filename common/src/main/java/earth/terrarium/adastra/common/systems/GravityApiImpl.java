@@ -4,7 +4,7 @@ import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
 import earth.terrarium.adastra.common.planets.Planet;
-import earth.terrarium.adastra.common.planets.PlanetData;
+import earth.terrarium.adastra.common.planets.AdAstraData;
 import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,7 +24,7 @@ public class GravityApiImpl implements GravityApi {
 
     @Override
     public float getGravity(ResourceKey<Level> level) {
-        return Optionull.mapOrDefault(PlanetData.getPlanet(level), Planet::gravity, PlanetConstants.EARTH_GRAVITY) / PlanetConstants.EARTH_GRAVITY;
+        return Optionull.mapOrDefault(AdAstraData.getPlanet(level), Planet::gravity, PlanetConstants.EARTH_GRAVITY) / PlanetConstants.EARTH_GRAVITY;
     }
 
     @Override

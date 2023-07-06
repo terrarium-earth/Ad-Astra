@@ -37,5 +37,9 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.ITEM_GROUP.getString(), "Ad Astra");
         add(ConstantComponents.DEATH_OXYGEN.getString(), "%1$s couldn't breathe anymore");
         add(ConstantComponents.DEATH_OXYGEN_PLAYER.getString(), "%1$s lost their breath whilst trying to escape %2$s");
+
+        add("text.adastra.oxygen", "%s");
+        add("text.adastra.temperature", "%s °C");
+        add("text.adastra.gravity", "%s m/s²");
     }
 }

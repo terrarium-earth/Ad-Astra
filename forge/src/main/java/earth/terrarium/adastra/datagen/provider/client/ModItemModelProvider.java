@@ -4,6 +4,7 @@ package earth.terrarium.adastra.datagen.provider.client;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.registry.ModBlocks;
+import earth.terrarium.adastra.common.registry.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -21,6 +22,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         getBuilder(ModBlocks.OXYGEN_DISTRIBUTOR.getId().getPath())
             .parent(getExistingFile(RENDERED_ITEM));
+        basicItem(ModItems.TI_69.get());
     }
 
     private void createBlockItem(RegistryEntry<Block> item) {

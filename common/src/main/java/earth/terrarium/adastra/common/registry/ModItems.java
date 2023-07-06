@@ -32,4 +32,6 @@ public class ModItems {
         OxygenDistributorBlockEntity.SPIN));
 
     public static final RegistryEntry<Item> BATTERY = MACHINES.register("battery", () -> new BlockItem(ModBlocks.BATTERY.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> TI_69 = MACHINES.register("ti_69", () -> new Item(new Item.Properties()));
 }

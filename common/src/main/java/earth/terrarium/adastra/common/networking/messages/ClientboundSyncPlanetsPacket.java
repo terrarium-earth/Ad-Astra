@@ -5,7 +5,7 @@ import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.planets.Planet;
-import earth.terrarium.adastra.common.planets.PlanetData;
+import earth.terrarium.adastra.common.planets.AdAstraData;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -34,18 +34,18 @@ public record ClientboundSyncPlanetsPacket(
     private static class Handler implements PacketHandler<ClientboundSyncPlanetsPacket> {
         @Override
         public void encode(ClientboundSyncPlanetsPacket packet, FriendlyByteBuf buf) {
-            PlanetData.encodePlanets(buf);
+            AdAstraData.encodePlanets(buf);
         }
 
         @Override
         public ClientboundSyncPlanetsPacket decode(FriendlyByteBuf buf) {
-            return new ClientboundSyncPlanetsPacket(PlanetData.decodePlanets(buf).stream()
+            return new ClientboundSyncPlanetsPacket(AdAstraData.decodePlanets(buf).stream()
                 .collect(Collectors.toMap(Planet::dimension, Function.identity())));
         }
 
         @Override
         public PacketContext handle(ClientboundSyncPlanetsPacket packet) {
-            return (player, level) -> PlanetData.setPlanets(packet.planets);
+            return (player, level) -> AdAstraData.setPlanets(packet.planets);
         }
     }
 }

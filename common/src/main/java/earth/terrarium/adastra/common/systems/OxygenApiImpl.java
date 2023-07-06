@@ -3,7 +3,7 @@ package earth.terrarium.adastra.common.systems;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
 import earth.terrarium.adastra.common.planets.Planet;
-import earth.terrarium.adastra.common.planets.PlanetData;
+import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
 import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
@@ -21,7 +21,7 @@ public class OxygenApiImpl implements OxygenApi {
 
     @Override
     public boolean hasOxygen(ResourceKey<Level> level) {
-        return Optionull.mapOrDefault(PlanetData.getPlanet(level), Planet::oxygen, true);
+        return Optionull.mapOrDefault(AdAstraData.getPlanet(level), Planet::oxygen, true);
     }
 
     @Override

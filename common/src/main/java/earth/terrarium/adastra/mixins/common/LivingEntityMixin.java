@@ -5,6 +5,8 @@ import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
 import earth.terrarium.adastra.client.AdAstraClient;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
+import earth.terrarium.adastra.common.handlers.PlanetData;
+import net.minecraft.Optionull;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
@@ -45,7 +47,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (entity instanceof Player player) {
             if (player.getAbilities().flying) return;
             if (level().isClientSide()) {
-                gravity = AdAstraClient.localGravity;
+                gravity = Optionull.mapOrDefault(AdAstraClient.localData, PlanetData::gravity, PlanetConstants.EARTH_GRAVITY);
             }
         }
 

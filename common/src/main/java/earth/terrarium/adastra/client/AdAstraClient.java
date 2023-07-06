@@ -2,7 +2,7 @@ package earth.terrarium.adastra.client;
 
 import earth.terrarium.adastra.client.renderers.blocks.machines.OxygenDistributorRenderer;
 import earth.terrarium.adastra.client.renderers.items.base.CustomGeoItemRenderer;
-import earth.terrarium.adastra.common.constants.PlanetConstants;
+import earth.terrarium.adastra.common.handlers.PlanetData;
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.botarium.client.ClientHooks;
@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
 
 import java.util.HashMap;
@@ -17,7 +18,9 @@ import java.util.Map;
 
 public class AdAstraClient {
     private static final Map<Item, BlockEntityWithoutLevelRenderer> ITEM_RENDERERS = new HashMap<>();
-    public static float localGravity = PlanetConstants.EARTH_GRAVITY;
+
+    @Nullable
+    public static PlanetData localData;
 
     public static void init() {
         registerBlockRenderTypes();
