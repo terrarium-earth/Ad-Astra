@@ -11,8 +11,11 @@ dependencies {
 
     modImplementation(group = "net.fabricmc", name = "fabric-loader", version = fabricLoaderVersion)
     modApi(group = "net.fabricmc.fabric-api", name = "fabric-api", version = "$fabricApiVersion+$minecraftVersion")
-    "modApi"(group = "com.terraformersmc", name = "modmenu", version = modMenuVersion)
-    "modLocalRuntime"(group = "me.shedaniel", name = "RoughlyEnoughItems-fabric", version = reiVersion)
+    modApi(group = "com.terraformersmc", name = "modmenu", version = modMenuVersion)
+    modLocalRuntime(group = "me.shedaniel", name = "RoughlyEnoughItems-fabric", version = reiVersion)
+
+    modLocalRuntime(group = "RebornCore", name = "RebornCore-1.20", version = "5.8.3")
+    modLocalRuntime(group = "TechReborn", name = "TechReborn-1.20", version = "5.8.3")
 }
 
 tasks.processResources {

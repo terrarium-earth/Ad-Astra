@@ -111,7 +111,7 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
         this.resetLastDistributedBlocks(positions);
 
         for (BlockPos position : positions) {
-            ModUtils.sendParticles(level, ParticleTypes.FLAME, position.getX(), position.getY(), position.getZ(), 1, 0, 0, 0, 0);
+//            ModUtils.sendParticles(level, ParticleTypes.FLAME, position.getX(), position.getY(), position.getZ(), 1, 0, 0, 0, 0);
             OxygenApi.API.addOxygen(level, position);
         }
     }

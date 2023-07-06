@@ -1,10 +1,12 @@
 package earth.terrarium.adastra.datagen.provider.client;
 
 
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -17,8 +19,13 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        ModBlocks.MACHINES.getEntries().forEach(block ->
-            getBuilder(block.getId().getPath())
-                .parent(getExistingFile(RENDERED_ITEM)));
+        getBuilder(ModBlocks.OXYGEN_DISTRIBUTOR.getId().getPath())
+            .parent(getExistingFile(RENDERED_ITEM));
+    }
+
+    private void createBlockItem(RegistryEntry<Block> item) {
+        ResourceLocation id = item.getId();
+        getBuilder(id.getPath())
+            .parent(getExistingFile(modLoc("block/" + id.getPath())));
     }
 }

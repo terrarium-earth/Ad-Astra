@@ -1,4 +1,5 @@
 {
+  "block.adastra.battery": "Battery",
   "block.adastra.oxygen_distributor": "Oxygen Distributor",
   "death.attack.oxygen": "%1$s couldn't breathe anymore",
   "death.attack.oxygen.player": "%1$s lost their breath whilst trying to escape %2$s",

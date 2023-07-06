@@ -1,0 +1,604 @@
+{
+  "variants": {
+    "charge=0,facing=east,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_0",
+      "y": 270
+    },
+    "charge=0,facing=east,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_0",
+      "y": 270
+    },
+    "charge=0,facing=east,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_0",
+      "y": 270
+    },
+    "charge=0,facing=east,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_0",
+      "y": 270
+    },
+    "charge=0,facing=east,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_0",
+      "y": 270
+    },
+    "charge=0,facing=east,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_0",
+      "y": 270
+    },
+    "charge=0,facing=east,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_0",
+      "y": 270
+    },
+    "charge=0,facing=east,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_0",
+      "y": 270
+    },
+    "charge=0,facing=north,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_0",
+      "y": 180
+    },
+    "charge=0,facing=north,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_0",
+      "y": 180
+    },
+    "charge=0,facing=north,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_0",
+      "y": 180
+    },
+    "charge=0,facing=north,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_0",
+      "y": 180
+    },
+    "charge=0,facing=north,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_0",
+      "y": 180
+    },
+    "charge=0,facing=north,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_0",
+      "y": 180
+    },
+    "charge=0,facing=north,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_0",
+      "y": 180
+    },
+    "charge=0,facing=north,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_0",
+      "y": 180
+    },
+    "charge=0,facing=south,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_0"
+    },
+    "charge=0,facing=south,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_0"
+    },
+    "charge=0,facing=south,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_0"
+    },
+    "charge=0,facing=south,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_0"
+    },
+    "charge=0,facing=south,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_0"
+    },
+    "charge=0,facing=south,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_0"
+    },
+    "charge=0,facing=south,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_0"
+    },
+    "charge=0,facing=south,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_0"
+    },
+    "charge=0,facing=west,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_0",
+      "y": 90
+    },
+    "charge=0,facing=west,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_0",
+      "y": 90
+    },
+    "charge=0,facing=west,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_0",
+      "y": 90
+    },
+    "charge=0,facing=west,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_0",
+      "y": 90
+    },
+    "charge=0,facing=west,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_0",
+      "y": 90
+    },
+    "charge=0,facing=west,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_0",
+      "y": 90
+    },
+    "charge=0,facing=west,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_0",
+      "y": 90
+    },
+    "charge=0,facing=west,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_0",
+      "y": 90
+    },
+    "charge=1,facing=east,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_25",
+      "y": 270
+    },
+    "charge=1,facing=east,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_25",
+      "y": 270
+    },
+    "charge=1,facing=east,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_25",
+      "y": 270
+    },
+    "charge=1,facing=east,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_25",
+      "y": 270
+    },
+    "charge=1,facing=east,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_25",
+      "y": 270
+    },
+    "charge=1,facing=east,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_25",
+      "y": 270
+    },
+    "charge=1,facing=east,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_25",
+      "y": 270
+    },
+    "charge=1,facing=east,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_25",
+      "y": 270
+    },
+    "charge=1,facing=north,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_25",
+      "y": 180
+    },
+    "charge=1,facing=north,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_25",
+      "y": 180
+    },
+    "charge=1,facing=north,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_25",
+      "y": 180
+    },
+    "charge=1,facing=north,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_25",
+      "y": 180
+    },
+    "charge=1,facing=north,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_25",
+      "y": 180
+    },
+    "charge=1,facing=north,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_25",
+      "y": 180
+    },
+    "charge=1,facing=north,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_25",
+      "y": 180
+    },
+    "charge=1,facing=north,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_25",
+      "y": 180
+    },
+    "charge=1,facing=south,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_25"
+    },
+    "charge=1,facing=south,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_25"
+    },
+    "charge=1,facing=south,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_25"
+    },
+    "charge=1,facing=south,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_25"
+    },
+    "charge=1,facing=south,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_25"
+    },
+    "charge=1,facing=south,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_25"
+    },
+    "charge=1,facing=south,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_25"
+    },
+    "charge=1,facing=south,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_25"
+    },
+    "charge=1,facing=west,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_25",
+      "y": 90
+    },
+    "charge=1,facing=west,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_25",
+      "y": 90
+    },
+    "charge=1,facing=west,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_25",
+      "y": 90
+    },
+    "charge=1,facing=west,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_25",
+      "y": 90
+    },
+    "charge=1,facing=west,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_25",
+      "y": 90
+    },
+    "charge=1,facing=west,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_25",
+      "y": 90
+    },
+    "charge=1,facing=west,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_25",
+      "y": 90
+    },
+    "charge=1,facing=west,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_25",
+      "y": 90
+    },
+    "charge=2,facing=east,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_50",
+      "y": 270
+    },
+    "charge=2,facing=east,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_50",
+      "y": 270
+    },
+    "charge=2,facing=east,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_50",
+      "y": 270
+    },
+    "charge=2,facing=east,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_50",
+      "y": 270
+    },
+    "charge=2,facing=east,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_50",
+      "y": 270
+    },
+    "charge=2,facing=east,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_50",
+      "y": 270
+    },
+    "charge=2,facing=east,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_50",
+      "y": 270
+    },
+    "charge=2,facing=east,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_50",
+      "y": 270
+    },
+    "charge=2,facing=north,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_50",
+      "y": 180
+    },
+    "charge=2,facing=north,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_50",
+      "y": 180
+    },
+    "charge=2,facing=north,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_50",
+      "y": 180
+    },
+    "charge=2,facing=north,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_50",
+      "y": 180
+    },
+    "charge=2,facing=north,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_50",
+      "y": 180
+    },
+    "charge=2,facing=north,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_50",
+      "y": 180
+    },
+    "charge=2,facing=north,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_50",
+      "y": 180
+    },
+    "charge=2,facing=north,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_50",
+      "y": 180
+    },
+    "charge=2,facing=south,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_50"
+    },
+    "charge=2,facing=south,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_50"
+    },
+    "charge=2,facing=south,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_50"
+    },
+    "charge=2,facing=south,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_50"
+    },
+    "charge=2,facing=south,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_50"
+    },
+    "charge=2,facing=south,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_50"
+    },
+    "charge=2,facing=south,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_50"
+    },
+    "charge=2,facing=south,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_50"
+    },
+    "charge=2,facing=west,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_50",
+      "y": 90
+    },
+    "charge=2,facing=west,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_50",
+      "y": 90
+    },
+    "charge=2,facing=west,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_50",
+      "y": 90
+    },
+    "charge=2,facing=west,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_50",
+      "y": 90
+    },
+    "charge=2,facing=west,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_50",
+      "y": 90
+    },
+    "charge=2,facing=west,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_50",
+      "y": 90
+    },
+    "charge=2,facing=west,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_50",
+      "y": 90
+    },
+    "charge=2,facing=west,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_50",
+      "y": 90
+    },
+    "charge=3,facing=east,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_75",
+      "y": 270
+    },
+    "charge=3,facing=east,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_75",
+      "y": 270
+    },
+    "charge=3,facing=east,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_75",
+      "y": 270
+    },
+    "charge=3,facing=east,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_75",
+      "y": 270
+    },
+    "charge=3,facing=east,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_75",
+      "y": 270
+    },
+    "charge=3,facing=east,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_75",
+      "y": 270
+    },
+    "charge=3,facing=east,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_75",
+      "y": 270
+    },
+    "charge=3,facing=east,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_75",
+      "y": 270
+    },
+    "charge=3,facing=north,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_75",
+      "y": 180
+    },
+    "charge=3,facing=north,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_75",
+      "y": 180
+    },
+    "charge=3,facing=north,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_75",
+      "y": 180
+    },
+    "charge=3,facing=north,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_75",
+      "y": 180
+    },
+    "charge=3,facing=north,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_75",
+      "y": 180
+    },
+    "charge=3,facing=north,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_75",
+      "y": 180
+    },
+    "charge=3,facing=north,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_75",
+      "y": 180
+    },
+    "charge=3,facing=north,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_75",
+      "y": 180
+    },
+    "charge=3,facing=south,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_75"
+    },
+    "charge=3,facing=south,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_75"
+    },
+    "charge=3,facing=south,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_75"
+    },
+    "charge=3,facing=south,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_75"
+    },
+    "charge=3,facing=south,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_75"
+    },
+    "charge=3,facing=south,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_75"
+    },
+    "charge=3,facing=south,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_75"
+    },
+    "charge=3,facing=south,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_75"
+    },
+    "charge=3,facing=west,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_75",
+      "y": 90
+    },
+    "charge=3,facing=west,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_75",
+      "y": 90
+    },
+    "charge=3,facing=west,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_75",
+      "y": 90
+    },
+    "charge=3,facing=west,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_75",
+      "y": 90
+    },
+    "charge=3,facing=west,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_75",
+      "y": 90
+    },
+    "charge=3,facing=west,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_75",
+      "y": 90
+    },
+    "charge=3,facing=west,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_75",
+      "y": 90
+    },
+    "charge=3,facing=west,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_75",
+      "y": 90
+    },
+    "charge=4,facing=east,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_100",
+      "y": 270
+    },
+    "charge=4,facing=east,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_100",
+      "y": 270
+    },
+    "charge=4,facing=east,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_100",
+      "y": 270
+    },
+    "charge=4,facing=east,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_100",
+      "y": 270
+    },
+    "charge=4,facing=east,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_100",
+      "y": 270
+    },
+    "charge=4,facing=east,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_100",
+      "y": 270
+    },
+    "charge=4,facing=east,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_100",
+      "y": 270
+    },
+    "charge=4,facing=east,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_100",
+      "y": 270
+    },
+    "charge=4,facing=north,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_100",
+      "y": 180
+    },
+    "charge=4,facing=north,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_100",
+      "y": 180
+    },
+    "charge=4,facing=north,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_100",
+      "y": 180
+    },
+    "charge=4,facing=north,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_100",
+      "y": 180
+    },
+    "charge=4,facing=north,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_100",
+      "y": 180
+    },
+    "charge=4,facing=north,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_100",
+      "y": 180
+    },
+    "charge=4,facing=north,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_100",
+      "y": 180
+    },
+    "charge=4,facing=north,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_100",
+      "y": 180
+    },
+    "charge=4,facing=south,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_100"
+    },
+    "charge=4,facing=south,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_100"
+    },
+    "charge=4,facing=south,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_100"
+    },
+    "charge=4,facing=south,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_100"
+    },
+    "charge=4,facing=south,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_100"
+    },
+    "charge=4,facing=south,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_100"
+    },
+    "charge=4,facing=south,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_100"
+    },
+    "charge=4,facing=south,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_100"
+    },
+    "charge=4,facing=west,half=lower,lit=false,powered=false": {
+      "model": "adastra:block/battery_100",
+      "y": 90
+    },
+    "charge=4,facing=west,half=lower,lit=false,powered=true": {
+      "model": "adastra:block/battery_100",
+      "y": 90
+    },
+    "charge=4,facing=west,half=lower,lit=true,powered=false": {
+      "model": "adastra:block/battery_100",
+      "y": 90
+    },
+    "charge=4,facing=west,half=lower,lit=true,powered=true": {
+      "model": "adastra:block/battery_100",
+      "y": 90
+    },
+    "charge=4,facing=west,half=upper,lit=false,powered=false": {
+      "model": "adastra:block/battery_100",
+      "y": 90
+    },
+    "charge=4,facing=west,half=upper,lit=false,powered=true": {
+      "model": "adastra:block/battery_100",
+      "y": 90
+    },
+    "charge=4,facing=west,half=upper,lit=true,powered=false": {
+      "model": "adastra:block/battery_100",
+      "y": 90
+    },
+    "charge=4,facing=west,half=upper,lit=true,powered=true": {
+      "model": "adastra:block/battery_100",
+      "y": 90
+    }
+  }
+}

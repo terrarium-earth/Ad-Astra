@@ -78,7 +78,8 @@ public class OxygenDistributorBlock extends MachineBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, POWERED, LIT, FACE);
+        super.createBlockStateDefinition(builder);
+        builder.add(FACE);
     }
 
     @Nullable

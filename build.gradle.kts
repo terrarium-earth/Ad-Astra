@@ -26,7 +26,6 @@ subprojects {
 
     configure<LoomGradleExtensionAPI> {
         silentMojangMappingsLicense()
-        enableTransitiveAccessWideners.set(true)
     }
 
     repositories {

@@ -5,12 +5,12 @@ issueTrackerURL = "https://github.com/terrarium-earth/ad-astra/issues"
 
 [[mods]]
 modId = "adastra"
-version = "${file.jarVersion}"
+version = "${version}"
 displayName = "Ad Astra"
 displayURL = "https://modrinth.com/mod/ad-astra"
 logoFile = "icon.png"
 authors = "Alex Nijjar"
-credits = "CodexAdrian, Facu, Fizz, ThatGravyBoat"
+credits = "CodexAdrian, Facu, Fizz, MsRandom, ThatGravyBoat"
 description = "Live long and prosper, Ad Astra!"
 
 [[dependencies.adastra]]

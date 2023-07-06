@@ -9,6 +9,7 @@ import earth.terrarium.adastra.common.blockentities.OxygenDistributorBlockEntity
 import earth.terrarium.adastra.common.items.base.CustomGeoBlockItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -29,4 +30,6 @@ public class ModItems {
         ModBlocks.OXYGEN_DISTRIBUTOR.get(),
         new Item.Properties(),
         OxygenDistributorBlockEntity.SPIN));
+
+    public static final RegistryEntry<Item> BATTERY = MACHINES.register("battery", () -> new BlockItem(ModBlocks.BATTERY.get(), new Item.Properties()));
 }

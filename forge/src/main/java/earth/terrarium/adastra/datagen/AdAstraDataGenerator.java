@@ -27,8 +27,8 @@ public final class AdAstraDataGenerator {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         generator.addProvider(event.includeClient(), new ModLangProvider(packOutput));
-        generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
 
         generator.addProvider(event.includeServer(), new ModRegistryProvider(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new ModPlanetProvider(packOutput));

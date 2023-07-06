@@ -38,8 +38,8 @@ public abstract class BasicEntityBlock extends BaseEntityBlock {
     }
 
     public BlockEntityType<?> entity(BlockState state) {
-        if (entity == null) {
-            entity = BLOCK_TO_ENTITY.apply(state.getBlock());
+        if (this.entity == null) {
+            this.entity = BLOCK_TO_ENTITY.apply(state.getBlock());
         }
         return this.entity;
     }

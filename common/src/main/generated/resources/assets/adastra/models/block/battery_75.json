@@ -1,0 +1,7 @@
+{
+  "parent": "adastra:block/battery",
+  "textures": {
+    "0": "adastra:block/battery/battery_75",
+    "particle": "adastra:block/battery/battery_75"
+  }
+}
