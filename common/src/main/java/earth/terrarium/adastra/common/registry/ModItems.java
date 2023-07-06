@@ -6,6 +6,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.OxygenDistributorBlockEntity;
+import earth.terrarium.adastra.common.blockentities.SolarPanelBlockEntity;
 import earth.terrarium.adastra.common.items.base.CustomGeoBlockItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -30,6 +31,16 @@ public class ModItems {
         ModBlocks.OXYGEN_DISTRIBUTOR.get(),
         new Item.Properties(),
         OxygenDistributorBlockEntity.SPIN));
+
+    public static final RegistryEntry<Item> ETRIONIC_SOLAR_PANEL = MACHINES.register("etreonic_solar_panel", () -> new CustomGeoBlockItem(
+        ModBlocks.ETRIONIC_SOLAR_PANEL.get(),
+        new Item.Properties(),
+        SolarPanelBlockEntity.CLOSE));
+
+    public static final RegistryEntry<Item> VESNIUM_SOLAR_PANEL = MACHINES.register("vesnium_solar_panel", () -> new CustomGeoBlockItem(
+        ModBlocks.VESNIUM_SOLAR_PANEL.get(),
+        new Item.Properties(),
+        SolarPanelBlockEntity.CLOSE));
 
     public static final RegistryEntry<Item> BATTERY = MACHINES.register("battery", () -> new BlockItem(ModBlocks.BATTERY.get(), new Item.Properties()));
 

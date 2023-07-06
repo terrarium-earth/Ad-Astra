@@ -54,9 +54,9 @@ public class Ti69Renderer {
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
         poseStack.scale(0.5F, 0.5F, 0.5F);
-        poseStack.translate(-0.5F, -0.6F, 0.0F);
+        poseStack.translate(-0.5F, -0.65F, 0.0F);
         poseStack.scale(0.0078125F, 0.0078125F, 0.0078125F);
-        poseStack.scale(0.63f, 0.99f, 1);
+        poseStack.scale(0.63f, 1.06f, 1);
         VertexConsumer vertex = buffer.getBuffer(RenderType.text(TEXTURE));
         Matrix4f matrix4f = poseStack.last().pose();
         vertex.vertex(matrix4f, -7.0F, 135.0F, 0.0F).color(255, 255, 255, 255).uv(0.0F, 1.0F).uv2(combinedLight).endVertex();

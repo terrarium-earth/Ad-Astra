@@ -17,10 +17,10 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
-public class OxygenDistributorRenderer extends GeoBlockRenderer<OxygenDistributorBlockEntity> {
+public class OxygenDistributorBlockEntityRenderer extends GeoBlockRenderer<OxygenDistributorBlockEntity> {
     public static final ResourceLocation MODEL = new ResourceLocation(AdAstra.MOD_ID, "oxygen_distributor");
 
-    public OxygenDistributorRenderer() {
+    public OxygenDistributorBlockEntityRenderer() {
         super(new DefaultedBlockGeoModel<>(MODEL));
     }
 

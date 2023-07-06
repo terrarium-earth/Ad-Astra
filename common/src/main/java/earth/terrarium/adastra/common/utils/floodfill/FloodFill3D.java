@@ -60,7 +60,9 @@ public final class FloodFill3D {
     private static boolean isFaceSturdy(VoxelShape collisionShape, Direction dir) {
         VoxelShape faceShape = collisionShape.getFaceShape(dir);
         if (faceShape.isEmpty()) return true;
-        return checkBounds(faceShape.toAabbs().get(0), dir.getAxis());
+        var aabbs = faceShape.toAabbs();
+        if (aabbs.isEmpty()) return true;
+        return checkBounds(aabbs.get(0), dir.getAxis());
     }
 
     private static boolean checkBounds(AABB bounds, Direction.Axis axis) {

@@ -6,6 +6,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.BatteryBlockEntity;
 import earth.terrarium.adastra.common.blockentities.OxygenDistributorBlockEntity;
+import earth.terrarium.adastra.common.blockentities.SolarPanelBlockEntity;
 import earth.terrarium.botarium.common.registry.RegistryHelpers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -18,6 +19,14 @@ public class ModBlockEntityTypes {
         () -> RegistryHelpers.createBlockEntityType(
             OxygenDistributorBlockEntity::new,
             ModBlocks.OXYGEN_DISTRIBUTOR.get()));
+
+    public static final RegistryEntry<BlockEntityType<SolarPanelBlockEntity>> SOLAR_PANEL = BLOCK_ENTITY_TYPES.register(
+        "solar_panel",
+        () -> RegistryHelpers.createBlockEntityType(
+            SolarPanelBlockEntity::new,
+            ModBlocks.ETRIONIC_SOLAR_PANEL.get(),
+            ModBlocks.VESNIUM_SOLAR_PANEL.get()
+        ));
 
     public static final RegistryEntry<BlockEntityType<BatteryBlockEntity>> BATTERY = BLOCK_ENTITY_TYPES.register(
         "battery",

@@ -3,11 +3,11 @@ package earth.terrarium.adastra.datagen.provider.client;
 
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blocks.BatteryBlock;
-import earth.terrarium.adastra.common.blocks.OxygenDistributorBlock;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -19,22 +19,19 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        oxygenDistributorBlock((OxygenDistributorBlock) ModBlocks.OXYGEN_DISTRIBUTOR.get());
+        basicRenderedBlock(ModBlocks.OXYGEN_DISTRIBUTOR.get());
+        basicRenderedBlock(ModBlocks.ETRIONIC_SOLAR_PANEL.get(), ModItemModelProvider.SOLAR_PANEL);
+        basicRenderedBlock(ModBlocks.VESNIUM_SOLAR_PANEL.get(), ModItemModelProvider.SOLAR_PANEL);
         batteryBlock((BatteryBlock) ModBlocks.BATTERY.get());
     }
 
-    public void oxygenDistributorBlock(OxygenDistributorBlock block) {
-        getVariantBuilder(block).forAllStates(state -> {
-            Direction facing = state.getValue(OxygenDistributorBlock.FACING);
-            AttachFace face = state.getValue(OxygenDistributorBlock.FACE);
+    public void basicRenderedBlock(Block block) {
+        basicRenderedBlock(block, ModItemModelProvider.RENDERED_ITEM);
+    }
 
-            return ConfiguredModel.builder()
-                .modelFile(cubeAll(block))
-                .rotationX(face == AttachFace.FLOOR ? 0 : (face == AttachFace.WALL ? 90 : 180))
-                .rotationY((int) (face == AttachFace.CEILING ? facing : facing.getOpposite()).toYRot())
-                .uvLock(face == AttachFace.WALL)
-                .build();
-        });
+    public void basicRenderedBlock(Block block, ResourceLocation itemModel) {
+        simpleBlockItem(block, itemModels().getExistingFile(itemModel));
+        simpleBlock(block);
     }
 
     public void batteryBlock(BatteryBlock block) {

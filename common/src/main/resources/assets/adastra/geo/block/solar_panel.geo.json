@@ -1,0 +1,140 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.solar_panel",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 5,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "facuiscool",
+					"pivot": [0, 10, 0],
+					"cubes": [
+						{
+							"origin": [-7, 0, -7],
+							"size": [14, 5, 14],
+							"uv": {
+								"north": {"uv": [34, 45], "uv_size": [14, 5]},
+								"east": {"uv": [34, 45], "uv_size": [14, 5]},
+								"south": {"uv": [34, 45], "uv_size": [14, 5]},
+								"west": {"uv": [34, 45], "uv_size": [14, 5]},
+								"up": {"uv": [48, 45], "uv_size": [-14, -14]},
+								"down": {"uv": [48, 64], "uv_size": [-14, -14]}
+							}
+						},
+						{
+							"origin": [-6, 5, -6],
+							"size": [12, 10, 12],
+							"uv": {
+								"north": {"uv": [48, 44], "uv_size": [12, 10]},
+								"east": {"uv": [48, 54], "uv_size": [12, 10]},
+								"south": {"uv": [48, 44], "uv_size": [12, 10]},
+								"west": {"uv": [48, 54], "uv_size": [12, 10]},
+								"up": {"uv": [60, 44], "uv_size": [-12, -12]},
+								"down": {"uv": [60, 44], "uv_size": [-12, -12]}
+							}
+						}
+					]
+				},
+				{
+					"name": "squishywashere",
+					"parent": "facuiscool",
+					"pivot": [0, 14, 0],
+					"cubes": [
+						{
+							"origin": [-2, 14, -2],
+							"size": [4, 8, 4],
+							"uv": {
+								"north": {"uv": [10, 0], "uv_size": [4, 8]},
+								"east": {"uv": [14, 0], "uv_size": [4, 8]},
+								"south": {"uv": [10, 0], "uv_size": [4, 8]},
+								"west": {"uv": [18, 0], "uv_size": [-4, 8]},
+								"up": {"uv": [18, 8], "uv_size": [-4, -4]},
+								"down": {"uv": [18, 8], "uv_size": [-4, -4]}
+							}
+						}
+					]
+				},
+				{
+					"name": "top",
+					"parent": "squishywashere",
+					"pivot": [0, 21, 0],
+					"rotation": [30, 0, 0],
+					"cubes": [
+						{
+							"origin": [-5, 21, -5],
+							"size": [10, 2, 10],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [10, 2]},
+								"east": {"uv": [0, 0], "uv_size": [10, 2]},
+								"south": {"uv": [0, 0], "uv_size": [10, 2]},
+								"west": {"uv": [0, 0], "uv_size": [10, 2]},
+								"up": {"uv": [10, 12], "uv_size": [-10, -10]},
+								"down": {"uv": [10, 12], "uv_size": [-10, -10]}
+							}
+						},
+						{
+							"origin": [-16, 23, -12],
+							"size": [32, 2, 24],
+							"uv": {
+								"north": {"uv": [0, 38], "uv_size": [32, 2]},
+								"east": {"uv": [34, 64], "uv_size": [-2, -24]},
+								"south": {"uv": [0, 38], "uv_size": [32, 2]},
+								"west": {"uv": [34, 40], "uv_size": [-2, 24]},
+								"up": {"uv": [32, 14], "uv_size": [-32, 24]},
+								"down": {"uv": [0, 64], "uv_size": [32, -24]}
+							}
+						}
+					]
+				},
+				{
+					"name": "leftpanel",
+					"parent": "top",
+					"pivot": [-16, 25, 0],
+					"cubes": [
+						{
+							"origin": [-32, 23, -12],
+							"size": [16, 2, 24],
+							"pivot": [-16, 25, 0],
+							"rotation": [0, 0, 40],
+							"uv": {
+								"north": {"uv": [48, 24], "uv_size": [16, 2]},
+								"east": {"uv": [64, 51], "uv_size": [-2, -24]},
+								"south": {"uv": [48, 24], "uv_size": [16, 2]},
+								"west": {"uv": [62, 27], "uv_size": [2, 24]},
+								"up": {"uv": [64, 0], "uv_size": [-16, 24]},
+								"down": {"uv": [48, 24], "uv_size": [-16, -24]}
+							}
+						}
+					]
+				},
+				{
+					"name": "rightpanel",
+					"parent": "top",
+					"pivot": [16, 25, 0],
+					"cubes": [
+						{
+							"origin": [16, 23, -12],
+							"size": [16, 2, 24],
+							"pivot": [16, 25, 0],
+							"rotation": [0, 0, -40],
+							"uv": {
+								"north": {"uv": [48, 24], "uv_size": [16, 2]},
+								"east": {"uv": [64, 51], "uv_size": [-2, -24]},
+								"south": {"uv": [48, 24], "uv_size": [16, 2]},
+								"west": {"uv": [64, 27], "uv_size": [-2, 24]},
+								"up": {"uv": [64, 0], "uv_size": [-16, 24]},
+								"down": {"uv": [32, 24], "uv_size": [16, -24]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

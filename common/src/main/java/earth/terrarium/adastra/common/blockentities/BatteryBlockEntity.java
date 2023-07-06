@@ -42,7 +42,7 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity implements B
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         if (time % 10 == 0) {
-            int charge = Math.round(this.getEnergyStorage().getStoredEnergy() / (float) this.getEnergyStorage().getMaxCapacity() * 4);
+            int charge = Math.round(this.energyContainer.getStoredEnergy() / (float) this.getEnergyStorage().getMaxCapacity() * 4);
             level.setBlock(pos, state.setValue(BatteryBlock.CHARGE, charge), Block.UPDATE_CLIENTS);
         }
     }
