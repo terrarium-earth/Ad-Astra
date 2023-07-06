@@ -38,6 +38,18 @@ public class ModBlockEntityTypes {
             SteamGeneratorBlockEntity::new,
             ModBlocks.STEAM_GENERATOR.get()));
 
+    public static final RegistryEntry<BlockEntityType<EmitterBlockEntity>> EMITTER = BLOCK_ENTITY_TYPES.register(
+        "emitter",
+        () -> RegistryHelpers.createBlockEntityType(
+            EmitterBlockEntity::new,
+            ModBlocks.EMITTER.get()));
+
+    public static final RegistryEntry<BlockEntityType<ReceiverBlockEntity>> RECEIVER = BLOCK_ENTITY_TYPES.register(
+        "receiver",
+        () -> RegistryHelpers.createBlockEntityType(
+            ReceiverBlockEntity::new,
+            ModBlocks.RECEIVER.get()));
+
     public static final RegistryEntry<BlockEntityType<BatteryBlockEntity>> BATTERY = BLOCK_ENTITY_TYPES.register(
         "battery",
         () -> RegistryHelpers.createBlockEntityType(

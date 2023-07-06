@@ -1,9 +1,6 @@
 package earth.terrarium.adastra.client;
 
-import earth.terrarium.adastra.client.renderers.blocks.machines.HydraulicPressBlockEntityRenderer;
-import earth.terrarium.adastra.client.renderers.blocks.machines.OxygenDistributorBlockEntityRenderer;
-import earth.terrarium.adastra.client.renderers.blocks.machines.SolarPanelBlockEntityRenderer;
-import earth.terrarium.adastra.client.renderers.blocks.machines.SteamGeneratorBlockEntityRenderer;
+import earth.terrarium.adastra.client.renderers.blocks.machines.*;
 import earth.terrarium.adastra.client.renderers.items.base.CustomGeoItemRenderer;
 import earth.terrarium.adastra.common.handlers.PlanetData;
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
@@ -11,7 +8,6 @@ import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.botarium.client.ClientHooks;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
@@ -42,6 +38,8 @@ public class AdAstraClient {
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SOLAR_PANEL.get(), context -> new SolarPanelBlockEntityRenderer());
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.HYDRAULIC_PRESS.get(), context -> new HydraulicPressBlockEntityRenderer());
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.STEAM_GENERATOR.get(), context -> new SteamGeneratorBlockEntityRenderer());
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.EMITTER.get(), context -> new EmitterBlockEntityRenderer());
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.RECEIVER.get(), context -> new ReceiverBlockEntityRenderer());
     }
 
     private static void registerItemRenderers() {
@@ -50,6 +48,8 @@ public class AdAstraClient {
         ITEM_RENDERERS.put(ModBlocks.VESNIUM_SOLAR_PANEL.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(SolarPanelBlockEntityRenderer.MODEL)));
         ITEM_RENDERERS.put(ModBlocks.HYDRAULIC_PRESS.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(HydraulicPressBlockEntityRenderer.MODEL)));
         ITEM_RENDERERS.put(ModBlocks.STEAM_GENERATOR.get().asItem(), new SteamGeneratorBlockEntityRenderer.ItemRender(new DefaultedBlockGeoModel<>(SteamGeneratorBlockEntityRenderer.MODEL)));
+        ITEM_RENDERERS.put(ModBlocks.EMITTER.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(EmitterBlockEntityRenderer.MODEL)));
+        ITEM_RENDERERS.put(ModBlocks.RECEIVER.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(ReceiverBlockEntityRenderer.MODEL)));
     }
 
     public static BlockEntityWithoutLevelRenderer getItemRenderer(ItemLike item) {

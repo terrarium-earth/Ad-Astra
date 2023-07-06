@@ -5,10 +5,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.blockentities.HydraulicPressBlockEntity;
-import earth.terrarium.adastra.common.blockentities.OxygenDistributorBlockEntity;
-import earth.terrarium.adastra.common.blockentities.SolarPanelBlockEntity;
-import earth.terrarium.adastra.common.blockentities.SteamGeneratorBlockEntity;
+import earth.terrarium.adastra.common.blockentities.*;
 import earth.terrarium.adastra.common.items.base.CustomGeoBlockItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -53,6 +50,16 @@ public class ModItems {
         ModBlocks.STEAM_GENERATOR.get(),
         new Item.Properties(),
         SteamGeneratorBlockEntity.IDLE));
+
+    public static final RegistryEntry<Item> EMITTER = MACHINES.register("emitter", () -> new CustomGeoBlockItem(
+        ModBlocks.EMITTER.get(),
+        new Item.Properties(),
+        EmitterBlockEntity.IDLE));
+
+    public static final RegistryEntry<Item> RECEIVER = MACHINES.register("receiver", () -> new CustomGeoBlockItem(
+        ModBlocks.RECEIVER.get(),
+        new Item.Properties(),
+        ReceiverBlockEntity.IDLE));
 
     public static final RegistryEntry<Item> BATTERY = MACHINES.register("battery", () -> new BlockItem(ModBlocks.BATTERY.get(), new Item.Properties()));
     public static final RegistryEntry<Item> ETRIONIC_BLAST_FURNACE = MACHINES.register("etreonic_blast_furnace", () -> new BlockItem(ModBlocks.ETRIONIC_BLAST_FURNACE.get(), new Item.Properties()));

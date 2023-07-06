@@ -1,9 +1,11 @@
 {
   "block.adastra.battery": "Battery",
+  "block.adastra.emitter": "Emitter",
   "block.adastra.etreonic_blast_furnace": "Etreonic Blast Furnace",
   "block.adastra.etreonic_solar_panel": "Etreonic Solar Panel",
   "block.adastra.hydraulic_press": "Hydraulic Press",
   "block.adastra.oxygen_distributor": "Oxygen Distributor",
+  "block.adastra.receiver": "Receiver",
   "block.adastra.steam_generator": "Steam Generator",
   "block.adastra.vesnium_solar_panel": "Vesnium Solar Panel",
   "death.attack.oxygen": "%1$s couldn't breathe anymore",

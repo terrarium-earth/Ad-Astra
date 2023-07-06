@@ -26,6 +26,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         basicRenderedBlock(ModBlocks.VESNIUM_SOLAR_PANEL.get(), ModItemModelProvider.SOLAR_PANEL);
         basicRenderedBlock(ModBlocks.HYDRAULIC_PRESS.get(), ModItemModelProvider.SMALL_RENDERED_ITEM);
         basicRenderedBlock(ModBlocks.STEAM_GENERATOR.get(), ModItemModelProvider.SMALL_RENDERED_ITEM, modLoc("block/steam_generator/steam_generator"));
+        basicRenderedBlock(ModBlocks.EMITTER.get());
+        basicRenderedBlock(ModBlocks.RECEIVER.get());
         batteryBlock((BatteryBlock) ModBlocks.BATTERY.get());
         etrionicBlastFurnaceBlock((EtrionicBlastFurnaceBlock) ModBlocks.ETRIONIC_BLAST_FURNACE.get());
     }
