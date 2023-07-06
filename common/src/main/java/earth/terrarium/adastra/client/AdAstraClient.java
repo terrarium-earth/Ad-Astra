@@ -37,6 +37,7 @@ public class AdAstraClient {
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.OXYGEN_DISTRIBUTOR.get(), context -> new OxygenDistributorBlockEntityRenderer());
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SOLAR_PANEL.get(), context -> new SolarPanelBlockEntityRenderer());
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.HYDRAULIC_PRESS.get(), context -> new HydraulicPressBlockEntityRenderer());
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.OIL_REFINERY.get(), context -> new OilRefineryBlockEntityRenderer());
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.STEAM_GENERATOR.get(), context -> new SteamGeneratorBlockEntityRenderer());
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.EMITTER.get(), context -> new EmitterBlockEntityRenderer());
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.RECEIVER.get(), context -> new ReceiverBlockEntityRenderer());
@@ -48,6 +49,7 @@ public class AdAstraClient {
         ITEM_RENDERERS.put(ModBlocks.ETRIONIC_SOLAR_PANEL.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(SolarPanelBlockEntityRenderer.MODEL)));
         ITEM_RENDERERS.put(ModBlocks.VESNIUM_SOLAR_PANEL.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(SolarPanelBlockEntityRenderer.MODEL)));
         ITEM_RENDERERS.put(ModBlocks.HYDRAULIC_PRESS.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(HydraulicPressBlockEntityRenderer.MODEL)));
+        ITEM_RENDERERS.put(ModBlocks.OIL_REFINERY.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(OilRefineryBlockEntityRenderer.MODEL)));
         ITEM_RENDERERS.put(ModBlocks.STEAM_GENERATOR.get().asItem(), new SteamGeneratorBlockEntityRenderer.ItemRender(new DefaultedBlockGeoModel<>(SteamGeneratorBlockEntityRenderer.MODEL)));
         ITEM_RENDERERS.put(ModBlocks.EMITTER.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(EmitterBlockEntityRenderer.MODEL)));
         ITEM_RENDERERS.put(ModBlocks.RECEIVER.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(ReceiverBlockEntityRenderer.MODEL)));

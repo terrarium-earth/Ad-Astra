@@ -27,6 +27,8 @@ public class ModBlocks {
 
     public static final RegistryEntry<Block> HYDRAULIC_PRESS = MACHINES.register("hydraulic_press", () -> new HydraulicPressBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
+    public static final RegistryEntry<Block> OIL_REFINERY = MACHINES.register("oil_refinery", () -> new OilRefineryBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+
     public static final RegistryEntry<Block> STEAM_GENERATOR = MACHINES.register("steam_generator", () -> new SteamGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
     public static final RegistryEntry<Block> EMITTER = MACHINES.register("emitter", () -> new EmitterBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));

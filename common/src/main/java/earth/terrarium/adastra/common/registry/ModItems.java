@@ -46,6 +46,11 @@ public class ModItems {
         new Item.Properties(),
         HydraulicPressBlockEntity.BONK));
 
+    public static final RegistryEntry<Item> OIL_REFINERY = MACHINES.register("oil_refinery", () -> new CustomGeoBlockItem(
+        ModBlocks.OIL_REFINERY.get(),
+        new Item.Properties(),
+        OilRefineryBlockEntity.IDLE_OFF));
+
     public static final RegistryEntry<Item> STEAM_GENERATOR = MACHINES.register("steam_generator", () -> new CustomGeoBlockItem(
         ModBlocks.STEAM_GENERATOR.get(),
         new Item.Properties(),

@@ -32,6 +32,12 @@ public class ModBlockEntityTypes {
             HydraulicPressBlockEntity::new,
             ModBlocks.HYDRAULIC_PRESS.get()));
 
+    public static final RegistryEntry<BlockEntityType<OilRefineryBlockEntity>> OIL_REFINERY = BLOCK_ENTITY_TYPES.register(
+        "oil_refinery",
+        () -> RegistryHelpers.createBlockEntityType(
+            OilRefineryBlockEntity::new,
+            ModBlocks.OIL_REFINERY.get()));
+
     public static final RegistryEntry<BlockEntityType<SteamGeneratorBlockEntity>> STEAM_GENERATOR = BLOCK_ENTITY_TYPES.register(
         "steam_generator",
         () -> RegistryHelpers.createBlockEntityType(
