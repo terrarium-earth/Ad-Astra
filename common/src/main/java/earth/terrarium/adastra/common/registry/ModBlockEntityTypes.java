@@ -4,10 +4,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.blockentities.BatteryBlockEntity;
-import earth.terrarium.adastra.common.blockentities.HydraulicPressBlockEntity;
-import earth.terrarium.adastra.common.blockentities.OxygenDistributorBlockEntity;
-import earth.terrarium.adastra.common.blockentities.SolarPanelBlockEntity;
+import earth.terrarium.adastra.common.blockentities.*;
 import earth.terrarium.botarium.common.registry.RegistryHelpers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -34,6 +31,12 @@ public class ModBlockEntityTypes {
         () -> RegistryHelpers.createBlockEntityType(
             HydraulicPressBlockEntity::new,
             ModBlocks.HYDRAULIC_PRESS.get()));
+
+    public static final RegistryEntry<BlockEntityType<SteamGeneratorBlockEntity>> STEAM_GENERATOR = BLOCK_ENTITY_TYPES.register(
+        "steam_generator",
+        () -> RegistryHelpers.createBlockEntityType(
+            SteamGeneratorBlockEntity::new,
+            ModBlocks.STEAM_GENERATOR.get()));
 
     public static final RegistryEntry<BlockEntityType<BatteryBlockEntity>> BATTERY = BLOCK_ENTITY_TYPES.register(
         "battery",

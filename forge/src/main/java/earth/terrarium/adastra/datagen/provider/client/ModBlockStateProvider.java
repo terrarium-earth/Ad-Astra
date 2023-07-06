@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -23,6 +24,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         basicRenderedBlock(ModBlocks.ETRIONIC_SOLAR_PANEL.get(), ModItemModelProvider.SOLAR_PANEL);
         basicRenderedBlock(ModBlocks.VESNIUM_SOLAR_PANEL.get(), ModItemModelProvider.SOLAR_PANEL);
         basicRenderedBlock(ModBlocks.HYDRAULIC_PRESS.get(), ModItemModelProvider.SMALL_RENDERED_ITEM);
+        basicRenderedBlock(ModBlocks.STEAM_GENERATOR.get(), ModItemModelProvider.SMALL_RENDERED_ITEM, modLoc("block/steam_generator/steam_generator"));
         batteryBlock((BatteryBlock) ModBlocks.BATTERY.get());
     }
 
@@ -33,6 +35,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
     public void basicRenderedBlock(Block block, ResourceLocation itemModel) {
         simpleBlockItem(block, itemModels().getExistingFile(itemModel));
         simpleBlock(block);
+    }
+
+    public void basicRenderedBlock(Block block, ResourceLocation itemModel, ResourceLocation texture) {
+        simpleBlockItem(block, itemModels().getExistingFile(itemModel));
+        simpleBlock(block, this.models().cubeAll(this.name(block), texture));
     }
 
     public void batteryBlock(BatteryBlock block) {
@@ -49,5 +56,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .rotationY((int) facing.toYRot())
                 .build();
         });
+    }
+
+    private ResourceLocation key(Block block) {
+        return ForgeRegistries.BLOCKS.getKey(block);
+    }
+
+    private String name(Block block) {
+        return this.key(block).getPath();
     }
 }

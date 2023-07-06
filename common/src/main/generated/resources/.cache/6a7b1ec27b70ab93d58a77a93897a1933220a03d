@@ -1,8 +1,9 @@
-// 1.20.1	2023-07-06T05:39:59.826954	Block States: adastra
+// 1.20.1	2023-07-06T06:19:46.337881	Block States: adastra
 36ad980a61ba623d936a511a42a24e6209d00991 assets/adastra/blockstates/battery.json
 fa15414b2d253bbb39884ddf2e85a08b59b16f7d assets/adastra/blockstates/etreonic_solar_panel.json
 74d5948e3bde721a9aa23340692351f508ce242e assets/adastra/blockstates/hydraulic_press.json
 6ab9a73db65665b2f0d326555e9e41cdc12535d9 assets/adastra/blockstates/oxygen_distributor.json
+5117843af31bd7ef0d55b913338713cb6c110d06 assets/adastra/blockstates/steam_generator.json
 7e9c1425276d71da702b47a592ba814b2e528a78 assets/adastra/blockstates/vesnium_solar_panel.json
 c89f42be01bbd9e62229cbaf1ab4a3a02fa49ed4 assets/adastra/models/block/battery_0.json
 db914fff3c1e83653202f335c331f7bc4107c600 assets/adastra/models/block/battery_100.json
@@ -12,9 +13,11 @@ bd87354df12de9fcf4b6c5ad7e857045b8148db3 assets/adastra/models/block/battery_75.
 38da306dd2cdd09156c04b6fc3d9ec4026f15d2a assets/adastra/models/block/etreonic_solar_panel.json
 87f00a68cf7b0200b0035c74b9e2a50220ce1061 assets/adastra/models/block/hydraulic_press.json
 27428ecf5a726ecf1d7767ef1ef79a81003b433e assets/adastra/models/block/oxygen_distributor.json
+322f90f41686e9c8748d4b6d1a2ea94b05b48c31 assets/adastra/models/block/steam_generator.json
 2846b5ba981e12285e7cd6d993c4c7f661c653e8 assets/adastra/models/block/vesnium_solar_panel.json
 62cbbfd8fd0866ac0057b866eab873c9d8152a1c assets/adastra/models/item/battery.json
 4fd741b5f58593b773080a1b0732c176fd5a9119 assets/adastra/models/item/etreonic_solar_panel.json
 7614f968892c8809a21e0714f92af1aadd79554a assets/adastra/models/item/hydraulic_press.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/oxygen_distributor.json
+7614f968892c8809a21e0714f92af1aadd79554a assets/adastra/models/item/steam_generator.json
 4fd741b5f58593b773080a1b0732c176fd5a9119 assets/adastra/models/item/vesnium_solar_panel.json

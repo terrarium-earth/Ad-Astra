@@ -8,6 +8,7 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.HydraulicPressBlockEntity;
 import earth.terrarium.adastra.common.blockentities.OxygenDistributorBlockEntity;
 import earth.terrarium.adastra.common.blockentities.SolarPanelBlockEntity;
+import earth.terrarium.adastra.common.blockentities.SteamGeneratorBlockEntity;
 import earth.terrarium.adastra.common.items.base.CustomGeoBlockItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -47,6 +48,11 @@ public class ModItems {
         ModBlocks.HYDRAULIC_PRESS.get(),
         new Item.Properties(),
         HydraulicPressBlockEntity.BONK));
+
+    public static final RegistryEntry<Item> STEAM_GENERATOR = MACHINES.register("steam_generator", () -> new CustomGeoBlockItem(
+        ModBlocks.STEAM_GENERATOR.get(),
+        new Item.Properties(),
+        SteamGeneratorBlockEntity.IDLE));
 
     public static final RegistryEntry<Item> BATTERY = MACHINES.register("battery", () -> new BlockItem(ModBlocks.BATTERY.get(), new Item.Properties()));
 

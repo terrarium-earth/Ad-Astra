@@ -1,14 +1,9 @@
 package earth.terrarium.adastra.client.renderers.blocks.machines;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.HydraulicPressBlockEntity;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
@@ -17,11 +12,6 @@ public class HydraulicPressBlockEntityRenderer extends GeoBlockRenderer<Hydrauli
 
     public HydraulicPressBlockEntityRenderer() {
         super(new DefaultedBlockGeoModel<>(MODEL));
-    }
-
-    @Override
-    public void actuallyRender(PoseStack poseStack, HydraulicPressBlockEntity animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
     @Override
