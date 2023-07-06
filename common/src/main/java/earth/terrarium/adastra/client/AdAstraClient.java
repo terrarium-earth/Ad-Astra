@@ -40,6 +40,7 @@ public class AdAstraClient {
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.STEAM_GENERATOR.get(), context -> new SteamGeneratorBlockEntityRenderer());
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.EMITTER.get(), context -> new EmitterBlockEntityRenderer());
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.RECEIVER.get(), context -> new ReceiverBlockEntityRenderer());
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.VESNIUM_COIL.get(), context -> new VesniumCoilBlockEntityRenderer());
     }
 
     private static void registerItemRenderers() {
@@ -50,6 +51,7 @@ public class AdAstraClient {
         ITEM_RENDERERS.put(ModBlocks.STEAM_GENERATOR.get().asItem(), new SteamGeneratorBlockEntityRenderer.ItemRender(new DefaultedBlockGeoModel<>(SteamGeneratorBlockEntityRenderer.MODEL)));
         ITEM_RENDERERS.put(ModBlocks.EMITTER.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(EmitterBlockEntityRenderer.MODEL)));
         ITEM_RENDERERS.put(ModBlocks.RECEIVER.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(ReceiverBlockEntityRenderer.MODEL)));
+        ITEM_RENDERERS.put(ModBlocks.VESNIUM_COIL.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(VesniumCoilBlockEntityRenderer.MODEL)));
     }
 
     public static BlockEntityWithoutLevelRenderer getItemRenderer(ItemLike item) {

@@ -61,6 +61,11 @@ public class ModItems {
         new Item.Properties(),
         ReceiverBlockEntity.IDLE));
 
+    public static final RegistryEntry<Item> VESNIUM_COIL = MACHINES.register("vesnium_coil", () -> new CustomGeoBlockItem(
+        ModBlocks.VESNIUM_COIL.get(),
+        new Item.Properties(),
+        VesniumCoilBlockEntity.IDLE));
+
     public static final RegistryEntry<Item> BATTERY = MACHINES.register("battery", () -> new BlockItem(ModBlocks.BATTERY.get(), new Item.Properties()));
     public static final RegistryEntry<Item> ETRIONIC_BLAST_FURNACE = MACHINES.register("etreonic_blast_furnace", () -> new BlockItem(ModBlocks.ETRIONIC_BLAST_FURNACE.get(), new Item.Properties()));
 

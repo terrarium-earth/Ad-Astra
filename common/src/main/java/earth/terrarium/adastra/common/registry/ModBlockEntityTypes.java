@@ -50,6 +50,12 @@ public class ModBlockEntityTypes {
             ReceiverBlockEntity::new,
             ModBlocks.RECEIVER.get()));
 
+    public static final RegistryEntry<BlockEntityType<VesniumCoilBlockEntity>> VESNIUM_COIL = BLOCK_ENTITY_TYPES.register(
+        "vesnium_coil",
+        () -> RegistryHelpers.createBlockEntityType(
+            VesniumCoilBlockEntity::new,
+            ModBlocks.VESNIUM_COIL.get()));
+
     public static final RegistryEntry<BlockEntityType<BatteryBlockEntity>> BATTERY = BLOCK_ENTITY_TYPES.register(
         "battery",
         () -> RegistryHelpers.createBlockEntityType(

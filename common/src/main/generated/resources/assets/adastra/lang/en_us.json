@@ -7,6 +7,7 @@
   "block.adastra.oxygen_distributor": "Oxygen Distributor",
   "block.adastra.receiver": "Receiver",
   "block.adastra.steam_generator": "Steam Generator",
+  "block.adastra.vesnium_coil": "Vesnium Coil",
   "block.adastra.vesnium_solar_panel": "Vesnium Solar Panel",
   "death.attack.oxygen": "%1$s couldn't breathe anymore",
   "death.attack.oxygen.player": "%1$s lost their breath whilst trying to escape %2$s",

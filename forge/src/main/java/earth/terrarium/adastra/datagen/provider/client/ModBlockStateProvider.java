@@ -28,6 +28,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         basicRenderedBlock(ModBlocks.STEAM_GENERATOR.get(), ModItemModelProvider.SMALL_RENDERED_ITEM, modLoc("block/steam_generator/steam_generator"));
         basicRenderedBlock(ModBlocks.EMITTER.get());
         basicRenderedBlock(ModBlocks.RECEIVER.get());
+        basicRenderedBlock(ModBlocks.VESNIUM_COIL.get(), ModItemModelProvider.SMALL_RENDERED_ITEM);
         batteryBlock((BatteryBlock) ModBlocks.BATTERY.get());
         etrionicBlastFurnaceBlock((EtrionicBlastFurnaceBlock) ModBlocks.ETRIONIC_BLAST_FURNACE.get());
     }

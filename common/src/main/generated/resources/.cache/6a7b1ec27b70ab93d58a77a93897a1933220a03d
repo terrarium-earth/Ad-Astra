@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-06T08:18:04.71107	Block States: adastra
+// 1.20.1	2023-07-06T08:37:21.347555	Block States: adastra
 36ad980a61ba623d936a511a42a24e6209d00991 assets/adastra/blockstates/battery.json
 c6a2b5db66914899b69ae442f06cf6c1d37cebd5 assets/adastra/blockstates/emitter.json
 f18438bc556d2de124171f6810360f756ba2e879 assets/adastra/blockstates/etreonic_blast_furnace.json
@@ -7,6 +7,7 @@ fa15414b2d253bbb39884ddf2e85a08b59b16f7d assets/adastra/blockstates/etreonic_sol
 6ab9a73db65665b2f0d326555e9e41cdc12535d9 assets/adastra/blockstates/oxygen_distributor.json
 b650372dc246c0893da8fd134960df20bb20e317 assets/adastra/blockstates/receiver.json
 5117843af31bd7ef0d55b913338713cb6c110d06 assets/adastra/blockstates/steam_generator.json
+83770b8ec82794350ecc1b2df8f27aa14a274287 assets/adastra/blockstates/vesnium_coil.json
 7e9c1425276d71da702b47a592ba814b2e528a78 assets/adastra/blockstates/vesnium_solar_panel.json
 c89f42be01bbd9e62229cbaf1ab4a3a02fa49ed4 assets/adastra/models/block/battery_0.json
 db914fff3c1e83653202f335c331f7bc4107c600 assets/adastra/models/block/battery_100.json
@@ -21,6 +22,7 @@ a97269c7fff62c6a7ac64fc7727e83778bcbbd01 assets/adastra/models/block/etrionic_bl
 27428ecf5a726ecf1d7767ef1ef79a81003b433e assets/adastra/models/block/oxygen_distributor.json
 a3c9a033ec6f02b85162973f4b4acd0651bba52c assets/adastra/models/block/receiver.json
 322f90f41686e9c8748d4b6d1a2ea94b05b48c31 assets/adastra/models/block/steam_generator.json
+661f5d6ff7f66293529474e8b76bb823fdde0da7 assets/adastra/models/block/vesnium_coil.json
 2846b5ba981e12285e7cd6d993c4c7f661c653e8 assets/adastra/models/block/vesnium_solar_panel.json
 62cbbfd8fd0866ac0057b866eab873c9d8152a1c assets/adastra/models/item/battery.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/emitter.json
@@ -30,4 +32,5 @@ ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/emitter.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/oxygen_distributor.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/receiver.json
 7614f968892c8809a21e0714f92af1aadd79554a assets/adastra/models/item/steam_generator.json
+7614f968892c8809a21e0714f92af1aadd79554a assets/adastra/models/item/vesnium_coil.json
 4fd741b5f58593b773080a1b0732c176fd5a9119 assets/adastra/models/item/vesnium_solar_panel.json

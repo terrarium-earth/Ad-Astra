@@ -32,4 +32,6 @@ public class ModBlocks {
     public static final RegistryEntry<Block> EMITTER = MACHINES.register("emitter", () -> new EmitterBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
     public static final RegistryEntry<Block> RECEIVER = MACHINES.register("receiver", () -> new ReceiverBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+
+    public static final RegistryEntry<Block> VESNIUM_COIL = MACHINES.register("vesnium_coil", () -> new VesniumCoilBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 }
