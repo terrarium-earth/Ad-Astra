@@ -2,10 +2,10 @@
   "parent": "builtin/entity",
   "display": {
         "gui": {
-			"rotation": [30, 225, 0],
-			"translation": [-0.5, -2.75, 0],
-			"scale": [0.425, 0.425, 0.425]
-		},
+			   "rotation": [30, 225, 0],
+			   "translation": [-0.5, -2.75, 0],
+			   "scale": [0.425, 0.425, 0.425]
+		  },
         "ground": {
             "rotation": [ 0, 0, 0 ],
             "translation": [ 0, 3, 0],

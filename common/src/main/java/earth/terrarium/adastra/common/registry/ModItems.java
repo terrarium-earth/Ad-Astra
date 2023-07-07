@@ -71,6 +71,11 @@ public class ModItems {
         new Item.Properties(),
         VesniumCoilBlockEntity.IDLE));
 
+    public static final RegistryEntry<Item> TINKERERS_WORKBENCH = MACHINES.register("tinkerers_workbench", () -> new CustomGeoBlockItem(
+        ModBlocks.TINKERERS_WORKBENCH.get(),
+        new Item.Properties(),
+        TinkerersWorkbenchBlockEntity.FABRICATING));
+
     public static final RegistryEntry<Item> BATTERY = MACHINES.register("battery", () -> new BlockItem(ModBlocks.BATTERY.get(), new Item.Properties()));
     public static final RegistryEntry<Item> ETRIONIC_BLAST_FURNACE = MACHINES.register("etreonic_blast_furnace", () -> new BlockItem(ModBlocks.ETRIONIC_BLAST_FURNACE.get(), new Item.Properties()));
 

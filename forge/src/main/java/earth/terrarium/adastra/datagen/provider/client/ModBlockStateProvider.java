@@ -30,6 +30,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         basicRenderedBlock(ModBlocks.EMITTER.get());
         basicRenderedBlock(ModBlocks.RECEIVER.get());
         basicRenderedBlock(ModBlocks.VESNIUM_COIL.get(), ModItemModelProvider.SMALL_RENDERED_ITEM);
+        basicRenderedBlock(ModBlocks.TINKERERS_WORKBENCH.get(), ModItemModelProvider.SMALL_RENDERED_ITEM);
         batteryBlock((BatteryBlock) ModBlocks.BATTERY.get());
         etrionicBlastFurnaceBlock((EtrionicBlastFurnaceBlock) ModBlocks.ETRIONIC_BLAST_FURNACE.get());
     }

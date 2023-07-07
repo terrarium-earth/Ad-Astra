@@ -62,6 +62,12 @@ public class ModBlockEntityTypes {
             VesniumCoilBlockEntity::new,
             ModBlocks.VESNIUM_COIL.get()));
 
+    public static final RegistryEntry<BlockEntityType<TinkerersWorkbenchBlockEntity>> TINKERERS_WORKBENCH = BLOCK_ENTITY_TYPES.register(
+        "tinkerers_workbench",
+        () -> RegistryHelpers.createBlockEntityType(
+            TinkerersWorkbenchBlockEntity::new,
+            ModBlocks.TINKERERS_WORKBENCH.get()));
+
     public static final RegistryEntry<BlockEntityType<BatteryBlockEntity>> BATTERY = BLOCK_ENTITY_TYPES.register(
         "battery",
         () -> RegistryHelpers.createBlockEntityType(
