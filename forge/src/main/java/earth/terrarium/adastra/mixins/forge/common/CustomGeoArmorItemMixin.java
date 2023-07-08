@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.mixins.forge.common;
 
 import earth.terrarium.adastra.client.AdAstraClient;
-import earth.terrarium.adastra.common.items.base.CustomGeoBlockItem;
+import earth.terrarium.adastra.common.items.base.CustomGeoArmorItem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,7 +14,7 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 import java.util.function.Consumer;
 
-@Mixin(CustomGeoBlockItem.class)
+@Mixin(CustomGeoArmorItem.class)
 public abstract class CustomGeoArmorItemMixin extends Item {
 
     public CustomGeoArmorItemMixin(Properties properties) {

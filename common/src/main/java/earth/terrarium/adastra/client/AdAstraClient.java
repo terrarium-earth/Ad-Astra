@@ -59,7 +59,7 @@ public class AdAstraClient {
 
     private static void registerItemRenderers() {
         ITEM_RENDERERS.put(ModBlocks.OXYGEN_DISTRIBUTOR.get().asItem(), new CustomGeoItemRenderer(ModBlocks.OXYGEN_DISTRIBUTOR));
-        ITEM_RENDERERS.put(ModBlocks.ETRIONIC_SOLAR_PANEL.get().asItem(), new CustomGeoItemRenderer(ModBlocks.ETRIONIC_SOLAR_PANEL));
+        ITEM_RENDERERS.put(ModBlocks.ETRIONIC_SOLAR_PANEL.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(new ResourceLocation(AdAstra.MOD_ID, "solar_panel"))));
         ITEM_RENDERERS.put(ModBlocks.VESNIUM_SOLAR_PANEL.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(new ResourceLocation(AdAstra.MOD_ID, "solar_panel"))));
         ITEM_RENDERERS.put(ModBlocks.HYDRAULIC_PRESS.get().asItem(), new CustomGeoItemRenderer(ModBlocks.HYDRAULIC_PRESS));
         ITEM_RENDERERS.put(ModBlocks.OIL_REFINERY.get().asItem(), new CustomGeoItemRenderer(ModBlocks.OIL_REFINERY));

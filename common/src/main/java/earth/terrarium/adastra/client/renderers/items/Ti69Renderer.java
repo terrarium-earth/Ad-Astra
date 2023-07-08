@@ -78,6 +78,7 @@ public class Ti69Renderer {
 
         PlanetData data = AdAstraClient.localData;
         if (data == null) return;
+        poseStack.translate(rightHanded ? 0.0f : 4.0f, 0.0f, 0.0f);
         poseStack.translate(36, 18, -2.0f);
         poseStack.scale(0.75f, 0.7f, 0.7f);
         poseStack.scale(1.6f, 1.0f, 1.0f);
