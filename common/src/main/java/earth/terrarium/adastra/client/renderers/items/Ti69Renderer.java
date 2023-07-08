@@ -54,9 +54,9 @@ public class Ti69Renderer {
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
         poseStack.scale(0.5F, 0.5F, 0.5F);
-        poseStack.translate(-0.5F, -0.65F, 0.0F);
+        poseStack.translate(-0.5F, -0.75F, 0.0F);
         poseStack.scale(0.0078125F, 0.0078125F, 0.0078125F);
-        poseStack.scale(0.63f, 1.06f, 1);
+        poseStack.scale(0.6f, 1.06f, 1);
         VertexConsumer vertex = buffer.getBuffer(RenderType.text(TEXTURE));
         Matrix4f matrix4f = poseStack.last().pose();
         vertex.vertex(matrix4f, -7.0F, 135.0F, 0.0F).color(255, 255, 255, 255).uv(0.0F, 1.0F).uv2(combinedLight).endVertex();
@@ -79,7 +79,7 @@ public class Ti69Renderer {
         PlanetData data = AdAstraClient.localData;
         if (data == null) return;
         poseStack.translate(36, 18, -2.0f);
-        poseStack.scale(0.7f, 0.7f, 0.7f);
+        poseStack.scale(0.75f, 0.7f, 0.7f);
         poseStack.scale(1.6f, 1.0f, 1.0f);
         Font font = Minecraft.getInstance().font;
         Component oxygen = Component.translatable("text.adastra.oxygen", data.oxygen());

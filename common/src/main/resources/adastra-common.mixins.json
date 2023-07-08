@@ -14,7 +14,8 @@
         "common.gravity.ThrownPotionMixin"
     ],
     "client": [
-        "client.ItemInHandRendererMixin"
+        "client.ItemInHandRendererMixin",
+        "client.PlayerRendererMixin"
     ],
     "injectors": {
         "defaultRequire": 1
