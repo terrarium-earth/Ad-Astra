@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public final class FloodFill3D {
 
-    public static final BlockPredicate TEST_FULL_SEAL = (level, pos, direction) -> {
+    public static final SolidBlockPredicate TEST_FULL_SEAL = (level, pos, direction) -> {
         BlockState state = level.getBlockState(pos);
         if (state.isAir()) return true;
         VoxelShape collisionShape = state.getCollisionShape(level, pos);
@@ -24,7 +24,7 @@ public final class FloodFill3D {
         return !isFaceSturdy(collisionShape, direction);
     };
 
-    public static Set<BlockPos> run(Level level, BlockPos start, int limit, BlockPredicate predicate) {
+    public static Set<BlockPos> run(Level level, BlockPos start, int limit, SolidBlockPredicate predicate) {
         level.getProfiler().push("adastra-floodfill");
 
         LongOpenHashSet positions = new LongOpenHashSet(limit);
@@ -74,7 +74,7 @@ public final class FloodFill3D {
     }
 
     @FunctionalInterface
-    public interface BlockPredicate {
+    public interface SolidBlockPredicate {
         boolean test(Level level, BlockPos pos, Direction direction);
     }
 }

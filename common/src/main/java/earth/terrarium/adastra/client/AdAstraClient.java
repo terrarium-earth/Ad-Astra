@@ -8,10 +8,15 @@ import earth.terrarium.adastra.client.renderers.blocks.machines.TinkerersWorkben
 import earth.terrarium.adastra.client.renderers.items.armor.AerolyteSpaceSuitRenderer;
 import earth.terrarium.adastra.client.renderers.items.base.CustomGeoItemRenderer;
 import earth.terrarium.adastra.common.handlers.PlanetData;
+import earth.terrarium.adastra.common.networking.NetworkHandler;
+import earth.terrarium.adastra.common.networking.messages.ServerboundSyncKeybindPacket;
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
+import earth.terrarium.adastra.common.utils.KeybindManager;
 import earth.terrarium.botarium.client.ClientHooks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.Options;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -84,5 +89,20 @@ public class AdAstraClient {
 
     public static BlockEntityWithoutLevelRenderer getItemRenderer(ItemLike item) {
         return ITEM_RENDERERS.get(item.asItem());
+    }
+
+    public static void clientTick(Minecraft minecraft) {
+        if (minecraft.player == null) return;
+        Options options = minecraft.options;
+        var keybinds = new KeybindManager(
+            options.keyJump.isDown(),
+            options.keySprint.isDown(),
+            options.keyUp.isDown(),
+            options.keyLeft.isDown(),
+            options.keyDown.isDown(),
+            options.keyRight.isDown()
+        );
+        KeybindManager.set(minecraft.player, keybinds);
+        NetworkHandler.CHANNEL.sendToServer(new ServerboundSyncKeybindPacket(keybinds));
     }
 }
