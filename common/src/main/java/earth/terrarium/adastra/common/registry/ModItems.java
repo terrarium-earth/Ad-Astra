@@ -6,13 +6,12 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.*;
+import earth.terrarium.adastra.common.items.armor.AerolyteSpaceSuitItem;
+import earth.terrarium.adastra.common.items.armor.materials.AerolyteSpaceSuitMaterial;
 import earth.terrarium.adastra.common.items.base.CustomGeoBlockItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 
 import java.util.function.Supplier;
 
@@ -80,4 +79,9 @@ public class ModItems {
     public static final RegistryEntry<Item> ETRIONIC_BLAST_FURNACE = MACHINES.register("etreonic_blast_furnace", () -> new BlockItem(ModBlocks.ETRIONIC_BLAST_FURNACE.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> TI_69 = MACHINES.register("ti_69", () -> new Item(new Item.Properties()));
+
+    public static final RegistryEntry<Item> AEROLYTE_SPACE_HELMET = MACHINES.register("aerolyte_space_helmet", () -> new AerolyteSpaceSuitItem(AerolyteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryEntry<Item> AEROLYTE_SPACE_SUIT = MACHINES.register("aerolyte_space_suit", () -> new AerolyteSpaceSuitItem(AerolyteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryEntry<Item> AEROLYTE_SPACE_PANTS = MACHINES.register("aerolyte_space_pants", () -> new AerolyteSpaceSuitItem(AerolyteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryEntry<Item> AEROLYTE_SPACE_BOOTS = MACHINES.register("aerolyte_space_boots", () -> new AerolyteSpaceSuitItem(AerolyteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()));
 }

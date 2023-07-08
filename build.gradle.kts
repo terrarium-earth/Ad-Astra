@@ -62,9 +62,9 @@ subprojects {
             "modApi"(group = "me.shedaniel", name = "RoughlyEnoughItems-api", version = reiVersion) {
                 isTransitive = false
             }
-            "modImplementation"(group = "software.bernie.geckolib", name = "geckolib-fabric-1.20", version = geckolibVersion)
+            "modImplementation"(group = "software.bernie.geckolib", name = "geckolib-fabric-$minecraftVersion", version = geckolibVersion)
         } else {
-            "modImplementation"(group = "software.bernie.geckolib", name = "geckolib-$modLoader-1.20", version = geckolibVersion)
+            "modImplementation"(group = "software.bernie.geckolib", name = "geckolib-$modLoader-$minecraftVersion", version = geckolibVersion)
         }
     }
 

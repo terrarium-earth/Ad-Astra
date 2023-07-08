@@ -1,10 +1,12 @@
 package earth.terrarium.adastra.client;
 
 import earth.terrarium.adastra.client.renderers.blocks.machines.*;
+import earth.terrarium.adastra.client.renderers.items.armor.AerolyteSpaceSuitRenderer;
 import earth.terrarium.adastra.client.renderers.items.base.CustomGeoItemRenderer;
 import earth.terrarium.adastra.common.handlers.PlanetData;
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.adastra.common.registry.ModBlocks;
+import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.botarium.client.ClientHooks;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
@@ -12,12 +14,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class AdAstraClient {
     private static final Map<Item, BlockEntityWithoutLevelRenderer> ITEM_RENDERERS = new HashMap<>();
+    private static final Map<Item, Supplier<GeoArmorRenderer<?>>> ARMOR_RENDERERS = new HashMap<>();
 
     @Nullable
     public static PlanetData localData;
@@ -26,6 +31,7 @@ public class AdAstraClient {
         registerBlockRenderTypes();
         registerBlockEntityRenderers();
         registerItemRenderers();
+        registerArmorRenderers();
     }
 
     private static void registerBlockRenderTypes() {
@@ -56,6 +62,17 @@ public class AdAstraClient {
         ITEM_RENDERERS.put(ModBlocks.RECEIVER.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(ReceiverBlockEntityRenderer.MODEL)));
         ITEM_RENDERERS.put(ModBlocks.VESNIUM_COIL.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(VesniumCoilBlockEntityRenderer.MODEL)));
         ITEM_RENDERERS.put(ModBlocks.TINKERERS_WORKBENCH.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(TinkerersWorkbenchBlockEntityRenderer.MODEL)));
+    }
+
+    public static void registerArmorRenderers() {
+        ARMOR_RENDERERS.put(ModItems.AEROLYTE_SPACE_HELMET.get(), AerolyteSpaceSuitRenderer::new);
+        ARMOR_RENDERERS.put(ModItems.AEROLYTE_SPACE_SUIT.get(), AerolyteSpaceSuitRenderer::new);
+        ARMOR_RENDERERS.put(ModItems.AEROLYTE_SPACE_PANTS.get(), AerolyteSpaceSuitRenderer::new);
+        ARMOR_RENDERERS.put(ModItems.AEROLYTE_SPACE_BOOTS.get(), AerolyteSpaceSuitRenderer::new);
+    }
+
+    public static GeoArmorRenderer<?> getArmorRenderer(ItemLike item) {
+        return ARMOR_RENDERERS.get(item.asItem()).get();
     }
 
     public static BlockEntityWithoutLevelRenderer getItemRenderer(ItemLike item) {

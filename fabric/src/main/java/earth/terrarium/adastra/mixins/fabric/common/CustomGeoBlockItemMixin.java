@@ -5,6 +5,7 @@ import earth.terrarium.adastra.common.items.base.CustomGeoBlockItem;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.client.RenderProvider;
 
@@ -14,6 +15,7 @@ import java.util.function.Supplier;
 @Mixin(CustomGeoBlockItem.class)
 public abstract class CustomGeoBlockItemMixin extends Item implements GeoItem {
 
+    @Unique
     private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
     public CustomGeoBlockItemMixin(Properties properties) {
