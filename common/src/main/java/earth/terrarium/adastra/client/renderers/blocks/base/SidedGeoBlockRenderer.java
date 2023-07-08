@@ -1,34 +1,33 @@
-package earth.terrarium.adastra.client.renderers.blocks.machines;
+package earth.terrarium.adastra.client.renderers.blocks.base;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.teamresourceful.resourcefullib.client.CloseablePoseStack;
-import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.blockentities.OxygenDistributorBlockEntity;
-import earth.terrarium.adastra.common.blocks.OxygenDistributorBlock;
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
+import earth.terrarium.adastra.common.blocks.base.SidedMachineBlock;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.model.DefaultedBlockGeoModel;
-import software.bernie.geckolib.renderer.GeoBlockRenderer;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.model.GeoModel;
 
-public class OxygenDistributorBlockEntityRenderer extends GeoBlockRenderer<OxygenDistributorBlockEntity> {
-    public static final ResourceLocation MODEL = new ResourceLocation(AdAstra.MOD_ID, "oxygen_distributor");
+public class SidedGeoBlockRenderer<T extends BlockEntity & GeoAnimatable> extends CustomGeoBlockRenderer<T> {
 
-    public OxygenDistributorBlockEntityRenderer() {
-        super(new DefaultedBlockGeoModel<>(MODEL));
+    public SidedGeoBlockRenderer(RegistryEntry<Block> block) {
+        super(block);
     }
 
     @Override
-    public void actuallyRender(PoseStack poseStack, OxygenDistributorBlockEntity animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void actuallyRender(PoseStack poseStack, T animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         BlockState blockState = animatable.getBlockState();
-        AttachFace face = blockState.getValue(OxygenDistributorBlock.FACE);
-        Direction direction = blockState.getValue(OxygenDistributorBlock.FACING);
+        AttachFace face = blockState.getValue(SidedMachineBlock.FACE);
+        Direction direction = blockState.getValue(SidedMachineBlock.FACING);
 
         try (var pose = new CloseablePoseStack(poseStack)) {
             if (face == AttachFace.CEILING) {

@@ -30,6 +30,11 @@ public class ModItems {
         new Item.Properties(),
         OxygenDistributorBlockEntity.SPIN));
 
+    public static final RegistryEntry<Item> GRAVITY_NORMALIZER = MACHINES.register("gravity_normalizer", () -> new CustomGeoBlockItem(
+        ModBlocks.GRAVITY_NORMALIZER.get(),
+        new Item.Properties(),
+        GravityNormalizerBlockEntity.IDLE_ON));
+
     public static final RegistryEntry<Item> ETRIONIC_SOLAR_PANEL = MACHINES.register("etreonic_solar_panel", () -> new CustomGeoBlockItem(
         ModBlocks.ETRIONIC_SOLAR_PANEL.get(),
         new Item.Properties(),

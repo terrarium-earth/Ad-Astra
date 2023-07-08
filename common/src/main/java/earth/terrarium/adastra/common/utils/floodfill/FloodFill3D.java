@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public final class FloodFill3D {
 
-    public static final BlockPredicate TEST_SEALED = (level, pos, direction) -> {
+    public static final BlockPredicate TEST_FULL_SEAL = (level, pos, direction) -> {
         BlockState state = level.getBlockState(pos);
         if (state.isAir()) return true;
         VoxelShape collisionShape = state.getCollisionShape(level, pos);

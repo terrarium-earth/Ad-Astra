@@ -19,7 +19,6 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        basicItem(ModItems.TI_69.get());
         basicItem(ModItems.AEROLYTE_SPACE_HELMET.get());
         basicItem(ModItems.AEROLYTE_SPACE_SUIT.get());
         basicItem(ModItems.AEROLYTE_SPACE_PANTS.get());

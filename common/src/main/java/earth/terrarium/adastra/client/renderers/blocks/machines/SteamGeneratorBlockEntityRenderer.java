@@ -1,21 +1,20 @@
 package earth.terrarium.adastra.client.renderers.blocks.machines;
 
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.client.renderers.blocks.base.CustomGeoBlockRenderer;
 import earth.terrarium.adastra.client.renderers.items.base.CustomGeoItemRenderer;
 import earth.terrarium.adastra.common.blockentities.SteamGeneratorBlockEntity;
 import earth.terrarium.adastra.common.blocks.SteamGeneratorBlock;
 import earth.terrarium.adastra.common.items.base.CustomGeoBlockItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.model.DefaultedBlockGeoModel;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoBlockRenderer;
+import net.minecraft.world.level.block.Block;
 
-public class SteamGeneratorBlockEntityRenderer extends GeoBlockRenderer<SteamGeneratorBlockEntity> {
-    public static final ResourceLocation MODEL = new ResourceLocation(AdAstra.MOD_ID, "steam_generator");
+public class SteamGeneratorBlockEntityRenderer extends CustomGeoBlockRenderer<SteamGeneratorBlockEntity> {
 
-    public SteamGeneratorBlockEntityRenderer() {
-        super(new DefaultedBlockGeoModel<>(MODEL));
+    public SteamGeneratorBlockEntityRenderer(RegistryEntry<Block> block) {
+        super(block);
     }
 
     @Override
@@ -29,8 +28,8 @@ public class SteamGeneratorBlockEntityRenderer extends GeoBlockRenderer<SteamGen
     }
 
     public static class ItemRender extends CustomGeoItemRenderer {
-        public ItemRender(GeoModel<CustomGeoBlockItem> model) {
-            super(model);
+        public ItemRender(RegistryEntry<Block> block) {
+            super(block);
         }
 
         @Override

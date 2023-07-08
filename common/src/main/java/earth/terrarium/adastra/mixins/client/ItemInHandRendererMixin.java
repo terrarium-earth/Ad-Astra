@@ -26,7 +26,7 @@ public abstract class ItemInHandRendererMixin {
         if (stack.is(ModItems.TI_69.get())) {
             boolean mainHand = hand == InteractionHand.MAIN_HAND;
             HumanoidArm humanoidArm = mainHand ? player.getMainArm() : player.getMainArm().getOpposite();
-            Ti69Renderer.renderTi69(poseStack, buffer, combinedLight, equippedProgress, humanoidArm, swingProgress, stack, this::renderPlayerArm);
+            Ti69Renderer.renderTi69(poseStack, buffer, combinedLight, equippedProgress, humanoidArm, swingProgress, this::renderPlayerArm);
             ci.cancel();
         }
     }

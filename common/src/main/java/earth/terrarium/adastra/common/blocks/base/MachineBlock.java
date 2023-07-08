@@ -58,11 +58,12 @@ public class MachineBlock extends BasicEntityBlock {
         return (entityLevel, blockPos, blockState, blockEntity) -> {
             if (blockEntity instanceof MachineBlockEntity machine) {
                 BlockPos pos = blockEntity.getBlockPos();
-                machine.tick(level, level.getGameTime(), state, pos);
+                long time = level.getGameTime() - pos.asLong();
+                machine.tick(level, time, state, pos);
                 if (level.isClientSide()) {
-                    machine.clientTick((ClientLevel) level, level.getGameTime(), state, pos);
+                    machine.clientTick((ClientLevel) level, time, state, pos);
                 } else {
-                    machine.serverTick((ServerLevel) level, level.getGameTime(), state, pos);
+                    machine.serverTick((ServerLevel) level, time, state, pos);
                 }
             }
         };

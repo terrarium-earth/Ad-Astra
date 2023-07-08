@@ -1,0 +1,91 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "bone",
+					"pivot": [0, 16, 0],
+					"cubes": [
+						{
+							"origin": [-7, 0, -7],
+							"size": [14, 5, 14],
+							"uv": {
+								"north": {"uv": [0, 14], "uv_size": [14, 5]},
+								"east": {"uv": [0, 14], "uv_size": [14, 5]},
+								"south": {"uv": [0, 14], "uv_size": [14, 5]},
+								"west": {"uv": [0, 14], "uv_size": [14, 5]},
+								"up": {"uv": [0, 0], "uv_size": [14, 14]},
+								"down": {"uv": [0, 32], "uv_size": [14, -14]}
+							}
+						}
+					]
+				},
+				{
+					"name": "squishywashere",
+					"parent": "bone",
+					"pivot": [0, 12, 0],
+					"cubes": [
+						{
+							"origin": [-3, 9, -3],
+							"size": [6, 6, 6],
+							"uv": {
+								"north": {"uv": [14, 0], "uv_size": [6, 6]},
+								"east": {"uv": [14, 0], "uv_size": [6, 6]},
+								"south": {"uv": [14, 0], "uv_size": [6, 6]},
+								"west": {"uv": [14, 0], "uv_size": [6, 6]},
+								"up": {"uv": [14, 12], "uv_size": [6, 6]},
+								"down": {"uv": [14, 24], "uv_size": [6, -6]}
+							}
+						}
+					]
+				},
+				{
+					"name": "toes",
+					"parent": "bone",
+					"pivot": [0, 7, -4.5]
+				},
+				{
+					"name": "fronttoe",
+					"parent": "toes",
+					"pivot": [0, 4.93934, -4.76777],
+					"cubes": [
+						{"origin": [-2, 5, -7], "size": [4, 5, 1], "pivot": [0, 7, -4.5], "rotation": [45, 0, 0], "uv": [14, 6]}
+					]
+				},
+				{
+					"name": "righttoe",
+					"parent": "toes",
+					"pivot": [-4.15685, 4.93934, -0.24695],
+					"cubes": [
+						{"origin": [4, 7.43934, 1.25305], "size": [4, 5, 1], "pivot": [0, 5.93934, 5.75305], "rotation": [0, 90, -45], "uv": [14, 6]}
+					]
+				},
+				{
+					"name": "lefttoe",
+					"parent": "toes",
+					"pivot": [4.15685, 4.93934, -0.24695],
+					"cubes": [
+						{"origin": [4, 7.43934, 9.25305], "size": [4, 5, 1], "pivot": [0, 5.93934, 5.75305], "rotation": [0, 90, 45], "uv": [14, 6]}
+					]
+				},
+				{
+					"name": "backtoe",
+					"parent": "toes",
+					"pivot": [0, 4.93934, 4.25305],
+					"cubes": [
+						{"origin": [-2, 11, 3], "size": [4, 5, 1], "pivot": [0, 7, -4.5], "rotation": [-45, 0, 0], "uv": [14, 6]}
+					]
+				}
+			]
+		}
+	]
+}

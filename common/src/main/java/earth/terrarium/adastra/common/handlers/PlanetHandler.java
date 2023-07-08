@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class PlanetHandler extends SaveHandler {
     private final Map<BlockPos, PlanetData> planetData = new HashMap<>();
@@ -59,19 +60,48 @@ public class PlanetHandler extends SaveHandler {
 
     public static void setOxygen(ServerLevel level, BlockPos pos, boolean oxygen) {
         var data = read(level);
-        data.planetData.put(pos, new PlanetData(oxygen, getTemperature(level, pos), getGravity(level, pos)));
-        data.setDirty();
+        data.planetData.computeIfAbsent(pos, p -> new PlanetData(oxygen, getTemperature(level, p), getGravity(level, p)))
+            .setOxygen(oxygen);
     }
 
     public static void setTemperature(ServerLevel level, BlockPos pos, short temperature) {
         var data = read(level);
-        data.planetData.put(pos, new PlanetData(hasOxygen(level, pos), temperature, getGravity(level, pos)));
-        data.setDirty();
+        data.planetData.computeIfAbsent(pos, p -> new PlanetData(hasOxygen(level, p), temperature, getGravity(level, p)))
+            .setTemperature(temperature);
     }
 
     public static void setGravity(ServerLevel level, BlockPos pos, float gravity) {
         var data = read(level);
-        data.planetData.put(pos, new PlanetData(hasOxygen(level, pos), getTemperature(level, pos), gravity));
-        data.setDirty();
+        data.planetData.computeIfAbsent(pos, p -> new PlanetData(hasOxygen(level, p), getTemperature(level, p), gravity))
+            .setGravity(gravity);
+    }
+
+    public static void setOxygen(ServerLevel level, Set<BlockPos> positions, boolean oxygen) {
+        var data = read(level);
+        for (BlockPos pos : positions) {
+            data.planetData.computeIfAbsent(pos, p -> new PlanetData(oxygen, getTemperature(level, p), getGravity(level, p)))
+                .setOxygen(oxygen);
+        }
+    }
+
+    public static void setTemperature(ServerLevel level, Set<BlockPos> positions, short temperature) {
+        var data = read(level);
+        for (BlockPos pos : positions) {
+            data.planetData.computeIfAbsent(pos, p -> new PlanetData(hasOxygen(level, p), temperature, getGravity(level, p)))
+                .setTemperature(temperature);
+        }
+    }
+
+    public static void setGravity(ServerLevel level, Set<BlockPos> positions, float gravity) {
+        var data = read(level);
+        for (BlockPos pos : positions) {
+            data.planetData.computeIfAbsent(pos, p -> new PlanetData(hasOxygen(level, p), getTemperature(level, p), gravity))
+                .setGravity(gravity);
+        }
+    }
+
+    @Override
+    public boolean isDirty() {
+        return true;
     }
 }

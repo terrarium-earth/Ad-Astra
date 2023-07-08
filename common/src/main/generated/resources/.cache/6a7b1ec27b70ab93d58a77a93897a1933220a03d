@@ -1,8 +1,9 @@
-// 1.20.1	2023-07-06T18:58:46.028003	Block States: adastra
+// 1.20.1	2023-07-08T03:57:19.092541	Block States: adastra
 36ad980a61ba623d936a511a42a24e6209d00991 assets/adastra/blockstates/battery.json
 c6a2b5db66914899b69ae442f06cf6c1d37cebd5 assets/adastra/blockstates/emitter.json
 f18438bc556d2de124171f6810360f756ba2e879 assets/adastra/blockstates/etreonic_blast_furnace.json
 fa15414b2d253bbb39884ddf2e85a08b59b16f7d assets/adastra/blockstates/etreonic_solar_panel.json
+02a50a2e2bfeea5ae24882842fb3742bca717906 assets/adastra/blockstates/gravity_normalizer.json
 74d5948e3bde721a9aa23340692351f508ce242e assets/adastra/blockstates/hydraulic_press.json
 061409ef079f4666442e09e851f91c206dda2eb7 assets/adastra/blockstates/oil_refinery.json
 6ab9a73db65665b2f0d326555e9e41cdc12535d9 assets/adastra/blockstates/oxygen_distributor.json
@@ -20,6 +21,7 @@ f8b5e78da43d41aa3f763bf6b640f212a1afce86 assets/adastra/models/block/emitter.jso
 38da306dd2cdd09156c04b6fc3d9ec4026f15d2a assets/adastra/models/block/etreonic_solar_panel.json
 9a77289c08f5b7ea8fcb971b3f278eaa05bffd5c assets/adastra/models/block/etrionic_blast_furnace.json
 a97269c7fff62c6a7ac64fc7727e83778bcbbd01 assets/adastra/models/block/etrionic_blast_furnace_on.json
+87b354afcaf39686b8fe2d5dbef69d00bbbbc196 assets/adastra/models/block/gravity_normalizer.json
 87f00a68cf7b0200b0035c74b9e2a50220ce1061 assets/adastra/models/block/hydraulic_press.json
 129cccf0ee9f12edc0b724c8a1102a77e6f40d4d assets/adastra/models/block/oil_refinery.json
 27428ecf5a726ecf1d7767ef1ef79a81003b433e assets/adastra/models/block/oxygen_distributor.json
@@ -32,6 +34,7 @@ b068a0b6b614b5aef2c0be4147bcc2f780864da1 assets/adastra/models/block/tinkerers_w
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/emitter.json
 68d3058c71d8cb8faaf923ad3c70ba812f40f6d0 assets/adastra/models/item/etreonic_blast_furnace.json
 4fd741b5f58593b773080a1b0732c176fd5a9119 assets/adastra/models/item/etreonic_solar_panel.json
+ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/gravity_normalizer.json
 7614f968892c8809a21e0714f92af1aadd79554a assets/adastra/models/item/hydraulic_press.json
 7614f968892c8809a21e0714f92af1aadd79554a assets/adastra/models/item/oil_refinery.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/oxygen_distributor.json

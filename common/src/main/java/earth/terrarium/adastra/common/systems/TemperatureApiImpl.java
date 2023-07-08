@@ -16,6 +16,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
+import java.util.Set;
+
 public class TemperatureApiImpl implements TemperatureApi {
     @Override
     public short getTemperature(Level level) {
@@ -42,6 +44,22 @@ public class TemperatureApiImpl implements TemperatureApi {
     public void setTemperature(Level level, BlockPos pos, short temperature) {
         if (level.isClientSide()) return;
         PlanetHandler.setTemperature((ServerLevel) level, pos, temperature);
+    }
+
+    @Override
+    public void setTemperature(Level level, Set<BlockPos> positions, short temperature) {
+        if (level.isClientSide()) return;
+        PlanetHandler.setTemperature((ServerLevel) level, positions, temperature);
+    }
+
+    @Override
+    public void removeTemperature(Level level, BlockPos pos) {
+        setTemperature(level, pos, getTemperature(level));
+    }
+
+    @Override
+    public void removeTemperature(Level level, Set<BlockPos> positions) {
+        setTemperature(level, positions, getTemperature(level));
     }
 
     @Override

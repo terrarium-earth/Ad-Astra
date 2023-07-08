@@ -1,8 +1,8 @@
 package earth.terrarium.adastra.common.blockentities;
 
-import earth.terrarium.adastra.api.systems.OxygenApi;
+import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
-import earth.terrarium.adastra.common.blocks.OxygenDistributorBlock;
+import earth.terrarium.adastra.common.blocks.GravityNormalizerBlock;
 import earth.terrarium.adastra.common.utils.floodfill.FloodFill3D;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
@@ -29,18 +29,21 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.HashSet;
 import java.util.Set;
 
-public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer>, BotariumFluidBlock<WrappedBlockFluidContainer>, GeoBlockEntity {
+public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer>, BotariumFluidBlock<WrappedBlockFluidContainer>, GeoBlockEntity {
     private WrappedBlockEnergyContainer energyContainer;
     private WrappedBlockFluidContainer fluidContainer;
     private final Set<BlockPos> lastDistributedBlocks = new HashSet<>();
 
-    public static final RawAnimation SPIN = RawAnimation.begin().thenLoop("animation.model.spin");
+    public static final RawAnimation IDLE_OFF = RawAnimation.begin().thenLoop("animation.model.idle.off");
+    public static final RawAnimation IDLE_ON = RawAnimation.begin().thenLoop("animation.model.idle.on");
+    public static final RawAnimation TURN_ON = RawAnimation.begin().thenPlayAndHold("animation.model.turn.on");
+    public static final RawAnimation TURN_OFF = RawAnimation.begin().thenPlayAndHold("animation.model.turn.off");
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public static final int CONTAINER_SIZE = 5;
 
-    public OxygenDistributorBlockEntity(BlockPos pos, BlockState state) {
+    public GravityNormalizerBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, CONTAINER_SIZE);
     }
 
@@ -71,7 +74,7 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, state ->
-            state.setAndContinue(SPIN)));
+            state.setAndContinue(IDLE_ON)));
     }
 
     @Override
@@ -86,18 +89,18 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         if (time % 40 == 0) {
-            this.tickOxygen(level, state, pos);
+            this.tickGravity(level, state, pos);
         }
     }
 
     @Override
     public void onRemoved() {
-        this.clearOxygenBlocks();
+        this.clearGravityBlocks();
     }
 
-    protected void tickOxygen(ServerLevel level, BlockState state, BlockPos pos) {
-        AttachFace face = state.getValue(OxygenDistributorBlock.FACE);
-        Direction facing = state.getValue(OxygenDistributorBlock.FACING);
+    protected void tickGravity(ServerLevel level, BlockState state, BlockPos pos) {
+        AttachFace face = state.getValue(GravityNormalizerBlock.FACE);
+        Direction facing = state.getValue(GravityNormalizerBlock.FACING);
         BlockPos start = switch (face) {
             case FLOOR -> pos.above();
             case WALL -> pos.relative(facing);
@@ -107,18 +110,18 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
         int limit = 3000;
         Set<BlockPos> positions = FloodFill3D.run(level, start, limit, FloodFill3D.TEST_FULL_SEAL);
         this.resetLastDistributedBlocks(positions);
-        OxygenApi.API.setOxygen(level, positions, true);
+        GravityApi.API.setGravity(level, positions, 0.5f);
     }
 
     protected void resetLastDistributedBlocks(Set<BlockPos> positions) {
         this.lastDistributedBlocks.removeAll(positions);
-        OxygenApi.API.removeOxygen(level, positions);
+        GravityApi.API.removeGravity(level, this.lastDistributedBlocks);
         this.lastDistributedBlocks.clear();
         this.lastDistributedBlocks.addAll(positions);
     }
 
-    protected void clearOxygenBlocks() {
-        OxygenApi.API.removeOxygen(level, this.lastDistributedBlocks);
+    protected void clearGravityBlocks() {
+        GravityApi.API.removeGravity(level, this.lastDistributedBlocks);
         this.lastDistributedBlocks.clear();
     }
 }

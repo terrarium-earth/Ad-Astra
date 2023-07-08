@@ -17,16 +17,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.item.ItemStack;
 import org.joml.Matrix4f;
 
 public class Ti69Renderer {
     public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/ti-69/ti-69.png");
     public static final ResourceLocation SCREEN = new ResourceLocation(AdAstra.MOD_ID, "textures/ti-69/ti-69_screen.png");
 
-    public static void renderTi69(PoseStack poseStack, MultiBufferSource buffer, int combinedLight, float equippedProgress, HumanoidArm hand, float swingProgress, ItemStack stack, ArmRenderer armRenderer) {
-        float f = hand == HumanoidArm.RIGHT ? 1.0F : -1.0F;
+    public static void renderTi69(PoseStack poseStack, MultiBufferSource buffer, int combinedLight, float equippedProgress, HumanoidArm hand, float swingProgress, ArmRenderer armRenderer) {
+        boolean rightHanded = hand == HumanoidArm.RIGHT;
+        float f = rightHanded ? 1.0F : -1.0F;
         poseStack.translate(f * 0.125F, -0.125F, 0.0F);
+        assert Minecraft.getInstance().player != null;
         if (!Minecraft.getInstance().player.isInvisible()) {
             poseStack.pushPose();
             poseStack.mulPose(Axis.ZP.rotationDegrees(f * 10.0F));
@@ -46,11 +47,11 @@ public class Ti69Renderer {
             pose.mulPose(Axis.YP.rotationDegrees(f * h * -30.0F));
             float moveAmount = hand == HumanoidArm.RIGHT ? 0.1F : 0.09F;
             pose.translate(moveAmount, 0.0F, 0.0F);
-            renderTi69(pose, buffer, combinedLight, stack);
+            renderTi69(pose, buffer, combinedLight, rightHanded);
         }
     }
 
-    public static void renderTi69(PoseStack poseStack, MultiBufferSource buffer, int combinedLight, ItemStack stack) {
+    public static void renderTi69(PoseStack poseStack, MultiBufferSource buffer, int combinedLight, boolean rightHanded) {
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
         poseStack.scale(0.5F, 0.5F, 0.5F);
@@ -66,7 +67,7 @@ public class Ti69Renderer {
 
         try (var pose = new CloseablePoseStack(poseStack)) {
             pose.scale(0.95f, 0.38f, 1.0f);
-            pose.translate(20.0f, 48.0f, -1.0f);
+            pose.translate(rightHanded ? 20.0f : 22.0f, 50.0f, -1.0f);
             VertexConsumer screenVertex = buffer.getBuffer(RenderType.text(SCREEN));
             Matrix4f matrix4f2 = pose.last().pose();
             screenVertex.vertex(matrix4f2, -7.0F, 100.0F, 0.0F).color(255, 255, 255, 255).uv(0.0F, 1.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
@@ -74,7 +75,6 @@ public class Ti69Renderer {
             screenVertex.vertex(matrix4f2, 100.0F, -7.0F, 0.0F).color(255, 255, 255, 255).uv(1.0F, 0.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
             screenVertex.vertex(matrix4f2, -7.0F, -7.0F, 0.0F).color(255, 255, 255, 255).uv(0.0F, 0.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
         }
-
 
         PlanetData data = AdAstraClient.localData;
         if (data == null) return;

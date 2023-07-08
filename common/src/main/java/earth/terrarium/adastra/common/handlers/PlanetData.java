@@ -1,12 +1,46 @@
 package earth.terrarium.adastra.common.handlers;
 
-public record PlanetData(boolean oxygen, short temperature, float gravity) {
+public final class PlanetData {
     public static final int OXYGEN_BIT = 0;
     public static final int OXYGEN_BIT_LENGTH = Byte.SIZE;
     public static final int TEMPERATURE_BIT = OXYGEN_BIT + OXYGEN_BIT_LENGTH;
     public static final int TEMPERATURE_BIT_LENGTH = Short.SIZE;
     public static final int GRAVITY_BIT = TEMPERATURE_BIT + TEMPERATURE_BIT_LENGTH;
     public static final int GRAVITY_BIT_LENGTH = Float.SIZE;
+
+    private boolean oxygen;
+    private short temperature;
+    private float gravity;
+
+    public PlanetData(boolean oxygen, short temperature, float gravity) {
+        this.oxygen = oxygen;
+        this.temperature = temperature;
+        this.gravity = gravity;
+    }
+
+    public boolean oxygen() {
+        return oxygen;
+    }
+
+    public void setOxygen(boolean oxygen) {
+        this.oxygen = oxygen;
+    }
+
+    public short temperature() {
+        return temperature;
+    }
+
+    public void setTemperature(short temperature) {
+        this.temperature = temperature;
+    }
+
+    public float gravity() {
+        return gravity;
+    }
+
+    public void setGravity(float gravity) {
+        this.gravity = gravity;
+    }
 
     public long pack() {
         long packedData = 0;
