@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ModDamageSources {
+public final class ModDamageSources {
     private static final Map<ResourceKey<DamageType>, DamageSource> DAMAGE_SOURCES = new HashMap<>();
 
     public static final ResourceKey<DamageType> OXYGEN = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(AdAstra.MOD_ID, "oxygen"));

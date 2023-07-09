@@ -1,11 +1,14 @@
-// 1.20.1	2023-07-08T03:57:19.092541	Block States: adastra
+// 1.20.1	2023-07-08T23:46:06.764505	Block States: adastra
 36ad980a61ba623d936a511a42a24e6209d00991 assets/adastra/blockstates/battery.json
 c6a2b5db66914899b69ae442f06cf6c1d37cebd5 assets/adastra/blockstates/emitter.json
 f18438bc556d2de124171f6810360f756ba2e879 assets/adastra/blockstates/etreonic_blast_furnace.json
 fa15414b2d253bbb39884ddf2e85a08b59b16f7d assets/adastra/blockstates/etreonic_solar_panel.json
 02a50a2e2bfeea5ae24882842fb3742bca717906 assets/adastra/blockstates/gravity_normalizer.json
 74d5948e3bde721a9aa23340692351f508ce242e assets/adastra/blockstates/hydraulic_press.json
+ba7472e434f71e1cf8848d97c7b8d11dca998611 assets/adastra/blockstates/hydrogen.json
+e35160973716ebc349a74595d067b8d03a7d226c assets/adastra/blockstates/oil.json
 061409ef079f4666442e09e851f91c206dda2eb7 assets/adastra/blockstates/oil_refinery.json
+899c99ddc76621abeed88fbc2b32cc2b48d6de7b assets/adastra/blockstates/oxygen.json
 6ab9a73db65665b2f0d326555e9e41cdc12535d9 assets/adastra/blockstates/oxygen_distributor.json
 b650372dc246c0893da8fd134960df20bb20e317 assets/adastra/blockstates/receiver.json
 5117843af31bd7ef0d55b913338713cb6c110d06 assets/adastra/blockstates/steam_generator.json
@@ -23,7 +26,10 @@ f8b5e78da43d41aa3f763bf6b640f212a1afce86 assets/adastra/models/block/emitter.jso
 a97269c7fff62c6a7ac64fc7727e83778bcbbd01 assets/adastra/models/block/etrionic_blast_furnace_on.json
 87b354afcaf39686b8fe2d5dbef69d00bbbbc196 assets/adastra/models/block/gravity_normalizer.json
 87f00a68cf7b0200b0035c74b9e2a50220ce1061 assets/adastra/models/block/hydraulic_press.json
+50812bd51e14ec5ea223afe239c89730a63e43b1 assets/adastra/models/block/hydrogen.json
+50812bd51e14ec5ea223afe239c89730a63e43b1 assets/adastra/models/block/oil.json
 129cccf0ee9f12edc0b724c8a1102a77e6f40d4d assets/adastra/models/block/oil_refinery.json
+50812bd51e14ec5ea223afe239c89730a63e43b1 assets/adastra/models/block/oxygen.json
 27428ecf5a726ecf1d7767ef1ef79a81003b433e assets/adastra/models/block/oxygen_distributor.json
 a3c9a033ec6f02b85162973f4b4acd0651bba52c assets/adastra/models/block/receiver.json
 322f90f41686e9c8748d4b6d1a2ea94b05b48c31 assets/adastra/models/block/steam_generator.json

@@ -5,15 +5,17 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blocks.*;
+import earth.terrarium.botarium.common.registry.fluid.BotariumLiquidBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public class ModBlocks {
+public final class ModBlocks {
     public static final ResourcefulRegistry<Block> BLOCKS = ResourcefulRegistries.create(BuiltInRegistries.BLOCK, AdAstra.MOD_ID);
 
     public static final ResourcefulRegistry<Block> MACHINES = ResourcefulRegistries.create(BLOCKS);
+    public static final ResourcefulRegistry<Block> FLUIDS = ResourcefulRegistries.create(BLOCKS);
 
     public static final RegistryEntry<Block> OXYGEN_DISTRIBUTOR = MACHINES.register("oxygen_distributor", () -> new OxygenDistributorBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
@@ -39,5 +41,9 @@ public class ModBlocks {
 
     public static final RegistryEntry<Block> VESNIUM_COIL = MACHINES.register("vesnium_coil", () -> new VesniumCoilBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
-    public static final RegistryEntry<Block> TINKERERS_WORKBENCH = BLOCKS.register("tinkerers_workbench", () -> new TinkerersWorkbenchBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
+    public static final RegistryEntry<Block> TINKERERS_WORKBENCH = MACHINES.register("tinkerers_workbench", () -> new TinkerersWorkbenchBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
+
+    public static final RegistryEntry<Block> OXYGEN = FLUIDS.register("oxygen", () -> new BotariumLiquidBlock(ModFluidProperties.OXYGEN, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryEntry<Block> HYDROGEN = FLUIDS.register("hydrogen", () -> new BotariumLiquidBlock(ModFluidProperties.HYDROGEN, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryEntry<Block> OIL = FLUIDS.register("oil", () -> new BotariumLiquidBlock(ModFluidProperties.OIL, BlockBehaviour.Properties.copy(Blocks.WATER)));
 }

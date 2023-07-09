@@ -5,6 +5,7 @@ import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.planets.Planet;
+import earth.terrarium.adastra.common.tags.ModEntityTypeTags;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
@@ -81,10 +82,13 @@ public class TemperatureApiImpl implements TemperatureApi {
     @Override
     public void entityTick(ServerLevel level, LivingEntity entity) {
         if (level.getGameTime() % 20 != 0) return;
+        if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE)) return;
         if (this.isHot(level, entity.blockPosition())) {
+            if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_EXTREME_HEAT)) return;
             entity.hurt(entity.damageSources().onFire(), 6);
             entity.setSecondsOnFire(10);
         } else if (this.isCold(level, entity.blockPosition())) {
+            if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_EXTREME_COLD)) return;
             entity.hurt(entity.damageSources().freeze(), 3);
             entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze() + 20, entity.getTicksFrozen() + 5 * 10));
             ModUtils.sendParticles(level, ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), 1, Mth.randomBetween(level.random, -1.0f, 1.0f) * 0.083333336f, 0.05, (double) Mth.randomBetween(level.random, -1.0f, 1.0f) * 0.083333336, 0);

@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.utils.floodfill;
 
+import earth.terrarium.adastra.common.tags.ModBlockTags;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,6 +19,8 @@ public final class FloodFill3D {
     public static final SolidBlockPredicate TEST_FULL_SEAL = (level, pos, direction) -> {
         BlockState state = level.getBlockState(pos);
         if (state.isAir()) return true;
+        if (state.is(ModBlockTags.PASSES_FLOOD_FILL)) return true;
+        if (state.is(ModBlockTags.BLOCKS_FLOOD_FILL)) return false;
         VoxelShape collisionShape = state.getCollisionShape(level, pos);
         if (collisionShape.isEmpty()) return true;
         if (!isSideSolid(collisionShape, direction)) return true;

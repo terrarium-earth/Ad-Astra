@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.datagen.provider.client;
 
 
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blocks.BatteryBlock;
 import earth.terrarium.adastra.common.blocks.EtrionicBlastFurnaceBlock;
@@ -15,12 +16,16 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBlockStateProvider extends BlockStateProvider {
+    public static final ResourceLocation WATER_STILL = new ResourceLocation("block/water_still");
+
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, AdAstra.MOD_ID, existingFileHelper);
     }
 
     @Override
     protected void registerStatesAndModels() {
+        ModBlocks.FLUIDS.stream().map(RegistryEntry::get).forEach(this::fluidBlock);
+
         basicRenderedBlock(ModBlocks.OXYGEN_DISTRIBUTOR.get());
         basicRenderedBlock(ModBlocks.GRAVITY_NORMALIZER.get());
         basicRenderedBlock(ModBlocks.ETRIONIC_SOLAR_PANEL.get(), ModItemModelProvider.SOLAR_PANEL);
@@ -81,6 +86,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .rotationY((int) facing.toYRot())
                 .build();
         });
+    }
+
+    private void fluidBlock(Block block) {
+        simpleBlock(block, models().getBuilder(name(block)).texture("particle", WATER_STILL.toString()));
     }
 
     private ResourceLocation key(Block block) {

@@ -9,6 +9,7 @@ import earth.terrarium.adastra.common.blockentities.*;
 import earth.terrarium.adastra.common.items.armor.AerolyteSpaceSuitItem;
 import earth.terrarium.adastra.common.items.armor.materials.AerolyteSpaceSuitMaterial;
 import earth.terrarium.adastra.common.items.base.CustomGeoBlockItem;
+import earth.terrarium.botarium.common.registry.fluid.FluidBucketItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
@@ -16,7 +17,7 @@ import net.minecraft.world.item.*;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
-public class ModItems {
+public final class ModItems {
     public static final ResourcefulRegistry<Item> ITEMS = ResourcefulRegistries.create(BuiltInRegistries.ITEM, AdAstra.MOD_ID);
     public static final Supplier<CreativeModeTab> TAB = new ResourcefulCreativeTab(new ResourceLocation(AdAstra.MOD_ID, "main"))
         .setItemIcon(() -> Items.DIRT)
@@ -24,6 +25,8 @@ public class ModItems {
         .build();
 
     public static final ResourcefulRegistry<Item> MACHINES = ResourcefulRegistries.create(ITEMS);
+
+    public static final RegistryEntry<Item> TI_69 = ITEMS.register("ti_69", () -> new Item(new Item.Properties()));
 
     public static final RegistryEntry<Item> OXYGEN_DISTRIBUTOR = MACHINES.register("oxygen_distributor", () -> new CustomGeoBlockItem(
         ModBlocks.OXYGEN_DISTRIBUTOR.get(),
@@ -80,13 +83,51 @@ public class ModItems {
         new Item.Properties(),
         TinkerersWorkbenchBlockEntity.FABRICATING));
 
-    public static final RegistryEntry<Item> BATTERY = MACHINES.register("battery", () -> new BlockItem(ModBlocks.BATTERY.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> ETRIONIC_BLAST_FURNACE = MACHINES.register("etreonic_blast_furnace", () -> new BlockItem(ModBlocks.ETRIONIC_BLAST_FURNACE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> BATTERY = MACHINES.register("battery", () -> new BlockItem(
+        ModBlocks.BATTERY.get(), new Item.Properties())
+    );
 
-    public static final RegistryEntry<Item> TI_69 = MACHINES.register("ti_69", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIONIC_BLAST_FURNACE = MACHINES.register("etreonic_blast_furnace", () -> new BlockItem(
+        ModBlocks.ETRIONIC_BLAST_FURNACE.get(),
+        new Item.Properties())
+    );
 
-    public static final RegistryEntry<Item> AEROLYTE_SPACE_HELMET = MACHINES.register("aerolyte_space_helmet", () -> new AerolyteSpaceSuitItem(AerolyteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final RegistryEntry<Item> AEROLYTE_SPACE_SUIT = MACHINES.register("aerolyte_space_suit", () -> new AerolyteSpaceSuitItem(AerolyteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-    public static final RegistryEntry<Item> AEROLYTE_SPACE_PANTS = MACHINES.register("aerolyte_space_pants", () -> new AerolyteSpaceSuitItem(AerolyteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-    public static final RegistryEntry<Item> AEROLYTE_SPACE_BOOTS = MACHINES.register("aerolyte_space_boots", () -> new AerolyteSpaceSuitItem(AerolyteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final RegistryEntry<Item> AEROLYTE_SPACE_HELMET = ITEMS.register("aerolyte_space_helmet", () -> new AerolyteSpaceSuitItem(
+        AerolyteSpaceSuitMaterial.MATERIAL,
+        ArmorItem.Type.HELMET,
+        new Item.Properties())
+    );
+
+    public static final RegistryEntry<Item> AEROLYTE_SPACE_SUIT = ITEMS.register("aerolyte_space_suit", () -> new AerolyteSpaceSuitItem(
+        AerolyteSpaceSuitMaterial.MATERIAL,
+        ArmorItem.Type.CHESTPLATE,
+        new Item.Properties())
+    );
+
+    public static final RegistryEntry<Item> AEROLYTE_SPACE_PANTS = ITEMS.register("aerolyte_space_pants", () -> new AerolyteSpaceSuitItem(
+        AerolyteSpaceSuitMaterial.MATERIAL,
+        ArmorItem.Type.LEGGINGS,
+        new Item.Properties())
+    );
+
+    public static final RegistryEntry<Item> AEROLYTE_SPACE_BOOTS = ITEMS.register("aerolyte_space_boots", () -> new AerolyteSpaceSuitItem(
+        AerolyteSpaceSuitMaterial.MATERIAL,
+        ArmorItem.Type.BOOTS,
+        new Item.Properties())
+    );
+
+    public static final RegistryEntry<Item> OXYGEN_BUCKET = ITEMS.register("oxygen_bucket", () -> new FluidBucketItem(
+        ModFluidProperties.OXYGEN,
+        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
+    );
+
+    public static final RegistryEntry<Item> HYDROGEN_BUCKET = ITEMS.register("hydrogen_bucket", () -> new FluidBucketItem(
+        ModFluidProperties.HYDROGEN,
+        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
+    );
+
+    public static final RegistryEntry<Item> OIL_BUCKET = ITEMS.register("oil_bucket", () -> new FluidBucketItem(
+        ModFluidProperties.OIL,
+        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
+    );
 }

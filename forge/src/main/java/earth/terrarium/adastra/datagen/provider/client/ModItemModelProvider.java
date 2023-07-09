@@ -23,5 +23,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.AEROLYTE_SPACE_SUIT.get());
         basicItem(ModItems.AEROLYTE_SPACE_PANTS.get());
         basicItem(ModItems.AEROLYTE_SPACE_BOOTS.get());
+
+        basicItem(ModItems.OXYGEN_BUCKET.get());
+        basicItem(ModItems.HYDROGEN_BUCKET.get());
+        basicItem(ModItems.OIL_BUCKET.get());
     }
 }

@@ -8,10 +8,7 @@ import earth.terrarium.adastra.common.networking.NetworkHandler;
 import earth.terrarium.adastra.common.networking.messages.ClientboundSyncLocalPlanetDataPacket;
 import earth.terrarium.adastra.common.networking.messages.ClientboundSyncPlanetsPacket;
 import earth.terrarium.adastra.common.planets.AdAstraData;
-import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
-import earth.terrarium.adastra.common.registry.ModBlocks;
-import earth.terrarium.adastra.common.registry.ModDamageSources;
-import earth.terrarium.adastra.common.registry.ModItems;
+import earth.terrarium.adastra.common.registry.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,7 +21,8 @@ public class AdAstra {
 
     public static void init() {
         NetworkHandler.init();
-
+        ModFluidProperties.FLUID_PROPERTIES.initialize();
+        ModFluids.FLUIDS.init();
         ModBlocks.BLOCKS.init();
         ModItems.ITEMS.init();
         ModBlockEntityTypes.BLOCK_ENTITY_TYPES.init();

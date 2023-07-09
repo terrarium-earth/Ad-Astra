@@ -5,6 +5,7 @@ import earth.terrarium.adastra.common.handlers.PlanetHandler;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
+import earth.terrarium.adastra.common.tags.ModEntityTypeTags;
 import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
@@ -63,6 +64,8 @@ public class OxygenApiImpl implements OxygenApi {
     public void entityTick(ServerLevel level, LivingEntity entity) {
         if (level.getGameTime() % 20 != 0) return;
         if (this.hasOxygen(entity)) return;
+        if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_WITHOUT_OXYGEN)) return;
+        if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE)) return;
         entity.hurt(ModDamageSources.getOrCreate(level, ModDamageSources.OXYGEN), 2);
         entity.setAirSupply(-80);
     }

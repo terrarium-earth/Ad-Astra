@@ -6,6 +6,7 @@ import earth.terrarium.adastra.datagen.provider.client.ModBlockStateProvider;
 import earth.terrarium.adastra.datagen.provider.client.ModItemModelProvider;
 import earth.terrarium.adastra.datagen.provider.client.ModLangProvider;
 import earth.terrarium.adastra.datagen.provider.server.ModPlanetProvider;
+import earth.terrarium.adastra.datagen.provider.server.tags.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -32,5 +33,11 @@ public final class AdAstraDataGenerator {
 
         generator.addProvider(event.includeServer(), new ModRegistryProvider(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new ModPlanetProvider(packOutput));
+
+        generator.addProvider(event.includeServer(), new ModBlockTagProvider(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModItemTagProvider(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModFluidTagProvider(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModEntityTypeTagProvider(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModRecipeTypeTagProvider(packOutput, lookupProvider, existingFileHelper));
     }
 }

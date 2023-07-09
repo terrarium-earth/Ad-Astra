@@ -1,0 +1,5 @@
+// 1.20.1	2023-07-09T00:14:29.521239	Tags for minecraft:entity_type mod id adastra
+6ee92c5c1aa1e11e42dd86a04cac8d864f8cfbb8 data/adastra/tags/entity_types/can_survive_extreme_cold.json
+68b0da066fd014874f1d7b886cd84b74d69bf3db data/adastra/tags/entity_types/can_survive_extreme_heat.json
+7b94778a998a2b28e9882b1d60d1b4653cc0fdfd data/adastra/tags/entity_types/can_survive_in_space.json
+a0bf22c6fa8cd459ed108aa49b2a1e4adc9c7929 data/adastra/tags/entity_types/can_survive_without_oxygen.json
