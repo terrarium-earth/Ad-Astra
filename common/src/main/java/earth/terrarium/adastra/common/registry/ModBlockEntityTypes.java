@@ -85,4 +85,10 @@ public final class ModBlockEntityTypes {
         () -> RegistryHelpers.createBlockEntityType(
             EtrionicBlastFurnaceBlockEntity::new,
             ModBlocks.ETRIONIC_BLAST_FURNACE.get()));
+
+    public static final RegistryEntry<BlockEntityType<RecyclerBlockEntity>> RECYCLER = BLOCK_ENTITY_TYPES.register(
+        "recycler",
+        () -> RegistryHelpers.createBlockEntityType(
+            RecyclerBlockEntity::new,
+            ModBlocks.RECYCLER.get()));
 }

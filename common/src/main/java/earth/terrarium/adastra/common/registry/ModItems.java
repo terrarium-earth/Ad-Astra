@@ -83,6 +83,11 @@ public final class ModItems {
         new Item.Properties(),
         TinkerersWorkbenchBlockEntity.FABRICATING));
 
+    public static final RegistryEntry<Item> RECYCLER = MACHINES.register("recycler", () -> new CustomGeoBlockItem(
+        ModBlocks.RECYCLER.get(),
+        new Item.Properties(),
+        RecyclerBlockEntity.IDLE_ON));
+
     public static final RegistryEntry<Item> BATTERY = MACHINES.register("battery", () -> new BlockItem(
         ModBlocks.BATTERY.get(), new Item.Properties())
     );

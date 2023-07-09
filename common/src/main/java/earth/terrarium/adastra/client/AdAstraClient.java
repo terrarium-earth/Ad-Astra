@@ -59,6 +59,7 @@ public class AdAstraClient {
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.RECEIVER.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.RECEIVER));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.VESNIUM_COIL.get(), context -> new CustomGeoBlockRenderer<>(ModBlocks.VESNIUM_COIL));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.TINKERERS_WORKBENCH.get(), context -> new TinkerersWorkbenchBlockEntityRenderer(ModBlocks.TINKERERS_WORKBENCH));
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.RECYCLER.get(), context -> new CustomGeoBlockRenderer<>(ModBlocks.RECYCLER));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.GRAVITY_NORMALIZER.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.GRAVITY_NORMALIZER));
     }
 
@@ -73,6 +74,7 @@ public class AdAstraClient {
         ITEM_RENDERERS.put(ModBlocks.RECEIVER.get().asItem(), new CustomGeoItemRenderer(ModBlocks.RECEIVER));
         ITEM_RENDERERS.put(ModBlocks.VESNIUM_COIL.get().asItem(), new CustomGeoItemRenderer(ModBlocks.VESNIUM_COIL));
         ITEM_RENDERERS.put(ModBlocks.TINKERERS_WORKBENCH.get().asItem(), new CustomGeoItemRenderer(ModBlocks.TINKERERS_WORKBENCH));
+        ITEM_RENDERERS.put(ModBlocks.RECYCLER.get().asItem(), new CustomGeoItemRenderer(ModBlocks.RECYCLER));
         ITEM_RENDERERS.put(ModBlocks.GRAVITY_NORMALIZER.get().asItem(), new CustomGeoItemRenderer(ModBlocks.GRAVITY_NORMALIZER));
     }
 
