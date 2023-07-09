@@ -6,6 +6,7 @@ import com.mojang.math.Axis;
 import com.teamresourceful.resourcefullib.client.CloseablePoseStack;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.AdAstraClient;
+import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.handlers.PlanetData;
 import net.minecraft.client.Minecraft;
@@ -83,7 +84,7 @@ public class Ti69Renderer {
         poseStack.scale(0.75f, 0.7f, 0.7f);
         poseStack.scale(1.6f, 1.0f, 1.0f);
         Font font = Minecraft.getInstance().font;
-        Component oxygen = Component.translatable("text.adastra.oxygen", data.oxygen());
+        Component oxygen = data.oxygen() ? ConstantComponents.OXYGEN_TRUE : ConstantComponents.OXYGEN_FALSE;
         Component temperature = Component.translatable("text.adastra.temperature", data.temperature());
         Component gravity = Component.translatable("text.adastra.gravity", Math.round(data.gravity() * PlanetConstants.EARTH_GRAVITY * 1000) / 1000f);
         font.drawInBatch(oxygen, 0, 5, 0xFFFFFF, false, matrix4f, buffer, Font.DisplayMode.NORMAL, 0xFFFFFF, LightTexture.FULL_BRIGHT);

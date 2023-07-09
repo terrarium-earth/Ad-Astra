@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.client;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.renderers.blocks.base.CustomGeoBlockRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.base.SidedGeoBlockRenderer;
@@ -7,7 +8,9 @@ import earth.terrarium.adastra.client.renderers.blocks.machines.SteamGeneratorBl
 import earth.terrarium.adastra.client.renderers.blocks.machines.TinkerersWorkbenchBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.items.armor.AerolyteSpaceSuitRenderer;
 import earth.terrarium.adastra.client.renderers.items.base.CustomGeoItemRenderer;
+import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.handlers.PlanetData;
+import earth.terrarium.adastra.common.items.armor.AerolyteSpaceSuitItem;
 import earth.terrarium.adastra.common.networking.NetworkHandler;
 import earth.terrarium.adastra.common.networking.messages.ServerboundSyncKeybindPacket;
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
@@ -15,11 +18,14 @@ import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.adastra.common.utils.KeybindManager;
 import earth.terrarium.botarium.client.ClientHooks;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
@@ -33,6 +39,12 @@ import java.util.function.Supplier;
 public class AdAstraClient {
     private static final Map<Item, BlockEntityWithoutLevelRenderer> ITEM_RENDERERS = new HashMap<>();
     private static final Map<Item, Supplier<GeoArmorRenderer<?>>> ARMOR_RENDERERS = new HashMap<>();
+    private static boolean suitFlightEnabled = true;
+
+    public static final KeyMapping KEY_TOGGLE_SUIT_FLIGHT = new KeyMapping(
+        ConstantComponents.TOGGLE_SUIT_FLIGHT_KEY.getString(),
+        InputConstants.KEY_V,
+        ConstantComponents.AD_ASTRA_CATEGORY.getString());
 
     @Nullable
     public static PlanetData localData;
@@ -94,17 +106,25 @@ public class AdAstraClient {
     }
 
     public static void clientTick(Minecraft minecraft) {
-        if (minecraft.player == null) return;
+        LocalPlayer player = minecraft.player;
+        if (player == null) return;
         Options options = minecraft.options;
+
+        if (KEY_TOGGLE_SUIT_FLIGHT.consumeClick() && player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof AerolyteSpaceSuitItem) {
+            player.displayClientMessage(suitFlightEnabled ? ConstantComponents.SUIT_FLIGHT_DISABLED : ConstantComponents.SUIT_FLIGHT_ENABLED, true);
+            suitFlightEnabled = !suitFlightEnabled;
+        }
+
         var keybinds = new KeybindManager(
             options.keyJump.isDown(),
             options.keySprint.isDown(),
             options.keyUp.isDown(),
             options.keyLeft.isDown(),
             options.keyDown.isDown(),
-            options.keyRight.isDown()
+            options.keyRight.isDown(),
+            suitFlightEnabled
         );
-        KeybindManager.set(minecraft.player, keybinds);
+        KeybindManager.set(player, keybinds);
         NetworkHandler.CHANNEL.sendToServer(new ServerboundSyncKeybindPacket(keybinds));
     }
 }

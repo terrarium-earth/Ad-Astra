@@ -15,17 +15,19 @@ public final class KeybindManager {
     private boolean leftDown;
     private boolean backDown;
     private boolean rightDown;
+    private boolean suitFlightEnabled;
 
     public KeybindManager() {
     }
 
-    public KeybindManager(boolean jumpDown, boolean sprintDown, boolean forwardDown, boolean leftDown, boolean backDown, boolean rightDown) {
+    public KeybindManager(boolean jumpDown, boolean sprintDown, boolean forwardDown, boolean leftDown, boolean backDown, boolean rightDown, boolean suitFlightEnabled) {
         this.jumpDown = jumpDown;
         this.sprintDown = sprintDown;
         this.forwardDown = forwardDown;
         this.leftDown = leftDown;
         this.backDown = backDown;
         this.rightDown = rightDown;
+        this.suitFlightEnabled = suitFlightEnabled;
     }
 
     public static boolean jumpDown(Player player) {
@@ -76,6 +78,14 @@ public final class KeybindManager {
         return PLAYER_KEYS.getOrDefault(player, new KeybindManager()).rightDown;
     }
 
+    public static boolean suitFlightEnabled(Player player) {
+        return suitFlightEnabled(player.getUUID());
+    }
+
+    public static boolean suitFlightEnabled(UUID player) {
+        return PLAYER_KEYS.getOrDefault(player, new KeybindManager()).suitFlightEnabled;
+    }
+
     public byte pack() {
         byte packed = 0;
         packed |= this.jumpDown ? 1 : 0;
@@ -84,6 +94,7 @@ public final class KeybindManager {
         packed |= this.leftDown ? 8 : 0;
         packed |= this.backDown ? 16 : 0;
         packed |= this.rightDown ? 32 : 0;
+        packed |= this.suitFlightEnabled ? 64 : 0;
         return packed;
     }
 
@@ -95,6 +106,7 @@ public final class KeybindManager {
         keybinds.leftDown = (packed & 8) != 0;
         keybinds.backDown = (packed & 16) != 0;
         keybinds.rightDown = (packed & 32) != 0;
+        keybinds.suitFlightEnabled = (packed & 64) != 0;
         return keybinds;
     }
 

@@ -27,7 +27,12 @@
   "item.adastra.oxygen_bucket": "Oxygen Bucket",
   "item.adastra.ti_69": "Ti 69",
   "itemGroup.adastra.main": "Ad Astra",
+  "key.adastra.toggle_suit_flight": "Toggle Suit Flight",
+  "key.categories.adastra": "Ad Astra",
+  "message.adastra.suit_flight_disabled": "Suit Flight Disabled",
+  "message.adastra.suit_flight_enabled": "Suit Flight Enabled",
   "text.adastra.gravity": "%s m/s²",
-  "text.adastra.oxygen": "%s",
+  "text.adastra.oxygen_false": "✘",
+  "text.adastra.oxygen_true": "✔",
   "text.adastra.temperature": "%s °C"
 }
