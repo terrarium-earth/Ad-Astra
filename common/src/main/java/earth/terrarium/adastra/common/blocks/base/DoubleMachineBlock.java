@@ -75,10 +75,14 @@ public class DoubleMachineBlock extends MachineBlock {
         Level level = context.getLevel();
         if (blockPos.getY() < level.getMaxBuildHeight() - 1 && level.getBlockState(blockPos.above()).canBeReplaced(context)) {
             boolean powered = level.hasNeighborSignal(blockPos) || level.hasNeighborSignal(blockPos.above());
-            return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(POWERED, powered);
+            return this.defaultBlockState().setValue(FACING, this.placeOppositeDirection() ? context.getHorizontalDirection().getOpposite() : context.getHorizontalDirection()).setValue(POWERED, powered);
         } else {
             return null;
         }
+    }
+
+    public boolean placeOppositeDirection() {
+        return true;
     }
 
     @Override

@@ -82,4 +82,9 @@ public class EtrionicBlastFurnaceBlock extends DoubleMachineBlock {
             return TOP_SHAPE;
         }
     }
+
+    @Override
+    public boolean placeOppositeDirection() {
+        return false;
+    }
 }

@@ -40,7 +40,7 @@ public class AerolyteSpaceSuitMaterial implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return "aerolyte_space_suit";
+        return "netherite";
     }
 
     @Override
