@@ -57,6 +57,7 @@ subprojects {
         "modApi"(group = "com.teamresourceful.resourcefullib", name = "resourcefullib-$modLoader-$minecraftVersion", version = resourcefulLibVersion)
         "modApi"(group = "com.teamresourceful.resourcefulconfig", name = "resourcefulconfig-$modLoader-1.20", version = resourcefulConfigVersion)
         "modApi"(group = "earth.terrarium", name = "botarium-$modLoader-1.20", version = botariumVersion)
+        "include"(implementation(group = "javazoom", name = "jlayer", version = "1.0.1"))
         if (isCommon) {
             "modApi"(group = "mezz.jei", name = "jei-$minecraftVersion-$modLoader-api", version = jeiVersion)
             "modApi"(group = "me.shedaniel", name = "RoughlyEnoughItems-api", version = reiVersion) {

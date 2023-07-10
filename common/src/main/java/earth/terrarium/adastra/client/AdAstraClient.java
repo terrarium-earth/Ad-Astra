@@ -2,6 +2,7 @@ package earth.terrarium.adastra.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.client.config.ClientConfig;
 import earth.terrarium.adastra.client.renderers.blocks.base.CustomGeoBlockRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.base.SidedGeoBlockRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.machines.SteamGeneratorBlockEntityRenderer;
@@ -50,6 +51,7 @@ public class AdAstraClient {
     public static PlanetData localData;
 
     public static void init() {
+        AdAstra.CONFIGURATOR.registerConfig(ClientConfig.class);
         registerBlockRenderTypes();
         registerBlockEntityRenderers();
         registerItemRenderers();

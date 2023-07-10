@@ -1,23 +1,25 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "earth.terrarium.adastra.mixins",
-    "compatibilityLevel": "JAVA_17",
-    "mixins": [
-        "common.LivingEntityMixin",
-        "common.gravity.AbstractArrowMixin",
-        "common.gravity.BoatMixin",
-        "common.gravity.FishingHookMixin",
-        "common.gravity.GravityEntityMixin",
-        "common.gravity.ThrowableProjectileMixin",
-        "common.gravity.ThrownExperienceBottleMixin",
-        "common.gravity.ThrownPotionMixin"
-    ],
-    "client": [
-        "client.ItemInHandRendererMixin",
-        "client.PlayerRendererMixin"
-    ],
-    "injectors": {
-        "defaultRequire": 1
-    }
+  "required": true,
+  "minVersion": "0.8",
+  "package": "earth.terrarium.adastra.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "common.LivingEntityMixin",
+    "common.gravity.AbstractArrowMixin",
+    "common.gravity.BoatMixin",
+    "common.gravity.FishingHookMixin",
+    "common.gravity.GravityEntityMixin",
+    "common.gravity.ThrowableProjectileMixin",
+    "common.gravity.ThrownExperienceBottleMixin",
+    "common.gravity.ThrownPotionMixin"
+  ],
+  "client": [
+    "client.ItemInHandRendererMixin",
+    "client.PlayerRendererMixin",
+    "client.SoundEngineAccessor",
+    "client.SoundManagerAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

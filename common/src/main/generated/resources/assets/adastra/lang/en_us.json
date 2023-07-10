@@ -34,5 +34,6 @@
   "text.adastra.gravity": "%s m/s²",
   "text.adastra.oxygen_false": "✘",
   "text.adastra.oxygen_true": "✔",
+  "text.adastra.radio.none": "No station",
   "text.adastra.temperature": "%s °C"
 }

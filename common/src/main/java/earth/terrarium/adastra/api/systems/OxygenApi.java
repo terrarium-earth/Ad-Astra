@@ -59,9 +59,9 @@ public interface OxygenApi {
     /**
      * Sets the oxygen presence of the given positions to the given value.
      *
-     * @param level  The level to check.
-     * @param positions    The position to add oxygen to.
-     * @param oxygen The oxygen to set.
+     * @param level     The level to check.
+     * @param positions The position to add oxygen to.
+     * @param oxygen    The oxygen to set.
      */
     void setOxygen(Level level, Set<BlockPos> positions, boolean oxygen);
 

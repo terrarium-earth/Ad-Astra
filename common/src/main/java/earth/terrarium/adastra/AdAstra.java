@@ -1,5 +1,6 @@
 package earth.terrarium.adastra;
 
+import com.teamresourceful.resourcefulconfig.common.config.Configurator;
 import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
@@ -9,6 +10,7 @@ import earth.terrarium.adastra.common.networking.messages.ClientboundSyncLocalPl
 import earth.terrarium.adastra.common.networking.messages.ClientboundSyncPlanetsPacket;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.registry.*;
+import earth.terrarium.adastra.common.utils.radio.StationLoader;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,10 +19,14 @@ import net.minecraft.server.packs.resources.PreparableReloadListener;
 import java.util.function.BiConsumer;
 
 public class AdAstra {
+
     public static final String MOD_ID = "adastra";
+    public static final Configurator CONFIGURATOR = new Configurator();
 
     public static void init() {
         NetworkHandler.init();
+        StationLoader.init();
+
         ModFluidProperties.FLUID_PROPERTIES.initialize();
         ModFluids.FLUIDS.init();
         ModBlocks.BLOCKS.init();
