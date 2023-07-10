@@ -65,6 +65,10 @@ public final class RadioSoundInstance extends AbstractSoundInstance implements T
 
     @Override
     public void tick() {
+        if (this != RadioHandler.getLastStation()) {
+            this.stopped = true;
+            return;
+        }
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.isAlive()) {
             this.x = (float) Minecraft.getInstance().player.getX();
             this.y = (float) Minecraft.getInstance().player.getY();

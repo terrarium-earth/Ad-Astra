@@ -94,4 +94,8 @@ public final class RadioHandler {
         if (lastStation == null) return null;
         return lastStation.url();
     }
+
+    public static RadioSoundInstance getLastStation() {
+        return lastStation;
+    }
 }

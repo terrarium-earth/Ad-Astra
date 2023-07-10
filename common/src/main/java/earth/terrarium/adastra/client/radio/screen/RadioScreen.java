@@ -112,10 +112,10 @@ public class RadioScreen extends BaseCursorScreen {
         int secondMinute = minutes % 10;
 
         graphics.blit(CLOCK, x, y, 0, (firstHour % 5) * 13, 8, 13, 64, 64);
-        graphics.blit(CLOCK, x + 8, y, (int) (secondHour / 5f), (secondHour % 5) * 13, 8, 13, 64, 64);
+        graphics.blit(CLOCK, x + 8, y, (int) (secondHour / 5f) * 8, (secondHour % 5) * 13, 8, 13, 64, 64);
         graphics.blit(CLOCK, x + 16, y, 39, 0, 5, 13, 64, 64);
-        graphics.blit(CLOCK, x + 21, y, (int) (firstMinute / 5f), (firstMinute % 5) * 13, 8, 13, 64, 64);
-        graphics.blit(CLOCK, x + 29, y, (int) (secondMinute / 5f), (secondMinute % 5) * 13, 8, 13, 64, 64);
+        graphics.blit(CLOCK, x + 21, y, (int) (firstMinute / 5f) * 8, (firstMinute % 5) * 13, 8, 13, 64, 64);
+        graphics.blit(CLOCK, x + 29, y, (int) (secondMinute / 5f) * 8, (secondMinute % 5) * 13, 8, 13, 64, 64);
 
         graphics.blit(CLOCK, x + 37, y, 42, isPm ? 0 : 13, 22, 13, 64, 64);
     }
