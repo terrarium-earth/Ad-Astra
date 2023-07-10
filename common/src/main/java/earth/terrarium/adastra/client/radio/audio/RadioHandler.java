@@ -92,6 +92,8 @@ public final class RadioHandler {
 
     public static String getPlaying() {
         if (lastStation == null) return null;
+        if (lastStation.isStopped()) return null;
+        if (!Minecraft.getInstance().getSoundManager().isActive(lastStation)) return null;
         return lastStation.url();
     }
 
