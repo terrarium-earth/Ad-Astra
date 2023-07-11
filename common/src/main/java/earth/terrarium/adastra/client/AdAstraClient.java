@@ -2,6 +2,7 @@ package earth.terrarium.adastra.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.api.ti69.client.Ti69AppApi;
 import earth.terrarium.adastra.client.config.ClientConfig;
 import earth.terrarium.adastra.client.renderers.blocks.base.CustomGeoBlockRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.base.SidedGeoBlockRenderer;
@@ -9,8 +10,10 @@ import earth.terrarium.adastra.client.renderers.blocks.machines.SteamGeneratorBl
 import earth.terrarium.adastra.client.renderers.blocks.machines.TinkerersWorkbenchBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.items.armor.AerolyteSpaceSuitRenderer;
 import earth.terrarium.adastra.client.renderers.items.base.CustomGeoItemRenderer;
+import earth.terrarium.adastra.client.ti69.apps.SensorApp;
+import earth.terrarium.adastra.client.ti69.apps.WeatherApp;
+import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
-import earth.terrarium.adastra.common.handlers.PlanetData;
 import earth.terrarium.adastra.common.items.armor.AerolyteSpaceSuitItem;
 import earth.terrarium.adastra.common.networking.NetworkHandler;
 import earth.terrarium.adastra.common.networking.messages.ServerboundSyncKeybindPacket;
@@ -29,7 +32,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.DefaultedBlockGeoModel;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
@@ -40,15 +42,11 @@ import java.util.function.Supplier;
 public class AdAstraClient {
     private static final Map<Item, BlockEntityWithoutLevelRenderer> ITEM_RENDERERS = new HashMap<>();
     private static final Map<Item, Supplier<GeoArmorRenderer<?>>> ARMOR_RENDERERS = new HashMap<>();
-    private static boolean suitFlightEnabled = true;
 
     public static final KeyMapping KEY_TOGGLE_SUIT_FLIGHT = new KeyMapping(
         ConstantComponents.TOGGLE_SUIT_FLIGHT_KEY.getString(),
         InputConstants.KEY_V,
         ConstantComponents.AD_ASTRA_CATEGORY.getString());
-
-    @Nullable
-    public static PlanetData localData;
 
     public static void init() {
         AdAstra.CONFIGURATOR.registerConfig(ClientConfig.class);
@@ -56,6 +54,7 @@ public class AdAstraClient {
         registerBlockEntityRenderers();
         registerItemRenderers();
         registerArmorRenderers();
+        registerTi69Apps();
     }
 
     private static void registerBlockRenderTypes() {
@@ -99,6 +98,11 @@ public class AdAstraClient {
         ARMOR_RENDERERS.put(ModItems.AEROLYTE_SPACE_BOOTS.get(), AerolyteSpaceSuitRenderer::new);
     }
 
+    public static void registerTi69Apps() {
+        Ti69AppApi.API.register(SensorApp.ID, new SensorApp());
+        Ti69AppApi.API.register(WeatherApp.ID, new WeatherApp());
+    }
+
     public static GeoArmorRenderer<?> getArmorRenderer(ItemLike item) {
         return ARMOR_RENDERERS.get(item.asItem()).get();
     }
@@ -113,8 +117,8 @@ public class AdAstraClient {
         Options options = minecraft.options;
 
         if (KEY_TOGGLE_SUIT_FLIGHT.consumeClick() && player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof AerolyteSpaceSuitItem) {
-            player.displayClientMessage(suitFlightEnabled ? ConstantComponents.SUIT_FLIGHT_DISABLED : ConstantComponents.SUIT_FLIGHT_ENABLED, true);
-            suitFlightEnabled = !suitFlightEnabled;
+            player.displayClientMessage(ClientData.suitFlightEnabled ? ConstantComponents.SUIT_FLIGHT_DISABLED : ConstantComponents.SUIT_FLIGHT_ENABLED, true);
+            ClientData.suitFlightEnabled = !ClientData.suitFlightEnabled;
         }
 
         var keybinds = new KeybindManager(
@@ -124,7 +128,7 @@ public class AdAstraClient {
             options.keyLeft.isDown(),
             options.keyDown.isDown(),
             options.keyRight.isDown(),
-            suitFlightEnabled
+            ClientData.suitFlightEnabled
         );
         KeybindManager.set(player, keybinds);
         NetworkHandler.CHANNEL.sendToServer(new ServerboundSyncKeybindPacket(keybinds));

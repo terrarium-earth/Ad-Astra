@@ -46,8 +46,11 @@ public class ModLangProvider extends LanguageProvider {
 
         add(ConstantComponents.OXYGEN_TRUE.getString(), "✔");
         add(ConstantComponents.OXYGEN_FALSE.getString(), "✘");
-        add("text.adastra.temperature", "%s °C");
-        add("text.adastra.gravity", "%s m/s²");
+        add("text.adastra.temperature", "%s°C");
+        add("text.adastra.gravity", "%sm/s²");
         add("text.adastra.radio.none", "No station");
+
+        add("text.adastra.weather.temperature", "Now: %s°C");
+        add("text.adastra.weather.temperature.in", "In: %s");
     }
 }

@@ -1,20 +1,18 @@
-package earth.terrarium.adastra.client.renderers.items;
+package earth.terrarium.adastra.client.ti69;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.teamresourceful.resourcefullib.client.CloseablePoseStack;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.client.AdAstraClient;
-import earth.terrarium.adastra.common.constants.ConstantComponents;
-import earth.terrarium.adastra.common.constants.PlanetConstants;
-import earth.terrarium.adastra.common.handlers.PlanetData;
+import earth.terrarium.adastra.api.ti69.client.Ti69App;
+import earth.terrarium.adastra.api.ti69.client.Ti69AppApi;
+import earth.terrarium.adastra.common.items.Ti69Item;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
@@ -22,7 +20,9 @@ import org.joml.Matrix4f;
 
 public class Ti69Renderer {
     public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/ti-69/ti-69.png");
-    public static final ResourceLocation SCREEN = new ResourceLocation(AdAstra.MOD_ID, "textures/ti-69/ti-69_screen.png");
+    public static final ResourceLocation SCREEN = new ResourceLocation(AdAstra.MOD_ID, "textures/ti-69/screen.png");
+    public static final ResourceLocation OVERLAY = new ResourceLocation(AdAstra.MOD_ID, "textures/ti-69/overlay.png");
+    public static final ResourceLocation ICONS = new ResourceLocation(AdAstra.MOD_ID, "textures/ti-69/icons.png");
 
     public static void renderTi69(PoseStack poseStack, MultiBufferSource buffer, int combinedLight, float equippedProgress, HumanoidArm hand, float swingProgress, ArmRenderer armRenderer) {
         boolean rightHanded = hand == HumanoidArm.RIGHT;
@@ -59,6 +59,7 @@ public class Ti69Renderer {
         poseStack.translate(-0.5F, -0.75F, 0.0F);
         poseStack.scale(0.0078125F, 0.0078125F, 0.0078125F);
         poseStack.scale(0.6f, 1.06f, 1);
+
         VertexConsumer vertex = buffer.getBuffer(RenderType.text(TEXTURE));
         Matrix4f matrix4f = poseStack.last().pose();
         vertex.vertex(matrix4f, -7.0F, 135.0F, 0.0F).color(255, 255, 255, 255).uv(0.0F, 1.0F).uv2(combinedLight).endVertex();
@@ -66,30 +67,32 @@ public class Ti69Renderer {
         vertex.vertex(matrix4f, 135.0F, -7.0F, 0.0F).color(255, 255, 255, 255).uv(1.0F, 0.0F).uv2(combinedLight).endVertex();
         vertex.vertex(matrix4f, -7.0F, -7.0F, 0.0F).color(255, 255, 255, 255).uv(0.0F, 0.0F).uv2(combinedLight).endVertex();
 
+        Ti69App app = Ti69AppApi.API.get(Ti69Item.selectedApp);
+        texture(poseStack, buffer, app.color(), 0.01f, SCREEN);
         try (var pose = new CloseablePoseStack(poseStack)) {
-            pose.scale(0.95f, 0.38f, 1.0f);
-            pose.translate(rightHanded ? 20.0f : 22.0f, 50.0f, -1.0f);
-            VertexConsumer screenVertex = buffer.getBuffer(RenderType.text(SCREEN));
-            Matrix4f matrix4f2 = pose.last().pose();
-            screenVertex.vertex(matrix4f2, -7.0F, 100.0F, 0.0F).color(255, 255, 255, 255).uv(0.0F, 1.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
-            screenVertex.vertex(matrix4f2, 100.0F, 100.0F, 0.0F).color(255, 255, 255, 255).uv(1.0F, 1.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
-            screenVertex.vertex(matrix4f2, 100.0F, -7.0F, 0.0F).color(255, 255, 255, 255).uv(1.0F, 0.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
-            screenVertex.vertex(matrix4f2, -7.0F, -7.0F, 0.0F).color(255, 255, 255, 255).uv(0.0F, 0.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
+            pose.scale(1.2f, 0.7f, 0.7f);
+            pose.translate(15.0f, 25.0f, 0.0f);
+            ClientLevel level = Minecraft.getInstance().level;
+            if (level == null) return;
+            app.render(pose, buffer, pose.last().pose(), Minecraft.getInstance().font, level, rightHanded);
         }
+        texture(poseStack, buffer, 0xFFFFFFFF, -0.01f, OVERLAY);
+    }
 
-        PlanetData data = AdAstraClient.localData;
-        if (data == null) return;
-        poseStack.translate(rightHanded ? 0.0f : 4.0f, 0.0f, 0.0f);
-        poseStack.translate(36, 18, -2.0f);
-        poseStack.scale(0.75f, 0.7f, 0.7f);
-        poseStack.scale(1.6f, 1.0f, 1.0f);
-        Font font = Minecraft.getInstance().font;
-        Component oxygen = data.oxygen() ? ConstantComponents.OXYGEN_TRUE : ConstantComponents.OXYGEN_FALSE;
-        Component temperature = Component.translatable("text.adastra.temperature", data.temperature());
-        Component gravity = Component.translatable("text.adastra.gravity", Math.round(data.gravity() * PlanetConstants.EARTH_GRAVITY * 1000) / 1000f);
-        font.drawInBatch(oxygen, 0, 5, 0xFFFFFF, false, matrix4f, buffer, Font.DisplayMode.NORMAL, 0xFFFFFF, LightTexture.FULL_BRIGHT);
-        font.drawInBatch(temperature, 0, 22, 0xFFFFFF, false, matrix4f, buffer, Font.DisplayMode.NORMAL, 0xFFFFFF, LightTexture.FULL_BRIGHT);
-        font.drawInBatch(gravity, 0, 39, 0xFFFFFF, false, matrix4f, buffer, Font.DisplayMode.NORMAL, 0xFFFFFF, LightTexture.FULL_BRIGHT);
+    private static void texture(PoseStack poseStack, MultiBufferSource buffer, int color, float z, ResourceLocation overlay) {
+        try (var pose = new CloseablePoseStack(poseStack)) {
+            pose.scale(0.95f, 0.392f, 1.0f);
+            pose.translate(21.0f, 48.0f, z);
+            VertexConsumer screenVertex = buffer.getBuffer(RenderType.text(overlay));
+            Matrix4f matrix4f = pose.last().pose();
+            int red = (color >> 16) & 0xFF;
+            int green = (color >> 8) & 0xFF;
+            int blue = color & 0xFF;
+            screenVertex.vertex(matrix4f, -7.0F, 100.0F, 0.0F).color(red, green, blue, 255).uv(0.0F, 1.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
+            screenVertex.vertex(matrix4f, 100.0F, 100.0F, 0.0F).color(red, green, blue, 255).uv(1.0F, 1.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
+            screenVertex.vertex(matrix4f, 100.0F, -7.0F, 0.0F).color(red, green, blue, 255).uv(1.0F, 0.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
+            screenVertex.vertex(matrix4f, -7.0F, -7.0F, 0.0F).color(red, green, blue, 255).uv(0.0F, 0.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
+        }
     }
 
     @FunctionalInterface

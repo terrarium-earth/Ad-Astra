@@ -1,4 +1,5 @@
 import dev.architectury.plugin.ArchitectPluginExtension
+import groovy.json.StringEscapeUtils
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
 import net.fabricmc.loom.task.RemapJarTask
 
@@ -17,11 +18,11 @@ subprojects {
 
     val minecraftVersion: String by project
     val modLoader = project.name
-    val modId = name
+    val modId = rootProject.name
     val isCommon = modLoader == rootProject.projects.common.name
 
     base {
-        archivesName.set("$name-$modLoader-$minecraftVersion")
+        archivesName.set("$modId-$modLoader-$minecraftVersion")
     }
 
     configure<LoomGradleExtensionAPI> {
@@ -79,6 +80,13 @@ subprojects {
 
     tasks.named<RemapJarTask>("remapJar") {
         archiveClassifier.set(null as String?)
+    }
+
+    tasks.processResources {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        filesMatching(listOf("META-INF/mods.toml", "fabric.mod.json")) {
+            expand("version" to project.version)
+        }
     }
 
     if (!isCommon) {
@@ -149,7 +157,7 @@ resourcefulGradle {
             injectedValues.set(mapOf(
                     "minecraft" to minecraftVersion,
                     "version" to version,
-                    "changelog" to groovy.json.StringEscapeUtils.escapeJava(changelog),
+                    "changelog" to StringEscapeUtils.escapeJava(changelog),
             ))
         }
     }

@@ -3,7 +3,7 @@ package earth.terrarium.adastra.mixins.common;
 import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
-import earth.terrarium.adastra.client.AdAstraClient;
+import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.handlers.PlanetData;
 import net.minecraft.Optionull;
@@ -47,7 +47,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (entity instanceof Player player) {
             if (player.getAbilities().flying) return;
             if (level().isClientSide()) {
-                gravity = Optionull.mapOrDefault(AdAstraClient.localData, PlanetData::gravity, PlanetConstants.EARTH_GRAVITY);
+                gravity = Optionull.mapOrDefault(ClientData.localData, PlanetData::gravity, PlanetConstants.EARTH_GRAVITY);
             }
         }
 

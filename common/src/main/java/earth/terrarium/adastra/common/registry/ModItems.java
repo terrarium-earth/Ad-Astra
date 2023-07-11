@@ -6,6 +6,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.*;
+import earth.terrarium.adastra.common.items.Ti69Item;
 import earth.terrarium.adastra.common.items.armor.AerolyteSpaceSuitItem;
 import earth.terrarium.adastra.common.items.armor.materials.AerolyteSpaceSuitMaterial;
 import earth.terrarium.adastra.common.items.base.CustomGeoBlockItem;
@@ -26,7 +27,7 @@ public final class ModItems {
 
     public static final ResourcefulRegistry<Item> MACHINES = ResourcefulRegistries.create(ITEMS);
 
-    public static final RegistryEntry<Item> TI_69 = ITEMS.register("ti_69", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> TI_69 = ITEMS.register("ti_69", () -> new Ti69Item(new Item.Properties().stacksTo(1)));
 
     public static final RegistryEntry<Item> OXYGEN_DISTRIBUTOR = MACHINES.register("oxygen_distributor", () -> new CustomGeoBlockItem(
         ModBlocks.OXYGEN_DISTRIBUTOR.get(),

@@ -11,6 +11,7 @@ public final class NetworkHandler {
     public static void init() {
         CHANNEL.registerPacket(NetworkDirection.SERVER_TO_CLIENT, ClientboundSyncPlanetsPacket.ID, ClientboundSyncPlanetsPacket.HANDLER, ClientboundSyncPlanetsPacket.class);
         CHANNEL.registerPacket(NetworkDirection.SERVER_TO_CLIENT, ClientboundSyncLocalPlanetDataPacket.ID, ClientboundSyncLocalPlanetDataPacket.HANDLER, ClientboundSyncLocalPlanetDataPacket.class);
+        CHANNEL.registerPacket(NetworkDirection.SERVER_TO_CLIENT, ClientboundSyncWeatherPacket.ID, ClientboundSyncWeatherPacket.HANDLER, ClientboundSyncWeatherPacket.class);
 
         CHANNEL.registerPacket(NetworkDirection.SERVER_TO_CLIENT, ServerboundSyncKeybindPacket.ID, ServerboundSyncKeybindPacket.HANDLER, ServerboundSyncKeybindPacket.class);
         CHANNEL.registerPacket(NetworkDirection.SERVER_TO_CLIENT, ClientboundSendStationsPacket.ID, ClientboundSendStationsPacket.HANDLER, ClientboundSendStationsPacket.class);

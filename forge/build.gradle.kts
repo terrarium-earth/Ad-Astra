@@ -25,11 +25,3 @@ dependencies {
     forge(group = "net.minecraftforge", name = "forge", version = "$minecraftVersion-$forgeVersion")
     modLocalRuntime(group = "me.shedaniel", name = "RoughlyEnoughItems-forge", version = reiVersion)
 }
-
-tasks.processResources {
-    inputs.property("version", version)
-
-    filesMatching("META-INF/mods.toml") {
-        expand("version" to version)
-    }
-}

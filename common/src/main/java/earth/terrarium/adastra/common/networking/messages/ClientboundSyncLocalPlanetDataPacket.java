@@ -4,7 +4,7 @@ import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.client.AdAstraClient;
+import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.handlers.PlanetData;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -38,7 +38,7 @@ public record ClientboundSyncLocalPlanetDataPacket(
 
         @Override
         public PacketContext handle(ClientboundSyncLocalPlanetDataPacket packet) {
-            return (player, level) -> AdAstraClient.localData = packet.localData();
+            return (player, level) -> ClientData.localData = packet.localData();
         }
     }
 }

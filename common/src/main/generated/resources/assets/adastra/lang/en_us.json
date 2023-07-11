@@ -31,9 +31,11 @@
   "key.categories.adastra": "Ad Astra",
   "message.adastra.suit_flight_disabled": "Suit Flight Disabled",
   "message.adastra.suit_flight_enabled": "Suit Flight Enabled",
-  "text.adastra.gravity": "%s m/s²",
+  "text.adastra.gravity": "%sm/s²",
   "text.adastra.oxygen_false": "✘",
   "text.adastra.oxygen_true": "✔",
   "text.adastra.radio.none": "No station",
-  "text.adastra.temperature": "%s °C"
+  "text.adastra.temperature": "%s°C",
+  "text.adastra.weather.temperature": "Now: %s°C",
+  "text.adastra.weather.temperature.in": "In: %s"
 }

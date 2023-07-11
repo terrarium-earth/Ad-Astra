@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.mixins.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.adastra.client.renderers.items.Ti69Renderer;
+import earth.terrarium.adastra.client.ti69.Ti69Renderer;
 import earth.terrarium.adastra.common.registry.ModItems;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
