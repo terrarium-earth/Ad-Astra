@@ -2,7 +2,7 @@ package earth.terrarium.adastra.common.blockentities;
 
 import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
-import earth.terrarium.adastra.common.blocks.GravityNormalizerBlock;
+import earth.terrarium.adastra.common.blocks.base.SidedMachineBlock;
 import earth.terrarium.adastra.common.utils.floodfill.FloodFill3D;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
@@ -12,13 +12,11 @@ import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.AttachFace;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -32,16 +30,17 @@ import java.util.Set;
 public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer>, BotariumFluidBlock<WrappedBlockFluidContainer>, GeoBlockEntity {
     private WrappedBlockEnergyContainer energyContainer;
     private WrappedBlockFluidContainer fluidContainer;
-    private final Set<BlockPos> lastDistributedBlocks = new HashSet<>();
 
     public static final RawAnimation IDLE_OFF = RawAnimation.begin().thenLoop("animation.model.idle.off");
     public static final RawAnimation IDLE_ON = RawAnimation.begin().thenLoop("animation.model.idle.on");
     public static final RawAnimation TURN_ON = RawAnimation.begin().thenPlayAndHold("animation.model.turn.on");
     public static final RawAnimation TURN_OFF = RawAnimation.begin().thenPlayAndHold("animation.model.turn.off");
 
+    public static final int CONTAINER_SIZE = 5;
+
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public static final int CONTAINER_SIZE = 5;
+    private final Set<BlockPos> lastDistributedBlocks = new HashSet<>();
 
     public GravityNormalizerBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, CONTAINER_SIZE);
@@ -99,16 +98,8 @@ public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity im
     }
 
     protected void tickGravity(ServerLevel level, BlockState state, BlockPos pos) {
-        AttachFace face = state.getValue(GravityNormalizerBlock.FACE);
-        Direction facing = state.getValue(GravityNormalizerBlock.FACING);
-        BlockPos start = switch (face) {
-            case FLOOR -> pos.above();
-            case WALL -> pos.relative(facing);
-            case CEILING -> pos.below();
-        };
-
         int limit = 3000;
-        Set<BlockPos> positions = FloodFill3D.run(level, start, limit, FloodFill3D.TEST_FULL_SEAL);
+        Set<BlockPos> positions = FloodFill3D.run(level, ((SidedMachineBlock) state.getBlock()).getTop(state, pos), limit, FloodFill3D.TEST_FULL_SEAL);
         this.resetLastDistributedBlocks(positions);
         GravityApi.API.setGravity(level, positions, 0.5f);
     }

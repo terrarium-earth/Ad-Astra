@@ -20,10 +20,12 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 @Mixin(PlayerRenderer.class)
 public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
@@ -34,6 +36,9 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
     public PlayerRendererMixin(EntityRendererProvider.Context context, PlayerModel<AbstractClientPlayer> entityModel, float f) {
         super(context, entityModel, f);
     }
+
+    @Unique
+    private GeoArmorRenderer<?> armor;
 
     @SuppressWarnings("DataFlowIssue")
     @Inject(method = "renderHand", at = @At("HEAD"), cancellable = true)
@@ -57,6 +62,14 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
             renderer.getBodyBone().setHidden(true);
             renderer.getLeftArmBone().setHidden(isRightHand);
             renderer.getRightArmBone().setHidden(!isRightHand);
+
+            renderer.getRightArmBone().setRotX(this.model.rightArm.xRot);
+            renderer.getRightArmBone().setRotY(this.model.rightArm.yRot);
+            renderer.getRightArmBone().setRotZ(this.model.rightArm.zRot);
+
+            renderer.getLeftArmBone().setRotX(this.model.leftArm.xRot);
+            renderer.getLeftArmBone().setRotY(this.model.leftArm.yRot);
+            renderer.getLeftArmBone().setRotZ(this.model.leftArm.zRot);
 
             renderer.actuallyRender(matrixStack, spaceSuit, model, renderType, buffer, vertexConsumer, true, partialTicks, combinedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         }

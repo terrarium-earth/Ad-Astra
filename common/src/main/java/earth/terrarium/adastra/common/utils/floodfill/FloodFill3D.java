@@ -1,7 +1,6 @@
 package earth.terrarium.adastra.common.utils.floodfill;
 
 import earth.terrarium.adastra.common.tags.ModBlockTags;
-import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -10,9 +9,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.ArrayDeque;
+import java.util.LinkedHashSet;
 import java.util.Queue;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public final class FloodFill3D {
 
@@ -30,30 +29,29 @@ public final class FloodFill3D {
     public static Set<BlockPos> run(Level level, BlockPos start, int limit, SolidBlockPredicate predicate) {
         level.getProfiler().push("adastra-floodfill");
 
-        LongOpenHashSet positions = new LongOpenHashSet(limit);
-        Queue<Long> queue = new ArrayDeque<>();
+        LinkedHashSet<BlockPos> positions = new LinkedHashSet<>(limit);
+        Queue<Long> queue = new ArrayDeque<>(limit);
         queue.add(start.asLong());
 
+        Direction[] directions = Direction.values();
         while (!queue.isEmpty() && positions.size() < limit) {
             long pos = queue.poll();
             BlockPos blockPos = BlockPos.of(pos);
-            if (positions.contains(pos)) continue;
-            positions.add(pos);
+            if (positions.contains(blockPos)) continue;
+            positions.add(blockPos);
 
-            for (Direction direction : Direction.values()) {
+            for (Direction direction : directions) {
                 BlockPos neighbor = blockPos.relative(direction);
                 if (!predicate.test(level, neighbor, direction)) continue;
                 long neighborPos = neighbor.asLong();
-                if (!positions.contains(neighborPos)) {
+                if (!positions.contains(neighbor)) {
                     queue.add(neighborPos);
                 }
             }
         }
 
         level.getProfiler().pop();
-        return positions.longStream()
-            .mapToObj(BlockPos::of)
-            .collect(Collectors.toSet());
+        return positions;
     }
 
     private static boolean isSideSolid(VoxelShape collisionShape, Direction dir) {

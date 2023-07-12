@@ -16,4 +16,7 @@ public class ConstantComponents {
 
     public static final Component OXYGEN_TRUE = Component.translatable("text.adastra.oxygen_true");
     public static final Component OXYGEN_FALSE = Component.translatable("text.adastra.oxygen_false");
+
+    public static final Component TI_69_TOOLTIP_1 = Component.translatable("tooltip.adastra.ti_69_1");
+    public static final Component TI_69_TOOLTIP_2 = Component.translatable("tooltip.adastra.ti_69_2");
 }

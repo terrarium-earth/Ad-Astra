@@ -19,6 +19,7 @@ import earth.terrarium.adastra.common.networking.NetworkHandler;
 import earth.terrarium.adastra.common.networking.messages.ServerboundSyncKeybindPacket;
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.adastra.common.registry.ModBlocks;
+import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.adastra.common.utils.KeybindManager;
 import earth.terrarium.botarium.client.ClientHooks;
@@ -28,6 +29,7 @@ import net.minecraft.client.Options;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
@@ -52,6 +54,7 @@ public class AdAstraClient {
         AdAstra.CONFIGURATOR.registerConfig(ClientConfig.class);
         registerBlockRenderTypes();
         registerBlockEntityRenderers();
+        registerEntityRenderers();
         registerItemRenderers();
         registerArmorRenderers();
         registerTi69Apps();
@@ -74,6 +77,10 @@ public class AdAstraClient {
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.TINKERERS_WORKBENCH.get(), context -> new TinkerersWorkbenchBlockEntityRenderer(ModBlocks.TINKERERS_WORKBENCH));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.RECYCLER.get(), context -> new CustomGeoBlockRenderer<>(ModBlocks.RECYCLER));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.GRAVITY_NORMALIZER.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.GRAVITY_NORMALIZER));
+    }
+
+    public static void registerEntityRenderers() {
+        ClientHooks.registerEntityRenderer(ModEntityTypes.AIR_VORTEX, NoopRenderer::new);
     }
 
     private static void registerItemRenderers() {

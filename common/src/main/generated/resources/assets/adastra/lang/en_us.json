@@ -37,5 +37,7 @@
   "text.adastra.radio.none": "No station",
   "text.adastra.temperature": "%s°C",
   "text.adastra.weather.temperature": "Now: %s°C",
-  "text.adastra.weather.temperature.in": "In: %s"
+  "text.adastra.weather.temperature.in": "In: %s",
+  "tooltip.adastra.ti_69_1": "Displays important information",
+  "tooltip.adastra.ti_69_2": "Right-click to change the current app"
 }

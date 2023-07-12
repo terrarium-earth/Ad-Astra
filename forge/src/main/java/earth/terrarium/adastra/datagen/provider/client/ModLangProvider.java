@@ -16,23 +16,19 @@ public class ModLangProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        ModBlocks.BLOCKS.stream().forEach(entry ->
-            addBlock(
-                entry,
+        ModBlocks.BLOCKS.stream().forEach(entry -> addBlock(entry,
+            StringUtils.capitaliseAllWords(entry
+                .getId()
+                .getPath()
+                .replace("_", " "))));
+
+        ModItems.ITEMS.stream()
+            .filter(i -> !(i.get() instanceof BlockItem))
+            .forEach(entry -> addItem(entry,
                 StringUtils.capitaliseAllWords(entry
                     .getId()
                     .getPath()
                     .replace("_", " "))));
-
-        ModItems.ITEMS.stream()
-            .filter(i -> !(i.get() instanceof BlockItem))
-            .forEach(entry ->
-                addItem(
-                    entry,
-                    StringUtils.capitaliseAllWords(entry
-                        .getId()
-                        .getPath()
-                        .replace("_", " "))));
 
         add(ConstantComponents.ITEM_GROUP.getString(), "Ad Astra");
         add(ConstantComponents.DEATH_OXYGEN.getString(), "%1$s couldn't breathe anymore");
@@ -52,5 +48,8 @@ public class ModLangProvider extends LanguageProvider {
 
         add("text.adastra.weather.temperature", "Now: %s°C");
         add("text.adastra.weather.temperature.in", "In: %s");
+
+        add(ConstantComponents.TI_69_TOOLTIP_1.getString(), "Displays important information");
+        add(ConstantComponents.TI_69_TOOLTIP_2.getString(), "Right-click to change the current app");
     }
 }

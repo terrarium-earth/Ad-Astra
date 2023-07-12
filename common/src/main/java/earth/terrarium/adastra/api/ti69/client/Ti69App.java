@@ -2,7 +2,6 @@ package earth.terrarium.adastra.api.ti69.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import earth.terrarium.adastra.common.planets.AdAstraData;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
@@ -62,6 +61,14 @@ public interface Ti69App {
         BufferUploader.drawWithShader(bufferBuilder.end());
     }
 
+    /**
+     * Renders the time
+     *
+     * @param bufferSource The buffer source
+     * @param matrix4f     The matrix
+     * @param font         The font
+     * @param level        The client level
+     */
     default void renderTime(MultiBufferSource bufferSource, Matrix4f matrix4f, Font font, ClientLevel level) {
         double ratio = 1000.0 / 60.0;
         int dayTime = (int) ((level.getDayTime() + 6000L) % 12000L);

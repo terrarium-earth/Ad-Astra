@@ -55,10 +55,10 @@ public class AerolyteSpaceSuitItem extends CustomGeoArmorItem {
             }
 
             boolean isFullSet = wornArmor.containsAll(ObjectArrayList.of(
-                    ModItems.AEROLYTE_SPACE_HELMET.get(),
-                    ModItems.AEROLYTE_SPACE_SUIT.get(),
-                    ModItems.AEROLYTE_SPACE_PANTS.get(),
-                    ModItems.AEROLYTE_SPACE_BOOTS.get()));
+                ModItems.AEROLYTE_SPACE_HELMET.get(),
+                ModItems.AEROLYTE_SPACE_SUIT.get(),
+                ModItems.AEROLYTE_SPACE_PANTS.get(),
+                ModItems.AEROLYTE_SPACE_BOOTS.get()));
 
             return isFullSet ? PlayState.CONTINUE : PlayState.STOP;
         }));
@@ -109,7 +109,7 @@ public class AerolyteSpaceSuitItem extends CustomGeoArmorItem {
 
     public static boolean hasFullSet(LivingEntity entity) {
         return StreamSupport.stream(entity.getArmorSlots().spliterator(), false)
-                .allMatch(stack -> stack.getItem() instanceof AerolyteSpaceSuitItem);
+            .allMatch(stack -> stack.getItem() instanceof AerolyteSpaceSuitItem);
     }
 
     protected boolean isFullFlightEnabled(Player player) {

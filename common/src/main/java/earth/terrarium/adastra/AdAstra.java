@@ -35,6 +35,7 @@ public class AdAstra {
         ModFluids.FLUIDS.init();
         ModBlocks.BLOCKS.init();
         ModItems.ITEMS.init();
+        ModEntityTypes.ENTITY_TYPES.init();
         ModBlockEntityTypes.BLOCK_ENTITY_TYPES.init();
     }
 

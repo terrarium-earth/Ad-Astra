@@ -2,7 +2,8 @@ package earth.terrarium.adastra.common.blockentities;
 
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
-import earth.terrarium.adastra.common.blocks.OxygenDistributorBlock;
+import earth.terrarium.adastra.common.blocks.base.SidedMachineBlock;
+import earth.terrarium.adastra.common.entities.AirVortex;
 import earth.terrarium.adastra.common.utils.floodfill.FloodFill3D;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
@@ -12,13 +13,12 @@ import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -30,15 +30,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer>, BotariumFluidBlock<WrappedBlockFluidContainer>, GeoBlockEntity {
+    public static final int MAX_BLOCKS = 3000;
     private WrappedBlockEnergyContainer energyContainer;
     private WrappedBlockFluidContainer fluidContainer;
-    private final Set<BlockPos> lastDistributedBlocks = new HashSet<>();
 
     public static final RawAnimation SPIN = RawAnimation.begin().thenLoop("animation.model.spin");
 
+    public static final int CONTAINER_SIZE = 5;
+
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public static final int CONTAINER_SIZE = 5;
+    private final Set<BlockPos> lastDistributedBlocks = new HashSet<>();
 
     public OxygenDistributorBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, CONTAINER_SIZE);
@@ -96,29 +98,38 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
     }
 
     protected void tickOxygen(ServerLevel level, BlockState state, BlockPos pos) {
-        AttachFace face = state.getValue(OxygenDistributorBlock.FACE);
-        Direction facing = state.getValue(OxygenDistributorBlock.FACING);
-        BlockPos start = switch (face) {
-            case FLOOR -> pos.above();
-            case WALL -> pos.relative(facing);
-            case CEILING -> pos.below();
-        };
-
-        int limit = 3000;
-        Set<BlockPos> positions = FloodFill3D.run(level, start, limit, FloodFill3D.TEST_FULL_SEAL);
-        this.resetLastDistributedBlocks(positions);
+        int limit = MAX_BLOCKS;
+        Set<BlockPos> positions = FloodFill3D.run(level, ((SidedMachineBlock) state.getBlock()).getTop(state, pos), limit, FloodFill3D.TEST_FULL_SEAL);
+        boolean oxygenLeak = positions.size() >= limit;
         OxygenApi.API.setOxygen(level, positions, true);
+
+        Set<BlockPos> lastPositionsCopy = new HashSet<>(this.lastDistributedBlocks);
+        this.resetLastDistributedBlocks(positions);
+        if (oxygenLeak && lastPositionsCopy.size() < limit) {
+            positions.removeAll(lastPositionsCopy);
+            BlockPos target = positions.stream()
+                .skip(6)
+                .findFirst()
+                .orElse(positions.stream().findFirst().orElse(null));
+            if (target == null) return;
+            AirVortex vortex = new AirVortex(level, pos, lastPositionsCopy);
+            vortex.setPos(Vec3.atCenterOf(target));
+            level.addFreshEntity(vortex);
+        }
     }
 
     protected void resetLastDistributedBlocks(Set<BlockPos> positions) {
         this.lastDistributedBlocks.removeAll(positions);
-        OxygenApi.API.removeOxygen(level, positions);
-        this.lastDistributedBlocks.clear();
+        this.clearOxygenBlocks();
         this.lastDistributedBlocks.addAll(positions);
     }
 
     protected void clearOxygenBlocks() {
         OxygenApi.API.removeOxygen(level, this.lastDistributedBlocks);
         this.lastDistributedBlocks.clear();
+    }
+
+    public Set<BlockPos> lastDistributedBlocks() {
+        return this.lastDistributedBlocks;
     }
 }
