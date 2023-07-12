@@ -2,6 +2,6 @@
   "dimension": "adastra:space",
   "gravity": 0.0,
   "oxygen": false,
-  "solar_power": 64,
+  "solar_power": 128,
   "temperature": -270
 }

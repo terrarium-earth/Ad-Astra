@@ -37,6 +37,13 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.SPACE_TEMPERATURE,
                 PlanetConstants.SPACE_GRAVITY,
                 PlanetConstants.SPACE_SOLAR_POWER));
+        consumer.accept(
+            new ResourceLocation(AdAstra.MOD_ID, "moon"),
+            new Planet(Planet.MOON,
+                false,
+                PlanetConstants.MOON_TEMPERATURE,
+                PlanetConstants.MOON_GRAVITY,
+                PlanetConstants.MOON_SOLAR_POWER));
     }
 
     @Override

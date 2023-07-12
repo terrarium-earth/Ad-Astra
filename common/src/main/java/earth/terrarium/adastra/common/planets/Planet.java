@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 
 public record Planet(ResourceKey<Level> dimension, boolean oxygen, short temperature, float gravity, int solarPower) {
     public static final ResourceKey<Level> SPACE = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "space"));
+    public static final ResourceKey<Level> MOON = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "moon"));
 
     public static final Codec<Planet> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         ResourceKey.codec(Registries.DIMENSION).fieldOf("dimension").forGetter(Planet::dimension),

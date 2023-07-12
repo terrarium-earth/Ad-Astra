@@ -1,6 +1,12 @@
-// 1.20.1	2023-07-11T10:15:35.99347	Registries
+// 1.20.1	2023-07-12T09:39:30.135889	Registries
 a01ddce420ff2235fcbe262415985c4326d85f83 data/adastra/damage_type/oxygen.json
+fbd32e04d8301a6939f051f4f851922e6c714f80 data/adastra/dimension/moon.json
 f5018f5d74fb5c0b457517413d76c019c0223d46 data/adastra/dimension/space.json
-ab695f43f64233ec98ef374577055ecae0fe20c1 data/adastra/dimension_type/space.json
+015d3f6d91ee8a46598e5463791c57d27c8a36dc data/adastra/dimension_type/moon.json
+015d3f6d91ee8a46598e5463791c57d27c8a36dc data/adastra/dimension_type/space.json
+b9bf01f039029efca980ed24d5dac0447045ea62 data/adastra/worldgen/biome/moon_wastes.json
 b9bf01f039029efca980ed24d5dac0447045ea62 data/adastra/worldgen/biome/space.json
-84e423f0064f0e51ec51c4a3909ca4a6e7a02e12 data/adastra/worldgen/noise_settings/space.json
+413ab0df006778e23ac8ac2e9525401ce3dae01f data/adastra/worldgen/configured_carver/moon_crater.json
+86d6bdfcc24b96ea5f77f6cbcdfe48078edec85e data/adastra/worldgen/density_function/craters.json
+43f229f1283b11aaa4cd68960bf71c6b7f8e954b data/adastra/worldgen/noise_settings/moon.json
+b0545836177b2db9b6ed41572fcfdcb6e8dc0421 data/adastra/worldgen/noise_settings/space.json

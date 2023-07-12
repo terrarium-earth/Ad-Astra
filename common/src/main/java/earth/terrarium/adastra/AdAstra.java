@@ -37,6 +37,9 @@ public class AdAstra {
         ModItems.ITEMS.init();
         ModEntityTypes.ENTITY_TYPES.init();
         ModBlockEntityTypes.BLOCK_ENTITY_TYPES.init();
+        ModWorldCarvers.WORLD_CARVERS.init();
+        ModBiomeSources.BIOME_SOURCES.init();
+        ModDensityFunctionTypes.DENSITY_FUNCTION_TYPES.init();
     }
 
     public static void onAddReloadListener(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {

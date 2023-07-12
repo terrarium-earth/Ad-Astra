@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
 @SuppressWarnings("SameParameterValue")
 public class ModBiomeDataProvider {
     public static final ResourceKey<Biome> SPACE = register("space");
+    public static final ResourceKey<Biome> MOON_WASTES = register("moon_wastes");
 
     private static ResourceKey<Biome> register(String name) {
         return ResourceKey.create(Registries.BIOME, new ResourceLocation(AdAstra.MOD_ID, name));
@@ -28,11 +29,31 @@ public class ModBiomeDataProvider {
         context.register(
             SPACE,
             space(placedFeatures, configuredCarvers));
+
+        context.register(
+            MOON_WASTES,
+            moonWastes(placedFeatures, configuredCarvers));
     }
 
     public static Biome space(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
-        BiomeGenerationSettings.Builder biomegenerationsettings$builder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
-        return biome(false, 0.5F, 0.5F, new MobSpawnSettings.Builder(), biomegenerationsettings$builder, null);
+        BiomeGenerationSettings.Builder builder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
+        return biome(
+            false,
+            0.5F,
+            0.5F,
+            new MobSpawnSettings.Builder(), builder,
+            null);
+    }
+
+    public static Biome moonWastes(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        BiomeGenerationSettings.Builder builder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
+        return biome(
+            false,
+            0.5F,
+            0.5F,
+            new MobSpawnSettings.Builder(),
+            builder,
+            null);
     }
 
     public static Biome biome(boolean hasPercipitation, float temperature, float downfall, MobSpawnSettings.Builder mobSpawnSettings, BiomeGenerationSettings.Builder generationSettings, @Nullable Music backgroundMusic) {

@@ -15,6 +15,7 @@ import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 
 public class ModDimensionProvider {
     public static final ResourceKey<LevelStem> SPACE = register("space");
+    public static final ResourceKey<LevelStem> MOON = register("moon");
 
     private static ResourceKey<LevelStem> register(String name) {
         return ResourceKey.create(Registries.LEVEL_STEM, new ResourceLocation(AdAstra.MOD_ID, name));
@@ -31,5 +32,12 @@ public class ModDimensionProvider {
                 new FixedBiomeSource(
                     biomes.getOrThrow(ModBiomeDataProvider.SPACE)),
                 noiseSettings.getOrThrow(ModNoiseGeneratorSettingsProvider.SPACE))));
+
+        context.register(MOON, new LevelStem(
+            dimensionTypes.getOrThrow(ModDimensionTypeProvider.MOON),
+            new NoiseBasedChunkGenerator(
+                new FixedBiomeSource(
+                    biomes.getOrThrow(ModBiomeDataProvider.MOON_WASTES)),
+                noiseSettings.getOrThrow(ModNoiseGeneratorSettingsProvider.MOON))));
     }
 }

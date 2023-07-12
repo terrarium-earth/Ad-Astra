@@ -2,6 +2,6 @@
   "dimension": "minecraft:overworld",
   "gravity": 9.807,
   "oxygen": true,
-  "solar_power": 16,
+  "solar_power": 32,
   "temperature": 15
 }

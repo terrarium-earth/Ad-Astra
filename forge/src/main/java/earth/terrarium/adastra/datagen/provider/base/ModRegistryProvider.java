@@ -17,7 +17,9 @@ public class ModRegistryProvider extends DatapackBuiltinEntriesProvider {
         .add(Registries.DIMENSION_TYPE, ModDimensionTypeProvider::bootstrap)
         .add(Registries.BIOME, ModBiomeDataProvider::bootstrap)
         .add(Registries.NOISE_SETTINGS, ModNoiseGeneratorSettingsProvider::bootstrap)
-        .add(Registries.LEVEL_STEM, ModDimensionProvider::bootstrap);
+        .add(Registries.LEVEL_STEM, ModDimensionProvider::bootstrap)
+        .add(Registries.CONFIGURED_CARVER, ModConfiguredCarverProvider::bootstrap)
+        .add(Registries.DENSITY_FUNCTION, ModDensityFunctionProvider::bootstrap);
 
     public ModRegistryProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(AdAstra.MOD_ID));

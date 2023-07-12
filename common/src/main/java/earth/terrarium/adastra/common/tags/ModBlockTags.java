@@ -9,6 +9,8 @@ import net.minecraft.world.level.block.Block;
 public final class ModBlockTags {
     public static final TagKey<Block> PASSES_FLOOD_FILL = tag("passes_flood_fill");
     public static final TagKey<Block> BLOCKS_FLOOD_FILL = tag("blocks_flood_fill");
+    public static final TagKey<Block> MOON_CARVER_REPLACEABLES = tag("moon_carver_replaceables");
+
 
     private static TagKey<Block> tag(String name) {
         return TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, name));

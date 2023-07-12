@@ -1,0 +1,20 @@
+{
+  "type": "adastra:crater",
+  "config": {
+    "lava_level": {
+      "above_bottom": -2032
+    },
+    "probability": 1.0,
+    "replaceable": "#adastra:moon_carver_replaceables",
+    "y": {
+      "type": "minecraft:uniform",
+      "max_inclusive": {
+        "below_top": 0
+      },
+      "min_inclusive": {
+        "below_top": 32
+      }
+    },
+    "yScale": 1.0
+  }
+}

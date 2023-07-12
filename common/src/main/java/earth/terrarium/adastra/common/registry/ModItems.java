@@ -25,75 +25,73 @@ public final class ModItems {
         .addRegistry(ITEMS)
         .build();
 
-    public static final ResourcefulRegistry<Item> MACHINES = ResourcefulRegistries.create(ITEMS);
-
     public static final RegistryEntry<Item> TI_69 = ITEMS.register("ti_69", () -> new Ti69Item(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryEntry<Item> OXYGEN_DISTRIBUTOR = MACHINES.register("oxygen_distributor", () -> new CustomGeoBlockItem(
+    public static final RegistryEntry<Item> OXYGEN_DISTRIBUTOR = ITEMS.register("oxygen_distributor", () -> new CustomGeoBlockItem(
         ModBlocks.OXYGEN_DISTRIBUTOR.get(),
         new Item.Properties(),
         OxygenDistributorBlockEntity.SPIN));
 
-    public static final RegistryEntry<Item> GRAVITY_NORMALIZER = MACHINES.register("gravity_normalizer", () -> new CustomGeoBlockItem(
+    public static final RegistryEntry<Item> GRAVITY_NORMALIZER = ITEMS.register("gravity_normalizer", () -> new CustomGeoBlockItem(
         ModBlocks.GRAVITY_NORMALIZER.get(),
         new Item.Properties(),
         GravityNormalizerBlockEntity.IDLE_ON));
 
-    public static final RegistryEntry<Item> ETRIONIC_SOLAR_PANEL = MACHINES.register("etreonic_solar_panel", () -> new CustomGeoBlockItem(
+    public static final RegistryEntry<Item> ETRIONIC_SOLAR_PANEL = ITEMS.register("etreonic_solar_panel", () -> new CustomGeoBlockItem(
         ModBlocks.ETRIONIC_SOLAR_PANEL.get(),
         new Item.Properties(),
         SolarPanelBlockEntity.CLOSE));
 
-    public static final RegistryEntry<Item> VESNIUM_SOLAR_PANEL = MACHINES.register("vesnium_solar_panel", () -> new CustomGeoBlockItem(
+    public static final RegistryEntry<Item> VESNIUM_SOLAR_PANEL = ITEMS.register("vesnium_solar_panel", () -> new CustomGeoBlockItem(
         ModBlocks.VESNIUM_SOLAR_PANEL.get(),
         new Item.Properties(),
         SolarPanelBlockEntity.CLOSE));
 
-    public static final RegistryEntry<Item> HYDRAULIC_PRESS = MACHINES.register("hydraulic_press", () -> new CustomGeoBlockItem(
+    public static final RegistryEntry<Item> HYDRAULIC_PRESS = ITEMS.register("hydraulic_press", () -> new CustomGeoBlockItem(
         ModBlocks.HYDRAULIC_PRESS.get(),
         new Item.Properties(),
         HydraulicPressBlockEntity.BONK));
 
-    public static final RegistryEntry<Item> OIL_REFINERY = MACHINES.register("oil_refinery", () -> new CustomGeoBlockItem(
+    public static final RegistryEntry<Item> OIL_REFINERY = ITEMS.register("oil_refinery", () -> new CustomGeoBlockItem(
         ModBlocks.OIL_REFINERY.get(),
         new Item.Properties(),
         OilRefineryBlockEntity.IDLE_OFF));
 
-    public static final RegistryEntry<Item> STEAM_GENERATOR = MACHINES.register("steam_generator", () -> new CustomGeoBlockItem(
+    public static final RegistryEntry<Item> STEAM_GENERATOR = ITEMS.register("steam_generator", () -> new CustomGeoBlockItem(
         ModBlocks.STEAM_GENERATOR.get(),
         new Item.Properties(),
         SteamGeneratorBlockEntity.IDLE));
 
-    public static final RegistryEntry<Item> EMITTER = MACHINES.register("emitter", () -> new CustomGeoBlockItem(
+    public static final RegistryEntry<Item> EMITTER = ITEMS.register("emitter", () -> new CustomGeoBlockItem(
         ModBlocks.EMITTER.get(),
         new Item.Properties(),
         EmitterBlockEntity.IDLE));
 
-    public static final RegistryEntry<Item> RECEIVER = MACHINES.register("receiver", () -> new CustomGeoBlockItem(
+    public static final RegistryEntry<Item> RECEIVER = ITEMS.register("receiver", () -> new CustomGeoBlockItem(
         ModBlocks.RECEIVER.get(),
         new Item.Properties(),
         ReceiverBlockEntity.IDLE));
 
-    public static final RegistryEntry<Item> VESNIUM_COIL = MACHINES.register("vesnium_coil", () -> new CustomGeoBlockItem(
+    public static final RegistryEntry<Item> VESNIUM_COIL = ITEMS.register("vesnium_coil", () -> new CustomGeoBlockItem(
         ModBlocks.VESNIUM_COIL.get(),
         new Item.Properties(),
         VesniumCoilBlockEntity.IDLE));
 
-    public static final RegistryEntry<Item> TINKERERS_WORKBENCH = MACHINES.register("tinkerers_workbench", () -> new CustomGeoBlockItem(
+    public static final RegistryEntry<Item> TINKERERS_WORKBENCH = ITEMS.register("tinkerers_workbench", () -> new CustomGeoBlockItem(
         ModBlocks.TINKERERS_WORKBENCH.get(),
         new Item.Properties(),
         TinkerersWorkbenchBlockEntity.FABRICATING));
 
-    public static final RegistryEntry<Item> RECYCLER = MACHINES.register("recycler", () -> new CustomGeoBlockItem(
+    public static final RegistryEntry<Item> RECYCLER = ITEMS.register("recycler", () -> new CustomGeoBlockItem(
         ModBlocks.RECYCLER.get(),
         new Item.Properties(),
         RecyclerBlockEntity.IDLE_ON));
 
-    public static final RegistryEntry<Item> BATTERY = MACHINES.register("battery", () -> new BlockItem(
+    public static final RegistryEntry<Item> BATTERY = ITEMS.register("battery", () -> new BlockItem(
         ModBlocks.BATTERY.get(), new Item.Properties())
     );
 
-    public static final RegistryEntry<Item> ETRIONIC_BLAST_FURNACE = MACHINES.register("etreonic_blast_furnace", () -> new BlockItem(
+    public static final RegistryEntry<Item> ETRIONIC_BLAST_FURNACE = ITEMS.register("etreonic_blast_furnace", () -> new BlockItem(
         ModBlocks.ETRIONIC_BLAST_FURNACE.get(),
         new Item.Properties())
     );
@@ -136,4 +134,7 @@ public final class ModItems {
         ModFluidProperties.OIL,
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
+
+    public static final RegistryEntry<Item> MOON_SAND = ITEMS.register("moon_sand", () -> new BlockItem(ModBlocks.MOON_SAND.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MOON_STONE = ITEMS.register("moon_stone", () -> new BlockItem(ModBlocks.MOON_STONE.get(), new Item.Properties()));
 }

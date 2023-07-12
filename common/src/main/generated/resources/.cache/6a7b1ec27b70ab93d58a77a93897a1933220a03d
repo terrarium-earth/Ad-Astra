@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-09T00:38:29.846648	Block States: adastra
+// 1.20.1	2023-07-12T08:02:15.481339	Block States: adastra
 36ad980a61ba623d936a511a42a24e6209d00991 assets/adastra/blockstates/battery.json
 c6a2b5db66914899b69ae442f06cf6c1d37cebd5 assets/adastra/blockstates/emitter.json
 f18438bc556d2de124171f6810360f756ba2e879 assets/adastra/blockstates/etreonic_blast_furnace.json
@@ -6,6 +6,8 @@ fa15414b2d253bbb39884ddf2e85a08b59b16f7d assets/adastra/blockstates/etreonic_sol
 02a50a2e2bfeea5ae24882842fb3742bca717906 assets/adastra/blockstates/gravity_normalizer.json
 74d5948e3bde721a9aa23340692351f508ce242e assets/adastra/blockstates/hydraulic_press.json
 ba7472e434f71e1cf8848d97c7b8d11dca998611 assets/adastra/blockstates/hydrogen.json
+eb7add301d063c184398dcd4af66fc6edaefcb75 assets/adastra/blockstates/moon_sand.json
+2fc2d7a90b7d4ad8ed62754888fdc9ccc519226e assets/adastra/blockstates/moon_stone.json
 e35160973716ebc349a74595d067b8d03a7d226c assets/adastra/blockstates/oil.json
 061409ef079f4666442e09e851f91c206dda2eb7 assets/adastra/blockstates/oil_refinery.json
 899c99ddc76621abeed88fbc2b32cc2b48d6de7b assets/adastra/blockstates/oxygen.json
@@ -28,6 +30,8 @@ a97269c7fff62c6a7ac64fc7727e83778bcbbd01 assets/adastra/models/block/etrionic_bl
 87b354afcaf39686b8fe2d5dbef69d00bbbbc196 assets/adastra/models/block/gravity_normalizer.json
 87f00a68cf7b0200b0035c74b9e2a50220ce1061 assets/adastra/models/block/hydraulic_press.json
 50812bd51e14ec5ea223afe239c89730a63e43b1 assets/adastra/models/block/hydrogen.json
+80002df0c81a5305d210bdb88f28d3baca4108d6 assets/adastra/models/block/moon_sand.json
+8ab3d675c494f0b9b6f1cb46c515336324d0940f assets/adastra/models/block/moon_stone.json
 50812bd51e14ec5ea223afe239c89730a63e43b1 assets/adastra/models/block/oil.json
 129cccf0ee9f12edc0b724c8a1102a77e6f40d4d assets/adastra/models/block/oil_refinery.json
 50812bd51e14ec5ea223afe239c89730a63e43b1 assets/adastra/models/block/oxygen.json
@@ -44,6 +48,8 @@ ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/emitter.json
 4fd741b5f58593b773080a1b0732c176fd5a9119 assets/adastra/models/item/etreonic_solar_panel.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/gravity_normalizer.json
 7614f968892c8809a21e0714f92af1aadd79554a assets/adastra/models/item/hydraulic_press.json
+35da6834afa8503985d7f0283056378783dada10 assets/adastra/models/item/moon_sand.json
+a5dccfb893a5b522f7d913ce8224c478e4cb6465 assets/adastra/models/item/moon_stone.json
 7614f968892c8809a21e0714f92af1aadd79554a assets/adastra/models/item/oil_refinery.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/oxygen_distributor.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/receiver.json

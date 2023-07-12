@@ -26,6 +26,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         ModBlocks.FLUIDS.stream().map(RegistryEntry::get).forEach(this::fluidBlock);
 
+        ModBlocks.CUBES.stream().map(RegistryEntry::get).forEach(this::basicBlock);
+
         basicRenderedBlock(ModBlocks.OXYGEN_DISTRIBUTOR.get());
         basicRenderedBlock(ModBlocks.GRAVITY_NORMALIZER.get());
         basicRenderedBlock(ModBlocks.ETRIONIC_SOLAR_PANEL.get(), ModItemModelProvider.SOLAR_PANEL);
@@ -40,6 +42,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         basicRenderedBlock(ModBlocks.RECYCLER.get(), ModItemModelProvider.SMALL_RENDERED_ITEM);
         batteryBlock((BatteryBlock) ModBlocks.BATTERY.get());
         etrionicBlastFurnaceBlock((EtrionicBlastFurnaceBlock) ModBlocks.ETRIONIC_BLAST_FURNACE.get());
+    }
+
+    public void basicBlock(Block block) {
+        simpleBlockItem(block, models().getBuilder(name(block)));
+        simpleBlock(block);
     }
 
     public void basicRenderedBlock(Block block) {
