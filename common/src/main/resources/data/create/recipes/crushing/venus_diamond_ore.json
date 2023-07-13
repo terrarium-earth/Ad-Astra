@@ -16,18 +16,18 @@
   "type": "create:crushing",
   "ingredients": [
     {
-      "item": "ad_astra:mars_ice_shard_ore"
+      "item": "ad_astra:venus_diamond_ore"
     }
   ],
   "results": [
     {
-      "item": "ad_astra:ice_shard",
+      "item": "minecraft:diamond",
       "count": 1
     },
     {
-      "item": "ad_astra:ice_shard",
+      "item": "minecraft:diamond",
       "count": 1,
-      "chance": 0.25
+      "chance": 0.75
     },
     {
       "item": "create:experience_nugget",
@@ -35,7 +35,7 @@
       "chance": 0.75
     },
     {
-      "item": "ad_astra:mars_cobblestone",
+      "item": "ad_astra:venus_cobblestone",
       "count": 1,
       "chance": 0.125
     }

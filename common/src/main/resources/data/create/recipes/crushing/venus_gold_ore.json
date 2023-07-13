@@ -16,26 +16,26 @@
   "type": "create:crushing",
   "ingredients": [
     {
-      "item": "ad_astra:mars_ice_shard_ore"
+      "item": "ad_astra:venus_gold_ore"
     }
   ],
   "results": [
     {
-      "item": "ad_astra:ice_shard",
+      "item": "minecraft:raw_gold",
       "count": 1
     },
     {
-      "item": "ad_astra:ice_shard",
-      "count": 1,
-      "chance": 0.25
-    },
-    {
-      "item": "create:experience_nugget",
+      "item": "minecraft:raw_gold",
       "count": 1,
       "chance": 0.75
     },
     {
-      "item": "ad_astra:mars_cobblestone",
+      "item": "create:experience_nugget",
+      "count": 2,
+      "chance": 0.75
+    },
+    {
+      "item": "ad_astra:venus_cobblestone",
       "count": 1,
       "chance": 0.125
     }
