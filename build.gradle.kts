@@ -1,3 +1,4 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import dev.architectury.plugin.ArchitectPluginExtension
 import groovy.json.StringEscapeUtils
 import net.fabricmc.loom.api.LoomGradleExtensionAPI
@@ -8,7 +9,13 @@ plugins {
     id("maven-publish")
     id("com.teamresourceful.resourcefulgradle") version "0.0.+"
     id("dev.architectury.loom") version "1.2-SNAPSHOT" apply false
-    id("architectury-plugin") version "3.4-SNAPSHOT" apply false
+    id("architectury-plugin") version "3.4-SNAPSHOT"
+    id("com.github.johnrengelman.shadow") version "7.1.2" apply false
+}
+
+architectury {
+    val minecraftVersion: String by project
+    minecraft = minecraftVersion
 }
 
 subprojects {
@@ -90,21 +97,29 @@ subprojects {
     }
 
     if (!isCommon) {
+        apply(plugin = "com.github.johnrengelman.shadow")
         configure<ArchitectPluginExtension> {
             platformSetupLoomIde()
         }
 
-        sourceSets.main {
-            val main = this
-
-            rootProject.projects.common.dependencyProject.sourceSets.main {
-                main.java.source(java)
-                main.resources.source(resources)
-            }
+        val shadowCommon by configurations.creating {
+            isCanBeConsumed = false
+            isCanBeResolved = true
         }
 
-        dependencies {
-            compileOnly(rootProject.projects.common)
+        tasks {
+            "shadowJar"(ShadowJar::class) {
+                archiveClassifier.set("dev-shadow")
+                configurations = listOf(shadowCommon)
+
+                exclude(".cache/**") //Remove datagen cache from jar.
+                exclude("**/adastra/datagen/**") //Remove data gen code from jar.
+            }
+
+            "remapJar"(RemapJarTask::class) {
+                dependsOn("shadowJar")
+                inputFile.set(named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
+            }
         }
     } else {
         sourceSets.main.get().resources.srcDir("src/main/generated/resources")

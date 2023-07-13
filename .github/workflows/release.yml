@@ -1,0 +1,85 @@
+name: Publish Release
+on:
+  workflow_dispatch:
+jobs:
+  publish-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Setup Gradle Caches
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: ${{ runner.os }}-gradle
+
+      - name: Setup Gradle Wrapper
+        run: chmod +x gradlew
+
+      - name: Get Version and Platform
+        id: properties
+        uses: christian-draeger/read-properties@1.1.1
+        with:
+          path: "./gradle.properties"
+          properties: "version enabledPlatforms minecraftVersion"
+
+      - name: Publish Release
+        run: ./gradlew publish --info
+        env:
+          MAVEN_USER: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_PASS: ${{ secrets.MAVEN_PASSWORD }}
+
+      - name: Upload Forge Releases (Curse/Modrinth/Github)
+        if: contains(steps.properties.outputs.enabledPlatforms, 'forge')
+        uses: Kir-Antipov/mc-publish@v3.2
+        with:
+          curseforge-id: ${{ vars.CURSE_ID }}
+          curseforge-token: ${{ secrets.CURSE_TOKEN }}
+
+          modrinth-id: ${{ vars.MODRINTH_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          files: ./forge/build/libs/!(*-@(dev|sources|dev-shadow)).jar
+          name: "[Forge] Ad Astra ${{ steps.properties.outputs.version }}"
+          version: ${{ steps.properties.outputs.version }}
+          version-type: release
+          changelog-file: changelog.md
+          loaders: forge
+          game-versions: ${{ steps.properties.outputs.minecraftVersion }}
+          version-resolver: exact
+
+      - name: Upload Fabric Releases (Curse/Modrinth/Github)
+        if: contains(steps.properties.outputs.enabledPlatforms, 'fabric')
+        uses: Kir-Antipov/mc-publish@v3.2
+        with:
+          curseforge-id: ${{ vars.CURSE_ID }}
+          curseforge-token: ${{ secrets.CURSE_TOKEN }}
+
+          modrinth-id: ${{ vars.MODRINTH_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          files: ./fabric/build/libs/!(*-@(dev|sources|dev-shadow)).jar
+          name: "[Fabric] Ad Astra ${{ steps.properties.outputs.version }}"
+          version: ${{ steps.properties.outputs.version }}
+          version-type: release
+          changelog-file: changelog.md
+          loaders: fabric
+          game-versions: ${{ steps.properties.outputs.minecraftVersion }}
+          version-resolver: exact
+
+      - name: Generate Discord Embed
+        run: ./gradlew injectEmbed
+
+      - name: Upload Discord Embed
+        uses: tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          raw-data: ./build/embed.json

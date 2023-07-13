@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.datagen.provider.server.tags;
 
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.tags.ModBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -27,5 +28,8 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.tag(BlockTags.FENCES.location()));
         tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.element(ForgeRegistries.BLOCKS.getKey(Blocks.IRON_BARS)));
         tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.element(ForgeRegistries.BLOCKS.getKey(Blocks.TNT)));
+
+        tag(ModBlockTags.MOON_CARVER_REPLACEABLES).add(TagEntry.element(ForgeRegistries.BLOCKS.getKey(ModBlocks.MOON_SAND.get())));
+        tag(ModBlockTags.MOON_CARVER_REPLACEABLES).add(TagEntry.element(ForgeRegistries.BLOCKS.getKey(ModBlocks.MOON_STONE.get())));
     }
 }

@@ -2,8 +2,8 @@ package earth.terrarium.adastra.datagen.provider.server.registry;
 
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.registry.ModBlocks;
+import earth.terrarium.adastra.datagen.dimensions.ModNoiseRouterData;
 import earth.terrarium.adastra.datagen.dimensions.ModSurfaceRuleData;
-import earth.terrarium.adastra.datagen.dimensions.MoonNoiseRouterData;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.SurfaceRuleData;
@@ -12,7 +12,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
+import net.minecraft.world.level.levelgen.NoiseRouter;
+import net.minecraft.world.level.levelgen.NoiseSettings;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 
 import java.util.List;
 
@@ -32,11 +35,11 @@ public class ModNoiseGeneratorSettingsProvider {
     }
 
     public static NoiseGeneratorSettings space() {
-        return new NoiseGeneratorSettings(
+        return create(
             SIMPLE_NOISE_SETTINGS,
             Blocks.AIR.defaultBlockState(),
             Blocks.AIR.defaultBlockState(),
-            none(),
+            ModNoiseRouterData.none(),
             SurfaceRuleData.air(),
             List.of(),
             0,
@@ -52,7 +55,7 @@ public class ModNoiseGeneratorSettingsProvider {
             SIMPLE_NOISE_SETTINGS,
             ModBlocks.MOON_STONE.get().defaultBlockState(),
             Blocks.AIR.defaultBlockState(),
-            MoonNoiseRouterData.moon(context.lookup(Registries.DENSITY_FUNCTION), context.lookup(Registries.NOISE)),
+            ModNoiseRouterData.moon(context.lookup(Registries.DENSITY_FUNCTION), context.lookup(Registries.NOISE)),
             ModSurfaceRuleData.moon(),
             List.of(),
             63,
@@ -60,26 +63,6 @@ public class ModNoiseGeneratorSettingsProvider {
             false,
             false,
             false
-        );
-    }
-
-    public static NoiseRouter none() {
-        return new NoiseRouter(
-            DensityFunctions.zero(),
-            DensityFunctions.zero(),
-            DensityFunctions.zero(),
-            DensityFunctions.zero(),
-            DensityFunctions.zero(),
-            DensityFunctions.zero(),
-            DensityFunctions.zero(),
-            DensityFunctions.zero(),
-            DensityFunctions.zero(),
-            DensityFunctions.zero(),
-            DensityFunctions.zero(),
-            DensityFunctions.zero(),
-            DensityFunctions.zero(),
-            DensityFunctions.zero(),
-            DensityFunctions.zero()
         );
     }
 

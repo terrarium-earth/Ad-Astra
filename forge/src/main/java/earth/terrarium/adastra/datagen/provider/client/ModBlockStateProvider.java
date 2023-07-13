@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -27,6 +28,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         ModBlocks.FLUIDS.stream().map(RegistryEntry::get).forEach(this::fluidBlock);
 
         ModBlocks.CUBES.stream().map(RegistryEntry::get).forEach(this::basicBlock);
+        ModBlocks.CUBE_COLUMNS.stream().map(RegistryEntry::get).forEach(this::basicCubeColumn);
 
         basicRenderedBlock(ModBlocks.OXYGEN_DISTRIBUTOR.get());
         basicRenderedBlock(ModBlocks.GRAVITY_NORMALIZER.get());
@@ -47,6 +49,19 @@ public class ModBlockStateProvider extends BlockStateProvider {
     public void basicBlock(Block block) {
         simpleBlockItem(block, models().getBuilder(name(block)));
         simpleBlock(block);
+    }
+
+    public void basicBlock(Block block, ModelFile model) {
+        simpleBlockItem(block, models().getBuilder(name(block)));
+        simpleBlock(block, model);
+    }
+
+    public void basicCubeColumn(Block block) {
+        basicBlock(block,
+            models().cubeColumn(
+                name(block),
+                modLoc("block/" + name(block)),
+                modLoc("block/" + name(block) + "_top")));
     }
 
     public void basicRenderedBlock(Block block) {

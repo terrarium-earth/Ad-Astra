@@ -12,6 +12,7 @@ public class ModSurfaceRuleData {
     private static final SurfaceRules.RuleSource BEDROCK = makeStateRule(Blocks.BEDROCK);
     private static final SurfaceRules.RuleSource MOON_SAND = makeStateRule(ModBlocks.MOON_SAND.get());
     private static final SurfaceRules.RuleSource MOON_STONE = makeStateRule(ModBlocks.MOON_STONE.get());
+    private static final SurfaceRules.RuleSource MOON_DEEPSLATE = makeStateRule(ModBlocks.MOON_DEEPSLATE.get());
 
     public static SurfaceRules.RuleSource moon() {
         SurfaceRules.ConditionSource isMoonWastes = SurfaceRules.isBiome(ModBiomeDataProvider.MOON_WASTES);
@@ -25,12 +26,22 @@ public class ModSurfaceRuleData {
             )
         );
 
+
+        SurfaceRules.RuleSource deepslateRule = SurfaceRules.sequence(
+            SurfaceRules.ifTrue(
+                SurfaceRules.verticalGradient("deepslate",
+                    VerticalAnchor.absolute(0),
+                    VerticalAnchor.absolute(8)),
+                MOON_DEEPSLATE
+            )
+        );
+
         SurfaceRules.RuleSource lunarWastesRule = SurfaceRules.sequence(
             SurfaceRules.ifTrue(isMoonWastes,
                 SurfaceRules.sequence(
                     SurfaceRules.ifTrue(
                         SurfaceRules.yBlockCheck(
-                            VerticalAnchor.absolute(87),
+                            VerticalAnchor.absolute(37),
                             2),
                         SurfaceRules.sequence(
                             SurfaceRules.ifTrue(
@@ -48,6 +59,7 @@ public class ModSurfaceRuleData {
 
         return SurfaceRules.sequence(
             bedrockFloorRule,
+            deepslateRule,
             lunarWastesRule);
     }
 

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "adastra:block/moon_deepslate_top",
+    "side": "adastra:block/moon_deepslate"
+  }
+}

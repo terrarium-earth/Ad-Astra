@@ -18,6 +18,7 @@ public final class ModBlocks {
     public static final ResourcefulRegistry<Block> MACHINES = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> FLUIDS = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> CUBES = ResourcefulRegistries.create(BLOCKS);
+    public static final ResourcefulRegistry<Block> CUBE_COLUMNS = ResourcefulRegistries.create(BLOCKS);
 
     public static final RegistryEntry<Block> OXYGEN_DISTRIBUTOR = MACHINES.register("oxygen_distributor", () -> new OxygenDistributorBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
@@ -53,4 +54,5 @@ public final class ModBlocks {
 
     public static final RegistryEntry<Block> MOON_SAND = CUBES.register("moon_sand", () -> new SandBlock(0x5c6466, BlockBehaviour.Properties.copy(Blocks.SAND)));
     public static final RegistryEntry<Block> MOON_STONE = CUBES.register("moon_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+    public static final RegistryEntry<Block> MOON_DEEPSLATE = CUBE_COLUMNS.register("moon_deepslate", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
 }

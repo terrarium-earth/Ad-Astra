@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.datagen.provider.server.registry;
 
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.common.world.biome.CratersBiomeSource;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -12,6 +13,8 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
+
+import java.util.List;
 
 public class ModDimensionProvider {
     public static final ResourceKey<LevelStem> SPACE = register("space");
@@ -36,8 +39,11 @@ public class ModDimensionProvider {
         context.register(MOON, new LevelStem(
             dimensionTypes.getOrThrow(ModDimensionTypeProvider.MOON),
             new NoiseBasedChunkGenerator(
-                new FixedBiomeSource(
-                    biomes.getOrThrow(ModBiomeDataProvider.MOON_WASTES)),
+                new CratersBiomeSource(
+                    biomes.getOrThrow(ModBiomeDataProvider.MOON_WASTES),
+                    List.of(),
+                    0.0F
+                ),
                 noiseSettings.getOrThrow(ModNoiseGeneratorSettingsProvider.MOON))));
     }
 }

@@ -53,6 +53,6 @@ public class WeatherApp implements Ti69App {
 
     @Override
     public int color() {
-        return 0xff003366;
+        return 0xff2b3fb3;
     }
 }

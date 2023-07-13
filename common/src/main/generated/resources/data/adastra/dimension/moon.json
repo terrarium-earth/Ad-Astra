@@ -3,8 +3,10 @@
   "generator": {
     "type": "minecraft:noise",
     "biome_source": {
-      "type": "minecraft:fixed",
-      "biome": "adastra:moon_wastes"
+      "type": "adastra:craters",
+      "biomes": [],
+      "default_biome": "adastra:moon_wastes",
+      "erosion_threshold": 0.0
     },
     "settings": "adastra:moon"
   }
