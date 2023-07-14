@@ -66,6 +66,8 @@ public class AdAstraClientForge {
         bus.addListener(AdAstraClientForge::chestSpriteLoading);
         bus.addListener(AdAstraClientForge::onRegisterLayerDefinitions);
         bus.addListener(AdAstraClientForge::onClientReloadListeners);
+        bus.addListener(AdAstraClientForge::onSetupItemColors);
+        bus.addListener(AdAstraClientForge::onSetupBlockColors);
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onRegisterClientHud);
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onClientTick);
         ForgeMenuConfig.register();
@@ -113,6 +115,14 @@ public class AdAstraClientForge {
                 event.registerLayerDefinition(location, definition);
             }
         });
+    }
+
+    public static void onSetupItemColors(RegisterColorHandlersEvent.Item event) {
+        AdAstraClient.onAddItemColors(event::register);
+    }
+
+    public static void onSetupBlockColors(RegisterColorHandlersEvent.Block event) {
+        AdAstraClient.onAddBlockColors(event::register);
     }
 
     public static boolean hasInitializedRenderers() {

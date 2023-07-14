@@ -1,52 +1,48 @@
-<a href="https://modrinth.com/mod/resourceful-lib">
-    <p align="center">
-        <img src="https://media.discordapp.net/attachments/1023678603289972797/1042445198183120946/BH_NU_BADGE.png" alt="Resourceful Lib" width="400"/> 
-    </p>
-</a>
-
-<a href="https://modrinth.com/mod/resourceful-config">
-    <p align="center">
-        <img src="https://i.imgur.com/2oA0JFA.png" alt="Resourceful Config" width="400"/> 
-    </p>
-</a>
-
 <div align="center">
 
-Also uses [Botarium](https://modrinth.com/mod/botarium)
+## Ad Astra
+
+[![Requires Resourceful Lib](https://cdn.discordapp.com/attachments/1073717602880327761/1073717942014972034/RLib_vector.svg)](http://modrinth.com/mod/resourceful-lib)
+[![Requires Resourceful Config](https://cdn.discordapp.com/attachments/1073717602880327761/1073717981118480535/RConfig_vector.svg)](http://modrinth.com/mod/resourceful-config)
+[![Requires Botarium](https://cdn.discordapp.com/attachments/1073717602880327761/1090775450437046392/Requires_Botarium_vector.svg)](http://modrinth.com/mod/botarium)
+
+[![Made by Terrarium](https://cdn.discordapp.com/attachments/1073717602880327761/1073718144910233691/Terrarium_vector.svg)](https://discord.terrarium.earth)
+[![Modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/ad-astra)
+[![CurseForge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg)](https://www.curseforge.com/minecraft/mc-mods/ad-astra)
+<hr>
+
+### 📖About 📖
+
+<hr>
 </div>
 
-<a href="https://discord.terrarium.earth/">
-    <p align="center">
-        <img src="https://cdn.discordapp.com/attachments/1005798262273495041/1018731591314448495/discord.png" alt="Discord" width="400"/> 
-    </p>
-</a>
-
-<a>
-    <p align="center">
-        <img src="https://cdn.discordapp.com/attachments/1005798262273495041/1018343461642055690/Ad_Astra.png" alt="Ad Astra!" width="400"/> 
-    </p>
-</a>
-
 Ad Astra! (translation: "To the Stars!") is a space mod for Fabric and Forge with a focus on technology, travel and
-exploration. We've got
-everything you need to become an astronaut: rockets, space suits, space stations and machines. Why not take a stroll on
-the Moon? Build a self-sustaining bunker on Mars? Go mining on Venus? The entire Solar System, better yet, Milky Way, is
-at your disposal!
-
-<a>
-    <p align="center">
-        <img src="https://cdn.discordapp.com/attachments/1005798262273495041/1018343462006964234/Features.png" alt="Features" width="400"/> 
-    </p>
-</a>
+exploration. We've got everything you need to become an astronaut: rockets, space suits, space stations and machines.
+Why not take a stroll on the Moon? Build a self-sustaining bunker on Mars? Go mining on Venus? The entire Solar System,
+better yet, Milky Way, is at your disposal!
 
 - Five celestial bodies: The Moon, Mars, Venus, Mercury and Glacio, in two different solar systems. Each planet
   expresses a distinctive flair, with specific mobs and unique materials.
 - Vehicles: Four rocket tiers for interplanetary travel and a rover for traversing the rough, alien terrain ahead.
 - Technology: Standard processing machines and generators, along with oxygen generation and distribution, fuel refining,
-  water pumping, cables, fluid pipes and a rocket workbench.
+  water pumping, cable, fluid pipes and a rocket workbench.
 - Building: Spruce up your builds with over 250 building blocks, ranging from planet-specific bricks and stones to space
   station deco and metal plating.
 - An in-game guidebook, explaining everything you need to progress and prosper in Ad Astra!
+
+<div align="center">
+
+## ✨Socials✨
+
+[![YouTube](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/youtube-plural_vector.svg)](https://youtube.terrarium.earth)
+[![Twitch](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/twitch-plural_vector.svg)](https://www.twitch.tv/terrariumearth)
+[![Twitter](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/twitter-plural_vector.svg)](https://twitter.terrarium.earth)
+[![Kofi](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/donate/kofi-plural_vector.svg)](https://kofi.terrarium.earth)
+[![Discord-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/discord-plural_vector.svg)](https://discord.terrarium.earth)
+[![Modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/modrinth_vector.svg)](https://modrinth.com/user/Terrarium)
+[![CurseForge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/curseforge_vector.svg)](https://www.curseforge.com/members/terrariumearth/projects)
+<hr>
+</div>
 
 ## Developers
 
@@ -56,8 +52,8 @@ To add this library to your project, do the following:
 repositories {
   maven {
     // Location of the maven that hosts Terrarium and Team Resourceful's files.
-    name = "Resourceful Bees Maven"
-    url = "https://nexus.resourcefulbees.com/repository/maven-public/"
+    name = "Team Resourceful Maven"
+    url = "https://maven.resourcefulbees.com/repository/maven-public/"
   }
 }
 ```

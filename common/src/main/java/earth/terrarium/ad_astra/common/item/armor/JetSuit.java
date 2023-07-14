@@ -29,7 +29,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -181,14 +180,15 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
     }
 
     @Override
-    public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        if (slot.equals(EquipmentSlot.CHEST)) {
-            if (stack.getItem() instanceof JetSuit) {
-                var energy = EnergyHooks.getItemEnergyManager(stack);
-                return new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armour/jet_suit/jet_suit_" + (energy.getStoredEnergy() == 0 ? 0 : ((int) Math.min((energy.getStoredEnergy() * 5 / energy.getCapacity()) + 1, 5))) + ".png").toString();
-            }
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+        if (!slot.equals(EquipmentSlot.CHEST)) {
+            return new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armour/jet_suit/jet_suit_5.png").toString();
         }
-        return AdAstra.MOD_ID + ":textures/entity/armour/jet_suit/jet_suit_5.png";
+        if (stack.getItem() instanceof JetSuit) {
+            var energy = EnergyHooks.getItemEnergyManager(stack);
+            return new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armour/jet_suit/jet_suit_" + (energy.getStoredEnergy() <= 0 ? 0 : ((int) Math.min((energy.getStoredEnergy() * 5 / Math.max(1, energy.getCapacity())) + 1, 5))) + ".png").toString();
+        }
+        return new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armour/jet_suit/jet_suit_5.png").toString();
     }
 
     public void setFallFlying(boolean fallFlying) {

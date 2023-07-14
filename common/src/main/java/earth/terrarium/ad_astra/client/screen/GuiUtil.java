@@ -4,8 +4,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Matrix4f;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.ClientPlatformUtils;
 import earth.terrarium.botarium.api.fluid.ClientFluidHooks;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
@@ -22,8 +22,6 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.level.material.Fluid;
-import org.apache.commons.lang3.NotImplementedException;
 
 import java.awt.*;
 
@@ -164,7 +162,7 @@ public class GuiUtil {
 
 
     public static void drawTankTooltip(Screen screen, PoseStack poseStack, FluidHolder tank, long capacity, int mouseX, int mouseY) {
-        screen.renderTooltip(poseStack, Component.translatable("gauge_text.ad_astra.liquid_storage", FluidHooks.toMillibuckets(tank.getFluidAmount()), FluidHooks.toMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)).append(Component.nullToEmpty(", ")).append(GuiUtil.getFluidTranslation(tank.getFluid())), mouseX, mouseY);
+        screen.renderTooltip(poseStack, Component.translatable("gauge_text.ad_astra.liquid_storage", FluidHooks.toMillibuckets(tank.getFluidAmount()), FluidHooks.toMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)).append(Component.nullToEmpty(", ")).append(ClientPlatformUtils.getFluidTranslation(tank.getFluid())), mouseX, mouseY);
     }
 
     public static class FloatGuiComponent {
@@ -190,10 +188,5 @@ public class GuiUtil {
             bufferBuilder.vertex(matrix, x0, y0, z).uv(u0, v0).endVertex();
             BufferUploader.drawWithShader(bufferBuilder.end());
         }
-    }
-
-    @ExpectPlatform
-    public static Component getFluidTranslation(Fluid fluid) {
-        throw new NotImplementedException();
     }
 }

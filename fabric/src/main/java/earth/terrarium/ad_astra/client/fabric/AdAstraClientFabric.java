@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
@@ -48,6 +49,8 @@ public class AdAstraClientFabric implements ClientModInitializer {
         AdAstraClient.onRegisterBlockRenderTypes(AdAstraClientFabric::registerBlockRenderTypes);
         AdAstraClient.onRegisterItemRenderers(AdAstraClientFabric::registerItemRenderer);
         ClientModParticles.onRegisterParticles(AdAstraClientFabric::registerParticles);
+        AdAstraClient.onAddItemColors(ColorProviderRegistry.ITEM::register);
+        AdAstraClient.onAddBlockColors(ColorProviderRegistry.BLOCK::register);
         registerRenderers();
         initEvents();
         AdAstraClient.onRegisterReloadListeners((id, listener) -> ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new IdentifiableResourceReloadListener() {

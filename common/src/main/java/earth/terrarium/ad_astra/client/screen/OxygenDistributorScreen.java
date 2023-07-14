@@ -2,11 +2,11 @@ package earth.terrarium.ad_astra.client.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.common.block.machine.entity.OxygenDistributorBlockEntity;
 import earth.terrarium.ad_astra.client.screen.util.ButtonType;
 import earth.terrarium.ad_astra.client.screen.util.CustomButton;
 import earth.terrarium.ad_astra.client.screen.util.PlanetSelectionScreen.TooltipType;
 import earth.terrarium.ad_astra.client.screen.util.ScreenUtils;
+import earth.terrarium.ad_astra.common.block.machine.entity.OxygenDistributorBlockEntity;
 import earth.terrarium.ad_astra.common.config.OxygenDistributorConfig;
 import earth.terrarium.ad_astra.common.data.ButtonColor;
 import earth.terrarium.ad_astra.common.networking.NetworkHandling;
@@ -89,13 +89,13 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos()) >= OxygenDistributorConfig.maxBlockChecks;
         if (oxygenLeak) {
             if (GuiUtil.isHovering(getOxygenLeakWarningSignBounds(), mouseX, mouseY)) {
-                this.renderComponentTooltip(poseStack, Arrays.asList(Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[0]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[1]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[2]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[3]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[4]")), mouseX, mouseY);
+                this.renderComponentTooltip(poseStack, Arrays.asList(Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[0]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[1]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[2]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[3]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[4]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[5]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[6]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[7]")), mouseX, mouseY);
             }
         }
 
         if (oxygenBlocksCount <= 0 && this.machine.getEnergyStorage().getStoredEnergy() > 0 && this.menu.getFluids().get(1).getFluidAmount() > 0) {
             if (GuiUtil.isHovering(getBlockedWarningSignBounds(), mouseX, mouseY)) {
-                this.renderComponentTooltip(poseStack, Arrays.asList(Component.translatable("gauge_text.ad_astra.blocked_warning[0]"), Component.translatable("gauge_text.ad_astra.blocked_warning[1]"), Component.translatable("gauge_text.ad_astra.blocked_warning[2]")), mouseX, mouseY);
+                this.renderComponentTooltip(poseStack, Arrays.asList(Component.translatable("gauge_text.ad_astra.blocked_warning[0]"), Component.translatable("gauge_text.ad_astra.blocked_warning[1]")), mouseX, mouseY);
             }
         }
     }

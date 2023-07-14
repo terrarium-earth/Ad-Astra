@@ -9,6 +9,7 @@ import earth.terrarium.ad_astra.common.networking.NetworkHandling;
 import earth.terrarium.ad_astra.common.recipe.condition.IRecipeConditionSerializer;
 import earth.terrarium.ad_astra.common.registry.*;
 import earth.terrarium.ad_astra.common.util.PlatformUtils;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import org.slf4j.Logger;
@@ -49,10 +50,15 @@ public class AdAstra {
     }
 
     public static void postInit() {
-        PlatformUtils.registerStrippedLog(ModBlocks.GLACIAN_LOG.get(), ModBlocks.STRIPPED_GLACIAN_LOG.get());
+        CauldronInteraction.WATER.put(ModItems.SPACE_HELMET.get(), CauldronInteraction.DYED_ITEM);
+        CauldronInteraction.WATER.put(ModItems.SPACE_SUIT.get(), CauldronInteraction.DYED_ITEM);
+        CauldronInteraction.WATER.put(ModItems.SPACE_PANTS.get(), CauldronInteraction.DYED_ITEM);
+        CauldronInteraction.WATER.put(ModItems.SPACE_BOOTS.get(), CauldronInteraction.DYED_ITEM);
         
+        PlatformUtils.registerStrippedLog(ModBlocks.GLACIAN_LOG.get(), ModBlocks.STRIPPED_GLACIAN_LOG.get());
         for (IRecipeConditionSerializer<?> recipeConditionSerializer : ModRecipeConditionSerializers.getSerializers()) {
             PlatformUtils.registerRecipeConditionSerializer(recipeConditionSerializer);
         }
+        ModEntityTypes.registerSpawnPlacements();
     }
 }

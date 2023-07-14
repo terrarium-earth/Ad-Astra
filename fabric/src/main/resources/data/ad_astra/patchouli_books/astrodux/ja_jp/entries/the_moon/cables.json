@@ -1,0 +1,23 @@
+{
+  "name": "ケーブル",
+  "icon": "ad_astra:desh_cable",
+  "sortnum": 4,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "ケーブル",
+      "item": "ad_astra:desh_cable",
+      "text": "ケーブルを使うと長距離の送電が可能になります。鋼製とデッシュ製の2種類があり、デッシュ製の方が転送速度が速いです。レンチを使うと、ケーブルの延長方向やネットワーク内のノードとの接続を解除するように設定することができます。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/steel_cable",
+      "recipe2": "ad_astra:recipes/desh_cable"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/wrench"
+    }
+  ]
+}

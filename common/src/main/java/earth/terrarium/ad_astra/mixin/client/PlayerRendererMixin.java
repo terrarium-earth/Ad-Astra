@@ -6,6 +6,7 @@ import com.mojang.math.Vector3f;
 import earth.terrarium.ad_astra.client.renderer.armor.JetSuitModel;
 import earth.terrarium.ad_astra.client.renderer.armor.NetheriteSpaceSuitModel;
 import earth.terrarium.ad_astra.client.renderer.armor.SpaceSuitModel;
+import earth.terrarium.ad_astra.common.config.SpaceSuitConfig;
 import earth.terrarium.ad_astra.common.item.armor.JetSuit;
 import earth.terrarium.ad_astra.common.item.armor.SpaceSuit;
 import earth.terrarium.ad_astra.common.item.vehicle.VehicleItem;
@@ -31,6 +32,7 @@ public class PlayerRendererMixin {
 
     @Inject(method = "renderRightHand", at = @At("HEAD"), cancellable = true)
     public void ad_astra$renderRightHand(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AbstractClientPlayer player, CallbackInfo ci) {
+        if (!SpaceSuitConfig.renderCustomFirstPersonHand) return;
         ItemStack offhandStack = player.getOffhandItem();
         if (offhandStack.getItem() instanceof VehicleItem) {
             ci.cancel();
@@ -44,6 +46,7 @@ public class PlayerRendererMixin {
 
     @Inject(method = "renderLeftHand", at = @At("HEAD"), cancellable = true)
     public void ad_astra$renderLeftHand(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AbstractClientPlayer player, CallbackInfo ci) {
+        if (!SpaceSuitConfig.renderCustomFirstPersonHand) return;
         ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
         if (!chest.isEmpty()) {
             if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit) {

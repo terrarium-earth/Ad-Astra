@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.common.compat.jei.category;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.ClientPlatformUtils;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.compat.jei.EnergyBarDrawable;
@@ -62,10 +63,10 @@ public class FuelConversionCategory extends BaseCategory<FuelConversionRecipe> {
             tooltips.add(Component.translatable("rei.tooltip.ad_astra.energy_using", FuelRefineryConfig.energyPerTick));
         }
         if (mouseX > 15 && mouseY > 13 && mouseX < 15 + GuiUtil.FLUID_TANK_WIDTH && mouseY < 13 + GuiUtil.FLUID_TANK_HEIGHT) {
-            tooltips.add(GuiUtil.getFluidTranslation(recipe.getFluidInput().get(0).value()));
+            tooltips.add(ClientPlatformUtils.getFluidTranslation(recipe.getFluidInput().get(0).value()));
         }
         if (mouseX > 80 && mouseY > 13 && mouseX < 80 + GuiUtil.FLUID_TANK_WIDTH && mouseY < 13 + GuiUtil.FLUID_TANK_HEIGHT) {
-            tooltips.add(GuiUtil.getFluidTranslation(recipe.getFluidOutput()));
+            tooltips.add(ClientPlatformUtils.getFluidTranslation(recipe.getFluidOutput()));
         }
         return tooltips;
     }

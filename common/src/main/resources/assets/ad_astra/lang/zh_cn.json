@@ -377,6 +377,8 @@
 	"block.ad_astra.strophar_stem"      : "孑节柄",
 	"block.ad_astra.strophar_trapdoor"  : "孑节木活板门",
 
+	"block.ad_astra.vent": "通风口",
+
 	"block.ad_astra.venus_calorite_ore"          : "锃金耐热金属矿石",
 	"block.ad_astra.venus_coal_ore"              : "锃金煤矿石",
 	"block.ad_astra.venus_cobblestone"           : "锃金圆石",
@@ -475,7 +477,7 @@
 	"fluid.ad_astra.cryo_fuel": "深低温燃油",
 	"fluid.ad_astra.fuel"     : "燃油",
 	"fluid.ad_astra.oil"      : "原油",
-	"fluid.ad_astra.oxygen"   : "氧气",
+	"fluid.ad_astra.oxygen"   : "液氧",
 
 
 

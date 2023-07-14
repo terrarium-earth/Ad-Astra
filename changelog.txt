@@ -1,6 +1,9 @@
-- fixed fluid translation issue (#89)
-- added config to disable taking damage in rockets (#199)
-- fixed water not freezing despite being cold enough (#228)
-- fixed issues with vents (#231)
+- Added Resourceful Config Web Support! you can now edit the Ad Astra config file from a web interface in: https://config.teamresourceful.com. more info can be found here: https://config.teamresourceful.com/about
 
-- diesel and biodiesel from other mods can now be used as fuel.
+- water will no longer freeze if the block above it has oxygen
+- fixed being able to place water on waterloggable blocks in space
+- the oxygen leak warning now has some additional info.
+- fixed the water pump still consuming power with a full tank
+- fixed stophar and aeronos doors having no loot tables.
+- fixed jet suit randomly crashing (#239)
+- fixed broken netherite space suit texture (#247)

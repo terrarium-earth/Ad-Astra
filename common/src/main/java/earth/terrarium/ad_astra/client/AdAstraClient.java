@@ -28,6 +28,8 @@ import earth.terrarium.botarium.client.ClientHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -41,6 +43,8 @@ import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.DyeableArmorItem;
+import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
@@ -157,6 +161,16 @@ public class AdAstraClient {
         for (BakedQuad quad : quads1) {
             vertexConsumer1.putBulkData(entry1, quad, 1, 1, 1, packedLight, packedOverlay);
         }
+    }
+
+    public static void onAddItemColors(BiConsumer<ItemColor, ItemLike[]> register) {
+        register.accept((itemStack, i) -> ((DyeableArmorItem) itemStack.getItem()).getColor(itemStack), new ItemLike[]{ModItems.SPACE_HELMET.get(), ModItems.SPACE_SUIT.get(), ModItems.SPACE_PANTS.get(), ModItems.SPACE_BOOTS.get()});
+        register.accept((itemStack, i) -> ((DyeableArmorItem) itemStack.getItem()).getColor(itemStack), new ItemLike[]{ModItems.NETHERITE_SPACE_HELMET.get(), ModItems.NETHERITE_SPACE_SUIT.get(), ModItems.NETHERITE_SPACE_PANTS.get(), ModItems.NETHERITE_SPACE_BOOTS.get()});
+        register.accept((itemStack, i) -> ((DyeableArmorItem) itemStack.getItem()).getColor(itemStack), new ItemLike[]{ModItems.JET_SUIT_HELMET.get(), ModItems.JET_SUIT.get(), ModItems.JET_SUIT_PANTS.get(), ModItems.JET_SUIT_BOOTS.get()});
+    }
+
+    public static void onAddBlockColors(BiConsumer<BlockColor, Block[]> register) {
+
     }
 
     @FunctionalInterface

@@ -30,7 +30,7 @@
       "chance": 0.25
     },
     {
-      "item": "minecraft:deepslate",
+      "item": "minecraft:cobbled_deepslate",
       "count": 1,
       "chance": 0.125
     }

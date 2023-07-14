@@ -3,8 +3,10 @@ package earth.terrarium.ad_astra.common.config;
 import com.teamresourceful.resourcefulconfig.common.annotations.Category;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
+import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
 
 @Category(id = "energizer", translation = "text.resourcefulconfig.ad_astra.option.energizer")
+@WebInfo(icon = "zap")
 public final class EnergizerConfig {
 
     @ConfigEntry(
@@ -19,5 +21,5 @@ public final class EnergizerConfig {
             type = EntryType.LONG,
             translation = "text.resourcefulconfig.ad_astra.option.energizer.energyPerTick"
     )
-    public static long energyPerTick = 170L;
+    public static long energyPerTick = 600L;
 }
