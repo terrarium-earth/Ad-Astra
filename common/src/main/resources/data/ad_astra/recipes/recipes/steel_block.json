@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "ad_astra:steel_ingot"
+      "tag": "ad_astra_platform:steel_ingots"
     }
   },
   "pattern": [
