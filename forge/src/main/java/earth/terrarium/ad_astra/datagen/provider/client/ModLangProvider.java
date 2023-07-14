@@ -130,13 +130,18 @@ public class ModLangProvider extends LanguageProvider {
         add("gui.ad_astra.text.moon", "Moon");
         add("gui.ad_astra.text.name", "Planet Selection");
         add("gui.ad_astra.text.no_gravity", "No Gravity");
+        add("gui.ad_astra.text.open", "Open");
         add("gui.ad_astra.text.orbit", "Orbit");
+        add("gui.ad_astra.text.overlay_config1", "Drag to move overlays");
+        add("gui.ad_astra.text.overlay_config2", "Scroll to scale up/down overlays");
         add("gui.ad_astra.text.oxygen", "Oxygen");
         add("gui.ad_astra.text.oxygen.false", "false");
         add("gui.ad_astra.text.oxygen.true", "true");
         add("gui.ad_astra.text.planet", "Planet");
         add("gui.ad_astra.text.provided", "Provided");
         add("gui.ad_astra.text.proxima_centauri", "Proxima Centauri");
+        add("gui.ad_astra.text.reset", "Reset");
+        add("gui.ad_astra.text.save", "Save");
         add("gui.ad_astra.text.show", "Show");
         add("gui.ad_astra.text.solar_system", "Solar System");
         add("gui.ad_astra.text.space_station", "Space Station");
@@ -153,6 +158,7 @@ public class ModLangProvider extends LanguageProvider {
         add("message.ad_astra.hold_space", "§7Hold §cSpace!");
         add("message.ad_astra.no_fuel", "§cNO FUEL! §7Fill the Rocket with §cFuel§7. (§6Sneak and Right Click§7)");
         add("message.ad_astra.speed", "%s m/s");
+        add("options.ad_astra.overlay_config", "Space Suit Overlay Settings");
         add("message.ad_astra.vehicle.dismount_caution", "§cCAUTION! §7Very dangerous to dismount now. Keep shift down during 40 ticks to dismount.");
         add("rei.category.ad_astra.space_station", "Space Station");
         add("rei.text.ad_astra.amount", "Amount: %s 🪣");

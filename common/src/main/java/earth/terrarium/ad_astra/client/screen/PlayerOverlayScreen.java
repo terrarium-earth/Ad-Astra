@@ -13,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -69,50 +70,12 @@ public class PlayerOverlayScreen {
             return;
         }
 
-        // Oxygen
         if (shouldRenderOxygen && !minecraft.options.renderDebug) {
-
-            poseStack.pushPose();
-            poseStack.scale(AdAstraConfig.oxygenBarScale, AdAstraConfig.oxygenBarScale, AdAstraConfig.oxygenBarScale);
-            int x = 5 + AdAstraConfig.oxygenBarXOffset;
-            int y = 25 + AdAstraConfig.oxygenBarYOffset;
-
-            int textureWidth = 62;
-            int textureHeight = 52;
-
-            GuiUtil.drawVerticalReverse(poseStack, x, y, textureWidth, textureHeight, OXYGEN_TANK_EMPTY_TEXTURE, oxygenRatio);
-            GuiUtil.drawVertical(poseStack, x, y, textureWidth, textureHeight, OXYGEN_TANK_FULL_TEXTURE, oxygenRatio);
-
-            // Oxygen text
-            double oxygen = Math.round(oxygenRatio * 1000) / 10.0;
-            Component text = Component.nullToEmpty((oxygen) + "%");
-            int textWidth = minecraft.font.width(text);
-            if (doesNotNeedOxygen) {
-                minecraft.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x7FFF00);
-            } else {
-                minecraft.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
-            }
-            poseStack.popPose();
+            renderOxygenTank(poseStack, minecraft);
         }
 
-        // Battery
         if (shouldRenderBattery && !minecraft.options.renderDebug) {
-
-            poseStack.pushPose();
-            poseStack.scale(AdAstraConfig.energyBarScale, AdAstraConfig.energyBarScale, AdAstraConfig.energyBarScale);
-            int x = screenWidth - 75 - AdAstraConfig.energyBarXOffset;
-            int y = 25 + AdAstraConfig.energyBarYOffset;
-
-            int textureWidth = (int) (49 * 1.4);
-            int textureHeight = (int) (27 * 1.4);
-            GuiUtil.drawHorizontal(poseStack, x, y, textureWidth, textureHeight, BATTERY_EMPTY_TEXTURE, 1.0);
-            GuiUtil.drawHorizontal(poseStack, x, y, textureWidth, textureHeight, BATTERY_TEXTURE, batteryRatio);
-
-            double energy = Math.round(batteryRatio * 1000) / 10.0;
-            Component text = Component.nullToEmpty((energy) + "%");
-            int textWidth = minecraft.font.width(text);
-            minecraft.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x6082B6);
-            poseStack.popPose();
+            renderEnergyBar(poseStack, minecraft);
         }
 
         // Timer
@@ -190,6 +153,58 @@ public class PlayerOverlayScreen {
             RenderSystem.disableBlend();
             poseStack.popPose();
         }
+    }
+
+    public static Rect2i getOxygenTankUnscaledRect(Minecraft minecraft) {
+        int x = 5 + AdAstraConfig.oxygenBarXOffset;
+        int y = 25 + AdAstraConfig.oxygenBarYOffset;
+        int textureWidth = 62;
+        int textureHeight = 52;
+        return new Rect2i(x, y, textureWidth, textureHeight);
+    }
+
+    public static void renderOxygenTank(PoseStack poseStack, Minecraft minecraft) {
+        poseStack.pushPose();
+        poseStack.scale(AdAstraConfig.oxygenBarScale, AdAstraConfig.oxygenBarScale, AdAstraConfig.oxygenBarScale);
+
+        Rect2i rect = getOxygenTankUnscaledRect(minecraft);
+        GuiUtil.drawVerticalReverse(poseStack, rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight(), OXYGEN_TANK_EMPTY_TEXTURE, oxygenRatio);
+        GuiUtil.drawVertical(poseStack, rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight(), OXYGEN_TANK_FULL_TEXTURE, oxygenRatio);
+
+        // Oxygen text
+        double oxygen = Math.round(oxygenRatio * 1000) / 10.0;
+        Component text = Component.nullToEmpty((oxygen) + "%");
+        int textWidth = minecraft.font.width(text);
+        if (doesNotNeedOxygen) {
+            minecraft.font.drawShadow(poseStack, text, (rect.getX() + (rect.getWidth() - textWidth) / 2.0f), rect.getY() + rect.getHeight() + 3, 0x7FFF00);
+        } else {
+            minecraft.font.drawShadow(poseStack, text, (rect.getX() + (rect.getWidth() - textWidth) / 2.0f), rect.getY() + rect.getHeight() + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
+        }
+        poseStack.popPose();
+    }
+
+    public static Rect2i getEnergyBarUnscaledRect(Minecraft minecraft) {
+        int screenWidth = minecraft.getWindow().getGuiScaledWidth();
+        int x = screenWidth - 75 - AdAstraConfig.energyBarXOffset;
+        int y = 25 + AdAstraConfig.energyBarYOffset;
+        int textureWidth = (int) (49 * 1.4);
+        int textureHeight = (int) (27 * 1.4);
+        return new Rect2i(x, y, textureWidth, textureHeight);
+    }
+
+    public static void renderEnergyBar(PoseStack poseStack, Minecraft minecraft) {
+        poseStack.pushPose();
+        poseStack.scale(AdAstraConfig.energyBarScale, AdAstraConfig.energyBarScale, AdAstraConfig.energyBarScale);
+
+        Rect2i rect = getEnergyBarUnscaledRect(minecraft);
+        GuiUtil.drawHorizontal(poseStack, rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight(), BATTERY_EMPTY_TEXTURE, 1.0);
+        GuiUtil.drawHorizontal(poseStack, rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight(), BATTERY_TEXTURE, batteryRatio);
+
+        double energy = Math.round(batteryRatio * 1000) / 10.0;
+        Component text = Component.nullToEmpty((energy) + "%");
+        int textWidth = minecraft.font.width(text);
+        minecraft.font.drawShadow(poseStack, text, (rect.getX() + (rect.getWidth() - textWidth) / 2.0f), rect.getY() + rect.getHeight() + 3, 0x6082B6);
+        poseStack.popPose();
     }
 
     public static void disableAllOverlays() {

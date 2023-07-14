@@ -44,7 +44,8 @@
     "client.LocalPlayerMixin",
     "client.PlayerRendererMixin",
     "client.SheetsMixin",
-    "client.SoundManagerMixin"
+    "client.SoundManagerMixin",
+    "client.VideoSettingsScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
