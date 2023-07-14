@@ -153,6 +153,7 @@ public class ModLangProvider extends LanguageProvider {
         add("message.ad_astra.hold_space", "§7Hold §cSpace!");
         add("message.ad_astra.no_fuel", "§cNO FUEL! §7Fill the Rocket with §cFuel§7. (§6Sneak and Right Click§7)");
         add("message.ad_astra.speed", "%s m/s");
+        add("message.ad_astra.vehicle.dismount_caution", "§cCAUTION! §7Very dangerous to dismount now. Keep shift down during 40 ticks to dismount.");
         add("rei.category.ad_astra.space_station", "Space Station");
         add("rei.text.ad_astra.amount", "Amount: %s 🪣");
         add("rei.text.ad_astra.conversion_ratio", "Conversion Ratio: %s%%");
