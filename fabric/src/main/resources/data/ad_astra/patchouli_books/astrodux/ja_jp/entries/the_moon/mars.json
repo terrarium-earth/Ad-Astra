@@ -1,0 +1,19 @@
+{
+  "name": "火星へ",
+  "icon": "ad_astra:/textures/sky/mars.png",
+  "sortnum": 6,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "火星",
+      "text": "月を探検し、デッシュを手に入れたあなたは、ロケットをさらに進化させて赤い惑星に行きたいと考えています。火星に行くことができるTier2ロケットの製造は、Tier1ロケットの製造と似ていますが、鉄の代わりにデッシュ製の素材を使います。パーツを組み立て、NASA作業台でロケットを作り、燃料を充填すれば、火星へ出発です！"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "オストラム",
+      "item": "ad_astra:ostrum_ingot",
+      "text": "オストラムは、赤い惑星であなたが求める次の素材です。より強力な宇宙服、優れた機械の製造、そして高温に耐えるロケットの製造に使用され、高温の惑星へ行けるようになります。"
+    }
+  ]
+}

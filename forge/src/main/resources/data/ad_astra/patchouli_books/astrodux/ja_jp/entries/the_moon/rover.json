@@ -1,0 +1,19 @@
+{
+  "name": "バギー",
+  "icon": "ad_astra:tier_1_rover",
+  "sortnum": 3,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "バギー",
+      "item": "ad_astra:tier_1_rover",
+      "text": "バギーは、月や惑星の荒れた地形を走行することができる陸上車両です。非常に速く、8つのアイテムを保存できるインベントリを持ち、複数のプレイヤーが乗れるように2つの座席を備えています。使用するには、バギーに燃料を入れます(SHIFTキーを押しながらクリックし、左の入力スロットに燃料バケツを置く)。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "ad_astra:tier_1_rover",
+      "scale": 0.36
+    }
+  ]
+}

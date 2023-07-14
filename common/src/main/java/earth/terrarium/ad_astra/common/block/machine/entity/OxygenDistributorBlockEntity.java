@@ -25,6 +25,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -162,7 +163,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<OxygenConversionRecipe> recipes = OxygenConversionRecipe.getRecipes(this.level);
-                if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, FluidHooks.buckets(1) / 20)) {
+                if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, FluidHooks.buckets(1f) / 10)) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                 }
             }
@@ -198,7 +199,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
             }
         }
 
-        Set<BlockPos> positions = FloodFiller3D.run(level, worldPosition.above());
+        Set<BlockPos> positions = FloodFiller3D.run(level, worldPosition);
 
         if (this.canDistribute(positions.size())) {
             OxygenUtils.setEntry(this.level, worldPosition, positions);

@@ -5,9 +5,11 @@ import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.annotations.IntRange;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
+import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 
 @Category(id = "oxygenDistributor", translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor")
+@WebInfo(icon = "vent")
 public final class OxygenDistributorConfig {
 
     @ConfigEntry(

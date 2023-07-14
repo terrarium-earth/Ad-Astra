@@ -46,7 +46,7 @@ public class SpacePainting extends Painting {
 
         paintingEntity.setDirection(facing);
         spacePaintings.removeIf(variant -> {
-            ((PaintingInvoker) paintingEntity).adastra_invokeSetVariant(variant);
+            ((PaintingInvoker) paintingEntity).ad_astra$invokeSetVariant(variant);
             return !paintingEntity.survives();
         });
 
@@ -62,7 +62,7 @@ public class SpacePainting extends Painting {
             return Optional.empty();
         }
 
-        ((PaintingInvoker) paintingEntity).adastra_invokeSetVariant(optional.get());
+        ((PaintingInvoker) paintingEntity).ad_astra$invokeSetVariant(optional.get());
         paintingEntity.setDirection(facing);
         return Optional.of(paintingEntity);
     }
@@ -86,7 +86,7 @@ public class SpacePainting extends Painting {
     public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
         ResourceKey<PaintingVariant> registryKey = ResourceKey.create(Registry.PAINTING_VARIANT_REGISTRY, new ResourceLocation(nbt.getString("Variant")));
-        ((PaintingInvoker) this).adastra_invokeSetVariant(Registry.PAINTING_VARIANT.getHolder(registryKey).get());
+        ((PaintingInvoker) this).ad_astra$invokeSetVariant(Registry.PAINTING_VARIANT.getHolder(registryKey).get());
         this.direction = Direction.from2DDataValue(nbt.getByte("Facing"));
         this.setDirection(this.direction);
     }

@@ -13,7 +13,7 @@ public class KeyboardHandlerMixin {
 
     // Avoids keybind conflicts
     @Inject(method = "keyPress", at = @At("TAIL"))
-    public void adastra_keyPress(long l, int i, int j, int k, int m, CallbackInfo ci) {
+    public void ad_astra$keyPress(long l, int i, int j, int k, int m, CallbackInfo ci) {
         InputConstants.Key key = InputConstants.getKey(i, j);
         if (InputConstants.KEY_SPACE == key.getValue()) {
             ClientModKeybindings.launchRocket();

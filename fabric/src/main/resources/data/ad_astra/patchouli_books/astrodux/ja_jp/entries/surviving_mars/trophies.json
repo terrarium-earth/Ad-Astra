@@ -1,0 +1,20 @@
+{
+  "name": "記念品",
+  "icon": "ad_astra:mars_globe",
+  "sortnum": 0,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "天体儀",
+      "item": "ad_astra:earth_globe",
+      "text": "天体儀は、ダンジョン終了時に報酬として得られる記念品です。実用的な機能はなく、装飾用のブロックとして使います。右クリックで回転させることができ、レッドストーンで動かすと永遠に回転し続けることができます。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "宇宙の絵画",
+      "item": "ad_astra:space_painting",
+      "text": "宇宙の絵画は、ダンジョン内のチェストから入手します。通常の絵画と同じように使えますが、このMODの絵画しか置けません。14種類あります。"
+    }
+  ]
+}

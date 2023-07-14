@@ -42,7 +42,7 @@ public class ModBlocks {
     public static final ResourcefulRegistry<Block> WALL_SIGNS = ResourcefulRegistries.create(SIGNS);
     public static final ResourcefulRegistry<Block> CHESTS = ResourcefulRegistries.create(BLOCKS);
 
-    public static final WoodType GLACIAN_SIGN_TYPE = WoodTypeInvoker.adastra_invokeRegister(WoodTypeInvoker.adastra_init(ArchitecturyTarget.getCurrentTarget().equals("forge") ? "ad_astra:glacian" : "glacian"));
+    public static final WoodType GLACIAN_SIGN_TYPE = WoodTypeInvoker.ad_astra$invokeRegister(WoodTypeInvoker.ad_astra$init(ArchitecturyTarget.getCurrentTarget().equals("forge") ? "ad_astra:glacian" : "glacian"));
 
     public static final RegistryEntry<Block> LAUNCH_PAD = BLOCKS.register("launch_pad", () -> new LaunchPad(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));
 

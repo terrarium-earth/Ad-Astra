@@ -6,6 +6,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.recipe.*;
+import earth.terrarium.ad_astra.common.recipe.lunarian.*;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
@@ -21,4 +22,11 @@ public class ModRecipeSerializers {
     public static final RegistryEntry<RecipeSerializer<FuelConversionRecipe>> FUEL_CONVERSION_SERIALIZER = RECIPE_SERIALIZERS.register("fuel_conversion", () -> new CodecRecipeSerializer<>(ModRecipeTypes.FUEL_CONVERSION_RECIPE.get(), FuelConversionRecipe::codec));
     public static final RegistryEntry<RecipeSerializer<OxygenConversionRecipe>> OXYGEN_CONVERSION_SERIALIZER = RECIPE_SERIALIZERS.register("oxygen_conversion", () -> new CodecRecipeSerializer<>(ModRecipeTypes.OXYGEN_CONVERSION_RECIPE.get(), OxygenConversionRecipe::codec));
     public static final RegistryEntry<RecipeSerializer<CryoFuelConversionRecipe>> CRYO_FUEL_CONVERSION_SERIALIZER = RECIPE_SERIALIZERS.register("cryo_fuel_conversion", () -> new CodecRecipeSerializer<>(ModRecipeTypes.CRYO_FUEL_CONVERSION_RECIPE.get(), CryoFuelConversionRecipe::codec, CryoFuelConversionRecipe::networkCodec));
+
+    public static final RegistryEntry<RecipeSerializer<LunarianTradeSimpleRecipe>> LUNARIAN_TRADE_SIMPLE_SERIALIZER = RECIPE_SERIALIZERS.register("lunarian_trade_simple", () -> new LunarianTradeRecipe.Serializer<>(LunarianTradeSimpleRecipe::new));
+    public static final RegistryEntry<RecipeSerializer<LunarianTradeEnchantedBookRecipe>> LUNARIAN_TRADE_ENCHANTED_BOOK_SERIALIZER = RECIPE_SERIALIZERS.register("lunarian_trade_enchanted_book", () -> new LunarianTradeRecipe.Serializer<>(LunarianTradeEnchantedBookRecipe::new));
+    public static final RegistryEntry<RecipeSerializer<LunarianTradeEnchantedItemRecipe>> LUNARIAN_TRADE_ENCHANTED_ITEM_SERIALIZER = RECIPE_SERIALIZERS.register("lunarian_trade_enchanted_item", () -> new LunarianTradeRecipe.Serializer<>(LunarianTradeEnchantedItemRecipe::new));
+    public static final RegistryEntry<RecipeSerializer<LunarianTradeDyedItemRecipe>> LUNARIAN_TRADE_DYED_ITEM_SERIALIZER = RECIPE_SERIALIZERS.register("lunarian_trade_dyed_item", () -> new LunarianTradeRecipe.Serializer<>(LunarianTradeDyedItemRecipe::new));
+    public static final RegistryEntry<RecipeSerializer<LunarianTradePotionedItemRecipe>> LUNARIAN_TRADE_POTIONED_ITEM_SERIALIZER = RECIPE_SERIALIZERS.register("lunarian_trade_potioned_item", () -> new LunarianTradeRecipe.Serializer<>(LunarianTradePotionedItemRecipe::new));
+    public static final RegistryEntry<RecipeSerializer<LunarianTradeSuspiciousStewRecipe>> LUNARIAN_TRADE_SUSPICIOUS_STEW_SERIALIZER = RECIPE_SERIALIZERS.register("lunarian_trade_suspicious_stew", () -> new LunarianTradeRecipe.Serializer<>(LunarianTradeSuspiciousStewRecipe::new));
 }

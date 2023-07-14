@@ -3,8 +3,10 @@ package earth.terrarium.ad_astra.common.config;
 import com.teamresourceful.resourcefulconfig.common.annotations.Category;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
+import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
 
 @Category(id = "spawning", translation = "text.resourcefulconfig.ad_astra.option.spawning")
+@WebInfo(icon = "creeper")
 public final class SpawnConfig {
     @ConfigEntry(
             id = "spawnCorruptedLunarians",

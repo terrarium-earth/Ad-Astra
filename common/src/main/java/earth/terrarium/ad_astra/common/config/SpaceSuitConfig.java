@@ -4,9 +4,11 @@ import com.teamresourceful.resourcefulconfig.common.annotations.Category;
 import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
+import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 
 @Category(id = "spaceSuit", translation = "text.resourcefulconfig.ad_astra.option.spaceSuit")
+@WebInfo(icon = "shirt")
 public final class SpaceSuitConfig {
 
     @ConfigEntry(
@@ -94,4 +96,12 @@ public final class SpaceSuitConfig {
         translation = "text.resourcefulconfig.ad_astra.option.spaceSuit.spawnJetSuitParticles"
     )
     public static boolean spawnJetSuitParticles = true;
+
+    @ConfigEntry(
+        id = "renderCustomFirstPersonHand",
+        type = EntryType.BOOLEAN,
+        translation = "text.resourcefulconfig.ad_astra.option.spaceSuit.renderCustomFirstPersonHand"
+    )
+    @Comment(value = "Custom hand rendering may interfere with Shaders", translation = "text.resourcefulconfig.ad_astra.option.spaceSuit.renderCustomFirstPersonHand.tooltip")
+    public static boolean renderCustomFirstPersonHand = true;
 }

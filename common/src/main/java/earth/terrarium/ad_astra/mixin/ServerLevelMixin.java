@@ -32,7 +32,7 @@ public abstract class ServerLevelMixin {
     private List<CustomSpawner> customSpawners;
 
     @Inject(at = @At(value = "TAIL"), method = "<init>")
-    public void adastra_Serverlevel(MinecraftServer minecraftServer, Executor executor, LevelStorageSource.LevelStorageAccess session, ServerLevelData serverWorldProperties, ResourceKey<Level> registryKey, LevelStem dimensionOptions, ChunkProgressListener levelGenerationProgressListener, boolean debugWorld, long seed, List<CustomSpawner> spawners, boolean shouldTickTime, CallbackInfo ci) {
+    public void ad_astra$Serverlevel(MinecraftServer minecraftServer, Executor executor, LevelStorageSource.LevelStorageAccess session, ServerLevelData serverWorldProperties, ResourceKey<Level> registryKey, LevelStem dimensionOptions, ChunkProgressListener levelGenerationProgressListener, boolean debugWorld, long seed, List<CustomSpawner> spawners, boolean shouldTickTime, CallbackInfo ci) {
 
         List<CustomSpawner> serverSpawners = new ArrayList<>(this.customSpawners);
         if (!shouldTickTime) {

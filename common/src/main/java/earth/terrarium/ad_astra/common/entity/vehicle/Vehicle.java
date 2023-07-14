@@ -385,4 +385,8 @@ public abstract class Vehicle extends Entity implements Updatable {
     @Override
     public void update() {
     }
+    
+    public boolean cautionForDismount(Entity passenger) {
+        return false;
+    }
 }

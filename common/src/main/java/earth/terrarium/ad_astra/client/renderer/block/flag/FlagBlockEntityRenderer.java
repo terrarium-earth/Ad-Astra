@@ -83,7 +83,7 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
         if (flip) flipY(poseStack, 0.5f);
         VertexConsumer vertexConsumer = buffer.getBuffer(getRenderLayer(entity.getOwner()));
         renderQuad(poseStack, vertexConsumer, 0.5f, 0.5f, 8f/64f, 8f/64f, 8f/64f, 8f/64f, packedLight, overlay);
-        renderQuad(poseStack, vertexConsumer, 0.5f, 0.5f, 32f/64f, 8f/64f, 8f/64f, 8f/64f, packedLight, overlay);
+        renderQuad(poseStack, vertexConsumer, 0.5f, 0.5f, 40f/64f, 8f/64f, 8f/64f, 8f/64f, packedLight, overlay);
         poseStack.popPose();
     }
 

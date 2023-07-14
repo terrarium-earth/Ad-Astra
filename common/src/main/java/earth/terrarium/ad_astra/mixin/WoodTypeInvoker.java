@@ -8,12 +8,12 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface WoodTypeInvoker {
 
     @Invoker("<init>")
-    static WoodType adastra_init(String name) {
+    static WoodType ad_astra$init(String name) {
         throw new UnsupportedOperationException();
     }
 
     @Invoker("register")
-    static WoodType adastra_invokeRegister(WoodType value) {
+    static WoodType ad_astra$invokeRegister(WoodType value) {
         throw new UnsupportedOperationException();
     }
 }

@@ -20,14 +20,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class IceBlockMixin {
 
     @Inject(method = "playerDestroy", at = @At("TAIL"))
-    public void adastra_playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack, CallbackInfo ci) {
+    public void ad_astra$playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack, CallbackInfo ci) {
         if (!OxygenUtils.posHasOxygen(level, pos) && ModUtils.getWorldTemperature(level) < 0) {
             level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
         }
     }
 
     @Inject(method = "melt", at = @At("HEAD"), cancellable = true)
-    public void adastra_melt(BlockState state, Level level, BlockPos pos, CallbackInfo ci) {
+    public void ad_astra$melt(BlockState state, Level level, BlockPos pos, CallbackInfo ci) {
         if (!OxygenUtils.posHasOxygen(level, pos) && ModUtils.getWorldTemperature(level) < 0) {
             ci.cancel();
         }

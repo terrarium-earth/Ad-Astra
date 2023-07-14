@@ -12,13 +12,13 @@ import java.util.Map;
 public interface AxeItemAccessor {
 
     @Accessor("STRIPPABLES")
-    static Map<Block, Block> adastra_getStrippables() {
+    static Map<Block, Block> ad_astra$getStrippables() {
         throw new UnsupportedOperationException();
     }
 
     @Mutable
     @Accessor("STRIPPABLES")
-    static void adastra_setStrippables(Map<Block, Block> value) {
+    static void ad_astra$setStrippables(Map<Block, Block> value) {
         throw new UnsupportedOperationException();
     }
 }

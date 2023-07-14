@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.common.util.fabric;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -18,6 +19,8 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.PortalInfo;
 
 import java.util.function.Supplier;
+
+import earth.terrarium.ad_astra.common.recipe.condition.IRecipeConditionSerializer;
 
 public class PlatformUtilsImpl {
     public static CreativeModeTab createTab(ResourceLocation loc, Supplier<ItemStack> icon) {
@@ -38,5 +41,9 @@ public class PlatformUtilsImpl {
 
     public static <T extends Mob> void registerSpawnPlacement(EntityType<T> entityType, SpawnPlacements.Type decoratorType, Heightmap.Types heightMapType, SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
         SpawnPlacements.register(entityType, decoratorType, heightMapType, decoratorPredicate);
+    }
+
+    public static void registerRecipeConditionSerializer(IRecipeConditionSerializer<?> recipeConditionSerializer) {
+        ResourceConditions.register(recipeConditionSerializer.getId(), json -> recipeConditionSerializer.readJson(json).test());
     }
 }

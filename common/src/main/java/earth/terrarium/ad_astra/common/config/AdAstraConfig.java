@@ -5,9 +5,27 @@ import com.teamresourceful.resourcefulconfig.common.annotations.Config;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.annotations.InlineCategory;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
+import com.teamresourceful.resourcefulconfig.web.annotations.Gradient;
+import com.teamresourceful.resourcefulconfig.web.annotations.Link;
+import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 
 @Config("ad_astra")
+@WebInfo(
+        title = "Ad Astra",
+        description = "Live long and prosper, and may the force be with you.",
+
+        icon = "planet",
+        gradient = @Gradient(value = "45deg", first = "#7F4DEE", second = "#E7797A"),
+
+        links = {
+                @Link(value = "https://discord.gg/terrarium", icon = "gamepad-2", title = "Discord"),
+                @Link(value = "https://github.com/terrarium-earth/Ad-Astra", icon = "github", title = "GitHub"),
+
+                @Link(value = "https://www.curseforge.com/minecraft/mc-mods/ad-astra", icon = "curseforge", title = "CurseForge"),
+                @Link(value = "https://modrinth.com/mod/ad-astra", icon = "modrinth", title = "Modrinth"),
+        }
+)
 public final class AdAstraConfig {
 
     @ConfigEntry(
@@ -168,6 +186,14 @@ public final class AdAstraConfig {
     )
     @Comment("Prevents stuff like gravity and oxygen checks in the overworld as that's normally not used in Ad Astra. enable if you're making an addon or something that transforms the overworld into some sort of planet.")
     public static boolean avoidOverworldChecks = true;
+
+    @ConfigEntry(
+            id = "enabledLunarianDefaultTrades",
+            type = EntryType.BOOLEAN,
+            translation = "text.resourcefulconfig.ad_astra.option.general.enabledLunarianDefaultTrades"
+    )
+    @Comment("Enable/Disable lunarian and lunarian wandering trader's default trades. Apply to lunarian spawned after this value changed.")
+    public static boolean enabledLunarianDefaultTrades = true;
 
     @InlineCategory
     public static SpawnConfig spawnConfig;

@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ArmorDyeRecipeMixin {
 
     @Inject(method = "matches*", at = @At("HEAD"), cancellable = true)
-    public void adastra_matches(CraftingContainer craftingInventory, Level level, CallbackInfoReturnable<Boolean> cir) {
+    public void ad_astra$matches(CraftingContainer craftingInventory, Level level, CallbackInfoReturnable<Boolean> cir) {
         for (int i = 0; i < craftingInventory.getContainerSize(); i++) {
             Item item = craftingInventory.getItem(i).getItem();
             if (item instanceof SpaceSuit) {

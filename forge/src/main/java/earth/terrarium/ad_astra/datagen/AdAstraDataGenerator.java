@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.datagen;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.datagen.provider.client.ModLangProvider;
+import earth.terrarium.ad_astra.datagen.provider.server.ModRecipeProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -24,7 +25,7 @@ public final class AdAstraDataGenerator {
 
         // Server
 //        generator.addProvider(event.includeServer(), new ModLootTableProvider(generator));
-//        generator.addProvider(event.includeServer(), new ModRecipeProvider(generator));
+        generator.addProvider(event.includeServer(), new ModRecipeProvider(generator));
 //        ModBlockTagProvider blockTagProvider = new ModBlockTagProvider(generator, existingFileHelper);
 //        generator.addProvider(event.includeServer(), blockTagProvider);
 //        generator.addProvider(event.includeServer(), new ModItemTagProvider(generator, blockTagProvider, existingFileHelper));

@@ -19,7 +19,7 @@ public abstract class ServerGamePacketListenerImplMixin {
     private int aboveGroundVehicleTickCount;
 
     @Inject(method = "tick", at = @At("HEAD"))
-    public void adastra_tick(CallbackInfo ci) {
+    public void ad_astra$tick(CallbackInfo ci) {
         ServerPlayer player = ((ServerGamePacketListenerImpl) (Object) this).player;
 
         // Prevent the player from being kicked for flying a jet suit

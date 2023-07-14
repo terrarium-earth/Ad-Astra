@@ -98,8 +98,7 @@ public class ModLangProvider extends LanguageProvider {
         add("gauge.ad_astra.fuel", "Fuel");
         add("gauge.ad_astra.oxygen", "Oxygen");
         add("gauge_text.ad_astra.blocked_warning[0]", "§4No Oxygen is Being Generated!");
-        add("gauge_text.ad_astra.blocked_warning[1]", "Ensure that there is no block above the distributor");
-        add("gauge_text.ad_astra.blocked_warning[2]", "and enough oxygen and power is being supplied.");
+        add("gauge_text.ad_astra.blocked_warning[1]", "Ensure that enough oxygen and power is being supplied.");
         add("gauge_text.ad_astra.energy_per_tick", "%s ⚡ / tick");
         add("gauge_text.ad_astra.fluid_per_tick", "%s 🪣 / sec");
         add("gauge_text.ad_astra.liquid_storage", "%s 🪣 / %d 🪣");
@@ -110,6 +109,9 @@ public class ModLangProvider extends LanguageProvider {
         add("gauge_text.ad_astra.oxygen_leak_warning[2]", "the structure is too large for this distributor");
         add("gauge_text.ad_astra.oxygen_leak_warning[3]", "to handle. Ensure that the entire structure is");
         add("gauge_text.ad_astra.oxygen_leak_warning[4]", "completely sealed.");
+        add("gauge_text.ad_astra.oxygen_leak_warning[5]", "");
+        add("gauge_text.ad_astra.oxygen_leak_warning[6]", "If you've got multiple distributors set up in");
+        add("gauge_text.ad_astra.oxygen_leak_warning[7]", "a large structure, you can ignore this warning.");
         add("gauge_text.ad_astra.storage", "§eEnergy: %s ⚡ / %d ⚡");
         add("gui.ad_astra.text.back", "Back");
         add("gui.ad_astra.text.catalog", "CATALOG");
@@ -157,6 +159,7 @@ public class ModLangProvider extends LanguageProvider {
         add("message.ad_astra.no_fuel", "§cNO FUEL! §7Fill the Rocket with §cFuel§7. (§6Sneak and Right Click§7)");
         add("message.ad_astra.speed", "%s m/s");
         add("options.ad_astra.overlay_config", "Space Suit Overlay Settings");
+        add("message.ad_astra.vehicle.dismount_caution", "§cCAUTION! §7Very dangerous to dismount now. Keep shift down during 40 ticks to dismount.");
         add("rei.category.ad_astra.space_station", "Space Station");
         add("rei.text.ad_astra.amount", "Amount: %s 🪣");
         add("rei.text.ad_astra.conversion_ratio", "Conversion Ratio: %s%%");
@@ -260,6 +263,8 @@ public class ModLangProvider extends LanguageProvider {
         add("text.resourcefulconfig.ad_astra.option.general.spawnSulfurCreepers", "Spawn Sulfur Creepers");
         add("text.resourcefulconfig.ad_astra.option.general.avoidOverworldChecks", "Avoid Overworld Checks");
         add("text.resourcefulconfig.ad_astra.option.general.avoidOverworldChecks.tooltip", "Prevents stuff like gravity and oxygen checks in the overworld as that's normally not used in Ad Astra. enable if you're making an addon or something that transforms the overworld into some sort of planet.");
+        add("text.resourcefulconfig.ad_astra.option.general.enabledLunarianDefaultTrades", "Lunarian Default Trades");
+        add("text.resourcefulconfig.ad_astra.option.general.enabledLunarianDefaultTrades.tooltip", "Enable/Disable lunarian and lunarian wandering trader's default trades. Apply to lunarian spawned after this value changed.");
         add("text.resourcefulconfig.ad_astra.option.lander", "Lander");
         add("text.resourcefulconfig.ad_astra.option.lander.boosterSpeed", "Booster Speed");
         add("text.resourcefulconfig.ad_astra.option.lander.boosterThreshold", "Booster Threshold");
@@ -287,6 +292,7 @@ public class ModLangProvider extends LanguageProvider {
         add("text.resourcefulconfig.ad_astra.option.rocket.countDownTicks", "Count Down Ticks");
         add("text.resourcefulconfig.ad_astra.option.rocket.countDownTicks.tooltip", "200 ticks = 10 seconds.");
         add("text.resourcefulconfig.ad_astra.option.rocket.efficientFuelLaunchCost", "Efficient Fuel Launch Cost");
+        add("text.resourcefulconfig.ad_astra.option.rocket.takeDamageInRocket", "Take Damage In Rocket");
         add("text.resourcefulconfig.ad_astra.option.rocket.entitiesBurnUnderRocket", "Entities Burn Under Rocket");
         add("text.resourcefulconfig.ad_astra.option.rocket.entitiesBurnUnderRocket.tooltip", "Should entities that are under the flames of the rocket burn?");
         add("text.resourcefulconfig.ad_astra.option.rocket.fuelLaunchCost", "Fuel Launch Cost");
@@ -319,6 +325,8 @@ public class ModLangProvider extends LanguageProvider {
         add("text.resourcefulconfig.ad_astra.option.spaceSuit.netheriteSpaceSuitTankSize", "Netherite Space Suit Tank Size");
         add("text.resourcefulconfig.ad_astra.option.spaceSuit.spaceSuitTankSize", "Space Suit Tank Size");
         add("text.resourcefulconfig.ad_astra.option.spaceSuit.spawnJetSuitParticles", "Spawn Jet Suit Particles");
+        add("text.resourcefulconfig.ad_astra.option.spaceSuit.renderCustomFirstPersonHand", "Render Custom Space Suit Hand");
+        add("text.resourcefulconfig.ad_astra.option.spaceSuit.renderCustomFirstPersonHand.tooltip", "Custom hand rendering may interfere with Shaders");
         add("text.resourcefulconfig.ad_astra.option.vehicles", "Vehicles");
         add("text.resourcefulconfig.ad_astra.option.vehicles.fallingExplosionMultiplier", "Vehicle Falling Explosion Multiplier");
         add("text.resourcefulconfig.ad_astra.option.vehicles.fallingExplosionMultiplier.tooltip", "How powerful the explosion should be when the vehicle has fallen.");

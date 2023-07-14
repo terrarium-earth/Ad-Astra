@@ -1,27 +1,9 @@
-- added some new plating and stone textures
-- added tags "passes_flood_fill" and "blocks_flood_fill" to allow for more control over what blocks are sealed
-- added vents. new blocks that allow oxygen to pass through
-- changed the space suit recipes to use normal glass instead of orange stained glass
-- fixed being damaged by acid rain while in a rocket (RIP Direwolf20)
-- increased space suit durability
-- lunarian villages now have aeronos and strophar mushroom wood instead of warped wood allowing you to use it in survival
-- new globe models
-- removed fabric loader version requirement which should fix some quilt versions
-- increased desh, ostrum and calorite ore veins per chunk
-- reduced cryo freezer energy requirement
-- updated flood fill algorithm to better seal blocks based on voxel shape
-- fix lunarian wandering traders selling 9 launchpads when they should only sell 1
-- lunarian wandering traders now sell aeronos stems, strophar stems, glacian logs, and glacian leaves. (glacian wood is now obtainable in survival mode)
+- Added Resourceful Config Web Support! you can now edit the Ad Astra config file from a web interface in: https://config.teamresourceful.com. more info can be found here: https://config.teamresourceful.com/about
 
-- added Ukrainian translations (thanks to @Unroman)
-- updated Korean translations (thanks to @Giselle)
-- updated Russian translations (thanks to @Gigachad)
-
-- fixed pipes not present in creative menu (#183)
-- fixed pipes and cables being able to insert into their source block causing an infinite loop (maybe fixes #186 and #193)?
-- fixed pipes crashing create (#195)
-- fixed extinguished stuff still producing light (#197)
-- fixed config being loaded too late causing issues like the hammer durability not being applied on Forge (#207)
-- fixed crash after using blink+decoy spell in space (Ars Nouveau) (#208)
-- fixed solar panels crashing server (#210)
-- fixed oxygen still being consumed underwater with water breathing (#217)
+- water will no longer freeze if the block above it has oxygen
+- fixed being able to place water on waterloggable blocks in space
+- the oxygen leak warning now has some additional info.
+- fixed the water pump still consuming power with a full tank
+- fixed stophar and aeronos doors having no loot tables.
+- fixed jet suit randomly crashing (#239)
+- fixed broken netherite space suit texture (#247)

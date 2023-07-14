@@ -1,0 +1,17 @@
+{
+  "name": "ケンタウルス座",
+  "icon": "ad_astra:/textures/painting/alpha_centauri.png",
+  "sortnum": 1,
+  "category": "ad_astra:the_hot_planets",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "ケンタウルス座",
+      "text": "Tier4ロケットを作るのに十分なカロライトを見つけたら、この太陽系を離れて新しい星系に入ることができるようになります。ケンタウルス座で最初に向かう惑星はグラシオです。グラシオは極寒の地ですが、酸素があるため、宇宙服がなくても生きていけます。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ad Astraの攻略は、ひとまずこれで終了です。このガイドブックは、コンテンツが追加されるたびに拡張していく予定です。Ad Astraをプレイしていただき、ありがとうございました！"
+    }
+  ]
+}

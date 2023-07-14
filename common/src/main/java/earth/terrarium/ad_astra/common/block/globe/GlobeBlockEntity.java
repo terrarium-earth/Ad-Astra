@@ -44,6 +44,7 @@ public class GlobeBlockEntity extends BlockEntity {
 
     @Override
     public void load(CompoundTag tag) {
+        super.load(tag);
         torque = tag.getFloat("Torque");
         yaw = tag.getFloat("Yaw");
         prevYaw = yaw;
@@ -51,6 +52,7 @@ public class GlobeBlockEntity extends BlockEntity {
 
     @Override
     public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         tag.putFloat("Torque", torque);
         tag.putFloat("Yaw", yaw);
     }

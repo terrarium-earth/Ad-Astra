@@ -3,9 +3,9 @@ package earth.terrarium.ad_astra.client.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Matrix4f;
-import com.teamresourceful.resourcefullib.client.scissor.ClosingScissorBox;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.ClientPlatformUtils;
 import earth.terrarium.botarium.api.fluid.ClientFluidHooks;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
@@ -22,8 +22,6 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
 
 import java.awt.*;
 
@@ -110,11 +108,11 @@ public class GuiUtil {
         RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
 
         int calcHeight =  (int)((FLUID_TANK_HEIGHT + 1) * ratio);
-        ClosingScissorBox scissor = RenderUtils.createScissorBox(Minecraft.getInstance(), poseStack, x, y + FLUID_TANK_HEIGHT - calcHeight, FLUID_TANK_WIDTH, calcHeight);
-        for (int i = 1; i < 4; i++) {
-            GuiComponent.blit(poseStack, x + 1, FLUID_TANK_HEIGHT + y - (spriteHeight * i), 0, FLUID_TANK_WIDTH - 2, spriteHeight, sprite);
+        try (var ignored = RenderUtils.createScissorBox(Minecraft.getInstance(), poseStack, x, y + FLUID_TANK_HEIGHT - calcHeight, FLUID_TANK_WIDTH, calcHeight)) {
+            for (int i = 1; i < 4; i++) {
+                GuiComponent.blit(poseStack, x + 1, FLUID_TANK_HEIGHT + y - (spriteHeight * i), 0, FLUID_TANK_WIDTH - 2, spriteHeight, sprite);
+            }
         }
-        scissor.close();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
@@ -158,21 +156,13 @@ public class GuiUtil {
         GuiComponent.blit(poseStack, x, y, 0, 0, ratioWidth, height, width, height);
     }
 
-
-    public static Component getFluidTranslation(Fluid fluid) {
-        if (fluid.equals(Fluids.EMPTY)) {
-            return Component.translatable("item.ad_astra.empty_tank").setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
-        }
-        return Component.translatable(fluid.defaultFluidState().createLegacyBlock().getBlock().getDescriptionId()).setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
-    }
-
     public static void drawEnergyTooltip(Screen screen, PoseStack poseStack, long energy, long energyCapacity, int mouseX, int mouseY) {
         screen.renderTooltip(poseStack, Component.translatable("gauge_text.ad_astra.storage", Mth.clamp(energy, 0, energyCapacity), energyCapacity).setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)), mouseX, mouseY);
     }
 
 
     public static void drawTankTooltip(Screen screen, PoseStack poseStack, FluidHolder tank, long capacity, int mouseX, int mouseY) {
-        screen.renderTooltip(poseStack, Component.translatable("gauge_text.ad_astra.liquid_storage", FluidHooks.toMillibuckets(tank.getFluidAmount()), FluidHooks.toMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)).append(Component.nullToEmpty(", ")).append(GuiUtil.getFluidTranslation(tank.getFluid())), mouseX, mouseY);
+        screen.renderTooltip(poseStack, Component.translatable("gauge_text.ad_astra.liquid_storage", FluidHooks.toMillibuckets(tank.getFluidAmount()), FluidHooks.toMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)).append(Component.nullToEmpty(", ")).append(ClientPlatformUtils.getFluidTranslation(tank.getFluid())), mouseX, mouseY);
     }
 
     public static class FloatGuiComponent {

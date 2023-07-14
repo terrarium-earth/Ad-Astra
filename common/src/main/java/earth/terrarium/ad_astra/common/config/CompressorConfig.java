@@ -3,8 +3,10 @@ package earth.terrarium.ad_astra.common.config;
 import com.teamresourceful.resourcefulconfig.common.annotations.Category;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
+import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
 
 @Category(id = "compressor", translation = "text.resourcefulconfig.ad_astra.option.compressor")
+@WebInfo(icon = "gavel")
 public final class CompressorConfig {
 
     @ConfigEntry(

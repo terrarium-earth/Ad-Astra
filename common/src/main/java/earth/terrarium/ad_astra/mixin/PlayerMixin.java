@@ -1,9 +1,13 @@
 package earth.terrarium.ad_astra.mixin;
 
 import earth.terrarium.ad_astra.common.config.SpaceSuitConfig;
+import earth.terrarium.ad_astra.common.config.VehiclesConfig;
+import earth.terrarium.ad_astra.common.entity.vehicle.Rocket;
+import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
 import earth.terrarium.ad_astra.common.item.armor.JetSuit;
 import earth.terrarium.ad_astra.common.item.armor.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -17,10 +21,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Player.class)
 public abstract class PlayerMixin {
 
+    private int ad_astra$shiftDownDuration = 0;
+
     @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
-    public void adastra_damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    public void ad_astra$damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        Player player = ((Player) (Object) this);
         if (SpaceSuitConfig.netheriteSpaceSuitHasFireResistance) {
-            Player player = ((Player) (Object) this);
             if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
                 if (NetheriteSpaceSuit.hasFullSet(player)) {
                     player.setRemainingFireTicks(0);
@@ -28,13 +34,16 @@ public abstract class PlayerMixin {
                 }
             }
         }
+        if (!VehiclesConfig.RocketConfig.takeDamageInRocket && player.getVehicle() instanceof Rocket) {
+            cir.setReturnValue(false);
+        }
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
-    public void adastra_tick(CallbackInfo ci) {
+    public void ad_astra$tick(CallbackInfo ci) {
+        Player player = ((Player) (Object) this);
         if (SpaceSuitConfig.enableJetSuitFlight) {
-            Player player = ((Player) (Object) this);
-            if (!player.isPassenger()) {
+            if (!player.level.isClientSide && !player.isPassenger()) {
                 ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
                 if (chest.getItem() instanceof JetSuit jetSuit) {
                     if (ModKeyBindings.jumpKeyDown(player)) {
@@ -42,12 +51,31 @@ public abstract class PlayerMixin {
                             jetSuit.fly(player, chest);
                         }
                     } else {
-                        jetSuit.isFallFlying = false;
+                        jetSuit.setFallFlying(false);
+                        jetSuit.setEmitParticles(false);
                         if (!player.level.isClientSide) {
                             chest.getOrCreateTag().putBoolean("SpawnParticles", false);
                         }
                     }
                 }
+            }
+        }
+        if (player.isShiftKeyDown() && player.getVehicle() instanceof Vehicle vehicle && vehicle.cautionForDismount(player)) {
+            if (this.ad_astra$shiftDownDuration == 0 && !player.getLevel().isClientSide()) {
+                player.displayClientMessage(Component.translatable("message.ad_astra.vehicle.dismount_caution"), false);
+            }
+            this.ad_astra$shiftDownDuration++;
+        } else {
+            this.ad_astra$shiftDownDuration = 0;
+        }
+    }
+
+    @Inject(method = "wantsToStopRiding", at = @At("TAIL"), cancellable = true)
+    public void ad_astra$wantsToStopRiding(CallbackInfoReturnable<Boolean> ci) {
+        Player player = ((Player) (Object) this);
+        if (player.getVehicle() instanceof Vehicle vehicle && vehicle.cautionForDismount(player)) {
+            if (ci.getReturnValueZ() && this.ad_astra$shiftDownDuration < 40) {
+                ci.setReturnValue(false);
             }
         }
     }

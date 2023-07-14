@@ -16,7 +16,7 @@ public abstract class WorldGenSettingsMixin {
 
     // Gets the level seed
     @Inject(at = @At(value = "TAIL"), method = "<init>(JZZLnet/minecraft/core/Registry;Ljava/util/Optional;)V")
-    private void adastra_GeneratorOptions(long seed, boolean generateStructures, boolean bonusChest, Registry<LevelStem> options, Optional<String> legacyCustomOptions, CallbackInfo ci) {
+    private void ad_astra$GeneratorOptions(long seed, boolean generateStructures, boolean bonusChest, Registry<LevelStem> options, Optional<String> legacyCustomOptions, CallbackInfo ci) {
         LevelSeed.setSeed(seed);
     }
 }
