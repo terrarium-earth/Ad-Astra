@@ -16,16 +16,16 @@
   "type": "create:crushing",
   "ingredients": [
     {
-      "item": "ad_astra:mars_ice_shard_ore"
+      "item": "ad_astra:glacio_copper_ore"
     }
   ],
   "results": [
     {
-      "item": "ad_astra:ice_shard",
-      "count": 1
+      "item": "create:crushed_raw_copper",
+      "count": 5
     },
     {
-      "item": "ad_astra:ice_shard",
+      "item": "ad_astra:crushed_raw_copper",
       "count": 1,
       "chance": 0.25
     },
@@ -35,7 +35,7 @@
       "chance": 0.75
     },
     {
-      "item": "ad_astra:mars_cobblestone",
+      "item": "ad_astra:glacio_cobblestone",
       "count": 1,
       "chance": 0.125
     }

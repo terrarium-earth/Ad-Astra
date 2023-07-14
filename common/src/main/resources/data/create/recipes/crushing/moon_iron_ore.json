@@ -16,16 +16,16 @@
   "type": "create:crushing",
   "ingredients": [
     {
-      "item": "ad_astra:mars_ice_shard_ore"
+      "item": "ad_astra:moon_iron_ore"
     }
   ],
   "results": [
     {
-      "item": "ad_astra:ice_shard",
+      "item": "minecraft:raw_iron",
       "count": 1
     },
     {
-      "item": "ad_astra:ice_shard",
+      "item": "ad_astra:raw_iron",
       "count": 1,
       "chance": 0.25
     },
@@ -35,7 +35,7 @@
       "chance": 0.75
     },
     {
-      "item": "ad_astra:mars_cobblestone",
+      "item": "ad_astra:moon_cobblestone",
       "count": 1,
       "chance": 0.125
     }
