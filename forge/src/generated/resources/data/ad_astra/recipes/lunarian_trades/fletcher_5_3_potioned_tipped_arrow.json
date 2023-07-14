@@ -1,0 +1,28 @@
+{
+  "type": "ad_astra:lunarian_trade_potioned_item",
+  "buyA": {
+    "count": 2,
+    "id": "minecraft:emerald"
+  },
+  "buyB": {
+    "count": 5,
+    "id": "minecraft:arrow"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 30,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 5,
+  "profession": "minecraft:fletcher",
+  "sell": {
+    "count": 5,
+    "id": "minecraft:tipped_arrow"
+  }
+}

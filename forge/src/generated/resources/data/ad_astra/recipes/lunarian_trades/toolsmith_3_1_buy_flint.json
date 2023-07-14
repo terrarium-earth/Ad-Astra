@@ -1,0 +1,24 @@
+{
+  "type": "ad_astra:lunarian_trade_simple",
+  "buyA": {
+    "count": 30,
+    "id": "minecraft:flint"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 20,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 3,
+  "profession": "minecraft:toolsmith",
+  "sell": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  }
+}

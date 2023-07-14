@@ -1,0 +1,25 @@
+{
+  "type": "ad_astra:lunarian_trade_simple",
+  "buyA": {
+    "count": 4,
+    "id": "minecraft:emerald"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 1,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 2,
+  "maxUses": 6,
+  "sell": {
+    "count": 1,
+    "id": "ad_astra:fuel_bucket"
+  },
+  "wandering": true
+}

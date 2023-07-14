@@ -1,0 +1,25 @@
+{
+  "type": "ad_astra:lunarian_trade_simple",
+  "buyA": {
+    "count": 12,
+    "id": "ad_astra:ice_shard"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 2,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 1,
+  "maxUses": 16,
+  "profession": "minecraft:weaponsmith",
+  "sell": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  }
+}

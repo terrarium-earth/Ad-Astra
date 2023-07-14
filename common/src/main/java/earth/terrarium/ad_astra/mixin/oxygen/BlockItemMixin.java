@@ -45,7 +45,7 @@ public abstract class BlockItemMixin {
 
                 // Burns out tag
                 if (blockstate.is(ModTags.BURNS_OUT) && blockstate.hasProperty(BlockStateProperties.LIT)) {
-                    level.setBlock(pos, blockstate.setValue(BlockStateProperties.LIT, false), Block.UPDATE_ALL);
+                    level.setBlockAndUpdate(pos, blockstate.setValue(BlockStateProperties.LIT, false));
                     playSound = true;
                 }
 
@@ -58,10 +58,11 @@ public abstract class BlockItemMixin {
                 // Torch
                 else if (block instanceof TorchBlock && !block.equals(Blocks.SOUL_TORCH) && !block.equals(Blocks.SOUL_WALL_TORCH)) {
                     if (!block.equals(Blocks.REDSTONE_TORCH) && !block.equals(Blocks.REDSTONE_WALL_TORCH)) {
-                        level.setBlock(pos, ModBlocks.EXTINGUISHED_TORCH.get().defaultBlockState(), Block.UPDATE_ALL);
+                        level.setBlockAndUpdate(pos, ModBlocks.EXTINGUISHED_TORCH.get().defaultBlockState());
                         playSound = true;
                     }
                 }
+
 
                 // Lantern
                 else if (block instanceof LanternBlock && !block.equals(Blocks.SOUL_LANTERN)) {

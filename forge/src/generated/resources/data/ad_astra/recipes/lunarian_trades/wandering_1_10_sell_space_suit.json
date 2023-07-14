@@ -1,0 +1,28 @@
+{
+  "type": "ad_astra:lunarian_trade_simple",
+  "buyA": {
+    "count": 16,
+    "id": "minecraft:emerald"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 1,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 1,
+  "maxUses": 2,
+  "sell": {
+    "count": 1,
+    "id": "ad_astra:space_suit",
+    "nbt": {
+      "Damage": 0
+    }
+  },
+  "wandering": true
+}

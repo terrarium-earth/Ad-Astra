@@ -1,0 +1,25 @@
+{
+  "type": "ad_astra:lunarian_trade_simple",
+  "buyA": {
+    "count": 24,
+    "id": "minecraft:feather"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 30,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 4,
+  "maxUses": 16,
+  "profession": "minecraft:fletcher",
+  "sell": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "ad_astra:lunarian_trade_simple",
+  "buyA": {
+    "count": 10,
+    "id": "minecraft:sweet_berries"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 30,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 5,
+  "profession": "minecraft:butcher",
+  "sell": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  }
+}

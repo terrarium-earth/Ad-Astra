@@ -13,7 +13,6 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.common.networking.NetworkHandling;
 import earth.terrarium.ad_astra.common.networking.packet.client.RequestPlanetDataPacket;
-import earth.terrarium.ad_astra.common.networking.packet.client.ToggleDistributorPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -80,15 +79,15 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
 
     public static void writePlanetData(FriendlyByteBuf buf) {
         YabnElement element = Planet.CODEC.listOf().encodeStart(YabnOps.COMPRESSED, PlanetData.planets().stream().toList())
-                .getOrThrow(false, AdAstra.LOGGER::error);
+            .getOrThrow(false, AdAstra.LOGGER::error);
         buf.writeBytes(element.toData());
     }
 
     public static void readPlanetData(FriendlyByteBuf buf) {
         try {
             PlanetData.updatePlanets(Planet.CODEC.listOf().parse(YabnOps.COMPRESSED, YabnParser.parse(new ByteBufByteReader(buf)))
-                    .result()
-                    .orElseThrow());
+                .result()
+                .orElseThrow());
         } catch (Exception e) {
             AdAstra.LOGGER.error("Failed to parse planet data!");
             e.printStackTrace();

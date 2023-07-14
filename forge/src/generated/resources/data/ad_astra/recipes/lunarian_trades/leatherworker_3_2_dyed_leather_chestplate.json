@@ -1,0 +1,26 @@
+{
+  "type": "ad_astra:lunarian_trade_dyed_item",
+  "buyA": {
+    "count": 7,
+    "id": "minecraft:emerald"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 3,
+  "profession": "minecraft:leatherworker",
+  "sell": {
+    "count": 1,
+    "id": "minecraft:leather_chestplate",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

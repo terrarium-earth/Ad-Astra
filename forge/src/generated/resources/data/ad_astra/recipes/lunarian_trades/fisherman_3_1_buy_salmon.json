@@ -1,0 +1,25 @@
+{
+  "type": "ad_astra:lunarian_trade_simple",
+  "buyA": {
+    "count": 13,
+    "id": "minecraft:salmon"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 20,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 3,
+  "maxUses": 16,
+  "profession": "minecraft:fisherman",
+  "sell": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  }
+}

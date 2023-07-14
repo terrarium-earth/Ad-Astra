@@ -64,7 +64,7 @@ Common
 
 ```groovy
 dependencies {
-    modImplementation "earth.terrarium:ad_astra-common-$rootProject.minecraft_version:$rootProject.ad_astra_version"
+    modImplementation "earth.terrarium.adastra:ad_astra-common-$rootProject.minecraft_version:$rootProject.ad_astra_version"
 }
 ```
 
@@ -72,7 +72,7 @@ Fabric
 
 ```groovy
 dependencies {
-    modImplementation "earth.terrarium:ad_astra-fabric-$rootProject.minecraft_version:$rootProject.ad_astra_version"
+    modImplementation "earth.terrarium.adastra:ad_astra-fabric-$rootProject.minecraft_version:$rootProject.ad_astra_version"
 }
 ```
 
@@ -80,7 +80,7 @@ Forge
 
 ```groovy
 dependencies {
-    modImplementation "earth.terrarium:ad_astra-forge-$rootProject.minecraft_version:$rootProject.ad_astra_version"
+    modImplementation "earth.terrarium.adastra:ad_astra-forge-$rootProject.minecraft_version:$rootProject.ad_astra_version"
 }
 ```
 

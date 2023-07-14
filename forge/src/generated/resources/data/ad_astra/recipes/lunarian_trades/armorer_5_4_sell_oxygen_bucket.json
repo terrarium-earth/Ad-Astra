@@ -1,0 +1,25 @@
+{
+  "type": "ad_astra:lunarian_trade_simple",
+  "buyA": {
+    "count": 32,
+    "id": "minecraft:emerald"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 60,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 5,
+  "maxUses": 1,
+  "profession": "minecraft:armorer",
+  "sell": {
+    "count": 1,
+    "id": "ad_astra:oxygen_bucket"
+  }
+}

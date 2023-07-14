@@ -1,0 +1,28 @@
+{
+  "type": "ad_astra:lunarian_trade_simple",
+  "buyA": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "buyB": {
+    "count": 10,
+    "id": "minecraft:gravel"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 1,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 1,
+  "profession": "minecraft:fletcher",
+  "sell": {
+    "count": 10,
+    "id": "minecraft:flint"
+  }
+}

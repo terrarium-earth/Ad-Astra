@@ -1,0 +1,24 @@
+{
+  "type": "ad_astra:lunarian_trade_enchanted_book",
+  "buyA": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "buyB": {
+    "count": 1,
+    "id": "minecraft:book"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 15,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 4,
+  "profession": "minecraft:librarian"
+}

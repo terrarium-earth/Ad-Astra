@@ -1,0 +1,25 @@
+{
+  "type": "ad_astra:lunarian_trade_simple",
+  "buyA": {
+    "count": 20,
+    "id": "ad_astra:cheese"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 5,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 1,
+  "maxUses": 20,
+  "profession": "minecraft:butcher",
+  "sell": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  }
+}

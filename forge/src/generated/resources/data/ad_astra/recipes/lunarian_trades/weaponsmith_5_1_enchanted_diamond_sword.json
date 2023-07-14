@@ -1,0 +1,30 @@
+{
+  "type": "ad_astra:lunarian_trade_enchanted_item",
+  "basePrice": 8,
+  "buyA": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 30,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 5,
+  "maxUses": 3,
+  "multiplier": 0.2,
+  "profession": "minecraft:weaponsmith",
+  "sell": {
+    "count": 1,
+    "id": "minecraft:diamond_sword",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

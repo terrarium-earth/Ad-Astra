@@ -1,0 +1,25 @@
+{
+  "type": "ad_astra:lunarian_trade_simple",
+  "buyA": {
+    "count": 12,
+    "id": "minecraft:black_dye"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "experience": 10,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 2,
+  "maxUses": 16,
+  "profession": "minecraft:shepherd",
+  "sell": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  }
+}

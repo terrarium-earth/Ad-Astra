@@ -1,0 +1,35 @@
+{
+  "type": "ad_astra:lunarian_trade_suspicious_stew",
+  "buyA": {
+    "count": 1,
+    "id": "minecraft:emerald"
+  },
+  "conditions": [
+    {
+      "type": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "duration": 160,
+  "experience": 15,
+  "fabric:load_conditions": [
+    {
+      "condition": "ad_astra:lunarian_default_trades"
+    }
+  ],
+  "level": 4,
+  "mobEffect": "minecraft:jump_boost",
+  "profession": "minecraft:farmer",
+  "sell": {
+    "count": 1,
+    "id": "minecraft:suspicious_stew",
+    "nbt": {
+      "Effects": [
+        {
+          "EffectDuration": 160,
+          "EffectId": 8,
+          "forge:effect_id": "minecraft:jump_boost"
+        }
+      ]
+    }
+  }
+}
