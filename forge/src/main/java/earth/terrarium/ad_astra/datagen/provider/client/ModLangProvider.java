@@ -317,6 +317,8 @@ public class ModLangProvider extends LanguageProvider {
         add("text.resourcefulconfig.ad_astra.option.spaceSuit.netheriteSpaceSuitTankSize", "Netherite Space Suit Tank Size");
         add("text.resourcefulconfig.ad_astra.option.spaceSuit.spaceSuitTankSize", "Space Suit Tank Size");
         add("text.resourcefulconfig.ad_astra.option.spaceSuit.spawnJetSuitParticles", "Spawn Jet Suit Particles");
+        add("text.resourcefulconfig.ad_astra.option.spaceSuit.renderCustomFirstPersonHand", "Render Custom Space Suit Hand");
+        add("text.resourcefulconfig.ad_astra.option.spaceSuit.renderCustomFirstPersonHand.tooltip", "Custom hand rendering may interfere with Shaders");
         add("text.resourcefulconfig.ad_astra.option.vehicles", "Vehicles");
         add("text.resourcefulconfig.ad_astra.option.vehicles.fallingExplosionMultiplier", "Vehicle Falling Explosion Multiplier");
         add("text.resourcefulconfig.ad_astra.option.vehicles.fallingExplosionMultiplier.tooltip", "How powerful the explosion should be when the vehicle has fallen.");
