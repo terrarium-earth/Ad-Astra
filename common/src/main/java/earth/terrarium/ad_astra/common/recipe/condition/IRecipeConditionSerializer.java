@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.common.recipe.condition;
 
 import com.google.gson.JsonObject;
-
 import net.minecraft.resources.ResourceLocation;
 
 public interface IRecipeConditionSerializer<T extends IRecipeCondition> {

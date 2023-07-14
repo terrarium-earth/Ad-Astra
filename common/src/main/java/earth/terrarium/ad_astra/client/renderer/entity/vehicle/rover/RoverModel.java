@@ -26,7 +26,7 @@ public class RoverModel extends VehicleModel<Rover> {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
         PartDefinition frame = modelPartData.addOrReplaceChild("Frame", CubeListBuilder.create().texOffs(0, 0).addBox(-15.0f, -10.0f, -16.0f, 30.0f, 3.0f, 43.0f, new CubeDeformation(0.0f)).texOffs(88, 64).addBox(-18.0f, -9.6f, -17.0f, 36.0f, 3.0f, 3.0f, new CubeDeformation(0.0f)).texOffs(88, 64).addBox(-18.0f, -9.6f, 25.0f, 36.0f, 3.0f, 3.0f, new CubeDeformation(0.0f)).texOffs(0, 46).addBox(-11.0f, -13.0f, -29.0f, 22.0f, 3.0f, 22.0f, new CubeDeformation(0.0f)).texOffs(66, 53).addBox(6.0f, -24.0f, -3.0f, 4.0f, 3.0f, 4.0f, new CubeDeformation(0.0f)).texOffs(0, 0).addBox(7.0f, -22.0f, -17.0f, 8.0f, 12.0f, 12.0f, new CubeDeformation(0.0f)).texOffs(139, 28).addBox(6.0f, -20.0f, -10.0f, 10.0f, 3.0f, 3.0f, new CubeDeformation(0.0f)).texOffs(139, 28).addBox(-16.0f, -20.0f, -10.0f, 10.0f, 3.0f, 3.0f, new CubeDeformation(0.0f)).texOffs(0, 0).addBox(-15.0f, -22.0f, -17.0f, 8.0f, 12.0f, 12.0f, new CubeDeformation(0.0f)).texOffs(103, 0).addBox(-9.0f, -35.0f, -23.0f, 2.0f, 22.0f, 2.0f, new CubeDeformation(0.0f)).texOffs(103, 24).addBox(-14.0f, -14.0f, 4.0f, 12.0f, 2.0f, 12.0f, new CubeDeformation(0.0f)).texOffs(32, 24)
-                .addBox(-9.0f, -23.0f, 17.0f, 2.0f, 13.0f, 2.0f, new CubeDeformation(0.0f)).texOffs(0, 71).addBox(-15.0f, -33.0f, 21.0f, 30.0f, 23.0f, 2.0f, new CubeDeformation(0.0f)).texOffs(66, 46).addBox(-15.0f, -12.0f, 23.0f, 30.0f, 2.0f, 16.0f, new CubeDeformation(0.0f)).texOffs(64, 71).addBox(-9.0f, -22.0f, 24.0f, 18.0f, 10.0f, 14.0f, new CubeDeformation(0.0f)).texOffs(0, 96).addBox(-9.0f, -24.0f, 24.0f, 18.0f, 2.0f, 14.0f, new CubeDeformation(0.0f)).texOffs(32, 24).addBox(7.0f, -23.0f, 17.0f, 2.0f, 13.0f, 2.0f, new CubeDeformation(0.0f)).texOffs(103, 24).addBox(2.0f, -14.0f, 4.0f, 12.0f, 2.0f, 12.0f, new CubeDeformation(0.0f)), PartPose.offset(2.0f, 24.0f, -4.0f));
+            .addBox(-9.0f, -23.0f, 17.0f, 2.0f, 13.0f, 2.0f, new CubeDeformation(0.0f)).texOffs(0, 71).addBox(-15.0f, -33.0f, 21.0f, 30.0f, 23.0f, 2.0f, new CubeDeformation(0.0f)).texOffs(66, 46).addBox(-15.0f, -12.0f, 23.0f, 30.0f, 2.0f, 16.0f, new CubeDeformation(0.0f)).texOffs(64, 71).addBox(-9.0f, -22.0f, 24.0f, 18.0f, 10.0f, 14.0f, new CubeDeformation(0.0f)).texOffs(0, 96).addBox(-9.0f, -24.0f, 24.0f, 18.0f, 2.0f, 14.0f, new CubeDeformation(0.0f)).texOffs(32, 24).addBox(7.0f, -23.0f, 17.0f, 2.0f, 13.0f, 2.0f, new CubeDeformation(0.0f)).texOffs(103, 24).addBox(2.0f, -14.0f, 4.0f, 12.0f, 2.0f, 12.0f, new CubeDeformation(0.0f)), PartPose.offset(2.0f, 24.0f, -4.0f));
 
         PartDefinition cube_r1 = frame.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(50, 101).addBox(2.5f, -1.0f, -10.0f, 12.0f, 2.0f, 14.0f, new CubeDeformation(0.0f)).texOffs(50, 101).addBox(-13.5f, -1.0f, -10.0f, 12.0f, 2.0f, 14.0f, new CubeDeformation(0.0f)), PartPose.offsetAndRotation(-0.5f, -23.0f, 18.0f, 1.2217f, 0.0f, 0.0f));
 
@@ -93,7 +93,7 @@ public class RoverModel extends VehicleModel<Rover> {
     }
 
     @Override
-   public void setupAnim(Rover entity, float tickDelta, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setupAnim(Rover entity, float tickDelta, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         super.setupAnim(entity, tickDelta, limbDistance, animationProgress, headYaw, headPitch);
         this.frame.x = 0.0f;
         this.frame.y = 24.0f;

@@ -24,10 +24,10 @@ public class OxygenConversionRecipe extends ConversionRecipe {
 
     public static Codec<OxygenConversionRecipe> codec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
-                RecordCodecBuilder.point(id),
-                HolderSetCodec.of(Registry.FLUID).fieldOf("input").forGetter(ConversionRecipe::getFluidInput),
-                Registry.FLUID.byNameCodec().fieldOf("output").forGetter(ConversionRecipe::getFluidOutput),
-                Codec.DOUBLE.fieldOf("conversion_ratio").orElse(1.0).forGetter(ConversionRecipe::getConversionRatio)
+            RecordCodecBuilder.point(id),
+            HolderSetCodec.of(Registry.FLUID).fieldOf("input").forGetter(ConversionRecipe::getFluidInput),
+            Registry.FLUID.byNameCodec().fieldOf("output").forGetter(ConversionRecipe::getFluidOutput),
+            Codec.DOUBLE.fieldOf("conversion_ratio").orElse(1.0).forGetter(ConversionRecipe::getConversionRatio)
         ).apply(instance, OxygenConversionRecipe::new));
     }
 

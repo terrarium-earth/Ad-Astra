@@ -7,9 +7,9 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 import com.mojang.math.Vector4f;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.common.block.flag.FlagBlock;
 import earth.terrarium.ad_astra.common.block.flag.FlagBlockEntity;
-import earth.terrarium.ad_astra.client.AdAstraClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -82,8 +82,8 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 
         if (flip) flipY(poseStack, 0.5f);
         VertexConsumer vertexConsumer = buffer.getBuffer(getRenderLayer(entity.getOwner()));
-        renderQuad(poseStack, vertexConsumer, 0.5f, 0.5f, 8f/64f, 8f/64f, 8f/64f, 8f/64f, packedLight, overlay);
-        renderQuad(poseStack, vertexConsumer, 0.5f, 0.5f, 40f/64f, 8f/64f, 8f/64f, 8f/64f, packedLight, overlay);
+        renderQuad(poseStack, vertexConsumer, 0.5f, 0.5f, 8f / 64f, 8f / 64f, 8f / 64f, 8f / 64f, packedLight, overlay);
+        renderQuad(poseStack, vertexConsumer, 0.5f, 0.5f, 40f / 64f, 8f / 64f, 8f / 64f, 8f / 64f, packedLight, overlay);
         poseStack.popPose();
     }
 

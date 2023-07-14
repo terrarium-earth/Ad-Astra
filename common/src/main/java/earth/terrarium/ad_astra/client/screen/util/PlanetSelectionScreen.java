@@ -168,8 +168,8 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
 
         if (currentPage == 1) {
             AdAstraClient.galaxies.stream().filter(g -> g.galaxy().equals(this.currentCategory.id()))
-                    .findFirst()
-                    .ifPresent(galaxy -> ScreenUtils.addRotatingTexture(this, poseStack, -125, -125, galaxy.scale(), galaxy.scale(), galaxy.texture(), 0.6f));
+                .findFirst()
+                .ifPresent(galaxy -> ScreenUtils.addRotatingTexture(this, poseStack, -125, -125, galaxy.scale(), galaxy.scale(), galaxy.texture(), 0.6f));
         }
         // Render the Solar System when inside the Solar System category
         else {

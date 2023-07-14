@@ -4,11 +4,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.ClientPlatformUtils;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.compat.jei.EnergyBarDrawable;
 import earth.terrarium.ad_astra.common.compat.jei.FluidBarDrawable;
 import earth.terrarium.ad_astra.common.config.FuelRefineryConfig;
 import earth.terrarium.ad_astra.common.recipe.FuelConversionRecipe;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import mezz.jei.api.gui.builder.IIngredientAcceptor;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -32,10 +32,10 @@ public class FuelConversionCategory extends BaseCategory<FuelConversionRecipe> {
 
     public FuelConversionCategory(IGuiHelper guiHelper) {
         super(guiHelper,
-                RECIPE,
-                Component.translatable(ModItems.FUEL_REFINERY.get().getDescriptionId()),
-                guiHelper.createBlankDrawable(144, 90),
-                guiHelper.createDrawableItemStack(ModItems.FUEL_REFINERY.get().getDefaultInstance())
+            RECIPE,
+            Component.translatable(ModItems.FUEL_REFINERY.get().getDescriptionId()),
+            guiHelper.createBlankDrawable(144, 90),
+            guiHelper.createDrawableItemStack(ModItems.FUEL_REFINERY.get().getDefaultInstance())
         );
         arrow = guiHelper.drawableBuilder(GuiUtil.ARROW_TEXTURE, 0, 0, GuiUtil.ARROW_WIDTH, GuiUtil.ARROW_HEIGHT).setTextureSize(GuiUtil.ARROW_WIDTH, GuiUtil.ARROW_HEIGHT).buildAnimated(100, IDrawableAnimated.StartDirection.LEFT, false);
     }

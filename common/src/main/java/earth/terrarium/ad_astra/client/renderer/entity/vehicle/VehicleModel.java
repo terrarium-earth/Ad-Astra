@@ -19,7 +19,7 @@ public class VehicleModel<T extends Vehicle> extends EntityModel<T> {
     }
 
     @Override
-   public void setupAnim(T entity, float tickDelta, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setupAnim(T entity, float tickDelta, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         float newYaw = Mth.lerp(tickDelta, entity.previousYaw, entity.getYRot());
         this.frame.yRot = (float) Math.toRadians(newYaw);
         this.frame.zRot = 0.0f;

@@ -1,15 +1,14 @@
 package earth.terrarium.ad_astra.common.recipe;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import earth.terrarium.ad_astra.common.recipe.condition.IRecipeCondition;
 import earth.terrarium.ad_astra.common.recipe.condition.IRecipeConditionSerializer;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class ModRecipeBuilder<RECIPE extends ModRecipe> {
 

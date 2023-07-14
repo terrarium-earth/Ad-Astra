@@ -7,9 +7,9 @@ public final class ColourUtils {
 
     public static Color lighten(Color colour, float amount) {
         return new Color((int) (colour.getIntRed() + amount * 255),
-                (int) (colour.getIntGreen() + amount * 255),
-                (int) (colour.getIntBlue() + amount * 255),
-                colour.getIntAlpha());
+            (int) (colour.getIntGreen() + amount * 255),
+            (int) (colour.getIntBlue() + amount * 255),
+            colour.getIntAlpha());
     }
 
     public static Vec3 toVector(Color colour) {

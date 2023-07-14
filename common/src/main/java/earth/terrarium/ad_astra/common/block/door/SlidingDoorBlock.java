@@ -190,22 +190,22 @@ public class SlidingDoorBlock extends BaseEntityBlock {
 
         // Bottom
         return level.getBlockState(mainPos).isAir() &&
-                // Bottom Left
-                level.getBlockState(mainPos.relative(direction)).isAir() &&
-                // Bottom Right
-                level.getBlockState(mainPos.relative(direction.getOpposite())).isAir() &&
-                // Center
-                level.getBlockState(mainPos.above()).isAir() &&
-                // Left
-                level.getBlockState(mainPos.above().relative(direction)).isAir() &&
-                // Right
-                level.getBlockState(mainPos.above().relative(direction.getOpposite())).isAir() &&
-                // Top
-                level.getBlockState(mainPos.above().above()).isAir() &&
-                // Top Left
-                level.getBlockState(mainPos.above().above().relative(direction)).isAir() &&
-                // Top Right
-                level.getBlockState(mainPos.above().above().relative(direction.getOpposite())).isAir();
+            // Bottom Left
+            level.getBlockState(mainPos.relative(direction)).isAir() &&
+            // Bottom Right
+            level.getBlockState(mainPos.relative(direction.getOpposite())).isAir() &&
+            // Center
+            level.getBlockState(mainPos.above()).isAir() &&
+            // Left
+            level.getBlockState(mainPos.above().relative(direction)).isAir() &&
+            // Right
+            level.getBlockState(mainPos.above().relative(direction.getOpposite())).isAir() &&
+            // Top
+            level.getBlockState(mainPos.above().above()).isAir() &&
+            // Top Left
+            level.getBlockState(mainPos.above().above().relative(direction)).isAir() &&
+            // Top Right
+            level.getBlockState(mainPos.above().above().relative(direction.getOpposite())).isAir();
 
     }
 

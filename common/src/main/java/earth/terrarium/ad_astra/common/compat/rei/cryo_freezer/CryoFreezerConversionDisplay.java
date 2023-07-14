@@ -11,18 +11,18 @@ import java.util.List;
 
 public record CryoFreezerConversionDisplay(CryoFuelConversionRecipe recipe) implements Display {
 
-	@Override
-	public List<EntryIngredient> getInputEntries() {
-		return EntryIngredients.ofIngredients(recipe.getIngredients());
-	}
+    @Override
+    public List<EntryIngredient> getInputEntries() {
+        return EntryIngredients.ofIngredients(recipe.getIngredients());
+    }
 
-	@Override
-	public List<EntryIngredient> getOutputEntries() {
-		return List.of(EntryIngredients.of(recipe.getFluidOutput()));
-	}
+    @Override
+    public List<EntryIngredient> getOutputEntries() {
+        return List.of(EntryIngredients.of(recipe.getFluidOutput()));
+    }
 
-	@Override
-	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return REICategories.CRYO_FREEZER_CONVERSION_CATEGORY;
-	}
+    @Override
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return REICategories.CRYO_FREEZER_CONVERSION_CATEGORY;
+    }
 }

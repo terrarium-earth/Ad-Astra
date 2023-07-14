@@ -27,7 +27,7 @@ public class SpaceSuitShapedRecipe extends ShapedRecipe {
 
     public SpaceSuitShapedRecipe(ShapedRecipe internal) {
         super(internal.getId(), internal.getGroup(), internal.getWidth(), internal.getHeight(),
-                internal.getIngredients(), internal.getResultItem());
+            internal.getIngredients(), internal.getResultItem());
     }
 
     @Override

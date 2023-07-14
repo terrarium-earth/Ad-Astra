@@ -1,12 +1,12 @@
 package earth.terrarium.ad_astra.common.entity.vehicle;
 
+import earth.terrarium.ad_astra.common.config.VehiclesConfig;
 import earth.terrarium.ad_astra.common.item.vehicle.VehicleItem;
 import earth.terrarium.ad_astra.common.registry.ModTags;
+import earth.terrarium.ad_astra.common.screen.VehicleScreenMenuProvider;
 import earth.terrarium.ad_astra.common.util.CustomInventory;
 import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
-import earth.terrarium.ad_astra.common.config.VehiclesConfig;
-import earth.terrarium.ad_astra.common.screen.VehicleScreenMenuProvider;
 import earth.terrarium.botarium.api.Updatable;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
@@ -385,7 +385,7 @@ public abstract class Vehicle extends Entity implements Updatable {
     @Override
     public void update() {
     }
-    
+
     public boolean cautionForDismount(Entity passenger) {
         return false;
     }

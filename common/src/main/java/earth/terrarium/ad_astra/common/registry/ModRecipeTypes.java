@@ -1,8 +1,5 @@
 package earth.terrarium.ad_astra.common.registry;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeType;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
@@ -12,6 +9,9 @@ import earth.terrarium.ad_astra.common.recipe.*;
 import earth.terrarium.ad_astra.common.recipe.lunarian.*;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.crafting.RecipeType;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class ModRecipeTypes {
     public static final ResourcefulRegistry<RecipeType<?>> RECIPE_TYPES = ResourcefulRegistries.create(Registry.RECIPE_TYPE, AdAstra.MOD_ID);

@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.common.recipe.condition;
 
 import com.google.gson.JsonObject;
-
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.registry.ModRecipeConditionSerializers;

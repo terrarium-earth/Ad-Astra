@@ -17,9 +17,9 @@ public final class EnergizerConfig {
     public static long maxEnergy = 2000000L;
 
     @ConfigEntry(
-            id = "energyPerTick",
-            type = EntryType.LONG,
-            translation = "text.resourcefulconfig.ad_astra.option.energizer.energyPerTick"
+        id = "energyPerTick",
+        type = EntryType.LONG,
+        translation = "text.resourcefulconfig.ad_astra.option.energizer.energyPerTick"
     )
     public static long energyPerTick = 600L;
 }

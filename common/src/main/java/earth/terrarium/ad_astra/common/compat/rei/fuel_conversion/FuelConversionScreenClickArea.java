@@ -1,11 +1,11 @@
 package earth.terrarium.ad_astra.common.compat.rei.fuel_conversion;
 
-import java.awt.Rectangle;
-
 import earth.terrarium.ad_astra.client.screen.ConversionScreen;
 import earth.terrarium.ad_astra.common.block.machine.entity.FuelRefineryBlockEntity;
 import earth.terrarium.ad_astra.common.compat.rei.BaseClickArea;
 import earth.terrarium.ad_astra.common.compat.rei.REICategories;
+
+import java.awt.*;
 
 public class FuelConversionScreenClickArea extends BaseClickArea<ConversionScreen> {
 

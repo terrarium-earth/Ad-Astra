@@ -15,60 +15,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmiSpaceStationRecipe implements EmiRecipe {
-	private final ResourceLocation id;
-	SpaceStationRecipe recipe;
-	private final List<EmiIngredient> input = new ArrayList<>();
+    private final ResourceLocation id;
+    SpaceStationRecipe recipe;
+    private final List<EmiIngredient> input = new ArrayList<>();
 
-	public EmiSpaceStationRecipe(SpaceStationRecipe recipe) {
-		this.id = recipe.getId();
-		this.recipe = recipe;
+    public EmiSpaceStationRecipe(SpaceStationRecipe recipe) {
+        this.id = recipe.getId();
+        this.recipe = recipe;
 
-		for (IngredientHolder holder : recipe.getHolders()) {
-			this.input.add(EmiIngredient.of(holder.ingredient(), holder.count()));
-		}
-	}
+        for (IngredientHolder holder : recipe.getHolders()) {
+            this.input.add(EmiIngredient.of(holder.ingredient(), holder.count()));
+        }
+    }
 
-	@Override
-	public EmiRecipeCategory getCategory() {
-		return EmiCategories.SPACE_STATION_CATEGORY;
-	}
+    @Override
+    public EmiRecipeCategory getCategory() {
+        return EmiCategories.SPACE_STATION_CATEGORY;
+    }
 
-	@Override
-	public ResourceLocation getId() {
-		return this.id;
-	}
+    @Override
+    public ResourceLocation getId() {
+        return this.id;
+    }
 
-	@Override
-	public List<EmiIngredient> getInputs() {
-		return this.input;
-	}
+    @Override
+    public List<EmiIngredient> getInputs() {
+        return this.input;
+    }
 
-	@Override
-	public List<EmiStack> getOutputs() {
-		return List.of();
-	}
+    @Override
+    public List<EmiStack> getOutputs() {
+        return List.of();
+    }
 
-	@Override
-	public int getDisplayWidth() {
-		return 150;
-	}
+    @Override
+    public int getDisplayWidth() {
+        return 150;
+    }
 
-	@Override
-	public int getDisplayHeight() {
-		return 51;
-	}
+    @Override
+    public int getDisplayHeight() {
+        return 51;
+    }
 
-	@Override
-	public void addWidgets(WidgetHolder widgets) {
-		int xOffset = 3;
-		int yOffset = 0;
+    @Override
+    public void addWidgets(WidgetHolder widgets) {
+        int xOffset = 3;
+        int yOffset = 0;
 
-		for (int i = 0; i < 8; i++) {
-			if (i < this.input.size()) {
-				widgets.addSlot(this.input.get(i), 18 * i + xOffset, 0);
-			} else {
-				widgets.addSlot(EmiStack.of(ItemStack.EMPTY), 18 * i + xOffset, 0);
-			}
-		}
-	}
+        for (int i = 0; i < 8; i++) {
+            if (i < this.input.size()) {
+                widgets.addSlot(this.input.get(i), 18 * i + xOffset, 0);
+            } else {
+                widgets.addSlot(EmiStack.of(ItemStack.EMPTY), 18 * i + xOffset, 0);
+            }
+        }
+    }
 }

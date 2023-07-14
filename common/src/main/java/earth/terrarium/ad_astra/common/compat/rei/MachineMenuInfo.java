@@ -1,7 +1,5 @@
 package earth.terrarium.ad_astra.common.compat.rei;
 
-import java.util.function.Function;
-
 import earth.terrarium.ad_astra.common.screen.menu.AbstractMachineMenu;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.transfer.info.MenuInfoContext;
@@ -9,6 +7,8 @@ import me.shedaniel.rei.api.common.transfer.info.simple.SimplePlayerInventoryMen
 import me.shedaniel.rei.api.common.transfer.info.stack.SlotAccessor;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.crafting.Recipe;
+
+import java.util.function.Function;
 
 public class MachineMenuInfo<MENU extends AbstractMachineMenu<?>, DISPLAY extends Display> implements SimplePlayerInventoryMenuInfo<MENU, DISPLAY> {
 

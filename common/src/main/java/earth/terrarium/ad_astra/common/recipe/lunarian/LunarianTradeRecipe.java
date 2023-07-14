@@ -1,12 +1,8 @@
 package earth.terrarium.ad_astra.common.recipe.lunarian;
 
-import java.util.function.BiFunction;
-import java.util.function.Function;
-
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
-
 import earth.terrarium.ad_astra.common.recipe.ModRecipe;
 import earth.terrarium.ad_astra.common.recipe.ModRecipeBuilder;
 import net.minecraft.core.Registry;
@@ -17,6 +13,9 @@ import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public abstract class LunarianTradeRecipe extends ModRecipe {
 

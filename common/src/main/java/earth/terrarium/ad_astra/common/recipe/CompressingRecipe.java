@@ -24,19 +24,19 @@ public class CompressingRecipe extends CookingRecipe {
 
     public static Codec<CompressingRecipe> codec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
-                RecordCodecBuilder.point(id),
-                IngredientCodec.CODEC.fieldOf("input").forGetter(CompressingRecipe::getInputIngredient),
-                ItemStackCodec.CODEC.fieldOf("output").forGetter(CompressingRecipe::getResultItem),
-                Codec.INT.fieldOf("time").orElse(200).forGetter(CompressingRecipe::getCookTime)
+            RecordCodecBuilder.point(id),
+            IngredientCodec.CODEC.fieldOf("input").forGetter(CompressingRecipe::getInputIngredient),
+            ItemStackCodec.CODEC.fieldOf("output").forGetter(CompressingRecipe::getResultItem),
+            Codec.INT.fieldOf("time").orElse(200).forGetter(CompressingRecipe::getCookTime)
         ).apply(instance, CompressingRecipe::new));
     }
 
     public static Codec<CompressingRecipe> networkCodec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
-                RecordCodecBuilder.point(id),
-                IngredientCodec.NETWORK_CODEC.fieldOf("input").forGetter(CompressingRecipe::getInputIngredient),
-                ItemStackCodec.NETWORK_CODEC.fieldOf("output").forGetter(CompressingRecipe::getResultItem),
-                Codec.INT.fieldOf("time").orElse(200).forGetter(CompressingRecipe::getCookTime)
+            RecordCodecBuilder.point(id),
+            IngredientCodec.NETWORK_CODEC.fieldOf("input").forGetter(CompressingRecipe::getInputIngredient),
+            ItemStackCodec.NETWORK_CODEC.fieldOf("output").forGetter(CompressingRecipe::getResultItem),
+            Codec.INT.fieldOf("time").orElse(200).forGetter(CompressingRecipe::getCookTime)
         ).apply(instance, CompressingRecipe::new));
     }
 

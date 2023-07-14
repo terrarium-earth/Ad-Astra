@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.common.level;
 
+import earth.terrarium.ad_astra.common.config.SpawnConfig;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import earth.terrarium.ad_astra.common.config.SpawnConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

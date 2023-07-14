@@ -14,18 +14,18 @@ import java.util.List;
 @Environment(EnvType.CLIENT)
 public record SpaceStationDisplay(SpaceStationRecipe recipe) implements Display {
 
-	@Override
-	public List<EntryIngredient> getInputEntries() {
-		return EntryIngredients.ofIngredients(recipe.getIngredients());
-	}
+    @Override
+    public List<EntryIngredient> getInputEntries() {
+        return EntryIngredients.ofIngredients(recipe.getIngredients());
+    }
 
-	@Override
-	public List<EntryIngredient> getOutputEntries() {
-		return List.of(EntryIngredients.of(recipe.getResultItem()));
-	}
+    @Override
+    public List<EntryIngredient> getOutputEntries() {
+        return List.of(EntryIngredients.of(recipe.getResultItem()));
+    }
 
-	@Override
-	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return REICategories.SPACE_STATION_CATEGORY;
-	}
+    @Override
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return REICategories.SPACE_STATION_CATEGORY;
+    }
 }

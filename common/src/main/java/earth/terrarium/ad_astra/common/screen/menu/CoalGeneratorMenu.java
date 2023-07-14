@@ -19,8 +19,8 @@ public class CoalGeneratorMenu extends ProcessingMachineMenu<CoalGeneratorBlockE
 
     public CoalGeneratorMenu(int syncId, Inventory inventory, CoalGeneratorBlockEntity entity) {
         super(ModMenus.COAL_GENERATOR_MENU.get(), syncId, inventory, entity,
-                new Slot[]{new Slot(entity, 0, 77, 71)
-                });
+            new Slot[]{new Slot(entity, 0, 77, 71)
+            });
     }
 
     @Override

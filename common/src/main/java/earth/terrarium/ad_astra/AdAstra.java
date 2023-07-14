@@ -54,7 +54,7 @@ public class AdAstra {
         CauldronInteraction.WATER.put(ModItems.SPACE_SUIT.get(), CauldronInteraction.DYED_ITEM);
         CauldronInteraction.WATER.put(ModItems.SPACE_PANTS.get(), CauldronInteraction.DYED_ITEM);
         CauldronInteraction.WATER.put(ModItems.SPACE_BOOTS.get(), CauldronInteraction.DYED_ITEM);
-        
+
         PlatformUtils.registerStrippedLog(ModBlocks.GLACIAN_LOG.get(), ModBlocks.STRIPPED_GLACIAN_LOG.get());
         for (IRecipeConditionSerializer<?> recipeConditionSerializer : ModRecipeConditionSerializers.getSerializers()) {
             PlatformUtils.registerRecipeConditionSerializer(recipeConditionSerializer);

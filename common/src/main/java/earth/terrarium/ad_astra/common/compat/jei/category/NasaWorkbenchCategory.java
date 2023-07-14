@@ -3,8 +3,8 @@ package earth.terrarium.ad_astra.common.compat.jei.category;
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.recipe.NasaWorkbenchRecipe;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -24,10 +24,10 @@ public class NasaWorkbenchCategory extends BaseCategory<NasaWorkbenchRecipe> {
 
     public NasaWorkbenchCategory(IGuiHelper guiHelper) {
         super(guiHelper,
-                RECIPE,
-                Component.translatable(ModItems.NASA_WORKBENCH.get().getDescriptionId()),
-                guiHelper.createBlankDrawable(144, 110),
-                guiHelper.createDrawableItemStack(ModItems.NASA_WORKBENCH.get().getDefaultInstance())
+            RECIPE,
+            Component.translatable(ModItems.NASA_WORKBENCH.get().getDescriptionId()),
+            guiHelper.createBlankDrawable(144, 110),
+            guiHelper.createDrawableItemStack(ModItems.NASA_WORKBENCH.get().getDefaultInstance())
         );
         slot = guiHelper.getSlotDrawable();
         arrow = guiHelper.drawableBuilder(GuiUtil.ARROW_TEXTURE, 0, 0, GuiUtil.ARROW_WIDTH, GuiUtil.ARROW_HEIGHT).setTextureSize(GuiUtil.ARROW_WIDTH, GuiUtil.ARROW_HEIGHT).build();

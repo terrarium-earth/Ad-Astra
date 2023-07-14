@@ -53,11 +53,11 @@ public class LanderModel extends EntityModel<Lander> {
         PartDefinition fins = main.addOrReplaceChild("fins", CubeListBuilder.create(), PartPose.offset(-2.0F, -8.0F, -2.0F));
 
         PartDefinition pyramid = main.addOrReplaceChild("pyramid", CubeListBuilder.create().texOffs(75, -10).addBox(-6.0F, -77.5F, -5.0F, 0.0F, 9.0F, 10.0F, new CubeDeformation(0.0F))
-                .texOffs(75, -10).addBox(6.0F, -77.5F, -5.0F, 0.0F, 9.0F, 10.0F, new CubeDeformation(0.0F))
-                .texOffs(88, 11).addBox(10.0F, -58.0F, -10.0F, 0.0F, 2.0F, 20.0F, new CubeDeformation(0.0F))
-                .texOffs(88, 11).addBox(-10.0F, -58.0F, -10.0F, 0.0F, 2.0F, 20.0F, new CubeDeformation(0.0F))
-                .texOffs(88, 31).addBox(-10.0F, -58.0F, 10.0F, 20.0F, 2.0F, 0.0F, new CubeDeformation(0.0F))
-                .texOffs(88, 31).addBox(-10.0F, -58.0F, -10.0F, 20.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -17.0F, 0.0F));
+            .texOffs(75, -10).addBox(6.0F, -77.5F, -5.0F, 0.0F, 9.0F, 10.0F, new CubeDeformation(0.0F))
+            .texOffs(88, 11).addBox(10.0F, -58.0F, -10.0F, 0.0F, 2.0F, 20.0F, new CubeDeformation(0.0F))
+            .texOffs(88, 11).addBox(-10.0F, -58.0F, -10.0F, 0.0F, 2.0F, 20.0F, new CubeDeformation(0.0F))
+            .texOffs(88, 31).addBox(-10.0F, -58.0F, 10.0F, 20.0F, 2.0F, 0.0F, new CubeDeformation(0.0F))
+            .texOffs(88, 31).addBox(-10.0F, -58.0F, -10.0F, 20.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -17.0F, 0.0F));
 
         PartDefinition cube_r9 = pyramid.addOrReplaceChild("cube_r9", CubeListBuilder.create().texOffs(39, 0).addBox(-1.0F, 2.6076F, -3.171F, 2.0F, 15.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -93.0F, 0.0F, -0.3491F, 0.7854F, 0.0F));
 
@@ -78,7 +78,7 @@ public class LanderModel extends EntityModel<Lander> {
         PartDefinition cube_r17 = pyramid.addOrReplaceChild("cube_r17", CubeListBuilder.create().texOffs(39, 0).addBox(-1.02F, 0.01F, 0.0027F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.9353F, -77.5491F, -6.3647F, 0.0F, -0.7854F, 0.0F));
 
         PartDefinition cube_r18 = pyramid.addOrReplaceChild("cube_r18", CubeListBuilder.create().texOffs(75, -10).addBox(-6.0F, -4.5F, -5.0F, 0.0F, 9.0F, 10.0F, new CubeDeformation(0.0F))
-                .texOffs(75, -10).addBox(6.0F, -4.5F, -5.0F, 0.0F, 9.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -73.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
+            .texOffs(75, -10).addBox(6.0F, -4.5F, -5.0F, 0.0F, 9.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -73.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
 
         PartDefinition cube_r19 = pyramid.addOrReplaceChild("cube_r19", CubeListBuilder.create().texOffs(39, 0).addBox(-1.02F, 0.01F, 0.0027F, 2.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.9353F, -77.5491F, 4.9353F, 0.0F, -0.7854F, 0.0F));
 
@@ -105,13 +105,13 @@ public class LanderModel extends EntityModel<Lander> {
         PartDefinition booster = main.addOrReplaceChild("booster", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
         PartDefinition tip = main.addOrReplaceChild("tip", CubeListBuilder.create().texOffs(0, 24).addBox(-4.0F, -110.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
-                .texOffs(49, 0).addBox(-3.0F, -118.0F, -3.0F, 6.0F, 8.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+            .texOffs(49, 0).addBox(-3.0F, -118.0F, -3.0F, 6.0F, 8.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 128, 128);
     }
 
     @Override
-   public void setupAnim(Lander entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setupAnim(Lander entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
     }
 
     @Override

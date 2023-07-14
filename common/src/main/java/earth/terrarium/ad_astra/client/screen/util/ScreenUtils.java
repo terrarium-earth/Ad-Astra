@@ -66,8 +66,8 @@ public class ScreenUtils {
             for (int j = 0; j <= sides; j++) {
                 double angle = (Math.PI * 2 * j / sides) + Math.toRadians(180);
                 bufferBuilder.vertex(x + Math.sin(angle) * i, y + Math.cos(angle) * i, 0)
-                        .color(ringColour.getIntRed(), ringColour.getIntGreen(), ringColour.getIntBlue(), ringColour.getIntAlpha())
-                        .endVertex();
+                    .color(ringColour.getIntRed(), ringColour.getIntGreen(), ringColour.getIntBlue(), ringColour.getIntAlpha())
+                    .endVertex();
             }
             tessellator.end();
         }

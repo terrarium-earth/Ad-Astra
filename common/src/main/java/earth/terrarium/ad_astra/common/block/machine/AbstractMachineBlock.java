@@ -44,13 +44,13 @@ import java.util.function.ToIntFunction;
 @MethodsReturnNonnullByDefault
 public abstract class AbstractMachineBlock extends BaseEntityBlock {
     private static final CacheableFunction<Block, BlockEntityType<?>> BLOCK_TO_ENTITY = new CacheableFunction<>(block ->
-            ModBlockEntityTypes.BLOCK_ENTITY_TYPES
-                    .getEntries()
-                    .stream()
-                    .map(RegistryEntry::get)
-                    .filter(type -> type.isValid(block.defaultBlockState()))
-                    .findFirst()
-                    .orElse(null)
+        ModBlockEntityTypes.BLOCK_ENTITY_TYPES
+            .getEntries()
+            .stream()
+            .map(RegistryEntry::get)
+            .filter(type -> type.isValid(block.defaultBlockState()))
+            .findFirst()
+            .orElse(null)
     );
     private BlockEntityType<?> entity;
 

@@ -1,11 +1,11 @@
 package earth.terrarium.ad_astra.common.registry;
 
+import earth.terrarium.ad_astra.common.recipe.condition.IRecipeConditionSerializer;
+import earth.terrarium.ad_astra.common.recipe.condition.LunarianDefaultTradesCondition;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import earth.terrarium.ad_astra.common.recipe.condition.IRecipeConditionSerializer;
-import earth.terrarium.ad_astra.common.recipe.condition.LunarianDefaultTradesCondition;
 
 public class ModRecipeConditionSerializers {
     private static final List<IRecipeConditionSerializer<?>> SERIALIZERS = new ArrayList<>();

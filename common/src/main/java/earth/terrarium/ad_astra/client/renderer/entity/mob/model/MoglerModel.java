@@ -42,11 +42,11 @@ public class MoglerModel<T extends Entity> extends EntityModel<T> {
         PartDefinition partdefinition = meshdefinition.getRoot();
 
         PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(33, 127).addBox(-8.0F, 4.3819F, -6.3545F, 16.0F, 6.0F, 0.0F, new CubeDeformation(0.0F))
-                .texOffs(97, 68).addBox(-9.0F, -7.3501F, -12.2827F, 18.0F, 6.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 10.1899F, -17.7795F));
+            .texOffs(97, 68).addBox(-9.0F, -7.3501F, -12.2827F, 18.0F, 6.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 10.1899F, -17.7795F));
 
         PartDefinition cube_r1 = head.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(57, 46).addBox(-9.0F, -25.0F, -8.0F, 18.0F, 11.0F, 11.0F, new CubeDeformation(0.0F))
-                .texOffs(59, 106).addBox(-8.0F, -14.0F, 2.0F, 16.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))
-                .texOffs(56, 68).addBox(-8.0F, -14.0F, -7.0F, 16.0F, 6.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 10.8101F, -11.2205F, -0.5236F, 0.0F, 0.0F));
+            .texOffs(59, 106).addBox(-8.0F, -14.0F, 2.0F, 16.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))
+            .texOffs(56, 68).addBox(-8.0F, -14.0F, -7.0F, 16.0F, 6.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 10.8101F, -11.2205F, -0.5236F, 0.0F, 0.0F));
 
         PartDefinition cube_r2 = head.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 102).mirror().addBox(-2.0F, -2.5F, -2.5F, 7.0F, 5.0F, 9.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(4.4912F, 4.0149F, -10.184F, -0.4164F, -0.3272F, -0.6284F));
 

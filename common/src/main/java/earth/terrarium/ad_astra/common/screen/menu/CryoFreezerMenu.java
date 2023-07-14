@@ -18,18 +18,18 @@ public class CryoFreezerMenu extends AbstractMachineMenu<CryoFreezerBlockEntity>
     public CryoFreezerMenu(int syncId, Inventory inventory, CryoFreezerBlockEntity entity) {
         super(ModMenus.CRYO_FREEZER_MENU.get(), syncId, inventory, entity, new Slot[]{
 
-                // Left Insert.
-                new Slot(entity, 0, 26, 70),
+            // Left Insert.
+            new Slot(entity, 0, 26, 70),
 
-                // Right Insert.
-                new Slot(entity, 1, 113, 42),
-                // Right Extract.
-                new Slot(entity, 2, 113, 70) {
-                    @Override
-                    public boolean mayPlace(ItemStack stack) {
-                        return false;
-                    }
-                }});
+            // Right Insert.
+            new Slot(entity, 1, 113, 42),
+            // Right Extract.
+            new Slot(entity, 2, 113, 70) {
+                @Override
+                public boolean mayPlace(ItemStack stack) {
+                    return false;
+                }
+            }});
     }
 
     @Override

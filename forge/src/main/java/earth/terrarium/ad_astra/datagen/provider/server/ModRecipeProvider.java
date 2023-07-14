@@ -1,8 +1,5 @@
 package earth.terrarium.ad_astra.datagen.provider.server;
 
-import java.util.Map.Entry;
-import java.util.function.Consumer;
-
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.entity.ILunarianTradeRecipeBuilderProvider;
 import earth.terrarium.ad_astra.common.entity.LunarianMerchantOffer;
@@ -15,6 +12,9 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
+
+import java.util.Map.Entry;
+import java.util.function.Consumer;
 
 public class ModRecipeProvider extends RecipeProvider {
 

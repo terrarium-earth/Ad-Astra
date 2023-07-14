@@ -12,31 +12,31 @@ import net.minecraft.util.Mth;
 
 public class FluidBarWidget extends EnergyBarWidget {
 
-	protected FluidHolder fluid;
+    protected FluidHolder fluid;
 
-	public FluidBarWidget(Point point, boolean increasing, FluidHolder fluid) {
-		super(point, increasing);
-		this.bounds = new Rectangle(new Rectangle(point.x, point.y, GuiUtil.FLUID_TANK_WIDTH, GuiUtil.FLUID_TANK_HEIGHT));
-		this.fluid = fluid;
-	}
+    public FluidBarWidget(Point point, boolean increasing, FluidHolder fluid) {
+        super(point, increasing);
+        this.bounds = new Rectangle(new Rectangle(point.x, point.y, GuiUtil.FLUID_TANK_WIDTH, GuiUtil.FLUID_TANK_HEIGHT));
+        this.fluid = fluid;
+    }
 
-	@Override
-	public void renderBackground(PoseStack poseStack, boolean dark, float alpha) {
-		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, alpha);
+    @Override
+    public void renderBackground(PoseStack poseStack, boolean dark, float alpha) {
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, alpha);
 
-		RenderSystem.enableBlend();
-		RenderSystem.blendFuncSeparate(770, 771, 1, 0);
-		RenderSystem.blendFunc(770, 771);
+        RenderSystem.enableBlend();
+        RenderSystem.blendFuncSeparate(770, 771, 1, 0);
+        RenderSystem.blendFunc(770, 771);
 
-		ScreenUtils.addTexture(poseStack, this.bounds.x - 5, this.bounds.y - 3, 24, 59, REIUtils.FLUID_TANK_BACK_TEXTURE);
+        ScreenUtils.addTexture(poseStack, this.bounds.x - 5, this.bounds.y - 3, 24, 59, REIUtils.FLUID_TANK_BACK_TEXTURE);
 
-		double ratio = (this.bounds.height - Mth.ceil((System.currentTimeMillis() / (animationDuration / this.bounds.height) % this.bounds.height))) / (double) this.bounds.height;
-		if (this.increasing) {
-			GuiUtil.drawFluidTank(poseStack, this.bounds.x, this.bounds.y, 1.0f - ratio, fluid);
-		} else {
-			GuiUtil.drawFluidTank(poseStack, this.bounds.x, this.bounds.y, ratio, fluid);
-		}
+        double ratio = (this.bounds.height - Mth.ceil((System.currentTimeMillis() / (animationDuration / this.bounds.height) % this.bounds.height))) / (double) this.bounds.height;
+        if (this.increasing) {
+            GuiUtil.drawFluidTank(poseStack, this.bounds.x, this.bounds.y, 1.0f - ratio, fluid);
+        } else {
+            GuiUtil.drawFluidTank(poseStack, this.bounds.x, this.bounds.y, ratio, fluid);
+        }
 
-		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-	}
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+    }
 }

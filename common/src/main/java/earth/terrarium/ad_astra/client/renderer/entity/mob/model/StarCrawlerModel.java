@@ -38,8 +38,8 @@ public class StarCrawlerModel extends EntityModel<StarCrawler> {
         PartDefinition partdefinition = meshdefinition.getRoot();
 
         PartDefinition leg1 = partdefinition.addOrReplaceChild("leg1", CubeListBuilder.create().texOffs(0, 27).addBox(-16.0F, -9.0F, -6.0F, 8.0F, 9.0F, 12.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 51).addBox(-24.0F, -7.0F, -5.0F, 8.0F, 7.0F, 10.0F, new CubeDeformation(0.0F))
-                .texOffs(28, 61).addBox(-29.0F, -5.0F, -4.0F, 5.0F, 5.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+            .texOffs(0, 51).addBox(-24.0F, -7.0F, -5.0F, 8.0F, 7.0F, 10.0F, new CubeDeformation(0.0F))
+            .texOffs(28, 61).addBox(-29.0F, -5.0F, -4.0F, 5.0F, 5.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
         PartDefinition cube_r1 = leg1.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(51, 44).addBox(-7.0F, -2.5F, -3.5F, 7.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-16.0F, 0.804F, -5.8016F, 0.2618F, 0.0F, 0.0F));
 
@@ -54,8 +54,8 @@ public class StarCrawlerModel extends EntityModel<StarCrawler> {
         PartDefinition cube_r6 = leg1.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(23, 27).addBox(-7.0F, -2.5F, -3.5F, 7.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-9.0F, 0.804F, -6.8016F, 0.2618F, 0.0F, 0.0F));
 
         PartDefinition leg2 = partdefinition.addOrReplaceChild("leg2", CubeListBuilder.create().texOffs(40, 27).addBox(-6.0F, -9.0F, 8.0F, 12.0F, 9.0F, 8.0F, new CubeDeformation(0.0F))
-                .texOffs(58, 53).addBox(-5.0F, -7.0F, 16.0F, 10.0F, 7.0F, 8.0F, new CubeDeformation(0.0F))
-                .texOffs(54, 68).addBox(-4.0F, -5.0F, 24.0F, 8.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+            .texOffs(58, 53).addBox(-5.0F, -7.0F, 16.0F, 10.0F, 7.0F, 8.0F, new CubeDeformation(0.0F))
+            .texOffs(54, 68).addBox(-4.0F, -5.0F, 24.0F, 8.0F, 5.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
         PartDefinition cube_r7 = leg2.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(0, 23).addBox(0.0F, -2.5F, -0.5F, 0.0F, 3.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-6.4146F, -1.352F, 24.5F, 0.0F, 0.0F, 1.309F));
 
@@ -70,8 +70,8 @@ public class StarCrawlerModel extends EntityModel<StarCrawler> {
         PartDefinition cube_r12 = leg2.addOrReplaceChild("cube_r12", CubeListBuilder.create().texOffs(26, 67).addBox(0.0F, -2.5F, -3.5F, 0.0F, 5.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-8.4146F, -1.352F, 12.5F, 0.0F, 0.0F, 1.309F));
 
         PartDefinition leg3 = partdefinition.addOrReplaceChild("leg3", CubeListBuilder.create().texOffs(48, 0).addBox(-5.0F, -7.0F, -24.0F, 10.0F, 7.0F, 8.0F, new CubeDeformation(0.0F))
-                .texOffs(64, 15).addBox(-4.0F, -5.0F, -29.0F, 8.0F, 5.0F, 5.0F, new CubeDeformation(0.0F))
-                .texOffs(40, 27).addBox(-6.0F, -9.0F, -16.0F, 12.0F, 9.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+            .texOffs(64, 15).addBox(-4.0F, -5.0F, -29.0F, 8.0F, 5.0F, 5.0F, new CubeDeformation(0.0F))
+            .texOffs(40, 27).addBox(-6.0F, -9.0F, -16.0F, 12.0F, 9.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
         PartDefinition cube_r13 = leg3.addOrReplaceChild("cube_r13", CubeListBuilder.create().texOffs(0, 26).addBox(0.0F, -2.5F, -0.5F, 0.0F, 3.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(4.4827F, -1.8696F, -27.5F, 0.0F, 0.0F, 1.8326F));
 
@@ -86,8 +86,8 @@ public class StarCrawlerModel extends EntityModel<StarCrawler> {
         PartDefinition cube_r18 = leg3.addOrReplaceChild("cube_r18", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -2.5F, -3.5F, 0.0F, 5.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(8.4146F, -1.352F, -11.5F, 0.0F, 0.0F, 1.8326F));
 
         PartDefinition leg4 = partdefinition.addOrReplaceChild("leg4", CubeListBuilder.create().texOffs(30, 44).addBox(16.0F, -7.0F, -5.0F, 8.0F, 7.0F, 10.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 68).addBox(24.0F, -5.0F, -4.0F, 5.0F, 5.0F, 8.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 27).addBox(8.0F, -9.0F, -6.0F, 8.0F, 9.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+            .texOffs(0, 68).addBox(24.0F, -5.0F, -4.0F, 5.0F, 5.0F, 8.0F, new CubeDeformation(0.0F))
+            .texOffs(0, 27).addBox(8.0F, -9.0F, -6.0F, 8.0F, 9.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
         PartDefinition cube_r19 = leg4.addOrReplaceChild("cube_r19", CubeListBuilder.create().texOffs(23, 32).addBox(-4.0F, -2.5F, -3.5F, 4.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(28.0F, 1.3216F, 6.7334F, -0.2618F, 0.0F, 0.0F));
 
@@ -107,7 +107,7 @@ public class StarCrawlerModel extends EntityModel<StarCrawler> {
     }
 
     @Override
-   public void setupAnim(StarCrawler entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setupAnim(StarCrawler entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         this.leg1.yRot = Mth.cos(limbAngle * 0.6662f) * limbDistance;
         this.leg2.yRot = Mth.cos(limbAngle * 0.6662f) * limbDistance;
         this.leg3.yRot = Mth.cos(limbAngle * 0.6662f) * limbDistance;

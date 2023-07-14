@@ -17,7 +17,6 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.PortalInfo;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.crafting.CraftingHelper;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

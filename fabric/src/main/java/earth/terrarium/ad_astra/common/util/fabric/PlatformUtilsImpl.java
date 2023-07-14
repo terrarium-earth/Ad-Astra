@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.common.util.fabric;
 
+import earth.terrarium.ad_astra.common.recipe.condition.IRecipeConditionSerializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
@@ -19,8 +20,6 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.PortalInfo;
 
 import java.util.function.Supplier;
-
-import earth.terrarium.ad_astra.common.recipe.condition.IRecipeConditionSerializer;
 
 public class PlatformUtilsImpl {
     public static CreativeModeTab createTab(ResourceLocation loc, Supplier<ItemStack> icon) {

@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.common.entity.mob;
 
+import earth.terrarium.ad_astra.common.config.SpawnConfig;
 import earth.terrarium.ad_astra.common.entity.projectile.IceSpit;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
-import earth.terrarium.ad_astra.common.config.SpawnConfig;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;

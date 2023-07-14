@@ -11,18 +11,18 @@ import java.util.List;
 
 public record NasaWorkbenchDisplay(NasaWorkbenchRecipe recipe) implements Display {
 
-	@Override
-	public List<EntryIngredient> getInputEntries() {
-		return EntryIngredients.ofIngredients(recipe.getIngredients());
-	}
+    @Override
+    public List<EntryIngredient> getInputEntries() {
+        return EntryIngredients.ofIngredients(recipe.getIngredients());
+    }
 
-	@Override
-	public List<EntryIngredient> getOutputEntries() {
-		return List.of(EntryIngredients.of(recipe.getResultItem()));
-	}
+    @Override
+    public List<EntryIngredient> getOutputEntries() {
+        return List.of(EntryIngredients.of(recipe.getResultItem()));
+    }
 
-	@Override
-	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return REICategories.NASA_WORKBENCH_CATEGORY;
-	}
+    @Override
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return REICategories.NASA_WORKBENCH_CATEGORY;
+    }
 }

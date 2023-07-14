@@ -22,17 +22,17 @@ public class NasaWorkbenchRecipe extends CookingRecipe {
 
     public static Codec<NasaWorkbenchRecipe> codec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
-                RecordCodecBuilder.point(id),
-                IngredientHolder.CODEC.listOf().fieldOf("ingredients").forGetter(NasaWorkbenchRecipe::getHolders),
-                ItemStackCodec.CODEC.fieldOf("output").forGetter(NasaWorkbenchRecipe::getResultItem)
+            RecordCodecBuilder.point(id),
+            IngredientHolder.CODEC.listOf().fieldOf("ingredients").forGetter(NasaWorkbenchRecipe::getHolders),
+            ItemStackCodec.CODEC.fieldOf("output").forGetter(NasaWorkbenchRecipe::getResultItem)
         ).apply(instance, NasaWorkbenchRecipe::new));
     }
 
     public static Codec<NasaWorkbenchRecipe> networkCodec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
-                RecordCodecBuilder.point(id),
-                IngredientHolder.NETWORK_CODEC.listOf().fieldOf("ingredients").forGetter(NasaWorkbenchRecipe::getHolders),
-                ItemStackCodec.NETWORK_CODEC.fieldOf("output").forGetter(NasaWorkbenchRecipe::getResultItem)
+            RecordCodecBuilder.point(id),
+            IngredientHolder.NETWORK_CODEC.listOf().fieldOf("ingredients").forGetter(NasaWorkbenchRecipe::getHolders),
+            ItemStackCodec.NETWORK_CODEC.fieldOf("output").forGetter(NasaWorkbenchRecipe::getResultItem)
         ).apply(instance, NasaWorkbenchRecipe::new));
     }
 

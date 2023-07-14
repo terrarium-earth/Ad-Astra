@@ -6,15 +6,8 @@ import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.common.data.PlanetData;
-import earth.terrarium.ad_astra.common.screen.menu.AbstractMachineMenu;
-import earth.terrarium.ad_astra.common.screen.menu.AbstractVehicleMenu;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-
-import java.util.List;
 
 public record ReturnPlanetDataPacket() implements Packet<ReturnPlanetDataPacket> {
 

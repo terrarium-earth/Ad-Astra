@@ -1,14 +1,14 @@
 package earth.terrarium.ad_astra.common.compat.jei.transfer;
 
-import java.util.List;
-import java.util.Optional;
-
 import earth.terrarium.ad_astra.common.block.machine.entity.AbstractMachineBlockEntity;
 import earth.terrarium.ad_astra.common.screen.menu.AbstractMachineMenu;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
+
+import java.util.List;
+import java.util.Optional;
 
 public class MachineTransferInfo<MENU extends AbstractMachineMenu<? extends AbstractMachineBlockEntity>, RECIPE> implements IRecipeTransferInfo<MENU, RECIPE> {
 

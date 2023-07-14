@@ -1,10 +1,10 @@
 package earth.terrarium.ad_astra.common.entity.vehicle;
 
+import earth.terrarium.ad_astra.common.config.VehiclesConfig;
 import earth.terrarium.ad_astra.common.registry.ModItems;
+import earth.terrarium.ad_astra.common.screen.LargeVehicleMenuProvider;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import earth.terrarium.ad_astra.common.config.VehiclesConfig;
-import earth.terrarium.ad_astra.common.screen.LargeVehicleMenuProvider;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;

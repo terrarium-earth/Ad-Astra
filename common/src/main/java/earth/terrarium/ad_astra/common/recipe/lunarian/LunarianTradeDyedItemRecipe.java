@@ -1,7 +1,5 @@
 package earth.terrarium.ad_astra.common.recipe.lunarian;
 
-import java.util.function.BiFunction;
-
 import earth.terrarium.ad_astra.common.entity.LunarianMerchantOffer;
 import earth.terrarium.ad_astra.common.registry.ModRecipeSerializers;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
@@ -10,6 +8,8 @@ import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+
+import java.util.function.BiFunction;
 
 public class LunarianTradeDyedItemRecipe extends LunarianTradeRecipe {
 

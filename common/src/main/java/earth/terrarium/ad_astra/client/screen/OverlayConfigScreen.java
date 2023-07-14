@@ -1,11 +1,7 @@
 package earth.terrarium.ad_astra.client.screen;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamresourceful.resourcefulconfig.common.config.ResourcefulConfig;
-
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import net.minecraft.client.Minecraft;
@@ -16,6 +12,9 @@ import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OverlayConfigScreen extends Screen {
 
@@ -248,7 +247,7 @@ public class OverlayConfigScreen extends Screen {
 
         /**
          * Load config values and backup values for revert
-         * 
+         *
          * @param minecraft
          */
         public void load(Minecraft minecraft) {
@@ -258,7 +257,7 @@ public class OverlayConfigScreen extends Screen {
 
         /**
          * Restore config values to backup
-         * 
+         *
          * @param minecraft
          */
         public void revert(Minecraft minecraft) {
@@ -268,7 +267,7 @@ public class OverlayConfigScreen extends Screen {
 
         /**
          * Reset config values to default, Can revert
-         * 
+         *
          * @param minecraft
          */
         public void reset(Minecraft minecraft) {
@@ -278,7 +277,7 @@ public class OverlayConfigScreen extends Screen {
 
         /**
          * Apply current values to config and backup
-         * 
+         *
          * @param minecraft
          */
         public void save(Minecraft minecraft) {

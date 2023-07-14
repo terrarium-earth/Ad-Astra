@@ -3,10 +3,10 @@ package earth.terrarium.ad_astra.common.compat.jei.category;
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.compat.jei.EnergyBarDrawable;
 import earth.terrarium.ad_astra.common.config.CompressorConfig;
 import earth.terrarium.ad_astra.common.recipe.CompressingRecipe;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
@@ -30,10 +30,10 @@ public class CompressorCategory extends BaseCategory<CompressingRecipe> {
 
     public CompressorCategory(IGuiHelper guiHelper) {
         super(guiHelper,
-                RECIPE,
-                Component.translatable(ModItems.COMPRESSOR.get().getDescriptionId()),
-                guiHelper.createBlankDrawable(144, 90),
-                guiHelper.createDrawableItemStack(ModItems.COMPRESSOR.get().getDefaultInstance())
+            RECIPE,
+            Component.translatable(ModItems.COMPRESSOR.get().getDescriptionId()),
+            guiHelper.createBlankDrawable(144, 90),
+            guiHelper.createDrawableItemStack(ModItems.COMPRESSOR.get().getDefaultInstance())
         );
         slot = guiHelper.getSlotDrawable();
         hammer = guiHelper.drawableBuilder(GuiUtil.HAMMER_TEXTURE, 0, 0, GuiUtil.HAMMER_WIDTH, GuiUtil.HAMMER_HEIGHT).setTextureSize(GuiUtil.HAMMER_WIDTH, GuiUtil.HAMMER_HEIGHT).buildAnimated(100, IDrawableAnimated.StartDirection.LEFT, false);

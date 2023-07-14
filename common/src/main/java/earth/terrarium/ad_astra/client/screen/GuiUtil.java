@@ -107,7 +107,7 @@ public class GuiUtil {
         RenderSystem.setShaderColor((colour >> 16 & 255) / 255.0f, (float) (colour >> 8 & 255) / 255.0f, (float) (colour & 255) / 255.0f, 1.0f);
         RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
 
-        int calcHeight =  (int)((FLUID_TANK_HEIGHT + 1) * ratio);
+        int calcHeight = (int) ((FLUID_TANK_HEIGHT + 1) * ratio);
         try (var ignored = RenderUtils.createScissorBox(Minecraft.getInstance(), poseStack, x, y + FLUID_TANK_HEIGHT - calcHeight, FLUID_TANK_WIDTH, calcHeight)) {
             for (int i = 1; i < 4; i++) {
                 GuiComponent.blit(poseStack, x + 1, FLUID_TANK_HEIGHT + y - (spriteHeight * i), 0, FLUID_TANK_WIDTH - 2, spriteHeight, sprite);

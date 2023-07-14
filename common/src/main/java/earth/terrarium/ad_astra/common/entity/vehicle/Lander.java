@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.common.entity.vehicle;
 
-import earth.terrarium.ad_astra.common.util.ModKeyBindings;
-import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.config.VehiclesConfig;
 import earth.terrarium.ad_astra.common.screen.LanderMenuProvider;
+import earth.terrarium.ad_astra.common.util.ModKeyBindings;
+import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;

@@ -1,7 +1,5 @@
 package earth.terrarium.ad_astra.common.compat.rei;
 
-import java.util.function.Function;
-
 import earth.terrarium.ad_astra.common.compat.rei.compressor.CompressorDisplay;
 import earth.terrarium.ad_astra.common.compat.rei.cryo_freezer.CryoFreezerConversionDisplay;
 import earth.terrarium.ad_astra.common.compat.rei.nasa_workbench.NasaWorkbenchDisplay;
@@ -19,6 +17,8 @@ import me.shedaniel.rei.api.common.transfer.info.MenuInfoProvider;
 import me.shedaniel.rei.api.common.transfer.info.MenuInfoRegistry;
 import me.shedaniel.rei.api.common.transfer.info.simple.SimpleMenuInfoProvider;
 import net.minecraft.world.item.crafting.Recipe;
+
+import java.util.function.Function;
 
 public class AdAstraReiCommonPlugin implements REIServerPlugin {
 

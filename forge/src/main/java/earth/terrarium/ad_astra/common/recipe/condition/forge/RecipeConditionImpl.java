@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.common.recipe.condition.forge;
 
 import com.google.gson.JsonObject;
-
 import earth.terrarium.ad_astra.common.recipe.condition.IRecipeCondition;
 import earth.terrarium.ad_astra.common.recipe.condition.IRecipeConditionSerializer;
 import net.minecraft.resources.ResourceLocation;

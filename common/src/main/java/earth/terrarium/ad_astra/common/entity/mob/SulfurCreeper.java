@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.common.entity.mob;
 
-import earth.terrarium.ad_astra.common.item.armor.SpaceSuit;
 import earth.terrarium.ad_astra.common.config.SpawnConfig;
+import earth.terrarium.ad_astra.common.item.armor.SpaceSuit;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.world.effect.MobEffectInstance;

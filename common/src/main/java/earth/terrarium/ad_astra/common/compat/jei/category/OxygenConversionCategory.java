@@ -4,11 +4,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.ClientPlatformUtils;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.compat.jei.EnergyBarDrawable;
 import earth.terrarium.ad_astra.common.compat.jei.FluidBarDrawable;
 import earth.terrarium.ad_astra.common.config.OxygenLoaderConfig;
 import earth.terrarium.ad_astra.common.recipe.OxygenConversionRecipe;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
@@ -31,10 +31,10 @@ public class OxygenConversionCategory extends BaseCategory<OxygenConversionRecip
 
     public OxygenConversionCategory(IGuiHelper guiHelper) {
         super(guiHelper,
-                RECIPE,
-                Component.translatable(ModItems.OXYGEN_LOADER.get().getDescriptionId()),
-                guiHelper.createBlankDrawable(144, 90),
-                guiHelper.createDrawableItemStack(ModItems.OXYGEN_LOADER.get().getDefaultInstance())
+            RECIPE,
+            Component.translatable(ModItems.OXYGEN_LOADER.get().getDescriptionId()),
+            guiHelper.createBlankDrawable(144, 90),
+            guiHelper.createDrawableItemStack(ModItems.OXYGEN_LOADER.get().getDefaultInstance())
         );
         arrow = guiHelper.drawableBuilder(GuiUtil.ARROW_TEXTURE, 0, 0, GuiUtil.ARROW_WIDTH, GuiUtil.ARROW_HEIGHT).setTextureSize(GuiUtil.ARROW_WIDTH, GuiUtil.ARROW_HEIGHT).buildAnimated(100, IDrawableAnimated.StartDirection.LEFT, false);
     }

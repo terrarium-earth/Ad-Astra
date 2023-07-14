@@ -1,10 +1,10 @@
 package earth.terrarium.ad_astra.common.entity.system;
 
+import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
 import earth.terrarium.ad_astra.common.registry.ModDamageSource;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.mixin.EntityInvoker;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
