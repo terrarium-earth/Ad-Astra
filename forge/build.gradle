@@ -51,7 +51,7 @@ dependencies {
     modCompileOnly "mezz.jei:jei-$minecraft_version-forge-api:$jei_version"
     modLocalRuntime("mezz.jei:jei-$minecraft_version-forge:$jei_version") { transitive = false }
 
-    //    modImplementation "vazkii.patchouli:Patchouli:$minecraft_version-$patchouli_version"
+    modImplementation "vazkii.patchouli:Patchouli:$minecraft_version-$patchouli_version-FORGE"
 }
 
 processResources {

@@ -1,4 +1,2 @@
-- Update to 1.20.1
-- Fix Oxygen distributor screen invisible #312
-- Add smelts_to_glass tag #310
-- Fix not being able to place water on hot planets even when there is oxygen
+- Fix unable to open astrodux (#324)
+- Fix tooltip cut in Planet Selection GUI on Forge (#320)

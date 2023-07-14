@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.common.item;
 
+import com.teamresourceful.resourcefullib.common.utils.modinfo.ModInfoUtils;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.registry.ModItems;
-import earth.terrarium.botarium.util.CommonHooks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -35,13 +35,12 @@ public class AstroduxItem extends Item {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        if (player instanceof ServerPlayer serverPlayer) {
-            if (CommonHooks.isModLoaded("patchouli")) {
-                PatchouliAPI.get().openBookGUI(serverPlayer, new ResourceLocation(AdAstra.MOD_ID, "astrodux"));
+        if (level.isClientSide()) {
+            if (ModInfoUtils.isModLoaded("patchouli")) {
+                PatchouliAPI.get().openBookGUI(new ResourceLocation(AdAstra.MOD_ID, "astrodux"));
                 return InteractionResultHolder.success(player.getItemInHand(usedHand));
-            } else {
-                player.displayClientMessage(Component.translatable("info.ad_astra.install_patchouli"), true);
             }
+            player.displayClientMessage(Component.translatable("info.ad_astra.install_patchouli"), true);
         }
         return InteractionResultHolder.fail(player.getItemInHand(usedHand));
     }

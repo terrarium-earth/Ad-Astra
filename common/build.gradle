@@ -15,7 +15,7 @@ dependencies {
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:$rei_version"
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin:$rei_version"
 
-    modImplementation "vazkii.patchouli:Patchouli-xplat:1.19.3-$patchouli_version"
+    modImplementation "vazkii.patchouli:Patchouli-xplat:$minecraft_version-$patchouli_version"
 }
 
 processResources {

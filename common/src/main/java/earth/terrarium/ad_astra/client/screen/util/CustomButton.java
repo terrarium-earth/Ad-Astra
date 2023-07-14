@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.client.screen.util;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.teamresourceful.resourcefullib.client.utils.ScreenUtils;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screen.util.PlanetSelectionScreen.TooltipType;
@@ -11,7 +12,6 @@ import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -106,7 +106,7 @@ public class CustomButton extends Button {
             }
 
             if (this.isMouseOver(mouseX, mouseY)) {
-                renderTooltips(graphics, mouseX, mouseY, minecraft);
+                renderTooltips(minecraft);
             }
 
             graphics.pose().popPose();
@@ -130,15 +130,10 @@ public class CustomButton extends Button {
         return this.startY;
     }
 
-    private void renderTooltips(GuiGraphics graphics, int mouseX, int mouseY, Minecraft minecraft) {
-
-        Screen screen = minecraft.screen;
+    private void renderTooltips(Minecraft minecraft) {
         List<Component> textEntries = new LinkedList<>();
 
         switch (tooltip) {
-            case NONE -> {
-
-            }
             case GALAXY -> {
                 textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": §b" + label.getString()));
                 textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": §5" + PlanetSelectionScreen.GALAXY_TEXT.getString()));
@@ -172,6 +167,7 @@ public class CustomButton extends Button {
                 PlanetSelectionScreen currentScreen = (PlanetSelectionScreen) minecraft.screen;
                 textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.ITEM_REQUIREMENT_TEXT.getString()));
 
+                if (currentScreen == null) return;
                 currentScreen.ingredients.forEach(ingredient -> {
                     boolean isEnough = ingredient.getFirst().getCount() >= ingredient.getSecond();
                     textEntries.add(Component.nullToEmpty("§" + (isEnough ? "a" : "c") + ingredient.getFirst().getCount() + "/" + ingredient.getSecond() + " §3" + ingredient.getFirst().getHoverName().getString()));
@@ -190,6 +186,6 @@ public class CustomButton extends Button {
             textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.TEMPERATURE_TEXT.getString() + ": §1 " + ModUtils.ORBIT_TEMPERATURE + " °C"));
         }
 
-        graphics.renderComponentTooltip(minecraft.font, textEntries, mouseX, mouseY);
+        ScreenUtils.setTooltip(textEntries);
     }
 }
