@@ -628,6 +628,8 @@
   "text.resourcefulconfig.ad_astra.option.general.doOxygen": "Do Oxygen",
   "text.resourcefulconfig.ad_astra.option.general.doSpaceMuffler": "Do Space Muffler",
   "text.resourcefulconfig.ad_astra.option.general.doSpaceMuffler.tooltip": "Do sound suppression in orbit dimensions. If it gets annoying, you can turn it off.",
+  "text.resourcefulconfig.ad_astra.option.general.enabledLunarianDefaultTrades": "Lunarian Default Trades",
+  "text.resourcefulconfig.ad_astra.option.general.enabledLunarianDefaultTrades.tooltip": "Enable/Disable lunarian and lunarian wandering trader's default trades. Apply to lunarian spawned after this value changed.",
   "text.resourcefulconfig.ad_astra.option.general.energyBarScale": "Energy Bar Scale",
   "text.resourcefulconfig.ad_astra.option.general.energyBarXOffset": "Energy Bar X Offset",
   "text.resourcefulconfig.ad_astra.option.general.energyBarYOffset": "Energy Bar Y Offset",

@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.common.util;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import earth.terrarium.ad_astra.common.recipe.condition.IRecipeConditionSerializer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -41,6 +42,11 @@ public class PlatformUtils {
 
     @ExpectPlatform
     public static <T extends Mob> void registerSpawnPlacement(EntityType<T> entityType, SpawnPlacements.Type decoratorType, Heightmap.Types heightMapType, SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
+        throw new NotImplementedException();
+    }
+
+    @ExpectPlatform
+    public static void registerRecipeConditionSerializer(IRecipeConditionSerializer<?> recipeConditionSerializer) {
         throw new NotImplementedException();
     }
 }

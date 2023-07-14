@@ -2,7 +2,6 @@ package earth.terrarium.ad_astra.common.entity.mob;
 
 import earth.terrarium.ad_astra.common.entity.LunarianMerchantOffer;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
@@ -13,7 +12,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;
-import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
 
@@ -44,14 +43,7 @@ public class Lunarian extends Villager {
     @Override
     protected void updateTrades() {
         VillagerData villagerData = this.getVillagerData();
-        Int2ObjectMap<VillagerTrades.ItemListing[]> int2ObjectMap = LunarianMerchantOffer.PROFESSION_TO_LEVELED_TRADE.get(villagerData.getProfession());
-        if (int2ObjectMap == null || int2ObjectMap.isEmpty()) {
-            return;
-        }
-        VillagerTrades.ItemListing[] factorys = int2ObjectMap.get(villagerData.getLevel());
-        if (factorys == null) {
-            return;
-        }
+        ItemListing[] factorys = LunarianMerchantOffer.getProfessionItemListings(this.getLevel().getRecipeManager(), villagerData.getProfession(), villagerData.getLevel());
         MerchantOffers tradeOfferList = this.getOffers();
         this.addOffersFromItemListings(tradeOfferList, factorys, 2);
     }

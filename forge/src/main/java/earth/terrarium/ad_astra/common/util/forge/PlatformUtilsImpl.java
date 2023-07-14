@@ -1,5 +1,7 @@
 package earth.terrarium.ad_astra.common.util.forge;
 
+import earth.terrarium.ad_astra.common.recipe.condition.IRecipeConditionSerializer;
+import earth.terrarium.ad_astra.common.recipe.condition.forge.RecipeConditionImpl;
 import earth.terrarium.ad_astra.mixin.forge.AxeItemAccessor;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -14,6 +16,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.PortalInfo;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.common.crafting.CraftingHelper;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -47,5 +51,9 @@ public class PlatformUtilsImpl {
 
     public static <T extends Mob> void registerSpawnPlacement(EntityType<T> entityType, SpawnPlacements.Type decoratorType, Heightmap.Types heightMapType, SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
         SpawnPlacements.register(entityType, decoratorType, heightMapType, decoratorPredicate);
+    }
+
+    public static void registerRecipeConditionSerializer(IRecipeConditionSerializer<?> recipeConditionSerializer) {
+        CraftingHelper.register(new RecipeConditionImpl.Serializer(recipeConditionSerializer));
     }
 }
