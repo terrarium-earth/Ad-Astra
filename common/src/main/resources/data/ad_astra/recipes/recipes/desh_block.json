@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "ad_astra:desh_ingot"
+      "tag": "ad_astra_platform:desh_ingots"
     }
   },
   "pattern": [

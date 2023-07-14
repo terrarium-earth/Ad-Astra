@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "ad_astra:ostrum_ingot"
+      "tag": "ad_astra_platform:ostrum_ingots"
     }
   },
   "pattern": [
