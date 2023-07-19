@@ -11,7 +11,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 @SuppressWarnings("deprecation")
-public class ReceiverBlock extends SidedMachineBlock {
+public class EnergyControllerBlock extends SidedMachineBlock {
     public static final VoxelShape BOTTOM_SHAPE = Shapes.join(
         Block.box(1, 0, 1, 15, 5, 15),
         Block.box(3, 5, 3, 13, 15, 13),
@@ -42,7 +42,7 @@ public class ReceiverBlock extends SidedMachineBlock {
         Block.box(1, 3, 3, 11, 13, 13),
         BooleanOp.OR);
 
-    public ReceiverBlock(Properties properties) {
+    public EnergyControllerBlock(Properties properties) {
         super(properties);
     }
 

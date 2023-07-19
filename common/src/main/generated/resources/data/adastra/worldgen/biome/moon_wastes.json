@@ -1,7 +1,5 @@
 {
-  "carvers": {
-    "air": "adastra:moon_crater"
-  },
+  "carvers": {},
   "downfall": 0.5,
   "effects": {
     "fog_color": 12638463,

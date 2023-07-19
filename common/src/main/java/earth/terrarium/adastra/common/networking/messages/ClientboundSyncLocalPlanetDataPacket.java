@@ -28,12 +28,12 @@ public record ClientboundSyncLocalPlanetDataPacket(
     private static class Handler implements PacketHandler<ClientboundSyncLocalPlanetDataPacket> {
         @Override
         public void encode(ClientboundSyncLocalPlanetDataPacket packet, FriendlyByteBuf buf) {
-            buf.writeLong(packet.localData().pack());
+            buf.writeInt(packet.localData().pack());
         }
 
         @Override
         public ClientboundSyncLocalPlanetDataPacket decode(FriendlyByteBuf buf) {
-            return new ClientboundSyncLocalPlanetDataPacket(PlanetData.unpack(buf.readLong()));
+            return new ClientboundSyncLocalPlanetDataPacket(PlanetData.unpack(buf.readInt()));
         }
 
         @Override

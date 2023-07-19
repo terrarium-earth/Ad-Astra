@@ -23,7 +23,7 @@ public class PlanetHandler extends SaveHandler {
     @Override
     public void loadData(CompoundTag tag) {
         tag.getAllKeys().forEach(key ->
-            planetData.put(BlockPos.of(Long.parseLong(key)), PlanetData.unpack(tag.getLong(key))));
+            planetData.put(BlockPos.of(Long.parseLong(key)), PlanetData.unpack(tag.getInt(key))));
     }
 
     @Override
@@ -34,7 +34,7 @@ public class PlanetHandler extends SaveHandler {
         planetData.forEach((pos, data) -> {
             // Don't save positions that are identical to the default planet values.
             if (data.oxygen() != defaultOxygen || data.temperature() != defaultTemperature || data.gravity() != defaultGravity) {
-                tag.putLong(String.valueOf(pos.asLong()), data.pack());
+                tag.putInt(String.valueOf(pos.asLong()), data.pack());
             }
         });
     }

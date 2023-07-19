@@ -1,6 +1,7 @@
 {
   "block.adastra.battery": "Battery",
-  "block.adastra.emitter": "Emitter",
+  "block.adastra.energy_controller": "Energy Controller",
+  "block.adastra.energy_relay": "Energy Relay",
   "block.adastra.etreonic_blast_furnace": "Etreonic Blast Furnace",
   "block.adastra.etreonic_solar_panel": "Etreonic Solar Panel",
   "block.adastra.gravity_normalizer": "Gravity Normalizer",
@@ -13,7 +14,6 @@
   "block.adastra.oil_refinery": "Oil Refinery",
   "block.adastra.oxygen": "Oxygen",
   "block.adastra.oxygen_distributor": "Oxygen Distributor",
-  "block.adastra.receiver": "Receiver",
   "block.adastra.recycler": "Recycler",
   "block.adastra.steam_generator": "Steam Generator",
   "block.adastra.tinkerers_workbench": "Tinkerers Workbench",

@@ -17,6 +17,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
@@ -99,23 +100,25 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
 
     protected void tickOxygen(ServerLevel level, BlockState state, BlockPos pos) {
         int limit = MAX_BLOCKS;
-        Set<BlockPos> positions = FloodFill3D.run(level, ((SidedMachineBlock) state.getBlock()).getTop(state, pos), limit, FloodFill3D.TEST_FULL_SEAL);
-        boolean oxygenLeak = positions.size() >= limit;
+        Set<BlockPos> positions = FloodFill3D.run(level, ((SidedMachineBlock) state.getBlock()).getTop(state, pos), limit, FloodFill3D.TEST_FULL_SEAL, true);
         OxygenApi.API.setOxygen(level, positions, true);
 
         Set<BlockPos> lastPositionsCopy = new HashSet<>(this.lastDistributedBlocks);
         this.resetLastDistributedBlocks(positions);
-        if (oxygenLeak && lastPositionsCopy.size() < limit) {
-            positions.removeAll(lastPositionsCopy);
-            BlockPos target = positions.stream()
-                .skip(6)
-                .findFirst()
-                .orElse(positions.stream().findFirst().orElse(null));
-            if (target == null) return;
-            AirVortex vortex = new AirVortex(level, pos, lastPositionsCopy);
-            vortex.setPos(Vec3.atCenterOf(target));
-            level.addFreshEntity(vortex);
-        }
+
+        if (positions.size() < limit) return;
+        if (lastPositionsCopy.size() >= limit) return;
+        if (OxygenApi.API.hasOxygen(level)) return;
+
+        positions.removeAll(lastPositionsCopy);
+        BlockPos target = positions.stream()
+            .skip(1)
+            .findFirst()
+            .orElse(positions.stream().findFirst().orElse(null));
+        if (target == null) return;
+        AirVortex vortex = new AirVortex(level, pos, lastPositionsCopy);
+        vortex.setPos(Vec3.atCenterOf(target));
+        level.addFreshEntity(vortex);
     }
 
     protected void resetLastDistributedBlocks(Set<BlockPos> positions) {

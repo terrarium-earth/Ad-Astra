@@ -2,6 +2,8 @@
   "values": [
     "#minecraft:fences",
     "minecraft:iron_bars",
-    "minecraft:tnt"
+    "minecraft:tnt",
+    "adastra:oxygen_distributor",
+    "adastra:gravity_normalizer"
   ]
 }

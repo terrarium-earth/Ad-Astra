@@ -37,8 +37,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         basicRenderedBlock(ModBlocks.HYDRAULIC_PRESS.get(), ModItemModelProvider.SMALL_RENDERED_ITEM);
         basicRenderedBlock(ModBlocks.OIL_REFINERY.get(), ModItemModelProvider.SMALL_RENDERED_ITEM);
         basicRenderedBlock(ModBlocks.STEAM_GENERATOR.get(), ModItemModelProvider.SMALL_RENDERED_ITEM, modLoc("block/steam_generator/steam_generator"));
-        basicRenderedBlock(ModBlocks.EMITTER.get());
-        basicRenderedBlock(ModBlocks.RECEIVER.get());
+        basicRenderedBlock(ModBlocks.ENERGY_CONTROLLER.get());
+        basicRenderedBlock(ModBlocks.ENERGY_RELAY.get());
         basicRenderedBlock(ModBlocks.VESNIUM_COIL.get(), ModItemModelProvider.SMALL_RENDERED_ITEM);
         basicRenderedBlock(ModBlocks.TINKERERS_WORKBENCH.get(), ModItemModelProvider.SMALL_RENDERED_ITEM);
         basicRenderedBlock(ModBlocks.RECYCLER.get(), ModItemModelProvider.SMALL_RENDERED_ITEM);

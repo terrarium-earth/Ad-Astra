@@ -11,6 +11,7 @@ import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import jdk.jfr.Unsigned;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
@@ -99,7 +100,7 @@ public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity im
 
     protected void tickGravity(ServerLevel level, BlockState state, BlockPos pos) {
         int limit = 3000;
-        Set<BlockPos> positions = FloodFill3D.run(level, ((SidedMachineBlock) state.getBlock()).getTop(state, pos), limit, FloodFill3D.TEST_FULL_SEAL);
+        Set<BlockPos> positions = FloodFill3D.run(level, ((SidedMachineBlock) state.getBlock()).getTop(state, pos), limit, FloodFill3D.TEST_FULL_SEAL, false);
         this.resetLastDistributedBlocks(positions);
         GravityApi.API.setGravity(level, positions, 0.5f);
     }

@@ -71,8 +71,8 @@ public class AdAstraClient {
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.HYDRAULIC_PRESS.get(), context -> new CustomGeoBlockRenderer<>(ModBlocks.HYDRAULIC_PRESS));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.OIL_REFINERY.get(), context -> new CustomGeoBlockRenderer<>(ModBlocks.OIL_REFINERY));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.STEAM_GENERATOR.get(), context -> new SteamGeneratorBlockEntityRenderer(ModBlocks.STEAM_GENERATOR));
-        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.EMITTER.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.EMITTER));
-        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.RECEIVER.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.RECEIVER));
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ENERGY_CONTROLLER.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.ENERGY_CONTROLLER));
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ENERGY_RELAY.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.ENERGY_RELAY));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.VESNIUM_COIL.get(), context -> new CustomGeoBlockRenderer<>(ModBlocks.VESNIUM_COIL));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.TINKERERS_WORKBENCH.get(), context -> new TinkerersWorkbenchBlockEntityRenderer(ModBlocks.TINKERERS_WORKBENCH));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.RECYCLER.get(), context -> new CustomGeoBlockRenderer<>(ModBlocks.RECYCLER));
@@ -90,8 +90,8 @@ public class AdAstraClient {
         ITEM_RENDERERS.put(ModBlocks.HYDRAULIC_PRESS.get().asItem(), new CustomGeoItemRenderer(ModBlocks.HYDRAULIC_PRESS));
         ITEM_RENDERERS.put(ModBlocks.OIL_REFINERY.get().asItem(), new CustomGeoItemRenderer(ModBlocks.OIL_REFINERY));
         ITEM_RENDERERS.put(ModBlocks.STEAM_GENERATOR.get().asItem(), new SteamGeneratorBlockEntityRenderer.ItemRender(ModBlocks.STEAM_GENERATOR));
-        ITEM_RENDERERS.put(ModBlocks.EMITTER.get().asItem(), new CustomGeoItemRenderer(ModBlocks.EMITTER));
-        ITEM_RENDERERS.put(ModBlocks.RECEIVER.get().asItem(), new CustomGeoItemRenderer(ModBlocks.RECEIVER));
+        ITEM_RENDERERS.put(ModBlocks.ENERGY_CONTROLLER.get().asItem(), new CustomGeoItemRenderer(ModBlocks.ENERGY_CONTROLLER));
+        ITEM_RENDERERS.put(ModBlocks.ENERGY_RELAY.get().asItem(), new CustomGeoItemRenderer(ModBlocks.ENERGY_RELAY));
         ITEM_RENDERERS.put(ModBlocks.VESNIUM_COIL.get().asItem(), new CustomGeoItemRenderer(ModBlocks.VESNIUM_COIL));
         ITEM_RENDERERS.put(ModBlocks.TINKERERS_WORKBENCH.get().asItem(), new CustomGeoItemRenderer(ModBlocks.TINKERERS_WORKBENCH));
         ITEM_RENDERERS.put(ModBlocks.RECYCLER.get().asItem(), new CustomGeoItemRenderer(ModBlocks.RECYCLER));

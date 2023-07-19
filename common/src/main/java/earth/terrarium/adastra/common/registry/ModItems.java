@@ -62,15 +62,15 @@ public final class ModItems {
         new Item.Properties(),
         SteamGeneratorBlockEntity.IDLE));
 
-    public static final RegistryEntry<Item> EMITTER = ITEMS.register("emitter", () -> new CustomGeoBlockItem(
-        ModBlocks.EMITTER.get(),
+    public static final RegistryEntry<Item> ENERGY_CONTROLLER = ITEMS.register("energy_controller", () -> new CustomGeoBlockItem(
+        ModBlocks.ENERGY_CONTROLLER.get(),
         new Item.Properties(),
-        EmitterBlockEntity.IDLE));
+        EnergyControllerBlockEntity.IDLE));
 
-    public static final RegistryEntry<Item> RECEIVER = ITEMS.register("receiver", () -> new CustomGeoBlockItem(
-        ModBlocks.RECEIVER.get(),
+    public static final RegistryEntry<Item> ENERGY_RELAY = ITEMS.register("energy_relay", () -> new CustomGeoBlockItem(
+        ModBlocks.ENERGY_RELAY.get(),
         new Item.Properties(),
-        ReceiverBlockEntity.IDLE));
+        EnergyRelayBlockEntity.IDLE));
 
     public static final RegistryEntry<Item> VESNIUM_COIL = ITEMS.register("vesnium_coil", () -> new CustomGeoBlockItem(
         ModBlocks.VESNIUM_COIL.get(),

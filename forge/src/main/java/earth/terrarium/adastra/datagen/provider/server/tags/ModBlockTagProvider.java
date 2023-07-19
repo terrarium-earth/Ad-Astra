@@ -28,6 +28,8 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.tag(BlockTags.FENCES.location()));
         tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.element(ForgeRegistries.BLOCKS.getKey(Blocks.IRON_BARS)));
         tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.element(ForgeRegistries.BLOCKS.getKey(Blocks.TNT)));
+        tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.element(ModBlocks.OXYGEN_DISTRIBUTOR.getId()));
+        tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.element(ModBlocks.GRAVITY_NORMALIZER.getId()));
 
         tag(ModBlockTags.MOON_CARVER_REPLACEABLES).add(TagEntry.element(ForgeRegistries.BLOCKS.getKey(ModBlocks.MOON_SAND.get())));
         tag(ModBlockTags.MOON_CARVER_REPLACEABLES).add(TagEntry.element(ForgeRegistries.BLOCKS.getKey(ModBlocks.MOON_STONE.get())));

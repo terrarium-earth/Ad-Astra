@@ -1,12 +1,15 @@
 package earth.terrarium.adastra.common.handlers;
 
 public final class PlanetData {
-    public static final int OXYGEN_BIT = 0;
-    public static final int OXYGEN_BIT_LENGTH = Byte.SIZE;
-    public static final int TEMPERATURE_BIT = OXYGEN_BIT + OXYGEN_BIT_LENGTH;
-    public static final int TEMPERATURE_BIT_LENGTH = Short.SIZE;
-    public static final int GRAVITY_BIT = TEMPERATURE_BIT + TEMPERATURE_BIT_LENGTH;
-    public static final int GRAVITY_BIT_LENGTH = Float.SIZE;
+    private static final int OXYGEN_BIT_LENGTH = 1;
+    private static final int TEMPERATURE_BIT_LENGTH = 16;
+    private static final int GRAVITY_BIT_LENGTH = 15; // unsigned
+
+    private static final float GRAVITY_PRECISION = 100.0f;
+
+    private static final int OXYGEN_BIT = 0;
+    private static final int TEMPERATURE_BIT = OXYGEN_BIT + OXYGEN_BIT_LENGTH;
+    private static final int GRAVITY_BIT = TEMPERATURE_BIT + TEMPERATURE_BIT_LENGTH;
 
     private boolean oxygen;
     private short temperature;
@@ -42,20 +45,19 @@ public final class PlanetData {
         this.gravity = gravity;
     }
 
-    public long pack() {
-        long packedData = 0;
-
-        packedData |= (this.oxygen ? 1L : 0L) << OXYGEN_BIT;
+    public int pack() {
+        int packedData = 0;
+        packedData |= (this.oxygen ? 1 : 0) << OXYGEN_BIT;
         packedData |= (this.temperature & ((1 << TEMPERATURE_BIT_LENGTH) - 1)) << TEMPERATURE_BIT;
-        packedData |= (Float.floatToIntBits(this.gravity) & ((1L << GRAVITY_BIT_LENGTH) - 1)) << GRAVITY_BIT;
+        packedData |= (int) (this.gravity * GRAVITY_PRECISION) << GRAVITY_BIT;
 
         return packedData;
     }
 
-    public static PlanetData unpack(long packedData) {
-        boolean oxygen = ((packedData >> OXYGEN_BIT) & ((1L << OXYGEN_BIT_LENGTH) - 1)) == 1;
+    public static PlanetData unpack(int packedData) {
+        boolean oxygen = ((packedData >> OXYGEN_BIT) & 1) == 1;
         short temperature = (short) ((packedData >> TEMPERATURE_BIT) & ((1 << TEMPERATURE_BIT_LENGTH) - 1));
-        float gravity = Float.intBitsToFloat((int) ((packedData >> GRAVITY_BIT) & ((1L << GRAVITY_BIT_LENGTH) - 1)));
+        float gravity = ((packedData >> GRAVITY_BIT) & ((1 << GRAVITY_BIT_LENGTH) - 1)) / GRAVITY_PRECISION;
 
         return new PlanetData(oxygen, temperature, gravity);
     }

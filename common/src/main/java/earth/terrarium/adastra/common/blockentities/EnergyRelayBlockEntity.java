@@ -14,14 +14,14 @@ import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class EmitterBlockEntity extends MachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer>, GeoBlockEntity {
+public class EnergyRelayBlockEntity extends MachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer>, GeoBlockEntity {
     private WrappedBlockEnergyContainer energyContainer;
 
     public static final RawAnimation IDLE = RawAnimation.begin().thenLoop("animation.model.idle");
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-    public EmitterBlockEntity(BlockPos pos, BlockState state) {
+    public EnergyRelayBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state);
     }
 

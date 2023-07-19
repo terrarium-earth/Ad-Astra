@@ -50,17 +50,17 @@ public final class ModBlockEntityTypes {
             SteamGeneratorBlockEntity::new,
             ModBlocks.STEAM_GENERATOR.get()));
 
-    public static final RegistryEntry<BlockEntityType<EmitterBlockEntity>> EMITTER = BLOCK_ENTITY_TYPES.register(
-        "emitter",
+    public static final RegistryEntry<BlockEntityType<EnergyControllerBlockEntity>> ENERGY_CONTROLLER = BLOCK_ENTITY_TYPES.register(
+        "energy_controller",
         () -> RegistryHelpers.createBlockEntityType(
-            EmitterBlockEntity::new,
-            ModBlocks.EMITTER.get()));
+            EnergyControllerBlockEntity::new,
+            ModBlocks.ENERGY_CONTROLLER.get()));
 
-    public static final RegistryEntry<BlockEntityType<ReceiverBlockEntity>> RECEIVER = BLOCK_ENTITY_TYPES.register(
-        "receiver",
+    public static final RegistryEntry<BlockEntityType<EnergyRelayBlockEntity>> ENERGY_RELAY = BLOCK_ENTITY_TYPES.register(
+        "energy_relay",
         () -> RegistryHelpers.createBlockEntityType(
-            ReceiverBlockEntity::new,
-            ModBlocks.RECEIVER.get()));
+            EnergyRelayBlockEntity::new,
+            ModBlocks.ENERGY_RELAY.get()));
 
     public static final RegistryEntry<BlockEntityType<VesniumCoilBlockEntity>> VESNIUM_COIL = BLOCK_ENTITY_TYPES.register(
         "vesnium_coil",
