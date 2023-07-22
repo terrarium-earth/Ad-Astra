@@ -59,4 +59,12 @@ public final class ModBlocks {
     public static final RegistryEntry<Block> MOON_SAND = CUBES.register("moon_sand", () -> new SandBlock(0x5c6466, BlockBehaviour.Properties.copy(Blocks.SAND)));
     public static final RegistryEntry<Block> MOON_STONE = CUBES.register("moon_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
     public static final RegistryEntry<Block> MOON_DEEPSLATE = CUBE_COLUMNS.register("moon_deepslate", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
+
+    public static final RegistryEntry<Block> MARS_SAND = CUBES.register("mars_sand", () -> new SandBlock(0xc28152, BlockBehaviour.Properties.copy(Blocks.SAND)));
+    public static final RegistryEntry<Block> MARS_STONE = CUBES.register("mars_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+
+    public static final RegistryEntry<Block> VENUS_SAND = CUBES.register("venus_sand", () -> new SandBlock(0xd4a85e, BlockBehaviour.Properties.copy(Blocks.SAND)));
+    public static final RegistryEntry<Block> VENUS_STONE = CUBES.register("venus_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+
+    public static final RegistryEntry<Block> MERCURY_STONE = CUBES.register("mercury_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 }

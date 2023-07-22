@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-22T04:21:59.116883	Block States: adastra
+// 1.20.1	2023-07-22T04:58:57.985885	Block States: adastra
 36ad980a61ba623d936a511a42a24e6209d00991 assets/adastra/blockstates/battery.json
 c9f6505afc77af8d5b0f5d83c427190c97abeb7c assets/adastra/blockstates/energy_controller.json
 87596122930c30790be9afa86140030fa449de92 assets/adastra/blockstates/energy_injector.json
@@ -9,6 +9,9 @@ fa15414b2d253bbb39884ddf2e85a08b59b16f7d assets/adastra/blockstates/etreonic_sol
 02a50a2e2bfeea5ae24882842fb3742bca717906 assets/adastra/blockstates/gravity_normalizer.json
 74d5948e3bde721a9aa23340692351f508ce242e assets/adastra/blockstates/hydraulic_press.json
 ba7472e434f71e1cf8848d97c7b8d11dca998611 assets/adastra/blockstates/hydrogen.json
+33b2bdaf410a94f81d95b7191e0bd04741b755b7 assets/adastra/blockstates/mars_sand.json
+956c57c16dd30d9aad44be51ca77d328c7e603be assets/adastra/blockstates/mars_stone.json
+f19a7aa803a9a233141f7a03082dda116cd3e740 assets/adastra/blockstates/mercury_stone.json
 c8e473f828f553212a5d116944ea1daedb14c759 assets/adastra/blockstates/moon_deepslate.json
 eb7add301d063c184398dcd4af66fc6edaefcb75 assets/adastra/blockstates/moon_sand.json
 2fc2d7a90b7d4ad8ed62754888fdc9ccc519226e assets/adastra/blockstates/moon_stone.json
@@ -19,6 +22,8 @@ e35160973716ebc349a74595d067b8d03a7d226c assets/adastra/blockstates/oil.json
 5e1eb4730410d5ca3d3b070bc953ceb9ed79a6f7 assets/adastra/blockstates/recycler.json
 5117843af31bd7ef0d55b913338713cb6c110d06 assets/adastra/blockstates/steam_generator.json
 d8c881eeb4c3c5af8c9e99321d5fbf268f6d9fdc assets/adastra/blockstates/tinkerers_workbench.json
+ae612affc3d6c17695661d79bd4ce9fd422f0c09 assets/adastra/blockstates/venus_sand.json
+d5530e14202ceea345def3a210423dad99fd5045 assets/adastra/blockstates/venus_stone.json
 83770b8ec82794350ecc1b2df8f27aa14a274287 assets/adastra/blockstates/vesnium_coil.json
 7e9c1425276d71da702b47a592ba814b2e528a78 assets/adastra/blockstates/vesnium_solar_panel.json
 c89f42be01bbd9e62229cbaf1ab4a3a02fa49ed4 assets/adastra/models/block/battery_0.json
@@ -36,6 +41,9 @@ a97269c7fff62c6a7ac64fc7727e83778bcbbd01 assets/adastra/models/block/etrionic_bl
 87b354afcaf39686b8fe2d5dbef69d00bbbbc196 assets/adastra/models/block/gravity_normalizer.json
 87f00a68cf7b0200b0035c74b9e2a50220ce1061 assets/adastra/models/block/hydraulic_press.json
 50812bd51e14ec5ea223afe239c89730a63e43b1 assets/adastra/models/block/hydrogen.json
+3ec2c3098108ff88ddfbecbdc82de92c38b7839b assets/adastra/models/block/mars_sand.json
+56e35b9da0df828ef203a828be6f371037d057ef assets/adastra/models/block/mars_stone.json
+f0463261a0d32c508cb610f3c1159fb67e790d7b assets/adastra/models/block/mercury_stone.json
 f21961da5191a0b831de2baf88c38d6ffce74550 assets/adastra/models/block/moon_deepslate.json
 80002df0c81a5305d210bdb88f28d3baca4108d6 assets/adastra/models/block/moon_sand.json
 8ab3d675c494f0b9b6f1cb46c515336324d0940f assets/adastra/models/block/moon_stone.json
@@ -46,6 +54,8 @@ f21961da5191a0b831de2baf88c38d6ffce74550 assets/adastra/models/block/moon_deepsl
 9dbdaa2e2a9a18423a56ead38236ee670449d989 assets/adastra/models/block/recycler.json
 322f90f41686e9c8748d4b6d1a2ea94b05b48c31 assets/adastra/models/block/steam_generator.json
 b068a0b6b614b5aef2c0be4147bcc2f780864da1 assets/adastra/models/block/tinkerers_workbench.json
+861d4fd488a7919a12b56f87dcfcd32cd82013a0 assets/adastra/models/block/venus_sand.json
+e2d73b3b4e10f7d0dc5a05f74ef0a1ba43800618 assets/adastra/models/block/venus_stone.json
 661f5d6ff7f66293529474e8b76bb823fdde0da7 assets/adastra/models/block/vesnium_coil.json
 2846b5ba981e12285e7cd6d993c4c7f661c653e8 assets/adastra/models/block/vesnium_solar_panel.json
 62cbbfd8fd0866ac0057b866eab873c9d8152a1c assets/adastra/models/item/battery.json
@@ -57,6 +67,9 @@ ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/energy_relay
 4fd741b5f58593b773080a1b0732c176fd5a9119 assets/adastra/models/item/etreonic_solar_panel.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/gravity_normalizer.json
 7614f968892c8809a21e0714f92af1aadd79554a assets/adastra/models/item/hydraulic_press.json
+77819d283e55f23a0d3bcad73b10e519e868571a assets/adastra/models/item/mars_sand.json
+4a2806ea81e1ba422ea1fc6058a1e5870fc700c5 assets/adastra/models/item/mars_stone.json
+f3e363b41d27193305725abd9fd2b13ba586e995 assets/adastra/models/item/mercury_stone.json
 5da117a6d83a5f27d10587e56f1ac8f5ffcdba51 assets/adastra/models/item/moon_deepslate.json
 35da6834afa8503985d7f0283056378783dada10 assets/adastra/models/item/moon_sand.json
 a5dccfb893a5b522f7d913ce8224c478e4cb6465 assets/adastra/models/item/moon_stone.json
@@ -65,5 +78,7 @@ ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/oxygen_distr
 7614f968892c8809a21e0714f92af1aadd79554a assets/adastra/models/item/recycler.json
 7614f968892c8809a21e0714f92af1aadd79554a assets/adastra/models/item/steam_generator.json
 7614f968892c8809a21e0714f92af1aadd79554a assets/adastra/models/item/tinkerers_workbench.json
+0f177fe9472cd65ed03377473f26e76e88ab9c57 assets/adastra/models/item/venus_sand.json
+0309b591873a30148164feec9ab59ab111511945 assets/adastra/models/item/venus_stone.json
 7614f968892c8809a21e0714f92af1aadd79554a assets/adastra/models/item/vesnium_coil.json
 4fd741b5f58593b773080a1b0732c176fd5a9119 assets/adastra/models/item/vesnium_solar_panel.json
