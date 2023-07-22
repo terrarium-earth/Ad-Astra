@@ -42,6 +42,10 @@ public final class ModBlocks {
 
     public static final RegistryEntry<Block> ENERGY_RELAY = MACHINES.register("energy_relay", () -> new EnergyRelayBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
+    public static final RegistryEntry<Block> ENERGY_INJECTOR = MACHINES.register("energy_injector", () -> new EnergyInjectorBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+
+    public static final RegistryEntry<Block> ENERGY_RECEIVER = MACHINES.register("energy_receiver", () -> new EnergyReceiverBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+
     public static final RegistryEntry<Block> VESNIUM_COIL = MACHINES.register("vesnium_coil", () -> new VesniumCoilBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
     public static final RegistryEntry<Block> TINKERERS_WORKBENCH = MACHINES.register("tinkerers_workbench", () -> new TinkerersWorkbenchBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));

@@ -72,6 +72,16 @@ public final class ModItems {
         new Item.Properties(),
         EnergyRelayBlockEntity.IDLE));
 
+    public static final RegistryEntry<Item> ENERGY_INJECTOR = ITEMS.register("energy_injector", () -> new CustomGeoBlockItem(
+        ModBlocks.ENERGY_INJECTOR.get(),
+        new Item.Properties(),
+        EnergyInjectorBlockEntity.IDLE));
+
+    public static final RegistryEntry<Item> ENERGY_RECEIVER = ITEMS.register("energy_receiver", () -> new CustomGeoBlockItem(
+        ModBlocks.ENERGY_RECEIVER.get(),
+        new Item.Properties(),
+        EnergyReceiverBlockEntity.IDLE));
+
     public static final RegistryEntry<Item> VESNIUM_COIL = ITEMS.register("vesnium_coil", () -> new CustomGeoBlockItem(
         ModBlocks.VESNIUM_COIL.get(),
         new Item.Properties(),

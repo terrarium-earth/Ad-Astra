@@ -16,11 +16,11 @@ import java.util.stream.Stream;
 
 public class CratersBiomeSource extends BiomeSource {
     public static final Codec<CratersBiomeSource> CODEC = RecordCodecBuilder.create(instance ->
-            instance.group(
-                    Biome.CODEC.fieldOf("default_biome").forGetter(source -> source.defaultBiome),
-                    ExtraCodecs.nonEmptyList(DepthBiome.CODEC.listOf()).listOf().fieldOf("biomes").forGetter(source -> source.allowedBiomes),
-                    Codec.doubleRange(Double.MIN_VALUE, 1).fieldOf("erosion_threshold").orElse(0.5).forGetter(source -> source.erosionThreshold)
-            ).apply(instance, CratersBiomeSource::new)
+        instance.group(
+            Biome.CODEC.fieldOf("default_biome").forGetter(source -> source.defaultBiome),
+            ExtraCodecs.nonEmptyList(DepthBiome.CODEC.listOf()).listOf().fieldOf("biomes").forGetter(source -> source.allowedBiomes),
+            Codec.doubleRange(Double.MIN_VALUE, 1).fieldOf("erosion_threshold").orElse(0.5).forGetter(source -> source.erosionThreshold)
+        ).apply(instance, CratersBiomeSource::new)
     );
 
     private final Holder<Biome> defaultBiome;
@@ -68,10 +68,10 @@ public class CratersBiomeSource extends BiomeSource {
     // Holder<Biome> with depth parameter
     public record DepthBiome(Holder<Biome> biome, Climate.Parameter depth) {
         public static final Codec<DepthBiome> CODEC = RecordCodecBuilder.create(instance ->
-                instance.group(
-                        Biome.CODEC.fieldOf("biome").forGetter(DepthBiome::biome),
-                        Climate.Parameter.CODEC.fieldOf("depth").forGetter(DepthBiome::depth)
-                ).apply(instance, DepthBiome::new)
+            instance.group(
+                Biome.CODEC.fieldOf("biome").forGetter(DepthBiome::biome),
+                Climate.Parameter.CODEC.fieldOf("depth").forGetter(DepthBiome::depth)
+            ).apply(instance, DepthBiome::new)
         );
     }
 }

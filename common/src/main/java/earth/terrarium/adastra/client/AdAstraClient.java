@@ -73,6 +73,8 @@ public class AdAstraClient {
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.STEAM_GENERATOR.get(), context -> new SteamGeneratorBlockEntityRenderer(ModBlocks.STEAM_GENERATOR));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ENERGY_CONTROLLER.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.ENERGY_CONTROLLER));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ENERGY_RELAY.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.ENERGY_RELAY));
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ENERGY_INJECTOR.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.ENERGY_INJECTOR));
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ENERGY_RECEIVER.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.ENERGY_RECEIVER));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.VESNIUM_COIL.get(), context -> new CustomGeoBlockRenderer<>(ModBlocks.VESNIUM_COIL));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.TINKERERS_WORKBENCH.get(), context -> new TinkerersWorkbenchBlockEntityRenderer(ModBlocks.TINKERERS_WORKBENCH));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.RECYCLER.get(), context -> new CustomGeoBlockRenderer<>(ModBlocks.RECYCLER));
@@ -92,6 +94,8 @@ public class AdAstraClient {
         ITEM_RENDERERS.put(ModBlocks.STEAM_GENERATOR.get().asItem(), new SteamGeneratorBlockEntityRenderer.ItemRender(ModBlocks.STEAM_GENERATOR));
         ITEM_RENDERERS.put(ModBlocks.ENERGY_CONTROLLER.get().asItem(), new CustomGeoItemRenderer(ModBlocks.ENERGY_CONTROLLER));
         ITEM_RENDERERS.put(ModBlocks.ENERGY_RELAY.get().asItem(), new CustomGeoItemRenderer(ModBlocks.ENERGY_RELAY));
+        ITEM_RENDERERS.put(ModBlocks.ENERGY_INJECTOR.get().asItem(), new CustomGeoItemRenderer(ModBlocks.ENERGY_INJECTOR));
+        ITEM_RENDERERS.put(ModBlocks.ENERGY_RECEIVER.get().asItem(), new CustomGeoItemRenderer(ModBlocks.ENERGY_RECEIVER));
         ITEM_RENDERERS.put(ModBlocks.VESNIUM_COIL.get().asItem(), new CustomGeoItemRenderer(ModBlocks.VESNIUM_COIL));
         ITEM_RENDERERS.put(ModBlocks.TINKERERS_WORKBENCH.get().asItem(), new CustomGeoItemRenderer(ModBlocks.TINKERERS_WORKBENCH));
         ITEM_RENDERERS.put(ModBlocks.RECYCLER.get().asItem(), new CustomGeoItemRenderer(ModBlocks.RECYCLER));

@@ -13,9 +13,9 @@ public class CratersDensityFunction extends BlendedNoise {
     private final double scale;
 
     public static final KeyDispatchDataCodec<CratersDensityFunction> CODEC = KeyDispatchDataCodec.of(Codec
-            .doubleRange(Double.MIN_VALUE, 1)
-            .fieldOf("scale")
-            .xmap(CratersDensityFunction::new, function -> function.scale)
+        .doubleRange(Double.MIN_VALUE, 1)
+        .fieldOf("scale")
+        .xmap(CratersDensityFunction::new, function -> function.scale)
     );
 
     public CratersDensityFunction(double scale) {

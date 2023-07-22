@@ -1,6 +1,8 @@
-// 1.20.1	2023-07-19T03:06:20.355263	Block States: adastra
+// 1.20.1	2023-07-22T04:21:59.116883	Block States: adastra
 36ad980a61ba623d936a511a42a24e6209d00991 assets/adastra/blockstates/battery.json
 c9f6505afc77af8d5b0f5d83c427190c97abeb7c assets/adastra/blockstates/energy_controller.json
+87596122930c30790be9afa86140030fa449de92 assets/adastra/blockstates/energy_injector.json
+f17c814b697e204530d33294ab8a274c21295b22 assets/adastra/blockstates/energy_receiver.json
 54842cc62637f6cfa5976507ac4092d52dcb6054 assets/adastra/blockstates/energy_relay.json
 f18438bc556d2de124171f6810360f756ba2e879 assets/adastra/blockstates/etreonic_blast_furnace.json
 fa15414b2d253bbb39884ddf2e85a08b59b16f7d assets/adastra/blockstates/etreonic_solar_panel.json
@@ -25,6 +27,8 @@ f314374c097bb3a484b137ca1110431b4ec8d2de assets/adastra/models/block/battery_25.
 948e94b793894d28289ffc7194c1230b45a5324e assets/adastra/models/block/battery_50.json
 bd87354df12de9fcf4b6c5ad7e857045b8148db3 assets/adastra/models/block/battery_75.json
 1bae0d43824f96af07a2f159ac13e56c8f37d498 assets/adastra/models/block/energy_controller.json
+0e2177a9fa00688cde48bf2cabdac5c5f0f8c6a7 assets/adastra/models/block/energy_injector.json
+cde831e888df0459af01597639710d7db44f397f assets/adastra/models/block/energy_receiver.json
 b249f4815e8dea187e42d0059ef10ec3551e6f3b assets/adastra/models/block/energy_relay.json
 38da306dd2cdd09156c04b6fc3d9ec4026f15d2a assets/adastra/models/block/etreonic_solar_panel.json
 9a77289c08f5b7ea8fcb971b3f278eaa05bffd5c assets/adastra/models/block/etrionic_blast_furnace.json
@@ -46,6 +50,8 @@ b068a0b6b614b5aef2c0be4147bcc2f780864da1 assets/adastra/models/block/tinkerers_w
 2846b5ba981e12285e7cd6d993c4c7f661c653e8 assets/adastra/models/block/vesnium_solar_panel.json
 62cbbfd8fd0866ac0057b866eab873c9d8152a1c assets/adastra/models/item/battery.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/energy_controller.json
+ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/energy_injector.json
+ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/energy_receiver.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/energy_relay.json
 68d3058c71d8cb8faaf923ad3c70ba812f40f6d0 assets/adastra/models/item/etreonic_blast_furnace.json
 4fd741b5f58593b773080a1b0732c176fd5a9119 assets/adastra/models/item/etreonic_solar_panel.json

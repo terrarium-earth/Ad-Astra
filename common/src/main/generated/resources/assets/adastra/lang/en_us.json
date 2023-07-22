@@ -1,6 +1,8 @@
 {
   "block.adastra.battery": "Battery",
   "block.adastra.energy_controller": "Energy Controller",
+  "block.adastra.energy_injector": "Energy Injector",
+  "block.adastra.energy_receiver": "Energy Receiver",
   "block.adastra.energy_relay": "Energy Relay",
   "block.adastra.etreonic_blast_furnace": "Etreonic Blast Furnace",
   "block.adastra.etreonic_solar_panel": "Etreonic Solar Panel",

@@ -24,18 +24,18 @@ public class CraterWorldCarver extends WorldCarver<CarverConfiguration> {
     @Override
     public boolean carve(CarvingContext context, CarverConfiguration config, ChunkAccess chunk, Function<BlockPos, Holder<Biome>> biomeAccessor, RandomSource random, Aquifer aquifer, ChunkPos chunkPos, CarvingMask carvingMask) {
         return carveEllipsoid(
-                context,
-                config,
-                chunk,
-                biomeAccessor,
-                aquifer,
-                chunkPos.getMiddleBlockX() + 0.5,
-                chunk.getHeight(Heightmap.Types.WORLD_SURFACE_WG, chunkPos.getMiddleBlockX(), chunkPos.getMiddleBlockZ()),
-                chunkPos.getMiddleBlockZ() + 0.5,
-                64,
-                32,
-                carvingMask,
-                (carvingContext, d, e, f, i) -> false
+            context,
+            config,
+            chunk,
+            biomeAccessor,
+            aquifer,
+            chunkPos.getMiddleBlockX() + 0.5,
+            chunk.getHeight(Heightmap.Types.WORLD_SURFACE_WG, chunkPos.getMiddleBlockX(), chunkPos.getMiddleBlockZ()),
+            chunkPos.getMiddleBlockZ() + 0.5,
+            64,
+            32,
+            carvingMask,
+            (carvingContext, d, e, f, i) -> false
         );
     }
 

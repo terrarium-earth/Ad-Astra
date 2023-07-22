@@ -62,6 +62,18 @@ public final class ModBlockEntityTypes {
             EnergyRelayBlockEntity::new,
             ModBlocks.ENERGY_RELAY.get()));
 
+    public static final RegistryEntry<BlockEntityType<EnergyRelayBlockEntity>> ENERGY_INJECTOR = BLOCK_ENTITY_TYPES.register(
+        "energy_injector",
+        () -> RegistryHelpers.createBlockEntityType(
+            EnergyRelayBlockEntity::new,
+            ModBlocks.ENERGY_INJECTOR.get()));
+
+    public static final RegistryEntry<BlockEntityType<EnergyRelayBlockEntity>> ENERGY_RECEIVER = BLOCK_ENTITY_TYPES.register(
+        "energy_receiver",
+        () -> RegistryHelpers.createBlockEntityType(
+            EnergyRelayBlockEntity::new,
+            ModBlocks.ENERGY_RECEIVER.get()));
+
     public static final RegistryEntry<BlockEntityType<VesniumCoilBlockEntity>> VESNIUM_COIL = BLOCK_ENTITY_TYPES.register(
         "vesnium_coil",
         () -> RegistryHelpers.createBlockEntityType(
