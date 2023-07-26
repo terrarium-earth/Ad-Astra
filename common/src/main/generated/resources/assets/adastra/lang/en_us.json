@@ -29,6 +29,7 @@
   "death.attack.oxygen": "%1$s couldn't breathe anymore",
   "death.attack.oxygen.player": "%1$s lost their breath whilst trying to escape %2$s",
   "entity.adastra.air_vortex": "Air Vortex",
+  "entity.adastra.companion_drone": "Companion Drone",
   "entity.adastra.spider_bot": "Spider Bot",
   "item.adastra.aerolyte_space_boots": "Aerolyte Space Boots",
   "item.adastra.aerolyte_space_helmet": "Aerolyte Space Helmet",

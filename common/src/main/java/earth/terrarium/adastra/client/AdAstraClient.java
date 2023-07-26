@@ -85,6 +85,7 @@ public class AdAstraClient {
     public static void registerEntityRenderers() {
         ClientHooks.registerEntityRenderer(ModEntityTypes.AIR_VORTEX, NoopRenderer::new);
         ClientHooks.registerEntityRenderer(ModEntityTypes.SPIDER_BOT, context -> new CustomGeoEntityRenderer<>(context, ModEntityTypes.SPIDER_BOT, 0.45f));
+        ClientHooks.registerEntityRenderer(ModEntityTypes.COMPANION_DRONE, context -> new CustomGeoEntityRenderer<>(context, ModEntityTypes.COMPANION_DRONE, -0.35f));
     }
 
     private static void registerItemRenderers() {

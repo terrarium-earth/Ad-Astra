@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.entities.AirVortex;
+import earth.terrarium.adastra.common.entities.CompanionDrone;
 import earth.terrarium.adastra.common.entities.SpiderBot;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
@@ -23,14 +24,20 @@ public class ModEntityTypes {
             .fireImmune()
             .noSummon()
             .noSave()
-            .build(""));
+            .build("air_vortex"));
 
     public static final RegistryEntry<EntityType<SpiderBot>> SPIDER_BOT = ENTITY_TYPES.register("spider_bot", () ->
         EntityType.Builder.of(SpiderBot::new, MobCategory.MISC)
             .sized(1.5f, 1.5f)
-            .build(""));
+            .build("spider_bot"));
+
+    public static final RegistryEntry<EntityType<CompanionDrone>> COMPANION_DRONE = ENTITY_TYPES.register("companion_drone", () ->
+        EntityType.Builder.of(CompanionDrone::new, MobCategory.MISC)
+            .sized(1.0f, 1.7f)
+            .build("companion_drone"));
 
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
-        attributes.accept(SPIDER_BOT, SpiderBot::createMobAttributes);
+        attributes.accept(SPIDER_BOT, SpiderBot::createAttributes);
+        attributes.accept(COMPANION_DRONE, CompanionDrone::createAttributes);
     }
 }

@@ -128,7 +128,7 @@
 			"loop": true,
 			"animation_length": 1.58333,
 			"bones": {
-				"Molly": {
+				"Spiderbot": {
 					"position": {
 						"0.7917": {
 							"pre": [0, 0, 0],
@@ -682,7 +682,7 @@
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
-				"Molly": {
+				"Spiderbot": {
 					"position": {
 						"0.0": {
 							"post": [0, 8, 0],
@@ -1208,7 +1208,7 @@
 			"loop": true,
 			"animation_length": 1.33333,
 			"bones": {
-				"Molly": {
+				"Spiderbot": {
 					"position": {
 						"0.0": {
 							"post": [0, 7.5, 0],
@@ -2083,7 +2083,7 @@
 			"loop": true,
 			"animation_length": 1.79167,
 			"bones": {
-				"Molly": {
+				"Spiderbot": {
 					"position": {
 						"0.0": {
 							"post": [0, 8, 0],

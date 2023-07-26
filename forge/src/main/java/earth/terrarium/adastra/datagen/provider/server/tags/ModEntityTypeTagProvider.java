@@ -26,6 +26,7 @@ public class ModEntityTypeTagProvider extends TagsProvider<EntityType<?>> {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(ModEntityTypes.SPIDER_BOT.get())));
+        tag(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(ModEntityTypes.COMPANION_DRONE.get())));
 
         tag(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.ARMOR_STAND)));
         tag(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.IRON_GOLEM)));
