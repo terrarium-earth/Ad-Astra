@@ -1,8 +1,10 @@
 package earth.terrarium.adastra.fabric;
 
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +22,7 @@ public class AdAstraFabric {
         onAddReloadListener();
         ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register((player, joined) -> AdAstra.onDatapackSync(player));
         ServerTickEvents.END_SERVER_TICK.register(AdAstra::onServerTick);
+        ModEntityTypes.registerAttributes((type, builder) -> FabricDefaultAttributeRegistry.register(type.get(), builder.get()));
     }
 
     public static void onAddReloadListener() {

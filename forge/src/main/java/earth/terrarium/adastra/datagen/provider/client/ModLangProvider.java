@@ -3,6 +3,7 @@ package earth.terrarium.adastra.datagen.provider.client;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.registry.ModBlocks;
+import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.registry.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
@@ -25,6 +26,13 @@ public class ModLangProvider extends LanguageProvider {
         ModItems.ITEMS.stream()
             .filter(i -> !(i.get() instanceof BlockItem))
             .forEach(entry -> addItem(entry,
+                StringUtils.capitaliseAllWords(entry
+                    .getId()
+                    .getPath()
+                    .replace("_", " "))));
+
+        ModEntityTypes.ENTITY_TYPES.stream()
+            .forEach(entry -> addEntityType(entry,
                 StringUtils.capitaliseAllWords(entry
                     .getId()
                     .getPath()

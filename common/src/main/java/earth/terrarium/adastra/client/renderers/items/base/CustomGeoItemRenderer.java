@@ -8,7 +8,6 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.items.base.CustomGeoBlockItem;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
@@ -17,12 +16,15 @@ import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 
 public class CustomGeoItemRenderer extends GeoItemRenderer<CustomGeoBlockItem> {
+    private final ResourceLocation texture;
+
     public CustomGeoItemRenderer(RegistryEntry<Block> block) {
-        super(new DefaultedBlockGeoModel<>(block.getId()));
+        this(block, new DefaultedBlockGeoModel<>(block.getId()));
     }
 
-    public CustomGeoItemRenderer(GeoModel<CustomGeoBlockItem> model) {
+    public CustomGeoItemRenderer(RegistryEntry<Block> block, GeoModel<CustomGeoBlockItem> model) {
         super(model);
+        this.texture = new ResourceLocation(AdAstra.MOD_ID, "textures/block/%s.png".formatted(block.getId().getPath()));
     }
 
     @Override
@@ -35,7 +37,6 @@ public class CustomGeoItemRenderer extends GeoItemRenderer<CustomGeoBlockItem> {
 
     @Override
     public ResourceLocation getTextureLocation(CustomGeoBlockItem animatable) {
-        ResourceLocation id = BuiltInRegistries.BLOCK.getKey(animatable.getBlock());
-        return new ResourceLocation(AdAstra.MOD_ID, "textures/block/%s.png".formatted(id.getPath()));
+        return this.texture;
     }
 }

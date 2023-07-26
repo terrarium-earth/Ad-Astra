@@ -8,6 +8,7 @@ import earth.terrarium.adastra.client.renderers.blocks.base.CustomGeoBlockRender
 import earth.terrarium.adastra.client.renderers.blocks.base.SidedGeoBlockRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.machines.SteamGeneratorBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.machines.TinkerersWorkbenchBlockEntityRenderer;
+import earth.terrarium.adastra.client.renderers.entities.base.CustomGeoEntityRenderer;
 import earth.terrarium.adastra.client.renderers.items.armor.AerolyteSpaceSuitRenderer;
 import earth.terrarium.adastra.client.renderers.items.base.CustomGeoItemRenderer;
 import earth.terrarium.adastra.client.ti69.apps.SensorApp;
@@ -83,12 +84,13 @@ public class AdAstraClient {
 
     public static void registerEntityRenderers() {
         ClientHooks.registerEntityRenderer(ModEntityTypes.AIR_VORTEX, NoopRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.SPIDER_BOT, context -> new CustomGeoEntityRenderer<>(context, ModEntityTypes.SPIDER_BOT, 0.45f));
     }
 
     private static void registerItemRenderers() {
         ITEM_RENDERERS.put(ModBlocks.OXYGEN_DISTRIBUTOR.get().asItem(), new CustomGeoItemRenderer(ModBlocks.OXYGEN_DISTRIBUTOR));
-        ITEM_RENDERERS.put(ModBlocks.ETRIONIC_SOLAR_PANEL.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(new ResourceLocation(AdAstra.MOD_ID, "solar_panel"))));
-        ITEM_RENDERERS.put(ModBlocks.VESNIUM_SOLAR_PANEL.get().asItem(), new CustomGeoItemRenderer(new DefaultedBlockGeoModel<>(new ResourceLocation(AdAstra.MOD_ID, "solar_panel"))));
+        ITEM_RENDERERS.put(ModBlocks.ETRIONIC_SOLAR_PANEL.get().asItem(), new CustomGeoItemRenderer(ModBlocks.ETRIONIC_SOLAR_PANEL, new DefaultedBlockGeoModel<>(new ResourceLocation(AdAstra.MOD_ID, "solar_panel"))));
+        ITEM_RENDERERS.put(ModBlocks.VESNIUM_SOLAR_PANEL.get().asItem(), new CustomGeoItemRenderer(ModBlocks.VESNIUM_SOLAR_PANEL, new DefaultedBlockGeoModel<>(new ResourceLocation(AdAstra.MOD_ID, "solar_panel"))));
         ITEM_RENDERERS.put(ModBlocks.HYDRAULIC_PRESS.get().asItem(), new CustomGeoItemRenderer(ModBlocks.HYDRAULIC_PRESS));
         ITEM_RENDERERS.put(ModBlocks.OIL_REFINERY.get().asItem(), new CustomGeoItemRenderer(ModBlocks.OIL_REFINERY));
         ITEM_RENDERERS.put(ModBlocks.STEAM_GENERATOR.get().asItem(), new SteamGeneratorBlockEntityRenderer.ItemRender(ModBlocks.STEAM_GENERATOR));
