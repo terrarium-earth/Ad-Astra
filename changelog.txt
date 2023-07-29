@@ -1,2 +1,1 @@
-- Fix unable to open astrodux (#324)
-- Fix tooltip cut in Planet Selection GUI on Forge (#320)
+- fixed water buckets evaporating when placing water in side of an oxygenated area on venus and mercury again but for forge
