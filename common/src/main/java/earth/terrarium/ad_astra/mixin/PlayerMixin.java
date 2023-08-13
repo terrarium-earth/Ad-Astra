@@ -7,6 +7,7 @@ import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
 import earth.terrarium.ad_astra.common.item.armor.JetSuit;
 import earth.terrarium.ad_astra.common.item.armor.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -22,6 +23,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerMixin {
 
     private int ad_astra$shiftDownDuration = 0;
+    private boolean ad_astra$clickingJetSuitTogglePower = false;
+    private boolean ad_astra$clickingJetSuitToggleHover = false;
 
     @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
     public void ad_astra$damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
@@ -43,9 +46,29 @@ public abstract class PlayerMixin {
     public void ad_astra$tick(CallbackInfo ci) {
         Player player = ((Player) (Object) this);
         if (SpaceSuitConfig.enableJetSuitFlight) {
-            if (!player.level.isClientSide && !player.isPassenger()) {
-                ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
-                if (chest.getItem() instanceof JetSuit jetSuit) {
+            ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
+            if (chest.getItem() instanceof JetSuit jetSuit) {
+                if (!player.level.isClientSide) {
+                    boolean clickingJetSuitTogglePower = ModKeyBindings.jetSuitTogglePowerKeyDown(player);
+                    boolean clickingJetSuitToggleHover = ModKeyBindings.jetSuitToggleHoverKeyDown(player);
+
+                    if (!this.ad_astra$clickingJetSuitTogglePower && clickingJetSuitTogglePower) {
+                        boolean newPowerEnabled = !jetSuit.isPowerEnabled(chest);
+                        jetSuit.setPowerEnabled(chest, newPowerEnabled);
+                        player.displayClientMessage(Component.translatable("info.ad_astra.jet_suit.power", Component.translatable("gui.ad_astra.text." + (newPowerEnabled ? "enabled" : "disabled")).withStyle(newPowerEnabled ? ChatFormatting.GREEN : ChatFormatting.RED)), true);
+                    }
+
+                    if (!this.ad_astra$clickingJetSuitToggleHover && clickingJetSuitToggleHover) {
+                        boolean newHoverEnabled = !jetSuit.isHoverEnabled(chest);
+                        jetSuit.setHoverEnabled(chest, newHoverEnabled);
+                        player.displayClientMessage(Component.translatable("info.ad_astra.jet_suit.hover", Component.translatable("gui.ad_astra.text." + (newHoverEnabled ? "enabled" : "disabled")).withStyle(newHoverEnabled ? ChatFormatting.GREEN : ChatFormatting.RED)), true);
+                    }
+
+                    this.ad_astra$clickingJetSuitTogglePower = clickingJetSuitTogglePower;
+                    this.ad_astra$clickingJetSuitToggleHover = clickingJetSuitToggleHover;
+                }
+
+                if (!player.level.isClientSide && !player.isPassenger()) {
                     if (ModKeyBindings.jumpKeyDown(player)) {
                         if (JetSuit.hasFullSet(player)) {
                             jetSuit.fly(player, chest);

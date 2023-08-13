@@ -24,7 +24,7 @@ public record KeybindPacket(Keybind keybind, boolean pressed) implements Packet<
     }
 
     public enum Keybind {
-        JUMP, SPRINT, FORWARD, BACK, LEFT, RIGHT
+        JUMP, SPRINT, FORWARD, BACK, LEFT, RIGHT, JET_SUIT_TOGGLE_POWER, JET_SUIT_TOGGLE_HOVER
     }
 
     private static class Handler implements PacketHandler<KeybindPacket> {

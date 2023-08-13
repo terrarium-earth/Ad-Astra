@@ -14,6 +14,7 @@ import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
@@ -39,6 +40,23 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
     public JetSuit(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
         super(material, slot, properties);
+    }
+
+    public boolean isPowerEnabled(ItemStack stack) {
+        CompoundTag tag = stack.getTag();
+        return !tag.contains("PowerEnabled") || tag.getBoolean("PowerEnabled");
+    }
+
+    public void setPowerEnabled(ItemStack stack, boolean powerEnabled) {
+        stack.getOrCreateTag().putBoolean("PowerEnabled", powerEnabled);
+    }
+
+    public boolean isHoverEnabled(ItemStack stack) {
+        return stack.getTag().getBoolean("HoverEnabled");
+    }
+
+    public void setHoverEnabled(ItemStack stack, boolean hoverEnabled) {
+        stack.getOrCreateTag().putBoolean("HoverEnabled", hoverEnabled);
     }
 
     public void spawnParticles(Level level, LivingEntity entity, HumanoidModel<LivingEntity> model) {
@@ -81,9 +99,15 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         return SpaceSuitConfig.jetSuitTankSize;
     }
 
-    // Display energy
+    // Display status, energy
     @Override
     public void appendHoverText(ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag context) {
+        if (stack.is(ModItems.JET_SUIT.get())) {
+            boolean powerEnabled = this.isPowerEnabled(stack);
+            boolean hoverEnabled = this.isHoverEnabled(stack);
+            tooltip.add(Component.translatable("tooltip.ad_astra.jet_suit.power", Component.translatable("gui.ad_astra.text." + (powerEnabled ? "enabled" : "disabled")).withStyle(powerEnabled ? ChatFormatting.GREEN : ChatFormatting.RED)));
+            tooltip.add(Component.translatable("tooltip.ad_astra.jet_suit.hover", Component.translatable("gui.ad_astra.text." + (hoverEnabled ? "enabled" : "disabled")).withStyle(hoverEnabled ? ChatFormatting.GREEN : ChatFormatting.RED)));
+        }
         super.appendHoverText(stack, level, tooltip, context);
         if (stack.is(ModItems.JET_SUIT.get())) {
             long energy = EnergyHooks.getItemEnergyManager(stack).getStoredEnergy();

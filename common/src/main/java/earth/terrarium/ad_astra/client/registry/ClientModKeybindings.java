@@ -1,15 +1,25 @@
 package earth.terrarium.ad_astra.client.registry;
 
+import java.util.function.Consumer;
+
+import org.lwjgl.glfw.GLFW;
+
+import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.entity.vehicle.Rocket;
 import earth.terrarium.ad_astra.common.networking.NetworkHandling;
 import earth.terrarium.ad_astra.common.networking.packet.client.KeybindPacket;
 import earth.terrarium.ad_astra.common.networking.packet.client.LaunchRocketPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 
 @Environment(EnvType.CLIENT)
 public class ClientModKeybindings {
+
+    public static final String CATEGORY = "key.categories." + AdAstra.MOD_ID;
+    public static final KeyMapping JET_SUIT_TOGGLE_POWER_KEY = createKeyMapping(KeybindPacket.Keybind.JET_SUIT_TOGGLE_POWER, GLFW.GLFW_KEY_COMMA);
+    public static final KeyMapping JET_SUIT_TOGGLE_HOVER_KEY = createKeyMapping(KeybindPacket.Keybind.JET_SUIT_TOGGLE_HOVER, GLFW.GLFW_KEY_PERIOD);
 
     public static boolean clickingJump;
     public static boolean clickingSprint;
@@ -17,6 +27,8 @@ public class ClientModKeybindings {
     public static boolean clickingBack;
     public static boolean clickingLeft;
     public static boolean clickingRight;
+    public static boolean clickingJetSuitTogglePower;
+    public static boolean clickingJetSuitToggleHover;
 
     private static boolean sentJumpPacket;
     private static boolean sentSprintPacket;
@@ -24,6 +36,17 @@ public class ClientModKeybindings {
     private static boolean sentBackPacket;
     private static boolean sentLeftPacket;
     private static boolean sentRightPacket;
+    private static boolean sentJetSuitTogglePower;
+    private static boolean sentJetSuitToggleHover;
+
+    private static KeyMapping createKeyMapping(KeybindPacket.Keybind key, int keyCode) {
+        return new KeyMapping("key." + AdAstra.MOD_ID + "." + key.name().toLowerCase(), keyCode, CATEGORY);
+    }
+
+    public static void onRegisterKeyMappings(Consumer<KeyMapping> register) {
+        register.accept(JET_SUIT_TOGGLE_POWER_KEY);
+        register.accept(JET_SUIT_TOGGLE_HOVER_KEY);
+    }
 
     public static void onStartTick(Minecraft minecraft) {
 
@@ -33,6 +56,8 @@ public class ClientModKeybindings {
         clickingBack = minecraft.options.keyDown.isDown();
         clickingLeft = minecraft.options.keyLeft.isDown();
         clickingRight = minecraft.options.keyRight.isDown();
+        clickingJetSuitTogglePower = JET_SUIT_TOGGLE_POWER_KEY.isDown();
+        clickingJetSuitToggleHover = JET_SUIT_TOGGLE_HOVER_KEY.isDown();
 
         if (minecraft.level != null) {
 
@@ -94,6 +119,16 @@ public class ClientModKeybindings {
             if (!clickingRight && !sentRightPacket) {
                 NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.RIGHT, false));
                 sentRightPacket = true;
+            }
+
+            if (sentJetSuitTogglePower != clickingJetSuitTogglePower) {
+                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.JET_SUIT_TOGGLE_POWER, clickingJetSuitTogglePower));
+                sentJetSuitTogglePower = clickingJetSuitTogglePower;
+            }
+
+            if (sentJetSuitToggleHover != clickingJetSuitToggleHover) {
+                NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.JET_SUIT_TOGGLE_HOVER, clickingJetSuitToggleHover));
+                sentJetSuitToggleHover = clickingJetSuitToggleHover;
             }
         }
     }
