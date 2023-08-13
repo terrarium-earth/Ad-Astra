@@ -68,6 +68,7 @@ public class AdAstraClientForge {
         bus.addListener(AdAstraClientForge::onClientReloadListeners);
         bus.addListener(AdAstraClientForge::onSetupItemColors);
         bus.addListener(AdAstraClientForge::onSetupBlockColors);
+        bus.addListener(AdAstraClientForge::onRegisterKeyMappings);
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onRegisterClientHud);
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onClientTick);
         ForgeMenuConfig.register();
@@ -123,6 +124,10 @@ public class AdAstraClientForge {
 
     public static void onSetupBlockColors(RegisterColorHandlersEvent.Block event) {
         AdAstraClient.onAddBlockColors(event::register);
+    }
+
+    public static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
+        ClientModKeybindings.onRegisterKeyMappings(event::register);
     }
 
     public static boolean hasInitializedRenderers() {

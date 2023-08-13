@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.datagen.provider.client;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModItems;
@@ -117,7 +118,9 @@ public class ModLangProvider extends LanguageProvider {
         add("gui.ad_astra.text.catalog", "CATALOG");
         add("gui.ad_astra.text.category", "Category");
         add("gui.ad_astra.text.confirm", "Confirm Selection");
+        add("gui.ad_astra.text.disabled", "Disabled");
         add("gui.ad_astra.text.earth", "Earth");
+        add("gui.ad_astra.text.enabled", "Enabled");
         add("gui.ad_astra.text.flag_url", "Flag Url (https://i.imgur.com/urURL.png)");
         add("gui.ad_astra.text.galaxy", "Galaxy");
         add("gui.ad_astra.text.glacio", "Glacio");
@@ -154,6 +157,8 @@ public class ModLangProvider extends LanguageProvider {
         add("info.ad_astra.install_patchouli", "Install Patchouli!");
         add("info.ad_astra.none", "None");
         add("info.ad_astra.normal", "Normal");
+        add("info.ad_astra.jet_suit.power", "Jet Suit Power: %s");
+        add("info.ad_astra.jet_suit.hover", "Jet Suit Hover: %s");
         add("message.ad_astra.flag.not_owner", "§cYou do not own this flag!");
         add("message.ad_astra.hold_space", "§7Hold §cSpace!");
         add("message.ad_astra.no_fuel", "§cNO FUEL! §7Fill the Rocket with §cFuel§7. (§6Sneak and Right Click§7)");
@@ -345,6 +350,8 @@ public class ModLangProvider extends LanguageProvider {
         add("tooltip.ad_astra.hold_shift", "Hold shift for more info");
         add("tooltip.ad_astra.space_suit", "§bOxygen: §%s/%d 🪣");
         add("tooltip.ad_astra.vehicle_fuel", "§bFuel: §%s/%d 🪣");
+        add("tooltip.ad_astra.jet_suit.power", "Power: §%s");
+        add("tooltip.ad_astra.jet_suit.hover", "Hover: §%s");
         add("item.ad_astra.coal_generator.tooltip", "Burns coal into energy.");
         add("item.ad_astra.compressor.tooltip", "Presses ingots into plates.");
         add("item.ad_astra.cryo_freezer.tooltip", "Converts ice shards into cryo fuel.");
@@ -399,5 +406,9 @@ public class ModLangProvider extends LanguageProvider {
 
         add("item.ad_astra.cable_duct.tooltip", "Transfers Energy while being air-tight");
         add("item.ad_astra.fluid_pipe_duct.tooltip", "Transfers Fluid while being air-tight");
+        
+        add(ClientModKeybindings.CATEGORY, "Ad Astra");
+        add(ClientModKeybindings.JET_SUIT_TOGGLE_POWER_KEY.getName(), "Toggle Jet Suit Power");
+        add(ClientModKeybindings.JET_SUIT_TOGGLE_HOVER_KEY.getName(), "Toggle Jet Suit Hover");
     }
 }

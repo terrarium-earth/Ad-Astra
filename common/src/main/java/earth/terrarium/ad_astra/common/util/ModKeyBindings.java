@@ -23,6 +23,8 @@ public class ModKeyBindings {
     private boolean clickingBack;
     private boolean clickingLeft;
     private boolean clickingRight;
+    private boolean clickingJetSuitTogglePower;
+    private boolean clickingJetSuitToggleHover;
 
     public static boolean jumpKeyDown(Player player) {
         return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.JUMP) : getServerKeyPressed(player, KeybindPacket.Keybind.JUMP);
@@ -48,6 +50,14 @@ public class ModKeyBindings {
         return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.RIGHT) : getServerKeyPressed(player, KeybindPacket.Keybind.RIGHT);
     }
 
+    public static boolean jetSuitTogglePowerKeyDown(Player player) {
+        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.JET_SUIT_TOGGLE_POWER) : getServerKeyPressed(player, KeybindPacket.Keybind.JET_SUIT_TOGGLE_POWER);
+    }
+
+    public static boolean jetSuitToggleHoverKeyDown(Player player) {
+        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.JET_SUIT_TOGGLE_HOVER) : getServerKeyPressed(player, KeybindPacket.Keybind.JET_SUIT_TOGGLE_HOVER);
+    }
+
     private static boolean getServerKeyPressed(Player player, KeybindPacket.Keybind key) {
         PLAYER_KEYS.putIfAbsent(player.getUUID(), new ModKeyBindings());
         return switch (key) {
@@ -62,6 +72,10 @@ public class ModKeyBindings {
             case LEFT -> PLAYER_KEYS.get(player.getUUID()).clickingLeft;
 
             case RIGHT -> PLAYER_KEYS.get(player.getUUID()).clickingRight;
+
+            case JET_SUIT_TOGGLE_POWER -> PLAYER_KEYS.get(player.getUUID()).clickingJetSuitTogglePower;
+
+            case JET_SUIT_TOGGLE_HOVER -> PLAYER_KEYS.get(player.getUUID()).clickingJetSuitToggleHover;
         };
     }
 
@@ -83,6 +97,10 @@ public class ModKeyBindings {
             case LEFT -> ClientModKeybindings.clickingLeft;
 
             case RIGHT -> ClientModKeybindings.clickingRight;
+
+            case JET_SUIT_TOGGLE_POWER -> ClientModKeybindings.clickingJetSuitTogglePower;
+
+            case JET_SUIT_TOGGLE_HOVER -> ClientModKeybindings.clickingJetSuitToggleHover;
         };
     }
 
@@ -101,6 +119,10 @@ public class ModKeyBindings {
             case LEFT -> PLAYER_KEYS.get(uuid).clickingLeft = keyDown;
 
             case RIGHT -> PLAYER_KEYS.get(uuid).clickingRight = keyDown;
+
+            case JET_SUIT_TOGGLE_POWER -> PLAYER_KEYS.get(uuid).clickingJetSuitTogglePower = keyDown;
+
+            case JET_SUIT_TOGGLE_HOVER -> PLAYER_KEYS.get(uuid).clickingJetSuitToggleHover = keyDown;
         }
     }
 
