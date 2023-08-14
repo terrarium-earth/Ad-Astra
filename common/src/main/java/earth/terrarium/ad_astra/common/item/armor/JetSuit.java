@@ -35,7 +35,9 @@ import java.util.List;
 
 public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
+    private boolean isUpFlying;
     private boolean isFallFlying;
+    private boolean isHoverFlying;
     private boolean emitParticles;
 
     public JetSuit(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
@@ -115,77 +117,112 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         }
     }
 
-    public void fly(Player player, ItemStack stack) {
+    public void updateFlying(Player player, ItemStack stack) {
+        boolean wasFallFlying = isFallFlying;
         emitParticles = false;
-        if (!SpaceSuitConfig.enableJetSuitFlight) {
-            return;
-        }
+        isUpFlying = false;
+        isFallFlying = false;
+        isHoverFlying = false;
 
         // Don't fly the Jet Suit in creative
         ItemStackHolder stackHolder = new ItemStackHolder(stack);
-        if (player.getAbilities().flying) {
-            return;
-        }
 
         // Don't fly if the Jet Suit has no energy
         if (EnergyHooks.getItemEnergyManager(stack).getStoredEnergy() <= 0) {
             return;
         }
 
-        if (ModKeyBindings.sprintKeyDown(player)) {
-            this.fallFly(player, stackHolder);
-        } else {
-            this.flyUpward(player, stackHolder);
+        double upFlySpeed = SpaceSuitConfig.jetSuitUpwardsSpeed;
+        double fallFlySpeed = SpaceSuitConfig.jetSuitSpeed;
+        boolean hoverEnabled = player.tickCount > 1 && this.isHoverEnabled(stack);
+
+        if (player.isShiftKeyDown() && hoverEnabled && !player.isOnGround()) {
+            if (ModKeyBindings.jumpKeyDown(player)) {
+                // Shift+Space, Keep current y-pos
+                this.hoverFly(player, 0.0D);
+            } else {
+                // Shift, Hover down
+                this.hoverFly(player, -upFlySpeed);
+            }
+        } else if (ModKeyBindings.jumpKeyDown(player)) {
+            if (ModKeyBindings.sprintKeyDown(player)) {
+                // Ctrl+Space, Fall fly
+                this.fallFly(player, fallFlySpeed);
+            } else {
+                // Space, Fly upward
+                this.flyUpward(player, upFlySpeed);
+            }
+        } else if (hoverEnabled) {
+            if (ModKeyBindings.sprintKeyDown(player)) {
+                if (!player.isOnGround()) {
+                    // Ctrl, Fall fly on hovering
+                    this.fallFly(player, fallFlySpeed);
+                } else if (wasFallFlying) {
+                    // Ctrl, Land on ground
+                    // If this is not, player will swim in ground
+                    this.hoverFly(player, -upFlySpeed);
+                }
+            } else if (!player.isOnGround()) {
+                // No key input, Keep current y-pos
+                this.hoverFly(player, 0.0D);
+            }
         }
 
-        if (isFallFlying) {
-            if (!player.isFallFlying()) {
-                player.startFallFlying();
-            }
-        } else {
-            if (player.isFallFlying()) {
-                player.stopFallFlying();
-            }
-        }
-        emitParticles = true;
-        if (stackHolder.isDirty()) player.setItemSlot(EquipmentSlot.CHEST, stackHolder.getStack());
-        ModUtils.sendUpdatePacket((ServerPlayer) player);
-    }
-
-    public void flyUpward(Player player, ItemStackHolder stack) {
-        if (EnergyHooks.isEnergyItem(stack.getStack())) {
-            player.fallDistance /= 2;
-
-            var energy = EnergyHooks.getItemEnergyManager(stack.getStack());
+        if (isUpFlying || isFallFlying || isHoverFlying) {
+            var energy = EnergyHooks.getItemEnergyManager(stackHolder.getStack());
             long tickEnergy = SpaceSuitConfig.jetSuitEnergyPerTick;
             if (!player.isCreative()) {
-                energy.extract(stack, tickEnergy, false);
+                energy.extract(stackHolder, tickEnergy, false);
             }
-            isFallFlying = false;
+            emitParticles = true;
+        }
 
-            double speed = SpaceSuitConfig.jetSuitUpwardsSpeed;
-            player.setDeltaMovement(player.getDeltaMovement().add(0.0, speed, 0.0));
-            if (player.getDeltaMovement().y() > speed) {
-                player.setDeltaMovement(player.getDeltaMovement().x(), speed, player.getDeltaMovement().z());
+        if (player instanceof ServerPlayer serverPlayer) {
+            if (stackHolder.isDirty())
+                player.setItemSlot(EquipmentSlot.CHEST, stackHolder.getStack());
+
+            if (isFallFlying) {
+                if (!player.isFallFlying()) {
+                    player.startFallFlying();
+                }
+
+            } else {
+                if (player.isFallFlying()) {
+                    player.stopFallFlying();
+                }
+            }
+            if (isUpFlying || isFallFlying) {
+                ModUtils.sendUpdatePacket(serverPlayer);
             }
         }
     }
 
-    public void fallFly(Player player, ItemStackHolder stack) {
+    public void flyUpward(Player player, double upSpeed) {
+        player.fallDistance /= 2;
+        this.isUpFlying = true;
+
+        player.setDeltaMovement(player.getDeltaMovement().add(0.0, upSpeed, 0.0));
+        if (player.getDeltaMovement().y() > upSpeed) {
+            player.setDeltaMovement(player.getDeltaMovement().x(), upSpeed, player.getDeltaMovement().z());
+        }
+    }
+
+    public void fallFly(Player player, double flySpeed) {
         if (player.isOnGround()) {
             player.fallDistance /= 2;
         }
-        var energy = EnergyHooks.getItemEnergyManager(stack.getStack());
-        long tickEnergy = SpaceSuitConfig.jetSuitEnergyPerTick;
-        if (!player.isCreative()) {
-            energy.extract(stack, tickEnergy, false);
-        }
-        isFallFlying = true;
-
-        double speed = SpaceSuitConfig.jetSuitSpeed - (ModUtils.getEntityGravity(player) * 0.25);
+        this.isFallFlying = true;
+        double speed = flySpeed - (ModUtils.getEntityGravity(player) * 0.25);
         Vec3 rotationVector = player.getLookAngle().scale(speed);
         Vec3 velocity = player.getDeltaMovement();
         player.setDeltaMovement(velocity.add(rotationVector.x() * 0.1 + (rotationVector.x() * 1.5 - velocity.x()) * 0.5, rotationVector.y() * 0.1 + (rotationVector.y() * 1.5 - velocity.y()) * 0.5, rotationVector.z() * 0.1 + (rotationVector.z() * 1.5 - velocity.z()) * 0.5));
+    }
+
+    public void hoverFly(Player player, double hoverSpeed) {
+        player.fallDistance = 0.0F;
+        this.isHoverFlying = true;
+        Vec3 velocity = player.getDeltaMovement();
+        player.setDeltaMovement(velocity.multiply(1.0D, 0.0D, 1.0D).add(0.0D, hoverSpeed, 0.0D));
     }
 
     @Override

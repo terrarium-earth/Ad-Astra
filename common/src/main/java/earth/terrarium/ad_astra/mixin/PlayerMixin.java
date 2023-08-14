@@ -68,17 +68,13 @@ public abstract class PlayerMixin {
                     this.ad_astra$clickingJetSuitToggleHover = clickingJetSuitToggleHover;
                 }
 
-                if (!player.level.isClientSide && !player.isPassenger()) {
-                    if (ModKeyBindings.jumpKeyDown(player)) {
-                        if (JetSuit.hasFullSet(player)) {
-                            jetSuit.fly(player, chest);
-                        }
-                    } else {
-                        jetSuit.setFallFlying(false);
-                        jetSuit.setEmitParticles(false);
-                        if (!player.level.isClientSide) {
-                            chest.getOrCreateTag().putBoolean("SpawnParticles", false);
-                        }
+                if (!player.isPassenger() && !player.getAbilities().flying && JetSuit.hasFullSet(player) && jetSuit.isPowerEnabled(chest)) {
+                    jetSuit.updateFlying(player, chest);
+                } else {
+                    jetSuit.setFallFlying(false);
+                    jetSuit.setEmitParticles(false);
+                    if (!player.level.isClientSide) {
+                        chest.getOrCreateTag().putBoolean("SpawnParticles", false);
                     }
                 }
             }
