@@ -6,7 +6,6 @@ import earth.terrarium.ad_astra.common.entity.vehicle.Rocket;
 import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
 import earth.terrarium.ad_astra.common.item.armor.JetSuit;
 import earth.terrarium.ad_astra.common.item.armor.NetheriteSpaceSuit;
-import earth.terrarium.ad_astra.common.item.armor.JetSuit.FlyingType;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -67,15 +66,8 @@ public abstract class PlayerMixin {
 
                     this.ad_astra$clickingJetSuitTogglePower = clickingJetSuitTogglePower;
                     this.ad_astra$clickingJetSuitToggleHover = clickingJetSuitToggleHover;
-                }
 
-                if (!player.isPassenger() && !player.getAbilities().flying && JetSuit.hasFullSet(player) && jetSuit.isPowerEnabled(chest)) {
                     jetSuit.updateFlying(player, chest);
-                } else {
-                    jetSuit.setFlyingType(chest, FlyingType.NONE);
-                    if (!player.level.isClientSide) {
-                        chest.getOrCreateTag().putBoolean("SpawnParticles", false);
-                    }
                 }
             }
         }

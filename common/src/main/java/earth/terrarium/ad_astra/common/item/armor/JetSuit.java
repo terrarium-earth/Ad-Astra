@@ -139,10 +139,15 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
     }
 
     public void updateFlying(Player player, ItemStack stack) {
-        @NotNull
         FlyingType prevFlyingType = this.getFlyingType(stack);
         this.setFlyingType(stack, FlyingType.NONE);
 
+        if (!player.isPassenger() && !player.getAbilities().flying && JetSuit.hasFullSet(player) && this.isPowerEnabled(stack)) {
+            this.updateFlying(player, stack, prevFlyingType);
+        }
+    }
+
+    private void updateFlying(Player player, ItemStack stack, FlyingType prevFlyingType) {
         // Don't fly the Jet Suit in creative
         ItemStackHolder stackHolder = new ItemStackHolder(stack);
 
