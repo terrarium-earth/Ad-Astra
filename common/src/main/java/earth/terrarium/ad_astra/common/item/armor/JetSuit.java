@@ -79,7 +79,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         double xRotator1 = Math.cos((yaw - 90) * Math.PI / 180.0) * pitch;
         double zRotator1 = Math.sin((yaw - 90) * Math.PI / 180.0) * pitch;
 
-        level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, true, entity.getX() + xRotator + xRotator1, entity.getY() + yOffset, entity.getZ() + zRotator1 + zRotator, 0.0, 0.0, 0.0);
+        level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, true, entity.getX() + xRotator + xRotator1, entity.getY() + yOffset, entity.getZ() + zRotator1 + zRotator, 0.0, -0.1, 0.0);
     }
 
     public static boolean hasFullSet(LivingEntity entity) {
