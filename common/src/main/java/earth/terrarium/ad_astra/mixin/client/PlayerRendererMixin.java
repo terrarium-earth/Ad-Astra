@@ -87,7 +87,7 @@ public class PlayerRendererMixin {
                 float b = (float) (decimal & 0xFF) / 255.0f;
 
                 if (JetSuit.hasFullSet(player)) {
-                    ((JetSuit) stack.getItem()).spawnParticles(player.level, player, model);
+                    ((JetSuit) stack.getItem()).spawnParticles(player.level, player, stack, model);
                 }
 
                 VertexConsumer vertex = SpaceSuitModel.getVertex(RenderType.entityTranslucentEmissive(model.getTextureLocation()), stack.isEnchanted());

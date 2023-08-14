@@ -1,5 +1,9 @@
 package earth.terrarium.ad_astra.common.item.armor;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+
 import dev.architectury.injectables.annotations.PlatformOnly;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screen.PlayerOverlayScreen;
@@ -29,40 +33,57 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
-    private boolean isUpFlying;
-    private boolean isFallFlying;
-    private boolean isHoverFlying;
-    private boolean emitParticles;
+    public static enum FlyingType {
+        NONE, UPWARD, FALL, HOVER
+    }
 
     public JetSuit(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
         super(material, slot, properties);
     }
 
+    public CompoundTag getCapabilityTag(ItemStack stack) {
+        CompoundTag tag = stack.getTagElement("JetSuit");
+        return tag != null ? tag : new CompoundTag();
+    }
+
+    public CompoundTag getOrCreateCapabilityTag(ItemStack stack) {
+        return stack.getOrCreateTagElement("JetSuit");
+    }
+
     public boolean isPowerEnabled(ItemStack stack) {
-        CompoundTag tag = stack.getTag();
+        CompoundTag tag = this.getCapabilityTag(stack);
         return !tag.contains("PowerEnabled") || tag.getBoolean("PowerEnabled");
     }
 
     public void setPowerEnabled(ItemStack stack, boolean powerEnabled) {
-        stack.getOrCreateTag().putBoolean("PowerEnabled", powerEnabled);
+        this.getOrCreateCapabilityTag(stack).putBoolean("PowerEnabled", powerEnabled);
     }
 
     public boolean isHoverEnabled(ItemStack stack) {
-        return stack.getTag().getBoolean("HoverEnabled");
+        return this.getCapabilityTag(stack).getBoolean("HoverEnabled");
     }
 
     public void setHoverEnabled(ItemStack stack, boolean hoverEnabled) {
-        stack.getOrCreateTag().putBoolean("HoverEnabled", hoverEnabled);
+        this.getOrCreateCapabilityTag(stack).putBoolean("HoverEnabled", hoverEnabled);
     }
 
-    public void spawnParticles(Level level, LivingEntity entity, HumanoidModel<LivingEntity> model) {
-        if (!SpaceSuitConfig.spawnJetSuitParticles || !emitParticles) return;
+    @NotNull
+    public FlyingType getFlyingType(ItemStack stack) {
+        FlyingType[] values = FlyingType.values();
+        int ordinal = this.getCapabilityTag(stack).getInt("FlyingType");
+        return (0 <= ordinal && ordinal < values.length) ? values[ordinal] : FlyingType.NONE;
+    }
+
+    public void setFlyingType(ItemStack stack, @NotNull FlyingType flyingType) {
+        this.getOrCreateCapabilityTag(stack).putInt("FlyingType", flyingType.ordinal());
+    }
+
+    public void spawnParticles(Level level, LivingEntity entity, ItemStack stack, HumanoidModel<LivingEntity> model) {
+        if (!SpaceSuitConfig.spawnJetSuitParticles || this.getFlyingType(stack) == FlyingType.NONE)
+            return;
 
         spawnParticles(level, entity, model.rightArm.xRot + 0.05, entity.isFallFlying() ? 0.0 : 0.8, -0.45);
         spawnParticles(level, entity, model.leftArm.xRot + 0.05, entity.isFallFlying() ? 0.0 : 0.8, 0.45);
@@ -118,11 +139,9 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
     }
 
     public void updateFlying(Player player, ItemStack stack) {
-        boolean wasFallFlying = isFallFlying;
-        emitParticles = false;
-        isUpFlying = false;
-        isFallFlying = false;
-        isHoverFlying = false;
+        @NotNull
+        FlyingType prevFlyingType = this.getFlyingType(stack);
+        this.setFlyingType(stack, FlyingType.NONE);
 
         // Don't fly the Jet Suit in creative
         ItemStackHolder stackHolder = new ItemStackHolder(stack);
@@ -139,49 +158,50 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         if (player.isShiftKeyDown() && hoverEnabled && !player.isOnGround()) {
             if (ModKeyBindings.jumpKeyDown(player)) {
                 // Shift+Space, Keep current y-pos
-                this.hoverFly(player, 0.0D);
+                this.hoverFly(player, stack, 0.0D);
             } else {
                 // Shift, Hover down
-                this.hoverFly(player, -upFlySpeed);
+                this.hoverFly(player, stack, -upFlySpeed);
             }
         } else if (ModKeyBindings.jumpKeyDown(player)) {
             if (ModKeyBindings.sprintKeyDown(player)) {
                 // Ctrl+Space, Fall fly
-                this.fallFly(player, fallFlySpeed);
+                this.fallFly(player, stack, fallFlySpeed);
             } else {
                 // Space, Fly upward
-                this.flyUpward(player, upFlySpeed);
+                this.flyUpward(player, stack, upFlySpeed);
             }
         } else if (hoverEnabled) {
             if (ModKeyBindings.sprintKeyDown(player)) {
                 if (!player.isOnGround()) {
                     // Ctrl, Fall fly on hovering
-                    this.fallFly(player, fallFlySpeed);
-                } else if (wasFallFlying) {
+                    this.fallFly(player, stack, fallFlySpeed);
+                } else if (prevFlyingType == FlyingType.FALL) {
                     // Ctrl, Land on ground
                     // If this is not, player will swim in ground
-                    this.hoverFly(player, -upFlySpeed);
+                    this.hoverFly(player, stack, -upFlySpeed);
                 }
             } else if (!player.isOnGround()) {
                 // No key input, Keep current y-pos
-                this.hoverFly(player, 0.0D);
+                this.hoverFly(player, stack, 0.0D);
             }
         }
 
-        if (isUpFlying || isFallFlying || isHoverFlying) {
+        FlyingType newFlyingType = this.getFlyingType(stack);
+
+        if (newFlyingType != FlyingType.NONE) {
             var energy = EnergyHooks.getItemEnergyManager(stackHolder.getStack());
             long tickEnergy = SpaceSuitConfig.jetSuitEnergyPerTick;
             if (!player.isCreative()) {
                 energy.extract(stackHolder, tickEnergy, false);
             }
-            emitParticles = true;
         }
 
         if (player instanceof ServerPlayer serverPlayer) {
             if (stackHolder.isDirty())
                 player.setItemSlot(EquipmentSlot.CHEST, stackHolder.getStack());
 
-            if (isFallFlying) {
+            if (newFlyingType == FlyingType.FALL) {
                 if (!player.isFallFlying()) {
                     player.startFallFlying();
                 }
@@ -191,15 +211,15 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
                     player.stopFallFlying();
                 }
             }
-            if (isUpFlying || isFallFlying) {
+            if (newFlyingType == FlyingType.UPWARD || newFlyingType == FlyingType.FALL) {
                 ModUtils.sendUpdatePacket(serverPlayer);
             }
         }
     }
 
-    public void flyUpward(Player player, double upSpeed) {
+    public void flyUpward(Player player, ItemStack stack, double upSpeed) {
         player.fallDistance /= 2;
-        this.isUpFlying = true;
+        this.setFlyingType(stack, FlyingType.UPWARD);
 
         player.setDeltaMovement(player.getDeltaMovement().add(0.0, upSpeed, 0.0));
         if (player.getDeltaMovement().y() > upSpeed) {
@@ -207,20 +227,20 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         }
     }
 
-    public void fallFly(Player player, double flySpeed) {
+    public void fallFly(Player player, ItemStack stack, double flySpeed) {
         if (player.isOnGround()) {
             player.fallDistance /= 2;
         }
-        this.isFallFlying = true;
+        this.setFlyingType(stack, FlyingType.FALL);
         double speed = flySpeed - (ModUtils.getEntityGravity(player) * 0.25);
         Vec3 rotationVector = player.getLookAngle().scale(speed);
         Vec3 velocity = player.getDeltaMovement();
         player.setDeltaMovement(velocity.add(rotationVector.x() * 0.1 + (rotationVector.x() * 1.5 - velocity.x()) * 0.5, rotationVector.y() * 0.1 + (rotationVector.y() * 1.5 - velocity.y()) * 0.5, rotationVector.z() * 0.1 + (rotationVector.z() * 1.5 - velocity.z()) * 0.5));
     }
 
-    public void hoverFly(Player player, double hoverSpeed) {
+    public void hoverFly(Player player, ItemStack stack, double hoverSpeed) {
         player.fallDistance = 0.0F;
-        this.isHoverFlying = true;
+        this.setFlyingType(stack, FlyingType.HOVER);
         Vec3 velocity = player.getDeltaMovement();
         player.setDeltaMovement(velocity.multiply(1.0D, 0.0D, 1.0D).add(0.0D, hoverSpeed, 0.0D));
     }
@@ -253,14 +273,6 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         return new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armour/jet_suit/jet_suit_5.png").toString();
     }
 
-    public void setFallFlying(boolean fallFlying) {
-        isFallFlying = fallFlying;
-    }
-
-    public boolean setEmitParticles(boolean emitParticles) {
-        return this.emitParticles = emitParticles;
-    }
-
     @PlatformOnly("forge")
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
         if (!entity.level.isClientSide) {
@@ -280,6 +292,6 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
     @PlatformOnly("forge")
     public boolean canElytraFly(ItemStack stack, LivingEntity entity) {
-        return this.isFallFlying;
+        return this.getFlyingType(stack) == FlyingType.FALL;
     }
 }

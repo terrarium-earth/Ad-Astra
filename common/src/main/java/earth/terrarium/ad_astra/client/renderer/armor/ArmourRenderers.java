@@ -34,7 +34,7 @@ public class ArmourRenderers {
 
             if (slot.equals(EquipmentSlot.CHEST)) {
                 if (JetSuit.hasFullSet(entity)) {
-                    ((JetSuit) stack.getItem()).spawnParticles(entity.level, entity, original);
+                    ((JetSuit) stack.getItem()).spawnParticles(entity.level, entity, entity.getItemBySlot(slot), original);
                 }
             }
 
