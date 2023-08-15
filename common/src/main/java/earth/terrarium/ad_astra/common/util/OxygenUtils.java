@@ -136,8 +136,10 @@ public class OxygenUtils {
                 }
 
                 if (block instanceof TorchBlock && !block.equals(Blocks.SOUL_TORCH) && !block.equals(Blocks.SOUL_WALL_TORCH)) {
-                    level.setBlockAndUpdate(pos, ModBlocks.EXTINGUISHED_TORCH.get().defaultBlockState());
-                    continue;
+                    if (!block.equals(Blocks.REDSTONE_TORCH) && !block.equals(Blocks.REDSTONE_WALL_TORCH)) {
+                        level.setBlockAndUpdate(pos, ModBlocks.EXTINGUISHED_TORCH.get().defaultBlockState());
+                        continue;
+                    }
                 }
 
                 if (block instanceof CandleCakeBlock) {
