@@ -13,6 +13,7 @@
     "IceBlockMixin",
     "LiquidBlockMixin",
     "LivingEntityMixin",
+    "MobMixin",
     "PaintingInvoker",
     "PiglinSpecificSensorMixin",
     "PlayerMixin",
