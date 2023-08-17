@@ -5,8 +5,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import earth.terrarium.ad_astra.common.entity.system.EntityOxygenStatus;
 import earth.terrarium.ad_astra.common.entity.system.EntityOxygenSystem;
-import earth.terrarium.ad_astra.common.entity.system.EntityOxygenSystem.EntityOxygenStatus;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
