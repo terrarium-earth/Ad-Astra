@@ -38,8 +38,24 @@ subprojects {
 
     repositories {
         maven(url = "https://maven.architectury.dev/")
-        maven(url = "https://maven.minecraftforge.net/")
         maven(url = "https://maven.resourcefulbees.com/repository/maven-public/")
+        maven {
+            url = uri("https://www.cursemaven.com")
+            content {
+                includeGroup("curse.maven")
+            }
+        }
+        exclusiveContent {
+            forRepository {
+                maven {
+                    name = "Modrinth"
+                    url = uri("https://api.modrinth.com/maven")
+                }
+            }
+            filter {
+                includeGroup("maven.modrinth")
+            }
+        }
     }
 
     dependencies {
@@ -61,11 +77,12 @@ subprojects {
             parchment(create(group = "org.parchmentmc.data", name = "parchment-$minecraftVersion", version = parchmentVersion))
         })
 
+        "include"(implementation(group = "javazoom", name = "jlayer", version = "1.0.1"))
+
         compileOnly(group = "com.teamresourceful", name = "yabn", version = "1.0.3")
         "modApi"(group = "com.teamresourceful.resourcefullib", name = "resourcefullib-$modLoader-$minecraftVersion", version = resourcefulLibVersion)
-        "modApi"(group = "com.teamresourceful.resourcefulconfig", name = "resourcefulconfig-$modLoader-1.20", version = resourcefulConfigVersion)
-        "modApi"(group = "earth.terrarium", name = "botarium-$modLoader-1.20", version = botariumVersion)
-        "include"(implementation(group = "javazoom", name = "jlayer", version = "1.0.1"))
+        "modApi"(group = "com.teamresourceful.resourcefulconfig", name = "resourcefulconfig-$modLoader-$minecraftVersion", version = resourcefulConfigVersion)
+        "modApi"(group = "earth.terrarium", name = "botarium-$modLoader-$minecraftVersion", version = botariumVersion)
         if (isCommon) {
             "modApi"(group = "mezz.jei", name = "jei-$minecraftVersion-$modLoader-api", version = jeiVersion)
             "modApi"(group = "me.shedaniel", name = "RoughlyEnoughItems-api", version = reiVersion) {

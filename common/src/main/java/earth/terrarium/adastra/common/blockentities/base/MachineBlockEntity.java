@@ -11,12 +11,17 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class MachineBlockEntity extends BlockEntity {
     public MachineBlockEntity(BlockPos pos, BlockState state) {
-        super(((BasicEntityBlock) state.getBlock()).entity(state), pos, state);
+        this(((BasicEntityBlock) state.getBlock()).entity(state), pos, state);
+    }
+
+    public MachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
     public void tick(Level level, long time, BlockState state, BlockPos pos) {

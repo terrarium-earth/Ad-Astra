@@ -34,9 +34,15 @@ public class MachineBlock extends BasicEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
+    private final boolean generator;
 
     public MachineBlock(Properties properties) {
+        this(properties, false);
+    }
+
+    public MachineBlock(Properties properties, boolean generator) {
         super(properties);
+        this.generator = generator;
         registerDefaultState(stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
             .setValue(POWERED, false)
@@ -57,13 +63,12 @@ public class MachineBlock extends BasicEntityBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return (entityLevel, blockPos, blockState, blockEntity) -> {
             if (blockEntity instanceof MachineBlockEntity machine) {
-                BlockPos pos = blockEntity.getBlockPos();
-                long time = level.getGameTime() - pos.asLong();
-                machine.tick(level, time, state, pos);
+                long time = level.getGameTime() - blockPos.asLong();
+                machine.tick(level, time, state, blockPos);
                 if (level.isClientSide()) {
-                    machine.clientTick((ClientLevel) level, time, state, pos);
+                    machine.clientTick((ClientLevel) level, time, state, blockPos);
                 } else {
-                    machine.serverTick((ServerLevel) level, time, state, pos);
+                    machine.serverTick((ServerLevel) level, time, state, blockPos);
                 }
             }
         };
@@ -104,5 +109,9 @@ public class MachineBlock extends BasicEntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
+    }
+
+    public boolean isGenerator() {
+        return this.generator;
     }
 }

@@ -27,7 +27,7 @@ public class RadioScreen extends BaseCursorScreen {
     private static final Debouncer VOLUME_DEBOUNCER = new Debouncer();
     private static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/radio/ui.png");
     private static final ResourceLocation CLOCK = new ResourceLocation(AdAstra.MOD_ID, "textures/radio/clock.png");
-    private static final int WIDHT = 253;
+    private static final int WIDTH = 253;
     private static final int HEIGHT = 138;
 
     private final List<StationInfo> stations = new ArrayList<>();
@@ -42,7 +42,7 @@ public class RadioScreen extends BaseCursorScreen {
 
     @Override
     protected void init() {
-        int left = (this.width - WIDHT) / 2;
+        int left = (this.width - WIDTH) / 2;
         int top = (this.height - HEIGHT) / 2;
         addRenderableWidget(new ImageButton(left + 116, top + 83, 21, 21, 253, 0, 21, TEXTURE, 512, 256, button -> {
             if (RadioConfig.volume >= 100) return;
@@ -64,10 +64,10 @@ public class RadioScreen extends BaseCursorScreen {
     @Override
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         super.renderBackground(graphics);
-        int left = (this.width - WIDHT) / 2;
+        int left = (this.width - WIDTH) / 2;
         int top = (this.height - HEIGHT) / 2;
 
-        graphics.blit(TEXTURE, left, top, 0, 0, WIDHT, HEIGHT, 512, 256);
+        graphics.blit(TEXTURE, left, top, 0, 0, WIDTH, HEIGHT, 512, 256);
         renderClock(graphics, left + 29, top + 92);
         graphics.drawString(font, RadioConfig.volume + "%", left + 102 - font.width(RadioConfig.volume + "%"), top + 114, 0x189418);
         graphics.drawString(font, "Day " + getDayTime() / 24000L, left + 16, top + 114, 0x189418);

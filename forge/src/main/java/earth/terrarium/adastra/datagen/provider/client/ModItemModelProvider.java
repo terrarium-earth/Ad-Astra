@@ -19,6 +19,9 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        basicItem(ModItems.ETRIUM_INGOT.get());
+        basicItem(ModItems.WRENCH.get());
+
         basicItem(ModItems.AEROLYTE_SPACE_HELMET.get());
         basicItem(ModItems.AEROLYTE_SPACE_SUIT.get());
         basicItem(ModItems.AEROLYTE_SPACE_PANTS.get());

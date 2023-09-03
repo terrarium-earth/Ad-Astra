@@ -1,8 +1,10 @@
-// 1.20.1	2023-07-19T03:06:20.35594	Item Models: adastra
+// 1.20.1	2023-08-21T14:21:13.629965	Item Models: adastra
 76339c09d579b1c8b10030755bb3627a7dc442d6 assets/adastra/models/item/aerolyte_space_boots.json
 b56c0918338cf499fb9b167d584ed602e9ea5451 assets/adastra/models/item/aerolyte_space_helmet.json
 9569115d3686aac753e0b72129c947274b4afc20 assets/adastra/models/item/aerolyte_space_pants.json
 410efeffb0096789fe3932366871c55f8e8d4a61 assets/adastra/models/item/aerolyte_space_suit.json
+38db1682f9bee60dd8b94d10ed60e1a73739c174 assets/adastra/models/item/etrium_ingot.json
 0e6c3b7a915ba73b8befe632d06250c55352ff53 assets/adastra/models/item/hydrogen_bucket.json
 ff173969954996aa06c76c68d8dc8f47ceacc143 assets/adastra/models/item/oil_bucket.json
 62c4359c20fa798a4ea895f199a41a7fe0934436 assets/adastra/models/item/oxygen_bucket.json
+2a81949d71fc956aacbfcc24b0967c1ad5fd6f0e assets/adastra/models/item/wrench.json

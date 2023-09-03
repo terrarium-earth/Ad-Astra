@@ -29,4 +29,6 @@ dependencies {
 
     modLocalRuntime(group = "RebornCore", name = "RebornCore-1.20", version = "5.8.3")
     modLocalRuntime(group = "TechReborn", name = "TechReborn-1.20", version = "5.8.3")
+
+    modLocalRuntime(group = "maven.modrinth", name = "jade", version = "11.5.1")
 }

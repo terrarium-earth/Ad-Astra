@@ -14,8 +14,8 @@ import net.minecraft.world.level.block.state.BlockState;
 public abstract class BasicEntityBlock extends BaseEntityBlock {
     private static final CacheableFunction<Block, BlockEntityType<?>> BLOCK_TO_ENTITY = new CacheableFunction<>(block ->
         ModBlockEntityTypes.BLOCK_ENTITY_TYPES
-            .getEntries()
             .stream()
+            .filter(type -> !(type.equals(ModBlockEntityTypes.DOUBLE_MACHINE_TOP)))
             .map(RegistryEntry::get)
             .filter(type -> type.isValid(block.defaultBlockState()))
             .findFirst()

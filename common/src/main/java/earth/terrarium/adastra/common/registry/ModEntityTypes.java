@@ -28,7 +28,7 @@ public class ModEntityTypes {
 
     public static final RegistryEntry<EntityType<SpiderBot>> SPIDER_BOT = ENTITY_TYPES.register("spider_bot", () ->
         EntityType.Builder.of(SpiderBot::new, MobCategory.MISC)
-            .sized(1.5f, 1.5f)
+            .sized(1.3f, 1.9f)
             .build("spider_bot"));
 
     public static final RegistryEntry<EntityType<CompanionDrone>> COMPANION_DRONE = ENTITY_TYPES.register("companion_drone", () ->

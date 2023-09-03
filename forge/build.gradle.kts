@@ -37,4 +37,9 @@ dependencies {
 
     forge(group = "net.minecraftforge", name = "forge", version = "$minecraftVersion-$forgeVersion")
     modLocalRuntime(group = "me.shedaniel", name = "RoughlyEnoughItems-forge", version = reiVersion)
+
+    modLocalRuntime(group = "maven.modrinth", name = "jade", version = "2iRQrBk4")
+
+    // comment out if downloaded from source
+    modLocalRuntime(files("run/lol/secretmod.jar"))
 }

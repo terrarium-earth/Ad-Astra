@@ -11,6 +11,7 @@ import earth.terrarium.adastra.client.renderers.blocks.machines.TinkerersWorkben
 import earth.terrarium.adastra.client.renderers.entities.base.CustomGeoEntityRenderer;
 import earth.terrarium.adastra.client.renderers.items.armor.AerolyteSpaceSuitRenderer;
 import earth.terrarium.adastra.client.renderers.items.base.CustomGeoItemRenderer;
+import earth.terrarium.adastra.client.screens.BatteryScreen;
 import earth.terrarium.adastra.client.ti69.apps.SensorApp;
 import earth.terrarium.adastra.client.ti69.apps.WeatherApp;
 import earth.terrarium.adastra.client.utils.ClientData;
@@ -18,15 +19,13 @@ import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.items.armor.AerolyteSpaceSuitItem;
 import earth.terrarium.adastra.common.networking.NetworkHandler;
 import earth.terrarium.adastra.common.networking.messages.ServerboundSyncKeybindPacket;
-import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
-import earth.terrarium.adastra.common.registry.ModBlocks;
-import earth.terrarium.adastra.common.registry.ModEntityTypes;
-import earth.terrarium.adastra.common.registry.ModItems;
+import earth.terrarium.adastra.common.registry.*;
 import earth.terrarium.adastra.common.utils.KeybindManager;
 import earth.terrarium.botarium.client.ClientHooks;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
@@ -53,12 +52,17 @@ public class AdAstraClient {
 
     public static void init() {
         AdAstra.CONFIGURATOR.registerConfig(ClientConfig.class);
+        registerScreens();
         registerBlockRenderTypes();
         registerBlockEntityRenderers();
         registerEntityRenderers();
         registerItemRenderers();
         registerArmorRenderers();
         registerTi69Apps();
+    }
+
+    private static void registerScreens() {
+        MenuScreens.register(ModMenus.BATTERY.get(), BatteryScreen::new);
     }
 
     private static void registerBlockRenderTypes() {
@@ -84,7 +88,7 @@ public class AdAstraClient {
 
     public static void registerEntityRenderers() {
         ClientHooks.registerEntityRenderer(ModEntityTypes.AIR_VORTEX, NoopRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.SPIDER_BOT, context -> new CustomGeoEntityRenderer<>(context, ModEntityTypes.SPIDER_BOT, 0.45f));
+        ClientHooks.registerEntityRenderer(ModEntityTypes.SPIDER_BOT, context -> new CustomGeoEntityRenderer<>(context, ModEntityTypes.SPIDER_BOT, -0.15f));
         ClientHooks.registerEntityRenderer(ModEntityTypes.COMPANION_DRONE, context -> new CustomGeoEntityRenderer<>(context, ModEntityTypes.COMPANION_DRONE, -0.35f));
     }
 
