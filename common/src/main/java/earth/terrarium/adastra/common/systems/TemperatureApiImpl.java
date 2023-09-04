@@ -91,7 +91,17 @@ public class TemperatureApiImpl implements TemperatureApi {
             if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_EXTREME_COLD)) return;
             entity.hurt(entity.damageSources().freeze(), 3);
             entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze() + 20, entity.getTicksFrozen() + 5 * 10));
-            ModUtils.sendParticles(level, ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), 1, Mth.randomBetween(level.random, -1.0f, 1.0f) * 0.083333336f, 0.05, (double) Mth.randomBetween(level.random, -1.0f, 1.0f) * 0.083333336, 0);
+            ModUtils.sendParticles(level,
+                ParticleTypes.SNOWFLAKE,
+                entity.getX(),
+                entity.getY() + 1,
+                entity.getZ(), 1,
+                Mth.randomBetween(level.random, -1.0f, 1.0f) * 0.085f,
+                0.05,
+                Mth.randomBetween(level.random,
+                    -1.0f,
+                    1.0f) * 0.085,
+                0);
         }
     }
 }

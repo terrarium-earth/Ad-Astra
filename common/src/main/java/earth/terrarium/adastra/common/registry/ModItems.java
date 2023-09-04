@@ -8,6 +8,7 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.*;
 import earth.terrarium.adastra.common.items.EtrionicCapacitorItem;
 import earth.terrarium.adastra.common.items.Ti69Item;
+import earth.terrarium.adastra.common.items.ZipGunItem;
 import earth.terrarium.adastra.common.items.armor.AerolyteSpaceSuitItem;
 import earth.terrarium.adastra.common.items.armor.materials.AerolyteSpaceSuitMaterial;
 import earth.terrarium.adastra.common.items.base.CustomGeoBlockItem;
@@ -29,6 +30,7 @@ public final class ModItems {
     public static final RegistryEntry<Item> TI_69 = ITEMS.register("ti_69", () -> new Ti69Item(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> ETRIONIC_CAPACITOR = ITEMS.register("etrionic_capacitor", () -> new EtrionicCapacitorItem(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> WRENCH = ITEMS.register("wrench", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> ZIP_GUN = ITEMS.register("zip_gun", () -> new ZipGunItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryEntry<Item> ETRIUM_INGOT = ITEMS.register("etrium_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> ETRIUM_NUGGET = ITEMS.register("etrium_nugget", () -> new Item(new Item.Properties()));

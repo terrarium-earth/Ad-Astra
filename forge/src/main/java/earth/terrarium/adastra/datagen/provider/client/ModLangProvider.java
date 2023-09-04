@@ -81,6 +81,8 @@ public class ModLangProvider extends LanguageProvider {
         add("tooltip.adastra.max_energy_in", "Max In: %s ⚡");
         add("tooltip.adastra.max_energy_out", "Max Out: %s ⚡");
 
+        add("tooltip.adastra.fluid", "%s 🪣 / %s 🪣 %s");
+
         add(ConstantComponents.SIDE_CONFIG.getString(), "Side Config");
         add(ConstantComponents.REDSTONE_CONTROL.getString(), "Redstone Control");
 

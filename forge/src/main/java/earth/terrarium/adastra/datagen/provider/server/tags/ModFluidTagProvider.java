@@ -26,5 +26,7 @@ public class ModFluidTagProvider extends TagsProvider<Fluid> {
         tag(ModFluidTags.OXYGEN).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(ModFluids.OXYGEN.get())));
         tag(ModFluidTags.HYDROGEN).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(ModFluids.HYDROGEN.get())));
         tag(ModFluidTags.OIL).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(ModFluids.OIL.get())));
+
+        tag(ModFluidTags.ZIP_GUN_PROPELLANTS).addTag(ModFluidTags.OXYGEN).addTag(ModFluidTags.HYDROGEN);
     }
 }
