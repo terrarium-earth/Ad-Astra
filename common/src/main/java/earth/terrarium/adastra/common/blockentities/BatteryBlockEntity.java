@@ -19,6 +19,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class BatteryBlockEntity extends ContainerMachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer> {
     private WrappedBlockEnergyContainer energyContainer;
@@ -32,7 +33,7 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity implements B
     }
 
     @Override
-    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+    public AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory, @NotNull Player player) {
         return new BatteryMenu(id, inventory, this);
     }
 
@@ -88,7 +89,7 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity implements B
     public void distributeToChargeSlots() {
         int filledSlots = 0;
         for (int i = 0; i < 4; i++) {
-            if (!this.getItem(i + 1).isEmpty()) {
+            if (EnergyApi.isEnergyItem(this.getItem(i + 1))) {
                 filledSlots++;
             }
         }

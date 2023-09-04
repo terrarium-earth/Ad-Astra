@@ -6,7 +6,7 @@ import earth.terrarium.adastra.client.components.PressableImageButton;
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.BatteryMenu;
-import net.minecraft.ChatFormatting;
+import earth.terrarium.adastra.common.utils.ComponentUtils;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -57,13 +57,9 @@ public class BatteryScreen extends AbstractContainerCursorScreen<BatteryMenu> {
             this.leftPos + 164,
             this.topPos + 38,
             menu.getEntity().getEnergyStorage(),
-            Component.translatable(
-                "tooltip.adastra.energy_%s".formatted(menu.getEntity().energyDifference() < 0 ? "out" : "in"),
-                GuiUtils.getFormattedEnergy(Math.abs(menu.getEntity().energyDifference()))).withStyle(ChatFormatting.GOLD),
-            Component.translatable("tooltip.adastra.max_energy_in",
-                GuiUtils.getFormattedEnergy(menu.getEntity().getEnergyStorage().maxInsert())).withStyle(ChatFormatting.GREEN),
-            Component.translatable("tooltip.adastra.max_energy_out",
-                GuiUtils.getFormattedEnergy(menu.getEntity().getEnergyStorage().maxExtract())).withStyle(ChatFormatting.GREEN));
+            ComponentUtils.getEnergyDifferenceComponent(menu.getEntity().energyDifference()),
+            ComponentUtils.getMaxEnergyInComponent(menu.getEntity().getEnergyStorage().maxInsert()),
+            ComponentUtils.getMaxEnergyOutComponent(menu.getEntity().getEnergyStorage().maxExtract()));
 
         // Gear
         graphics.blit(GuiUtils.SIDE_SETTINGS_ICON, this.leftPos + 149, this.topPos - 52, 0, 0, 18, 18, 18, 18);

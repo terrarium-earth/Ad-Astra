@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "adastra:item/etrionic_capacitor"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "adastra:toggled": 1
+      },
+      "model": "adastra:item/etrionic_capacitor_off"
+    }
+  ]
+}

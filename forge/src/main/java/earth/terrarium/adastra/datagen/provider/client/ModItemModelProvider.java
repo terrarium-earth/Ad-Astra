@@ -20,7 +20,14 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         basicItem(ModItems.ETRIUM_INGOT.get());
+        basicItem(ModItems.ETRIUM_NUGGET.get());
+        basicItem(ModItems.ETRIUM_PLATE.get());
+        basicItem(ModItems.ETRIUM_ROD.get());
+
         basicItem(ModItems.WRENCH.get());
+        basicItem(ModItems.ETRIONIC_CORE.get());
+        basicItem(ModItems.PHOTOVOLTAIC_ETRIUM_CELL.get());
+        basicItem(ModItems.PHOTOVOLTAIC_VESNIUM_CELL.get());
 
         basicItem(ModItems.AEROLYTE_SPACE_HELMET.get());
         basicItem(ModItems.AEROLYTE_SPACE_SUIT.get());

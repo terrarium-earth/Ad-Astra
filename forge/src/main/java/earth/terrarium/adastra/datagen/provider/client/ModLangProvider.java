@@ -14,6 +14,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.codehaus.plexus.util.StringUtils;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class ModLangProvider extends LanguageProvider {
@@ -87,10 +88,21 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.REDSTONE_NEVER_ON.getString(), "Never On");
         add(ConstantComponents.REDSTONE_ON_WHEN_POWERED.getString(), "On When Powered");
         add(ConstantComponents.REDSTONE_ON_WHEN_NOT_POWERED.getString(), "On When Not Powered");
+
+        add(ConstantComponents.ACTIVE.getString(), "Active");
+        add(ConstantComponents.INACTIVE.getString(), "Inactive");
+
+        add(ConstantComponents.SEQUENTIAL.getString(), "Sequential");
+        add(ConstantComponents.ROUND_ROBIN.getString(), "Round Robin");
+
+        add(ConstantComponents.CAPACITOR_ENABLED.getString(), "Capacitor Enabled");
+        add(ConstantComponents.CAPACITOR_DISABLED.getString(), "Capacitor Disabled");
+        add(ConstantComponents.CHANGE_MODE_SEQUENTIAL.getString(), "Set Capacitor Mode to \"Sequential\"");
+        add(ConstantComponents.CHANGE_MODE_ROUND_ROBIN.getString(), "Set Capacitor Mode to \"Round Robin\"");
     }
 
     public void addFluid(Supplier<? extends Fluid> key, String name) {
         if (key.get() instanceof BotariumFlowingFluid) return;
-        add("fluid_type.%s.%s".formatted(AdAstra.MOD_ID, ForgeRegistries.FLUIDS.getKey(key.get()).getPath()), name);
+        add("fluid_type.%s.%s".formatted(AdAstra.MOD_ID, Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(key.get())).getPath()), name);
     }
 }

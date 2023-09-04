@@ -16,6 +16,7 @@ import earth.terrarium.adastra.client.ti69.apps.SensorApp;
 import earth.terrarium.adastra.client.ti69.apps.WeatherApp;
 import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.adastra.common.items.EtrionicCapacitorItem;
 import earth.terrarium.adastra.common.items.armor.AerolyteSpaceSuitItem;
 import earth.terrarium.adastra.common.networking.NetworkHandler;
 import earth.terrarium.adastra.common.networking.messages.ServerboundSyncKeybindPacket;
@@ -57,6 +58,7 @@ public class AdAstraClient {
         registerBlockEntityRenderers();
         registerEntityRenderers();
         registerItemRenderers();
+        registerItemProperties();
         registerArmorRenderers();
         registerTi69Apps();
     }
@@ -107,6 +109,10 @@ public class AdAstraClient {
         ITEM_RENDERERS.put(ModBlocks.TINKERERS_WORKBENCH.get().asItem(), new CustomGeoItemRenderer(ModBlocks.TINKERERS_WORKBENCH));
         ITEM_RENDERERS.put(ModBlocks.RECYCLER.get().asItem(), new CustomGeoItemRenderer(ModBlocks.RECYCLER));
         ITEM_RENDERERS.put(ModBlocks.GRAVITY_NORMALIZER.get().asItem(), new CustomGeoItemRenderer(ModBlocks.GRAVITY_NORMALIZER));
+    }
+
+    private static void registerItemProperties() {
+        ClientHooks.registerItemProperty(ModItems.ETRIONIC_CAPACITOR.get(), new ResourceLocation(AdAstra.MOD_ID, "toggled"), (stack, level, entity, i) -> EtrionicCapacitorItem.active(stack) ? 0 : 1);
     }
 
     public static void registerArmorRenderers() {

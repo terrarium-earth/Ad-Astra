@@ -19,4 +19,24 @@ public class ConstantComponents {
 
     public static final Component TI_69_TOOLTIP_1 = Component.translatable("tooltip.adastra.ti_69_1");
     public static final Component TI_69_TOOLTIP_2 = Component.translatable("tooltip.adastra.ti_69_2");
+
+    public static final Component SIDE_CONFIG = Component.translatable("tooltip.adastra.side_config");
+    public static final Component REDSTONE_CONTROL = Component.translatable("tooltip.adastra.redstone_control");
+
+    public static final Component REDSTONE_ALWAYS_ON = Component.translatable("tooltip.adastra.redstone.always_on");
+    public static final Component REDSTONE_NEVER_ON = Component.translatable("tooltip.adastra.redstone.never_on");
+    public static final Component REDSTONE_ON_WHEN_POWERED = Component.translatable("tooltip.adastra.redstone.on_when_powered");
+    public static final Component REDSTONE_ON_WHEN_NOT_POWERED = Component.translatable("tooltip.adastra.redstone.on_when_not_powered");
+
+    public static final Component ACTIVE = Component.translatable("tooltip.adastra.active");
+    public static final Component INACTIVE = Component.translatable("tooltip.adastra.inactive");
+
+    public static final Component SEQUENTIAL = Component.translatable("tooltip.adastra.distribution_mode.sequential");
+    public static final Component ROUND_ROBIN = Component.translatable("tooltip.adastra.distribution_mode.round_robin");
+
+    public static final Component CAPACITOR_ENABLED = Component.translatable("tooltip.adastra.capacitor.enabled");
+    public static final Component CAPACITOR_DISABLED = Component.translatable("tooltip.adastra.capacitor.disabled");
+
+    public static final Component CHANGE_MODE_SEQUENTIAL = Component.translatable("tooltip.adastra.change_mode.sequential");
+    public static final Component CHANGE_MODE_ROUND_ROBIN = Component.translatable("tooltip.adastra.change_mode.round_robin");
 }
