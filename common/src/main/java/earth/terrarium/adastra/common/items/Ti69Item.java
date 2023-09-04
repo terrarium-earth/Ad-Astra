@@ -3,6 +3,7 @@ package earth.terrarium.adastra.common.items;
 import earth.terrarium.adastra.api.ti69.client.Ti69AppApi;
 import earth.terrarium.adastra.client.ti69.apps.SensorApp;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.adastra.common.utils.ComponentUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -25,7 +27,7 @@ public class Ti69Item extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, @NotNull Player player, @NotNull InteractionHand usedHand) {
         if (level.isClientSide()) {
             List<ResourceLocation> apps = new ArrayList<>(Ti69AppApi.API.apps().keySet());
             apps.sort(ResourceLocation::compareTo);
@@ -41,8 +43,7 @@ public class Ti69Item extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        tooltipComponents.add(ConstantComponents.TI_69_TOOLTIP_1);
-        tooltipComponents.add(ConstantComponents.TI_69_TOOLTIP_2);
+    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
+        ComponentUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.TI_69_INFO);
     }
 }

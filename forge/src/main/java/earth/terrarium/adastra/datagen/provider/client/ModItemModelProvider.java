@@ -29,6 +29,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.PHOTOVOLTAIC_ETRIUM_CELL.get());
         basicItem(ModItems.PHOTOVOLTAIC_VESNIUM_CELL.get());
 
+        basicItem(ModItems.GAS_TANK.get());
+        basicItem(ModItems.LARGE_GAS_TANK.get());
+
         basicItem(ModItems.AEROLYTE_SPACE_HELMET.get());
         basicItem(ModItems.AEROLYTE_SPACE_SUIT.get());
         basicItem(ModItems.AEROLYTE_SPACE_PANTS.get());

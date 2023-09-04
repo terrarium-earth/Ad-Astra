@@ -7,6 +7,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.*;
 import earth.terrarium.adastra.common.items.EtrionicCapacitorItem;
+import earth.terrarium.adastra.common.items.GasTankItem;
 import earth.terrarium.adastra.common.items.Ti69Item;
 import earth.terrarium.adastra.common.items.ZipGunItem;
 import earth.terrarium.adastra.common.items.armor.AerolyteSpaceSuitItem;
@@ -28,9 +29,12 @@ public final class ModItems {
         .build();
 
     public static final RegistryEntry<Item> TI_69 = ITEMS.register("ti_69", () -> new Ti69Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryEntry<Item> ETRIONIC_CAPACITOR = ITEMS.register("etrionic_capacitor", () -> new EtrionicCapacitorItem(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> WRENCH = ITEMS.register("wrench", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> ZIP_GUN = ITEMS.register("zip_gun", () -> new ZipGunItem(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryEntry<Item> ETRIONIC_CAPACITOR = ITEMS.register("etrionic_capacitor", () -> new EtrionicCapacitorItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> GAS_TANK = ITEMS.register("gas_tank", () -> new GasTankItem(new Item.Properties().stacksTo(1), 2, 0.05f));
+    public static final RegistryEntry<Item> LARGE_GAS_TANK = ITEMS.register("large_gas_tank", () -> new GasTankItem(new Item.Properties().stacksTo(1), 10, 0.25f));
 
     public static final RegistryEntry<Item> ETRIUM_INGOT = ITEMS.register("etrium_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> ETRIUM_NUGGET = ITEMS.register("etrium_nugget", () -> new Item(new Item.Properties()));

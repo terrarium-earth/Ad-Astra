@@ -40,6 +40,14 @@ public class FluidUtils {
         return getTank(stack, tank).getFluidAmount();
     }
 
+    public static long getTankCapacity(ItemStack stack) {
+        return getTankCapacity(stack, 0);
+    }
+
+    public static long getTankCapacity(ItemStack stack, int tank) {
+        return FluidHooks.getItemFluidManager(stack).getTankCapacity(tank);
+    }
+
     public static long insert(ItemStackHolder stack, FluidHolder fluid) {
         return FluidHooks.getItemFluidManager(stack.getStack()).insertFluid(stack, fluid, false);
     }

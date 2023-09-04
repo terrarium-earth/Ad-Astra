@@ -93,6 +93,7 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
         tooltipComponents.add(ComponentUtils.getDistributionModeComponent(mode(stack)));
         tooltipComponents.add(ComponentUtils.getMaxEnergyInComponent(energy.maxInsert()));
         tooltipComponents.add(ComponentUtils.getMaxEnergyOutComponent(energy.maxExtract()));
+        ComponentUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.ETRIONIC_CAPACITOR_INFO);
     }
 
     @Override

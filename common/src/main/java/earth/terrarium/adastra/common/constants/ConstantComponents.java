@@ -17,9 +17,6 @@ public class ConstantComponents {
     public static final Component OXYGEN_TRUE = Component.translatable("text.adastra.oxygen_true");
     public static final Component OXYGEN_FALSE = Component.translatable("text.adastra.oxygen_false");
 
-    public static final Component TI_69_TOOLTIP_1 = Component.translatable("tooltip.adastra.ti_69_1");
-    public static final Component TI_69_TOOLTIP_2 = Component.translatable("tooltip.adastra.ti_69_2");
-
     public static final Component SIDE_CONFIG = Component.translatable("tooltip.adastra.side_config");
     public static final Component REDSTONE_CONTROL = Component.translatable("tooltip.adastra.redstone_control");
 
@@ -39,4 +36,10 @@ public class ConstantComponents {
 
     public static final Component CHANGE_MODE_SEQUENTIAL = Component.translatable("tooltip.adastra.change_mode.sequential");
     public static final Component CHANGE_MODE_ROUND_ROBIN = Component.translatable("tooltip.adastra.change_mode.round_robin");
+
+    public static final Component SHIFT_DESCRIPTION = Component.translatable("tooltip.adastra.shift_description").withStyle(ChatFormatting.GRAY);
+    public static final Component TI_69_INFO = Component.translatable("info.adastra.ti_69").withStyle(ChatFormatting.GRAY);
+    public static final Component ETRIONIC_CAPACITOR_INFO = Component.translatable("info.adastra.etrionic_capacitor").withStyle(ChatFormatting.GRAY);
+    public static final Component ZIP_GUN_INFO = Component.translatable("info.adastra.zip_gun").withStyle(ChatFormatting.GRAY);
+    public static final Component GAS_TANK_INFO = Component.translatable("info.adastra.gas_tank").withStyle(ChatFormatting.GRAY);
 }

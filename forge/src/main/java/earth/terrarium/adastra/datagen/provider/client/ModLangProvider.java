@@ -71,9 +71,6 @@ public class ModLangProvider extends LanguageProvider {
         add("text.adastra.weather.temperature", "Now: %s°C");
         add("text.adastra.weather.temperature.in", "In: %s");
 
-        add(ConstantComponents.TI_69_TOOLTIP_1.getString(), "Displays important information");
-        add(ConstantComponents.TI_69_TOOLTIP_2.getString(), "Right-click to change the current app");
-
         add("tooltip.adastra.energy", "%s ⚡ / %s ⚡");
         add("tooltip.adastra.energy_in", "In: %s ⚡");
         add("tooltip.adastra.energy_out", "Out: %s ⚡");
@@ -82,6 +79,11 @@ public class ModLangProvider extends LanguageProvider {
         add("tooltip.adastra.max_energy_out", "Max Out: %s ⚡");
 
         add("tooltip.adastra.fluid", "%s 🪣 / %s 🪣 %s");
+        add("tooltip.adastra.fluid_in", "In: %s 🪣");
+        add("tooltip.adastra.fluid_out", "Out: %s 🪣");
+
+        add("tooltip.adastra.max_fluid_in", "Max In: %s 🪣");
+        add("tooltip.adastra.max_fluid_out", "Max Out: %s 🪣");
 
         add(ConstantComponents.SIDE_CONFIG.getString(), "Side Config");
         add(ConstantComponents.REDSTONE_CONTROL.getString(), "Redstone Control");
@@ -101,6 +103,12 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.CAPACITOR_DISABLED.getString(), "Capacitor Disabled");
         add(ConstantComponents.CHANGE_MODE_SEQUENTIAL.getString(), "Set Capacitor Mode to \"Sequential\"");
         add(ConstantComponents.CHANGE_MODE_ROUND_ROBIN.getString(), "Set Capacitor Mode to \"Round Robin\"");
+
+        add(ConstantComponents.SHIFT_DESCRIPTION.getString(), "Hold SHIFT for more information");
+        add(ConstantComponents.TI_69_INFO.getString(), "Displays important information\nRight-click to change the current app");
+        add(ConstantComponents.ETRIONIC_CAPACITOR_INFO.getString(), "Right-click to toggle\nShift-right-click to change the distribution mode");
+        add(ConstantComponents.ZIP_GUN_INFO.getString(), "Propels you forward\nUse a second one in your offhand to propel even further");
+        add(ConstantComponents.GAS_TANK_INFO.getString(), "Stores fluids and gases\nRight-click to distribute into your inventory");
     }
 
     public void addFluid(Supplier<? extends Fluid> key, String name) {

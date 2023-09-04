@@ -2,6 +2,7 @@ package earth.terrarium.adastra.common.items;
 
 import dev.architectury.injectables.annotations.PlatformOnly;
 import earth.terrarium.adastra.api.planets.PlanetApi;
+import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.utils.ComponentUtils;
@@ -10,6 +11,7 @@ import earth.terrarium.botarium.common.fluid.base.BotariumFluidItem;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedItemFluidContainer;
+import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.core.particles.ParticleTypes;
@@ -130,17 +132,16 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
             new SimpleFluidContainer(
                 FluidHooks.buckets(10),
                 1,
-                (t, f) -> f.getFluid().is(ModFluidTags.ZIP_GUN_PROPELLANTS))
-        );
+                (t, f) -> f.getFluid().is(ModFluidTags.ZIP_GUN_PROPELLANTS)));
     }
 
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
-        var container = this.getFluidContainer(stack);
         tooltipComponents.add(ComponentUtils.getFluidComponent(
             FluidUtils.getTank(stack),
-            container.getTankCapacity(0),
+            FluidUtils.getTankCapacity(stack),
             ModFluids.HYDROGEN.get()));
+        ComponentUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.ZIP_GUN_INFO);
     }
 
     @Override
@@ -156,7 +157,7 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
 
     @Override
     public int getBarColor(@NotNull ItemStack stack) {
-        return 0xffffff;
+        return ClientFluidHooks.getFluidColor(FluidUtils.getTank(stack));
     }
 
     // Fabric disabling of nbt change animation

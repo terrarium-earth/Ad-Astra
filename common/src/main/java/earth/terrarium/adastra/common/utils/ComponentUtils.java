@@ -5,8 +5,11 @@ import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.material.Fluid;
+
+import java.util.List;
 
 public class ComponentUtils {
 
@@ -64,10 +67,23 @@ public class ComponentUtils {
             ).withStyle(ChatFormatting.GOLD);
         }
 
+        return getFluidComponent(fluid, capacity);
+    }
+
+    public static Component getFluidComponent(FluidHolder fluid, long capacity) {
         return Component.translatable("tooltip.adastra.fluid",
             getFormattedAmount(fluid.getFluidAmount()),
             getFormattedAmount(capacity),
             ClientFluidHooks.getDisplayName(fluid)
         ).withStyle(ChatFormatting.GOLD);
+    }
+
+    public static Component getMaxFluidOutComponent(long maxOut) {
+        return Component.translatable("tooltip.adastra.max_fluid_out",
+            getFormattedAmount(maxOut)).withStyle(ChatFormatting.GREEN);
+    }
+
+    public static void addDescriptionComponent(List<Component> tooltipComponents, Component description) {
+        tooltipComponents.add(Screen.hasShiftDown() ? description : ConstantComponents.SHIFT_DESCRIPTION);
     }
 }
