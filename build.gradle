@@ -113,8 +113,8 @@ subprojects {
         }
 
         modApi "com.teamresourceful.resourcefullib:resourcefullib-$name-$minecraft_version:$resourcefullib_version"
-        modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-$name-1.20:$resourcefulconfig_version"
-        modApi "earth.terrarium:botarium-$name-1.20:$botarium_version"
+        modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-$name-$minecraft_version:$resourcefulconfig_version"
+        modApi "earth.terrarium:botarium-$name-$minecraft_version:$botarium_version"
     }
 
     var env = System.getenv()
