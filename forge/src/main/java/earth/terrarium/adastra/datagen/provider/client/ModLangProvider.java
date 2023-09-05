@@ -109,6 +109,11 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.ETRIONIC_CAPACITOR_INFO.getString(), "Right-click to toggle\nShift-right-click to change the distribution mode");
         add(ConstantComponents.ZIP_GUN_INFO.getString(), "Propels you forward\nUse a second one in your offhand to propel even further");
         add(ConstantComponents.GAS_TANK_INFO.getString(), "Stores fluids and gases\nRight-click to distribute into your inventory");
+
+        add(ConstantComponents.UPGRADES.getString(), "Upgrades");
+        add("tooltip.adastra.upgrades.entry", "- %sx %s");
+        add("upgrade.adastra.speed", "Speed Upgrade");
+        add("upgrade.adastra.capacity", "Capacity Upgrade");
     }
 
     public void addFluid(Supplier<? extends Fluid> key, String name) {

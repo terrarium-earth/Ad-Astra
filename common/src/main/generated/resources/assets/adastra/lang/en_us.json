@@ -94,5 +94,9 @@
   "tooltip.adastra.redstone.on_when_powered": "On When Powered",
   "tooltip.adastra.redstone_control": "Redstone Control",
   "tooltip.adastra.shift_description": "Hold SHIFT for more information",
-  "tooltip.adastra.side_config": "Side Config"
+  "tooltip.adastra.side_config": "Side Config",
+  "tooltip.adastra.upgrades": "Upgrades",
+  "tooltip.adastra.upgrades.entry": "- %sx %s",
+  "upgrade.adastra.capacity": "Capacity Upgrade",
+  "upgrade.adastra.speed": "Speed Upgrade"
 }

@@ -1,8 +1,11 @@
 package earth.terrarium.adastra.common.items;
 
 import dev.architectury.injectables.annotations.PlatformOnly;
-import earth.terrarium.adastra.api.planets.PlanetApi;
+import earth.terrarium.adastra.api.systems.GravityApi;
+import earth.terrarium.adastra.api.upgrades.Upgradable;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.adastra.common.constants.PlanetConstants;
+import earth.terrarium.adastra.common.items.upgrades.Upgrades;
 import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.utils.ComponentUtils;
@@ -16,6 +19,7 @@ import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,8 +33,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Set;
 
-public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFluidContainer> {
+public class ZipGunItem extends Item implements Upgradable, BotariumFluidItem<WrappedItemFluidContainer> {
 
     public ZipGunItem(Properties properties) {
         super(properties);
@@ -48,52 +53,58 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
     @Override
     public void onUseTick(@NotNull Level level, @NotNull LivingEntity entity, @NotNull ItemStack stack, int remainingUseDuration) {
         super.onUseTick(level, entity, stack, remainingUseDuration);
+        if (!(entity instanceof Player player)) return;
 
         ItemStack mainHandItem = entity.getMainHandItem();
         ItemStack offhandItem = entity.getOffhandItem();
 
-        boolean mainHandBoost = false;
-        if (mainHandItem.getItem() instanceof ZipGunItem) {
-            ItemStackHolder holder = new ItemStackHolder(entity.getMainHandItem());
-            FluidHolder extracted = FluidUtils.extract(holder, FluidHooks.newFluidHolder(FluidUtils.getFluid(stack), FluidHooks.buckets(0.005f), null));
-            if (extracted.getFluidAmount() > 0) {
-                mainHandBoost = true;
-            } else if ((offhandItem.getItem() instanceof ZipGunItem && !FluidUtils.hasFluid(offhandItem)) && extracted.getFluidAmount() == 0 && entity instanceof Player player) {
-                player.stopUsingItem();
-                return;
-            }
+        boolean hasMainHandSpeedUpgrade = hasUpgrade(Upgrades.SPEED_UPGRADE, stack);
+        boolean hasOffHandSpeedUpgrade = hasUpgrade(Upgrades.SPEED_UPGRADE, stack);
+
+
+        float fuelUsage = 0.005f;
+        boolean mainHandBoost = consumeFuel(mainHandItem, fuelUsage * (hasMainHandSpeedUpgrade ? 2.2f : 1.0f));
+        boolean offHandBoost = consumeFuel(offhandItem, fuelUsage * (hasOffHandSpeedUpgrade ? 2.2f : 1.0f));
+        if (!mainHandBoost && !offHandBoost) {
+            player.stopUsingItem();
+            return;
         }
 
-        boolean offhandBoost = false;
-        if (offhandItem.getItem() instanceof ZipGunItem) {
-            ItemStackHolder holder = new ItemStackHolder(offhandItem);
-            FluidHolder extracted = FluidUtils.extract(holder, FluidHooks.newFluidHolder(FluidUtils.getFluid(offhandItem), FluidHooks.buckets(0.005f), null));
-            if (extracted.getFluidAmount() > 0 && mainHandBoost) {
-                offhandBoost = true;
-            } else if ((mainHandItem.getItem() instanceof ZipGunItem && !FluidUtils.hasFluid(mainHandItem)) && extracted.getFluidAmount() == 0 && entity instanceof Player player) {
-                player.stopUsingItem();
-                return;
-            }
-        }
-
-        double maxSpeed = 0.5;
+        double maxSpeed = 0.35;
         double particleSpeed = 1.5;
         double propelForce = 0.2;
         double propelYForce = 0.2;
-        if (PlanetApi.API.isSpace(level)) {
+        int particleChance = 4;
+
+        if (GravityApi.API.getGravity(player) <= PlanetConstants.ZERO_GRAVITY_THRESHOLD) {
             propelForce *= 1.5;
-            propelYForce *= 3.0;
+            propelYForce *= 1.5;
             maxSpeed *= 2.0;
         } else {
             propelYForce *= 0.2;
+            propelYForce *= 1.0 - Math.min(1.0, entity.getY() / 90.0);
         }
 
-        if (offhandBoost) {
-            propelForce *= 1.5;
-            propelYForce *= 1.7;
-            maxSpeed *= 2.0;
+        if (mainHandBoost && offHandBoost) {
+            propelForce *= 1.4;
+            propelYForce *= 1.25;
+            maxSpeed *= 1.5;
             particleSpeed *= 1.5;
             entity.fallDistance *= 0.9f;
+            particleChance -= 2;
+        }
+
+        if (hasMainHandSpeedUpgrade && hasOffHandSpeedUpgrade) {
+            propelForce *= 1.4;
+            propelYForce *= 1.2;
+            maxSpeed *= 1.4;
+            particleSpeed *= 1.4;
+            particleChance--;
+        } else if (hasMainHandSpeedUpgrade || hasOffHandSpeedUpgrade) {
+            propelForce *= 1.2;
+            propelYForce *= 1.1;
+            maxSpeed *= 1.2;
+            particleSpeed *= 1.2;
         }
 
         var lookAngle = entity.getLookAngle();
@@ -102,7 +113,7 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
             entity.addDeltaMovement(propelRot);
         }
 
-        if (level.random.nextInt(offhandBoost ? 1 : 3) == 0) {
+        if (level.random.nextInt(particleChance) == 0) {
             level.addParticle(
                 ParticleTypes.SNOWFLAKE,
                 entity.getX(),
@@ -113,6 +124,13 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
                 lookAngle.z * particleSpeed + level.random.nextGaussian() * 0.03
             );
         }
+    }
+
+    public boolean consumeFuel(ItemStack stack, float amount) {
+        if (!(stack.getItem() instanceof ZipGunItem)) return false;
+        ItemStackHolder holder = new ItemStackHolder(stack);
+        FluidHolder extracted = FluidUtils.extract(holder, FluidHooks.newFluidHolder(FluidUtils.getFluid(stack), FluidHooks.buckets(amount), null));
+        return extracted.getFluidAmount() > 0;
     }
 
     @Override
@@ -130,9 +148,18 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
         return new WrappedItemFluidContainer(
             holder,
             new SimpleFluidContainer(
-                FluidHooks.buckets(10),
+                getCapacity(holder),
                 1,
-                (t, f) -> f.getFluid().is(ModFluidTags.ZIP_GUN_PROPELLANTS)));
+                (t, f) -> f.getFluid().is(ModFluidTags.ZIP_GUN_PROPELLANTS)) {
+                @Override
+                public boolean allowsExtraction() {
+                    return false;
+                }
+            });
+    }
+
+    public long getCapacity(ItemStack stack) {
+        return FluidHooks.buckets(10 + (hasUpgrade(Upgrades.CAPACITY_UPGRADE, stack) ? 10 : 0));
     }
 
     @Override
@@ -141,6 +168,7 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
             FluidUtils.getTank(stack),
             FluidUtils.getTankCapacity(stack),
             ModFluids.HYDROGEN.get()));
+        ComponentUtils.addUpgradesComponent(tooltipComponents, stack, this);
         ComponentUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.ZIP_GUN_INFO);
     }
 
@@ -158,6 +186,14 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
     @Override
     public int getBarColor(@NotNull ItemStack stack) {
         return ClientFluidHooks.getFluidColor(FluidUtils.getTank(stack));
+    }
+
+    @Override
+    public Set<ResourceLocation> getUpgrades() {
+        return Set.of(
+            Upgrades.CAPACITY_UPGRADE,
+            Upgrades.SPEED_UPGRADE
+        );
     }
 
     // Fabric disabling of nbt change animation

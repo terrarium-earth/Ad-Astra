@@ -6,6 +6,7 @@ import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
 import earth.terrarium.adastra.common.handlers.PlanetData;
 import earth.terrarium.adastra.common.items.Ti69Item;
+import earth.terrarium.adastra.common.items.upgrades.Upgrades;
 import earth.terrarium.adastra.common.networking.NetworkHandler;
 import earth.terrarium.adastra.common.networking.messages.ClientboundSyncLocalPlanetDataPacket;
 import earth.terrarium.adastra.common.networking.messages.ClientboundSyncPlanetsPacket;
@@ -41,6 +42,8 @@ public class AdAstra {
         ModWorldCarvers.WORLD_CARVERS.init();
         ModBiomeSources.BIOME_SOURCES.init();
         ModDensityFunctionTypes.DENSITY_FUNCTION_TYPES.init();
+
+        Upgrades.init();
     }
 
     public static void onAddReloadListener(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {

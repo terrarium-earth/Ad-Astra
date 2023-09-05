@@ -1,10 +1,12 @@
 package earth.terrarium.adastra.common.items.armor;
 
+import earth.terrarium.adastra.api.upgrades.Upgradable;
 import earth.terrarium.adastra.common.items.base.CustomGeoArmorItem;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.adastra.common.utils.KeybindManager;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,7 +27,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import java.util.Set;
 import java.util.stream.StreamSupport;
 
-public class AerolyteSpaceSuitItem extends CustomGeoArmorItem {
+public class AerolyteSpaceSuitItem extends CustomGeoArmorItem implements Upgradable {
 
     public static final RawAnimation IDLE_CLOSED = RawAnimation.begin().thenLoop("animation.model.idle.closed");
     public static final RawAnimation IDLE_OPEN = RawAnimation.begin().thenLoop("animation.model.idle.open");
@@ -114,6 +116,12 @@ public class AerolyteSpaceSuitItem extends CustomGeoArmorItem {
 
     protected boolean isFullFlightEnabled(Player player) {
         return KeybindManager.suitFlightEnabled(player) && KeybindManager.jumpDown(player) && KeybindManager.sprintDown(player);
+    }
+
+    @Override
+    public Set<ResourceLocation> getUpgrades() {
+        return Set.of(
+        );
     }
 
     @SuppressWarnings("unused") // Forge

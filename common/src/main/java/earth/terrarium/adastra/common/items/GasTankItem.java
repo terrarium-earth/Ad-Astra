@@ -65,7 +65,9 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
     public long distribute(ItemStackHolder from, FluidHolder container, Inventory inventory) {
         long moved = 0;
         moved += distribute(from, container, inventory.armor);
+        if (moved > 0) return moved;
         moved += distribute(from, container, inventory.offhand);
+        if (moved > 0) return moved;
         moved += distribute(from, container, inventory.items);
         return moved;
     }

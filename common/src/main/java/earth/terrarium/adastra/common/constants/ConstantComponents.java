@@ -42,4 +42,6 @@ public class ConstantComponents {
     public static final Component ETRIONIC_CAPACITOR_INFO = Component.translatable("info.adastra.etrionic_capacitor").withStyle(ChatFormatting.GRAY);
     public static final Component ZIP_GUN_INFO = Component.translatable("info.adastra.zip_gun").withStyle(ChatFormatting.GRAY);
     public static final Component GAS_TANK_INFO = Component.translatable("info.adastra.gas_tank").withStyle(ChatFormatting.GRAY);
+
+    public static final Component UPGRADES = Component.translatable("tooltip.adastra.upgrades").withStyle(ChatFormatting.LIGHT_PURPLE);
 }

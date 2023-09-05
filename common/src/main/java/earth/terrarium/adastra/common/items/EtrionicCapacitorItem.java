@@ -131,19 +131,20 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
     }
 
     public void distributeSequential(ItemStackHolder from, long maxExtract, Inventory inventory) {
-        distributeSequential(from, maxExtract, inventory.items);
-        distributeSequential(from, maxExtract, inventory.armor);
+        if (distributeSequential(from, maxExtract, inventory.items) > 0) return;
+        if (distributeSequential(from, maxExtract, inventory.armor) > 0) return;
         distributeSequential(from, maxExtract, inventory.offhand);
     }
 
-    public void distributeSequential(ItemStackHolder from, long maxExtract, List<ItemStack> items) {
+    public long distributeSequential(ItemStackHolder from, long maxExtract, List<ItemStack> items) {
         for (var item : items) {
             if (item.isEmpty() || item == from.getStack()) continue;
             ItemStackHolder to = new ItemStackHolder(item);
             long moved = EnergyApi.moveEnergy(from, to, maxExtract, false);
             if (moved == 0) continue;
-            return;
+            return moved;
         }
+        return 0;
     }
 
     public void distributeRoundRobin(ItemStackHolder stack, long maxExtract, Inventory inventory) {
