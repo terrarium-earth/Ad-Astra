@@ -52,6 +52,12 @@ public final class ModBlockEntityTypes {
             OilRefineryBlockEntity::new,
             ModBlocks.OIL_REFINERY.get()));
 
+    public static final RegistryEntry<BlockEntityType<SeparatorBlockEntity>> SEPARATOR = BLOCK_ENTITY_TYPES.register(
+        "separator",
+        () -> RegistryHelpers.createBlockEntityType(
+            SeparatorBlockEntity::new,
+            ModBlocks.SEPARATOR.get()));
+
     public static final RegistryEntry<BlockEntityType<SteamGeneratorBlockEntity>> STEAM_GENERATOR = BLOCK_ENTITY_TYPES.register(
         "steam_generator",
         () -> RegistryHelpers.createBlockEntityType(

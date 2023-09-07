@@ -55,4 +55,10 @@ public abstract class MachineBlockEntity extends BlockEntity {
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
+
+    public void sync() {
+        if (this.level() instanceof ServerLevel l) {
+            l.getChunkSource().blockChanged(this.worldPosition);
+        }
+    }
 }

@@ -114,6 +114,10 @@ public final class ModItems {
         new Item.Properties(),
         OilRefineryBlockEntity.IDLE_OFF));
 
+    public static final RegistryEntry<Item> SEPARATOR = ITEMS.register("separator", () -> new BlockItem( // TODO
+        ModBlocks.SEPARATOR.get(),
+        new Item.Properties()));
+
     public static final RegistryEntry<Item> STEAM_GENERATOR = ITEMS.register("steam_generator", () -> new CustomGeoBlockItem(
         ModBlocks.STEAM_GENERATOR.get(),
         new Item.Properties(),

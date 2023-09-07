@@ -57,6 +57,9 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
         if (container.getFluidAmount() == 0) return;
         ItemStackHolder from = new ItemStackHolder(stack);
         if (distribute(from, container, inventory) == 0) return;
+        if (from.isDirty()) {
+            stack.setTag(from.getStack().getTag());
+        }
         if (level.getGameTime() % 4 == 0) {
             level.playSound(null, player.blockPosition(), SoundEvents.GENERIC_DRINK, player.getSoundSource(), 1.0F, 1.0F);
         }
@@ -78,6 +81,9 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
             ItemStackHolder to = new ItemStackHolder(item);
             long moved = FluidApi.moveFluid(from, to, FluidHooks.newFluidHolder(container.getFluid(), FluidHooks.buckets(distributionAmount), null), false);
             if (moved == 0) continue;
+            if (to.isDirty()) {
+                item.setTag(to.getStack().getTag());
+            }
             return moved;
         }
         return 0;

@@ -36,6 +36,8 @@ public final class ModBlocks {
 
     public static final RegistryEntry<Block> OIL_REFINERY = MACHINES.register("oil_refinery", () -> new OilRefineryBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
+    public static final RegistryEntry<Block> SEPARATOR = MACHINES.register("separator", () -> new SeparatorBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+
     public static final RegistryEntry<Block> STEAM_GENERATOR = MACHINES.register("steam_generator", () -> new SteamGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
     public static final RegistryEntry<Block> ENERGY_CONTROLLER = MACHINES.register("energy_controller", () -> new EnergyControllerBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));

@@ -64,7 +64,7 @@ public class ComponentUtils {
         if (fluid.isEmpty()) {
             return Component.translatable("tooltip.adastra.fluid",
                 getFormattedAmount(0),
-                getFormattedAmount(capacity),
+                getFormattedAmount(FluidHooks.toMillibuckets(capacity)),
                 ClientFluidHooks.getDisplayName(FluidHooks.newFluidHolder(fallback, capacity, null))
             ).withStyle(ChatFormatting.GOLD);
         }
@@ -74,15 +74,25 @@ public class ComponentUtils {
 
     public static Component getFluidComponent(FluidHolder fluid, long capacity) {
         return Component.translatable("tooltip.adastra.fluid",
-            getFormattedAmount(fluid.getFluidAmount()),
-            getFormattedAmount(capacity),
+            getFormattedAmount(FluidHooks.toMillibuckets(fluid.getFluidAmount())),
+            getFormattedAmount(FluidHooks.toMillibuckets(capacity)),
             ClientFluidHooks.getDisplayName(fluid)
         ).withStyle(ChatFormatting.GOLD);
     }
 
+    public static Component getFluidDifferenceComponent(long fluid) {
+        return Component.translatable("tooltip.adastra.fluid_%s".formatted(fluid < 0 ? "out" : "in"),
+            getFormattedAmount(FluidHooks.toMillibuckets(Math.abs(fluid)))).withStyle(ChatFormatting.GOLD);
+    }
+
+    public static Component getMaxFluidInComponent(long maxIn) {
+        return Component.translatable("tooltip.adastra.max_fluid_in",
+            getFormattedAmount(FluidHooks.toMillibuckets(maxIn))).withStyle(ChatFormatting.GREEN);
+    }
+
     public static Component getMaxFluidOutComponent(long maxOut) {
         return Component.translatable("tooltip.adastra.max_fluid_out",
-            getFormattedAmount(maxOut)).withStyle(ChatFormatting.GREEN);
+            getFormattedAmount(FluidHooks.toMillibuckets(maxOut))).withStyle(ChatFormatting.GREEN);
     }
 
     public static void addDescriptionComponent(List<Component> tooltipComponents, Component description) {

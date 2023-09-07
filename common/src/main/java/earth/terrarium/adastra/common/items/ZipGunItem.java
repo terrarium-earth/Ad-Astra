@@ -130,6 +130,9 @@ public class ZipGunItem extends Item implements Upgradable, BotariumFluidItem<Wr
         if (!(stack.getItem() instanceof ZipGunItem)) return false;
         ItemStackHolder holder = new ItemStackHolder(stack);
         FluidHolder extracted = FluidUtils.extract(holder, FluidHooks.newFluidHolder(FluidUtils.getFluid(stack), FluidHooks.buckets(amount), null));
+        if (holder.isDirty()) {
+            stack.setTag(holder.getStack().getTag());
+        }
         return extracted.getFluidAmount() > 0;
     }
 

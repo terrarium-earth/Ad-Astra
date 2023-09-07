@@ -12,6 +12,7 @@ import earth.terrarium.adastra.client.renderers.entities.base.CustomGeoEntityRen
 import earth.terrarium.adastra.client.renderers.items.armor.AerolyteSpaceSuitRenderer;
 import earth.terrarium.adastra.client.renderers.items.base.CustomGeoItemRenderer;
 import earth.terrarium.adastra.client.screens.BatteryScreen;
+import earth.terrarium.adastra.client.screens.SeparatorScreen;
 import earth.terrarium.adastra.client.ti69.apps.SensorApp;
 import earth.terrarium.adastra.client.ti69.apps.WeatherApp;
 import earth.terrarium.adastra.client.utils.ClientData;
@@ -65,6 +66,7 @@ public class AdAstraClient {
 
     private static void registerScreens() {
         MenuScreens.register(ModMenus.BATTERY.get(), BatteryScreen::new);
+        MenuScreens.register(ModMenus.SEPARATOR.get(), SeparatorScreen::new);
     }
 
     private static void registerBlockRenderTypes() {

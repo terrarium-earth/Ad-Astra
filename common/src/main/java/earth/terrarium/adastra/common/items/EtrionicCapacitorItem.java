@@ -128,6 +128,9 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
             case SEQUENTIAL -> distributeSequential(from, container.maxExtract(), inventory);
             case ROUND_ROBIN -> distributeRoundRobin(from, container.maxExtract(), inventory);
         }
+        if (from.isDirty()) {
+            stack.setTag(from.getStack().getTag());
+        }
     }
 
     public void distributeSequential(ItemStackHolder from, long maxExtract, Inventory inventory) {
@@ -142,6 +145,9 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
             ItemStackHolder to = new ItemStackHolder(item);
             long moved = EnergyApi.moveEnergy(from, to, maxExtract, false);
             if (moved == 0) continue;
+            if (to.isDirty()) {
+                item.setTag(to.getStack().getTag());
+            }
             return moved;
         }
         return 0;
@@ -165,6 +171,9 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
             if (item.isEmpty() || item.is(this)) continue;
             ItemStackHolder to = new ItemStackHolder(item);
             EnergyApi.moveEnergy(stack, to, maxExtract / energyItems, false);
+            if (to.isDirty()) {
+                item.setTag(to.getStack().getTag());
+            }
         }
     }
 

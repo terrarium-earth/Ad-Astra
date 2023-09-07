@@ -80,7 +80,7 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity implements B
         if (stack.isEmpty()) return;
         if (!EnergyApi.isEnergyItem(stack)) return;
         ItemStackHolder holder = new ItemStackHolder(stack);
-        EnergyApi.moveEnergy(holder, this, null, energyContainer.maxInsert() * 4, false);
+        EnergyApi.moveEnergy(holder, this, null, energyContainer.maxInsert(), false);
         if (holder.isDirty()) {
             this.setItem(0, holder.getStack());
         }
@@ -100,7 +100,7 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity implements B
             if (stack.isEmpty()) continue;
             if (!EnergyApi.isEnergyItem(stack)) continue;
             ItemStackHolder holder = new ItemStackHolder(stack);
-            EnergyApi.moveEnergy(this, null, holder, energyContainer.maxExtract() / filledSlots, false);
+            EnergyApi.moveEnergy(this, null, holder, getEnergyStorage().maxExtract() / filledSlots, false);
             if (holder.isDirty()) {
                 this.setItem(i, holder.getStack());
             }
@@ -108,14 +108,14 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity implements B
     }
 
     public void energyChanged() {
-        int charge = Math.round(this.energyContainer.getStoredEnergy() / (float) this.getEnergyStorage().getMaxCapacity() * 4);
+        int charge = Math.round(this.energyContainer.getStoredEnergy() / (float) this.getEnergyStorage().getMaxCapacity());
         this.level().setBlock(this.getBlockPos(), this.getBlockState().setValue(BatteryBlock.CHARGE, charge), Block.UPDATE_CLIENTS);
     }
 
     @Override
     public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
-        this.energyDifference = this.energyContainer.getStoredEnergy() - this.lastEnergy;
-        this.lastEnergy = this.energyContainer.getStoredEnergy();
+        this.energyDifference = this.getEnergyStorage().getStoredEnergy() - this.lastEnergy;
+        this.lastEnergy = this.getEnergyStorage().getStoredEnergy();
     }
 
     public long energyDifference() {
