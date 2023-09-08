@@ -10,7 +10,7 @@ public interface BasicContainer extends Container {
 
     NonNullList<ItemStack> items();
 
-    void update();
+    default void update() {}
 
     @Override
     default boolean isEmpty() {

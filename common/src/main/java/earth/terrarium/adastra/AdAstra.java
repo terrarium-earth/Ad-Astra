@@ -39,6 +39,8 @@ public class AdAstra {
         ModEntityTypes.ENTITY_TYPES.init();
         ModBlockEntityTypes.BLOCK_ENTITY_TYPES.init();
         ModMenus.MENUS.init();
+        ModRecipeTypes.RECIPE_TYPES.init();
+        ModRecipeSerializers.RECIPE_SERIALIZERS.init();
         ModWorldCarvers.WORLD_CARVERS.init();
         ModBiomeSources.BIOME_SOURCES.init();
         ModDensityFunctionTypes.DENSITY_FUNCTION_TYPES.init();

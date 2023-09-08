@@ -5,6 +5,7 @@ import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.FurnaceResultSlot;
 import net.minecraft.world.inventory.Slot;
 
 public class SeparatorMenu extends BasicContainerMenu<SeparatorBlockEntity> {
@@ -49,10 +50,10 @@ public class SeparatorMenu extends BasicContainerMenu<SeparatorBlockEntity> {
 
         // Bucket slots
         addSlot(new Slot(entity, 1, 51, 138));
-        addSlot(new Slot(entity, 2, 69, 138));
+        addSlot(new FurnaceResultSlot(player, entity, 2, 69, 138));
         addSlot(new Slot(entity, 3, 11, 138));
-        addSlot(new Slot(entity, 4, 29, 138));
+        addSlot(new FurnaceResultSlot(player, entity, 4, 29, 138));
         addSlot(new Slot(entity, 5, 91, 138));
-        addSlot(new Slot(entity, 6, 109, 138));
+        addSlot(new FurnaceResultSlot(player, entity, 6, 109, 138));
     }
 }

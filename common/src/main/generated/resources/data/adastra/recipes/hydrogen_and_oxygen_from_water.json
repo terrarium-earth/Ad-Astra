@@ -1,0 +1,17 @@
+{
+  "type": "adastra:separating",
+  "cookingtime": 2,
+  "energy": 200,
+  "ingredient": {
+    "buckets": 0.003,
+    "fluid": "minecraft:water"
+  },
+  "result_fluid_1": {
+    "buckets": 0.002,
+    "fluid": "adastra:hydrogen"
+  },
+  "result_fluid_2": {
+    "buckets": 0.001,
+    "fluid": "adastra:oxygen"
+  }
+}
