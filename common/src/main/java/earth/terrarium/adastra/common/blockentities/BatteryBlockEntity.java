@@ -1,15 +1,12 @@
 package earth.terrarium.adastra.common.blockentities;
 
-import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
+import earth.terrarium.adastra.common.blockentities.base.PoweredMachineBlockEntity;
 import earth.terrarium.adastra.common.blocks.BatteryBlock;
 import earth.terrarium.adastra.common.menus.BatteryMenu;
-import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.botarium.common.energy.EnergyApi;
-import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -21,11 +18,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public class BatteryBlockEntity extends ContainerMachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer> {
-    private WrappedBlockEnergyContainer energyContainer;
-    private long lastEnergy;
-    private long energyDifference;
-
+public class BatteryBlockEntity extends PoweredMachineBlockEntity {
     public static final int CONTAINER_SIZE = 5;
 
     public BatteryBlockEntity(BlockPos pos, BlockState state) {
@@ -56,34 +49,22 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity implements B
                 @Override
                 public void setEnergy(long energy) {
                     super.setEnergy(energy);
-                    energyDifference = energy - lastEnergy;
-                    if (BatteryBlockEntity.this.level().getGameTime() % 10 == 0) {
-                        energyChanged();
-                    }
+                    onEnergyChange();
                 }
             });
     }
 
     @Override
-    public void update() {
-    }
-
-    @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
-        EnergyUtils.distributeEnergyNearby(this, energyContainer.maxExtract(), pair -> !pair.getFirst().equals(Direction.UP));
         extractBatterySlot();
+        distributeNearby(pair -> !pair.getFirst().equals(Direction.UP));
         distributeToChargeSlots();
     }
 
-    public void extractBatterySlot() {
-        ItemStack stack = this.getItem(0);
-        if (stack.isEmpty()) return;
-        if (!EnergyApi.isEnergyItem(stack)) return;
-        ItemStackHolder holder = new ItemStackHolder(stack);
-        EnergyApi.moveEnergy(holder, this, null, energyContainer.maxInsert(), false);
-        if (holder.isDirty()) {
-            this.setItem(0, holder.getStack());
-        }
+    public void onEnergyChange() {
+        if (BatteryBlockEntity.this.level().getGameTime() % 10 != 0) return;
+        int charge = Math.round(this.getEnergyStorage().getStoredEnergy() / (float) this.getEnergyStorage().getMaxCapacity());
+        this.level().setBlock(this.getBlockPos(), this.getBlockState().setValue(BatteryBlock.CHARGE, charge), Block.UPDATE_CLIENTS);
     }
 
     public void distributeToChargeSlots() {
@@ -105,20 +86,5 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity implements B
                 this.setItem(i, holder.getStack());
             }
         }
-    }
-
-    public void energyChanged() {
-        int charge = Math.round(this.energyContainer.getStoredEnergy() / (float) this.getEnergyStorage().getMaxCapacity());
-        this.level().setBlock(this.getBlockPos(), this.getBlockState().setValue(BatteryBlock.CHARGE, charge), Block.UPDATE_CLIENTS);
-    }
-
-    @Override
-    public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
-        this.energyDifference = this.getEnergyStorage().getStoredEnergy() - this.lastEnergy;
-        this.lastEnergy = this.getEnergyStorage().getStoredEnergy();
-    }
-
-    public long energyDifference() {
-        return this.energyDifference;
     }
 }
