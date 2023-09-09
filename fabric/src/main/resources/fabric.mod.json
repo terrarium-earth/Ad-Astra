@@ -31,6 +31,9 @@
         ],
         "rei_client": [
             "earth.terrarium.adastra.common.compat.rei.AdAstraReiPlugin"
+        ],
+        "jei_mod_plugin": [
+            "earth.terrarium.adastra.common.compat.jei.AdAstraJeiPlugin"
         ]
     },
     "mixins": [

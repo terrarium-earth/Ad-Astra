@@ -84,9 +84,8 @@ subprojects {
         "modApi"(group = "com.teamresourceful.resourcefulconfig", name = "resourcefulconfig-$modLoader-$minecraftVersion", version = resourcefulConfigVersion)
         "modApi"(group = "earth.terrarium", name = "botarium-$modLoader-$minecraftVersion", version = botariumVersion)
         if (isCommon) {
-            "modApi"(group = "mezz.jei", name = "jei-$minecraftVersion-$modLoader-api", version = jeiVersion)
-            "modApi"(group = "me.shedaniel", name = "RoughlyEnoughItems-api", version = reiVersion)
-            "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-default-plugin", version = reiVersion)
+            "modApi"(group = "mezz.jei", name = "jei-$minecraftVersion-common-api", version = jeiVersion)
+            "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-api", version = reiVersion)
             "modImplementation"(group = "software.bernie.geckolib", name = "geckolib-fabric-$minecraftVersion", version = geckolibVersion)
         } else {
             "modImplementation"(group = "software.bernie.geckolib", name = "geckolib-$modLoader-$minecraftVersion", version = geckolibVersion)
