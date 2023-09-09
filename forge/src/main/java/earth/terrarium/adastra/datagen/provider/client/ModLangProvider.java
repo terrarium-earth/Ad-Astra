@@ -77,6 +77,8 @@ public class ModLangProvider extends LanguageProvider {
         add("tooltip.adastra.energy_out", "Out: %s ⚡/t");
         add("tooltip.adastra.max_energy_in", "Max In: %s ⚡/t");
         add("tooltip.adastra.max_energy_out", "Max Out: %s ⚡/t");
+        add("tooltip.adastra.energy_use_per_tick", "Uses %s ⚡ per tick");
+        add("tooltip.adastra.energy_generation_per_tick", "Generates %s ⚡ per tick");
 
         add("tooltip.adastra.fluid", "%s 🪣 / %s 🪣 %s");
 
@@ -84,6 +86,10 @@ public class ModLangProvider extends LanguageProvider {
         add("tooltip.adastra.fluid_out", "Out: %s 🪣/t");
         add("tooltip.adastra.max_fluid_in", "Max In: %s 🪣/t");
         add("tooltip.adastra.max_fluid_out", "Max Out: %s 🪣/t");
+        add("tooltip.adastra.fluid_use_per_iteration", "Uses %s 🪣 per iteration");
+        add("tooltip.adastra.fluid_generation_per_iteration", "Generates %s 🪣 per iteration");
+
+        add("tooltip.adastra.ticks_per_iteration", "Takes %s ticks per iteration");
 
         add(ConstantComponents.CLEAR_FLUID_TANK.getString(), "Shift-right-click to clear");
 

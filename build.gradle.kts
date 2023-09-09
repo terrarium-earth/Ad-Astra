@@ -85,9 +85,7 @@ subprojects {
         "modApi"(group = "earth.terrarium", name = "botarium-$modLoader-$minecraftVersion", version = botariumVersion)
         if (isCommon) {
             "modApi"(group = "mezz.jei", name = "jei-$minecraftVersion-$modLoader-api", version = jeiVersion)
-            "modApi"(group = "me.shedaniel", name = "RoughlyEnoughItems-api", version = reiVersion) {
-                isTransitive = false
-            }
+            "modApi"(group = "me.shedaniel", name = "RoughlyEnoughItems-api", version = reiVersion)
             "modImplementation"(group = "software.bernie.geckolib", name = "geckolib-fabric-$minecraftVersion", version = geckolibVersion)
         } else {
             "modImplementation"(group = "software.bernie.geckolib", name = "geckolib-$modLoader-$minecraftVersion", version = geckolibVersion)

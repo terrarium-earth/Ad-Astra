@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
 public class BatteryScreen extends MachineScreen<BatteryMenu, BatteryBlockEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/battery.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/battery.png");
 
     public BatteryScreen(BatteryMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component, TEXTURE, 215, 231);

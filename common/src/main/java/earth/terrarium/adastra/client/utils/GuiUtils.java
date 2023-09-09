@@ -43,7 +43,7 @@ public class GuiUtils {
             graphics.blit(ENERGY_BAR, x + 6, y - 31, 0, 0, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT);
         }
 
-        drawTooltips(graphics, font, mouseX, mouseY, x + 6, y - 31, x + 16, y + 24, list -> {
+        drawTooltips(graphics, font, mouseX, mouseY, x + 6, x + 16, y - 31, y + 24, list -> {
             list.add(ComponentUtils.getEnergyComponent(energy, capacity));
             Collections.addAll(list, tooltips);
             return list;
@@ -74,17 +74,19 @@ public class GuiUtils {
         graphics.blit(FLUID_BAR, x + 6, y - 31, 0, 0, FLUID_BAR_WIDTH, FLUID_BAR_HEIGHT, FLUID_BAR_WIDTH, FLUID_BAR_HEIGHT);
         RenderSystem.disableBlend();
 
-        drawTooltips(graphics, font, mouseX, mouseY, x + 6, y - 31, x + 22, y + 17, list -> {
+        drawTooltips(graphics, font, mouseX, mouseY, x + 6, x + 22, y - 31, y + 17, list -> {
             list.add(ComponentUtils.getFluidComponent(fluid, capacity));
             Collections.addAll(list, tooltips);
-            if (!fluid.isEmpty()) list.add(ConstantComponents.CLEAR_FLUID_TANK);
             return list;
         });
     }
 
-    public static void drawTooltips(GuiGraphics graphics, Font font, int mouseX, int mouseY, int minX, int minY, int maxX, int maxY, Function<List<Component>, List<Component>> tooltips) {
+    public static void drawTooltips(GuiGraphics graphics, Font font, int mouseX, int mouseY, int minX, int maxX, int minY, int maxY, Function<List<Component>, List<Component>> tooltips) {
         if (mouseX >= minX && mouseX <= maxX && mouseY >= minY && mouseY <= maxY) {
-            graphics.renderComponentTooltip(font, tooltips.apply(new ArrayList<>()), mouseX, mouseY);
+            List<Component> lines = tooltips.apply(new ArrayList<>());
+            lines.removeIf(c -> c.getString().isEmpty());
+            graphics.renderComponentTooltip(font, lines, mouseX, mouseY);
+            graphics.flush();
         }
     }
 }

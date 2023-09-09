@@ -105,7 +105,8 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
             y,
             fluid,
             tank,
-            ComponentUtils.getFluidDifferenceComponent(fluidDifference));
+            ComponentUtils.getFluidDifferenceComponent(fluidDifference),
+            !fluid.isEmpty() ? ConstantComponents.CLEAR_FLUID_TANK : Component.empty());
 
         clearOnClicks.add(new ClearOnClick(x + 6, y - 31, x + 22, y + 17, tank));
     }

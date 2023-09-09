@@ -49,6 +49,16 @@ public class ComponentUtils {
             getFormattedAmount(maxOut)).withStyle(ChatFormatting.GREEN);
     }
 
+    public static Component getEnergyUsePerTickComponent(long usePerTick) {
+        return Component.translatable("tooltip.adastra.energy_use_per_tick",
+            getFormattedAmount(Math.abs(usePerTick))).withStyle(ChatFormatting.AQUA);
+    }
+
+    public static Component getEnergyGenerationPerTickComponent(long generationPerTick) {
+        return Component.translatable("tooltip.adastra.energy_generation_per_tick",
+            getFormattedAmount(Math.abs(generationPerTick))).withStyle(ChatFormatting.AQUA);
+    }
+
     public static Component getActiveInactiveComponent(boolean active) {
         return active ? ConstantComponents.ACTIVE.copy().withStyle(ChatFormatting.AQUA) : ConstantComponents.INACTIVE.copy().withStyle(ChatFormatting.AQUA);
     }
@@ -66,7 +76,7 @@ public class ComponentUtils {
                 getFormattedAmount(0),
                 getFormattedAmount(FluidHooks.toMillibuckets(capacity)),
                 ClientFluidHooks.getDisplayName(FluidHooks.newFluidHolder(fallback, capacity, null))
-            ).withStyle(ChatFormatting.GOLD);
+            ).withStyle(ChatFormatting.AQUA);
         }
 
         return getFluidComponent(fluid, capacity);
@@ -93,6 +103,21 @@ public class ComponentUtils {
     public static Component getMaxFluidOutComponent(long maxOut) {
         return Component.translatable("tooltip.adastra.max_fluid_out",
             getFormattedAmount(FluidHooks.toMillibuckets(maxOut))).withStyle(ChatFormatting.GREEN);
+    }
+
+    public static Component getFluidUsePerIterationComponent(long usePerTick) {
+        return Component.translatable("tooltip.adastra.fluid_use_per_iteration",
+            getFormattedAmount(FluidHooks.toMillibuckets(Math.abs(usePerTick)))).withStyle(ChatFormatting.AQUA);
+    }
+
+    public static Component getFluidGenerationPerIterationComponent(long gainPerTick) {
+        return Component.translatable("tooltip.adastra.fluid_generation_per_iteration",
+            getFormattedAmount(FluidHooks.toMillibuckets(Math.abs(gainPerTick)))).withStyle(ChatFormatting.AQUA);
+    }
+
+    public static Component getTicksPerIterationComponent(int time) {
+        return Component.translatable("tooltip.adastra.ticks_per_iteration",
+            getFormattedAmount(time)).withStyle(ChatFormatting.AQUA);
     }
 
     public static void addDescriptionComponent(List<Component> tooltipComponents, Component description) {

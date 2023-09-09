@@ -124,11 +124,12 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
         long fluid = fluidContainer.internalExtract(recipe.ingredient(), true).getFluidAmount();
         if (fluid < recipe.ingredient().getFluidAmount()) return;
 
+        energyStorage.internalExtract(recipe.energy(), false);
+        
         cookTime++;
         if (cookTime < cookTimeTotal) return;
         cookTime = 0;
 
-        energyStorage.internalExtract(recipe.energy(), false);
         fluidContainer.internalExtract(recipe.ingredient(), false);
 
         fluidContainer.internalInsert(recipe.resultFluid1(), false);

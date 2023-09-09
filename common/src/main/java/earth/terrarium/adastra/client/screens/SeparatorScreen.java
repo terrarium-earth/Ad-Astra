@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
 public class SeparatorScreen extends MachineScreen<SeparatorMenu, SeparatorBlockEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/separator.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/separator.png");
 
     public SeparatorScreen(SeparatorMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component, TEXTURE, 184, 255);

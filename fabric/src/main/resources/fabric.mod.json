@@ -1,4 +1,4 @@
- {
+{
     "schemaVersion": 1,
     "id": "adastra",
     "version": "${version}",
@@ -28,6 +28,9 @@
         ],
         "client": [
             "earth.terrarium.adastra.client.fabric.AdAstraFabricClient::init"
+        ],
+        "rei_client": [
+            "earth.terrarium.adastra.common.compat.rei.AdAstraReiPlugin"
         ]
     },
     "mixins": [

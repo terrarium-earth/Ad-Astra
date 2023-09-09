@@ -23,7 +23,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> writer) {
-        createSeparating(writer, 2, 200,
+        createSeparating(writer, 2, 100,
             FluidHooks.newFluidHolder(Fluids.WATER, FluidHooks.buckets(0.003), null),
             FluidHooks.newFluidHolder(ModFluids.HYDROGEN.get(), FluidHooks.buckets(0.002), null),
             FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), FluidHooks.buckets(0.001), null)
