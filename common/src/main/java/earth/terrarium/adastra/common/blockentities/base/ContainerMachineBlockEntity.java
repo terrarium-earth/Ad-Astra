@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,6 +20,12 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
     public ContainerMachineBlockEntity(BlockPos pos, BlockState state, int containerSize) {
         super(pos, state);
         items = NonNullList.withSize(containerSize, ItemStack.EMPTY);
+    }
+
+    @Override
+    public void firstTick(Level level, BlockPos pos, BlockState state) {
+        super.firstTick(level, pos, state);
+        update();
     }
 
     @Override
@@ -49,7 +56,7 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
     }
 
     @Override
-    public Component getDisplayName() {
+    public @NotNull Component getDisplayName() {
         return getBlockState().getBlock().getName();
     }
 

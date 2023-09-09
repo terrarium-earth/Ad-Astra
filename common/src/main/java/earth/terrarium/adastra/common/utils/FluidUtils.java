@@ -75,7 +75,7 @@ public class FluidUtils {
         if (fluid.isEmpty()) return;
 
         ItemStackHolder holder = getSingleItemHolder(inputStack);
-        if (!canExtractTankToSlot(inputStack, tank, outputTankHandler.insertFluid(fluid, true))) return;
+        if (!canExtractSlotToTank(inputStack, tank, outputTankHandler.insertFluid(fluid, true))) return;
         if (!simulateSlotToTank(inputStack, outputStack)) return;
 
         if (FluidHooks.moveItemToBlockFluid(holder, container, null, fluid) == 0) return;
@@ -107,7 +107,7 @@ public class FluidUtils {
         if (fluid.isEmpty()) return;
 
         ItemStackHolder holder = getSingleItemHolder(inputStack);
-        if (!canInsertSlotToTank(inputStack, fluid)) return;
+        if (!canInsertTankToSlot(inputStack, fluid)) return;
         if (!simulateTankToSlot(inputStack, outputStack, fluid)) return;
 
         if (FluidHooks.moveBlockToItemFluid(container, null, holder, fluid) == 0) return;
@@ -167,21 +167,16 @@ public class FluidUtils {
         return holder.getStack();
     }
 
-    public static boolean canInsertSlotToTank(ItemStack stack, FluidHolder toInsert) {
+    public static boolean canInsertTankToSlot(ItemStack stack, FluidHolder toInsert) {
         ItemStackHolder holder = getSingleItemHolder(stack);
         PlatformFluidItemHandler handler = FluidHooks.getItemFluidManager(holder.getStack());
-
-        if (handler.insertFluid(holder, toInsert, false) == 0) return false;
-        return holder.isDirty();
+        return handler.insertFluid(holder, toInsert, false) != 0;
     }
 
-    public static boolean canExtractTankToSlot(ItemStack stack, int tank, long toExtract) {
+    public static boolean canExtractSlotToTank(ItemStack stack, int tank, long toExtract) {
         ItemStackHolder holder = getSingleItemHolder(stack);
         PlatformFluidItemHandler handler = FluidHooks.getItemFluidManager(holder.getStack());
-
-        if (handler.extractFluid(holder, FluidHooks.newFluidHolder(handler.getFluidInTank(tank).getFluid(), toExtract, null), false).getFluidAmount() == 0) {
-            return false;
-        }
-        return holder.isDirty();
+        FluidHolder fluid = FluidHooks.newFluidHolder(handler.getFluidInTank(tank).getFluid(), toExtract, null);
+        return handler.extractFluid(holder, fluid, false).getFluidAmount() != 0;
     }
 }

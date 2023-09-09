@@ -72,18 +72,20 @@ public class ModLangProvider extends LanguageProvider {
         add("text.adastra.weather.temperature.in", "In: %s");
 
         add("tooltip.adastra.energy", "%s ⚡ / %s ⚡");
-        add("tooltip.adastra.energy_in", "In: %s ⚡");
-        add("tooltip.adastra.energy_out", "Out: %s ⚡");
 
-        add("tooltip.adastra.max_energy_in", "Max In: %s ⚡");
-        add("tooltip.adastra.max_energy_out", "Max Out: %s ⚡");
+        add("tooltip.adastra.energy_in", "In: %s ⚡/t");
+        add("tooltip.adastra.energy_out", "Out: %s ⚡/t");
+        add("tooltip.adastra.max_energy_in", "Max In: %s ⚡/t");
+        add("tooltip.adastra.max_energy_out", "Max Out: %s ⚡/t");
 
         add("tooltip.adastra.fluid", "%s 🪣 / %s 🪣 %s");
-        add("tooltip.adastra.fluid_in", "In: %s 🪣");
-        add("tooltip.adastra.fluid_out", "Out: %s 🪣");
 
-        add("tooltip.adastra.max_fluid_in", "Max In: %s 🪣");
-        add("tooltip.adastra.max_fluid_out", "Max Out: %s 🪣");
+        add("tooltip.adastra.fluid_in", "In: %s 🪣/t");
+        add("tooltip.adastra.fluid_out", "Out: %s 🪣/t");
+        add("tooltip.adastra.max_fluid_in", "Max In: %s 🪣/t");
+        add("tooltip.adastra.max_fluid_out", "Max Out: %s 🪣/t");
+
+        add(ConstantComponents.CLEAR_FLUID_TANK.getString(), "Shift-right-click to clear");
 
         add(ConstantComponents.SIDE_CONFIG.getString(), "Side Config");
         add(ConstantComponents.REDSTONE_CONTROL.getString(), "Redstone Control");

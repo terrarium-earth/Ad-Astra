@@ -16,6 +16,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class MachineBlockEntity extends BlockEntity {
+    private boolean initialized;
+
     public MachineBlockEntity(BlockPos pos, BlockState state) {
         this(((BasicEntityBlock) state.getBlock()).entity(state), pos, state);
     }
@@ -31,6 +33,10 @@ public abstract class MachineBlockEntity extends BlockEntity {
     }
 
     public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
+    }
+
+    public void firstTick(Level level, BlockPos pos, BlockState state) {
+        this.initialized = true;
     }
 
     public void onRemoved() {
@@ -54,6 +60,10 @@ public abstract class MachineBlockEntity extends BlockEntity {
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    public boolean isInitialized() {
+        return this.initialized;
     }
 
     public void sync() {

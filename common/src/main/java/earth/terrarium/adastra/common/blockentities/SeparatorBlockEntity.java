@@ -13,11 +13,13 @@ import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -25,7 +27,6 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements BotariumFluidBlock<WrappedBlockFluidContainer>, GeoBlockEntity {
-    public static final int CONTAINER_SIZE = 7;
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     @Nullable
@@ -34,15 +35,25 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
     private int cookTimeTotal;
 
     private WrappedBlockFluidContainer fluidContainer;
-    private long lastFluid1;
-    private long lastFluid2;
-    private long lastFluid3;
-    private long fluidDifference1;
-    private long fluidDifference2;
-    private long fluidDifference3;
+    private final long[] lastFluid = new long[3];
+    private final long[] fluidDifference = new long[3];
 
     public SeparatorBlockEntity(BlockPos pos, BlockState state) {
-        super(pos, state, CONTAINER_SIZE);
+        super(pos, state, 7);
+    }
+
+    @Override
+    public void load(@NotNull CompoundTag tag) {
+        super.load(tag);
+        cookTime = tag.getInt("CookTime");
+        cookTimeTotal = tag.getInt("CookTimeTotal");
+    }
+
+    @Override
+    protected void saveAdditional(@NotNull CompoundTag tag) {
+        super.saveAdditional(tag);
+        tag.putInt("CookTime", cookTime);
+        tag.putInt("CookTimeTotal", cookTimeTotal);
     }
 
     @Override
@@ -122,7 +133,7 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
 
         fluidContainer.internalInsert(recipe.resultFluid1(), false);
         fluidContainer.internalInsert(recipe.resultFluid2(), false);
-        
+
         this.updateFluidSlots();
         if (fluidContainer.getFluids().get(0).isEmpty()) {
             recipe = null;
@@ -153,24 +164,14 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
     @Override
     public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
         super.clientTick(level, time, state, pos);
-        if (time % 2 != 0) return;
-        this.fluidDifference1 = this.getFluidContainer().getFluids().get(0).getFluidAmount() - this.lastFluid1;
-        this.fluidDifference2 = this.getFluidContainer().getFluids().get(1).getFluidAmount() - this.lastFluid2;
-        this.fluidDifference3 = this.getFluidContainer().getFluids().get(2).getFluidAmount() - this.lastFluid3;
-        this.lastFluid1 = this.getFluidContainer().getFluids().get(0).getFluidAmount();
-        this.lastFluid2 = this.getFluidContainer().getFluids().get(1).getFluidAmount();
-        this.lastFluid3 = this.getFluidContainer().getFluids().get(2).getFluidAmount();
+        if (time % 2 == 0) return;
+        for (int i = 0; i < 3; i++) {
+            this.fluidDifference[i] = this.getFluidContainer().getFluids().get(i).getFluidAmount() - this.lastFluid[i];
+            this.lastFluid[i] = this.getFluidContainer().getFluids().get(i).getFluidAmount();
+        }
     }
 
-    public long fluidDifference1() {
-        return this.fluidDifference1;
-    }
-
-    public long fluidDifference2() {
-        return this.fluidDifference2;
-    }
-
-    public long fluidDifference3() {
-        return this.fluidDifference3;
+    public long fluidDifference(int tank) {
+        return this.fluidDifference[tank];
     }
 }

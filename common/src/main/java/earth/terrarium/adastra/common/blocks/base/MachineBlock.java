@@ -70,6 +70,7 @@ public class MachineBlock extends BasicEntityBlock {
                 } else {
                     machine.serverTick((ServerLevel) level, time, state, blockPos);
                 }
+                if (!machine.isInitialized()) machine.firstTick(level, blockPos, state);
             }
         };
     }

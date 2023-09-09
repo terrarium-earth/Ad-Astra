@@ -19,10 +19,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 public class BatteryBlockEntity extends PoweredMachineBlockEntity {
-    public static final int CONTAINER_SIZE = 5;
 
     public BatteryBlockEntity(BlockPos pos, BlockState state) {
-        super(pos, state, CONTAINER_SIZE);
+        super(pos, state, 5);
     }
 
     @Override

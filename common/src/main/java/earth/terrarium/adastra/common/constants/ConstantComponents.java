@@ -44,4 +44,5 @@ public class ConstantComponents {
     public static final Component GAS_TANK_INFO = Component.translatable("info.adastra.gas_tank").withStyle(ChatFormatting.GRAY);
 
     public static final Component UPGRADES = Component.translatable("tooltip.adastra.upgrades").withStyle(ChatFormatting.LIGHT_PURPLE);
+    public static final Component CLEAR_FLUID_TANK = Component.translatable("tooltip.adastra.clear_fluid_tank").withStyle(ChatFormatting.DARK_RED);
 }

@@ -29,8 +29,8 @@ public class SeparatorScreen extends MachineScreen<SeparatorMenu, SeparatorBlock
         super.render(graphics, mouseX, mouseY, f);
         this.drawGear(graphics, 110, 6);
         this.drawEnergyBar(graphics, mouseX, mouseY, 138, 103, menu.getEntity().getEnergyStorage(), menu.getEntity().energyDifference());
-        this.drawFluidBar(graphics, mouseX, mouseY, 54, 93, menu.getEntity().getFluidContainer(), 0, menu.getEntity().fluidDifference1());
-        this.drawFluidBar(graphics, mouseX, mouseY, 14, 105, menu.getEntity().getFluidContainer(), 1, menu.getEntity().fluidDifference2());
-        this.drawFluidBar(graphics, mouseX, mouseY, 94, 105, menu.getEntity().getFluidContainer(), 2, menu.getEntity().fluidDifference3());
+        this.drawFluidBar(graphics, mouseX, mouseY, 54, 93, menu.getEntity().getFluidContainer(), 0, menu.getEntity().fluidDifference(0));
+        this.drawFluidBar(graphics, mouseX, mouseY, 14, 105, menu.getEntity().getFluidContainer(), 1, menu.getEntity().fluidDifference(1));
+        this.drawFluidBar(graphics, mouseX, mouseY, 94, 105, menu.getEntity().getFluidContainer(), 2, menu.getEntity().fluidDifference(2));
     }
 }
