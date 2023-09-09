@@ -86,6 +86,7 @@ subprojects {
         if (isCommon) {
             "modApi"(group = "mezz.jei", name = "jei-$minecraftVersion-$modLoader-api", version = jeiVersion)
             "modApi"(group = "me.shedaniel", name = "RoughlyEnoughItems-api", version = reiVersion)
+            "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-default-plugin", version = reiVersion)
             "modImplementation"(group = "software.bernie.geckolib", name = "geckolib-fabric-$minecraftVersion", version = geckolibVersion)
         } else {
             "modImplementation"(group = "software.bernie.geckolib", name = "geckolib-$modLoader-$minecraftVersion", version = geckolibVersion)

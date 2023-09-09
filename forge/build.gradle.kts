@@ -36,6 +36,7 @@ dependencies {
     val reiVersion: String by project
 
     forge(group = "net.minecraftforge", name = "forge", version = "$minecraftVersion-$forgeVersion")
+    modCompileOnly(group = "me.shedaniel", name = "RoughlyEnoughItems-api-forge", version = reiVersion)
     modLocalRuntime(group = "me.shedaniel", name = "RoughlyEnoughItems-forge", version = reiVersion)
 
     modLocalRuntime(group = "maven.modrinth", name = "jade", version = "2iRQrBk4")
