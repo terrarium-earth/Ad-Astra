@@ -45,4 +45,15 @@ public class ConstantComponents {
 
     public static final Component UPGRADES = Component.translatable("tooltip.adastra.upgrades").withStyle(ChatFormatting.LIGHT_PURPLE);
     public static final Component CLEAR_FLUID_TANK = Component.translatable("tooltip.adastra.clear_fluid_tank").withStyle(ChatFormatting.DARK_RED);
+
+    public static final Component NEXT = Component.translatable("tooltip.adastra.next");
+    public static final Component PREVIOUS = Component.translatable("tooltip.adastra.previous");
+
+    public static final Component SIDE_CONFIG_SLOTS = Component.translatable("side_config.adastra.slots");
+    public static final Component SIDE_CONFIG_ENERGY = Component.translatable("side_config.adastra.energy");
+    public static final Component SIDE_CONFIG_FLUID = Component.translatable("side_config.adastra.fluid");
+    public static final Component SIDE_CONFIG_INPUT_SLOTS = Component.translatable("side_config.adastra.input_slots");
+    public static final Component SIDE_CONFIG_OUTPUT_SLOTS = Component.translatable("side_config.adastra.output_slots");
+    public static final Component SIDE_CONFIG_INPUT_FLUID = Component.translatable("side_config.adastra.input_fluid");
+    public static final Component SIDE_CONFIG_OUTPUT_FLUID = Component.translatable("side_config.adastra.output_fluid");
 }

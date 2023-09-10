@@ -3,16 +3,27 @@ package earth.terrarium.adastra.client.screens.base;
 import com.teamresourceful.resourcefullib.client.screens.AbstractContainerCursorScreen;
 import earth.terrarium.adastra.client.components.PressableImageButton;
 import earth.terrarium.adastra.client.utils.GuiUtils;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.SideConfigurable;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
 import earth.terrarium.adastra.common.networking.NetworkHandler;
 import earth.terrarium.adastra.common.networking.messages.ServerboundClearFluidTankPacket;
+import earth.terrarium.adastra.common.networking.messages.ServerboundSetSideConfigPacket;
 import earth.terrarium.adastra.common.utils.ComponentUtils;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
+import it.unimi.dsi.fastutil.ints.IntIntPair;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.Rect2i;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -22,20 +33,75 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends BlockEntity> extends AbstractContainerCursorScreen<T> {
+public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends BlockEntity & SideConfigurable> extends AbstractContainerCursorScreen<T> {
     private final ResourceLocation texture;
     private final List<ClearOnClick> clearOnClicks = new ArrayList<>();
+    protected final List<List<? extends Button>> sideConfigButtons = new ArrayList<>(6);
+    private Button previousArrow;
+    private Button nextArrow;
+    private int arrowIndex;
+    protected Component sideConfigTitle = Component.empty();
 
-    public MachineScreen(T abstractContainerMenu, Inventory inventory, Component component, ResourceLocation texture, int width, int height) {
-        super(abstractContainerMenu, inventory, component);
+    protected U entity;
+    protected boolean showSideConfig = false;
+
+    public MachineScreen(T menu, Inventory inventory, Component component, ResourceLocation texture, int width, int height) {
+        super(menu, inventory, component);
         this.texture = texture;
         this.imageWidth = width;
         this.imageHeight = height;
+        this.entity = menu.getEntity();
 
         this.inventoryLabelX = width - 180;
         this.inventoryLabelY = height - 98;
         this.titleLabelX = width - 180;
         this.titleLabelY = 43;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+
+        arrowIndex = 0;
+        sideConfigButtons.clear();
+        var configurableEntries = entity.getConfigurableEntries();
+        for (int i = 0; i < configurableEntries.size(); i++) {
+            var entry = configurableEntries.get(i);
+            List<PressableImageButton> buttons = new ArrayList<>();
+            final int configIndex = i;
+            entry.sides().forEach((direction, configuration) -> {
+                PressableImageButton button = getSideConfigButton(configIndex, direction, configuration, entry);
+                buttons.add(button);
+                addRenderableWidget(button);
+                button.visible = false;
+            });
+            sideConfigButtons.add(buttons);
+            sideConfigTitle = getSideConfigTitle();
+        }
+
+        previousArrow = addRenderableWidget(new ImageButton(this.leftPos + getSideConfigButtonXOffset() - 35, this.topPos + getSideConfigButtonYOffset() - 25, 7, 11, 7, 0, 11, GuiUtils.ARROWS, 14, 22,
+            button -> {
+                sideConfigButtons.forEach(all -> all.forEach(b -> b.visible = false));
+                int size = sideConfigButtons.size();
+                arrowIndex = (arrowIndex - 1 + size) % size;
+                sideConfigButtons.get(arrowIndex).forEach(b -> b.visible = true);
+                sideConfigTitle = getSideConfigTitle();
+            }
+        ));
+        previousArrow.setTooltip(Tooltip.create(ConstantComponents.PREVIOUS));
+        if (!showSideConfig) previousArrow.visible = false;
+
+        nextArrow = addRenderableWidget(new ImageButton(this.leftPos + getSideConfigButtonXOffset() - 20, this.topPos + getSideConfigButtonYOffset() - 25, 7, 11, 0, 0, 11, GuiUtils.ARROWS, 14, 22,
+            button -> {
+                sideConfigButtons.forEach(all -> all.forEach(b -> b.visible = false));
+                int size = sideConfigButtons.size();
+                arrowIndex = (arrowIndex + 1) % size;
+                sideConfigButtons.get(arrowIndex).forEach(b -> b.visible = true);
+                sideConfigTitle = getSideConfigTitle();
+            }
+        ));
+        nextArrow.setTooltip(Tooltip.create(ConstantComponents.NEXT));
+        if (!showSideConfig) nextArrow.visible = false;
     }
 
     @Override
@@ -50,6 +116,15 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
         int left = (this.width - this.imageWidth) / 2;
         int top = (this.height - this.imageHeight) / 2;
         graphics.blit(this.texture, left - 8, top, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+        if (showSideConfig) this.renderSideConfig(graphics, mouseX, mouseY);
+    }
+
+    public void renderSideConfig(GuiGraphics graphics, int mouseX, int mouseY) {
+
+    }
+
+    public int getGuiColor() {
+        return 0xff4d4a4e;
     }
 
     public int getTextColor() {
@@ -59,7 +134,11 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
     @Override
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
         graphics.drawString(font, this.title, this.titleLabelX, this.titleLabelY, this.getTextColor(), false);
-        graphics.drawString(font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, this.getTextColor(), false);
+        if (!this.showSideConfig) {
+            graphics.drawString(font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, this.getTextColor(), false);
+        } else {
+            graphics.drawString(font, this.sideConfigTitle, this.inventoryLabelX, this.inventoryLabelY + 10, this.getTextColor(), false);
+        }
     }
 
     public void addRedstoneButton(int xOffset, int yOffset) {
@@ -71,7 +150,13 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
 
     public void addSideConfigButton(int xOffset, int yOffset) {
         addRenderableWidget(new PressableImageButton(this.leftPos + xOffset, this.topPos + yOffset, 18, 18, 0, 0, 18, GuiUtils.SQUARE_BUTTON, 18, 36,
-            button -> {}, // TODO
+            button -> {
+                this.menu.togglePlayerInvSlots();
+                showSideConfig = !showSideConfig;
+                sideConfigButtons.forEach(all -> all.forEach(b -> b.visible = showSideConfig));
+                previousArrow.visible = showSideConfig;
+                nextArrow.visible = showSideConfig;
+            },
             ConstantComponents.SIDE_CONFIG
         ));
     }
@@ -111,11 +196,66 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
         for (var clearOnClick : clearOnClicks) {
             if (mouseX >= clearOnClick.minX() && mouseX <= clearOnClick.maxX() && mouseY >= clearOnClick.minY() && mouseY <= clearOnClick.maxY()) {
                 if (button == 1 && Screen.hasShiftDown()) {
-                    NetworkHandler.CHANNEL.sendToServer(new ServerboundClearFluidTankPacket(menu.getEntity().getBlockPos(), clearOnClick.tank()));
+                    NetworkHandler.CHANNEL.sendToServer(new ServerboundClearFluidTankPacket(entity.getBlockPos(), clearOnClick.tank()));
                 }
             }
         }
         return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        setFocused(null);
+        return super.mouseReleased(mouseX, mouseY, button);
+    }
+
+    private PressableImageButton getSideConfigButton(int configIndex, Direction direction, Configuration initial, ConfigurationEntry entry) {
+        IntIntPair pos = getButtonPosForDirection(direction);
+        return new PressableImageButton(
+            leftPos + getSideConfigButtonXOffset() + pos.leftInt(),
+            topPos + getSideConfigButtonYOffset() - pos.rightInt(),
+            16, 16,
+            0, 0,
+            16,
+            GuiUtils.SQUARE_BUTTON,
+            16, 32, b -> {
+            Configuration next = entity.getConfigurableEntries().get(configIndex).get(direction).next();
+            entry.set(direction, next);
+            NetworkHandler.CHANNEL.sendToServer(new ServerboundSetSideConfigPacket(entity.getBlockPos(), configIndex, direction, next));
+
+            b.setTooltip(Tooltip.create(getSideConfigTooltip(entry.type(), direction, next)));
+        }, getSideConfigTooltip(entry.type(), direction, initial));
+    }
+
+    public Component getSideConfigTooltip(ConfigurationType type, Direction direction, Configuration action) {
+        return Component.empty()
+            .append(Component.translatable("side_config.adastra.type.type", type.translation().getString()).withStyle(ChatFormatting.GREEN))
+            .append("\n")
+            .append(Component.translatable("side_config.adastra.type.direction", ComponentUtils.getRelativeDirectionComponent(direction).getString(), ComponentUtils.getDirectionComponent(direction).getString()).withStyle(ChatFormatting.GOLD))
+            .append("\n")
+            .append(Component.translatable("side_config.adastra.type.action", action.translation().getString()).withStyle(ChatFormatting.GOLD));
+    }
+
+    private IntIntPair getButtonPosForDirection(Direction direction) {
+        return switch (direction) {
+            case UP -> IntIntPair.of(0, 19);
+            case DOWN -> IntIntPair.of(0, -19);
+            case NORTH -> IntIntPair.of(0, 0);
+            case EAST -> IntIntPair.of(19, 0);
+            case SOUTH -> IntIntPair.of(-19, -19);
+            case WEST -> IntIntPair.of(-19, 0);
+        };
+    }
+
+    public Component getSideConfigTitle() {
+        return Component.translatable("side_config.adastra.title", entity.getConfigurableEntries().get(arrowIndex).title().getString());
+    }
+    public int getSideConfigButtonXOffset() {
+        return 75;
+    }
+
+    public int getSideConfigButtonYOffset() {
+        return imageHeight - 50;
     }
 
     public int leftPos() {

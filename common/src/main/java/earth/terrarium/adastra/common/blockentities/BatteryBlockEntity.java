@@ -6,6 +6,7 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.SideConfigurable;
 import earth.terrarium.adastra.common.blocks.BatteryBlock;
+import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.BatteryMenu;
 import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
@@ -99,10 +100,7 @@ public class BatteryBlockEntity extends PoweredMachineBlockEntity implements Sid
     @Override
     public void load(@NotNull CompoundTag tag) {
         super.load(tag);
-        ConfigurationEntry.load(tag, this.sideConfig);
-        if (this.sideConfig.isEmpty()) {
-            this.sideConfig.addAll(defaultConfig());
-        }
+        ConfigurationEntry.load(tag, this.sideConfig, defaultConfig());
     }
 
     @Override
@@ -119,8 +117,8 @@ public class BatteryBlockEntity extends PoweredMachineBlockEntity implements Sid
     @Override
     public List<ConfigurationEntry> defaultConfig() {
         return List.of(
-            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.INPUT),
-            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.INPUT_OUTPUT)
+            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.INPUT, ConstantComponents.SIDE_CONFIG_SLOTS),
+            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.INPUT_OUTPUT, ConstantComponents.SIDE_CONFIG_ENERGY)
         );
     }
 }

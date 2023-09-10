@@ -5,6 +5,7 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.SideConfigurable;
+import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.container.BiFluidContainer;
 import earth.terrarium.adastra.common.menus.SeparatorMenu;
 import earth.terrarium.adastra.common.recipes.SeparatingRecipe;
@@ -61,7 +62,7 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
     }
 
     @Override
-    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+    public AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory, @NotNull Player player) {
         return new SeparatorMenu(id, inventory, this);
     }
 
@@ -173,7 +174,7 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
     @Override
     public void load(@NotNull CompoundTag tag) {
         super.load(tag);
-        ConfigurationEntry.load(tag, this.sideConfig);
+        ConfigurationEntry.load(tag, this.sideConfig, defaultConfig());
         cookTime = tag.getInt("CookTime");
         cookTimeTotal = tag.getInt("CookTimeTotal");
     }
@@ -188,18 +189,18 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
 
     @Override
     public List<ConfigurationEntry> getConfigurableEntries() {
-        return sideConfig;
+        return this.sideConfig;
     }
 
     @Override
     public List<ConfigurationEntry> defaultConfig() {
         return List.of(
-            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.INPUT),
-            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.OUTPUT),
-            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.INPUT),
-            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.INPUT),
-            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.OUTPUT),
-            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.OUTPUT)
+            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.INPUT, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
+            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.OUTPUT, ConstantComponents.SIDE_CONFIG_OUTPUT_SLOTS),
+            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.INPUT, ConstantComponents.SIDE_CONFIG_ENERGY),
+            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.INPUT, ConstantComponents.SIDE_CONFIG_INPUT_FLUID),
+            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.OUTPUT, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID),
+            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.OUTPUT, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID)
         );
     }
 }

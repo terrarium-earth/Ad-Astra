@@ -7,6 +7,7 @@ import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
@@ -120,6 +121,14 @@ public class ComponentUtils {
     public static Component getTicksPerIterationComponent(int time) {
         return Component.translatable("tooltip.adastra.ticks_per_iteration",
             getFormattedAmount(time)).withStyle(ChatFormatting.AQUA);
+    }
+
+    public static Component getDirectionComponent(Direction direction) {
+        return Component.translatable("direction.adastra.%s".formatted(direction.getName()));
+    }
+
+    public static Component getRelativeDirectionComponent(Direction direction) {
+        return Component.translatable("direction.adastra.relative.%s".formatted(direction.getName()));
     }
 
     public static void addDescriptionComponent(List<Component> tooltipComponents, Component description) {

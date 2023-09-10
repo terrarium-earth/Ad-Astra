@@ -30,9 +30,26 @@ public class SeparatorScreen extends MachineScreen<SeparatorMenu, SeparatorBlock
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float f) {
         super.render(graphics, mouseX, mouseY, f);
         this.drawGear(graphics, 110, 6);
-        this.drawEnergyBar(graphics, mouseX, mouseY, 138, 103, menu.getEntity().getEnergyStorage(), menu.getEntity().energyDifference());
-        this.drawFluidBar(graphics, mouseX, mouseY, 54, 93, menu.getEntity().getFluidContainer(), 0, menu.getEntity().fluidDifference(0));
-        this.drawFluidBar(graphics, mouseX, mouseY, 14, 105, menu.getEntity().getFluidContainer(), 1, menu.getEntity().fluidDifference(1));
-        this.drawFluidBar(graphics, mouseX, mouseY, 94, 105, menu.getEntity().getFluidContainer(), 2, menu.getEntity().fluidDifference(2));
+        this.drawEnergyBar(graphics, mouseX, mouseY, 138, 103, entity.getEnergyStorage(), entity.energyDifference());
+        this.drawFluidBar(graphics, mouseX, mouseY, 54, 93, entity.getFluidContainer(), 0, entity.fluidDifference(0));
+        this.drawFluidBar(graphics, mouseX, mouseY, 14, 105, entity.getFluidContainer(), 1, entity.fluidDifference(1));
+        this.drawFluidBar(graphics, mouseX, mouseY, 94, 105, entity.getFluidContainer(), 2, entity.fluidDifference(2));
+    }
+
+    @Override
+    public void renderSideConfig(GuiGraphics graphics, int mouseX, int mouseY) {
+        graphics.fill(leftPos, topPos + 157, leftPos + 170, topPos + 245, getGuiColor());
+        graphics.blit(TEXTURE, leftPos - 8, topPos + 157, 0, 33, 184, 9, this.imageWidth, this.imageHeight);
+        super.renderSideConfig(graphics, mouseX, mouseY);
+    }
+
+    @Override
+    public int getSideConfigButtonXOffset() {
+        return 50;
+    }
+
+    @Override
+    public int getSideConfigButtonYOffset() {
+        return imageHeight - 50;
     }
 }

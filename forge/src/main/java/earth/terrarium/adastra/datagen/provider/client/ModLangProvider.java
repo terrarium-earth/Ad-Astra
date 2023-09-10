@@ -122,6 +122,44 @@ public class ModLangProvider extends LanguageProvider {
         add("tooltip.adastra.upgrades.entry", "- %sx %s");
         add("upgrade.adastra.speed", "Speed Upgrade");
         add("upgrade.adastra.capacity", "Capacity Upgrade");
+
+        add(ConstantComponents.SIDE_CONFIG_SLOTS.getString(), "Slots");
+        add(ConstantComponents.SIDE_CONFIG_ENERGY.getString(), "Energy");
+        add(ConstantComponents.SIDE_CONFIG_FLUID.getString(), "Fluid");
+        add(ConstantComponents.SIDE_CONFIG_INPUT_SLOTS.getString(), "Input Slots");
+        add(ConstantComponents.SIDE_CONFIG_OUTPUT_SLOTS.getString(), "Output Slots");
+        add(ConstantComponents.SIDE_CONFIG_INPUT_FLUID.getString(), "Input Fluid");
+        add(ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID.getString(), "Output Fluid");
+        add("side_config.adastra.title", "Side Config [%s]");
+        add("side_config.adastra.type.type", "Type: %s");
+        add("side_config.adastra.type.direction", "Direction: %s (%s)");
+        add("side_config.adastra.type.action", "Action: %s");
+
+        add("side_config.adastra.type.none", "None");
+        add("side_config.adastra.type.input", "Input");
+        add("side_config.adastra.type.output", "Output");
+        add("side_config.adastra.type.input_output", "Input/Output");
+
+        add("side_config.adastra.type.slot", "Slot");
+        add("side_config.adastra.type.energy", "Energy");
+        add("side_config.adastra.type.fluid", "Fluid");
+
+        add("direction.adastra.up", "Up");
+        add("direction.adastra.down", "Down");
+        add("direction.adastra.north", "North");
+        add("direction.adastra.east", "East");
+        add("direction.adastra.south", "South");
+        add("direction.adastra.west", "West");
+
+        add("direction.adastra.relative.up", "Top");
+        add("direction.adastra.relative.down", "Bottom");
+        add("direction.adastra.relative.north", "Front");
+        add("direction.adastra.relative.east", "Right");
+        add("direction.adastra.relative.south", "Back");
+        add("direction.adastra.relative.west", "Left");
+
+        add(ConstantComponents.NEXT.getString(), "Next");
+        add(ConstantComponents.PREVIOUS.getString(), "Previous");
     }
 
     public void addFluid(Supplier<? extends Fluid> key, String name) {

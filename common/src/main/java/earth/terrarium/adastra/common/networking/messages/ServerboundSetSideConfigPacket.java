@@ -20,7 +20,7 @@ public record ServerboundSetSideConfigPacket(BlockPos machine,
                                              Configuration configuration) implements Packet<ServerboundSetSideConfigPacket> {
 
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "set_side_config");
-    public static final ServerboundSetSideConfigPacket.Handler HANDLER = new ServerboundSetSideConfigPacket.Handler();
+    public static final Handler HANDLER = new ServerboundSetSideConfigPacket.Handler();
 
     @Override
     public ResourceLocation getID() {
@@ -59,6 +59,7 @@ public record ServerboundSetSideConfigPacket(BlockPos machine,
                 BlockEntity machine = level.getBlockEntity(packet.machine());
                 if (!(machine instanceof SideConfigurable sideConfigurable)) return;
                 sideConfigurable.getConfigurableEntries().get(packet.configIndex()).set(packet.direction(), packet.configuration());
+                machine.setChanged();
             };
         }
     }

@@ -28,6 +28,23 @@ public class BatteryScreen extends MachineScreen<BatteryMenu, BatteryBlockEntity
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float f) {
         super.render(graphics, mouseX, mouseY, f);
         this.drawGear(graphics, 141, 6);
-        this.drawEnergyBar(graphics, mouseX, mouseY, 156, 95, menu.getEntity().getEnergyStorage(), menu.getEntity().energyDifference());
+        this.drawEnergyBar(graphics, mouseX, mouseY, 156, 95, entity.getEnergyStorage(), entity.energyDifference());
+    }
+
+    @Override
+    public void renderSideConfig(GuiGraphics graphics, int mouseX, int mouseY) {
+        graphics.fill(leftPos + 30, topPos + 133, leftPos + 200, topPos + 222, getGuiColor());
+        graphics.blit(TEXTURE, leftPos - 8, topPos + 133, 0, 33, 215, 9, this.imageWidth, this.imageHeight);
+        super.renderSideConfig(graphics, mouseX, mouseY);
+    }
+
+    @Override
+    public int getSideConfigButtonXOffset() {
+        return 75;
+    }
+
+    @Override
+    public int getSideConfigButtonYOffset() {
+        return imageHeight - 50;
     }
 }

@@ -4,15 +4,16 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public record ConfigurationEntry(ConfigurationType type, Map<Direction, Configuration> sides) {
+public record ConfigurationEntry(ConfigurationType type, Map<Direction, Configuration> sides, Component title) {
 
-    public ConfigurationEntry(ConfigurationType type, Configuration defaultValue) {
-        this(type, getDefault(defaultValue));
+    public ConfigurationEntry(ConfigurationType type, Configuration defaultValue, Component title) {
+        this(type, getDefault(defaultValue), title);
     }
 
     public Configuration get(Direction direction) {
@@ -20,7 +21,7 @@ public record ConfigurationEntry(ConfigurationType type, Map<Direction, Configur
     }
 
     public void set(Direction direction, Configuration value) {
-        this.sides.put(direction, value);
+        this.sides.replace(direction, value);
     }
 
 
@@ -31,12 +32,8 @@ public record ConfigurationEntry(ConfigurationType type, Map<Direction, Configur
             CompoundTag entryTag = new CompoundTag();
             entryTag.putByte("Type", (byte) entry.type.ordinal());
 
-            entry.sides.forEach((direction, configuration) -> {
-                CompoundTag sideTag = new CompoundTag();
-                sideTag.putByte("Side", (byte) direction.ordinal());
-                sideTag.putByte("Configuration", (byte) configuration.ordinal());
-                entryTag.put("Side", sideTag);
-            });
+            entry.sides.forEach((direction, configuration) ->
+                entryTag.putByte(direction.getName(), (byte) configuration.ordinal()));
 
             list.add(entryTag);
         }
@@ -44,20 +41,24 @@ public record ConfigurationEntry(ConfigurationType type, Map<Direction, Configur
         tag.put("SideConfig", list);
     }
 
-    public static List<ConfigurationEntry> load(CompoundTag tag, List<ConfigurationEntry> sideConfig) {
+    public static List<ConfigurationEntry> load(CompoundTag tag, List<ConfigurationEntry> sideConfig, List<ConfigurationEntry> defaultConfig) {
         ListTag list = tag.getList("SideConfig", Tag.TAG_COMPOUND);
 
+        sideConfig.clear();
         for (int i = 0; i < list.size(); i++) {
             CompoundTag entryTag = list.getCompound(i);
             ConfigurationType type = ConfigurationType.values()[entryTag.getByte("Type")];
 
             Map<Direction, Configuration> sides = new HashMap<>();
-            CompoundTag sideTag = entryTag.getCompound("Side");
-            Direction direction = Direction.values()[sideTag.getByte("Side")];
-            Configuration configuration = Configuration.values()[sideTag.getByte("Configuration")];
-            sides.put(direction, configuration);
+            for (var direction : Direction.values()) {
+                sides.put(direction, Configuration.values()[entryTag.getByte(direction.getName())]);
+            }
 
-            sideConfig.add(new ConfigurationEntry(type, sides));
+            sideConfig.add(new ConfigurationEntry(type, sides, defaultConfig.get(i).title()));
+        }
+
+        if (sideConfig.isEmpty()) {
+            sideConfig.addAll(defaultConfig);
         }
 
         return sideConfig;

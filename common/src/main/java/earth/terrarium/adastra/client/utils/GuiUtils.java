@@ -3,7 +3,6 @@ package earth.terrarium.adastra.client.utils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.utils.ComponentUtils;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
@@ -32,6 +31,7 @@ public class GuiUtils {
 
     public static final ResourceLocation SIDE_SETTINGS_ICON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_settings_icon.png");
     public static final ResourceLocation SQUARE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/square_button.png");
+    public static final ResourceLocation ARROWS = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/arrows.png");
 
     public static void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, WrappedBlockEnergyContainer energyContainer, Component... tooltips) {
         drawEnergyBar(graphics, mouseX, mouseY, font, x, y, energyContainer.getStoredEnergy(), energyContainer.getMaxCapacity(), tooltips);
