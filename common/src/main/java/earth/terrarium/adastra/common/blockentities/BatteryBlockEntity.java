@@ -1,6 +1,10 @@
 package earth.terrarium.adastra.common.blockentities;
 
 import earth.terrarium.adastra.common.blockentities.base.PoweredMachineBlockEntity;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.SideConfigurable;
 import earth.terrarium.adastra.common.blocks.BatteryBlock;
 import earth.terrarium.adastra.common.menus.BatteryMenu;
 import earth.terrarium.botarium.common.energy.EnergyApi;
@@ -9,6 +13,7 @@ import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -18,7 +23,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public class BatteryBlockEntity extends PoweredMachineBlockEntity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class BatteryBlockEntity extends PoweredMachineBlockEntity implements SideConfigurable {
+    private final List<ConfigurationEntry> sideConfig = new ArrayList<>();
 
     public BatteryBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 5);
@@ -85,5 +94,33 @@ public class BatteryBlockEntity extends PoweredMachineBlockEntity {
                 this.setItem(i, holder.getStack());
             }
         }
+    }
+
+    @Override
+    public void load(@NotNull CompoundTag tag) {
+        super.load(tag);
+        ConfigurationEntry.load(tag, this.sideConfig);
+        if (this.sideConfig.isEmpty()) {
+            this.sideConfig.addAll(defaultConfig());
+        }
+    }
+
+    @Override
+    protected void saveAdditional(@NotNull CompoundTag tag) {
+        super.saveAdditional(tag);
+        ConfigurationEntry.save(tag, this.sideConfig);
+    }
+
+    @Override
+    public List<ConfigurationEntry> getConfigurableEntries() {
+        return sideConfig;
+    }
+
+    @Override
+    public List<ConfigurationEntry> defaultConfig() {
+        return List.of(
+            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.INPUT),
+            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.INPUT_OUTPUT)
+        );
     }
 }

@@ -72,7 +72,7 @@ public abstract class BasicContainerMenu<T extends BlockEntity> extends Abstract
     protected abstract void addMenuSlots();
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@NotNull Player player) {
         return true;
     }
 
@@ -101,15 +101,19 @@ public abstract class BasicContainerMenu<T extends BlockEntity> extends Abstract
         return itemStack;
     }
 
+    public void togglePlayerInvSlots() {
+        slots.stream().filter(slot -> slot instanceof InventorySlot).forEach(slot -> ((InventorySlot) slot).toggleActive());
+    }
+
     protected void addPlayerInvSlots() {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
-                addSlot(new Slot(inventory, j + i * 9 + 9, getPlayerInvXOffset() + j * 18, getPlayerInvYOffset() + i * 18));
+                addSlot(new InventorySlot(inventory, j + i * 9 + 9, getPlayerInvXOffset() + j * 18, getPlayerInvYOffset() + i * 18));
             }
         }
 
         for (int k = 0; k < 9; ++k) {
-            addSlot(new Slot(inventory, k, getPlayerInvXOffset() + k * 18, getPlayerInvYOffset() + 58));
+            addSlot(new InventorySlot(inventory, k, getPlayerInvXOffset() + k * 18, getPlayerInvYOffset() + 58));
         }
     }
 
@@ -136,6 +140,23 @@ public abstract class BasicContainerMenu<T extends BlockEntity> extends Abstract
         @Override
         public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
             return Pair.of(InventoryMenu.BLOCK_ATLAS, icon);
+        }
+    }
+
+    private static class InventorySlot extends Slot {
+        private boolean active = true;
+
+        public InventorySlot(Container container, int slot, int x, int y) {
+            super(container, slot, x, y);
+        }
+
+        @Override
+        public boolean isActive() {
+            return active;
+        }
+
+        public void toggleActive() {
+            this.active = !this.active;
         }
     }
 

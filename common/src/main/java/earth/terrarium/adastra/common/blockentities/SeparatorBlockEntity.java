@@ -1,6 +1,10 @@
 package earth.terrarium.adastra.common.blockentities;
 
 import earth.terrarium.adastra.common.blockentities.base.PoweredMachineBlockEntity;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.SideConfigurable;
 import earth.terrarium.adastra.common.container.BiFluidContainer;
 import earth.terrarium.adastra.common.menus.SeparatorMenu;
 import earth.terrarium.adastra.common.recipes.SeparatingRecipe;
@@ -26,7 +30,10 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements BotariumFluidBlock<WrappedBlockFluidContainer>, GeoBlockEntity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements BotariumFluidBlock<WrappedBlockFluidContainer>, GeoBlockEntity, SideConfigurable {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     @Nullable
@@ -34,26 +41,13 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
     private int cookTime;
     private int cookTimeTotal;
 
-    private WrappedBlockFluidContainer fluidContainer;
     private final long[] lastFluid = new long[3];
     private final long[] fluidDifference = new long[3];
+    private final List<ConfigurationEntry> sideConfig = new ArrayList<>();
+    private WrappedBlockFluidContainer fluidContainer;
 
     public SeparatorBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 7);
-    }
-
-    @Override
-    public void load(@NotNull CompoundTag tag) {
-        super.load(tag);
-        cookTime = tag.getInt("CookTime");
-        cookTimeTotal = tag.getInt("CookTimeTotal");
-    }
-
-    @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        super.saveAdditional(tag);
-        tag.putInt("CookTime", cookTime);
-        tag.putInt("CookTimeTotal", cookTimeTotal);
     }
 
     @Override
@@ -125,7 +119,7 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
         if (fluid < recipe.ingredient().getFluidAmount()) return;
 
         energyStorage.internalExtract(recipe.energy(), false);
-        
+
         cookTime++;
         if (cookTime < cookTimeTotal) return;
         cookTime = 0;
@@ -174,5 +168,38 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
 
     public long fluidDifference(int tank) {
         return this.fluidDifference[tank];
+    }
+
+    @Override
+    public void load(@NotNull CompoundTag tag) {
+        super.load(tag);
+        ConfigurationEntry.load(tag, this.sideConfig);
+        cookTime = tag.getInt("CookTime");
+        cookTimeTotal = tag.getInt("CookTimeTotal");
+    }
+
+    @Override
+    protected void saveAdditional(@NotNull CompoundTag tag) {
+        super.saveAdditional(tag);
+        ConfigurationEntry.save(tag, this.sideConfig);
+        tag.putInt("CookTime", cookTime);
+        tag.putInt("CookTimeTotal", cookTimeTotal);
+    }
+
+    @Override
+    public List<ConfigurationEntry> getConfigurableEntries() {
+        return sideConfig;
+    }
+
+    @Override
+    public List<ConfigurationEntry> defaultConfig() {
+        return List.of(
+            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.INPUT),
+            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.OUTPUT),
+            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.INPUT),
+            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.INPUT),
+            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.OUTPUT),
+            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.OUTPUT)
+        );
     }
 }
