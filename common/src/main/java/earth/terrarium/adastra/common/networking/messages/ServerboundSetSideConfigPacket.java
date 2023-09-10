@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.SideConfigurable;
 import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
 import net.minecraft.core.BlockPos;
@@ -13,6 +14,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntity;
+
+import java.util.List;
 
 public record ServerboundSetSideConfigPacket(BlockPos machine,
                                              int configIndex,
@@ -58,7 +61,9 @@ public record ServerboundSetSideConfigPacket(BlockPos machine,
                 if (player.distanceToSqr(packet.machine.getCenter()) > Mth.square(8)) return;
                 BlockEntity machine = level.getBlockEntity(packet.machine());
                 if (!(machine instanceof SideConfigurable sideConfigurable)) return;
-                sideConfigurable.getConfigurableEntries().get(packet.configIndex()).set(packet.direction(), packet.configuration());
+                List<ConfigurationEntry> entries = sideConfigurable.getConfigurableEntries();
+                if (entries.isEmpty()) entries.addAll(sideConfigurable.defaultConfig());
+                entries.get(packet.configIndex()).set(packet.direction(), packet.configuration());
                 machine.setChanged();
             };
         }
