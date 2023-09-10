@@ -17,15 +17,17 @@ public class ComponentUtils {
 
     // No need to go beyond a trillion. We're not Mekanism.
     public static String getFormattedAmount(long number) {
+        String formatted;
         if (number >= 1_000_000_000_000L) {
-            return number % 1_000_000_000_000L == 0 ? number / 1_000_000_000_000L + "T" : "%.2fT".formatted(number / 1_000_000_000_000f);
+            formatted = "%.2fT".formatted(number / 1_000_000_000_000f);
         } else if (number >= 1_000_000_000L) {
-            return number % 1_000_000_000L == 0 ? number / 1_000_000_000L + "G" : "%.2fG".formatted(number / 1_000_000_000f);
+            formatted = "%.2fG".formatted(number / 1_000_000_000f);
         } else if (number >= 1_000_000L) {
-            return number % 1_000_000L == 0 ? number / 1_000_000L + "M" : "%.2fM".formatted(number / 1_000_000f);
+            formatted = "%.2fM".formatted(number / 1_000_000f);
         } else if (number >= 1_000L) {
-            return number % 1_000L == 0 ? number / 1_000L + "K" : "%.2fK".formatted(number / 1_000f);
+            formatted = "%.2fK".formatted(number / 1_000f);
         } else return String.valueOf(number);
+        return formatted.replaceAll("(\\.?0+)([KMGT]?)$", "$2");
     }
 
     public static Component getEnergyComponent(long energy, long capacity) {

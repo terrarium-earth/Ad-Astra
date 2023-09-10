@@ -12,6 +12,7 @@ import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -81,10 +82,8 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
 
     public void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, int xOffset, int yOffset, WrappedBlockEnergyContainer energy, long energyDifference) {
         GuiUtils.drawEnergyBar(
-            graphics,
-            mouseX,
-            mouseY,
-            font,
+            graphics, mouseX,
+            mouseY, font,
             this.leftPos + xOffset,
             this.topPos + yOffset,
             energy,
@@ -97,14 +96,10 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
         int x = this.leftPos + xOffset;
         int y = this.topPos + yOffset;
         GuiUtils.drawFluidBar(
-            graphics,
-            mouseX,
-            mouseY,
-            font,
-            x,
-            y,
-            fluid,
-            tank,
+            graphics, mouseX,
+            mouseY, font,
+            x, y,
+            fluid, tank,
             ComponentUtils.getFluidDifferenceComponent(fluidDifference),
             !fluid.isEmpty() ? ConstantComponents.CLEAR_FLUID_TANK : Component.empty());
 
@@ -123,6 +118,18 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-    private record ClearOnClick(int minX, int minY, int maxX, int maxY, int tank) {
+    public int leftPos() {
+        return this.leftPos;
     }
+
+    public int topPos() {
+        return this.topPos;
+    }
+
+    @SuppressWarnings("unused")
+    public void testClickArea(GuiGraphics graphics, Rect2i clickArea) {
+        graphics.fill(leftPos + clickArea.getX(), topPos + clickArea.getY(), leftPos + clickArea.getX() + clickArea.getWidth(), topPos + clickArea.getY() + clickArea.getHeight(), 0x40ffff00);
+    }
+
+    private record ClearOnClick(int minX, int minY, int maxX, int maxY, int tank) {}
 }
