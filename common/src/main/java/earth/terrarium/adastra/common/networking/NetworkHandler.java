@@ -20,5 +20,6 @@ public final class NetworkHandler {
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundSetStationPacket.ID, ServerboundSetStationPacket.HANDLER, ServerboundSetStationPacket.class);
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundClearFluidTankPacket.ID, ServerboundClearFluidTankPacket.HANDLER, ServerboundClearFluidTankPacket.class);
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundSetSideConfigPacket.ID, ServerboundSetSideConfigPacket.HANDLER, ServerboundSetSideConfigPacket.class);
+        CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundResetSideConfigPacket.ID, ServerboundResetSideConfigPacket.HANDLER, ServerboundResetSideConfigPacket.class);
     }
 }

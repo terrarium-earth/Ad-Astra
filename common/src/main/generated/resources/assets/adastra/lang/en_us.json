@@ -131,6 +131,7 @@
   "tooltip.adastra.redstone.on_when_not_powered": "On When Not Powered",
   "tooltip.adastra.redstone.on_when_powered": "On When Powered",
   "tooltip.adastra.redstone_control": "Redstone Control",
+  "tooltip.adastra.reset_to_default": "Reset to Default",
   "tooltip.adastra.shift_description": "Hold SHIFT for more information",
   "tooltip.adastra.side_config": "Side Config",
   "tooltip.adastra.ticks_per_iteration": "Takes %s ticks per iteration",

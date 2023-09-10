@@ -35,7 +35,6 @@ public class BatteryScreen extends MachineScreen<BatteryMenu, BatteryBlockEntity
     public void renderSideConfig(GuiGraphics graphics, int mouseX, int mouseY) {
         graphics.fill(leftPos + 30, topPos + 133, leftPos + 200, topPos + 222, getGuiColor());
         graphics.blit(TEXTURE, leftPos - 8, topPos + 133, 0, 33, 215, 9, this.imageWidth, this.imageHeight);
-        super.renderSideConfig(graphics, mouseX, mouseY);
     }
 
     @Override

@@ -12,7 +12,7 @@ public record ServerboundSyncKeybindPacket(
     KeybindManager keybinds) implements Packet<ServerboundSyncKeybindPacket> {
 
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "sync_keybinds");
-    public static final ServerboundSyncKeybindPacket.Handler HANDLER = new ServerboundSyncKeybindPacket.Handler();
+    public static final Handler HANDLER = new ServerboundSyncKeybindPacket.Handler();
 
     @Override
     public ResourceLocation getID() {

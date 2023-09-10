@@ -48,6 +48,7 @@ public class ConstantComponents {
 
     public static final Component NEXT = Component.translatable("tooltip.adastra.next");
     public static final Component PREVIOUS = Component.translatable("tooltip.adastra.previous");
+    public static final Component RESET_TO_DEFAULT = Component.translatable("tooltip.adastra.reset_to_default");
 
     public static final Component SIDE_CONFIG_SLOTS = Component.translatable("side_config.adastra.slots");
     public static final Component SIDE_CONFIG_ENERGY = Component.translatable("side_config.adastra.energy");

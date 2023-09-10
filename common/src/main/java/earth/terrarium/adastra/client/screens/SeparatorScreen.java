@@ -40,12 +40,11 @@ public class SeparatorScreen extends MachineScreen<SeparatorMenu, SeparatorBlock
     public void renderSideConfig(GuiGraphics graphics, int mouseX, int mouseY) {
         graphics.fill(leftPos, topPos + 157, leftPos + 170, topPos + 245, getGuiColor());
         graphics.blit(TEXTURE, leftPos - 8, topPos + 157, 0, 33, 184, 9, this.imageWidth, this.imageHeight);
-        super.renderSideConfig(graphics, mouseX, mouseY);
     }
 
     @Override
     public int getSideConfigButtonXOffset() {
-        return 50;
+        return 44;
     }
 
     @Override

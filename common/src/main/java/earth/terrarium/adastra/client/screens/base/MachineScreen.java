@@ -11,6 +11,7 @@ import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
 import earth.terrarium.adastra.common.networking.NetworkHandler;
 import earth.terrarium.adastra.common.networking.messages.ServerboundClearFluidTankPacket;
+import earth.terrarium.adastra.common.networking.messages.ServerboundResetSideConfigPacket;
 import earth.terrarium.adastra.common.networking.messages.ServerboundSetSideConfigPacket;
 import earth.terrarium.adastra.common.utils.ComponentUtils;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
@@ -37,6 +38,7 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
     private final ResourceLocation texture;
     private final List<ClearOnClick> clearOnClicks = new ArrayList<>();
     protected final List<List<? extends Button>> sideConfigButtons = new ArrayList<>(6);
+    private Button resetToDefaultButton;
     private Button previousArrow;
     private Button nextArrow;
     private int arrowIndex;
@@ -62,7 +64,6 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
     protected void init() {
         super.init();
 
-        arrowIndex = 0;
         sideConfigButtons.clear();
         var configurableEntries = entity.getConfigurableEntries();
         for (int i = 0; i < configurableEntries.size(); i++) {
@@ -78,6 +79,17 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
             sideConfigButtons.add(buttons);
             sideConfigTitle = getSideConfigTitle();
         }
+
+        resetToDefaultButton = addRenderableWidget(new PressableImageButton(this.leftPos + getSideConfigButtonXOffset() - 43, this.topPos + getSideConfigButtonYOffset() + 25, 16, 16, 0, 0, 16, GuiUtils.SQUARE_BUTTON, 16, 32,
+            button -> {
+                entity.resetToDefault(arrowIndex);
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundResetSideConfigPacket(entity.getBlockPos(), arrowIndex));
+                rebuildWidgets();
+                sideConfigButtons.get(arrowIndex).forEach(b -> b.visible = true);
+            }
+        ));
+        resetToDefaultButton.setTooltip(Tooltip.create(ConstantComponents.RESET_TO_DEFAULT.copy().withStyle(ChatFormatting.DARK_RED)));
+        if (!showSideConfig) resetToDefaultButton.visible = false;
 
         previousArrow = addRenderableWidget(new ImageButton(this.leftPos + getSideConfigButtonXOffset() - 35, this.topPos + getSideConfigButtonYOffset() - 25, 7, 11, 7, 0, 11, GuiUtils.ARROWS, 14, 22,
             button -> {
@@ -119,9 +131,7 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
         if (showSideConfig) this.renderSideConfig(graphics, mouseX, mouseY);
     }
 
-    public void renderSideConfig(GuiGraphics graphics, int mouseX, int mouseY) {
-
-    }
+    public abstract void renderSideConfig(GuiGraphics graphics, int mouseX, int mouseY);
 
     public int getGuiColor() {
         return 0xff4d4a4e;
@@ -154,6 +164,7 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
                 this.menu.togglePlayerInvSlots();
                 showSideConfig = !showSideConfig;
                 sideConfigButtons.forEach(all -> all.forEach(b -> b.visible = showSideConfig));
+                resetToDefaultButton.visible = showSideConfig;
                 previousArrow.visible = showSideConfig;
                 nextArrow.visible = showSideConfig;
             },
@@ -212,14 +223,15 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
     private PressableImageButton getSideConfigButton(int configIndex, Direction direction, Configuration initial, ConfigurationEntry entry) {
         IntIntPair pos = getButtonPosForDirection(direction);
         return new PressableImageButton(
-            leftPos + getSideConfigButtonXOffset() + pos.leftInt(),
+            leftPos + 5 + getSideConfigButtonXOffset() + pos.leftInt(),
             topPos + getSideConfigButtonYOffset() - pos.rightInt(),
             16, 16,
             0, 0,
             16,
             GuiUtils.SQUARE_BUTTON,
             16, 32, b -> {
-            Configuration next = entity.getConfigurableEntries().get(configIndex).get(direction).next();
+            Configuration configuration = entity.getConfigurableEntries().get(configIndex).get(direction);
+            Configuration next = hasShiftDown() ? configuration.previous() : configuration.next();
             entry.set(direction, next);
             NetworkHandler.CHANNEL.sendToServer(new ServerboundSetSideConfigPacket(entity.getBlockPos(), configIndex, direction, next));
 
@@ -250,6 +262,7 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
     public Component getSideConfigTitle() {
         return Component.translatable("side_config.adastra.title", entity.getConfigurableEntries().get(arrowIndex).title().getString());
     }
+
     public int getSideConfigButtonXOffset() {
         return 75;
     }

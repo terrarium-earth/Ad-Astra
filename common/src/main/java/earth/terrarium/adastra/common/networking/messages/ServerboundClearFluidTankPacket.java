@@ -7,10 +7,6 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.base.PlatformFluidHandler;
-import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +17,7 @@ public record ServerboundClearFluidTankPacket(BlockPos machine,
                                               int tank) implements Packet<ServerboundClearFluidTankPacket> {
 
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "clear_fluid_tank");
-    public static final ServerboundClearFluidTankPacket.Handler HANDLER = new ServerboundClearFluidTankPacket.Handler();
+    public static final Handler HANDLER = new ServerboundClearFluidTankPacket.Handler();
 
     @Override
     public ResourceLocation getID() {

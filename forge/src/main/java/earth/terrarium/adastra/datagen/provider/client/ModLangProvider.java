@@ -160,6 +160,7 @@ public class ModLangProvider extends LanguageProvider {
 
         add(ConstantComponents.NEXT.getString(), "Next");
         add(ConstantComponents.PREVIOUS.getString(), "Previous");
+        add(ConstantComponents.RESET_TO_DEFAULT.getString(), "Reset to Default");
     }
 
     public void addFluid(Supplier<? extends Fluid> key, String name) {

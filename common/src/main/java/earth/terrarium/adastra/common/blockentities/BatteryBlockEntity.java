@@ -92,7 +92,7 @@ public class BatteryBlockEntity extends PoweredMachineBlockEntity implements Sid
             ItemStackHolder holder = new ItemStackHolder(stack);
             EnergyApi.moveEnergy(this, null, holder, getEnergyStorage().maxExtract() / filledSlots, false);
             if (holder.isDirty()) {
-                this.setItem(i, holder.getStack());
+                this.setItem(i + 1, holder.getStack());
             }
         }
     }

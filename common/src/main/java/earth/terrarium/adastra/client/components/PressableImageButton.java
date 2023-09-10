@@ -27,7 +27,7 @@ public class PressableImageButton extends ImageButton {
     }
 
     @Override
-    public void renderTexture(@NotNull GuiGraphics guiGraphics, @NotNull ResourceLocation texture, int x, int y, int uOffset, int vOffset, int textureDifference, int width, int height, int textureWidth, int textureHeight) {
+    public void renderTexture(@NotNull GuiGraphics graphics, @NotNull ResourceLocation texture, int x, int y, int uOffset, int vOffset, int textureDifference, int width, int height, int textureWidth, int textureHeight) {
         int i = vOffset;
         if (!this.isActive()) {
             i = vOffset + textureDifference * 2;
@@ -36,6 +36,6 @@ public class PressableImageButton extends ImageButton {
         }
 
         RenderSystem.enableDepthTest();
-        guiGraphics.blit(texture, x, y, (float) uOffset, (float) i, width, height, textureWidth, textureHeight);
+        graphics.blit(texture, x, y, (float) uOffset, (float) i, width, height, textureWidth, textureHeight);
     }
 }
