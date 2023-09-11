@@ -21,6 +21,18 @@ public enum Configuration {
         return this.icon;
     }
 
+    public boolean isNone() {
+        return this == NONE;
+    }
+
+    public boolean isInput() {
+        return this == INPUT || this == INPUT_OUTPUT;
+    }
+
+    public boolean isOutput() {
+        return this == OUTPUT || this == INPUT_OUTPUT;
+    }
+
     public Configuration next() {
         return values()[(ordinal() + 1) % values().length];
     }

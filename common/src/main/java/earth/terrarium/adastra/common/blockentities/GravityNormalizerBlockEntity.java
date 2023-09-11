@@ -2,6 +2,7 @@ package earth.terrarium.adastra.common.blockentities;
 
 import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
+import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blocks.base.SidedMachineBlock;
 import earth.terrarium.adastra.common.utils.floodfill.FloodFill3D;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
@@ -12,11 +13,15 @@ import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -25,6 +30,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer>, BotariumFluidBlock<WrappedBlockFluidContainer>, GeoBlockEntity {
@@ -114,5 +120,25 @@ public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity im
     protected void clearGravityBlocks() {
         GravityApi.API.removeGravity(level, this.lastDistributedBlocks);
         this.lastDistributedBlocks.clear();
+    }
+
+    @Override
+    public List<ConfigurationEntry> defaultConfig() {
+        return List.of();
+    }
+
+    @Override
+    public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
+        return new int[0];
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack itemStack, @Nullable Direction direction) {
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
+        return false;
     }
 }

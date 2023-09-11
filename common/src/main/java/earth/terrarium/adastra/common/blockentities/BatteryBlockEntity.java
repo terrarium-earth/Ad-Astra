@@ -4,17 +4,17 @@ import earth.terrarium.adastra.common.blockentities.base.PoweredMachineBlockEnti
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
-import earth.terrarium.adastra.common.blockentities.base.sideconfig.SideConfigurable;
 import earth.terrarium.adastra.common.blocks.BatteryBlock;
+import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.BatteryMenu;
+import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -23,12 +23,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class BatteryBlockEntity extends PoweredMachineBlockEntity implements SideConfigurable {
-    private final List<ConfigurationEntry> sideConfig = new ArrayList<>();
+public class BatteryBlockEntity extends PoweredMachineBlockEntity {
 
     public BatteryBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 5);
@@ -98,27 +97,30 @@ public class BatteryBlockEntity extends PoweredMachineBlockEntity implements Sid
     }
 
     @Override
-    public void load(@NotNull CompoundTag tag) {
-        super.load(tag);
-        ConfigurationEntry.load(tag, this.sideConfig, defaultConfig());
-    }
-
-    @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        super.saveAdditional(tag);
-        ConfigurationEntry.save(tag, this.sideConfig);
-    }
-
-    @Override
-    public List<ConfigurationEntry> getConfigurableEntries() {
-        return sideConfig;
-    }
-
-    @Override
     public List<ConfigurationEntry> defaultConfig() {
         return List.of(
             new ConfigurationEntry(ConfigurationType.SLOT, Configuration.INPUT, ConstantComponents.SIDE_CONFIG_SLOTS),
             new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.INPUT_OUTPUT, ConstantComponents.SIDE_CONFIG_ENERGY)
         );
+    }
+
+    @Override
+    public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
+        return new int[]{1, 2, 3, 4};
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack itemStack, @Nullable Direction direction) {
+        if (direction == null) return false;
+        var config = this.getSideConfig().get(0);
+        Direction facing = getBlockState().getValue(MachineBlock.FACING).getOpposite();
+        return config.get(ModUtils.relative(facing, direction)).isInput();
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
+        var config = this.getSideConfig().get(0);
+        Direction facing = getBlockState().getValue(MachineBlock.FACING).getOpposite();
+        return config.get(ModUtils.relative(facing, direction)).isOutput();
     }
 }

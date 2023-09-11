@@ -4,13 +4,14 @@ import earth.terrarium.adastra.common.blockentities.base.PoweredMachineBlockEnti
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
-import earth.terrarium.adastra.common.blockentities.base.sideconfig.SideConfigurable;
+import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.container.BiFluidContainer;
 import earth.terrarium.adastra.common.menus.SeparatorMenu;
 import earth.terrarium.adastra.common.recipes.SeparatingRecipe;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.FluidUtils;
+import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
@@ -18,11 +19,13 @@ import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,10 +34,9 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements BotariumFluidBlock<WrappedBlockFluidContainer>, GeoBlockEntity, SideConfigurable {
+public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements BotariumFluidBlock<WrappedBlockFluidContainer>, GeoBlockEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     @Nullable
@@ -44,7 +46,6 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
 
     private final long[] lastFluid = new long[3];
     private final long[] fluidDifference = new long[3];
-    private final List<ConfigurationEntry> sideConfig = new ArrayList<>();
     private WrappedBlockFluidContainer fluidContainer;
 
     public SeparatorBlockEntity(BlockPos pos, BlockState state) {
@@ -174,7 +175,6 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
     @Override
     public void load(@NotNull CompoundTag tag) {
         super.load(tag);
-        ConfigurationEntry.load(tag, this.sideConfig, defaultConfig());
         cookTime = tag.getInt("CookTime");
         cookTimeTotal = tag.getInt("CookTimeTotal");
     }
@@ -182,14 +182,8 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
         super.saveAdditional(tag);
-        ConfigurationEntry.save(tag, this.sideConfig);
         tag.putInt("CookTime", cookTime);
         tag.putInt("CookTimeTotal", cookTimeTotal);
-    }
-
-    @Override
-    public List<ConfigurationEntry> getConfigurableEntries() {
-        return this.sideConfig;
     }
 
     @Override
@@ -202,5 +196,25 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
             new ConfigurationEntry(ConfigurationType.FLUID, Configuration.OUTPUT, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID),
             new ConfigurationEntry(ConfigurationType.FLUID, Configuration.OUTPUT, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID)
         );
+    }
+
+    @Override
+    public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
+        return new int[]{1, 2, 3, 4, 5, 6};
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack itemStack, @Nullable Direction direction) {
+        if (direction == null) return false;
+        var config = index == 1 || index == 2 || index == 3 ? this.getSideConfig().get(0) : this.getSideConfig().get(1);
+        Direction facing = getBlockState().getValue(MachineBlock.FACING).getOpposite();
+        return config.get(ModUtils.relative(facing, direction)).isInput();
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
+        var config = index == 1 || index == 2 || index == 3 ? this.getSideConfig().get(0) : this.getSideConfig().get(1);
+        Direction facing = getBlockState().getValue(MachineBlock.FACING).getOpposite();
+        return config.get(ModUtils.relative(facing, direction)).isOutput();
     }
 }

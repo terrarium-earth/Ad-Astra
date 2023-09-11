@@ -12,13 +12,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class DoubleMachineTopBlockEntity extends BlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer>, BasicContainer {
+public class DoubleMachineTopBlockEntity extends BlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer>, BasicContainer, WorldlyContainer {
     private WrappedBlockEnergyContainer energyContainer;
     private WrappedBlockEnergyContainer belowContainer;
     private ContainerMachineBlockEntity belowEntity;
@@ -111,5 +113,20 @@ public class DoubleMachineTopBlockEntity extends BlockEntity implements Botarium
     @Override
     public boolean stillValid(@NotNull Player player) {
         return belowEntity.stillValid(player);
+    }
+
+    @Override
+    public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
+        return belowEntity.getSlotsForFace(side);
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack itemStack, @Nullable Direction direction) {
+        return belowEntity.canPlaceItemThroughFace(index, itemStack, direction);
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
+        return belowEntity.canTakeItemThroughFace(index, stack, direction);
     }
 }
