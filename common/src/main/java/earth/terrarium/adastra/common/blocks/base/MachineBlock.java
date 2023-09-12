@@ -69,6 +69,7 @@ public class MachineBlock extends BasicEntityBlock {
                     machine.clientTick((ClientLevel) level, time, state, blockPos);
                 } else {
                     machine.serverTick((ServerLevel) level, time, state, blockPos);
+                    machine.internalServerTick((ServerLevel) level, time, state, blockPos);
                 }
                 if (!machine.isInitialized()) machine.firstTick(level, blockPos, state);
             }

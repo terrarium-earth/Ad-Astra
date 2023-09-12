@@ -32,6 +32,10 @@ public abstract class MachineBlockEntity extends BlockEntity {
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
     }
 
+    public void internalServerTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
+
+    }
+
     public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
     }
 

@@ -1,13 +1,12 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
-import earth.terrarium.adastra.common.blockentities.base.PoweredMachineBlockEntity;
+import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
 import earth.terrarium.adastra.common.blocks.machines.BatteryBlock;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.BatteryMenu;
-import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
@@ -23,12 +22,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-public class BatteryBlockEntity extends PoweredMachineBlockEntity {
+public class BatteryBlockEntity extends ContainerMachineBlockEntity {
 
     public BatteryBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 5);
@@ -70,7 +68,6 @@ public class BatteryBlockEntity extends PoweredMachineBlockEntity {
         TransferUtils.pushEnergyNearby(this, this.getEnergyStorage().maxExtract(), this.getSideConfig().get(1), Predicate.not(Direction.UP::equals));
         TransferUtils.pullEnergyNearby(this, this.getEnergyStorage().maxInsert(), this.getSideConfig().get(1), Predicate.not(Direction.UP::equals));
 
-        extractBatterySlot();
         distributeToChargeSlots();
     }
 
@@ -112,18 +109,5 @@ public class BatteryBlockEntity extends PoweredMachineBlockEntity {
     @Override
     public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
         return new int[]{1, 2, 3, 4};
-    }
-
-    @Override
-    public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack itemStack, @Nullable Direction direction) {
-        if (direction == null) return false;
-        var config = this.getSideConfig().get(0);
-        return config.get(ModUtils.relative(this, direction)).canPull();
-    }
-
-    @Override
-    public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
-        var config = this.getSideConfig().get(0);
-        return config.get(ModUtils.relative(this, direction)).canPush();
     }
 }
