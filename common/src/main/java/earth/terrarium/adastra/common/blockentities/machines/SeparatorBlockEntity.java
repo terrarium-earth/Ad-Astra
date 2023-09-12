@@ -114,7 +114,8 @@ public class SeparatorBlockEntity extends RecipeMachineBlockEntity<SeparatingRec
         if (fluidContainer.getFluids().get(1).getFluidAmount() >= fluidContainer.getTankCapacity(1)) return;
         if (fluidContainer.getFluids().get(2).getFluidAmount() >= fluidContainer.getTankCapacity(2)) return;
         if (energyStorage.internalExtract(recipe.energy(), true) < recipe.energy()) return;
-        if (fluidContainer.internalExtract(recipe.ingredient(), true).getFluidAmount() < recipe.ingredient().getFluidAmount()) return;
+        if (fluidContainer.internalExtract(recipe.ingredient(), true).getFluidAmount() < recipe.ingredient().getFluidAmount())
+            return;
 
         energyStorage.internalExtract(recipe.energy(), false);
 

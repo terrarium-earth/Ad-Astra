@@ -9,6 +9,15 @@ public enum RedstoneControl {
     NEVER_ON,
     ;
 
+    public boolean canPower(boolean powered) {
+        return switch (this) {
+            case ALWAYS_ON -> true;
+            case ON_WHEN_POWERED -> powered;
+            case ON_WHEN_NOT_POWERED -> !powered;
+            case NEVER_ON -> false;
+        };
+    }
+
     public Component translation() {
         return Component.translatable("tooltip.adastra.redstone_control.%s".formatted(name().toLowerCase()));
     }

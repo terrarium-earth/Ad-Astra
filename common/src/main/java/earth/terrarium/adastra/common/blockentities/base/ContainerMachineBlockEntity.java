@@ -118,6 +118,10 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
         return this.items;
     }
 
+    public boolean canFunction() {
+        return getRedstoneControl().canPower(isRedstonePowered());
+    }
+
     @Override
     public List<ConfigurationEntry> getSideConfig() {
         if (this.sideConfig.isEmpty()) {

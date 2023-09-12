@@ -22,7 +22,7 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<?>> extends Cont
     @Override
     public void internalServerTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         super.internalServerTick(level, time, state, pos);
-        if (recipe != null) recipeTick(level, getEnergyStorage());
+        if (recipe != null && canFunction()) recipeTick(level, getEnergyStorage());
         if (time % 20 == 0 && recipe == null && shouldSync()) update();
     }
 

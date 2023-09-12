@@ -68,7 +68,7 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity {
         TransferUtils.pushEnergyNearby(this, this.getEnergyStorage().maxExtract(), this.getSideConfig().get(1), Predicate.not(Direction.UP::equals));
         TransferUtils.pullEnergyNearby(this, this.getEnergyStorage().maxInsert(), this.getSideConfig().get(1), Predicate.not(Direction.UP::equals));
 
-        distributeToChargeSlots();
+        if (canFunction()) distributeToChargeSlots();
     }
 
     public void onEnergyChange() {

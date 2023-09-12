@@ -26,25 +26,19 @@ public abstract class MachineBlockEntity extends BlockEntity {
         super(type, pos, state);
     }
 
-    public void tick(Level level, long time, BlockState state, BlockPos pos) {
-    }
+    public void tick(Level level, long time, BlockState state, BlockPos pos) {}
 
-    public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
-    }
+    public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {}
 
-    public void internalServerTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
+    public void internalServerTick(ServerLevel level, long time, BlockState state, BlockPos pos) {}
 
-    }
-
-    public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
-    }
+    public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {}
 
     public void firstTick(Level level, BlockPos pos, BlockState state) {
         this.initialized = true;
     }
 
-    public void onRemoved() {
-    }
+    public void onRemoved() {}
 
     @SuppressWarnings("DataFlowIssue")
     @NotNull
@@ -54,6 +48,10 @@ public abstract class MachineBlockEntity extends BlockEntity {
 
     public boolean isOn() {
         return this.getBlockState().getValue(MachineBlock.LIT);
+    }
+
+    public boolean isRedstonePowered() {
+        return this.getBlockState().getValue(MachineBlock.POWERED);
     }
 
     @Override
