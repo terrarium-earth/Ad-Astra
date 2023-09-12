@@ -112,6 +112,10 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
         extractBatterySlot();
         recipeTick();
         if (time % 2 == 0) sync();
+
+        if (time % 20 == 0 && recipe == null && getEnergyStorage().getStoredEnergy() > 0 && !getFluidContainer().getFluids().get(0).isEmpty()) {
+            update();
+        }
     }
 
     public void recipeTick() {

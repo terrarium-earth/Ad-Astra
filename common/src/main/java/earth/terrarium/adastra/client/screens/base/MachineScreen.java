@@ -4,15 +4,17 @@ import com.teamresourceful.resourcefullib.client.screens.AbstractContainerCursor
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.components.PressableImageButton;
 import earth.terrarium.adastra.client.utils.GuiUtils;
+import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
+import earth.terrarium.adastra.common.blockentities.base.RedstoneControl;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
-import earth.terrarium.adastra.common.blockentities.base.sideconfig.SideConfigurable;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
 import earth.terrarium.adastra.common.networking.NetworkHandler;
 import earth.terrarium.adastra.common.networking.messages.ServerboundClearFluidTankPacket;
 import earth.terrarium.adastra.common.networking.messages.ServerboundResetSideConfigPacket;
+import earth.terrarium.adastra.common.networking.messages.ServerboundSetRedstoneControlPacket;
 import earth.terrarium.adastra.common.networking.messages.ServerboundSetSideConfigPacket;
 import earth.terrarium.adastra.common.utils.ComponentUtils;
 import earth.terrarium.adastra.common.utils.ModUtils;
@@ -30,13 +32,12 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends BlockEntity & SideConfigurable> extends AbstractContainerCursorScreen<T> {
+public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends ContainerMachineBlockEntity> extends AbstractContainerCursorScreen<T> {
     public static final ResourceLocation PUSH_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/push.png");
     public static final ResourceLocation PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/pull.png");
     public static final ResourceLocation PUSH_PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/push_pull.png");
@@ -162,8 +163,13 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
 
     public void addRedstoneButton(int xOffset, int yOffset) {
         addRenderableWidget(new PressableImageButton(this.leftPos + xOffset, this.topPos + yOffset, 18, 18, 0, 0, 18, GuiUtils.SQUARE_BUTTON, 18, 36,
-            button -> {}, // TODO
-            ConstantComponents.REDSTONE_CONTROL
+            button -> {
+                RedstoneControl next = hasShiftDown() ? entity.getRedstoneControl().previous() : entity.getRedstoneControl().next();
+                entity.setRedstoneControl(next);
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundSetRedstoneControlPacket(entity.getBlockPos(), next));
+                button.setTooltip(Tooltip.create(getRedstoneControlTooltip(next)));
+            },
+            getRedstoneControlTooltip(entity.getRedstoneControl())
         ));
     }
 
@@ -261,6 +267,13 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
             .append(Component.translatable("side_config.adastra.type.direction", ComponentUtils.getRelativeDirectionComponent(direction).getString(), ComponentUtils.getDirectionComponent(relative).getString()).withStyle(ChatFormatting.GOLD))
             .append("\n")
             .append(Component.translatable("side_config.adastra.type.action", action.translation().getString()).withStyle(ChatFormatting.GOLD));
+    }
+
+    public Component getRedstoneControlTooltip(RedstoneControl redstoneControl) {
+        return Component.empty()
+            .append(ConstantComponents.REDSTONE_CONTROL).withStyle(ChatFormatting.RED)
+            .append("\n")
+            .append(Component.translatable("tooltip.adastra.redstone_control.mode", redstoneControl.translation().getString()).withStyle(ChatFormatting.GOLD));
     }
 
     private IntIntPair getButtonPosForDirection(Direction direction) {

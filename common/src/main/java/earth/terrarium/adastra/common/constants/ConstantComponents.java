@@ -17,7 +17,7 @@ public class ConstantComponents {
     public static final Component OXYGEN_TRUE = Component.translatable("text.adastra.oxygen_true");
     public static final Component OXYGEN_FALSE = Component.translatable("text.adastra.oxygen_false");
 
-    public static final Component SIDE_CONFIG = Component.translatable("tooltip.adastra.side_config");
+    public static final Component SIDE_CONFIG = Component.translatable("tooltip.adastra.side_config").copy().withStyle(ChatFormatting.GRAY);
     public static final Component REDSTONE_CONTROL = Component.translatable("tooltip.adastra.redstone_control");
 
     public static final Component REDSTONE_ALWAYS_ON = Component.translatable("tooltip.adastra.redstone.always_on");
@@ -46,8 +46,8 @@ public class ConstantComponents {
     public static final Component UPGRADES = Component.translatable("tooltip.adastra.upgrades").withStyle(ChatFormatting.LIGHT_PURPLE);
     public static final Component CLEAR_FLUID_TANK = Component.translatable("tooltip.adastra.clear_fluid_tank").withStyle(ChatFormatting.DARK_RED);
 
-    public static final Component NEXT = Component.translatable("tooltip.adastra.next");
-    public static final Component PREVIOUS = Component.translatable("tooltip.adastra.previous");
+    public static final Component NEXT = Component.translatable("tooltip.adastra.next").copy().withStyle(ChatFormatting.GRAY);
+    public static final Component PREVIOUS = Component.translatable("tooltip.adastra.previous").copy().withStyle(ChatFormatting.GRAY);
     public static final Component RESET_TO_DEFAULT = Component.translatable("tooltip.adastra.reset_to_default");
 
     public static final Component SIDE_CONFIG_SLOTS = Component.translatable("side_config.adastra.slots");

@@ -160,6 +160,12 @@ public class ModLangProvider extends LanguageProvider {
         add("direction.adastra.relative.south", "Back");
         add("direction.adastra.relative.west", "Right");
 
+        add("tooltip.adastra.redstone_control.always_on", "Always On");
+        add("tooltip.adastra.redstone_control.on_when_powered", "On When Powered");
+        add("tooltip.adastra.redstone_control.on_when_not_powered", "On When Not Powered");
+        add("tooltip.adastra.redstone_control.never_on", "Never On");
+        add("tooltip.adastra.redstone_control.mode", "Mode: %s");
+
         add(ConstantComponents.NEXT.getString(), "Next");
         add(ConstantComponents.PREVIOUS.getString(), "Previous");
         add(ConstantComponents.RESET_TO_DEFAULT.getString(), "Reset to Default");

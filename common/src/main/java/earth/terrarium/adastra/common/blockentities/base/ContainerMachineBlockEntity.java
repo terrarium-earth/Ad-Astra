@@ -23,6 +23,7 @@ import java.util.List;
 public abstract class ContainerMachineBlockEntity extends MachineBlockEntity implements BasicContainer, ExtraDataMenuProvider, SideConfigurable, WorldlyContainer {
     private final List<ConfigurationEntry> sideConfig = new ArrayList<>();
     private final NonNullList<ItemStack> items;
+    private RedstoneControl redstoneControl = RedstoneControl.ALWAYS_ON;
 
     public ContainerMachineBlockEntity(BlockPos pos, BlockState state, int containerSize) {
         super(pos, state);
@@ -40,6 +41,7 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
         super.load(tag);
         ContainerHelper.loadAllItems(tag, this.items);
         ConfigurationEntry.load(tag, this.sideConfig, getDefaultConfig());
+        tag.putByte("RedstoneControl", (byte) redstoneControl.ordinal());
     }
 
     @Override
@@ -47,6 +49,7 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
         super.saveAdditional(tag);
         ContainerHelper.saveAllItems(tag, this.items);
         ConfigurationEntry.save(tag, this.sideConfig);
+        tag.putByte("RedstoneControl", (byte) redstoneControl.ordinal());
     }
 
     @Override
@@ -78,5 +81,14 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
             this.sideConfig.addAll(this.getDefaultConfig());
         }
         return sideConfig;
+    }
+
+    public RedstoneControl getRedstoneControl() {
+        return redstoneControl;
+    }
+
+    public void setRedstoneControl(RedstoneControl redstoneControl) {
+        this.redstoneControl = redstoneControl;
+        this.setChanged();
     }
 }

@@ -79,7 +79,7 @@ public class ComponentUtils {
                 getFormattedAmount(0),
                 getFormattedAmount(FluidHooks.toMillibuckets(capacity)),
                 ClientFluidHooks.getDisplayName(FluidHooks.newFluidHolder(fallback, capacity, null))
-            ).withStyle(ChatFormatting.AQUA);
+            ).withStyle(ChatFormatting.GOLD);
         }
 
         return getFluidComponent(fluid, capacity);
