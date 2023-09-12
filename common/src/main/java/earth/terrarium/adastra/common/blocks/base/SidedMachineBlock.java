@@ -1,6 +1,6 @@
 package earth.terrarium.adastra.common.blocks.base;
 
-import earth.terrarium.adastra.common.blocks.OxygenDistributorBlock;
+import earth.terrarium.adastra.common.blocks.machines.OxygenDistributorBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;

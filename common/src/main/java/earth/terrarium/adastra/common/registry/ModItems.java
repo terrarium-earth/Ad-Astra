@@ -5,7 +5,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.blockentities.*;
+import earth.terrarium.adastra.common.blockentities.machines.*;
 import earth.terrarium.adastra.common.items.EtrionicCapacitorItem;
 import earth.terrarium.adastra.common.items.GasTankItem;
 import earth.terrarium.adastra.common.items.Ti69Item;

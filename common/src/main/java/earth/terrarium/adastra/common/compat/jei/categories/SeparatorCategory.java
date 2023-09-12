@@ -4,7 +4,7 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.screens.SeparatorScreen;
 import earth.terrarium.adastra.common.compat.jei.drawables.EnergyBarDrawable;
 import earth.terrarium.adastra.common.compat.jei.drawables.FluidBarDrawable;
-import earth.terrarium.adastra.common.recipes.SeparatingRecipe;
+import earth.terrarium.adastra.common.recipes.machines.SeparatingRecipe;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;

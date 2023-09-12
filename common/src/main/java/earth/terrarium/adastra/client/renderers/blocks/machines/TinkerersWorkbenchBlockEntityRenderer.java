@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.client.renderers.blocks.base.CustomGeoBlockRenderer;
-import earth.terrarium.adastra.common.blockentities.TinkerersWorkbenchBlockEntity;
+import earth.terrarium.adastra.common.blockentities.machines.TinkerersWorkbenchBlockEntity;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;

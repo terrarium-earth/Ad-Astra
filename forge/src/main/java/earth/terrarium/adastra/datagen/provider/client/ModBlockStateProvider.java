@@ -3,8 +3,8 @@ package earth.terrarium.adastra.datagen.provider.client;
 
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.blocks.BatteryBlock;
-import earth.terrarium.adastra.common.blocks.EtrionicBlastFurnaceBlock;
+import earth.terrarium.adastra.common.blocks.machines.BatteryBlock;
+import earth.terrarium.adastra.common.blocks.machines.EtrionicBlastFurnaceBlock;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;

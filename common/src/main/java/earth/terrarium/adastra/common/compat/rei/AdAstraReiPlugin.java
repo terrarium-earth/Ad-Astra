@@ -3,7 +3,7 @@ package earth.terrarium.adastra.common.compat.rei;
 import earth.terrarium.adastra.client.screens.SeparatorScreen;
 import earth.terrarium.adastra.common.compat.rei.categories.SeparatorCategory;
 import earth.terrarium.adastra.common.compat.rei.displays.SeparatorDisplay;
-import earth.terrarium.adastra.common.recipes.SeparatingRecipe;
+import earth.terrarium.adastra.common.recipes.machines.SeparatingRecipe;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import me.shedaniel.math.Rectangle;

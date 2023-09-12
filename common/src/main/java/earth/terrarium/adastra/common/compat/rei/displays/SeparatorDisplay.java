@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.common.compat.rei.displays;
 
 import earth.terrarium.adastra.common.compat.rei.categories.SeparatorCategory;
-import earth.terrarium.adastra.common.recipes.SeparatingRecipe;
+import earth.terrarium.adastra.common.recipes.machines.SeparatingRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;

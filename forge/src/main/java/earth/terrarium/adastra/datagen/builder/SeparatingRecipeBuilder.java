@@ -3,7 +3,7 @@ package earth.terrarium.adastra.datagen.builder;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import com.teamresourceful.resourcefullib.common.lib.Constants;
-import earth.terrarium.adastra.common.recipes.SeparatingRecipe;
+import earth.terrarium.adastra.common.recipes.machines.SeparatingRecipe;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import net.minecraft.advancements.Advancement;

@@ -1,6 +1,6 @@
 package earth.terrarium.adastra.common.entities;
 
-import earth.terrarium.adastra.common.blockentities.OxygenDistributorBlockEntity;
+import earth.terrarium.adastra.common.blockentities.machines.OxygenDistributorBlockEntity;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.core.BlockPos;

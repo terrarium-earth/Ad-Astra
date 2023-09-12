@@ -4,7 +4,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.blockentities.*;
+import earth.terrarium.adastra.common.blockentities.machines.*;
 import earth.terrarium.adastra.common.blocks.base.DoubleMachineTopBlockEntity;
 import earth.terrarium.botarium.common.registry.RegistryHelpers;
 import net.minecraft.core.registries.BuiltInRegistries;
