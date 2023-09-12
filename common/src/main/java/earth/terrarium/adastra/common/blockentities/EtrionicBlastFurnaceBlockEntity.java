@@ -15,7 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 
 import java.util.List;
 
@@ -50,7 +49,7 @@ public class EtrionicBlastFurnaceBlockEntity extends ContainerMachineBlockEntity
     }
 
     @Override
-    public List<ConfigurationEntry> defaultConfig() {
+    public List<ConfigurationEntry> getDefaultConfig() {
         return List.of();
     }
 

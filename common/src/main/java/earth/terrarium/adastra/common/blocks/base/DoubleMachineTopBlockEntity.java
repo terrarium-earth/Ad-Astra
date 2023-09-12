@@ -3,7 +3,6 @@ package earth.terrarium.adastra.common.blocks.base;
 import earth.terrarium.adastra.common.blockentities.base.BasicContainer;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
-import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import earth.terrarium.botarium.common.energy.base.EnergySnapshot;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
@@ -90,8 +89,11 @@ public class DoubleMachineTopBlockEntity extends BlockEntity implements Botarium
             belowEntity = entity;
         }
         if (this.energyContainer == null) return;
-        if (time % 5 == 0 && state.getBlock() instanceof DoubleMachineBlock machine && machine.isGenerator()) {
-            EnergyUtils.distributeEnergyNearby(this, energyContainer.maxExtract() * 4, pair -> !pair.getFirst().equals(Direction.DOWN));
+        if (state.getBlock() instanceof DoubleMachineBlock machine && machine.isGenerator()) {
+//            TransferUtils.pushItemsNearby(this, belowEntity, new int[0], belowEntity.getSideConfig().get(0), Predicate.not(Direction.DOWN::equals)); // TODO
+//            TransferUtils.pullItemsNearby(this, belowEntity, new int[0], belowEntity.getSideConfig().get(0), Predicate.not(Direction.DOWN::equals)); // TODO
+//            TransferUtils.pushEnergyNearby(this, this.getEnergyStorage().maxExtract(), belowEntity.getSideConfig().get(1), Predicate.not(Direction.DOWN::equals));
+//            TransferUtils.pullEnergyNearby(this, this.getEnergyStorage().maxInsert(), belowEntity.getSideConfig().get(1), Predicate.not(Direction.DOWN::equals));
         }
     }
 

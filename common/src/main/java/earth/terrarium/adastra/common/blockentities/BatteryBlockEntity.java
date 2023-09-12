@@ -5,10 +5,10 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
 import earth.terrarium.adastra.common.blocks.BatteryBlock;
-import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.BatteryMenu;
 import earth.terrarium.adastra.common.utils.ModUtils;
+import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
@@ -26,6 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class BatteryBlockEntity extends PoweredMachineBlockEntity {
 
@@ -64,14 +65,18 @@ public class BatteryBlockEntity extends PoweredMachineBlockEntity {
 
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
+        TransferUtils.pushItemsNearby(this, new int[]{1, 2, 3, 4}, this.getSideConfig().get(0), Predicate.not(Direction.UP::equals));
+        TransferUtils.pullItemsNearby(this, new int[]{1, 2, 3, 4}, this.getSideConfig().get(0), Predicate.not(Direction.UP::equals));
+        TransferUtils.pushEnergyNearby(this, this.getEnergyStorage().maxExtract(), this.getSideConfig().get(1), Predicate.not(Direction.UP::equals));
+        TransferUtils.pullEnergyNearby(this, this.getEnergyStorage().maxInsert(), this.getSideConfig().get(1), Predicate.not(Direction.UP::equals));
+
         extractBatterySlot();
-        distributeNearby(pair -> !pair.getFirst().equals(Direction.UP));
         distributeToChargeSlots();
     }
 
     public void onEnergyChange() {
         if (BatteryBlockEntity.this.level().getGameTime() % 10 != 0) return;
-        int charge = Math.round(this.getEnergyStorage().getStoredEnergy() / (float) this.getEnergyStorage().getMaxCapacity());
+        int charge = Math.round(this.getEnergyStorage().getStoredEnergy() / (float) this.getEnergyStorage().getMaxCapacity() * 4);
         this.level().setBlock(this.getBlockPos(), this.getBlockState().setValue(BatteryBlock.CHARGE, charge), Block.UPDATE_CLIENTS);
     }
 
@@ -97,10 +102,10 @@ public class BatteryBlockEntity extends PoweredMachineBlockEntity {
     }
 
     @Override
-    public List<ConfigurationEntry> defaultConfig() {
+    public List<ConfigurationEntry> getDefaultConfig() {
         return List.of(
-            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.INPUT, ConstantComponents.SIDE_CONFIG_SLOTS),
-            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.INPUT_OUTPUT, ConstantComponents.SIDE_CONFIG_ENERGY)
+            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_SLOTS),
+            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.PUSH_PULL, ConstantComponents.SIDE_CONFIG_ENERGY)
         );
     }
 
@@ -113,14 +118,12 @@ public class BatteryBlockEntity extends PoweredMachineBlockEntity {
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack itemStack, @Nullable Direction direction) {
         if (direction == null) return false;
         var config = this.getSideConfig().get(0);
-        Direction facing = getBlockState().getValue(MachineBlock.FACING).getOpposite();
-        return config.get(ModUtils.relative(facing, direction)).isInput();
+        return config.get(ModUtils.relative(this, direction)).canPull();
     }
 
     @Override
     public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
         var config = this.getSideConfig().get(0);
-        Direction facing = getBlockState().getValue(MachineBlock.FACING).getOpposite();
-        return config.get(ModUtils.relative(facing, direction)).isOutput();
+        return config.get(ModUtils.relative(this, direction)).canPush();
     }
 }

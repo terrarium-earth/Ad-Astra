@@ -4,7 +4,6 @@ import earth.terrarium.adastra.common.blockentities.base.PoweredMachineBlockEnti
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
-import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.container.BiFluidContainer;
 import earth.terrarium.adastra.common.menus.SeparatorMenu;
@@ -12,6 +11,7 @@ import earth.terrarium.adastra.common.recipes.SeparatingRecipe;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.ModUtils;
+import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
@@ -101,6 +101,14 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
 
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
+        TransferUtils.pullItemsNearby(this, new int[]{1}, this.getSideConfig().get(0), d -> true);
+        TransferUtils.pullItemsNearby(this, new int[]{3, 5}, this.getSideConfig().get(1), d -> true);
+        TransferUtils.pushItemsNearby(this, new int[]{2, 4, 6}, this.getSideConfig().get(2), d -> true);
+        TransferUtils.pullEnergyNearby(this, this.getEnergyStorage().maxInsert(), this.getSideConfig().get(3), d -> true);
+        TransferUtils.pullFluidNearby(this, this.getFluidContainer(), FluidHooks.buckets(0.2f), 0, this.getSideConfig().get(4), d -> true);
+        TransferUtils.pushFluidNearby(this, this.getFluidContainer(), FluidHooks.buckets(0.2f), 1, this.getSideConfig().get(5), d -> true);
+        TransferUtils.pushFluidNearby(this, this.getFluidContainer(), FluidHooks.buckets(0.2f), 2, this.getSideConfig().get(6), d -> true);
+
         extractBatterySlot();
         recipeTick();
         if (time % 2 == 0) sync();
@@ -187,14 +195,15 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
     }
 
     @Override
-    public List<ConfigurationEntry> defaultConfig() {
+    public List<ConfigurationEntry> getDefaultConfig() {
         return List.of(
-            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.INPUT, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
-            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.OUTPUT, ConstantComponents.SIDE_CONFIG_OUTPUT_SLOTS),
-            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.INPUT, ConstantComponents.SIDE_CONFIG_ENERGY),
-            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.INPUT, ConstantComponents.SIDE_CONFIG_INPUT_FLUID),
-            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.OUTPUT, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID),
-            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.OUTPUT, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID)
+            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
+            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_EXTRACTION_SLOTS),
+            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_SLOTS),
+            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.NONE, ConstantComponents.SIDE_CONFIG_ENERGY),
+            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_FLUID),
+            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID),
+            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID)
         );
     }
 
@@ -206,15 +215,21 @@ public class SeparatorBlockEntity extends PoweredMachineBlockEntity implements B
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack itemStack, @Nullable Direction direction) {
         if (direction == null) return false;
-        var config = index == 1 || index == 2 || index == 3 ? this.getSideConfig().get(0) : this.getSideConfig().get(1);
-        Direction facing = getBlockState().getValue(MachineBlock.FACING).getOpposite();
-        return config.get(ModUtils.relative(facing, direction)).isInput();
+        ConfigurationEntry config = getConfigForSlot(index);
+        return config.get(ModUtils.relative(this, direction)).canPull();
     }
 
     @Override
     public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
-        var config = index == 1 || index == 2 || index == 3 ? this.getSideConfig().get(0) : this.getSideConfig().get(1);
-        Direction facing = getBlockState().getValue(MachineBlock.FACING).getOpposite();
-        return config.get(ModUtils.relative(facing, direction)).isOutput();
+        ConfigurationEntry config = getConfigForSlot(index);
+        return config.get(ModUtils.relative(this, direction)).canPush();
+    }
+
+    public ConfigurationEntry getConfigForSlot(int index) {
+        return switch (index) {
+            case 1 -> this.getSideConfig().get(0);
+            case 3, 5 -> this.getSideConfig().get(1);
+            default -> this.getSideConfig().get(2);
+        };
     }
 }

@@ -6,11 +6,11 @@ public interface SideConfigurable {
 
     List<ConfigurationEntry> getSideConfig();
 
-    List<ConfigurationEntry> defaultConfig();
+    List<ConfigurationEntry> getDefaultConfig();
 
     default void resetToDefault(int index) {
         var entries = this.getSideConfig();
         entries.get(index).sides().clear();
-        entries.get(index).sides().putAll(this.defaultConfig().get(index).sides());
+        entries.get(index).sides().putAll(this.getDefaultConfig().get(index).sides());
     }
 }

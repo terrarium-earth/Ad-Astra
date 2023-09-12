@@ -64,7 +64,7 @@ public class TinkerersWorkbenchBlockEntity extends ContainerMachineBlockEntity i
     }
 
     @Override
-    public List<ConfigurationEntry> defaultConfig() {
+    public List<ConfigurationEntry> getDefaultConfig() {
         return List.of();
     }
 

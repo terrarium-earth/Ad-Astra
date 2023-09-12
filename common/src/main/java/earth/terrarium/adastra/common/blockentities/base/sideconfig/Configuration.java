@@ -7,9 +7,9 @@ import net.minecraft.resources.ResourceLocation;
 
 public enum Configuration {
     NONE(GuiUtils.SQUARE_BUTTON),
-    INPUT(MachineScreen.INPUT_BUTTON),
-    OUTPUT(MachineScreen.OUTPUT_BUTTON),
-    INPUT_OUTPUT(MachineScreen.INPUT_OUTPUT_BUTTON);
+    PUSH(MachineScreen.PUSH_BUTTON),
+    PULL(MachineScreen.PULL_BUTTON),
+    PUSH_PULL(MachineScreen.PUSH_PULL_BUTTON);
 
     private final ResourceLocation icon;
 
@@ -21,16 +21,12 @@ public enum Configuration {
         return this.icon;
     }
 
-    public boolean isNone() {
-        return this == NONE;
+    public boolean canPush() {
+        return this == PUSH || this == PUSH_PULL;
     }
 
-    public boolean isInput() {
-        return this == INPUT || this == INPUT_OUTPUT;
-    }
-
-    public boolean isOutput() {
-        return this == OUTPUT || this == INPUT_OUTPUT;
+    public boolean canPull() {
+        return this == PULL || this == PUSH_PULL;
     }
 
     public Configuration next() {

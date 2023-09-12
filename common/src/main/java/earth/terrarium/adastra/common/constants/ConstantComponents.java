@@ -55,6 +55,7 @@ public class ConstantComponents {
     public static final Component SIDE_CONFIG_FLUID = Component.translatable("side_config.adastra.fluid");
     public static final Component SIDE_CONFIG_INPUT_SLOTS = Component.translatable("side_config.adastra.input_slots");
     public static final Component SIDE_CONFIG_OUTPUT_SLOTS = Component.translatable("side_config.adastra.output_slots");
+    public static final Component SIDE_CONFIG_EXTRACTION_SLOTS = Component.translatable("side_config.adastra.extraction_slots");
     public static final Component SIDE_CONFIG_INPUT_FLUID = Component.translatable("side_config.adastra.input_fluid");
     public static final Component SIDE_CONFIG_OUTPUT_FLUID = Component.translatable("side_config.adastra.output_fluid");
 }

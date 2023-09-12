@@ -48,16 +48,17 @@ public class BatteryScreen extends MachineScreen<BatteryMenu, BatteryBlockEntity
         return imageHeight - 50;
     }
 
-     @Override
-     public void highlightSideConfigElement(GuiGraphics graphics, int index) {
-         switch (index) {
-             case 0 -> {
-                 graphics.renderOutline(leftPos + 62, topPos + 64, 24, 24, 0xFF00FF00);
-                 graphics.renderOutline(leftPos + 92, topPos + 64, 24, 24, 0xFF00FF00);
-                 graphics.renderOutline(leftPos + 62, topPos + 94, 24, 24, 0xFF00FF00);
-                    graphics.renderOutline(leftPos + 92, topPos + 94, 24, 24, 0xFF00FF00);
-             }
-             case 1 -> graphics.renderOutline(leftPos + 161, topPos + 63, GuiUtils.ENERGY_BAR_WIDTH + 2, GuiUtils.ENERGY_BAR_HEIGHT + 2, 0xFF00FF00);
-         }
-     }
+    @Override
+    public void highlightSideConfigElement(GuiGraphics graphics, int index) {
+        switch (index) {
+            case 0 -> {
+                graphics.renderOutline(leftPos + 62, topPos + 64, 24, 24, 0xFF00FF00);
+                graphics.renderOutline(leftPos + 92, topPos + 64, 24, 24, 0xFF00FF00);
+                graphics.renderOutline(leftPos + 62, topPos + 94, 24, 24, 0xFF00FF00);
+                graphics.renderOutline(leftPos + 92, topPos + 94, 24, 24, 0xFF00FF00);
+            }
+            case 1 ->
+                graphics.renderOutline(leftPos + 161, topPos + 63, GuiUtils.ENERGY_BAR_WIDTH + 2, GuiUtils.ENERGY_BAR_HEIGHT + 2, 0xFF00FF00);
+        }
+    }
 }

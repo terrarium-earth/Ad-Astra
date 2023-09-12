@@ -39,7 +39,7 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
     public void load(@NotNull CompoundTag tag) {
         super.load(tag);
         ContainerHelper.loadAllItems(tag, this.items);
-        ConfigurationEntry.load(tag, this.sideConfig, defaultConfig());
+        ConfigurationEntry.load(tag, this.sideConfig, getDefaultConfig());
     }
 
     @Override
@@ -75,7 +75,7 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
     @Override
     public List<ConfigurationEntry> getSideConfig() {
         if (this.sideConfig.isEmpty()) {
-            this.sideConfig.addAll(this.defaultConfig());
+            this.sideConfig.addAll(this.getDefaultConfig());
         }
         return sideConfig;
     }

@@ -49,7 +49,7 @@ public class FluidBarWidget extends BurningFire {
     @Override
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         long time = Objects.requireNonNull(Minecraft.getInstance().level).getGameTime();
-        long amount =  (time % (capacity / perTick) * perTick);
+        long amount = (time % (capacity / perTick) * perTick);
         long fluidAmount = gain ? amount : capacity - amount;
 
 

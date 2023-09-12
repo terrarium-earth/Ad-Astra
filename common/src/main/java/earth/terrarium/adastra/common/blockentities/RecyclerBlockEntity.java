@@ -71,7 +71,7 @@ public class RecyclerBlockEntity extends ContainerMachineBlockEntity implements 
     }
 
     @Override
-    public List<ConfigurationEntry> defaultConfig() {
+    public List<ConfigurationEntry> getDefaultConfig() {
         return List.of();
     }
 

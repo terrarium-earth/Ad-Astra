@@ -70,7 +70,7 @@ public class SteamGeneratorBlockEntity extends ContainerMachineBlockEntity imple
     }
 
     @Override
-    public List<ConfigurationEntry> defaultConfig() {
+    public List<ConfigurationEntry> getDefaultConfig() {
         return List.of();
     }
 

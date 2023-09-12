@@ -142,7 +142,7 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
     }
 
     @Override
-    public List<ConfigurationEntry> defaultConfig() {
+    public List<ConfigurationEntry> getDefaultConfig() {
         return List.of();
     }
 

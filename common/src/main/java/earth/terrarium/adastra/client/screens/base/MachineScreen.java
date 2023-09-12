@@ -8,7 +8,6 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.SideConfigurable;
-import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
 import earth.terrarium.adastra.common.networking.NetworkHandler;
@@ -38,9 +37,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends BlockEntity & SideConfigurable> extends AbstractContainerCursorScreen<T> {
-    public static final ResourceLocation INPUT_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/input.png");
-    public static final ResourceLocation OUTPUT_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/output.png");
-    public static final ResourceLocation INPUT_OUTPUT_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/input_output.png");
+    public static final ResourceLocation PUSH_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/push.png");
+    public static final ResourceLocation PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/pull.png");
+    public static final ResourceLocation PUSH_PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/push_pull.png");
 
     private final ResourceLocation texture;
     private final List<ClearOnClick> clearOnClicks = new ArrayList<>();
@@ -157,7 +156,7 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
         if (!this.showSideConfig) {
             graphics.drawString(font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, this.getTextColor(), false);
         } else {
-            graphics.drawString(font, this.sideConfigTitle, this.inventoryLabelX + 20, this.inventoryLabelY + 11, this.getTextColor(), false);
+            graphics.drawString(font, this.sideConfigTitle, this.inventoryLabelX + 18, this.inventoryLabelY + 11, this.getTextColor(), false);
         }
     }
 
@@ -254,18 +253,7 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends B
     }
 
     public Component getSideConfigTooltip(ConfigurationType type, Direction direction, Configuration action) {
-        Direction facing = entity.getBlockState().getValue(MachineBlock.FACING).getOpposite();
-        Direction relative = ModUtils.relative(facing, direction);
-
-        Direction.Axis facingAxis = facing.getAxis();
-        Direction.Axis directionAxis = direction.getAxis();
-
-        if (facingAxis == Direction.Axis.X && directionAxis.isHorizontal()) {
-            relative = relative.getOpposite();
-            direction = direction.getOpposite();
-        } else if (facingAxis == Direction.Axis.Z && directionAxis == Direction.Axis.X) {
-            direction = direction.getOpposite();
-        }
+        Direction relative = ModUtils.relative(entity, direction);
 
         return Component.empty()
             .append(Component.translatable("side_config.adastra.type.type", type.translation().getString()).withStyle(ChatFormatting.GREEN))
