@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blocks.base;
 
+import earth.terrarium.adastra.common.blockentities.base.ContainerMachineExtensionBlockEntity;
 import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
 import earth.terrarium.botarium.common.menu.MenuHooks;
 import net.minecraft.core.BlockPos;
@@ -41,7 +42,7 @@ public class DoubleMachineBlock extends MachineBlock {
     }
 
     public DoubleMachineBlock(Properties properties, boolean generator) {
-        super(properties, generator);
+        super(properties);
         registerDefaultState(stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
             .setValue(POWERED, false)
@@ -72,7 +73,7 @@ public class DoubleMachineBlock extends MachineBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return state.getValue(HALF) == DoubleBlockHalf.LOWER ? super.newBlockEntity(pos, state) : new DoubleMachineTopBlockEntity(pos, state);
+        return state.getValue(HALF) == DoubleBlockHalf.LOWER ? super.newBlockEntity(pos, state) : new ContainerMachineExtensionBlockEntity(pos, state);
     }
 
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
@@ -121,7 +122,7 @@ public class DoubleMachineBlock extends MachineBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         if (state.getValue(HALF) == DoubleBlockHalf.UPPER) return (entityLevel, blockPos, blockState, blockEntity) -> {
-            if (blockEntity instanceof DoubleMachineTopBlockEntity machine) {
+            if (blockEntity instanceof ContainerMachineExtensionBlockEntity machine) {
                 long time = level.getGameTime() - blockPos.asLong();
                 if (!level.isClientSide()) {
                     machine.serverTick((ServerLevel) level, time, state, blockPos);

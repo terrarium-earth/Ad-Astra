@@ -31,6 +31,7 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class SeparatorBlockEntity extends RecipeMachineBlockEntity<SeparatingRecipe> implements BotariumFluidBlock<WrappedBlockFluidContainer>, GeoBlockEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
@@ -97,13 +98,18 @@ public class SeparatorBlockEntity extends RecipeMachineBlockEntity<SeparatingRec
 
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
-        TransferUtils.pullItemsNearby(this, new int[]{1}, this.getSideConfig().get(0), d -> true);
-        TransferUtils.pullItemsNearby(this, new int[]{3, 5}, this.getSideConfig().get(1), d -> true);
-        TransferUtils.pushItemsNearby(this, new int[]{2, 4, 6}, this.getSideConfig().get(2), d -> true);
-        TransferUtils.pullEnergyNearby(this, this.getEnergyStorage().maxInsert(), this.getSideConfig().get(3), d -> true);
-        TransferUtils.pullFluidNearby(this, this.getFluidContainer(), FluidHooks.buckets(0.2f), 0, this.getSideConfig().get(4), d -> true);
-        TransferUtils.pushFluidNearby(this, this.getFluidContainer(), FluidHooks.buckets(0.2f), 1, this.getSideConfig().get(5), d -> true);
-        TransferUtils.pushFluidNearby(this, this.getFluidContainer(), FluidHooks.buckets(0.2f), 2, this.getSideConfig().get(6), d -> true);
+        if (canFunction()) tickSideInteractions(pos, d -> true);
+    }
+
+    @Override
+    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
+        TransferUtils.pullItemsNearby(this, pos, new int[]{1}, this.getSideConfig().get(0), filter);
+        TransferUtils.pullItemsNearby(this, pos, new int[]{3, 5}, this.getSideConfig().get(1), filter);
+        TransferUtils.pushItemsNearby(this, pos, new int[]{2, 4, 6}, this.getSideConfig().get(2), filter);
+        TransferUtils.pullEnergyNearby(this, pos, this.getEnergyStorage().maxInsert(), this.getSideConfig().get(3), filter);
+        TransferUtils.pullFluidNearby(this, pos, this.getFluidContainer(), FluidHooks.buckets(0.2f), 0, this.getSideConfig().get(4), filter);
+        TransferUtils.pushFluidNearby(this, pos, this.getFluidContainer(), FluidHooks.buckets(0.2f), 1, this.getSideConfig().get(5), filter);
+        TransferUtils.pushFluidNearby(this, pos, this.getFluidContainer(), FluidHooks.buckets(0.2f), 2, this.getSideConfig().get(6), filter);
     }
 
     @Override
@@ -191,14 +197,5 @@ public class SeparatorBlockEntity extends RecipeMachineBlockEntity<SeparatingRec
     @Override
     public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
         return new int[]{1, 2, 3, 4, 5, 6};
-    }
-
-    @Override
-    public ConfigurationEntry getConfigForSlot(int index) {
-        return switch (index) {
-            case 1 -> getSideConfig().get(0);
-            case 3, 5 -> getSideConfig().get(1);
-            default -> getSideConfig().get(2);
-        };
     }
 }

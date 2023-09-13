@@ -34,15 +34,9 @@ public class MachineBlock extends BasicEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
-    private final boolean generator;
 
     public MachineBlock(Properties properties) {
-        this(properties, false);
-    }
-
-    public MachineBlock(Properties properties, boolean generator) {
         super(properties);
-        this.generator = generator;
         registerDefaultState(stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
             .setValue(POWERED, false)
@@ -119,9 +113,5 @@ public class MachineBlock extends BasicEntityBlock {
         boolean hasSignal = level.hasNeighborSignal(pos);
         if (state.getValue(POWERED) == hasSignal) return;
         level.setBlockAndUpdate(pos, state.setValue(POWERED, hasSignal));
-    }
-
-    public boolean isGenerator() {
-        return this.generator;
     }
 }

@@ -5,7 +5,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.machines.*;
-import earth.terrarium.adastra.common.blocks.base.DoubleMachineTopBlockEntity;
+import earth.terrarium.adastra.common.blockentities.base.ContainerMachineExtensionBlockEntity;
 import earth.terrarium.botarium.common.registry.RegistryHelpers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
@@ -14,10 +14,10 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 public final class ModBlockEntityTypes {
     public static final ResourcefulRegistry<BlockEntityType<?>> BLOCK_ENTITY_TYPES = ResourcefulRegistries.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, AdAstra.MOD_ID);
 
-    public static final RegistryEntry<BlockEntityType<DoubleMachineTopBlockEntity>> DOUBLE_MACHINE_TOP = BLOCK_ENTITY_TYPES.register(
-        "double_machine_top",
+    public static final RegistryEntry<BlockEntityType<ContainerMachineExtensionBlockEntity>> MACHINE_EXTENSION = BLOCK_ENTITY_TYPES.register(
+        "machine_extension",
         () -> RegistryHelpers.createBlockEntityType(
-            DoubleMachineTopBlockEntity::new,
+            ContainerMachineExtensionBlockEntity::new,
             ModBlocks.MACHINES.stream().map(RegistryEntry::get).toArray(Block[]::new)));
 
     public static final RegistryEntry<BlockEntityType<OxygenDistributorBlockEntity>> OXYGEN_DISTRIBUTOR = BLOCK_ENTITY_TYPES.register(

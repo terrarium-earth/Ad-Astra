@@ -15,7 +15,7 @@ public class SeparatorBlock extends MachineBlock {
     public static final VoxelShape SHAPE = Shapes.block(); // TODO
 
     public SeparatorBlock(Properties properties) {
-        super(properties, false);
+        super(properties);
     }
 
     @Override

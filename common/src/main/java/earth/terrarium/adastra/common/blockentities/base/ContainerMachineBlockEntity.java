@@ -17,17 +17,20 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public abstract class ContainerMachineBlockEntity extends MachineBlockEntity implements BasicContainer, WorldlyContainer, ExtraDataMenuProvider, SideConfigurable, BotariumEnergyBlock<WrappedBlockEnergyContainer> {
     private final List<ConfigurationEntry> sideConfig = new ArrayList<>();
@@ -130,6 +133,8 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
         return sideConfig;
     }
 
+    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {}
+
     public RedstoneControl getRedstoneControl() {
         return redstoneControl;
     }
@@ -141,16 +146,11 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack itemStack, @Nullable Direction direction) {
-        if (direction == null) return false;
-        return getConfigForSlot(index).get(ModUtils.relative(this, direction)).canPull();
+        return true;
     }
 
     @Override
     public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
-        return getConfigForSlot(index).get(ModUtils.relative(this, direction)).canPush();
-    }
-
-    public ConfigurationEntry getConfigForSlot(int index) {
-        return getSideConfig().get(0);
+        return true;
     }
 }

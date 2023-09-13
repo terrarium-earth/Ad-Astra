@@ -25,7 +25,7 @@ public class SolarPanelBlock extends MachineBlock {
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public SolarPanelBlock(Properties properties, long generationRate, long capacity) {
-        super(properties, true);
+        super(properties);
         this.generationRate = generationRate;
         this.capacity = capacity;
     }

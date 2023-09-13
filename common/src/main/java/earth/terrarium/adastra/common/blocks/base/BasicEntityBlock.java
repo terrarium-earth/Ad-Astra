@@ -15,7 +15,7 @@ public abstract class BasicEntityBlock extends BaseEntityBlock {
     private static final CacheableFunction<Block, BlockEntityType<?>> BLOCK_TO_ENTITY = new CacheableFunction<>(block ->
         ModBlockEntityTypes.BLOCK_ENTITY_TYPES
             .stream()
-            .filter(type -> !(type.equals(ModBlockEntityTypes.DOUBLE_MACHINE_TOP)))
+            .filter(type -> !(type.equals(ModBlockEntityTypes.MACHINE_EXTENSION)))
             .map(RegistryEntry::get)
             .filter(type -> type.isValid(block.defaultBlockState()))
             .findFirst()

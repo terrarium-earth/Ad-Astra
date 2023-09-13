@@ -63,12 +63,18 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity {
 
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
-        TransferUtils.pushItemsNearby(this, new int[]{1, 2, 3, 4}, this.getSideConfig().get(0), Predicate.not(Direction.UP::equals));
-        TransferUtils.pullItemsNearby(this, new int[]{1, 2, 3, 4}, this.getSideConfig().get(0), Predicate.not(Direction.UP::equals));
-        TransferUtils.pushEnergyNearby(this, this.getEnergyStorage().maxExtract(), this.getSideConfig().get(1), Predicate.not(Direction.UP::equals));
-        TransferUtils.pullEnergyNearby(this, this.getEnergyStorage().maxInsert(), this.getSideConfig().get(1), Predicate.not(Direction.UP::equals));
+        if (canFunction()) {
+            tickSideInteractions(pos, Predicate.not(Direction.UP::equals));
+            distributeToChargeSlots();
+        }
+    }
 
-        if (canFunction()) distributeToChargeSlots();
+    @Override
+    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
+        TransferUtils.pushItemsNearby(this, pos, new int[]{1, 2, 3, 4}, this.getSideConfig().get(0), filter);
+        TransferUtils.pullItemsNearby(this, pos, new int[]{1, 2, 3, 4}, this.getSideConfig().get(0), filter);
+        TransferUtils.pushEnergyNearby(this, pos, this.getEnergyStorage().maxExtract(), this.getSideConfig().get(1), filter);
+        TransferUtils.pullEnergyNearby(this, pos, this.getEnergyStorage().maxInsert(), this.getSideConfig().get(1), filter);
     }
 
     public void onEnergyChange() {

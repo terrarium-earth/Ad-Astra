@@ -4,18 +4,21 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.HopperBlockEntity;
+
+import java.util.stream.IntStream;
 
 public class ItemUtils {
 
     public static void push(Container from, Container to, int[] fromSlots, Direction direction) {
         if (inventoryFull(to)) return;
         for (int slot : fromSlots) {
-            ItemStack stack = from.getItem(slot).copy();
+            ItemStack stack = from.getItem(slot);
             if (stack.isEmpty()) continue;
-            ItemStack inserted = HopperBlockEntity.addItem(from, to, from.removeItem(slot, 1), direction);
-            if (inserted.isEmpty()) continue;
-            to.setChanged();
+            if (!addItem(from, to, stack.copy(), IntStream.range(0, to.getContainerSize()).toArray(), direction)) {
+                continue;
+            }
+            from.removeItem(slot, 1);
+            from.setChanged();
             return;
         }
 
@@ -45,6 +48,11 @@ public class ItemUtils {
         fromStack.setCount(1);
         for (int slot : toSlots) {
             if (from instanceof WorldlyContainer worldlyContainer) {
+                if (!worldlyContainer.canTakeItemThroughFace(slot, fromStack, direction)) continue;
+            }
+            if (to instanceof WorldlyContainer worldlyContainer) {
+                int[] slots = worldlyContainer.getSlotsForFace(direction);
+                if (IntStream.of(slots).noneMatch(i -> i == slot)) continue;
                 if (!worldlyContainer.canPlaceItemThroughFace(slot, fromStack, direction)) continue;
             }
             ItemStack toStack = to.getItem(slot);
