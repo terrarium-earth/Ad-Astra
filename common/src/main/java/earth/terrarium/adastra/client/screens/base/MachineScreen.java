@@ -1,7 +1,6 @@
 package earth.terrarium.adastra.client.screens.base;
 
 import com.teamresourceful.resourcefullib.client.screens.AbstractContainerCursorScreen;
-import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.components.PressableImageButton;
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
@@ -38,10 +37,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends ContainerMachineBlockEntity> extends AbstractContainerCursorScreen<T> {
-    public static final ResourceLocation PUSH_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/push.png");
-    public static final ResourceLocation PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/pull.png");
-    public static final ResourceLocation PUSH_PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/push_pull.png");
-
     private final ResourceLocation texture;
     private final List<ClearOnClick> clearOnClicks = new ArrayList<>();
     protected final List<List<? extends Button>> sideConfigButtons = new ArrayList<>(6);

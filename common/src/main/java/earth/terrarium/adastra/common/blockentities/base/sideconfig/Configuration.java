@@ -1,15 +1,16 @@
 package earth.terrarium.adastra.common.blockentities.base.sideconfig;
 
-import earth.terrarium.adastra.client.screens.base.MachineScreen;
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.Locale;
+
 public enum Configuration {
     NONE(GuiUtils.SQUARE_BUTTON),
-    PUSH(MachineScreen.PUSH_BUTTON),
-    PULL(MachineScreen.PULL_BUTTON),
-    PUSH_PULL(MachineScreen.PUSH_PULL_BUTTON);
+    PUSH(GuiUtils.PUSH_BUTTON),
+    PULL(GuiUtils.PULL_BUTTON),
+    PUSH_PULL(GuiUtils.PUSH_PULL_BUTTON);
 
     private final ResourceLocation icon;
 
@@ -38,6 +39,6 @@ public enum Configuration {
     }
 
     public Component translation() {
-        return Component.translatable("side_config.adastra.type.%s".formatted(name().toLowerCase()));
+        return Component.translatable("side_config.adastra.type.%s".formatted(name().toLowerCase(Locale.ROOT)));
     }
 }

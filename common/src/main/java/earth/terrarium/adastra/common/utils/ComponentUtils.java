@@ -12,12 +12,16 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ComponentUtils {
 
     // No need to go beyond a trillion. We're not Mekanism.
     public static String getFormattedAmount(long number) {
+        if (Screen.hasShiftDown()) {
+            return DecimalFormat.getNumberInstance().format(number);
+        }
         String formatted;
         if (number >= 1_000_000_000_000L) {
             formatted = "%.2fT".formatted(number / 1_000_000_000_000f);

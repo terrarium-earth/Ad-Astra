@@ -28,6 +28,15 @@ public class ContainerMachineExtensionBlockEntity extends BlockEntity implements
         super(ModBlockEntityTypes.MACHINE_EXTENSION.get(), pos, blockState);
     }
 
+    public WrappedBlockEnergyContainer getEnergyContainer() {
+        return getBaseEntity().getEnergyStorage();
+    }
+
+    public ContainerMachineBlockEntity getBaseEntity() {
+        if (baseEntity != null) return baseEntity;
+        return baseEntity = ((ContainerMachineBlockEntity) Objects.requireNonNull(level).getBlockEntity(getBlockPos().below()));
+    }
+
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage() {
         if (this.energyContainer != null) return this.energyContainer;
@@ -85,48 +94,36 @@ public class ContainerMachineExtensionBlockEntity extends BlockEntity implements
     }
 
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
-        if (baseEntity == null) baseEntity = getBaseEntity();
-        if (this.energyContainer == null) energyContainer = getEnergyStorage();
-        baseEntity.tickSideInteractions(pos, Predicate.not(Direction.DOWN::equals));
-    }
-
-    public WrappedBlockEnergyContainer getEnergyContainer() {
-        if (baseEntity != null) return baseEntity.getEnergyStorage();
-        return getBaseEntity().getEnergyStorage();
-    }
-
-    public ContainerMachineBlockEntity getBaseEntity() {
-        if (baseEntity != null) return baseEntity;
-        return ((ContainerMachineBlockEntity) Objects.requireNonNull(level).getBlockEntity(getBlockPos().below()));
+        getBaseEntity().tickSideInteractions(pos, Predicate.not(Direction.DOWN::equals));
     }
 
     @Override
     public NonNullList<ItemStack> items() {
-        return baseEntity.items();
+        return getBaseEntity().items();
     }
 
     @Override
     public void update() {
-        baseEntity.update();
+        getBaseEntity().update();
     }
 
     @Override
     public boolean stillValid(@NotNull Player player) {
-        return baseEntity.stillValid(player);
+        return getBaseEntity().stillValid(player);
     }
 
     @Override
     public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
-        return baseEntity.getSlotsForFace(side);
+        return getBaseEntity().getSlotsForFace(side);
     }
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack itemStack, @Nullable Direction direction) {
-        return baseEntity.canPlaceItemThroughFace(index, itemStack, direction);
+        return getBaseEntity().canPlaceItemThroughFace(index, itemStack, direction);
     }
 
     @Override
     public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
-        return baseEntity.canTakeItemThroughFace(index, stack, direction);
+        return getBaseEntity().canTakeItemThroughFace(index, stack, direction);
     }
 }

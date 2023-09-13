@@ -2,6 +2,8 @@ package earth.terrarium.adastra.common.blockentities.base;
 
 import net.minecraft.network.chat.Component;
 
+import java.util.Locale;
+
 public enum RedstoneControl {
     ALWAYS_ON,
     ON_WHEN_POWERED,
@@ -19,7 +21,7 @@ public enum RedstoneControl {
     }
 
     public Component translation() {
-        return Component.translatable("tooltip.adastra.redstone_control.%s".formatted(name().toLowerCase()));
+        return Component.translatable("tooltip.adastra.redstone_control.%s".formatted(name().toLowerCase(Locale.ROOT)));
     }
 
     public RedstoneControl next() {

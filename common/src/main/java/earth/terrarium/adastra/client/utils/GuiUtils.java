@@ -33,6 +33,10 @@ public class GuiUtils {
     public static final ResourceLocation SQUARE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/square_button.png");
     public static final ResourceLocation ARROWS = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/arrows.png");
 
+    public static final ResourceLocation PUSH_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/push.png");
+    public static final ResourceLocation PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/pull.png");
+    public static final ResourceLocation PUSH_PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/push_pull.png");
+
     public static void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, WrappedBlockEnergyContainer energyContainer, Component... tooltips) {
         drawEnergyBar(graphics, mouseX, mouseY, font, x, y, energyContainer.getStoredEnergy(), energyContainer.getMaxCapacity(), tooltips);
     }
