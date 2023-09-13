@@ -1,11 +1,13 @@
 package earth.terrarium.adastra.common.networking.messages;
 
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
+import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.radio.audio.RadioHandler;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
 public record ClientboundPlayStationPacket(String url) implements Packet<ClientboundPlayStationPacket> {
@@ -23,15 +25,12 @@ public record ClientboundPlayStationPacket(String url) implements Packet<Clientb
         return HANDLER;
     }
 
-    private static class Handler implements PacketHandler<ClientboundPlayStationPacket> {
-        @Override
-        public void encode(ClientboundPlayStationPacket packet, FriendlyByteBuf buf) {
-            buf.writeUtf(packet.url);
-        }
-
-        @Override
-        public ClientboundPlayStationPacket decode(FriendlyByteBuf buf) {
-            return new ClientboundPlayStationPacket(buf.readUtf());
+    public static class Handler extends CodecPacketHandler<ClientboundPlayStationPacket> {
+        public Handler() {
+            super(ObjectByteCodec.create(
+                ByteCodec.STRING.fieldOf(ClientboundPlayStationPacket::url),
+                ClientboundPlayStationPacket::new
+            ));
         }
 
         @Override

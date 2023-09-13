@@ -1,16 +1,20 @@
 package earth.terrarium.adastra.common.networking.messages;
 
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
+import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.utils.ClientData;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
-public record ClientboundSyncWeatherPacket(int clearWeatherTime, int rainTime,
-                                           int thunderTime, boolean raining,
-                                           boolean thundering) implements Packet<ClientboundSyncWeatherPacket> {
+public record ClientboundSyncWeatherPacket(
+    int clearWeatherTime, int rainTime,
+    int thunderTime, boolean raining,
+    boolean thundering
+) implements Packet<ClientboundSyncWeatherPacket> {
 
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "sync_weather");
     public static final Handler HANDLER = new Handler();
@@ -25,24 +29,16 @@ public record ClientboundSyncWeatherPacket(int clearWeatherTime, int rainTime,
         return HANDLER;
     }
 
-    private static class Handler implements PacketHandler<ClientboundSyncWeatherPacket> {
-        @Override
-        public void encode(ClientboundSyncWeatherPacket packet, FriendlyByteBuf buf) {
-            buf.writeInt(packet.clearWeatherTime);
-            buf.writeInt(packet.rainTime);
-            buf.writeInt(packet.thunderTime);
-            buf.writeBoolean(packet.raining);
-            buf.writeBoolean(packet.thundering);
-        }
-
-        @Override
-        public ClientboundSyncWeatherPacket decode(FriendlyByteBuf buf) {
-            return new ClientboundSyncWeatherPacket(
-                buf.readInt(),
-                buf.readInt(),
-                buf.readInt(),
-                buf.readBoolean(),
-                buf.readBoolean());
+    private static class Handler extends CodecPacketHandler<ClientboundSyncWeatherPacket> {
+        public Handler() {
+            super(ObjectByteCodec.create(
+                ByteCodec.INT.fieldOf(ClientboundSyncWeatherPacket::clearWeatherTime),
+                ByteCodec.INT.fieldOf(ClientboundSyncWeatherPacket::rainTime),
+                ByteCodec.INT.fieldOf(ClientboundSyncWeatherPacket::thunderTime),
+                ByteCodec.BOOLEAN.fieldOf(ClientboundSyncWeatherPacket::raining),
+                ByteCodec.BOOLEAN.fieldOf(ClientboundSyncWeatherPacket::thundering),
+                ClientboundSyncWeatherPacket::new
+            ));
         }
 
         @Override

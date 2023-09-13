@@ -16,7 +16,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public record ClientboundSyncPlanetsPacket(
-    Map<ResourceKey<Level>, Planet> planets) implements Packet<ClientboundSyncPlanetsPacket> {
+    Map<ResourceKey<Level>, Planet> planets
+) implements Packet<ClientboundSyncPlanetsPacket> {
 
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "sync_planets");
     public static final Handler HANDLER = new Handler();

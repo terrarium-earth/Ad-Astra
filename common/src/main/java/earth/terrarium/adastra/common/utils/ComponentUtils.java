@@ -26,9 +26,9 @@ public class ComponentUtils {
         } else if (number >= 1_000_000L) {
             formatted = "%.2fM".formatted(number / 1_000_000f);
         } else if (number >= 1_000L) {
-            formatted = "%.2fK".formatted(number / 1_000f);
+            formatted = "%.2fk".formatted(number / 1_000f);
         } else return String.valueOf(number);
-        return formatted.replaceAll("(\\.?0+)([KMGT]?)$", "$2");
+        return formatted.replaceAll("(\\.?0+)([kMGT]?)$", "$2");
     }
 
     public static Component getEnergyComponent(long energy, long capacity) {

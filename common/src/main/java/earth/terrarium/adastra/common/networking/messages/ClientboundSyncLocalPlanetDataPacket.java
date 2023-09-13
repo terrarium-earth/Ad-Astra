@@ -1,16 +1,19 @@
 package earth.terrarium.adastra.common.networking.messages;
 
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
+import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.handlers.PlanetData;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
 public record ClientboundSyncLocalPlanetDataPacket(
-    PlanetData localData) implements Packet<ClientboundSyncLocalPlanetDataPacket> {
+    PlanetData localData
+) implements Packet<ClientboundSyncLocalPlanetDataPacket> {
 
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "sync_local_planet_data");
     public static final Handler HANDLER = new Handler();
@@ -25,15 +28,12 @@ public record ClientboundSyncLocalPlanetDataPacket(
         return HANDLER;
     }
 
-    private static class Handler implements PacketHandler<ClientboundSyncLocalPlanetDataPacket> {
-        @Override
-        public void encode(ClientboundSyncLocalPlanetDataPacket packet, FriendlyByteBuf buf) {
-            buf.writeInt(packet.localData().pack());
-        }
-
-        @Override
-        public ClientboundSyncLocalPlanetDataPacket decode(FriendlyByteBuf buf) {
-            return new ClientboundSyncLocalPlanetDataPacket(PlanetData.unpack(buf.readInt()));
+    private static class Handler extends CodecPacketHandler<ClientboundSyncLocalPlanetDataPacket> {
+        public Handler() {
+            super(ObjectByteCodec.create(
+                ByteCodec.INT.map(PlanetData::unpack, PlanetData::pack).fieldOf(ClientboundSyncLocalPlanetDataPacket::localData),
+                ClientboundSyncLocalPlanetDataPacket::new
+            ));
         }
 
         @Override

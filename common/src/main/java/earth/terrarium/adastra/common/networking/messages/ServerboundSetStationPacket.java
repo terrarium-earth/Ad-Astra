@@ -1,5 +1,8 @@
 package earth.terrarium.adastra.common.networking.messages;
 
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
+import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
@@ -7,7 +10,6 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.entities.base.RadioHolder;
 import earth.terrarium.adastra.common.networking.NetworkHandler;
 import earth.terrarium.adastra.common.utils.radio.StationLoader;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -27,15 +29,12 @@ public record ServerboundSetStationPacket(String url) implements Packet<Serverbo
         return HANDLER;
     }
 
-    private static class Handler implements PacketHandler<ServerboundSetStationPacket> {
-        @Override
-        public void encode(ServerboundSetStationPacket packet, FriendlyByteBuf buf) {
-            buf.writeUtf(packet.url());
-        }
-
-        @Override
-        public ServerboundSetStationPacket decode(FriendlyByteBuf buf) {
-            return new ServerboundSetStationPacket(buf.readUtf());
+    private static class Handler extends CodecPacketHandler<ServerboundSetStationPacket> {
+        public Handler() {
+            super(ObjectByteCodec.create(
+                ByteCodec.STRING.fieldOf(ServerboundSetStationPacket::url),
+                ServerboundSetStationPacket::new
+            ));
         }
 
         @Override

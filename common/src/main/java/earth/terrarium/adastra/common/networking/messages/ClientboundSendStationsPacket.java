@@ -1,18 +1,20 @@
 package earth.terrarium.adastra.common.networking.messages;
 
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
+import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.radio.screen.RadioScreen;
 import earth.terrarium.adastra.common.utils.radio.StationInfo;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
 public record ClientboundSendStationsPacket(
-    List<StationInfo> stations) implements Packet<ClientboundSendStationsPacket> {
+    List<StationInfo> stations
+) implements Packet<ClientboundSendStationsPacket> {
 
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "send_stations");
     public static final Handler HANDLER = new Handler();
@@ -27,15 +29,13 @@ public record ClientboundSendStationsPacket(
         return HANDLER;
     }
 
-    private static class Handler implements PacketHandler<ClientboundSendStationsPacket> {
-        @Override
-        public void encode(ClientboundSendStationsPacket packet, FriendlyByteBuf buf) {
-            buf.writeCollection(packet.stations, (buf1, station) -> station.toNetwork(buf1));
-        }
+    private static class Handler extends CodecPacketHandler<ClientboundSendStationsPacket> {
 
-        @Override
-        public ClientboundSendStationsPacket decode(FriendlyByteBuf buf) {
-            return new ClientboundSendStationsPacket(buf.readList(StationInfo::fromNetwork));
+        public Handler() {
+            super(ObjectByteCodec.create(
+                StationInfo.BYTE_CODEC.listOf().fieldOf(ClientboundSendStationsPacket::stations),
+                ClientboundSendStationsPacket::new
+            ));
         }
 
         @Override

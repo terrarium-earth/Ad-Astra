@@ -10,7 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public record ConfigurationEntry(ConfigurationType type, Map<Direction, Configuration> sides, Component title) {
+public record ConfigurationEntry(
+    ConfigurationType type,
+    Map<Direction, Configuration> sides,
+    Component title) {
 
     public ConfigurationEntry(ConfigurationType type, Configuration defaultValue, Component title) {
         this(type, getDefault(defaultValue), title);

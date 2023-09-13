@@ -1,11 +1,19 @@
 package earth.terrarium.adastra.common.utils;
 
+import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
+import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+
+import java.util.Optional;
 
 public final class ModUtils {
 
@@ -18,6 +26,14 @@ public final class ModUtils {
     // Marks this player's velocity as changed, so that it can be re-synced with the client later
     public static void sendUpdatePacket(ServerPlayer player) {
         player.hurtMarked = true;
+    }
+
+    public static Optional<ContainerMachineBlockEntity> getMachineFromMenuPacket(BlockPos pos, Player player, Level level) {
+        if (!(player.containerMenu instanceof BasicContainerMenu<?>)) return Optional.empty();
+        if (player.distanceToSqr(pos.getCenter()) > Mth.square(8)) return Optional.empty();
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (!(blockEntity instanceof ContainerMachineBlockEntity container)) return Optional.empty();
+        return Optional.of(container);
     }
 
     public static Direction relative(BlockEntity from, Direction to) {
