@@ -1,5 +1,6 @@
 {
   "block.adastra.battery": "Battery",
+  "block.adastra.detector": "Detector",
   "block.adastra.energy_controller": "Energy Controller",
   "block.adastra.energy_injector": "Energy Injector",
   "block.adastra.energy_receiver": "Energy Receiver",
@@ -95,6 +96,11 @@
   "side_config.adastra.type.push_pull": "Push/Pull",
   "side_config.adastra.type.slot": "Slot",
   "side_config.adastra.type.type": "Type: %s",
+  "text.adastra.detector.gravity_mode": "Set to normal gravity detection mode",
+  "text.adastra.detector.inverted_false": "Set to mormal",
+  "text.adastra.detector.inverted_true": "Set to inverted",
+  "text.adastra.detector.oxygen_mode": "Set to oxygen detection mode",
+  "text.adastra.detector.temperature_mode": "Set to safe temperature detection Mode",
   "text.adastra.gravity": "%sm/s²",
   "text.adastra.oxygen_false": "✘",
   "text.adastra.oxygen_true": "✔",

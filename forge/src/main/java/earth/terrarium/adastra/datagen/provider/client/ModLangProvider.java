@@ -169,6 +169,12 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.NEXT.getString(), "Next");
         add(ConstantComponents.PREVIOUS.getString(), "Previous");
         add(ConstantComponents.RESET_TO_DEFAULT.getString(), "Reset to Default");
+
+        add(ConstantComponents.DETECTOR_INVERTED_TRUE.getString(), "Set to inverted");
+        add(ConstantComponents.DETECTOR_INVERTED_FALSE.getString(), "Set to mormal");
+        add(ConstantComponents.DETECTOR_OXYGEN_MODE.getString(), "Set to oxygen detection mode");
+        add(ConstantComponents.DETECTOR_GRAVITY_MODE.getString(), "Set to normal gravity detection mode");
+        add(ConstantComponents.DETECTOR_TEMPERATURE_MODE.getString(), "Set to safe temperature detection Mode");
     }
 
     public void addFluid(Supplier<? extends Fluid> key, String name) {

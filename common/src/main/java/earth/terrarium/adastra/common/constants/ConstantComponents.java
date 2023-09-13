@@ -58,4 +58,10 @@ public class ConstantComponents {
     public static final Component SIDE_CONFIG_EXTRACTION_SLOTS = Component.translatable("side_config.adastra.extraction_slots");
     public static final Component SIDE_CONFIG_INPUT_FLUID = Component.translatable("side_config.adastra.input_fluid");
     public static final Component SIDE_CONFIG_OUTPUT_FLUID = Component.translatable("side_config.adastra.output_fluid");
+
+    public static final Component DETECTOR_INVERTED_TRUE = Component.translatable("text.adastra.detector.inverted_true");
+    public static final Component DETECTOR_INVERTED_FALSE = Component.translatable("text.adastra.detector.inverted_false");
+    public static final Component DETECTOR_OXYGEN_MODE = Component.translatable("text.adastra.detector.oxygen_mode");
+    public static final Component DETECTOR_GRAVITY_MODE = Component.translatable("text.adastra.detector.gravity_mode");
+    public static final Component DETECTOR_TEMPERATURE_MODE = Component.translatable("text.adastra.detector.temperature_mode");
 }

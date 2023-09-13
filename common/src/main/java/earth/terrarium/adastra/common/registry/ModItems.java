@@ -167,6 +167,11 @@ public final class ModItems {
         new Item.Properties())
     );
 
+    public static final RegistryEntry<Item> DETECTOR = ITEMS.register("detector", () -> new BlockItem(
+        ModBlocks.DETECTOR.get(),
+        new Item.Properties())
+    );
+
     public static final RegistryEntry<Item> MOON_SAND = ITEMS.register("moon_sand", () -> new BlockItem(ModBlocks.MOON_SAND.get(), new Item.Properties()));
     public static final RegistryEntry<Item> MOON_STONE = ITEMS.register("moon_stone", () -> new BlockItem(ModBlocks.MOON_STONE.get(), new Item.Properties()));
     public static final RegistryEntry<Item> MOON_DEEPSLATE = ITEMS.register("moon_deepslate", () -> new BlockItem(ModBlocks.MOON_DEEPSLATE.get(), new Item.Properties()));

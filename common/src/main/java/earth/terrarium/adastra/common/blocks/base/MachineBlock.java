@@ -110,6 +110,7 @@ public class MachineBlock extends BasicEntityBlock {
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
         if (level.isClientSide()) return;
+        if (state.isSignalSource()) return;
         boolean hasSignal = level.hasNeighborSignal(pos);
         if (state.getValue(POWERED) == hasSignal) return;
         level.setBlockAndUpdate(pos, state.setValue(POWERED, hasSignal));

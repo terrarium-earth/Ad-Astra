@@ -54,6 +54,8 @@ public final class ModBlocks {
 
     public static final RegistryEntry<Block> RECYCLER = MACHINES.register("recycler", () -> new RecyclerBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
+    public static final RegistryEntry<Block> DETECTOR = MACHINES.register("detector", () -> new DetectorBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+
     public static final RegistryEntry<Block> OXYGEN = FLUIDS.register("oxygen", () -> new BotariumLiquidBlock(ModFluidProperties.OXYGEN, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryEntry<Block> HYDROGEN = FLUIDS.register("hydrogen", () -> new BotariumLiquidBlock(ModFluidProperties.HYDROGEN, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryEntry<Block> OIL = FLUIDS.register("oil", () -> new BotariumLiquidBlock(ModFluidProperties.OIL, BlockBehaviour.Properties.copy(Blocks.WATER)));

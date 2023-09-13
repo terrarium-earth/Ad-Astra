@@ -117,4 +117,10 @@ public final class ModBlockEntityTypes {
         () -> RegistryHelpers.createBlockEntityType(
             RecyclerBlockEntity::new,
             ModBlocks.RECYCLER.get()));
+
+    public static final RegistryEntry<BlockEntityType<DetectorBlockEntity>> DETECTOR = BLOCK_ENTITY_TYPES.register(
+        "detector",
+        () -> RegistryHelpers.createBlockEntityType(
+            DetectorBlockEntity::new,
+            ModBlocks.DETECTOR.get()));
 }
