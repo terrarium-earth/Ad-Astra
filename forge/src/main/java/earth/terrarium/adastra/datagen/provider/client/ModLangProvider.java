@@ -27,7 +27,7 @@ public class ModLangProvider extends LanguageProvider {
     }
 
     private static final Set<RegistryEntry<Item>> CUSTOM_ITEM_NAMES = Set.of(ModItems.TI_69);
-    private static final Set<RegistryEntry<Block>> CUSTOM_BLOCK_NAMES = Set.of(ModBlocks.BLOCK_OF_ETRIUM, ModBlocks.BLOCK_OF_STEEL);
+    private static final Set<RegistryEntry<Block>> CUSTOM_BLOCK_NAMES = Set.of(ModBlocks.TINKERERS_WORKBENCH, ModBlocks.BLOCK_OF_ETRIUM, ModBlocks.BLOCK_OF_STEEL);
 
     @Override
     protected void addTranslations() {
@@ -65,6 +65,7 @@ public class ModLangProvider extends LanguageProvider {
         addItem(ModItems.TI_69, "TI-69");
         addBlock(ModBlocks.BLOCK_OF_ETRIUM, "Block of Etrium");
         addBlock(ModBlocks.BLOCK_OF_STEEL, "Block of Steel");
+        addBlock(ModBlocks.TINKERERS_WORKBENCH, "Tinkerer's Workbench");
 
         add(ConstantComponents.ITEM_GROUP.getString(), "Ad Astra");
         add(ConstantComponents.DEATH_OXYGEN.getString(), "%1$s couldn't breathe anymore");
@@ -185,7 +186,7 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.RESET_TO_DEFAULT.getString(), "Reset to Default");
 
         add(ConstantComponents.DETECTOR_INVERTED_TRUE.getString(), "Set to inverted");
-        add(ConstantComponents.DETECTOR_INVERTED_FALSE.getString(), "Set to mormal");
+        add(ConstantComponents.DETECTOR_INVERTED_FALSE.getString(), "Set to normal");
         add(ConstantComponents.DETECTOR_OXYGEN_MODE.getString(), "Set to oxygen detection mode");
         add(ConstantComponents.DETECTOR_GRAVITY_MODE.getString(), "Set to normal gravity detection mode");
         add(ConstantComponents.DETECTOR_TEMPERATURE_MODE.getString(), "Set to safe temperature detection Mode");

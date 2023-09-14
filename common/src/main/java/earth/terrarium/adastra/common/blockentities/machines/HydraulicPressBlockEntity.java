@@ -112,7 +112,7 @@ public class HydraulicPressBlockEntity extends RecipeMachineBlockEntity<Hydrauli
         if (recipe == null) return;
 
         getItem(1).shrink(1);
-        ItemUtils.addItem(this, 2, recipe.result());
+        ItemUtils.addItem(this, recipe.result(), 2);
 
         cookTime = 0;
         if (getItem(1).isEmpty()) clearRecipe();

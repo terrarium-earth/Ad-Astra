@@ -7,6 +7,7 @@ import earth.terrarium.adastra.client.config.ClientConfig;
 import earth.terrarium.adastra.client.renderers.blocks.base.CustomGeoBlockRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.base.SidedGeoBlockRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.machines.HydraulicPressBlockEntityRenderer;
+import earth.terrarium.adastra.client.renderers.blocks.machines.RecyclerBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.machines.SteamGeneratorBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.machines.TinkerersWorkbenchBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.entities.base.CustomGeoEntityRenderer;
@@ -14,6 +15,7 @@ import earth.terrarium.adastra.client.renderers.items.armor.AerolyteSpaceSuitRen
 import earth.terrarium.adastra.client.renderers.items.base.CustomGeoItemRenderer;
 import earth.terrarium.adastra.client.screens.BatteryScreen;
 import earth.terrarium.adastra.client.screens.HydraulicPressScreen;
+import earth.terrarium.adastra.client.screens.RecyclerScreen;
 import earth.terrarium.adastra.client.screens.SeparatorScreen;
 import earth.terrarium.adastra.client.ti69.apps.SensorApp;
 import earth.terrarium.adastra.client.ti69.apps.WeatherApp;
@@ -70,6 +72,7 @@ public class AdAstraClient {
         MenuScreens.register(ModMenus.BATTERY.get(), BatteryScreen::new);
         MenuScreens.register(ModMenus.SEPARATOR.get(), SeparatorScreen::new);
         MenuScreens.register(ModMenus.HYDRAULIC_PRESS.get(), HydraulicPressScreen::new);
+        MenuScreens.register(ModMenus.RECYCLER.get(), RecyclerScreen::new);
     }
 
     private static void registerBlockRenderTypes() {
@@ -89,7 +92,7 @@ public class AdAstraClient {
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ENERGY_RECEIVER.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.ENERGY_RECEIVER));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.VESNIUM_COIL.get(), context -> new CustomGeoBlockRenderer<>(ModBlocks.VESNIUM_COIL));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.TINKERERS_WORKBENCH.get(), context -> new TinkerersWorkbenchBlockEntityRenderer(ModBlocks.TINKERERS_WORKBENCH));
-        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.RECYCLER.get(), context -> new CustomGeoBlockRenderer<>(ModBlocks.RECYCLER));
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.RECYCLER.get(), context -> new RecyclerBlockEntityRenderer(ModBlocks.RECYCLER));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.GRAVITY_NORMALIZER.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.GRAVITY_NORMALIZER));
     }
 

@@ -45,10 +45,8 @@ public class SeparatorMenu extends BasicContainerMenu<SeparatorBlockEntity> {
 
     @Override
     protected void addMenuSlots() {
-        // Battery
         addSlot(new ImageSlot(entity, 0, 153, 7, BATTERY_SLOT_ICON));
 
-        // Bucket slots
         addSlot(new Slot(entity, 1, 51, 138));
         addSlot(new FurnaceResultSlot(player, entity, 2, 69, 138));
         addSlot(new Slot(entity, 3, 11, 138));

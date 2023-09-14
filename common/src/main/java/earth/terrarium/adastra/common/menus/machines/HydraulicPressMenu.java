@@ -44,7 +44,6 @@ public class HydraulicPressMenu extends BasicContainerMenu<HydraulicPressBlockEn
 
     @Override
     protected void addMenuSlots() {
-        // Battery
         addSlot(new ImageSlot(entity, 0, 184, 7, BATTERY_SLOT_ICON));
 
         addSlot(new Slot(entity, 1, 61, 86));

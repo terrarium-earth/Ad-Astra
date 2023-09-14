@@ -45,20 +45,17 @@ public class BatteryMenu extends BasicContainerMenu<BatteryBlockEntity> {
 
     @Override
     protected void addMenuSlots() {
-        // Battery
         addSlot(new ImageSlot(entity, 0, 184, 7, BATTERY_SLOT_ICON));
 
-        // Charging
-        addSlot(new Slot(entity, 1, 66, 68));
-        addSlot(new Slot(entity, 2, 96, 68));
-        addSlot(new Slot(entity, 3, 66, 98));
-        addSlot(new Slot(entity, 4, 96, 98));
-
-        // Player Armor
         addSlot(new ArmorSlot(inventory, 39, -2, 137, EquipmentSlot.HEAD));
         addSlot(new ArmorSlot(inventory, 38, -2, 155, EquipmentSlot.CHEST));
         addSlot(new ArmorSlot(inventory, 37, -2, 173, EquipmentSlot.LEGS));
         addSlot(new ArmorSlot(inventory, 36, -2, 191, EquipmentSlot.FEET));
         addSlot(new ImageSlot(inventory, 40, -2, 209, ARMOR_SLOT_SHIELD));
+
+        addSlot(new Slot(entity, 1, 66, 68));
+        addSlot(new Slot(entity, 2, 96, 68));
+        addSlot(new Slot(entity, 3, 66, 98));
+        addSlot(new Slot(entity, 4, 96, 98));
     }
 }

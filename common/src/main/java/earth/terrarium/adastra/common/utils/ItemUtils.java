@@ -25,6 +25,7 @@ public class ItemUtils {
     }
 
     public static void pull(Container from, Container to, int[] toSlots, Direction direction) {
+        if (inventoryFull(to)) return;
         for (int i = 0; i < from.getContainerSize(); i++) {
             ItemStack stack = from.getItem(i);
             if (stack.isEmpty()) continue;
@@ -71,12 +72,16 @@ public class ItemUtils {
         return input.isEmpty() || (ItemStack.isSameItemSameTags(input, output) && output.getCount() + input.getCount() <= input.getMaxStackSize());
     }
 
-    public static void addItem(Container container, int slot, ItemStack output) {
-        ItemStack input = container.getItem(slot);
-        if (input.isEmpty()) {
-            container.setItem(slot, output.copy());
-        } else if (ItemStack.isSameItemSameTags(input, output)) {
-            input.grow(output.getCount());
+    public static void addItem(Container container, ItemStack output, int... slots) {
+        for (int slot : slots) {
+            ItemStack input = container.getItem(slot);
+            if (input.isEmpty()) {
+                container.setItem(slot, output.copy());
+                return;
+            } else if (canAddItem(input, output)) {
+                input.grow(output.getCount());
+                return;
+            }
         }
     }
 }
