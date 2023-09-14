@@ -60,6 +60,9 @@ public final class ModBlocks {
     public static final RegistryEntry<Block> HYDROGEN = FLUIDS.register("hydrogen", () -> new BotariumLiquidBlock(ModFluidProperties.HYDROGEN, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryEntry<Block> OIL = FLUIDS.register("oil", () -> new BotariumLiquidBlock(ModFluidProperties.OIL, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
+    public static final RegistryEntry<Block> BLOCK_OF_ETRIUM = CUBES.register("block_of_etrium", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+    public static final RegistryEntry<Block> BLOCK_OF_STEEL = CUBES.register("block_of_steel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+
     public static final RegistryEntry<Block> MOON_SAND = CUBES.register("moon_sand", () -> new SandBlock(0x5c6466, BlockBehaviour.Properties.copy(Blocks.SAND)));
     public static final RegistryEntry<Block> MOON_STONE = CUBES.register("moon_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
     public static final RegistryEntry<Block> MOON_DEEPSLATE = CUBE_COLUMNS.register("moon_deepslate", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));

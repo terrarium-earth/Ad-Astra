@@ -1,0 +1,12 @@
+{
+  "type": "adastra:hydraulic_pressing",
+  "cookingtime": 800,
+  "energy": 20,
+  "ingredient": {
+    "tag": "adastra:etrium_blocks"
+  },
+  "result": {
+    "count": 9,
+    "id": "adastra:etrium_ingot"
+  }
+}

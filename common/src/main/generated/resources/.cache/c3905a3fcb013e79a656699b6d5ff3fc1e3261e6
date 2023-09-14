@@ -1,2 +1,14 @@
-// 1.20.1	2023-07-19T03:06:20.354317	Tags for minecraft:item mod id adastra
+// 1.20.1	2023-09-14T01:08:45.673081	Tags for minecraft:item mod id adastra
+48aa5616085a4684ad0d3c7648a55401b1737dbc data/adastra/tags/items/etrium_blocks.json
+43ededb39db2fd0de02ed2a5ffba0f554d87353e data/adastra/tags/items/etrium_ingots.json
+18180d07f60f685046449bf28e2961de1fbb6104 data/adastra/tags/items/etrium_nuggets.json
+f49f79b1c39157585903cbf4583088908adbc51f data/adastra/tags/items/etrium_plates.json
+0e93f1f84bb194691b5ce0a40322cc305de1b407 data/adastra/tags/items/etrium_rods.json
+e08805aedadf2cf18f9189e7b680baa8f084fd8e data/adastra/tags/items/iron_plates.json
+19a6d3813dbc184438c63fc50dc27f1cf59c9e00 data/adastra/tags/items/iron_rods.json
 dba948396ef7c74c789f90c262169b1b7560fd57 data/adastra/tags/items/recyclable.json
+ec61581bcff30bcde6a1ce44a8a256aa6453c362 data/adastra/tags/items/steel_blocks.json
+d4e9802296704bf6bcab6b2e07f2aa0caaf3a77b data/adastra/tags/items/steel_ingots.json
+2328482c62963be55037e2e2e59e6953ee208d7c data/adastra/tags/items/steel_nuggets.json
+f2582bc1389dcde943c1acd1e846331656ba5ce9 data/adastra/tags/items/steel_plates.json
+fdd916133f839e75e9ffdac6047a8d7938996256 data/adastra/tags/items/steel_rods.json

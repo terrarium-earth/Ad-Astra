@@ -39,8 +39,8 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity {
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage() {
-        if (this.energyContainer != null) return this.energyContainer;
-        return this.energyContainer = new WrappedBlockEnergyContainer(
+        if (energyContainer != null) return energyContainer;
+        return energyContainer = new WrappedBlockEnergyContainer(
             this,
             new SimpleEnergyContainer(2_000_000) {
                 @Override
@@ -71,35 +71,35 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity {
 
     @Override
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
-        TransferUtils.pushItemsNearby(this, pos, new int[]{1, 2, 3, 4}, this.getSideConfig().get(0), filter);
-        TransferUtils.pullItemsNearby(this, pos, new int[]{1, 2, 3, 4}, this.getSideConfig().get(0), filter);
-        TransferUtils.pushEnergyNearby(this, pos, this.getEnergyStorage().maxExtract(), this.getSideConfig().get(1), filter);
-        TransferUtils.pullEnergyNearby(this, pos, this.getEnergyStorage().maxInsert(), this.getSideConfig().get(1), filter);
+        TransferUtils.pushItemsNearby(this, pos, new int[]{1, 2, 3, 4}, getSideConfig().get(0), filter);
+        TransferUtils.pullItemsNearby(this, pos, new int[]{1, 2, 3, 4}, getSideConfig().get(0), filter);
+        TransferUtils.pushEnergyNearby(this, pos, getEnergyStorage().maxExtract(), getSideConfig().get(1), filter);
+        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), getSideConfig().get(1), filter);
     }
 
     public void onEnergyChange() {
-        if (BatteryBlockEntity.this.level().getGameTime() % 10 != 0) return;
-        int charge = Math.round(this.getEnergyStorage().getStoredEnergy() / (float) this.getEnergyStorage().getMaxCapacity() * 4);
-        this.level().setBlock(this.getBlockPos(), this.getBlockState().setValue(BatteryBlock.CHARGE, charge), Block.UPDATE_CLIENTS);
+        if (level().getGameTime() % 10 != 0) return;
+        int charge = Math.round(getEnergyStorage().getStoredEnergy() / (float) getEnergyStorage().getMaxCapacity() * 4);
+        level().setBlock(getBlockPos(), getBlockState().setValue(BatteryBlock.CHARGE, charge), Block.UPDATE_CLIENTS);
     }
 
     public void distributeToChargeSlots() {
         int filledSlots = 0;
         for (int i = 0; i < 4; i++) {
-            if (EnergyApi.isEnergyItem(this.getItem(i + 1))) {
+            if (EnergyApi.isEnergyItem(getItem(i + 1))) {
                 filledSlots++;
             }
         }
         if (filledSlots == 0) return;
 
         for (int i = 0; i < 4; i++) {
-            ItemStack stack = this.getItem(i + 1);
+            ItemStack stack = getItem(i + 1);
             if (stack.isEmpty()) continue;
             if (!EnergyApi.isEnergyItem(stack)) continue;
             ItemStackHolder holder = new ItemStackHolder(stack);
             EnergyApi.moveEnergy(this, null, holder, getEnergyStorage().maxExtract() / filledSlots, false);
             if (holder.isDirty()) {
-                this.setItem(i + 1, holder.getStack());
+                setItem(i + 1, holder.getStack());
             }
         }
     }

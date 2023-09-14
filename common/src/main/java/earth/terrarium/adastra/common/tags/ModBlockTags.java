@@ -11,6 +11,9 @@ public final class ModBlockTags {
     public static final TagKey<Block> BLOCKS_FLOOD_FILL = tag("blocks_flood_fill");
     public static final TagKey<Block> MOON_CARVER_REPLACEABLES = tag("moon_carver_replaceables");
 
+    public static final TagKey<Block> STEEL_BLOCKS = tag("steel_blocks");
+    public static final TagKey<Block> ETRIUM_BLOCKS = tag("etrium_blocks");
+
 
     private static TagKey<Block> tag(String name) {
         return TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, name));

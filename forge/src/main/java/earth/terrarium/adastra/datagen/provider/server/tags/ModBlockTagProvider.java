@@ -9,11 +9,13 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagEntry;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 public class ModBlockTagProvider extends TagsProvider<Block> {
@@ -22,16 +24,23 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         super(output, Registries.BLOCK, completableFuture, AdAstra.MOD_ID, existingFileHelper);
     }
 
-    @SuppressWarnings("DataFlowIssue")
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.tag(BlockTags.FENCES.location()));
-        tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.element(ForgeRegistries.BLOCKS.getKey(Blocks.IRON_BARS)));
-        tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.element(ForgeRegistries.BLOCKS.getKey(Blocks.TNT)));
-        tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.element(ModBlocks.OXYGEN_DISTRIBUTOR.getId()));
-        tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.element(ModBlocks.GRAVITY_NORMALIZER.getId()));
 
-        tag(ModBlockTags.MOON_CARVER_REPLACEABLES).add(TagEntry.element(ForgeRegistries.BLOCKS.getKey(ModBlocks.MOON_SAND.get())));
-        tag(ModBlockTags.MOON_CARVER_REPLACEABLES).add(TagEntry.element(ForgeRegistries.BLOCKS.getKey(ModBlocks.MOON_STONE.get())));
+        add(ModBlockTags.PASSES_FLOOD_FILL, Blocks.IRON_BARS);
+        add(ModBlockTags.PASSES_FLOOD_FILL, Blocks.TNT);
+        add(ModBlockTags.PASSES_FLOOD_FILL, ModBlocks.OXYGEN_DISTRIBUTOR.get());
+        add(ModBlockTags.PASSES_FLOOD_FILL, ModBlocks.GRAVITY_NORMALIZER.get());
+
+        add(ModBlockTags.MOON_CARVER_REPLACEABLES, ModBlocks.MOON_SAND.get());
+        add(ModBlockTags.MOON_CARVER_REPLACEABLES, ModBlocks.MOON_STONE.get());
+
+        add(ModBlockTags.STEEL_BLOCKS, ModBlocks.BLOCK_OF_STEEL.get());
+        add(ModBlockTags.ETRIUM_BLOCKS, ModBlocks.BLOCK_OF_ETRIUM.get());
+    }
+
+    private void add(TagKey<Block> tag, Block block) {
+        tag(tag).add(TagEntry.element(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block))));
     }
 }

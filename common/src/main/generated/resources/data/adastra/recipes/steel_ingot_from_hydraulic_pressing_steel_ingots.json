@@ -1,0 +1,12 @@
+{
+  "type": "adastra:hydraulic_pressing",
+  "cookingtime": 100,
+  "energy": 20,
+  "ingredient": {
+    "tag": "adastra:steel_ingots"
+  },
+  "result": {
+    "count": 1,
+    "id": "adastra:steel_ingot"
+  }
+}

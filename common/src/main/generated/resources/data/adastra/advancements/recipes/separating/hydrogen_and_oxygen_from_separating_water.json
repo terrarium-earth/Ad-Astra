@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "adastra:hydrogen_and_oxygen_from_water"
+        "recipe": "adastra:hydrogen_and_oxygen_from_separating_water"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -15,7 +15,7 @@
   ],
   "rewards": {
     "recipes": [
-      "adastra:hydrogen_and_oxygen_from_water"
+      "adastra:hydrogen_and_oxygen_from_separating_water"
     ]
   },
   "sends_telemetry_event": true

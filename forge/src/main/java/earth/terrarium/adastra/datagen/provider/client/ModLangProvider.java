@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.datagen.provider.client;
 
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.registry.ModBlocks;
@@ -9,12 +10,15 @@ import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.botarium.common.registry.fluid.BotariumFlowingFluid;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.codehaus.plexus.util.StringUtils;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class ModLangProvider extends LanguageProvider {
@@ -22,16 +26,22 @@ public class ModLangProvider extends LanguageProvider {
         super(output, AdAstra.MOD_ID, "en_us");
     }
 
+    private static final Set<RegistryEntry<Item>> CUSTOM_ITEM_NAMES = Set.of(ModItems.TI_69);
+    private static final Set<RegistryEntry<Block>> CUSTOM_BLOCK_NAMES = Set.of(ModBlocks.BLOCK_OF_ETRIUM, ModBlocks.BLOCK_OF_STEEL);
+
     @Override
     protected void addTranslations() {
-        ModBlocks.BLOCKS.stream().forEach(entry -> addBlock(entry,
-            StringUtils.capitaliseAllWords(entry
-                .getId()
-                .getPath()
-                .replace("_", " "))));
+        ModBlocks.BLOCKS.stream()
+            .filter(b -> !(CUSTOM_BLOCK_NAMES.contains(b)))
+            .forEach(entry -> addBlock(entry,
+                StringUtils.capitaliseAllWords(entry
+                    .getId()
+                    .getPath()
+                    .replace("_", " "))));
 
         ModItems.ITEMS.stream()
             .filter(i -> !(i.get() instanceof BlockItem))
+            .filter(i -> !(CUSTOM_ITEM_NAMES.contains(i)))
             .forEach(entry -> addItem(entry,
                 StringUtils.capitaliseAllWords(entry
                     .getId()
@@ -51,6 +61,10 @@ public class ModLangProvider extends LanguageProvider {
                     .getId()
                     .getPath()
                     .replace("_", " "))));
+
+        addItem(ModItems.TI_69, "TI-69");
+        addBlock(ModBlocks.BLOCK_OF_ETRIUM, "Block of Etrium");
+        addBlock(ModBlocks.BLOCK_OF_STEEL, "Block of Steel");
 
         add(ConstantComponents.ITEM_GROUP.getString(), "Ad Astra");
         add(ConstantComponents.DEATH_OXYGEN.getString(), "%1$s couldn't breathe anymore");

@@ -23,10 +23,17 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<?>> extends Cont
     public void internalServerTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         super.internalServerTick(level, time, state, pos);
         if (recipe != null && canFunction()) recipeTick(level, getEnergyStorage());
-        if (time % 20 == 0 && recipe == null && shouldSync()) update();
+        if (time % 20 == 0 && recipe == null && shouldUpdate()) update();
+        if (recipe == null) cookTimeTotal = 0;
+    }
+
+    public boolean shouldUpdate() {
+        return canCraft(getEnergyStorage());
     }
 
     public abstract void recipeTick(ServerLevel level, WrappedBlockEnergyContainer energyStorage);
+
+    public abstract boolean canCraft(WrappedBlockEnergyContainer energyStorage);
 
     public abstract void craft();
 
@@ -44,6 +51,12 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<?>> extends Cont
         super.saveAdditional(tag);
         tag.putInt("CookTime", cookTime);
         tag.putInt("CookTimeTotal", cookTimeTotal);
+    }
+
+    public void clearRecipe() {
+        recipe = null;
+        cookTime = 0;
+        cookTimeTotal = 0;
     }
 
     public int cookTime() {

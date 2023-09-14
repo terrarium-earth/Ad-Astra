@@ -1,0 +1,12 @@
+{
+  "type": "adastra:hydraulic_pressing",
+  "cookingtime": 100,
+  "energy": 20,
+  "ingredient": {
+    "item": "minecraft:iron_ingot"
+  },
+  "result": {
+    "count": 1,
+    "id": "adastra:iron_plate"
+  }
+}

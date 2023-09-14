@@ -30,7 +30,7 @@ public class BatteryBlock extends DoubleMachineBlock {
 
 
     public BatteryBlock(Properties properties) {
-        super(properties, true);
+        super(properties);
         registerDefaultState(stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
             .setValue(POWERED, false)

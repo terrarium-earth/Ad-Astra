@@ -66,4 +66,17 @@ public class ItemUtils {
         }
         return false;
     }
+
+    public static boolean canAddItem(ItemStack input, ItemStack output) {
+        return input.isEmpty() || (ItemStack.isSameItemSameTags(input, output) && output.getCount() + input.getCount() <= input.getMaxStackSize());
+    }
+
+    public static void addItem(Container container, int slot, ItemStack output) {
+        ItemStack input = container.getItem(slot);
+        if (input.isEmpty()) {
+            container.setItem(slot, output.copy());
+        } else if (ItemStack.isSameItemSameTags(input, output)) {
+            input.grow(output.getCount());
+        }
+    }
 }

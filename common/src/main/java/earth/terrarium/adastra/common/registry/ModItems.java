@@ -23,63 +23,72 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public final class ModItems {
     public static final ResourcefulRegistry<Item> ITEMS = ResourcefulRegistries.create(BuiltInRegistries.ITEM, AdAstra.MOD_ID);
+    public static final ResourcefulRegistry<Item> BASIC_ITEMS = ResourcefulRegistries.create(ITEMS);
     public static final Supplier<CreativeModeTab> TAB = new ResourcefulCreativeTab(new ResourceLocation(AdAstra.MOD_ID, "main"))
         .setItemIcon(() -> Items.DIRT)
         .addRegistry(ITEMS)
         .build();
 
     public static final RegistryEntry<Item> TI_69 = ITEMS.register("ti_69", () -> new Ti69Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryEntry<Item> WRENCH = ITEMS.register("wrench", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> WRENCH = BASIC_ITEMS.register("wrench", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> ZIP_GUN = ITEMS.register("zip_gun", () -> new ZipGunItem(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryEntry<Item> ETRIONIC_CAPACITOR = ITEMS.register("etrionic_capacitor", () -> new EtrionicCapacitorItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryEntry<Item> GAS_TANK = ITEMS.register("gas_tank", () -> new GasTankItem(new Item.Properties().stacksTo(1), 2, 0.05f));
-    public static final RegistryEntry<Item> LARGE_GAS_TANK = ITEMS.register("large_gas_tank", () -> new GasTankItem(new Item.Properties().stacksTo(1), 10, 0.25f));
+    public static final RegistryEntry<Item> ETRIONIC_CAPACITOR = BASIC_ITEMS.register("etrionic_capacitor", () -> new EtrionicCapacitorItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> GAS_TANK = BASIC_ITEMS.register("gas_tank", () -> new GasTankItem(new Item.Properties().stacksTo(1), 2, 0.05f));
+    public static final RegistryEntry<Item> LARGE_GAS_TANK = BASIC_ITEMS.register("large_gas_tank", () -> new GasTankItem(new Item.Properties().stacksTo(1), 10, 0.25f));
 
-    public static final RegistryEntry<Item> ETRIUM_INGOT = ITEMS.register("etrium_ingot", () -> new Item(new Item.Properties()));
-    public static final RegistryEntry<Item> ETRIUM_NUGGET = ITEMS.register("etrium_nugget", () -> new Item(new Item.Properties()));
-    public static final RegistryEntry<Item> ETRIUM_PLATE = ITEMS.register("etrium_plate", () -> new Item(new Item.Properties()));
-    public static final RegistryEntry<Item> ETRIUM_ROD = ITEMS.register("etrium_rod", () -> new Item(new Item.Properties()));
-    public static final RegistryEntry<Item> ETRIONIC_CORE = ITEMS.register("etrionic_core", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> IRON_PLATE = BASIC_ITEMS.register("iron_plate", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> IRON_ROD = BASIC_ITEMS.register("iron_rod", () -> new Item(new Item.Properties()));
 
-    public static final RegistryEntry<Item> PHOTOVOLTAIC_ETRIUM_CELL = ITEMS.register("photovoltaic_etrium_cell", () -> new Item(new Item.Properties()));
-    public static final RegistryEntry<Item> PHOTOVOLTAIC_VESNIUM_CELL = ITEMS.register("photovoltaic_vesnium_cell", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_INGOT = BASIC_ITEMS.register("steel_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_NUGGET = BASIC_ITEMS.register("steel_nugget", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_PLATE = BASIC_ITEMS.register("steel_plate", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_ROD = BASIC_ITEMS.register("steel_rod", () -> new Item(new Item.Properties()));
 
-    public static final RegistryEntry<Item> AEROLYTE_SPACE_HELMET = ITEMS.register("aerolyte_space_helmet", () -> new AerolyteSpaceSuitItem(
+    public static final RegistryEntry<Item> ETRIUM_INGOT = BASIC_ITEMS.register("etrium_ingot", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_NUGGET = BASIC_ITEMS.register("etrium_nugget", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_PLATE = BASIC_ITEMS.register("etrium_plate", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_ROD = BASIC_ITEMS.register("etrium_rod", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIONIC_CORE = BASIC_ITEMS.register("etrionic_core", () -> new Item(new Item.Properties()));
+
+    public static final RegistryEntry<Item> PHOTOVOLTAIC_ETRIUM_CELL = BASIC_ITEMS.register("photovoltaic_etrium_cell", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> PHOTOVOLTAIC_VESNIUM_CELL = BASIC_ITEMS.register("photovoltaic_vesnium_cell", () -> new Item(new Item.Properties()));
+
+    public static final RegistryEntry<Item> AEROLYTE_SPACE_HELMET = BASIC_ITEMS.register("aerolyte_space_helmet", () -> new AerolyteSpaceSuitItem(
         AerolyteSpaceSuitMaterial.MATERIAL,
         ArmorItem.Type.HELMET,
         new Item.Properties())
     );
 
-    public static final RegistryEntry<Item> AEROLYTE_SPACE_SUIT = ITEMS.register("aerolyte_space_suit", () -> new AerolyteSpaceSuitItem(
+    public static final RegistryEntry<Item> AEROLYTE_SPACE_SUIT = BASIC_ITEMS.register("aerolyte_space_suit", () -> new AerolyteSpaceSuitItem(
         AerolyteSpaceSuitMaterial.MATERIAL,
         ArmorItem.Type.CHESTPLATE,
         new Item.Properties())
     );
 
-    public static final RegistryEntry<Item> AEROLYTE_SPACE_PANTS = ITEMS.register("aerolyte_space_pants", () -> new AerolyteSpaceSuitItem(
+    public static final RegistryEntry<Item> AEROLYTE_SPACE_PANTS = BASIC_ITEMS.register("aerolyte_space_pants", () -> new AerolyteSpaceSuitItem(
         AerolyteSpaceSuitMaterial.MATERIAL,
         ArmorItem.Type.LEGGINGS,
         new Item.Properties())
     );
 
-    public static final RegistryEntry<Item> AEROLYTE_SPACE_BOOTS = ITEMS.register("aerolyte_space_boots", () -> new AerolyteSpaceSuitItem(
+    public static final RegistryEntry<Item> AEROLYTE_SPACE_BOOTS = BASIC_ITEMS.register("aerolyte_space_boots", () -> new AerolyteSpaceSuitItem(
         AerolyteSpaceSuitMaterial.MATERIAL,
         ArmorItem.Type.BOOTS,
         new Item.Properties())
     );
 
-    public static final RegistryEntry<Item> OXYGEN_BUCKET = ITEMS.register("oxygen_bucket", () -> new FluidBucketItem(
+    public static final RegistryEntry<Item> OXYGEN_BUCKET = BASIC_ITEMS.register("oxygen_bucket", () -> new FluidBucketItem(
         ModFluidProperties.OXYGEN,
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
-    public static final RegistryEntry<Item> HYDROGEN_BUCKET = ITEMS.register("hydrogen_bucket", () -> new FluidBucketItem(
+    public static final RegistryEntry<Item> HYDROGEN_BUCKET = BASIC_ITEMS.register("hydrogen_bucket", () -> new FluidBucketItem(
         ModFluidProperties.HYDROGEN,
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
-    public static final RegistryEntry<Item> OIL_BUCKET = ITEMS.register("oil_bucket", () -> new FluidBucketItem(
+    public static final RegistryEntry<Item> OIL_BUCKET = BASIC_ITEMS.register("oil_bucket", () -> new FluidBucketItem(
         ModFluidProperties.OIL,
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
@@ -171,6 +180,9 @@ public final class ModItems {
         ModBlocks.DETECTOR.get(),
         new Item.Properties())
     );
+
+    public static final RegistryEntry<Item> BLOCK_OF_STEEL = ITEMS.register("block_of_steel", () -> new BlockItem(ModBlocks.BLOCK_OF_STEEL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> BLOCK_OF_ETRIUM = ITEMS.register("block_of_etrium", () -> new BlockItem(ModBlocks.BLOCK_OF_ETRIUM.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> MOON_SAND = ITEMS.register("moon_sand", () -> new BlockItem(ModBlocks.MOON_SAND.get(), new Item.Properties()));
     public static final RegistryEntry<Item> MOON_STONE = ITEMS.register("moon_stone", () -> new BlockItem(ModBlocks.MOON_STONE.get(), new Item.Properties()));

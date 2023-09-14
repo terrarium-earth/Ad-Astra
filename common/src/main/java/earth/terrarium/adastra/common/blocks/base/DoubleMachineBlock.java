@@ -38,10 +38,6 @@ public class DoubleMachineBlock extends MachineBlock {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
     public DoubleMachineBlock(Properties properties) {
-        this(properties, false);
-    }
-
-    public DoubleMachineBlock(Properties properties, boolean generator) {
         super(properties);
         registerDefaultState(stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
@@ -141,5 +137,12 @@ public class DoubleMachineBlock extends MachineBlock {
             level.setBlock(belowPos, blockState2, 35);
             level.levelEvent(player, LevelEvent.PARTICLES_DESTROY_BLOCK, belowPos, Block.getId(belowState));
         }
+    }
+
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+        if (level.isClientSide()) return;
+        if (state.getValue(HALF) == DoubleBlockHalf.UPPER) return;
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
     }
 }

@@ -57,18 +57,18 @@ public interface PlanetApi {
     boolean isExtraterrestrial(ResourceKey<Level> level);
 
     /**
-     * Returns the solar power energy output of the given level.
+     * Returns the solar power energy result of the given level.
      *
      * @param level The level to check.
-     * @return The solar power energy output of the given level.
+     * @return The solar power energy result of the given level.
      */
     int getSolarPower(Level level);
 
     /**
-     * Returns the solar power energy output of the given level.
+     * Returns the solar power energy result of the given level.
      *
      * @param level The level to check.
-     * @return The solar power energy output of the given level.
+     * @return The solar power energy result of the given level.
      */
     int getSolarPower(ResourceKey<Level> level);
 }

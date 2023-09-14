@@ -1,8 +1,9 @@
-// 1.20.1	2023-09-04T15:57:34.208348	Item Models: adastra
+// 1.20.1	2023-09-14T01:00:26.210548	Item Models: adastra
 76339c09d579b1c8b10030755bb3627a7dc442d6 assets/adastra/models/item/aerolyte_space_boots.json
 b56c0918338cf499fb9b167d584ed602e9ea5451 assets/adastra/models/item/aerolyte_space_helmet.json
 9569115d3686aac753e0b72129c947274b4afc20 assets/adastra/models/item/aerolyte_space_pants.json
 410efeffb0096789fe3932366871c55f8e8d4a61 assets/adastra/models/item/aerolyte_space_suit.json
+3fd14cf38d65fddfa2f17b4514922802fabc4887 assets/adastra/models/item/etrionic_capacitor.json
 63166aae8f4d6a0bbef0a0a98f5164064c2e0828 assets/adastra/models/item/etrionic_core.json
 38db1682f9bee60dd8b94d10ed60e1a73739c174 assets/adastra/models/item/etrium_ingot.json
 f23fd54d43da8dc710b0c1fccce6ea867d8b6b16 assets/adastra/models/item/etrium_nugget.json
@@ -10,9 +11,15 @@ b121131cc0cb99edec252f815c47e75b7d467a5a assets/adastra/models/item/etrium_plate
 3d022be26832b9f9978d12abb80f7d34303c7063 assets/adastra/models/item/etrium_rod.json
 0969509bc2c2618a6093a8e817ae60245ec2b2d2 assets/adastra/models/item/gas_tank.json
 0e6c3b7a915ba73b8befe632d06250c55352ff53 assets/adastra/models/item/hydrogen_bucket.json
+5f4be4896e345a6b7ff8fead5984b008a1ff4722 assets/adastra/models/item/iron_plate.json
+adbd4fdc65a68565f30296dc37082510d97dc025 assets/adastra/models/item/iron_rod.json
 127e3cf9e4ec7d5fc812343b7a65adc13741136e assets/adastra/models/item/large_gas_tank.json
 ff173969954996aa06c76c68d8dc8f47ceacc143 assets/adastra/models/item/oil_bucket.json
 62c4359c20fa798a4ea895f199a41a7fe0934436 assets/adastra/models/item/oxygen_bucket.json
 b3ba6e5eb6c1e44a3f8e1cf914bea257cbdd45f2 assets/adastra/models/item/photovoltaic_etrium_cell.json
 8c7503a5dd801a8826ec05581837c322cd8e5a35 assets/adastra/models/item/photovoltaic_vesnium_cell.json
+dfa67c5b795224c618b10e195fdcf3875d04591b assets/adastra/models/item/steel_ingot.json
+3470717a7cd1678317bfd5070bb99296f4286127 assets/adastra/models/item/steel_nugget.json
+c6128522e6768227395ee19fd88043b20410eb8f assets/adastra/models/item/steel_plate.json
+04fc192cbe948f849e2a4c3a5639b4c90c911a7d assets/adastra/models/item/steel_rod.json
 2a81949d71fc956aacbfcc24b0967c1ad5fd6f0e assets/adastra/models/item/wrench.json

@@ -1,5 +1,7 @@
-// 1.20.1	2023-07-22T04:58:57.985885	Block States: adastra
+// 1.20.1	2023-09-14T01:00:26.208681	Block States: adastra
 36ad980a61ba623d936a511a42a24e6209d00991 assets/adastra/blockstates/battery.json
+2e1f33812b5519d6849862c6e5ed9d195ee4157b assets/adastra/blockstates/block_of_etrium.json
+20b61f9d792e454483a6fbfb6a4308e5bdd49516 assets/adastra/blockstates/block_of_steel.json
 c9f6505afc77af8d5b0f5d83c427190c97abeb7c assets/adastra/blockstates/energy_controller.json
 87596122930c30790be9afa86140030fa449de92 assets/adastra/blockstates/energy_injector.json
 f17c814b697e204530d33294ab8a274c21295b22 assets/adastra/blockstates/energy_receiver.json
@@ -31,6 +33,8 @@ db914fff3c1e83653202f335c331f7bc4107c600 assets/adastra/models/block/battery_100
 f314374c097bb3a484b137ca1110431b4ec8d2de assets/adastra/models/block/battery_25.json
 948e94b793894d28289ffc7194c1230b45a5324e assets/adastra/models/block/battery_50.json
 bd87354df12de9fcf4b6c5ad7e857045b8148db3 assets/adastra/models/block/battery_75.json
+998128eeb7fa0fc4f0531dd65b3f90703d448fa7 assets/adastra/models/block/block_of_etrium.json
+ba87dd309f1d141a05c7074ef147ce80adbb11e1 assets/adastra/models/block/block_of_steel.json
 1bae0d43824f96af07a2f159ac13e56c8f37d498 assets/adastra/models/block/energy_controller.json
 0e2177a9fa00688cde48bf2cabdac5c5f0f8c6a7 assets/adastra/models/block/energy_injector.json
 cde831e888df0459af01597639710d7db44f397f assets/adastra/models/block/energy_receiver.json
@@ -59,6 +63,8 @@ e2d73b3b4e10f7d0dc5a05f74ef0a1ba43800618 assets/adastra/models/block/venus_stone
 661f5d6ff7f66293529474e8b76bb823fdde0da7 assets/adastra/models/block/vesnium_coil.json
 2846b5ba981e12285e7cd6d993c4c7f661c653e8 assets/adastra/models/block/vesnium_solar_panel.json
 62cbbfd8fd0866ac0057b866eab873c9d8152a1c assets/adastra/models/item/battery.json
+67fc30ece1cca699c0e272473925b2fd14ea833a assets/adastra/models/item/block_of_etrium.json
+fa61a8ed66ead691684bc31526466b545394db5d assets/adastra/models/item/block_of_steel.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/energy_controller.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/energy_injector.json
 ee896602f723cb9a1dbd8d39997a863a368d4fcb assets/adastra/models/item/energy_receiver.json

@@ -46,7 +46,7 @@ public class SeparatorBlockEntity extends RecipeMachineBlockEntity<SeparatingRec
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.cache;
+        return cache;
     }
 
     @Override
@@ -65,9 +65,14 @@ public class SeparatorBlockEntity extends RecipeMachineBlockEntity<SeparatingRec
     }
 
     @Override
+    public boolean shouldUpdate() {
+        return shouldSync();
+    }
+
+    @Override
     public WrappedBlockEnergyContainer getEnergyStorage() {
-        if (this.energyContainer != null) return this.energyContainer;
-        return this.energyContainer = new WrappedBlockEnergyContainer(
+        if (energyContainer != null) return energyContainer;
+        return energyContainer = new WrappedBlockEnergyContainer(
             this,
             new InsertOnlyEnergyContainer(100_000) {
                 @Override
@@ -79,8 +84,8 @@ public class SeparatorBlockEntity extends RecipeMachineBlockEntity<SeparatingRec
 
     @Override
     public WrappedBlockFluidContainer getFluidContainer() {
-        if (this.fluidContainer != null) return this.fluidContainer;
-        return this.fluidContainer = new WrappedBlockFluidContainer(
+        if (fluidContainer != null) return fluidContainer;
+        return fluidContainer = new WrappedBlockFluidContainer(
             this,
             new BiFluidContainer(
                 FluidHooks.buckets(10.0f),
@@ -103,31 +108,38 @@ public class SeparatorBlockEntity extends RecipeMachineBlockEntity<SeparatingRec
 
     @Override
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
-        TransferUtils.pullItemsNearby(this, pos, new int[]{1}, this.getSideConfig().get(0), filter);
-        TransferUtils.pullItemsNearby(this, pos, new int[]{3, 5}, this.getSideConfig().get(1), filter);
-        TransferUtils.pushItemsNearby(this, pos, new int[]{2, 4, 6}, this.getSideConfig().get(2), filter);
-        TransferUtils.pullEnergyNearby(this, pos, this.getEnergyStorage().maxInsert(), this.getSideConfig().get(3), filter);
-        TransferUtils.pullFluidNearby(this, pos, this.getFluidContainer(), FluidHooks.buckets(0.2f), 0, this.getSideConfig().get(4), filter);
-        TransferUtils.pushFluidNearby(this, pos, this.getFluidContainer(), FluidHooks.buckets(0.2f), 1, this.getSideConfig().get(5), filter);
-        TransferUtils.pushFluidNearby(this, pos, this.getFluidContainer(), FluidHooks.buckets(0.2f), 2, this.getSideConfig().get(6), filter);
+        TransferUtils.pullItemsNearby(this, pos, new int[]{1}, getSideConfig().get(0), filter);
+        TransferUtils.pullItemsNearby(this, pos, new int[]{3, 5}, getSideConfig().get(1), filter);
+        TransferUtils.pushItemsNearby(this, pos, new int[]{2, 4, 6}, getSideConfig().get(2), filter);
+        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), getSideConfig().get(3), filter);
+        TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.2f), 0, getSideConfig().get(4), filter);
+        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.2f), 1, getSideConfig().get(5), filter);
+        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.2f), 2, getSideConfig().get(6), filter);
     }
 
     @Override
     public void recipeTick(ServerLevel level, WrappedBlockEnergyContainer energyStorage) {
         if (recipe == null) return;
-        var fluidContainer = getFluidContainer();
-
-        if (fluidContainer.getFluids().get(1).getFluidAmount() >= fluidContainer.getTankCapacity(1)) return;
-        if (fluidContainer.getFluids().get(2).getFluidAmount() >= fluidContainer.getTankCapacity(2)) return;
-        if (energyStorage.internalExtract(recipe.energy(), true) < recipe.energy()) return;
-        if (fluidContainer.internalExtract(recipe.ingredient(), true).getFluidAmount() < recipe.ingredient().getFluidAmount())
+        if (fluidContainer == null) getFluidContainer();
+        if (!canCraft(energyStorage)) {
+            clearRecipe();
             return;
+        }
 
         energyStorage.internalExtract(recipe.energy(), false);
 
         cookTime++;
         if (cookTime < cookTimeTotal) return;
         craft();
+    }
+
+    @Override
+    public boolean canCraft(WrappedBlockEnergyContainer energyStorage) {
+        if (recipe == null) return false;
+        if (energyStorage.internalExtract(recipe.energy(), true) < recipe.energy()) return false;
+        if (fluidContainer.getFluids().get(1).getFluidAmount() >= fluidContainer.getTankCapacity(1)) return false;
+        if (fluidContainer.getFluids().get(2).getFluidAmount() >= fluidContainer.getTankCapacity(2)) return false;
+        return fluidContainer.internalExtract(recipe.ingredient(), true).getFluidAmount() >= recipe.ingredient().getFluidAmount();
     }
 
     @Override
@@ -138,12 +150,10 @@ public class SeparatorBlockEntity extends RecipeMachineBlockEntity<SeparatingRec
         fluidContainer.internalInsert(recipe.resultFluid1(), false);
         fluidContainer.internalInsert(recipe.resultFluid2(), false);
 
-        this.updateSlots();
+        updateSlots();
 
         cookTime = 0;
-        if (fluidContainer.getFluids().get(0).isEmpty()) {
-            recipe = null;
-        }
+        if (fluidContainer.getFluids().get(0).isEmpty()) clearRecipe();
     }
 
     @Override
@@ -157,7 +167,7 @@ public class SeparatorBlockEntity extends RecipeMachineBlockEntity<SeparatingRec
                 recipe = r;
                 cookTimeTotal = r.cookingTime();
             });
-        this.updateSlots();
+        updateSlots();
     }
 
     @Override
@@ -172,13 +182,13 @@ public class SeparatorBlockEntity extends RecipeMachineBlockEntity<SeparatingRec
         super.clientTick(level, time, state, pos);
         if (time % 2 == 0) return;
         for (int i = 0; i < 3; i++) {
-            this.fluidDifference[i] = this.getFluidContainer().getFluids().get(i).getFluidAmount() - this.lastFluid[i];
-            this.lastFluid[i] = this.getFluidContainer().getFluids().get(i).getFluidAmount();
+            fluidDifference[i] = getFluidContainer().getFluids().get(i).getFluidAmount() - lastFluid[i];
+            lastFluid[i] = getFluidContainer().getFluids().get(i).getFluidAmount();
         }
     }
 
     public long fluidDifference(int tank) {
-        return this.fluidDifference[tank];
+        return fluidDifference[tank];
     }
 
     @Override

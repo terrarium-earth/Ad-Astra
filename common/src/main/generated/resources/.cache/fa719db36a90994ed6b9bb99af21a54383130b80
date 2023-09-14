@@ -1,3 +1,5 @@
-// 1.20.1	2023-09-13T12:25:17.657247	Tags for minecraft:block mod id adastra
+// 1.20.1	2023-09-14T01:00:26.211085	Tags for minecraft:block mod id adastra
+48aa5616085a4684ad0d3c7648a55401b1737dbc data/adastra/tags/blocks/etrium_blocks.json
 aa6360cd029c4d4a47d0c23592b422e678f094af data/adastra/tags/blocks/moon_carver_replaceables.json
 7be3b87b42beafc4ce33c16d105fb4f302f35772 data/adastra/tags/blocks/passes_flood_fill.json
+ec61581bcff30bcde6a1ce44a8a256aa6453c362 data/adastra/tags/blocks/steel_blocks.json

@@ -13,15 +13,18 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public record SeparatingRecipe(ResourceLocation id, int cookingTime, int energy,
-                               FluidHolder ingredient, FluidHolder resultFluid1,
-                               FluidHolder resultFluid2) implements CodecRecipe<Container> {
+public record SeparatingRecipe(
+    ResourceLocation id,
+    int cookingTime, int energy,
+    FluidHolder ingredient,
+    FluidHolder resultFluid1, FluidHolder resultFluid2
+) implements CodecRecipe<Container> {
 
     public static Codec<SeparatingRecipe> codec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
             RecordCodecBuilder.point(id),
-            Codec.INT.fieldOf("cookingtime").orElse(2).forGetter(SeparatingRecipe::cookingTime),
-            Codec.INT.fieldOf("energy").orElse(10).forGetter(SeparatingRecipe::energy),
+            Codec.INT.fieldOf("cookingtime").forGetter(SeparatingRecipe::cookingTime),
+            Codec.INT.fieldOf("energy").forGetter(SeparatingRecipe::energy),
             FluidHolder.CODEC.fieldOf("ingredient").forGetter(SeparatingRecipe::ingredient),
             FluidHolder.CODEC.fieldOf("result_fluid_1").forGetter(SeparatingRecipe::resultFluid1),
             FluidHolder.CODEC.fieldOf("result_fluid_2").forGetter(SeparatingRecipe::resultFluid2)

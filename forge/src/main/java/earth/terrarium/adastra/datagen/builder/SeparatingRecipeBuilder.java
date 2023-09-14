@@ -29,7 +29,7 @@ public class SeparatingRecipeBuilder implements RecipeBuilder {
     private final FluidHolder resultFluid2;
 
     private int cookingtime = 2;
-    private int energy = 10;
+    private int energy = 100;
 
     public SeparatingRecipeBuilder(FluidHolder ingredient, FluidHolder resultFluid1, FluidHolder resultFluid2) {
         this.ingredient = ingredient;
@@ -48,13 +48,13 @@ public class SeparatingRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public @NotNull RecipeBuilder unlockedBy(@NotNull String criterionName, @NotNull CriterionTriggerInstance criterionTrigger) {
+    public @NotNull SeparatingRecipeBuilder unlockedBy(@NotNull String criterionName, @NotNull CriterionTriggerInstance criterionTrigger) {
         this.advancement.addCriterion(criterionName, criterionTrigger);
         return this;
     }
 
     @Override
-    public @NotNull RecipeBuilder group(@Nullable String groupName) {
+    public @NotNull SeparatingRecipeBuilder group(@Nullable String groupName) {
         return this;
     }
 
@@ -81,10 +81,8 @@ public class SeparatingRecipeBuilder implements RecipeBuilder {
     public record Result(
         ResourceLocation id,
         FluidHolder ingredient,
-        FluidHolder resultFluid1,
-        FluidHolder resultFluid2,
-        int cookingtime,
-        int energy,
+        FluidHolder resultFluid1, FluidHolder resultFluid2,
+        int cookingtime, int energy,
         Advancement.Builder advancement, ResourceLocation advancementId
     ) implements FinishedRecipe {
 

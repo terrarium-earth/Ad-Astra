@@ -6,12 +6,14 @@ import earth.terrarium.adastra.api.ti69.client.Ti69AppApi;
 import earth.terrarium.adastra.client.config.ClientConfig;
 import earth.terrarium.adastra.client.renderers.blocks.base.CustomGeoBlockRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.base.SidedGeoBlockRenderer;
+import earth.terrarium.adastra.client.renderers.blocks.machines.HydraulicPressBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.machines.SteamGeneratorBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.machines.TinkerersWorkbenchBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.entities.base.CustomGeoEntityRenderer;
 import earth.terrarium.adastra.client.renderers.items.armor.AerolyteSpaceSuitRenderer;
 import earth.terrarium.adastra.client.renderers.items.base.CustomGeoItemRenderer;
 import earth.terrarium.adastra.client.screens.BatteryScreen;
+import earth.terrarium.adastra.client.screens.HydraulicPressScreen;
 import earth.terrarium.adastra.client.screens.SeparatorScreen;
 import earth.terrarium.adastra.client.ti69.apps.SensorApp;
 import earth.terrarium.adastra.client.ti69.apps.WeatherApp;
@@ -67,6 +69,7 @@ public class AdAstraClient {
     private static void registerScreens() {
         MenuScreens.register(ModMenus.BATTERY.get(), BatteryScreen::new);
         MenuScreens.register(ModMenus.SEPARATOR.get(), SeparatorScreen::new);
+        MenuScreens.register(ModMenus.HYDRAULIC_PRESS.get(), HydraulicPressScreen::new);
     }
 
     private static void registerBlockRenderTypes() {
@@ -77,7 +80,7 @@ public class AdAstraClient {
     private static void registerBlockEntityRenderers() {
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.OXYGEN_DISTRIBUTOR.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.OXYGEN_DISTRIBUTOR));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SOLAR_PANEL.get(), context -> new CustomGeoBlockRenderer<>(new DefaultedBlockGeoModel<>(new ResourceLocation(AdAstra.MOD_ID, "solar_panel"))));
-        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.HYDRAULIC_PRESS.get(), context -> new CustomGeoBlockRenderer<>(ModBlocks.HYDRAULIC_PRESS));
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.HYDRAULIC_PRESS.get(), context -> new HydraulicPressBlockEntityRenderer(ModBlocks.HYDRAULIC_PRESS));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.OIL_REFINERY.get(), context -> new CustomGeoBlockRenderer<>(ModBlocks.OIL_REFINERY));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.STEAM_GENERATOR.get(), context -> new SteamGeneratorBlockEntityRenderer(ModBlocks.STEAM_GENERATOR));
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ENERGY_CONTROLLER.get(), context -> new SidedGeoBlockRenderer<>(ModBlocks.ENERGY_CONTROLLER));

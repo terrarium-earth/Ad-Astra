@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.datagen.provider.client;
 
 
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.registry.ModItems;
 import net.minecraft.data.PackOutput;
@@ -19,26 +20,6 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        basicItem(ModItems.ETRIUM_INGOT.get());
-        basicItem(ModItems.ETRIUM_NUGGET.get());
-        basicItem(ModItems.ETRIUM_PLATE.get());
-        basicItem(ModItems.ETRIUM_ROD.get());
-
-        basicItem(ModItems.WRENCH.get());
-        basicItem(ModItems.ETRIONIC_CORE.get());
-        basicItem(ModItems.PHOTOVOLTAIC_ETRIUM_CELL.get());
-        basicItem(ModItems.PHOTOVOLTAIC_VESNIUM_CELL.get());
-
-        basicItem(ModItems.GAS_TANK.get());
-        basicItem(ModItems.LARGE_GAS_TANK.get());
-
-        basicItem(ModItems.AEROLYTE_SPACE_HELMET.get());
-        basicItem(ModItems.AEROLYTE_SPACE_SUIT.get());
-        basicItem(ModItems.AEROLYTE_SPACE_PANTS.get());
-        basicItem(ModItems.AEROLYTE_SPACE_BOOTS.get());
-
-        basicItem(ModItems.OXYGEN_BUCKET.get());
-        basicItem(ModItems.HYDROGEN_BUCKET.get());
-        basicItem(ModItems.OIL_BUCKET.get());
+        ModItems.BASIC_ITEMS.getEntries().stream().map(RegistryEntry::get).forEach(this::basicItem);
     }
 }
