@@ -17,4 +17,5 @@ public class ModMenus {
     public static final RegistryEntry<MenuType<HydraulicPressMenu>> HYDRAULIC_PRESS = MENUS.register("hydraulic_press", () -> RegistryHelpers.createMenuType(HydraulicPressMenu::new));
     public static final RegistryEntry<MenuType<RecyclerMenu>> RECYCLER = MENUS.register("recycler", () -> RegistryHelpers.createMenuType(RecyclerMenu::new));
     public static final RegistryEntry<MenuType<SolarPanelMenu>> SOLAR_PANEL = MENUS.register("solar_panel", () -> RegistryHelpers.createMenuType(SolarPanelMenu::new));
+    public static final RegistryEntry<MenuType<OilRefineryMenu>> OIL_REFINERY = MENUS.register("oil_refinery", () -> RegistryHelpers.createMenuType(OilRefineryMenu::new));
 }

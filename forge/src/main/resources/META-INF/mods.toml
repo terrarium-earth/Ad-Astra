@@ -30,7 +30,7 @@ side = "BOTH"
 [[dependencies.adastra]]
 modId = "resourcefullib"
 mandatory = true
-versionRange = "[2.1.1,)"
+versionRange = "[2.1.11,)"
 ordering = "NONE"
 side = "BOTH"
 
@@ -44,6 +44,13 @@ side = "BOTH"
 [[dependencies.adastra]]
 modId = "botarium"
 mandatory = true
-versionRange = "[2.1.0,)"
+versionRange = "[2.2.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.adastra]]
+modId = "geckolib"
+mandatory = true
+versionRange = "[4.2.2,)"
 ordering = "NONE"
 side = "BOTH"

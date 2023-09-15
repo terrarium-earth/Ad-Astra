@@ -10,6 +10,7 @@ public final class ModFluidTags {
     public static final TagKey<Fluid> OXYGEN = tag("oxygen");
     public static final TagKey<Fluid> HYDROGEN = tag("hydrogen");
     public static final TagKey<Fluid> OIL = tag("oil");
+    public static final TagKey<Fluid> FUEL = tag("fuel");
 
     public static final TagKey<Fluid> ZIP_GUN_PROPELLANTS = tag("zip_gun_propellants");
 

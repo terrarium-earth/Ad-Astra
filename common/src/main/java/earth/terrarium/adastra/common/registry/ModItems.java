@@ -93,6 +93,11 @@ public final class ModItems {
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
+    public static final RegistryEntry<Item> FUEL_BUCKET = BASIC_ITEMS.register("fuel_bucket", () -> new FluidBucketItem(
+        ModFluidProperties.FUEL,
+        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
+    );
+
     public static final RegistryEntry<Item> OXYGEN_DISTRIBUTOR = ITEMS.register("oxygen_distributor", () -> new CustomGeoBlockItem(
         ModBlocks.OXYGEN_DISTRIBUTOR.get(),
         new Item.Properties(),

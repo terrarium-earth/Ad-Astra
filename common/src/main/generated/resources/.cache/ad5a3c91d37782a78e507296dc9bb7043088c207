@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-14T01:00:26.210548	Item Models: adastra
+// 1.20.1	2023-09-15T13:52:50.356588	Item Models: adastra
 76339c09d579b1c8b10030755bb3627a7dc442d6 assets/adastra/models/item/aerolyte_space_boots.json
 b56c0918338cf499fb9b167d584ed602e9ea5451 assets/adastra/models/item/aerolyte_space_helmet.json
 9569115d3686aac753e0b72129c947274b4afc20 assets/adastra/models/item/aerolyte_space_pants.json
@@ -9,6 +9,7 @@ b56c0918338cf499fb9b167d584ed602e9ea5451 assets/adastra/models/item/aerolyte_spa
 f23fd54d43da8dc710b0c1fccce6ea867d8b6b16 assets/adastra/models/item/etrium_nugget.json
 b121131cc0cb99edec252f815c47e75b7d467a5a assets/adastra/models/item/etrium_plate.json
 3d022be26832b9f9978d12abb80f7d34303c7063 assets/adastra/models/item/etrium_rod.json
+9b0dce4413b9f5cac9d7d6b04b92be1c26d7d1b0 assets/adastra/models/item/fuel_bucket.json
 0969509bc2c2618a6093a8e817ae60245ec2b2d2 assets/adastra/models/item/gas_tank.json
 0e6c3b7a915ba73b8befe632d06250c55352ff53 assets/adastra/models/item/hydrogen_bucket.json
 5f4be4896e345a6b7ff8fead5984b008a1ff4722 assets/adastra/models/item/iron_plate.json

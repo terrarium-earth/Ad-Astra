@@ -1,0 +1,13 @@
+{
+  "type": "adastra:refining",
+  "cookingtime": 2,
+  "energy": 30,
+  "ingredient": {
+    "buckets": 0.002,
+    "fluid": "adastra:oil"
+  },
+  "result_fluid": {
+    "buckets": 0.001,
+    "fluid": "adastra:fuel"
+  }
+}

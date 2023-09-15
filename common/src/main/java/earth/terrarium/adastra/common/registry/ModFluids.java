@@ -20,4 +20,7 @@ public final class ModFluids {
 
     public static final RegistryEntry<Fluid> OIL = FLUIDS.register("oil", () -> new BotariumSourceFluid(ModFluidProperties.OIL));
     public static final RegistryEntry<Fluid> FLOWING_OIL = FLUIDS.register("flowing_oil", () -> new BotariumFlowingFluid(ModFluidProperties.OIL));
+
+    public static final RegistryEntry<Fluid> FUEL = FLUIDS.register("fuel", () -> new BotariumSourceFluid(ModFluidProperties.FUEL));
+    public static final RegistryEntry<Fluid> FLOWING_FUEL = FLUIDS.register("flowing_fuel", () -> new BotariumFlowingFluid(ModFluidProperties.FUEL));
 }

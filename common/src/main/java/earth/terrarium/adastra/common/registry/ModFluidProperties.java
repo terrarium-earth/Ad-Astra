@@ -41,4 +41,14 @@ public final class ModFluidProperties {
         .density(2000)
         .tintColor(0x373A36)
         .canConvertToSource(false));
+
+    public static final FluidData FUEL = FLUID_PROPERTIES.register("fuel", FluidProperties.create()
+        .still(new ResourceLocation("minecraft:block/water_still"))
+        .flowing(new ResourceLocation("minecraft:block/water_flow"))
+        .overlay(new ResourceLocation("minecraft:block/water_overlay"))
+        .screenOverlay(new ResourceLocation("textures/misc/underwater.png"))
+        .viscosity(1500)
+        .density(1500)
+        .tintColor(0xE5292B)
+        .canConvertToSource(false));
 }

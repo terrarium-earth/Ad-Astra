@@ -71,6 +71,7 @@ public class AdAstraClient {
         MenuScreens.register(ModMenus.HYDRAULIC_PRESS.get(), HydraulicPressScreen::new);
         MenuScreens.register(ModMenus.RECYCLER.get(), RecyclerScreen::new);
         MenuScreens.register(ModMenus.SOLAR_PANEL.get(), SolarPanelScreen::new);
+        MenuScreens.register(ModMenus.OIL_REFINERY.get(), OilRefineryScreen::new);
     }
 
     private static void registerBlockRenderTypes() {

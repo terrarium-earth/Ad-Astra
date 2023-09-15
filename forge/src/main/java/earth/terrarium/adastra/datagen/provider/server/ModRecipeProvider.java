@@ -5,6 +5,7 @@ import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.adastra.common.tags.ModItemTags;
 import earth.terrarium.adastra.datagen.builder.HydraulicPressingRecipeBuilder;
+import earth.terrarium.adastra.datagen.builder.RefiningRecipeBuilder;
 import earth.terrarium.adastra.datagen.builder.SeparatingRecipeBuilder;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
@@ -35,6 +36,11 @@ public class ModRecipeProvider extends RecipeProvider {
             FluidHooks.newFluidHolder(Fluids.WATER, FluidHooks.buckets(0.003), null),
             FluidHooks.newFluidHolder(ModFluids.HYDROGEN.get(), FluidHooks.buckets(0.002), null),
             FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), FluidHooks.buckets(0.001), null)
+        );
+
+        createRefining(writer, 2, 30,
+            FluidHooks.newFluidHolder(ModFluids.OIL.get(), FluidHooks.buckets(0.002), null),
+            FluidHooks.newFluidHolder(ModFluids.FUEL.get(), FluidHooks.buckets(0.001), null)
         );
 
         createHydraulicPressing(writer, 100, 20,
@@ -73,7 +79,7 @@ public class ModRecipeProvider extends RecipeProvider {
         ResourceLocation resultFluid1Id = Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(resultFluid1.getFluid()));
         ResourceLocation resultFluid2Id = Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(resultFluid2.getFluid()));
 
-        SeparatingRecipeBuilder builder = new SeparatingRecipeBuilder(ingredient, resultFluid1, resultFluid2)
+        var builder = new SeparatingRecipeBuilder(ingredient, resultFluid1, resultFluid2)
             .cookingTime(cookingtime)
             .energy(energy);
         builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "%s_and_%s_from_separating_%s".formatted(resultFluid1Id.getPath(), resultFluid2Id.getPath(), ingredientId.getPath())));
@@ -83,7 +89,7 @@ public class ModRecipeProvider extends RecipeProvider {
         ResourceLocation ingredientId = ingredient.location();
         ResourceLocation resultId = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(result.getItem()));
 
-        HydraulicPressingRecipeBuilder builder = new HydraulicPressingRecipeBuilder(Ingredient.of(ingredient), result)
+        var builder = new HydraulicPressingRecipeBuilder(Ingredient.of(ingredient), result)
             .unlockedBy("has_item", has(ingredient))
             .cookingTime(cookingtime)
             .energy(energy);
@@ -94,10 +100,20 @@ public class ModRecipeProvider extends RecipeProvider {
         ResourceLocation ingredientId = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingredient));
         ResourceLocation resultId = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(result.getItem()));
 
-        HydraulicPressingRecipeBuilder builder = new HydraulicPressingRecipeBuilder(Ingredient.of(ingredient), result)
+        var builder = new HydraulicPressingRecipeBuilder(Ingredient.of(ingredient), result)
             .unlockedBy("has_item", has(ingredient))
             .cookingTime(cookingtime)
             .energy(energy);
         builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "%s_from_hydraulic_pressing_%s".formatted(resultId.getPath(), ingredientId.getPath())));
+    }
+
+    public static void createRefining(Consumer<FinishedRecipe> writer, int cookingtime, int energy, FluidHolder ingredient, FluidHolder resultFluid) {
+        ResourceLocation ingredientId = Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(ingredient.getFluid()));
+        ResourceLocation resultFluidId = Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(resultFluid.getFluid()));
+
+        var builder = new RefiningRecipeBuilder(ingredient, resultFluid)
+            .cookingTime(cookingtime)
+            .energy(energy);
+        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "%s_from_refining_%s".formatted(resultFluidId.getPath(), ingredientId.getPath())));
     }
 }

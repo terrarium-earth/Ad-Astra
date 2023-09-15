@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.recipes.machines.HydraulicPressingRecipe;
+import earth.terrarium.adastra.common.recipes.machines.RefiningRecipe;
 import earth.terrarium.adastra.common.recipes.machines.SeparatingRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.Recipe;
@@ -15,6 +16,7 @@ public class ModRecipeTypes {
 
     public static final RegistryEntry<RecipeType<SeparatingRecipe>> SEPARATING = register("separating");
     public static final RegistryEntry<RecipeType<HydraulicPressingRecipe>> HYDRAULIC_PRESSING = register("hydraulic_pressing");
+    public static final RegistryEntry<RecipeType<RefiningRecipe>> REFINING = register("refining");
 
     private static <T extends Recipe<?>> RegistryEntry<RecipeType<T>> register(String id) {
         return RECIPE_TYPES.register(id, () -> new RecipeType<>() {

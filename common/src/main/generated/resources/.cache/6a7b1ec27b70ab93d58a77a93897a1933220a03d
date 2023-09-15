@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-14T01:00:26.208681	Block States: adastra
+// 1.20.1	2023-09-15T13:52:50.353927	Block States: adastra
 36ad980a61ba623d936a511a42a24e6209d00991 assets/adastra/blockstates/battery.json
 2e1f33812b5519d6849862c6e5ed9d195ee4157b assets/adastra/blockstates/block_of_etrium.json
 20b61f9d792e454483a6fbfb6a4308e5bdd49516 assets/adastra/blockstates/block_of_steel.json
@@ -8,6 +8,7 @@ f17c814b697e204530d33294ab8a274c21295b22 assets/adastra/blockstates/energy_recei
 54842cc62637f6cfa5976507ac4092d52dcb6054 assets/adastra/blockstates/energy_relay.json
 f18438bc556d2de124171f6810360f756ba2e879 assets/adastra/blockstates/etreonic_blast_furnace.json
 fa15414b2d253bbb39884ddf2e85a08b59b16f7d assets/adastra/blockstates/etreonic_solar_panel.json
+4ee6041c6f0548f5ad4af60f15dc6413e7cc5246 assets/adastra/blockstates/fuel.json
 02a50a2e2bfeea5ae24882842fb3742bca717906 assets/adastra/blockstates/gravity_normalizer.json
 74d5948e3bde721a9aa23340692351f508ce242e assets/adastra/blockstates/hydraulic_press.json
 ba7472e434f71e1cf8848d97c7b8d11dca998611 assets/adastra/blockstates/hydrogen.json
@@ -42,6 +43,7 @@ b249f4815e8dea187e42d0059ef10ec3551e6f3b assets/adastra/models/block/energy_rela
 38da306dd2cdd09156c04b6fc3d9ec4026f15d2a assets/adastra/models/block/etreonic_solar_panel.json
 9a77289c08f5b7ea8fcb971b3f278eaa05bffd5c assets/adastra/models/block/etrionic_blast_furnace.json
 a97269c7fff62c6a7ac64fc7727e83778bcbbd01 assets/adastra/models/block/etrionic_blast_furnace_on.json
+50812bd51e14ec5ea223afe239c89730a63e43b1 assets/adastra/models/block/fuel.json
 87b354afcaf39686b8fe2d5dbef69d00bbbbc196 assets/adastra/models/block/gravity_normalizer.json
 87f00a68cf7b0200b0035c74b9e2a50220ce1061 assets/adastra/models/block/hydraulic_press.json
 50812bd51e14ec5ea223afe239c89730a63e43b1 assets/adastra/models/block/hydrogen.json
