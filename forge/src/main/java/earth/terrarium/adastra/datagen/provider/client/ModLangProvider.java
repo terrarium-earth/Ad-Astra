@@ -71,11 +71,11 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.DEATH_OXYGEN.getString(), "%1$s couldn't breathe anymore");
         add(ConstantComponents.DEATH_OXYGEN_PLAYER.getString(), "%1$s lost their breath whilst trying to escape %2$s");
 
-        add(ConstantComponents.TOGGLE_SUIT_FLIGHT_KEY.getString(), "Toggle Suit Flight");
+        add(ConstantComponents.TOGGLE_SUIT_FLIGHT_KEY.getString(), "Toggle suit flight");
         add(ConstantComponents.AD_ASTRA_CATEGORY.getString(), "Ad Astra");
 
-        add(ConstantComponents.SUIT_FLIGHT_ENABLED.getString(), "Suit Flight Enabled");
-        add(ConstantComponents.SUIT_FLIGHT_DISABLED.getString(), "Suit Flight Disabled");
+        add(ConstantComponents.SUIT_FLIGHT_ENABLED.getString(), "Suit flight enabled");
+        add(ConstantComponents.SUIT_FLIGHT_DISABLED.getString(), "Suit flight disabled");
 
         add(ConstantComponents.OXYGEN_TRUE.getString(), "✔");
         add(ConstantComponents.OXYGEN_FALSE.getString(), "✘");
@@ -111,10 +111,11 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.SIDE_CONFIG.getString(), "Side Config");
         add(ConstantComponents.REDSTONE_CONTROL.getString(), "Redstone Control");
 
-        add(ConstantComponents.REDSTONE_ALWAYS_ON.getString(), "Always On");
-        add(ConstantComponents.REDSTONE_NEVER_ON.getString(), "Never On");
-        add(ConstantComponents.REDSTONE_ON_WHEN_POWERED.getString(), "On When Powered");
-        add(ConstantComponents.REDSTONE_ON_WHEN_NOT_POWERED.getString(), "On When Not Powered");
+        add(ConstantComponents.REDSTONE_ALWAYS_ON.getString(), "Always on");
+        add(ConstantComponents.REDSTONE_NEVER_ON.getString(), "Never on");
+        add(ConstantComponents.REDSTONE_ON_WHEN_POWERED.getString(), "On when powered");
+        add(ConstantComponents.REDSTONE_ON_WHEN_NOT_POWERED.getString(), "On when not powered");
+        add("tooltip.adastra.redstone_control.mode", "Mode: %s");
 
         add(ConstantComponents.ACTIVE.getString(), "Active");
         add(ConstantComponents.INACTIVE.getString(), "Inactive");
@@ -122,10 +123,10 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.SEQUENTIAL.getString(), "Sequential");
         add(ConstantComponents.ROUND_ROBIN.getString(), "Round Robin");
 
-        add(ConstantComponents.CAPACITOR_ENABLED.getString(), "Capacitor Enabled");
-        add(ConstantComponents.CAPACITOR_DISABLED.getString(), "Capacitor Disabled");
-        add(ConstantComponents.CHANGE_MODE_SEQUENTIAL.getString(), "Set Capacitor Mode to \"Sequential\"");
-        add(ConstantComponents.CHANGE_MODE_ROUND_ROBIN.getString(), "Set Capacitor Mode to \"Round Robin\"");
+        add(ConstantComponents.CAPACITOR_ENABLED.getString(), "Capacitor enabled");
+        add(ConstantComponents.CAPACITOR_DISABLED.getString(), "Capacitor disabled");
+        add(ConstantComponents.CHANGE_MODE_SEQUENTIAL.getString(), "Set capacitor mode to \"Sequential\"");
+        add(ConstantComponents.CHANGE_MODE_ROUND_ROBIN.getString(), "Set capacitor mode to \"Round Robin\"");
 
         add(ConstantComponents.SHIFT_DESCRIPTION.getString(), "Hold SHIFT for more information");
         add(ConstantComponents.TI_69_INFO.getString(), "Displays important information\nRight-click to change the current app");
@@ -141,11 +142,11 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.SIDE_CONFIG_SLOTS.getString(), "Slots");
         add(ConstantComponents.SIDE_CONFIG_ENERGY.getString(), "Energy");
         add(ConstantComponents.SIDE_CONFIG_FLUID.getString(), "Fluid");
-        add(ConstantComponents.SIDE_CONFIG_INPUT_SLOTS.getString(), "Input Slots");
-        add(ConstantComponents.SIDE_CONFIG_OUTPUT_SLOTS.getString(), "Output Slots");
-        add(ConstantComponents.SIDE_CONFIG_EXTRACTION_SLOTS.getString(), "Extraction Slots");
-        add(ConstantComponents.SIDE_CONFIG_INPUT_FLUID.getString(), "Input Fluid");
-        add(ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID.getString(), "Output Fluid");
+        add(ConstantComponents.SIDE_CONFIG_INPUT_SLOTS.getString(), "Input slots");
+        add(ConstantComponents.SIDE_CONFIG_OUTPUT_SLOTS.getString(), "Output slots");
+        add(ConstantComponents.SIDE_CONFIG_EXTRACTION_SLOTS.getString(), "Extraction slots");
+        add(ConstantComponents.SIDE_CONFIG_INPUT_FLUID.getString(), "Input fluid");
+        add(ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID.getString(), "Output fluid");
 
         add("side_config.adastra.title", "Side Config [%s]");
         add("side_config.adastra.type.type", "Type: %s");
@@ -175,15 +176,9 @@ public class ModLangProvider extends LanguageProvider {
         add("direction.adastra.relative.south", "Back");
         add("direction.adastra.relative.west", "Right");
 
-        add("tooltip.adastra.redstone_control.always_on", "Always On");
-        add("tooltip.adastra.redstone_control.on_when_powered", "On When Powered");
-        add("tooltip.adastra.redstone_control.on_when_not_powered", "On When Not Powered");
-        add("tooltip.adastra.redstone_control.never_on", "Never On");
-        add("tooltip.adastra.redstone_control.mode", "Mode: %s");
-
         add(ConstantComponents.NEXT.getString(), "Next");
         add(ConstantComponents.PREVIOUS.getString(), "Previous");
-        add(ConstantComponents.RESET_TO_DEFAULT.getString(), "Reset to Default");
+        add(ConstantComponents.RESET_TO_DEFAULT.getString(), "Reset to default");
 
         add(ConstantComponents.DETECTOR_INVERTED_TRUE.getString(), "Set to inverted");
         add(ConstantComponents.DETECTOR_INVERTED_FALSE.getString(), "Set to normal");

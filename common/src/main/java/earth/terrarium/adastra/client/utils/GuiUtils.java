@@ -29,13 +29,19 @@ public class GuiUtils {
     public static final int FLUID_BAR_WIDTH = 16;
     public static final int FLUID_BAR_HEIGHT = 48;
 
-    public static final ResourceLocation SIDE_SETTINGS_ICON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_settings_icon.png");
     public static final ResourceLocation SQUARE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/square_button.png");
+    public static final ResourceLocation SETTINGS_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/settings_button.png");
     public static final ResourceLocation ARROWS = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/arrows.png");
 
+    public static final ResourceLocation NONE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/none.png");
     public static final ResourceLocation PUSH_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/push.png");
     public static final ResourceLocation PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/pull.png");
     public static final ResourceLocation PUSH_PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/push_pull.png");
+
+    public static final ResourceLocation REDSTONE_ALWAYS_ON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/redstone/always_on_button.png");
+    public static final ResourceLocation REDSTONE_ON_WHEN_POWERED = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/redstone/on_when_powered_button.png");
+    public static final ResourceLocation REDSTONE_ON_WHEN_NOT_POWERED = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/redstone/on_when_not_powered_button.png");
+    public static final ResourceLocation REDSTONE_NEVER_ON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/redstone/never_on_button.png");
 
     public static void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, WrappedBlockEnergyContainer energyContainer, Component... tooltips) {
         drawEnergyBar(graphics, mouseX, mouseY, font, x, y, energyContainer.getStoredEnergy(), energyContainer.getMaxCapacity(), tooltips);

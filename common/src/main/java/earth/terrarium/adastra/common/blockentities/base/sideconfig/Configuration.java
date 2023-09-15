@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.Locale;
 
 public enum Configuration {
-    NONE(GuiUtils.SQUARE_BUTTON),
+    NONE(GuiUtils.NONE_BUTTON),
     PUSH(GuiUtils.PUSH_BUTTON),
     PULL(GuiUtils.PULL_BUTTON),
     PUSH_PULL(GuiUtils.PUSH_PULL_BUTTON);

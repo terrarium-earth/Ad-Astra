@@ -30,7 +30,6 @@ public class RecyclerScreen extends MachineScreen<RecyclerMenu, RecyclerBlockEnt
     @Override
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float f) {
         super.render(graphics, mouseX, mouseY, f);
-        this.drawGear(graphics, 110, 6);
         this.drawEnergyBar(graphics, mouseX, mouseY, 138, 103, entity.getEnergyStorage(), entity.energyDifference());
     }
 

@@ -36,14 +36,16 @@ public class PressableImageButton extends ImageButton {
 
     @Override
     public void renderTexture(@NotNull GuiGraphics graphics, @NotNull ResourceLocation texture, int x, int y, int uOffset, int vOffset, int textureDifference, int width, int height, int textureWidth, int textureHeight) {
-        int i = vOffset;
+        int v = vOffset + textureDifference;
         if (!this.isActive()) {
-            i = vOffset + textureDifference * 2;
+            v = vOffset + textureDifference * 2;
         } else if (this.isFocused()) {
-            i = vOffset + textureDifference;
+            v = vOffset;
+        } else if (this.isHovered()) {
+            v = vOffset - textureDifference;
         }
 
         RenderSystem.enableDepthTest();
-        graphics.blit(this.texture != null ? this.texture : texture, x, y, (float) uOffset, (float) i, width, height, textureWidth, textureHeight);
+        graphics.blit(this.texture != null ? this.texture : texture, x, y, uOffset, v, width, height, textureWidth, textureHeight);
     }
 }

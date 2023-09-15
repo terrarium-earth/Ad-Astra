@@ -28,7 +28,6 @@ public class BatteryScreen extends MachineScreen<BatteryMenu, BatteryBlockEntity
     @Override
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float f) {
         super.render(graphics, mouseX, mouseY, f);
-        this.drawGear(graphics, 141, 6);
         this.drawEnergyBar(graphics, mouseX, mouseY, 156, 95, entity.getEnergyStorage(), entity.energyDifference());
     }
 

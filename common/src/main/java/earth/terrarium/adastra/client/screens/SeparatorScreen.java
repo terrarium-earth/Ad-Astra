@@ -30,7 +30,6 @@ public class SeparatorScreen extends MachineScreen<SeparatorMenu, SeparatorBlock
     @Override
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float f) {
         super.render(graphics, mouseX, mouseY, f);
-        this.drawGear(graphics, 110, 6);
         this.drawEnergyBar(graphics, mouseX, mouseY, 138, 103, entity.getEnergyStorage(), entity.energyDifference());
         this.drawFluidBar(graphics, mouseX, mouseY, 54, 93, entity.getFluidContainer(), 0, entity.fluidDifference(0));
         this.drawFluidBar(graphics, mouseX, mouseY, 14, 105, entity.getFluidContainer(), 1, entity.fluidDifference(1));

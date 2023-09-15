@@ -82,7 +82,7 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends C
             sideConfigTitle = getSideConfigTitle();
         }
 
-        resetToDefaultButton = addRenderableWidget(new PressableImageButton(this.leftPos + getSideConfigButtonXOffset() - 43, this.topPos + getSideConfigButtonYOffset() + 25, 16, 16, 0, 0, 16, GuiUtils.SQUARE_BUTTON, 16, 32,
+        resetToDefaultButton = addRenderableWidget(new PressableImageButton(this.leftPos + getSideConfigButtonXOffset() - 43, this.topPos + getSideConfigButtonYOffset() + 25, 18, 18, 0, 0, 18, GuiUtils.SQUARE_BUTTON, 18, 54,
             button -> {
                 entity.resetToDefault(arrowIndex);
                 NetworkHandler.CHANNEL.sendToServer(new ServerboundResetSideConfigPacket(entity.getBlockPos(), arrowIndex));
@@ -157,19 +157,20 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends C
     }
 
     public void addRedstoneButton(int xOffset, int yOffset) {
-        addRenderableWidget(new PressableImageButton(this.leftPos + xOffset, this.topPos + yOffset, 18, 18, 0, 0, 18, GuiUtils.SQUARE_BUTTON, 18, 36,
+        addRenderableWidget(new PressableImageButton(this.leftPos + xOffset, this.topPos + yOffset, 18, 18, 0, 0, 18, entity.getRedstoneControl().icon(), 18, 54,
             button -> {
                 RedstoneControl next = hasShiftDown() ? entity.getRedstoneControl().previous() : entity.getRedstoneControl().next();
                 entity.setRedstoneControl(next);
                 NetworkHandler.CHANNEL.sendToServer(new ServerboundSetRedstoneControlPacket(entity.getBlockPos(), next));
                 button.setTooltip(Tooltip.create(getRedstoneControlTooltip(next)));
+                ((PressableImageButton) button).setTexture(next.icon());
             },
             getRedstoneControlTooltip(entity.getRedstoneControl())
         ));
     }
 
     public void addSideConfigButton(int xOffset, int yOffset) {
-        addRenderableWidget(new PressableImageButton(this.leftPos + xOffset, this.topPos + yOffset, 18, 18, 0, 0, 18, GuiUtils.SQUARE_BUTTON, 18, 36,
+        addRenderableWidget(new PressableImageButton(this.leftPos + xOffset, this.topPos + yOffset, 18, 18, 0, 0, 18, GuiUtils.SETTINGS_BUTTON, 18, 54,
             button -> toggleSideConfig(),
             ConstantComponents.SIDE_CONFIG
         ));
@@ -183,10 +184,6 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends C
         resetToDefaultButton.visible = showSideConfig;
         previousArrow.visible = showSideConfig;
         nextArrow.visible = showSideConfig;
-    }
-
-    public void drawGear(GuiGraphics graphics, int xOffset, int yOffset) {
-        graphics.blit(GuiUtils.SIDE_SETTINGS_ICON, this.leftPos + xOffset, this.topPos + yOffset, 0, 0, 18, 18, 18, 18);
     }
 
     public void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, int xOffset, int yOffset, WrappedBlockEnergyContainer energy, long energyDifference) {
