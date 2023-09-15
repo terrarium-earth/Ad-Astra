@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class OilRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRecipe> implements BotariumFluidBlock<WrappedBlockFluidContainer>, GeoBlockEntity {
+    public static final RawAnimation IDLE_OFF = RawAnimation.begin().thenLoop("animation.model.idle.off");
     public static final RawAnimation TURN_ON = RawAnimation.begin()
         .thenPlay("animation.model.turn.on")
         .thenPlayAndHold("animation.model.idle.on");
