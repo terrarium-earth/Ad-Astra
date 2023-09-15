@@ -4,6 +4,7 @@ import com.teamresourceful.resourcefulconfig.common.config.Configurator;
 import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
+import earth.terrarium.adastra.common.blockentities.machines.RecyclerBlockEntity;
 import earth.terrarium.adastra.common.handlers.PlanetData;
 import earth.terrarium.adastra.common.items.Ti69Item;
 import earth.terrarium.adastra.common.items.upgrades.Upgrades;
@@ -55,6 +56,7 @@ public class AdAstra {
     public static void onDatapackSync(ServerPlayer player) {
         NetworkHandler.CHANNEL.sendToPlayer(new ClientboundSyncPlanetsPacket(AdAstraData.planets()), player);
         ModDamageSources.clear();
+        RecyclerBlockEntity.clearCache();
     }
 
     public static void onServerTick(MinecraftServer server) {

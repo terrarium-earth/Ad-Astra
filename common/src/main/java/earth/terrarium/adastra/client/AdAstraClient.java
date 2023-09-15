@@ -13,10 +13,7 @@ import earth.terrarium.adastra.client.renderers.blocks.machines.TinkerersWorkben
 import earth.terrarium.adastra.client.renderers.entities.base.CustomGeoEntityRenderer;
 import earth.terrarium.adastra.client.renderers.items.armor.AerolyteSpaceSuitRenderer;
 import earth.terrarium.adastra.client.renderers.items.base.CustomGeoItemRenderer;
-import earth.terrarium.adastra.client.screens.BatteryScreen;
-import earth.terrarium.adastra.client.screens.HydraulicPressScreen;
-import earth.terrarium.adastra.client.screens.RecyclerScreen;
-import earth.terrarium.adastra.client.screens.SeparatorScreen;
+import earth.terrarium.adastra.client.screens.*;
 import earth.terrarium.adastra.client.ti69.apps.SensorApp;
 import earth.terrarium.adastra.client.ti69.apps.WeatherApp;
 import earth.terrarium.adastra.client.utils.ClientData;
@@ -73,6 +70,7 @@ public class AdAstraClient {
         MenuScreens.register(ModMenus.SEPARATOR.get(), SeparatorScreen::new);
         MenuScreens.register(ModMenus.HYDRAULIC_PRESS.get(), HydraulicPressScreen::new);
         MenuScreens.register(ModMenus.RECYCLER.get(), RecyclerScreen::new);
+        MenuScreens.register(ModMenus.SOLAR_PANEL.get(), SolarPanelScreen::new);
     }
 
     private static void registerBlockRenderTypes() {

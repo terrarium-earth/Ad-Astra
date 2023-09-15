@@ -20,11 +20,6 @@ public class ConstantComponents {
     public static final Component SIDE_CONFIG = Component.translatable("tooltip.adastra.side_config").copy().withStyle(ChatFormatting.GRAY);
     public static final Component REDSTONE_CONTROL = Component.translatable("tooltip.adastra.redstone_control");
 
-    public static final Component REDSTONE_ALWAYS_ON = Component.translatable("tooltip.adastra.redstone.always_on");
-    public static final Component REDSTONE_NEVER_ON = Component.translatable("tooltip.adastra.redstone.never_on");
-    public static final Component REDSTONE_ON_WHEN_POWERED = Component.translatable("tooltip.adastra.redstone.on_when_powered");
-    public static final Component REDSTONE_ON_WHEN_NOT_POWERED = Component.translatable("tooltip.adastra.redstone.on_when_not_powered");
-
     public static final Component ACTIVE = Component.translatable("tooltip.adastra.active");
     public static final Component INACTIVE = Component.translatable("tooltip.adastra.inactive");
 

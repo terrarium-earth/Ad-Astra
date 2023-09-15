@@ -72,7 +72,7 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
         super.load(tag);
         ContainerHelper.loadAllItems(tag, this.items);
         ConfigurationEntry.load(tag, this.sideConfig, getDefaultConfig());
-        tag.putByte("RedstoneControl", (byte) redstoneControl.ordinal());
+        this.redstoneControl = RedstoneControl.values()[tag.getByte("RedstoneControl")];
     }
 
     @Override

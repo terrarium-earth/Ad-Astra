@@ -167,6 +167,10 @@ public class RecyclerBlockEntity extends RecipeMachineBlockEntity<Recipe<?>> imp
         return (T) u;
     }
 
+    public static void clearCache() {
+        RECIPE_CACHE.clear();
+    }
+
     @Override
     public List<ConfigurationEntry> getDefaultConfig() {
         return List.of(

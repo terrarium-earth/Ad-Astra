@@ -29,6 +29,7 @@ public class HydraulicPressBlockEntityRenderer extends CustomGeoBlockRenderer<Hy
         super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
         try (var ignored = new CloseablePoseStack(poseStack)) {
             ItemStack stack = animatable.getItem(1);
+            if (stack.isEmpty()) return;
             boolean isBlock = stack.getItem() instanceof BlockItem;
             poseStack.translate(0, isBlock ? 0.575 : 0.46f, 0);
             poseStack.scale(0.55f, 0.55f, 0.55f);

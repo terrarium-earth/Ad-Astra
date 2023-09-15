@@ -111,10 +111,10 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.SIDE_CONFIG.getString(), "Side Config");
         add(ConstantComponents.REDSTONE_CONTROL.getString(), "Redstone Control");
 
-        add(ConstantComponents.REDSTONE_ALWAYS_ON.getString(), "Always on");
-        add(ConstantComponents.REDSTONE_NEVER_ON.getString(), "Never on");
-        add(ConstantComponents.REDSTONE_ON_WHEN_POWERED.getString(), "On when powered");
-        add(ConstantComponents.REDSTONE_ON_WHEN_NOT_POWERED.getString(), "On when not powered");
+        add("tooltip.adastra.redstone_control.always_on", "Always on");
+        add("tooltip.adastra.redstone_control.on_when_powered", "On when powered");
+        add("tooltip.adastra.redstone_control.on_when_not_powered", "On when not powered");
+        add("tooltip.adastra.redstone_control.never_on", "Never on");
         add("tooltip.adastra.redstone_control.mode", "Mode: %s");
 
         add(ConstantComponents.ACTIVE.getString(), "Active");

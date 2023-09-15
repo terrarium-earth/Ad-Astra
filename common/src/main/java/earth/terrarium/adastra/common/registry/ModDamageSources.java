@@ -17,7 +17,8 @@ public final class ModDamageSources {
     public static final ResourceKey<DamageType> OXYGEN = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(AdAstra.MOD_ID, "oxygen"));
 
     public static DamageSource getOrCreate(Level level, ResourceKey<DamageType> key) {
-        return DAMAGE_SOURCES.computeIfAbsent(key, k -> new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key)));
+        return DAMAGE_SOURCES.computeIfAbsent(key, k ->
+            new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key)));
     }
 
     public static void clear() {

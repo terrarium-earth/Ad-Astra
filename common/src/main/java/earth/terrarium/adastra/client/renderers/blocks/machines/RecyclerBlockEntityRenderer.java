@@ -28,6 +28,7 @@ public class RecyclerBlockEntityRenderer extends CustomGeoBlockRenderer<Recycler
         super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
         try (var ignored = new CloseablePoseStack(poseStack)) {
             ItemStack stack = animatable.getItem(1);
+            if (stack.isEmpty()) return;
             poseStack.translate(0, 1.2f, -0.2f);
             poseStack.scale(0.55f, 0.55f, 0.55f);
             if (animatable.cookTimeTotal() == 0 || !animatable.canFunction()) return;

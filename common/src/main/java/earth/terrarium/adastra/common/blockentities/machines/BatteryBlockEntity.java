@@ -77,6 +77,19 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity {
         TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), getSideConfig().get(1), filter);
     }
 
+    @Override
+    public List<ConfigurationEntry> getDefaultConfig() {
+        return List.of(
+            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_SLOTS),
+            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.PUSH_PULL, ConstantComponents.SIDE_CONFIG_ENERGY)
+        );
+    }
+
+    @Override
+    public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
+        return new int[]{1, 2, 3, 4};
+    }
+
     public void onEnergyChange() {
         if (level().getGameTime() % 10 != 0) return;
         int charge = Math.round(getEnergyStorage().getStoredEnergy() / (float) getEnergyStorage().getMaxCapacity() * 4);
@@ -102,18 +115,5 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity {
                 setItem(i + 1, holder.getStack());
             }
         }
-    }
-
-    @Override
-    public List<ConfigurationEntry> getDefaultConfig() {
-        return List.of(
-            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_SLOTS),
-            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.PUSH_PULL, ConstantComponents.SIDE_CONFIG_ENERGY)
-        );
-    }
-
-    @Override
-    public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
-        return new int[]{1, 2, 3, 4};
     }
 }
