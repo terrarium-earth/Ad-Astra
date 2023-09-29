@@ -95,20 +95,11 @@ public class JetSuit extends NetheriteSpaceSuit implements BotariumEnergyItem<Wr
 
     public void fly(Player player, ItemStack stack) {
         emitParticles = false;
-        if (!SpaceSuitConfig.enableJetSuitFlight) {
-            return;
-        }
-
-        // Don't fly the Jet Suit in creative
+        if (!SpaceSuitConfig.enableJetSuitFlight) return;
+        if (player.getCooldowns().isOnCooldown(stack.getItem())) return;
         ItemStackHolder stackHolder = new ItemStackHolder(stack);
-        if (player.getAbilities().flying) {
-            return;
-        }
-
-        // Don't fly if the Jet Suit has no energy
-        if (EnergyHooks.getItemEnergyManager(stack).getStoredEnergy() <= 0) {
-            return;
-        }
+        if (player.getAbilities().flying) return;
+        if (EnergyHooks.getItemEnergyManager(stack).getStoredEnergy() <= 0) return;
 
         if (ModKeyBindings.sprintKeyDown(player)) {
             this.fallFly(player, stackHolder);

@@ -1,1 +1,2 @@
 - Update Ukrainian and Russian translations (PoPCorn)
+- Make jet suit turn off when on cooldown

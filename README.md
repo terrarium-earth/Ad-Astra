@@ -93,7 +93,7 @@ Common
 
 ```groovy
 dependencies {
-    modImplementation "earth.terrarium.adastra:adastra-common-$minecraft_version:$ad_astra_version"
+    modImplementation "earth.terrarium.adastra:ad_astra-common-$minecraft_version:$ad_astra_version"
 }
 ```
 
@@ -101,7 +101,7 @@ Fabric
 
 ```groovy
 dependencies {
-    modImplementation "earth.terrarium.adastra:adastra-fabric-$minecraft_version:$ad_astra_version"
+    modImplementation "earth.terrarium.adastra:ad_astra-fabric-$minecraft_version:$ad_astra_version"
 }
 ```
 
@@ -109,6 +109,6 @@ Forge
 
 ```groovy
 dependencies {
-    modImplementation "earth.terrarium.adastra:adastra-forge-$minecraft_version:$ad_astra_version"
+    modImplementation "earth.terrarium.adastra:ad_astra-forge-$minecraft_version:$ad_astra_version"
 }
 ```
