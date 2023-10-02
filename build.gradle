@@ -81,6 +81,15 @@ allprojects {
                 includeGroup 'com.github.llamalad7.mixinextras'
             }
         }
+
+        maven {
+            url = "https://maven.tterrag.com/"
+            content {
+                includeGroup "com.tterrag.registrate"
+                includeGroup "com.jozufozu.flywheel"
+                includeGroup "com.simibubi.create"
+            }
+        }
     }
 
     tasks.withType(JavaCompile).tap {

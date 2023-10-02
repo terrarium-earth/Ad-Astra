@@ -51,6 +51,10 @@ dependencies {
     modCompileOnly "mezz.jei:jei-$minecraft_version-forge-api:$jei_version"
     modLocalRuntime("mezz.jei:jei-$minecraft_version-forge:$jei_version") { transitive = false }
 
+    modImplementation("com.tterrag.registrate:Registrate:${registrate_forge_version}")
+    modImplementation("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_forge_version}")
+    modImplementation("com.simibubi.create:create-${minecraft_version}:${create_forge_version}:slim") { transitive = false }
+
     modImplementation "vazkii.patchouli:Patchouli:$minecraft_version-$patchouli_version-FORGE"
 }
 

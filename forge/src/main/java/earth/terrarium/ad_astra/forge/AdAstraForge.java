@@ -7,12 +7,14 @@ import earth.terrarium.ad_astra.common.item.AstroduxItem;
 import earth.terrarium.ad_astra.common.registry.ModCommands;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
+import earth.terrarium.ad_astra.compat.create.CreateCompat;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -34,6 +36,10 @@ public class AdAstraForge {
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onRegisterCommands);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onPlayerLogIn);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onPlayerLogOut);
+
+        if(ModList.get().isLoaded("create")) {
+            CreateCompat.init();
+        }
     }
 
     public static void onServerReloadListeners(AddReloadListenerEvent event) {
