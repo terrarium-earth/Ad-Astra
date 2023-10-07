@@ -640,7 +640,7 @@
   "text.resourcefulconfig.ad_astra.option.general.oxygenBarYOffset": "氧气条Y轴偏移量",
   "text.resourcefulconfig.ad_astra.option.general.oxygenDamage": "氧气消耗值",
   "text.resourcefulconfig.ad_astra.option.general.oxygenTankSize": "氧气罐容量",
-  "text.resourcefulconfig.ad_astra.option.general.spawnCorruptedLunarians": "生成月球僵尸村民",
+  "text.resourcefulconfig.ad_astra.option.general.spawnCorruptedLunarians": "生成腐化的月球村民",
   "text.resourcefulconfig.ad_astra.option.general.spawnLunarianWanderingTrader": "生成月球流浪商人",
   "text.resourcefulconfig.ad_astra.option.general.spawnMartianRaptors": "生存火星迅猛龙",
   "text.resourcefulconfig.ad_astra.option.general.spawnMoglers": "生成外星疣猪兽",
