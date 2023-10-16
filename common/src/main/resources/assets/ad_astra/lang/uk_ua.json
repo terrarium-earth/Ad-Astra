@@ -402,6 +402,7 @@
   "gauge_text.ad_astra.oxygen_leak_warning[2]": "конструкція занадто велика для цього",
   "gauge_text.ad_astra.oxygen_leak_warning[3]": "розповсюджувача. Переконайтеся, що вся конструкція",
   "gauge_text.ad_astra.oxygen_leak_warning[4]": "повністю герметична.",
+  "gauge_text.ad_astra.oxygen_leak_warning[5]": "",
   "gauge_text.ad_astra.oxygen_leak_warning[6]": "Якщо ви маєте кілька встановлених росповсюджувачів",
   "gauge_text.ad_astra.oxygen_leak_warning[7]": "на великій конструкції, ви можете ігнорувати це попередження.",
   "gauge_text.ad_astra.storage": "§eЕнергії: %s ⚡ / %d ⚡",
