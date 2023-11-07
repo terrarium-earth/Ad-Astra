@@ -23,6 +23,7 @@ import earth.terrarium.ad_astra.client.screen.PlayerOverlayScreen;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModFluids;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.botarium.client.ClientHooks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemColor;
@@ -50,8 +51,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-
-import static earth.terrarium.ad_astra.common.registry.ModItems.*;
 
 public class AdAstraClient {
 
@@ -102,17 +101,17 @@ public class AdAstraClient {
     }
 
     public static void onRegisterItemRenderers(BiConsumer<ItemLike, BlockEntityWithoutLevelRenderer> register) {
-        register.accept(TIER_1_ROCKET.get(), new RocketItemRendererTier1());
-        register.accept(TIER_2_ROCKET.get(), new RocketItemRendererTier2());
-        register.accept(TIER_3_ROCKET.get(), new RocketItemRendererTier3());
-        register.accept(TIER_4_ROCKET.get(), new RocketItemRendererTier4());
-        register.accept(TIER_1_ROVER.get(), new RoverItemRenderer());
+        register.accept(ModItems.TIER_1_ROCKET.get(), new RocketItemRendererTier1());
+        register.accept(ModItems.TIER_2_ROCKET.get(), new RocketItemRendererTier2());
+        register.accept(ModItems.TIER_3_ROCKET.get(), new RocketItemRendererTier3());
+        register.accept(ModItems.TIER_4_ROCKET.get(), new RocketItemRendererTier4());
+        register.accept(ModItems.TIER_1_ROVER.get(), new RoverItemRenderer());
 
         register.accept(ModBlocks.AERONOS_CHEST.get(), new ChestItemRenderer(ModBlocks.AERONOS_CHEST.get()));
         register.accept(ModBlocks.STROPHAR_CHEST.get(), new ChestItemRenderer(ModBlocks.STROPHAR_CHEST.get()));
 
-        GLOBES.stream().forEach(item -> register.accept(item.get(), new GlobeRenderer.ItemRenderer()));
-        FLAGS.stream().forEach(item -> register.accept(item.get(), new FlagItemRenderer()));
+        ModItems.GLOBES.stream().forEach(item -> register.accept(item.get(), new GlobeRenderer.ItemRenderer()));
+        ModItems.FLAGS.stream().forEach(item -> register.accept(item.get(), new FlagItemRenderer()));
     }
 
     public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {
@@ -141,13 +140,9 @@ public class AdAstraClient {
     }
 
     public static void onAddItemColors(BiConsumer<ItemColor, ItemLike[]> register) {
-        register.accept((stack, tintIndex) -> tintIndex > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack),
-                new ItemLike[] {
-                    SPACE_HELMET.get(), SPACE_SUIT.get(), SPACE_PANTS.get(), SPACE_BOOTS.get(),
-                    NETHERITE_SPACE_HELMET.get(), NETHERITE_SPACE_SUIT.get(), NETHERITE_SPACE_PANTS.get(), NETHERITE_SPACE_BOOTS.get(),
-                    JET_SUIT_HELMET.get(), JET_SUIT.get(), JET_SUIT_PANTS.get(), JET_SUIT_BOOTS.get(),
-                }
-        );
+        register.accept((itemStack, i) -> i > 0 ? -1 : ((DyeableArmorItem) itemStack.getItem()).getColor(itemStack), new ItemLike[]{ModItems.SPACE_HELMET.get(), ModItems.SPACE_SUIT.get(), ModItems.SPACE_PANTS.get(), ModItems.SPACE_BOOTS.get()});
+        register.accept((itemStack, i) -> i > 0 ? -1 : ((DyeableArmorItem) itemStack.getItem()).getColor(itemStack), new ItemLike[]{ModItems.NETHERITE_SPACE_HELMET.get(), ModItems.NETHERITE_SPACE_SUIT.get(), ModItems.NETHERITE_SPACE_PANTS.get(), ModItems.NETHERITE_SPACE_BOOTS.get()});
+        register.accept((itemStack, i) -> i > 0 ? -1 : ((DyeableArmorItem) itemStack.getItem()).getColor(itemStack), new ItemLike[]{ModItems.JET_SUIT_HELMET.get(), ModItems.JET_SUIT.get(), ModItems.JET_SUIT_PANTS.get(), ModItems.JET_SUIT_BOOTS.get()});
     }
 
     @FunctionalInterface
