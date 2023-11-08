@@ -1,7 +1,5 @@
 package earth.terrarium.ad_astra.client.particle;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ExplodeParticle;
 import net.minecraft.client.particle.Particle;
@@ -22,7 +20,6 @@ public class LargeFlameParticle extends ExplodeParticle {
         this.yd -= 0.004 + 0.04 * this.gravity;
     }
 
-    @Environment(value = EnvType.CLIENT)
     public static class Provider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 

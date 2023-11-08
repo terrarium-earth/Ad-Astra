@@ -1,42 +1,101 @@
-name: Release
-on: [
-  workflow_dispatch
-]
-
+name: Publish Release
+on:
+  workflow_dispatch:
 jobs:
-  build:
-    runs-on: ubuntu-22.04
+  publish-release:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
+          distribution: 'temurin'
           java-version: 17
-      - name: Cache Gradle packages
+
+      - name: Setup Gradle Caches
         uses: actions/cache@v3
         with:
           path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: ${{ runner.os }}-gradle
-      - run: chmod +x ./gradlew
 
-      - name: Release
-        run: ./gradlew :fabric:modrinth :forge:modrinth :fabric:curseforge :forge:curseforge
+      - name: Setup Gradle Wrapper
+        run: chmod +x gradlew
+
+      - name: Get Version and Platform
+        id: properties
+        uses: christian-draeger/read-properties@1.1.1
+        with:
+          path: "./gradle.properties"
+          properties: "version enabledPlatforms minecraftVersion"
+
+      - name: Publish Release
+        run: ./gradlew publish --info
         env:
-          CURSE_TOKEN: ${{ secrets.CURSE_TOKEN }}
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          MAVEN_USER: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_PASS: ${{ secrets.MAVEN_PASSWORD }}
 
-      - run: ./gradlew generateDiscordEmbed
+      - name: Upload Forge Releases (Curse/Modrinth/Github)
+        id: forge_release
+        if: contains(steps.properties.outputs.enabledPlatforms, 'forge')
+        uses: Kir-Antipov/mc-publish@v3.2
+        with:
+          curseforge-id: ${{ vars.CURSE_ID }}
+          curseforge-token: ${{ secrets.CURSE_TOKEN }}
+
+          modrinth-id: ${{ vars.MODRINTH_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          files: ./forge/build/libs/!(*-@(dev|sources|dev-shadow)).jar
+          name: "[Forge] Ad Astra ${{ steps.properties.outputs.version }}"
+          version: ${{ steps.properties.outputs.version }}
+          version-type: release
+          changelog-file: changelog.md
+          loaders: forge
+          game-versions: ${{ steps.properties.outputs.minecraftVersion }}
+          version-resolver: exact
+
+          dependencies: |
+            resourceful-lib | depends | *
+            resourceful-config | depends | *
+            botarium | depends | *
+
+      - name: Upload Fabric Releases (Curse/Modrinth/Github)
+        id: fabric_release
+        if: contains(steps.properties.outputs.enabledPlatforms, 'fabric')
+        uses: Kir-Antipov/mc-publish@v3.2
+        with:
+          curseforge-id: ${{ vars.CURSE_ID }}
+          curseforge-token: ${{ secrets.CURSE_TOKEN }}
+
+          modrinth-id: ${{ vars.MODRINTH_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          files: ./fabric/build/libs/!(*-@(dev|sources|dev-shadow)).jar
+          name: "[Fabric] Ad Astra ${{ steps.properties.outputs.version }}"
+          version: ${{ steps.properties.outputs.version }}
+          version-type: release
+          changelog-file: changelog.md
+          loaders: fabric
+          game-versions: ${{ steps.properties.outputs.minecraftVersion }}
+          version-resolver: exact
+
+          dependencies: |
+            fabric-api | depends | *
+            resourceful-lib | depends | *
+            resourceful-config | depends | *
+            botarium | depends | *
+
+      - name: Generate Discord Embed
+        run: ./gradlew injectEmbed
         env:
-          MODRINTH_PROJECT_URL: ${{ secrets.MODRINTH_PROJECT_URL }}
-          CURSE_PROJECT_URL: ${{ secrets.CURSE_PROJECT_URL }}
-          EMBED_COLOR: ${{ secrets.EMBED_COLOR }}
-          WEBHOOK_THUMBNAIL: ${{ secrets.WEBHOOK_THUMBNAIL }}
-          WEBHOOK_USERNAME: ${{ secrets.WEBHOOK_USERNAME }}
-          WEBHOOK_AVATAR: ${{ secrets.WEBHOOK_AVATAR }}
+          FORGE_RELEASE_URL: ${{ steps.forge_release.outputs.modrinth-url }}
+          FABRIC_RELEASE_URL: ${{ steps.fabric_release.outputs.modrinth-url }}
 
-      - name: Trigger Discord Webhook
+      - name: Upload Discord Embed
         uses: tsickert/discord-webhook@v5.3.0
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
-          raw-data: embed.json
+          raw-data: ./build/embed.json
