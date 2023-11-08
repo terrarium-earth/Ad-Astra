@@ -1,6 +1,6 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "ad-astra"
+rootProject.name = "ad_astra"
 
 pluginManagement {
     repositories {

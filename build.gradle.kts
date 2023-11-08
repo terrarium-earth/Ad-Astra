@@ -132,8 +132,8 @@ subprojects {
                 archiveClassifier.set("dev-shadow")
                 configurations = listOf(shadowCommon)
 
-                exclude(".cache/**") //Remove datagen cache from jar.
-                exclude("**/ad_astra/datagen/**") //Remove data gen code from jar.
+                exclude(".cache/**") // Remove datagen cache from jar.
+                exclude("**/ad_astra/datagen/**") // Remove data gen code from jar.
             }
 
             "remapJar"(RemapJarTask::class) {

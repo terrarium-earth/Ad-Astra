@@ -704,6 +704,8 @@
   "text.resourcefulconfig.ad_astra.option.spaceSuit.jetSuitUpwardsSpeed.tooltip": "The speed when idle flying up.",
   "text.resourcefulconfig.ad_astra.option.spaceSuit.netheriteSpaceSuitHasFireResistance": "Netherite Space Suit Has Fire Resistance",
   "text.resourcefulconfig.ad_astra.option.spaceSuit.netheriteSpaceSuitTankSize": "Netherite Space Suit Tank Size",
+  "text.resourcefulconfig.ad_astra.option.spaceSuit.renderCustomFirstPersonHand": "Render Custom Space Suit Hand",
+  "text.resourcefulconfig.ad_astra.option.spaceSuit.renderCustomFirstPersonHand.tooltip": "Custom hand rendering may interfere with Shaders",
   "text.resourcefulconfig.ad_astra.option.spaceSuit.spaceSuitTankSize": "Space Suit Tank Size",
   "text.resourcefulconfig.ad_astra.option.spaceSuit.spawnJetSuitParticles": "Spawn Jet Suit Particles",
   "text.resourcefulconfig.ad_astra.option.spawning": "Spawning",
