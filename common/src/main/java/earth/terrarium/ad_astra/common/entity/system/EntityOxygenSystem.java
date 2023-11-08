@@ -10,39 +10,42 @@ import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class EntityOxygenSystem {
-    public static void oxygenTick(LivingEntity entity, ServerLevel level) {
-        if (!AdAstraConfig.doOxygen) {
-            return;
-        }
-        if (entity.isInvertedHealAndHarm()) {
-            return;
-        }
-
-        if (ModUtils.checkTag(entity, ModTags.LIVES_WITHOUT_OXYGEN)) {
-            return;
-        }
-
-        if (OxygenUtils.levelHasOxygen(level) && !entity.isUnderWater()) {
-            return;
-        }
+    @NotNull
+    public static EntityOxygenStatus getOxygenStatus(LivingEntity entity, Level level) {
+        if (!AdAstraConfig.doOxygen) return EntityOxygenStatus.IGNORE;
+        if (entity.isInvertedHealAndHarm()) return EntityOxygenStatus.IGNORE;
+        if (ModUtils.checkTag(entity, ModTags.LIVES_WITHOUT_OXYGEN)) return EntityOxygenStatus.IGNORE;
+        if (OxygenUtils.levelHasOxygen(level) && !entity.isUnderWater()) return EntityOxygenStatus.IGNORE;
 
         boolean entityHasOxygen = OxygenUtils.entityHasOxygen(level, entity);
         boolean hasOxygenatedSpaceSuit = SpaceSuit.hasOxygenatedSpaceSuit(entity) && SpaceSuit.hasFullSet(entity);
 
         if (entityHasOxygen && hasOxygenatedSpaceSuit && entity.isUnderWater() && !entity.canBreatheUnderwater() && !entity.hasEffect(MobEffects.WATER_BREATHING)) {
-            consumeOxygen(entity);
-            return;
+            return EntityOxygenStatus.CONSUME;
         }
 
         if (!entityHasOxygen) {
             if (hasOxygenatedSpaceSuit) {
-                consumeOxygen(entity);
+                return EntityOxygenStatus.CONSUME;
             } else if (!ModUtils.armourIsOxygenated(entity)) {
-                entity.hurt(ModDamageSources.of(level, ModDamageSources.OXYGEN), AdAstraConfig.oxygenDamage);
-                entity.setAirSupply(-40);
+                return EntityOxygenStatus.DAMAGE;
             }
+        }
+
+        return EntityOxygenStatus.IGNORE;
+    }
+
+    public static void oxygenTick(LivingEntity entity, ServerLevel level) {
+        EntityOxygenStatus status = getOxygenStatus(entity, level);
+        if (status == EntityOxygenStatus.CONSUME) {
+            consumeOxygen(entity);
+        } else if (status == EntityOxygenStatus.DAMAGE) {
+            entity.hurt(ModDamageSources.of(level, ModDamageSources.OXYGEN), AdAstraConfig.oxygenDamage);
+            entity.setAirSupply(-40);
         }
     }
 

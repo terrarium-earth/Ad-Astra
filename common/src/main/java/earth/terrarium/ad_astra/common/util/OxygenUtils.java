@@ -12,7 +12,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
@@ -40,8 +39,7 @@ public class OxygenUtils {
      * Checks if an entity has oxygen.
      */
     public static boolean entityHasOxygen(Level level, LivingEntity entity) {
-        Vec3 eyePosition = entity.getEyePosition();
-        return posHasOxygen(level, BlockPos.containing(eyePosition));
+        return posHasOxygen(level, BlockPos.containing(entity.getEyePosition()));
     }
 
     /**
@@ -123,23 +121,20 @@ public class OxygenUtils {
                 BlockState state = level.getBlockState(pos);
 
                 OXYGEN_LOCATIONS.get(getOxygenSource(level, source)).remove(pos);
-                if (posHasOxygen(level, pos)) {
-                    continue;
-                }
-
-                if (state.isAir()) {
-                    continue;
-                }
+                if (posHasOxygen(level, pos)) continue;
+                if (state.isAir()) continue;
 
                 Block block = state.getBlock();
-                if (block instanceof WallTorchBlock && !block.equals(Blocks.SOUL_WALL_TORCH) && !block.equals(Blocks.REDSTONE_WALL_TORCH)) {
+                if (block instanceof WallTorchBlock && !block.equals(Blocks.SOUL_WALL_TORCH)) {
                     level.setBlockAndUpdate(pos, ModBlocks.WALL_EXTINGUISHED_TORCH.get().defaultBlockState().setValue(WallTorchBlock.FACING, state.getValue(WallTorchBlock.FACING)));
                     continue;
                 }
 
-                if (block instanceof TorchBlock && !block.equals(Blocks.SOUL_TORCH) && !block.equals(Blocks.SOUL_WALL_TORCH) && !block.equals(Blocks.REDSTONE_TORCH) && !block.equals(Blocks.REDSTONE_WALL_TORCH)) {
-                    level.setBlockAndUpdate(pos, ModBlocks.EXTINGUISHED_TORCH.get().defaultBlockState());
-                    continue;
+                if (block instanceof TorchBlock && !block.equals(Blocks.SOUL_TORCH) && !block.equals(Blocks.SOUL_WALL_TORCH)) {
+                    if (!block.equals(Blocks.REDSTONE_TORCH) && !block.equals(Blocks.REDSTONE_WALL_TORCH)) {
+                        level.setBlockAndUpdate(pos, ModBlocks.EXTINGUISHED_TORCH.get().defaultBlockState());
+                        continue;
+                    }
                 }
 
                 if (block instanceof CandleCakeBlock) {
