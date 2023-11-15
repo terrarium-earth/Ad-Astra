@@ -2,21 +2,27 @@ package earth.terrarium.ad_astra.common.block.door;
 
 import net.minecraft.util.StringRepresentable;
 
+import java.util.Locale;
+
 public enum LocationState implements StringRepresentable {
-    TOP_LEFT("top_left"), TOP("top"), TOP_RIGHT("top_right"), LEFT("left"), CENTER("center"), RIGHT("right"), BOTTOM_LEFT("bottom_left"), BOTTOM("bottom"), BOTTOM_RIGHT("bottom_right");
+    TOP_LEFT,
+    TOP,
+    TOP_RIGHT,
+    LEFT,
+    CENTER,
+    RIGHT,
+    BOTTOM_LEFT,
+    BOTTOM,
+    BOTTOM_RIGHT,
+    ;
 
-    private final String name;
-
-    LocationState(String name) {
-        this.name = name;
-    }
 
     public String toString() {
-        return this.name;
+        return getSerializedName();
     }
 
     @Override
     public String getSerializedName() {
-        return this.name;
+        return this.name().toLowerCase(Locale.ROOT);
     }
 }

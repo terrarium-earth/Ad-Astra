@@ -44,7 +44,7 @@ public class CustomButton extends Button {
         this.startY = y;
         this.label = label;
         this.buttonSize = size;
-        Color colour = buttonColor.getColour();
+        Color colour = buttonColor.getColor();
         // The button becomes lightened when the mouse hovers over the button.
         this.buttonColourLightened = ColourUtils.lighten(colour, 0.1f);
         // This is the normal colour when the button is not being hovered over.

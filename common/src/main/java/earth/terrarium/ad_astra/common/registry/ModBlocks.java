@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 
 public class ModBlocks {
     public static final ResourcefulRegistry<Block> BLOCKS = ResourcefulRegistries.create(BuiltInRegistries.BLOCK, AdAstra.MOD_ID);
@@ -44,7 +45,7 @@ public class ModBlocks {
 
     public static final WoodType GLACIAN_SIGN_TYPE = WoodTypeInvoker.ad_astra$invokeRegister(WoodTypeInvoker.ad_astra$init(ArchitecturyTarget.getCurrentTarget().equals("forge") ? "ad_astra:glacian" : "glacian", BlockSetType.OAK));
 
-    public static final RegistryEntry<Block> LAUNCH_PAD = BLOCKS.register("launch_pad", () -> new LaunchPad(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));
+    public static final RegistryEntry<Block> LAUNCH_PAD = BLOCKS.register("launch_pad", () -> new LaunchPad(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).pushReaction(PushReaction.BLOCK)));
 
     public static final RegistryEntry<Block> STEEL_CABLE = BLOCKS.register("steel_cable", () -> new PipeBlock(1024, 0.344, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
     public static final RegistryEntry<Block> DESH_CABLE = BLOCKS.register("desh_cable", () -> new PipeBlock(4096, 0.344, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
