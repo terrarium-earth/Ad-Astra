@@ -91,8 +91,8 @@ jobs:
       - name: Generate Discord Embed
         run: ./gradlew injectEmbed
         env:
-          FORGE_RELEASE_URL: ${{ steps.forge_release.outputs.modrinth-url }}
-          FABRIC_RELEASE_URL: ${{ steps.fabric_release.outputs.modrinth-url }}
+          FORGE_RELEASE_URL: ${{ steps.forge_release.outputs.modrinth-version }}
+          FABRIC_RELEASE_URL: ${{ steps.fabric_release.outputs.modrinth-version }}
 
       - name: Upload Discord Embed
         uses: tsickert/discord-webhook@v5.3.0

@@ -7,16 +7,15 @@
                     "type": 2,
                     "label": "Fabric",
                     "style": 5,
-                    "url": "${fabric_link}"
+                    "url": "https://modrinth.com/mod/ad_astra/version/${fabric_link}"
                 },
                 {
                     "type": 2,
                     "label": "Forge",
                     "style": 5,
-                    "url": "${forge_link}"
+                    "url": "https://modrinth.com/mod/ad_astra/version/${forge_link}"
                 }
             ]
-
         }
     ],
     "embeds": [
