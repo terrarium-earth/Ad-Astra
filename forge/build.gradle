@@ -19,6 +19,7 @@ sourceSets {
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
     forge {
+        convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
         mixinConfig "$project.mod_id-common.mixins.json"
         mixinConfig "${project.mod_id}.mixins.json"
@@ -66,6 +67,7 @@ processResources {
 
 shadowJar {
     exclude "fabric.mod.json"
+    exclude "ad_astra-common.accesswidener"
 
     configurations = [project.configurations.shadowCommon]
     archiveClassifier.set  "dev-shadow"
