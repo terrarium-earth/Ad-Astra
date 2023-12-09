@@ -1,6 +1,5 @@
 package earth.terrarium.adastra.common.blocks.base;
 
-import earth.terrarium.adastra.common.blocks.machines.OxygenDistributorBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -49,8 +48,8 @@ public class SidedMachineBlock extends MachineBlock {
     }
 
     public BlockPos getTop(BlockState state, BlockPos pos) {
-        AttachFace face = state.getValue(OxygenDistributorBlock.FACE);
-        Direction facing = state.getValue(OxygenDistributorBlock.FACING);
+        AttachFace face = state.getValue(FACE);
+        Direction facing = state.getValue(FACING);
 
         return switch (face) {
             case FLOOR -> pos.above();

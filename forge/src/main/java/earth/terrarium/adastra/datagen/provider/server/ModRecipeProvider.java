@@ -82,7 +82,7 @@ public class ModRecipeProvider extends RecipeProvider {
         var builder = new SeparatingRecipeBuilder(ingredient, resultFluid1, resultFluid2)
             .cookingTime(cookingtime)
             .energy(energy);
-        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "%s_and_%s_from_separating_%s".formatted(resultFluid1Id.getPath(), resultFluid2Id.getPath(), ingredientId.getPath())));
+        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "separating/%s_and_%s_from_separating_%s".formatted(resultFluid1Id.getPath(), resultFluid2Id.getPath(), ingredientId.getPath())));
     }
 
     public static void createHydraulicPressing(Consumer<FinishedRecipe> writer, int cookingtime, int energy, TagKey<Item> ingredient, ItemStack result) {
@@ -93,7 +93,7 @@ public class ModRecipeProvider extends RecipeProvider {
             .unlockedBy("has_item", has(ingredient))
             .cookingTime(cookingtime)
             .energy(energy);
-        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "%s_from_hydraulic_pressing_%s".formatted(resultId.getPath(), ingredientId.getPath())));
+        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "hydraulic_pressing/%s_from_hydraulic_pressing_%s".formatted(resultId.getPath(), ingredientId.getPath())));
     }
 
     public static void createHydraulicPressing(Consumer<FinishedRecipe> writer, int cookingtime, int energy, Item ingredient, ItemStack result) {
@@ -104,7 +104,7 @@ public class ModRecipeProvider extends RecipeProvider {
             .unlockedBy("has_item", has(ingredient))
             .cookingTime(cookingtime)
             .energy(energy);
-        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "%s_from_hydraulic_pressing_%s".formatted(resultId.getPath(), ingredientId.getPath())));
+        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "hydraulic_pressing/%s_from_hydraulic_pressing_%s".formatted(resultId.getPath(), ingredientId.getPath())));
     }
 
     public static void createRefining(Consumer<FinishedRecipe> writer, int cookingtime, int energy, FluidHolder ingredient, FluidHolder resultFluid) {
@@ -114,6 +114,6 @@ public class ModRecipeProvider extends RecipeProvider {
         var builder = new RefiningRecipeBuilder(ingredient, resultFluid)
             .cookingTime(cookingtime)
             .energy(energy);
-        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "%s_from_refining_%s".formatted(resultFluidId.getPath(), ingredientId.getPath())));
+        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "refining/%s_from_refining_%s".formatted(resultFluidId.getPath(), ingredientId.getPath())));
     }
 }

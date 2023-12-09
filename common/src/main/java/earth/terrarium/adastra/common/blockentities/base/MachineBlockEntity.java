@@ -69,8 +69,8 @@ public abstract class MachineBlockEntity extends BlockEntity {
     }
 
     public void sync() {
-        if (this.level() instanceof ServerLevel l) {
-            l.getChunkSource().blockChanged(this.worldPosition);
+        if (level() instanceof ServerLevel serverLevel) {
+            serverLevel.getChunkSource().blockChanged(this.worldPosition);
         }
     }
 }

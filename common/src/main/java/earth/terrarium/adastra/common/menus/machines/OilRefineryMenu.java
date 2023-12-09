@@ -1,14 +1,14 @@
 package earth.terrarium.adastra.common.menus.machines;
 
 import earth.terrarium.adastra.common.blockentities.machines.OilRefineryBlockEntity;
-import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
+import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.FurnaceResultSlot;
 import net.minecraft.world.inventory.Slot;
 
-public class OilRefineryMenu extends BasicContainerMenu<OilRefineryBlockEntity> {
+public class OilRefineryMenu extends BaseContainerMenu<OilRefineryBlockEntity> {
 
     public OilRefineryMenu(int id, Inventory inventory, OilRefineryBlockEntity entity) {
         super(ModMenus.OIL_REFINERY.get(), id, inventory, entity);

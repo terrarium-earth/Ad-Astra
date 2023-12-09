@@ -1,13 +1,13 @@
 package earth.terrarium.adastra.common.menus.machines;
 
 import earth.terrarium.adastra.common.blockentities.machines.HydraulicPressBlockEntity;
-import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
+import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 
-public class HydraulicPressMenu extends BasicContainerMenu<HydraulicPressBlockEntity> {
+public class HydraulicPressMenu extends BaseContainerMenu<HydraulicPressBlockEntity> {
 
     public HydraulicPressMenu(int id, Inventory inventory, HydraulicPressBlockEntity entity) {
         super(ModMenus.HYDRAULIC_PRESS.get(), id, inventory, entity);

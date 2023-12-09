@@ -1,14 +1,14 @@
 package earth.terrarium.adastra.common.menus.machines;
 
 import earth.terrarium.adastra.common.blockentities.machines.BatteryBlockEntity;
-import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
+import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 
-public class BatteryMenu extends BasicContainerMenu<BatteryBlockEntity> {
+public class BatteryMenu extends BaseContainerMenu<BatteryBlockEntity> {
 
     public BatteryMenu(int id, Inventory inventory, BatteryBlockEntity entity) {
         super(ModMenus.BATTERY.get(), id, inventory, entity);

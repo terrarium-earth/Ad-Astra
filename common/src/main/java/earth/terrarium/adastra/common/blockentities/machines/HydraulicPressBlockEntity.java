@@ -10,7 +10,6 @@ import earth.terrarium.adastra.common.recipes.machines.HydraulicPressingRecipe;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.ItemUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
-import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import net.minecraft.core.BlockPos;
@@ -31,7 +30,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class HydraulicPressBlockEntity extends RecipeMachineBlockEntity<HydraulicPressingRecipe> implements BotariumEnergyBlock<WrappedBlockEnergyContainer>, GeoBlockEntity {
+public class HydraulicPressBlockEntity extends RecipeMachineBlockEntity<HydraulicPressingRecipe> implements GeoBlockEntity {
     public static final RawAnimation BONK = RawAnimation.begin().thenLoop("animation.model.bonk");
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);

@@ -27,7 +27,7 @@
             "earth.terrarium.adastra.fabric.AdAstraFabric::init"
         ],
         "client": [
-            "earth.terrarium.adastra.client.fabric.AdAstraFabricClient::init"
+            "earth.terrarium.adastra.client.fabric.AdAstraClientFabric::init"
         ],
         "rei_client": [
             "earth.terrarium.adastra.common.compat.rei.AdAstraReiPlugin"
@@ -41,11 +41,11 @@
         "adastra.mixins.json"
     ],
     "depends": {
-        "fabric": "*",
+        "fabric-api": "*",
         "minecraft": ">=1.20",
         "java": ">=17",
         "resourcefullib": ">=2.1.11",
-        "resourcefulconfig": ">=2.0.0",
+        "resourcefulconfig": ">=2.1.0",
         "botarium": ">=2.2.0",
         "geckolib": ">=4.2.2"
   }

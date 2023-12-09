@@ -2,7 +2,7 @@ package earth.terrarium.adastra.common.utils;
 
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
-import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
+import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -29,7 +29,7 @@ public final class ModUtils {
     }
 
     public static Optional<ContainerMachineBlockEntity> getMachineFromMenuPacket(BlockPos pos, Player player, Level level) {
-        if (!(player.containerMenu instanceof BasicContainerMenu<?>))
+        if (!(player.containerMenu instanceof BaseContainerMenu<?>))
             return Optional.empty(); // ensure the sender has the menu open
         if (player.distanceToSqr(pos.getCenter()) > Mth.square(8))
             return Optional.empty(); // ensure the sender is close enough to the block

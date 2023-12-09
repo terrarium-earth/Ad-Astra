@@ -1,6 +1,6 @@
 package earth.terrarium.adastra.common.constants;
 
-// Based Source: https://www.windows2universe.org/our_solar_system/planets_table.html
+// Source: https://www.windows2universe.org/our_solar_system/planets_table.html
 public class PlanetConstants {
     public static final float EARTH_GRAVITY = 9.807f;
     public static final short EARTH_TEMPERATURE = 15;

@@ -96,7 +96,7 @@ public class GravityApiImpl implements GravityApi {
         if (entity.shouldDiscardFriction()) {
             entity.setDeltaMovement(movementVector.x, downSpeed, movementVector.z);
         } else {
-            entity.setDeltaMovement(movementVector.x * speed, downSpeed * 0.9800000190734863, movementVector.z * speed);
+            entity.setDeltaMovement(movementVector.x * speed, downSpeed * 0.98, movementVector.z * speed);
         }
 
         entity.calculateEntityAnimation(this instanceof FlyingAnimal);

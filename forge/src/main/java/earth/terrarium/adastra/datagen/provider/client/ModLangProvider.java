@@ -87,7 +87,6 @@ public class ModLangProvider extends LanguageProvider {
         add("text.adastra.weather.temperature.in", "In: %s");
 
         add("tooltip.adastra.energy", "%s ⚡ / %s ⚡");
-
         add("tooltip.adastra.energy_in", "In: %s ⚡/t");
         add("tooltip.adastra.energy_out", "Out: %s ⚡/t");
         add("tooltip.adastra.max_energy_in", "Max In: %s ⚡/t");
@@ -96,7 +95,6 @@ public class ModLangProvider extends LanguageProvider {
         add("tooltip.adastra.energy_generation_per_tick", "Generates %s ⚡ per tick");
 
         add("tooltip.adastra.fluid", "%s 🪣 / %s 🪣 %s");
-
         add("tooltip.adastra.fluid_in", "In: %s 🪣/t");
         add("tooltip.adastra.fluid_out", "Out: %s 🪣/t");
         add("tooltip.adastra.max_fluid_in", "Max In: %s 🪣/t");
@@ -105,6 +103,9 @@ public class ModLangProvider extends LanguageProvider {
         add("tooltip.adastra.fluid_generation_per_iteration", "Generates %s 🪣 per iteration");
 
         add("tooltip.adastra.ticks_per_iteration", "Takes %s ticks per iteration");
+
+        add("tooltip.ad_astra.progress", "%s / %s");
+        add("tooltip.ad_astra.eta", "ETA: %s seconds");
 
         add(ConstantComponents.CLEAR_FLUID_TANK.getString(), "Shift-right-click to clear");
 
@@ -185,6 +186,15 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.DETECTOR_OXYGEN_MODE.getString(), "Set to oxygen detection mode");
         add(ConstantComponents.DETECTOR_GRAVITY_MODE.getString(), "Set to normal gravity detection mode");
         add(ConstantComponents.DETECTOR_TEMPERATURE_MODE.getString(), "Set to safe temperature detection Mode");
+
+        add("tag.item.ad_astra.recyclable", "Recyclable");
+        add("tag.item.ad_astra.iron_plates", "Iron Plates");
+        add("tag.item.ad_astra.iron_rods", "Iron Rods");
+        add("tag.item.ad_astra.steel_ingots", "Steel Ingots");
+        add("tag.item.ad_astra.steel_nuggets", "Steel Nuggets");
+        add("tag.item.ad_astra.steel_plates", "Steel Plates");
+        add("tag.item.ad_astra.steel_rods", "Steel Rods");
+        add("tag.item.ad_astra.steel_blocks", "Steel Blocks");
     }
 
     public void addFluid(Supplier<? extends Fluid> key, String name) {

@@ -1,14 +1,14 @@
 package earth.terrarium.adastra.common.menus.machines;
 
 import earth.terrarium.adastra.common.blockentities.machines.SeparatorBlockEntity;
-import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
+import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.FurnaceResultSlot;
 import net.minecraft.world.inventory.Slot;
 
-public class SeparatorMenu extends BasicContainerMenu<SeparatorBlockEntity> {
+public class SeparatorMenu extends BaseContainerMenu<SeparatorBlockEntity> {
 
     public SeparatorMenu(int id, Inventory inventory, SeparatorBlockEntity entity) {
         super(ModMenus.SEPARATOR.get(), id, inventory, entity);

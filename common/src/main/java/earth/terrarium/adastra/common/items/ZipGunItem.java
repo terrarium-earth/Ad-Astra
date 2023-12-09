@@ -145,7 +145,6 @@ public class ZipGunItem extends Item implements Upgradable, BotariumFluidItem<Wr
         return 72_000;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public WrappedItemFluidContainer getFluidContainer(ItemStack holder) {
         return new WrappedItemFluidContainer(
@@ -153,7 +152,7 @@ public class ZipGunItem extends Item implements Upgradable, BotariumFluidItem<Wr
             new SimpleFluidContainer(
                 getCapacity(holder),
                 1,
-                (t, f) -> f.getFluid().is(ModFluidTags.ZIP_GUN_PROPELLANTS)) {
+                (t, f) -> f.is(ModFluidTags.ZIP_GUN_PROPELLANTS)) {
                 @Override
                 public boolean allowsExtraction() {
                     return false;

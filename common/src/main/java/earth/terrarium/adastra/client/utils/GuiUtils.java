@@ -21,27 +21,27 @@ import java.util.List;
 import java.util.function.Function;
 
 public class GuiUtils {
-    public static final ResourceLocation ENERGY_BAR = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/energy_bar.png");
+    public static final ResourceLocation ENERGY_BAR = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/energy_bar.png");
     public static final int ENERGY_BAR_WIDTH = 10;
     public static final int ENERGY_BAR_HEIGHT = 55;
 
-    public static final ResourceLocation FLUID_BAR = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/fluid_bar.png");
+    public static final ResourceLocation FLUID_BAR = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/fluid_bar.png");
     public static final int FLUID_BAR_WIDTH = 16;
     public static final int FLUID_BAR_HEIGHT = 48;
 
-    public static final ResourceLocation SQUARE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/square_button.png");
-    public static final ResourceLocation SETTINGS_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/settings_button.png");
-    public static final ResourceLocation ARROWS = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/arrows.png");
+    public static final ResourceLocation SQUARE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/square_button.png");
+    public static final ResourceLocation SETTINGS_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/settings_button.png");
+    public static final ResourceLocation ARROWS = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/arrows.png");
 
-    public static final ResourceLocation NONE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/none.png");
-    public static final ResourceLocation PUSH_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/push.png");
-    public static final ResourceLocation PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/pull.png");
-    public static final ResourceLocation PUSH_PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/side_config/push_pull.png");
+    public static final ResourceLocation NONE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/side_config/none.png");
+    public static final ResourceLocation PUSH_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/side_config/push.png");
+    public static final ResourceLocation PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/side_config/pull.png");
+    public static final ResourceLocation PUSH_PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/side_config/push_pull.png");
 
-    public static final ResourceLocation REDSTONE_ALWAYS_ON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/redstone/always_on_button.png");
-    public static final ResourceLocation REDSTONE_ON_WHEN_POWERED = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/redstone/on_when_powered_button.png");
-    public static final ResourceLocation REDSTONE_ON_WHEN_NOT_POWERED = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/redstone/on_when_not_powered_button.png");
-    public static final ResourceLocation REDSTONE_NEVER_ON = new ResourceLocation(AdAstra.MOD_ID, "textures/icons/redstone/never_on_button.png");
+    public static final ResourceLocation REDSTONE_ALWAYS_ON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/redstone/always_on_button.png");
+    public static final ResourceLocation REDSTONE_ON_WHEN_POWERED = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/redstone/on_when_powered_button.png");
+    public static final ResourceLocation REDSTONE_ON_WHEN_NOT_POWERED = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/redstone/on_when_not_powered_button.png");
+    public static final ResourceLocation REDSTONE_NEVER_ON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/redstone/never_on_button.png");
 
     public static void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, WrappedBlockEnergyContainer energyContainer, Component... tooltips) {
         drawEnergyBar(graphics, mouseX, mouseY, font, x, y, energyContainer.getStoredEnergy(), energyContainer.getMaxCapacity(), tooltips);
@@ -86,6 +86,17 @@ public class GuiUtils {
 
         drawTooltips(graphics, font, mouseX, mouseY, x + 6, x + 22, y - 31, y + 17, list -> {
             list.add(ComponentUtils.getFluidComponent(fluid, capacity));
+            Collections.addAll(list, tooltips);
+            return list;
+        });
+    }
+
+    public static void drawHorizontalProgressBar(GuiGraphics graphics, ResourceLocation texture, int mouseX, int mouseY, Font font, int x, int y, int width, int height, int progress, int maxProgress, Component... tooltips) {
+        int widthProgress = (int) (width * (progress / (float) maxProgress));
+        graphics.blit(texture, x, y, 0, 0, widthProgress, height, width, height);
+
+        if (widthProgress == 0) return;
+        drawTooltips(graphics, font, mouseX, mouseY, x, x + width, y, y + height, list -> {
             Collections.addAll(list, tooltips);
             return list;
         });

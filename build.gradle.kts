@@ -8,7 +8,7 @@ plugins {
     java
     id("maven-publish")
     id("com.teamresourceful.resourcefulgradle") version "0.0.+"
-    id("dev.architectury.loom") version "1.3-SNAPSHOT" apply false
+    id("dev.architectury.loom") version "1.4-SNAPSHOT" apply false
     id("architectury-plugin") version "3.4-SNAPSHOT"
     id("com.github.johnrengelman.shadow") version "7.1.2" apply false
 }
@@ -22,6 +22,7 @@ subprojects {
     apply(plugin = "maven-publish")
     apply(plugin = "dev.architectury.loom")
     apply(plugin = "architectury-plugin")
+    apply(plugin = "com.github.johnrengelman.shadow")
 
     val minecraftVersion: String by project
     val modLoader = project.name
@@ -37,8 +38,8 @@ subprojects {
     }
 
     repositories {
-        maven(url = "https://maven.architectury.dev/")
         maven(url = "https://maven.resourcefulbees.com/repository/maven-public/")
+        maven(url = "https://maven.neoforged.net/releases/")
         maven {
             url = uri("https://www.cursemaven.com")
             content {
@@ -112,7 +113,6 @@ subprojects {
     }
 
     if (!isCommon) {
-        apply(plugin = "com.github.johnrengelman.shadow")
         configure<ArchitectPluginExtension> {
             platformSetupLoomIde()
         }
@@ -182,12 +182,16 @@ resourcefulGradle {
             val minecraftVersion: String by project
             val version: String by project
             val changelog: String = file("changelog.md").readText(Charsets.UTF_8)
+            val fabricLink: String? = System.getenv("FABRIC_RELEASE_URL")
+            val forgeLink: String? = System.getenv("FORGE_RELEASE_URL")
 
             source.set(file("templates/embed.json.template"))
             injectedValues.set(mapOf(
                     "minecraft" to minecraftVersion,
                     "version" to version,
                     "changelog" to StringEscapeUtils.escapeJava(changelog),
+                    "fabric_link" to fabricLink,
+                    "forge_link" to forgeLink,
             ))
         }
     }

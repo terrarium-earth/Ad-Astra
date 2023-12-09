@@ -49,7 +49,7 @@ public interface PlanetApi {
     boolean isExtraterrestrial(Level level);
 
     /**
-     * Returns true if the given level is a planet or pace.
+     * Returns true if the given level is a planet or space.
      *
      * @param level The level to check.
      * @return True if the level is a planet or space.

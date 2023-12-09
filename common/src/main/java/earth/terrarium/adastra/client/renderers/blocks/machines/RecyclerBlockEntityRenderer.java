@@ -33,6 +33,7 @@ public class RecyclerBlockEntityRenderer extends CustomGeoBlockRenderer<Recycler
             poseStack.scale(0.55f, 0.55f, 0.55f);
             if (animatable.cookTimeTotal() == 0 || !animatable.canFunction()) return;
             ClientLevel level = Objects.requireNonNull(Minecraft.getInstance().level);
+            if (Minecraft.getInstance().isPaused()) return;
             level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, stack),
                 animatable.getBlockPos().getX() + 0.5,
                 animatable.getBlockPos().getY() + 1.2,

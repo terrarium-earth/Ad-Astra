@@ -1,0 +1,22 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "adastra:separating/hydrogen_and_oxygen_from_separating_water"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "adastra:separating/hydrogen_and_oxygen_from_separating_water"
+    ]
+  },
+  "sends_telemetry_event": true
+}

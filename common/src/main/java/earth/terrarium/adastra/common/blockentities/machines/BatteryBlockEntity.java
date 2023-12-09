@@ -63,10 +63,9 @@ public class BatteryBlockEntity extends ContainerMachineBlockEntity {
 
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
-        if (canFunction()) {
-            tickSideInteractions(pos, Predicate.not(Direction.UP::equals));
-            distributeToChargeSlots();
-        }
+        if (!canFunction()) return;
+        tickSideInteractions(pos, Predicate.not(Direction.UP::equals));
+        distributeToChargeSlots();
     }
 
     @Override

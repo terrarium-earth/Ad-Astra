@@ -72,6 +72,7 @@ public class AerolyteSpaceSuitItem extends CustomGeoArmorItem implements Upgrada
         if (entity instanceof Player player) {
             if (player.getAbilities().flying) return;
             if (!KeybindManager.suitFlightEnabled(player)) return;
+            if (player.getCooldowns().isOnCooldown(stack.getItem())) return;
             if (!KeybindManager.jumpDown(player)) return;
             if (!hasFullSet(player)) return;
 

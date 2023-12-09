@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.common.compat.jei;
 
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.client.screens.SeparatorScreen;
+import earth.terrarium.adastra.client.screens.machines.SeparatorScreen;
 import earth.terrarium.adastra.common.compat.jei.categories.SeparatorCategory;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;

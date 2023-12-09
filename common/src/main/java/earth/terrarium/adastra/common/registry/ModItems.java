@@ -23,17 +23,18 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public final class ModItems {
     public static final ResourcefulRegistry<Item> ITEMS = ResourcefulRegistries.create(BuiltInRegistries.ITEM, AdAstra.MOD_ID);
-    public static final ResourcefulRegistry<Item> BASIC_ITEMS = ResourcefulRegistries.create(ITEMS);
     public static final Supplier<CreativeModeTab> TAB = new ResourcefulCreativeTab(new ResourceLocation(AdAstra.MOD_ID, "main"))
         .setItemIcon(() -> Items.DIRT)
         .addRegistry(ITEMS)
         .build();
 
+    public static final ResourcefulRegistry<Item> BASIC_ITEMS = ResourcefulRegistries.create(ITEMS);
+
     public static final RegistryEntry<Item> TI_69 = ITEMS.register("ti_69", () -> new Ti69Item(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> WRENCH = BASIC_ITEMS.register("wrench", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> ZIP_GUN = ITEMS.register("zip_gun", () -> new ZipGunItem(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryEntry<Item> ETRIONIC_CAPACITOR = BASIC_ITEMS.register("etrionic_capacitor", () -> new EtrionicCapacitorItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> ETRIONIC_CAPACITOR = ITEMS.register("etrionic_capacitor", () -> new EtrionicCapacitorItem(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> GAS_TANK = BASIC_ITEMS.register("gas_tank", () -> new GasTankItem(new Item.Properties().stacksTo(1), 2, 0.05f));
     public static final RegistryEntry<Item> LARGE_GAS_TANK = BASIC_ITEMS.register("large_gas_tank", () -> new GasTankItem(new Item.Properties().stacksTo(1), 10, 0.25f));
 

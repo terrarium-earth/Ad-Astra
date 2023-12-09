@@ -149,4 +149,15 @@ public class ComponentUtils {
             tooltipComponents.add(upgradeEntry);
         });
     }
+
+    public static Component getProgressComponent(int progress, int maxProgress) {
+        return Component.translatable("tooltip.ad_astra.progress",
+            progress, maxProgress).withStyle(ChatFormatting.GOLD);
+    }
+
+    public static Component getEtaComponent(int progress, int maxProgress) {
+        int eta = (maxProgress - progress) / 20;
+        return Component.translatable("tooltip.ad_astra.eta",
+            eta).withStyle(ChatFormatting.GOLD);
+    }
 }

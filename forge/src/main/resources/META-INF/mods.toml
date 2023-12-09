@@ -37,7 +37,7 @@ side = "BOTH"
 [[dependencies.adastra]]
 modId = "resourcefulconfig"
 mandatory = true
-versionRange = "[2.0.0,)"
+versionRange = "[2.1.0,)"
 ordering = "NONE"
 side = "BOTH"
 

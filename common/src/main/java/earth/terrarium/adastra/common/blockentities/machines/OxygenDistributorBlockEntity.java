@@ -37,7 +37,6 @@ import java.util.Set;
 
 public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer>, BotariumFluidBlock<WrappedBlockFluidContainer>, GeoBlockEntity {
     public static final int MAX_BLOCKS = 3000;
-    private WrappedBlockEnergyContainer energyContainer;
     private WrappedBlockFluidContainer fluidContainer;
 
     public static final RawAnimation SPIN = RawAnimation.begin().thenLoop("animation.model.spin");

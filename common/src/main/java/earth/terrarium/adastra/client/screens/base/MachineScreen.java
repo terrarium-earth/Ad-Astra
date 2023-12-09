@@ -9,12 +9,12 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
-import earth.terrarium.adastra.common.menus.base.BasicContainerMenu;
-import earth.terrarium.adastra.common.networking.NetworkHandler;
-import earth.terrarium.adastra.common.networking.messages.ServerboundClearFluidTankPacket;
-import earth.terrarium.adastra.common.networking.messages.ServerboundResetSideConfigPacket;
-import earth.terrarium.adastra.common.networking.messages.ServerboundSetRedstoneControlPacket;
-import earth.terrarium.adastra.common.networking.messages.ServerboundSetSideConfigPacket;
+import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
+import earth.terrarium.adastra.common.network.NetworkHandler;
+import earth.terrarium.adastra.common.network.messages.ServerboundClearFluidTankPacket;
+import earth.terrarium.adastra.common.network.messages.ServerboundResetSideConfigPacket;
+import earth.terrarium.adastra.common.network.messages.ServerboundSetRedstoneControlPacket;
+import earth.terrarium.adastra.common.network.messages.ServerboundSetSideConfigPacket;
 import earth.terrarium.adastra.common.utils.ComponentUtils;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends ContainerMachineBlockEntity> extends AbstractContainerCursorScreen<T> {
+public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends ContainerMachineBlockEntity> extends AbstractContainerCursorScreen<T> {
     private final ResourceLocation texture;
     private final List<ClearOnClick> clearOnClicks = new ArrayList<>();
     protected final List<List<? extends Button>> sideConfigButtons = new ArrayList<>(6);
@@ -119,9 +119,9 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends C
     }
 
     @Override
-    public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float f) {
+    public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(graphics);
-        super.render(graphics, mouseX, mouseY, f);
+        super.render(graphics, mouseX, mouseY, partialTick);
         renderTooltip(graphics, mouseX, mouseY);
     }
 
@@ -210,6 +210,19 @@ public abstract class MachineScreen<T extends BasicContainerMenu<U>, U extends C
             !fluid.isEmpty() ? ConstantComponents.CLEAR_FLUID_TANK : Component.empty());
 
         clearOnClicks.add(new ClearOnClick(x + 6, y - 31, x + 22, y + 17, tank));
+    }
+
+    public void drawHorizontalProgressBar(GuiGraphics graphics, ResourceLocation texture, int mouseX, int mouseY, int xOffset, int yOffset, int width, int height, int progress, int maxProgress) {
+        GuiUtils.drawHorizontalProgressBar(
+            graphics, texture,
+            mouseX, mouseY,
+            font,
+            this.leftPos + xOffset,
+            this.topPos + yOffset,
+            width, height,
+            progress, maxProgress,
+            ComponentUtils.getProgressComponent(progress, maxProgress),
+            ComponentUtils.getEtaComponent(progress, maxProgress));
     }
 
     @Override
