@@ -1,0 +1,12 @@
+// 1.20.1	2023-12-21T17:26:03.03159	Tags for minecraft:fluid mod id ad_astra
+177c9e2ff17d4101adeb82bf787abd6ab892330a data/ad_astra/tags/fluids/efficient_fuel.json
+2884eec9b71568644af84f99387d17c93fe5e90d data/ad_astra/tags/fluids/fuel.json
+df46d35b0d02d95b18853e362cb8e5474c3db8e9 data/ad_astra/tags/fluids/hydrogen.json
+f4f33d274a7f054e18b707dd7731c9172b04d876 data/ad_astra/tags/fluids/oil.json
+2724168a46f990627b9ccc009c46a4da699788f2 data/ad_astra/tags/fluids/oxygen.json
+169053d1b00c68b76bb66a96b544352e1953b4e5 data/ad_astra/tags/fluids/tier_1_rocket_fuel.json
+169053d1b00c68b76bb66a96b544352e1953b4e5 data/ad_astra/tags/fluids/tier_1_rover_fuel.json
+169053d1b00c68b76bb66a96b544352e1953b4e5 data/ad_astra/tags/fluids/tier_2_rocket_fuel.json
+169053d1b00c68b76bb66a96b544352e1953b4e5 data/ad_astra/tags/fluids/tier_3_rocket_fuel.json
+169053d1b00c68b76bb66a96b544352e1953b4e5 data/ad_astra/tags/fluids/tier_4_rocket_fuel.json
+62b86c19d3471b75a8288dba78c665f4503b508e data/ad_astra/tags/fluids/zip_gun_propellants.json

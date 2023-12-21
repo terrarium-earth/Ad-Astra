@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:desh_ingot",
+    {
+      "id": "#c:desh_ingots",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/desh",
+      "required": false
+    }
+  ]
+}

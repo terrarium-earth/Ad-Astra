@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "ad_astra:block/cracked_mercury_stone_bricks"
+  }
+}

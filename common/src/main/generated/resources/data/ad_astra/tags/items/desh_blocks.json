@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:block_of_desh",
+    {
+      "id": "#c:desh_blocks",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/desh",
+      "required": false
+    }
+  ]
+}

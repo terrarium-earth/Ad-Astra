@@ -4,9 +4,9 @@ architectury {
 }
 
 loom {
-    accessWidenerPath.set(file("src/main/resources/ad_astra.accesswidener"))
+    accessWidenerPath.set(file("src/main/resources/adastra.accesswidener"))
 }
 
 dependencies {
-    modCompileOnly(group = "tech.thatgravyboat", name = "commonats", version = "1.0")
+    modCompileOnly(group = "tech.thatgravyboat", name = "commonats", version = "2.0")
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "ad_astra:block/infernal_spire_block_top",
+    "side": "ad_astra:block/infernal_spire_block"
+  }
+}

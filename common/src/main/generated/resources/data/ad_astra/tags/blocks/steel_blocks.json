@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:block_of_steel",
+    {
+      "id": "#c:steel_blocks",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/steel",
+      "required": false
+    }
+  ]
+}

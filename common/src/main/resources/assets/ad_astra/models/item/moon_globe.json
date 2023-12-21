@@ -1,7 +1,0 @@
-{
-  "parent": "ad_astra:item/globe",
-  "textures": {
-    "particle": "ad_astra:block/globe/moon_globe",
-    "texture": "ad_astra:block/globe/moon_globe"
-  }
-}

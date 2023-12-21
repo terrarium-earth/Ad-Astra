@@ -1,0 +1,7 @@
+{
+  "parent": "ad_astra:block/sliding_door",
+  "textures": {
+    "0": "ad_astra:block/sliding_door/steel_sliding_door",
+    "particle": "ad_astra:block/sliding_door/steel_sliding_door"
+  }
+}

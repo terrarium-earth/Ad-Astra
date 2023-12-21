@@ -1,0 +1,9 @@
+{
+  "dimension": "ad_astra:mars_orbit",
+  "gravity": 0.0,
+  "oxygen": false,
+  "solarSystem": "ad_astra:solar_system",
+  "solar_power": 12,
+  "temperature": -270,
+  "tier": 2
+}

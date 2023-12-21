@@ -1,0 +1,364 @@
+{
+  "variants": {
+    "facing=east,lit=false,power=0,powered=false": {
+      "model": "ad_astra:block/energizer_empty",
+      "y": 90
+    },
+    "facing=east,lit=false,power=0,powered=true": {
+      "model": "ad_astra:block/energizer_empty",
+      "y": 90
+    },
+    "facing=east,lit=false,power=1,powered=false": {
+      "model": "ad_astra:block/energizer_red",
+      "y": 90
+    },
+    "facing=east,lit=false,power=1,powered=true": {
+      "model": "ad_astra:block/energizer_red",
+      "y": 90
+    },
+    "facing=east,lit=false,power=2,powered=false": {
+      "model": "ad_astra:block/energizer_orange",
+      "y": 90
+    },
+    "facing=east,lit=false,power=2,powered=true": {
+      "model": "ad_astra:block/energizer_orange",
+      "y": 90
+    },
+    "facing=east,lit=false,power=3,powered=false": {
+      "model": "ad_astra:block/energizer_yellow",
+      "y": 90
+    },
+    "facing=east,lit=false,power=3,powered=true": {
+      "model": "ad_astra:block/energizer_yellow",
+      "y": 90
+    },
+    "facing=east,lit=false,power=4,powered=false": {
+      "model": "ad_astra:block/energizer_green",
+      "y": 90
+    },
+    "facing=east,lit=false,power=4,powered=true": {
+      "model": "ad_astra:block/energizer_green",
+      "y": 90
+    },
+    "facing=east,lit=false,power=5,powered=false": {
+      "model": "ad_astra:block/energizer_blue",
+      "y": 90
+    },
+    "facing=east,lit=false,power=5,powered=true": {
+      "model": "ad_astra:block/energizer_blue",
+      "y": 90
+    },
+    "facing=east,lit=true,power=0,powered=false": {
+      "model": "ad_astra:block/energizer_empty",
+      "y": 90
+    },
+    "facing=east,lit=true,power=0,powered=true": {
+      "model": "ad_astra:block/energizer_empty",
+      "y": 90
+    },
+    "facing=east,lit=true,power=1,powered=false": {
+      "model": "ad_astra:block/energizer_red",
+      "y": 90
+    },
+    "facing=east,lit=true,power=1,powered=true": {
+      "model": "ad_astra:block/energizer_red",
+      "y": 90
+    },
+    "facing=east,lit=true,power=2,powered=false": {
+      "model": "ad_astra:block/energizer_orange",
+      "y": 90
+    },
+    "facing=east,lit=true,power=2,powered=true": {
+      "model": "ad_astra:block/energizer_orange",
+      "y": 90
+    },
+    "facing=east,lit=true,power=3,powered=false": {
+      "model": "ad_astra:block/energizer_yellow",
+      "y": 90
+    },
+    "facing=east,lit=true,power=3,powered=true": {
+      "model": "ad_astra:block/energizer_yellow",
+      "y": 90
+    },
+    "facing=east,lit=true,power=4,powered=false": {
+      "model": "ad_astra:block/energizer_green",
+      "y": 90
+    },
+    "facing=east,lit=true,power=4,powered=true": {
+      "model": "ad_astra:block/energizer_green",
+      "y": 90
+    },
+    "facing=east,lit=true,power=5,powered=false": {
+      "model": "ad_astra:block/energizer_blue",
+      "y": 90
+    },
+    "facing=east,lit=true,power=5,powered=true": {
+      "model": "ad_astra:block/energizer_blue",
+      "y": 90
+    },
+    "facing=north,lit=false,power=0,powered=false": {
+      "model": "ad_astra:block/energizer_empty"
+    },
+    "facing=north,lit=false,power=0,powered=true": {
+      "model": "ad_astra:block/energizer_empty"
+    },
+    "facing=north,lit=false,power=1,powered=false": {
+      "model": "ad_astra:block/energizer_red"
+    },
+    "facing=north,lit=false,power=1,powered=true": {
+      "model": "ad_astra:block/energizer_red"
+    },
+    "facing=north,lit=false,power=2,powered=false": {
+      "model": "ad_astra:block/energizer_orange"
+    },
+    "facing=north,lit=false,power=2,powered=true": {
+      "model": "ad_astra:block/energizer_orange"
+    },
+    "facing=north,lit=false,power=3,powered=false": {
+      "model": "ad_astra:block/energizer_yellow"
+    },
+    "facing=north,lit=false,power=3,powered=true": {
+      "model": "ad_astra:block/energizer_yellow"
+    },
+    "facing=north,lit=false,power=4,powered=false": {
+      "model": "ad_astra:block/energizer_green"
+    },
+    "facing=north,lit=false,power=4,powered=true": {
+      "model": "ad_astra:block/energizer_green"
+    },
+    "facing=north,lit=false,power=5,powered=false": {
+      "model": "ad_astra:block/energizer_blue"
+    },
+    "facing=north,lit=false,power=5,powered=true": {
+      "model": "ad_astra:block/energizer_blue"
+    },
+    "facing=north,lit=true,power=0,powered=false": {
+      "model": "ad_astra:block/energizer_empty"
+    },
+    "facing=north,lit=true,power=0,powered=true": {
+      "model": "ad_astra:block/energizer_empty"
+    },
+    "facing=north,lit=true,power=1,powered=false": {
+      "model": "ad_astra:block/energizer_red"
+    },
+    "facing=north,lit=true,power=1,powered=true": {
+      "model": "ad_astra:block/energizer_red"
+    },
+    "facing=north,lit=true,power=2,powered=false": {
+      "model": "ad_astra:block/energizer_orange"
+    },
+    "facing=north,lit=true,power=2,powered=true": {
+      "model": "ad_astra:block/energizer_orange"
+    },
+    "facing=north,lit=true,power=3,powered=false": {
+      "model": "ad_astra:block/energizer_yellow"
+    },
+    "facing=north,lit=true,power=3,powered=true": {
+      "model": "ad_astra:block/energizer_yellow"
+    },
+    "facing=north,lit=true,power=4,powered=false": {
+      "model": "ad_astra:block/energizer_green"
+    },
+    "facing=north,lit=true,power=4,powered=true": {
+      "model": "ad_astra:block/energizer_green"
+    },
+    "facing=north,lit=true,power=5,powered=false": {
+      "model": "ad_astra:block/energizer_blue"
+    },
+    "facing=north,lit=true,power=5,powered=true": {
+      "model": "ad_astra:block/energizer_blue"
+    },
+    "facing=south,lit=false,power=0,powered=false": {
+      "model": "ad_astra:block/energizer_empty",
+      "y": 180
+    },
+    "facing=south,lit=false,power=0,powered=true": {
+      "model": "ad_astra:block/energizer_empty",
+      "y": 180
+    },
+    "facing=south,lit=false,power=1,powered=false": {
+      "model": "ad_astra:block/energizer_red",
+      "y": 180
+    },
+    "facing=south,lit=false,power=1,powered=true": {
+      "model": "ad_astra:block/energizer_red",
+      "y": 180
+    },
+    "facing=south,lit=false,power=2,powered=false": {
+      "model": "ad_astra:block/energizer_orange",
+      "y": 180
+    },
+    "facing=south,lit=false,power=2,powered=true": {
+      "model": "ad_astra:block/energizer_orange",
+      "y": 180
+    },
+    "facing=south,lit=false,power=3,powered=false": {
+      "model": "ad_astra:block/energizer_yellow",
+      "y": 180
+    },
+    "facing=south,lit=false,power=3,powered=true": {
+      "model": "ad_astra:block/energizer_yellow",
+      "y": 180
+    },
+    "facing=south,lit=false,power=4,powered=false": {
+      "model": "ad_astra:block/energizer_green",
+      "y": 180
+    },
+    "facing=south,lit=false,power=4,powered=true": {
+      "model": "ad_astra:block/energizer_green",
+      "y": 180
+    },
+    "facing=south,lit=false,power=5,powered=false": {
+      "model": "ad_astra:block/energizer_blue",
+      "y": 180
+    },
+    "facing=south,lit=false,power=5,powered=true": {
+      "model": "ad_astra:block/energizer_blue",
+      "y": 180
+    },
+    "facing=south,lit=true,power=0,powered=false": {
+      "model": "ad_astra:block/energizer_empty",
+      "y": 180
+    },
+    "facing=south,lit=true,power=0,powered=true": {
+      "model": "ad_astra:block/energizer_empty",
+      "y": 180
+    },
+    "facing=south,lit=true,power=1,powered=false": {
+      "model": "ad_astra:block/energizer_red",
+      "y": 180
+    },
+    "facing=south,lit=true,power=1,powered=true": {
+      "model": "ad_astra:block/energizer_red",
+      "y": 180
+    },
+    "facing=south,lit=true,power=2,powered=false": {
+      "model": "ad_astra:block/energizer_orange",
+      "y": 180
+    },
+    "facing=south,lit=true,power=2,powered=true": {
+      "model": "ad_astra:block/energizer_orange",
+      "y": 180
+    },
+    "facing=south,lit=true,power=3,powered=false": {
+      "model": "ad_astra:block/energizer_yellow",
+      "y": 180
+    },
+    "facing=south,lit=true,power=3,powered=true": {
+      "model": "ad_astra:block/energizer_yellow",
+      "y": 180
+    },
+    "facing=south,lit=true,power=4,powered=false": {
+      "model": "ad_astra:block/energizer_green",
+      "y": 180
+    },
+    "facing=south,lit=true,power=4,powered=true": {
+      "model": "ad_astra:block/energizer_green",
+      "y": 180
+    },
+    "facing=south,lit=true,power=5,powered=false": {
+      "model": "ad_astra:block/energizer_blue",
+      "y": 180
+    },
+    "facing=south,lit=true,power=5,powered=true": {
+      "model": "ad_astra:block/energizer_blue",
+      "y": 180
+    },
+    "facing=west,lit=false,power=0,powered=false": {
+      "model": "ad_astra:block/energizer_empty",
+      "y": 270
+    },
+    "facing=west,lit=false,power=0,powered=true": {
+      "model": "ad_astra:block/energizer_empty",
+      "y": 270
+    },
+    "facing=west,lit=false,power=1,powered=false": {
+      "model": "ad_astra:block/energizer_red",
+      "y": 270
+    },
+    "facing=west,lit=false,power=1,powered=true": {
+      "model": "ad_astra:block/energizer_red",
+      "y": 270
+    },
+    "facing=west,lit=false,power=2,powered=false": {
+      "model": "ad_astra:block/energizer_orange",
+      "y": 270
+    },
+    "facing=west,lit=false,power=2,powered=true": {
+      "model": "ad_astra:block/energizer_orange",
+      "y": 270
+    },
+    "facing=west,lit=false,power=3,powered=false": {
+      "model": "ad_astra:block/energizer_yellow",
+      "y": 270
+    },
+    "facing=west,lit=false,power=3,powered=true": {
+      "model": "ad_astra:block/energizer_yellow",
+      "y": 270
+    },
+    "facing=west,lit=false,power=4,powered=false": {
+      "model": "ad_astra:block/energizer_green",
+      "y": 270
+    },
+    "facing=west,lit=false,power=4,powered=true": {
+      "model": "ad_astra:block/energizer_green",
+      "y": 270
+    },
+    "facing=west,lit=false,power=5,powered=false": {
+      "model": "ad_astra:block/energizer_blue",
+      "y": 270
+    },
+    "facing=west,lit=false,power=5,powered=true": {
+      "model": "ad_astra:block/energizer_blue",
+      "y": 270
+    },
+    "facing=west,lit=true,power=0,powered=false": {
+      "model": "ad_astra:block/energizer_empty",
+      "y": 270
+    },
+    "facing=west,lit=true,power=0,powered=true": {
+      "model": "ad_astra:block/energizer_empty",
+      "y": 270
+    },
+    "facing=west,lit=true,power=1,powered=false": {
+      "model": "ad_astra:block/energizer_red",
+      "y": 270
+    },
+    "facing=west,lit=true,power=1,powered=true": {
+      "model": "ad_astra:block/energizer_red",
+      "y": 270
+    },
+    "facing=west,lit=true,power=2,powered=false": {
+      "model": "ad_astra:block/energizer_orange",
+      "y": 270
+    },
+    "facing=west,lit=true,power=2,powered=true": {
+      "model": "ad_astra:block/energizer_orange",
+      "y": 270
+    },
+    "facing=west,lit=true,power=3,powered=false": {
+      "model": "ad_astra:block/energizer_yellow",
+      "y": 270
+    },
+    "facing=west,lit=true,power=3,powered=true": {
+      "model": "ad_astra:block/energizer_yellow",
+      "y": 270
+    },
+    "facing=west,lit=true,power=4,powered=false": {
+      "model": "ad_astra:block/energizer_green",
+      "y": 270
+    },
+    "facing=west,lit=true,power=4,powered=true": {
+      "model": "ad_astra:block/energizer_green",
+      "y": 270
+    },
+    "facing=west,lit=true,power=5,powered=false": {
+      "model": "ad_astra:block/energizer_blue",
+      "y": 270
+    },
+    "facing=west,lit=true,power=5,powered=true": {
+      "model": "ad_astra:block/energizer_blue",
+      "y": 270
+    }
+  }
+}

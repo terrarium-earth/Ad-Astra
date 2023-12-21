@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:calorite_ingot",
+    {
+      "id": "#c:calorite_ingots",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/calorite",
+      "required": false
+    }
+  ]
+}

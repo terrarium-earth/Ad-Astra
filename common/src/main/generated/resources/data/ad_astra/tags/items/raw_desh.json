@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:raw_desh",
+    {
+      "id": "#c:raw_desh",
+      "required": false
+    },
+    {
+      "id": "#forge:raw_materials/desh",
+      "required": false
+    }
+  ]
+}

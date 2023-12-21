@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:block_of_ostrum",
+    {
+      "id": "#c:ostrum_blocks",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/ostrum",
+      "required": false
+    }
+  ]
+}

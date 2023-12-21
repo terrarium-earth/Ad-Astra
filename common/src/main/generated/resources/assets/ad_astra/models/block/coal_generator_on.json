@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "ad_astra:block/machine_bottom",
+    "east": "ad_astra:block/machine_side",
+    "north": "ad_astra:block/coal_generator_front_on",
+    "particle": "ad_astra:block/coal_generator_front_on",
+    "south": "ad_astra:block/machine_side",
+    "up": "ad_astra:block/machine_top",
+    "west": "ad_astra:block/machine_side"
+  }
+}

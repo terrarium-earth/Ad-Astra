@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "facing=east,inverted=false,lit=false,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor",
+      "y": 90
+    },
+    "facing=east,inverted=false,lit=false,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 90
+    },
+    "facing=east,inverted=false,lit=true,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor",
+      "y": 90
+    },
+    "facing=east,inverted=false,lit=true,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 90
+    },
+    "facing=east,inverted=true,lit=false,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor",
+      "y": 90
+    },
+    "facing=east,inverted=true,lit=false,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 90
+    },
+    "facing=east,inverted=true,lit=true,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor",
+      "y": 90
+    },
+    "facing=east,inverted=true,lit=true,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 90
+    },
+    "facing=north,inverted=false,lit=false,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor"
+    },
+    "facing=north,inverted=false,lit=false,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on"
+    },
+    "facing=north,inverted=false,lit=true,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor"
+    },
+    "facing=north,inverted=false,lit=true,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on"
+    },
+    "facing=north,inverted=true,lit=false,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor"
+    },
+    "facing=north,inverted=true,lit=false,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on"
+    },
+    "facing=north,inverted=true,lit=true,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor"
+    },
+    "facing=north,inverted=true,lit=true,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on"
+    },
+    "facing=south,inverted=false,lit=false,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor",
+      "y": 180
+    },
+    "facing=south,inverted=false,lit=false,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 180
+    },
+    "facing=south,inverted=false,lit=true,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor",
+      "y": 180
+    },
+    "facing=south,inverted=false,lit=true,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 180
+    },
+    "facing=south,inverted=true,lit=false,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor",
+      "y": 180
+    },
+    "facing=south,inverted=true,lit=false,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 180
+    },
+    "facing=south,inverted=true,lit=true,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor",
+      "y": 180
+    },
+    "facing=south,inverted=true,lit=true,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 180
+    },
+    "facing=west,inverted=false,lit=false,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor",
+      "y": 270
+    },
+    "facing=west,inverted=false,lit=false,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 270
+    },
+    "facing=west,inverted=false,lit=true,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor",
+      "y": 270
+    },
+    "facing=west,inverted=false,lit=true,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 270
+    },
+    "facing=west,inverted=true,lit=false,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor",
+      "y": 270
+    },
+    "facing=west,inverted=true,lit=false,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 270
+    },
+    "facing=west,inverted=true,lit=true,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor",
+      "y": 270
+    },
+    "facing=west,inverted=true,lit=true,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 270
+    }
+  }
+}

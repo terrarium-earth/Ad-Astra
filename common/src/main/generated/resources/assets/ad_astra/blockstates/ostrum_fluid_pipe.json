@@ -1,0 +1,168 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe_core"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe"
+      },
+      "when": {
+        "connected_north": "normal"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe_insert"
+      },
+      "when": {
+        "connected_north": "insert"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe_extract"
+      },
+      "when": {
+        "connected_north": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe",
+        "y": 90
+      },
+      "when": {
+        "connected_east": "normal"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe_insert",
+        "y": 90
+      },
+      "when": {
+        "connected_east": "insert"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe_extract",
+        "y": 90
+      },
+      "when": {
+        "connected_east": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe",
+        "y": 180
+      },
+      "when": {
+        "connected_south": "normal"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe_insert",
+        "y": 180
+      },
+      "when": {
+        "connected_south": "insert"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe_extract",
+        "y": 180
+      },
+      "when": {
+        "connected_south": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe",
+        "y": 270
+      },
+      "when": {
+        "connected_west": "normal"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe_insert",
+        "y": 270
+      },
+      "when": {
+        "connected_west": "insert"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe_extract",
+        "y": 270
+      },
+      "when": {
+        "connected_west": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe",
+        "x": 270
+      },
+      "when": {
+        "connected_up": "normal"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe_insert",
+        "x": 270
+      },
+      "when": {
+        "connected_up": "insert"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe_extract",
+        "x": 270
+      },
+      "when": {
+        "connected_up": "extract"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe",
+        "x": 90
+      },
+      "when": {
+        "connected_down": "normal"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe_insert",
+        "x": 90
+      },
+      "when": {
+        "connected_down": "insert"
+      }
+    },
+    {
+      "apply": {
+        "model": "ad_astra:block/ostrum_fluid_pipe_extract",
+        "x": 90
+      },
+      "when": {
+        "connected_down": "extract"
+      }
+    }
+  ]
+}

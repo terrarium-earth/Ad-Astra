@@ -1,0 +1,10 @@
+{
+  "dimension": "ad_astra:mercury",
+  "gravity": 3.7,
+  "orbit": "ad_astra:mercury_orbit",
+  "oxygen": false,
+  "solarSystem": "ad_astra:solar_system",
+  "solar_power": 64,
+  "temperature": 167,
+  "tier": 3
+}

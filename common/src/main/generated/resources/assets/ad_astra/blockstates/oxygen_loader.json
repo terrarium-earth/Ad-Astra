@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,lit=false,powered=false": {
+      "model": "ad_astra:block/oxygen_loader",
+      "y": 90
+    },
+    "facing=east,lit=false,powered=true": {
+      "model": "ad_astra:block/oxygen_loader",
+      "y": 90
+    },
+    "facing=east,lit=true,powered=false": {
+      "model": "ad_astra:block/oxygen_loader_on",
+      "y": 90
+    },
+    "facing=east,lit=true,powered=true": {
+      "model": "ad_astra:block/oxygen_loader_on",
+      "y": 90
+    },
+    "facing=north,lit=false,powered=false": {
+      "model": "ad_astra:block/oxygen_loader"
+    },
+    "facing=north,lit=false,powered=true": {
+      "model": "ad_astra:block/oxygen_loader"
+    },
+    "facing=north,lit=true,powered=false": {
+      "model": "ad_astra:block/oxygen_loader_on"
+    },
+    "facing=north,lit=true,powered=true": {
+      "model": "ad_astra:block/oxygen_loader_on"
+    },
+    "facing=south,lit=false,powered=false": {
+      "model": "ad_astra:block/oxygen_loader",
+      "y": 180
+    },
+    "facing=south,lit=false,powered=true": {
+      "model": "ad_astra:block/oxygen_loader",
+      "y": 180
+    },
+    "facing=south,lit=true,powered=false": {
+      "model": "ad_astra:block/oxygen_loader_on",
+      "y": 180
+    },
+    "facing=south,lit=true,powered=true": {
+      "model": "ad_astra:block/oxygen_loader_on",
+      "y": 180
+    },
+    "facing=west,lit=false,powered=false": {
+      "model": "ad_astra:block/oxygen_loader",
+      "y": 270
+    },
+    "facing=west,lit=false,powered=true": {
+      "model": "ad_astra:block/oxygen_loader",
+      "y": 270
+    },
+    "facing=west,lit=true,powered=false": {
+      "model": "ad_astra:block/oxygen_loader_on",
+      "y": 270
+    },
+    "facing=west,lit=true,powered=true": {
+      "model": "ad_astra:block/oxygen_loader_on",
+      "y": 270
+    }
+  }
+}

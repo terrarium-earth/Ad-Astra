@@ -3,7 +3,7 @@
   "start_pool": "ad_astra:oil_well/oil_well",
   "size": 1,
   "max_distance_from_center": 80,
-  "biomes": "#ad_astra:has_structure/oil_well_biomes",
+  "biomes": "#ad_astra:has_structure/oil_well",
   "step": "surface_structures",
   "terrain_adaptation": "none",
   "start_height": {

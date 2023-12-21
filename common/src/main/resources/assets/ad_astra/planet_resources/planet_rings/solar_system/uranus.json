@@ -1,8 +1,0 @@
-{
-  "galaxy": "ad_astra:milky_way",
-  "solar_system": "ad_astra:solar_system",
-  "texture": "ad_astra:textures/sky/uranus.png",
-  "speed": 1200,
-  "scale": 23,
-  "radius": 7.0
-}

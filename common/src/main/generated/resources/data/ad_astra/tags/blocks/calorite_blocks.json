@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:block_of_calorite",
+    {
+      "id": "#c:calorite_blocks",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/calorite",
+      "required": false
+    }
+  ]
+}

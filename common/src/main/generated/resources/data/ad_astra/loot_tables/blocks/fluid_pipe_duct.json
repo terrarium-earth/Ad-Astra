@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "ad_astra:fluid_pipe_duct"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "ad_astra:blocks/fluid_pipe_duct"
+}

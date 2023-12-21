@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:steel_nugget",
+    {
+      "id": "#c:steel_nuggets",
+      "required": false
+    },
+    {
+      "id": "#forge:nuggets/steel",
+      "required": false
+    }
+  ]
+}

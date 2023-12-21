@@ -1,0 +1,22 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:oxygen_loading/oxygen_from_oxygen_loading_oxygen"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:oxygen_loading/oxygen_from_oxygen_loading_oxygen"
+    ]
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:iron_rod",
+    {
+      "id": "#c:iron_rods",
+      "required": false
+    },
+    {
+      "id": "#forge:rods/iron",
+      "required": false
+    }
+  ]
+}

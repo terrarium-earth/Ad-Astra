@@ -1,0 +1,10 @@
+{
+  "dimension": "minecraft:overworld",
+  "gravity": 9.807,
+  "orbit": "ad_astra:earth_orbit",
+  "oxygen": true,
+  "solarSystem": "ad_astra:solar_system",
+  "solar_power": 16,
+  "temperature": 15,
+  "tier": 1
+}

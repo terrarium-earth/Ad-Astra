@@ -29,10 +29,11 @@ dependencies {
 
     modImplementation(group = "net.fabricmc", name = "fabric-loader", version = fabricLoaderVersion)
     modApi(group = "net.fabricmc.fabric-api", name = "fabric-api", version = "$fabricApiVersion+$minecraftVersion")
+
     modApi(group = "com.terraformersmc", name = "modmenu", version = modMenuVersion)
 //    modLocalRuntime(group = "me.shedaniel", name = "RoughlyEnoughItems-fabric", version = reiVersion)
-//    "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-default-plugin", version = reiVersion)
-    "modLocalRuntime"(group = "mezz.jei", name = "jei-$minecraftVersion-fabric", version = jeiVersion) {
+//    modCompileOnly(group = "me.shedaniel", name = "RoughlyEnoughItems-default-plugin", version = reiVersion)
+    modLocalRuntime(group = "mezz.jei", name = "jei-$minecraftVersion-fabric", version = jeiVersion) {
         isTransitive = false
     }
 

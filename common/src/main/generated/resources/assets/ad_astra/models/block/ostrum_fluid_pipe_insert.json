@@ -1,0 +1,7 @@
+{
+  "parent": "ad_astra:block/fluid_pipe",
+  "textures": {
+    "0": "ad_astra:block/pipe/ostrum_fluid_pipe_insert",
+    "particle": "ad_astra:block/pipe/ostrum_fluid_pipe_insert"
+  }
+}

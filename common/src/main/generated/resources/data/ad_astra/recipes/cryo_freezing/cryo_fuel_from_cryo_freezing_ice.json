@@ -1,0 +1,12 @@
+{
+  "type": "ad_astra:cryo_freezing",
+  "cookingtime": 120,
+  "energy": 40,
+  "ingredient": {
+    "item": "minecraft:ice"
+  },
+  "result_fluid": {
+    "buckets": 0.001,
+    "fluid": "ad_astra:cryo_fuel"
+  }
+}

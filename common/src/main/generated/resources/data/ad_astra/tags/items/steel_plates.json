@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:steel_plate",
+    {
+      "id": "#c:steel_plates",
+      "required": false
+    },
+    {
+      "id": "#forge:plates/steel",
+      "required": false
+    }
+  ]
+}

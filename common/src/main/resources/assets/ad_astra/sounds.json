@@ -1,141 +1,32 @@
 {
-  "rocket_fly": {
-    "category": "neutral",
-    "subtitle": "subtitles.ad_astra.rocket_fly",
+  "rocket_launch": {
     "sounds": [
-      {
-        "name": "ad_astra:rocket_fly",
-        "stream": true
-      }
-    ]
+      "ad_astra:rocket_launch"
+    ],
+    "subtitle": "subtitles.ad_astra.entity.rocket_launch"
+  },
+  "rocket": {
+    "sounds": [
+      "ad_astra:rocket"
+    ],
+    "subtitle": "subtitles.ad_astra.entity.rocket"
   },
   "wrench": {
-    "category": "ambient",
-    "subtitle": "subtitles.ad_astra.wrench",
     "sounds": [
-      {
-        "name": "ad_astra:wrench",
-        "stream": false
-      }
-    ]
+      "ad_astra:wrench"
+    ],
+    "subtitle": "subtitles.ad_astra.block.wrench"
   },
-  "windy": {
-    "category": "weather",
+  "sliding_door_open": {
     "sounds": [
-      {
-        "name": "ad_astra:windy",
-        "stream": true
-      }
-    ]
+      "ad_astra:sliding_door_open"
+    ],
+    "subtitle": "subtitles.ad_astra.block.sliding_door_open"
   },
-  "alien_watcher": {
-    "category": "ambient",
-    "subtitle": "subtitles.ad_astra.alien_watcher",
+  "sliding_door_close": {
     "sounds": [
-      {
-        "name": "ad_astra:alien_watcher",
-        "stream": false
-      }
-    ]
-  },
-  "drone_fly_by": {
-    "category": "ambient",
-    "subtitle": "subtitles.ad_astra.drone_fly_by",
-    "sounds": [
-      {
-        "name": "ad_astra:drone_fly_by",
-        "stream": false
-      }
-    ]
-  },
-  "flying_saucer": {
-    "category": "ambient",
-    "subtitle": "subtitles.ad_astra.flying_saucer",
-    "sounds": [
-      {
-        "name": "ad_astra:flying_saucer",
-        "stream": false
-      }
-    ]
-  },
-  "imminent_doom": {
-    "category": "ambient",
-    "subtitle": "subtitles.ad_astra.imminent_doom",
-    "sounds": [
-      {
-        "name": "ad_astra:imminent_doom",
-        "stream": false
-      }
-    ]
-  },
-  "light_speed_travel": {
-    "category": "ambient",
-    "subtitle": "subtitles.ad_astra.light_speed_travel",
-    "sounds": [
-      {
-        "name": "ad_astra:light_speed_travel",
-        "stream": false
-      }
-    ]
-  },
-  "passing_spaceship": {
-    "category": "ambient",
-    "subtitle": "subtitles.ad_astra.passing_spaceship",
-    "sounds": [
-      {
-        "name": "ad_astra:passing_spaceship",
-        "stream": false
-      }
-    ]
-  },
-  "space_laser": {
-    "category": "ambient",
-    "subtitle": "subtitles.ad_astra.space_laser",
-    "sounds": [
-      {
-        "name": "ad_astra:space_laser",
-        "stream": false
-      }
-    ]
-  },
-  "wormhole": {
-    "category": "ambient",
-    "subtitle": "subtitles.ad_astra.wormhole",
-    "sounds": [
-      {
-        "name": "ad_astra:wormhole",
-        "stream": false
-      }
-    ]
-  },
-  "large_door_open": {
-    "category": "block",
-    "subtitle": "subtitles.ad_astra.large_door_open",
-    "sounds": [
-      {
-        "name": "ad_astra:large_door_open",
-        "stream": false
-      }
-    ]
-  },
-  "large_door_close": {
-    "category": "block",
-    "subtitle": "subtitles.ad_astra.large_door_close",
-    "sounds": [
-      {
-        "name": "ad_astra:large_door_close",
-        "stream": false
-      }
-    ]
-  },
-  "small_door_open": {
-    "category": "block",
-    "subtitle": "subtitles.ad_astra.small_door_open",
-    "sounds": [
-      {
-        "name": "ad_astra:small_door_open",
-        "stream": false
-      }
-    ]
+      "ad_astra:sliding_door_close"
+    ],
+    "subtitle": "subtitles.ad_astra.block.sliding_door_close"
   }
 }

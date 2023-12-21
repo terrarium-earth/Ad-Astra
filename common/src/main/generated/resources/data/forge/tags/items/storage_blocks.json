@@ -1,0 +1,11 @@
+{
+  "values": [
+    "#forge:storage_blocks/steel",
+    "#forge:storage_blocks/desh",
+    "#forge:storage_blocks/raw_desh",
+    "#forge:storage_blocks/ostrum",
+    "#forge:storage_blocks/raw_ostrum",
+    "#forge:storage_blocks/calorite",
+    "#forge:storage_blocks/raw_calorite"
+  ]
+}

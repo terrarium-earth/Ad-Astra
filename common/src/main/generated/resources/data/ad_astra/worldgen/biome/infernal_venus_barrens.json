@@ -1,0 +1,66 @@
+{
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "downfall": 1.0,
+  "effects": {
+    "fog_color": 12638463,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "particle": {
+      "options": {
+        "type": "minecraft:crimson_spore"
+      },
+      "probability": 0.014
+    },
+    "sky_color": 7450367,
+    "water_color": 4159204,
+    "water_fog_color": 329011
+  },
+  "features": [
+    [],
+    [],
+    [
+      "minecraft:basalt_pillar",
+      "ad_astra:small_infernal_spire_column",
+      "ad_astra:large_infernal_spire_column"
+    ],
+    [],
+    [
+      "minecraft:delta"
+    ],
+    [],
+    [
+      "ad_astra:venus_calorite_ore",
+      "ad_astra:venus_coal_ore",
+      "ad_astra:venus_diamond_ore",
+      "ad_astra:venus_gold_ore",
+      "minecraft:ore_magma"
+    ],
+    [
+      "minecraft:spring_lava",
+      "minecraft:basalt_blobs"
+    ]
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 1.6
+}

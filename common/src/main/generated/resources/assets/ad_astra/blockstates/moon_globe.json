@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "powered=false,waterlogged=false": {
+      "model": "ad_astra:block/moon_globe"
+    },
+    "powered=false,waterlogged=true": {
+      "model": "ad_astra:block/moon_globe"
+    },
+    "powered=true,waterlogged=false": {
+      "model": "ad_astra:block/moon_globe"
+    },
+    "powered=true,waterlogged=true": {
+      "model": "ad_astra:block/moon_globe"
+    }
+  }
+}

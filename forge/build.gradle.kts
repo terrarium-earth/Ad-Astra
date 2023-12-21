@@ -5,8 +5,8 @@ architectury {
 loom {
     accessWidenerPath.set(project(":common").loom.accessWidenerPath)
     forge {
-        mixinConfig("ad_astra-common.mixins.json")
-        mixinConfig("ad_astra.mixins.json")
+        mixinConfig("adastra-common.mixins.json")
+        mixinConfig("adastra.mixins.json")
         convertAccessWideners.set(true)
     }
     runs {
@@ -40,4 +40,10 @@ dependencies {
     forge(group = "net.minecraftforge", name = "forge", version = "$minecraftVersion-$forgeVersion")
     modCompileOnly(group = "me.shedaniel", name = "RoughlyEnoughItems-api-forge", version = reiVersion)
     modLocalRuntime(group = "me.shedaniel", name = "RoughlyEnoughItems-forge", version = reiVersion)
+
+    modLocalRuntime(group = "maven.modrinth", name = "jade", version = "2iRQrBk4")
+    modLocalRuntime(group = "maven.modrinth", name = "mekanism", version = "10.4.2.16")
+
+    forgeRuntimeLibrary("com.teamresourceful:yabn:1.0.3")
+    forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2")
 }

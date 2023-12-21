@@ -1,0 +1,10 @@
+{
+  "dimension": "ad_astra:glacio",
+  "gravity": 3.721,
+  "orbit": "ad_astra:glacio_orbit",
+  "oxygen": true,
+  "solarSystem": "ad_astra:proxima_centauri",
+  "solar_power": 14,
+  "temperature": -20,
+  "tier": 4
+}

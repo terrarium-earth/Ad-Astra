@@ -1,0 +1,20 @@
+{
+  "type": "ad_astra:crater",
+  "config": {
+    "lava_level": {
+      "above_bottom": -2032
+    },
+    "probability": 1.0,
+    "replaceable": "#ad_astra:moon_stone_replaceables",
+    "y": {
+      "type": "minecraft:uniform",
+      "max_inclusive": {
+        "below_top": 0
+      },
+      "min_inclusive": {
+        "below_top": 32
+      }
+    },
+    "yScale": 1.0
+  }
+}

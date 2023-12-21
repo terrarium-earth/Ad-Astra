@@ -115,4 +115,4 @@ run/
 !gradle-wrapper.jar
 
 # Architectury Garbage
-.architectury-transformer/
+*.architectury-transformer

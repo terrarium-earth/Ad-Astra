@@ -1,0 +1,8 @@
+// 1.20.1	2023-12-18T03:47:17.181859	Tags for minecraft:worldgen/biome mod id ad_astra
+c186d74674560cb77f87571d50628fb910de9789 data/ad_astra/tags/worldgen/biome/has_structure/lunarian_village.json
+9369cdbff72781cc723cbf99a7efab00a9d808fb data/ad_astra/tags/worldgen/biome/has_structure/mars_temple.json
+c186d74674560cb77f87571d50628fb910de9789 data/ad_astra/tags/worldgen/biome/has_structure/moon_dungeon.json
+afd9da16b8e57511d3b12c69ccd4555d71ebb29f data/ad_astra/tags/worldgen/biome/has_structure/oil_well.json
+372057ce50937b88c03eb94bb5a3c6a024e58e0d data/ad_astra/tags/worldgen/biome/has_structure/pygro_tower.json
+372057ce50937b88c03eb94bb5a3c6a024e58e0d data/ad_astra/tags/worldgen/biome/has_structure/pygro_village.json
+372057ce50937b88c03eb94bb5a3c6a024e58e0d data/ad_astra/tags/worldgen/biome/has_structure/venus_bullet.json

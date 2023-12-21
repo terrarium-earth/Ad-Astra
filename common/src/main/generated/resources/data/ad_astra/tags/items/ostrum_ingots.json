@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:ostrum_ingot",
+    {
+      "id": "#c:ostrum_ingots",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/ostrum",
+      "required": false
+    }
+  ]
+}

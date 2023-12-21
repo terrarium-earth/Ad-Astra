@@ -39,7 +39,7 @@ subprojects {
 
     repositories {
         maven(url = "https://maven.architectury.dev/")
-        maven(url = "https://maven.resourcefulbees.com/repository/maven-public/")
+        maven(url = "https://maven.teamresourceful.com/repository/maven-public/")
         maven {
             url = uri("https://www.cursemaven.com")
             content {
@@ -78,20 +78,18 @@ subprojects {
             parchment(create(group = "org.parchmentmc.data", name = "parchment-$minecraftVersion", version = parchmentVersion))
         })
 
+        "include"(implementation(group = "javazoom", name = "jlayer", version = "1.0.1"))
+
         compileOnly(group = "com.teamresourceful", name = "yabn", version = "1.0.3")
         "modApi"(group = "com.teamresourceful.resourcefullib", name = "resourcefullib-$modLoader-$minecraftVersion", version = resourcefulLibVersion)
         "modApi"(group = "com.teamresourceful.resourcefulconfig", name = "resourcefulconfig-$modLoader-$minecraftVersion", version = resourcefulConfigVersion)
-        "modApi"(group = "earth.terrarium", name = "botarium-$modLoader-$minecraftVersion", version = botariumVersion)
+        "modApi"(group = "earth.terrarium.botarium", name = "botarium-$modLoader-$minecraftVersion", version = botariumVersion)
         if (isCommon) {
             "modCompileOnly"(group = "vazkii.patchouli", name = "Patchouli-xplat", version = "$minecraftVersion-$patchouliVersion")
             "modApi"(group = "mezz.jei", name = "jei-$minecraftVersion-common-api", version = jeiVersion)
             "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-api", version = reiVersion)
-            "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-default-plugin", version = reiVersion)
         } else {
             "modLocalRuntime"(group = "vazkii.patchouli", name = "Patchouli", version = "$minecraftVersion-$patchouliVersion-${modLoader.uppercase()}")
-            "modRuntimeOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-$modLoader", version = reiVersion)
-            "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-api-$modLoader", version = reiVersion)
-            "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-default-plugin-$modLoader", version = reiVersion)
         }
     }
 
@@ -131,6 +129,8 @@ subprojects {
 
                 exclude(".cache/**") // Remove datagen cache from jar.
                 exclude("**/ad_astra/datagen/**") // Remove data gen code from jar.
+
+                exclude("architectury.common.json")
             }
 
             "remapJar"(RemapJarTask::class) {
@@ -168,7 +168,7 @@ subprojects {
         }
         repositories {
             maven {
-                setUrl("https://maven.resourcefulbees.com/repository/terrarium/")
+                setUrl("https://maven.teamresourceful.com/repository/terrarium/")
                 credentials {
                     username = System.getenv("MAVEN_USER")
                     password = System.getenv("MAVEN_PASS")

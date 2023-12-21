@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:raw_calorite",
+    {
+      "id": "#c:raw_calorite",
+      "required": false
+    },
+    {
+      "id": "#forge:raw_materials/calorite",
+      "required": false
+    }
+  ]
+}

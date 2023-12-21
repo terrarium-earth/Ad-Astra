@@ -1,0 +1,7 @@
+{
+  "parent": "ad_astra:block/large_cable_core",
+  "textures": {
+    "0": "ad_astra:block/pipe/desh_cable",
+    "particle": "ad_astra:block/pipe/desh_cable"
+  }
+}

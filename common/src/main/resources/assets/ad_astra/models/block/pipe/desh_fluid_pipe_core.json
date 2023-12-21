@@ -1,6 +1,0 @@
-{
-  "parent": "ad_astra:template/pipe/thick_pipe_core",
-  "textures": {
-    "pipe": "ad_astra:block/pipe/desh_fluid_pipe"
-  }
-}

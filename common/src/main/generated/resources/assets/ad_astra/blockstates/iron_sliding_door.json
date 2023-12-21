@@ -1,0 +1,868 @@
+{
+  "variants": {
+    "facing=east,locked=false,open=false,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=false,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=false,open=true,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=false,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=east,locked=true,open=true,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=false,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=false,open=true,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=false,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=north,locked=true,open=true,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=false,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=false,open=true,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=false,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=south,locked=true,open=true,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=false,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=false,open=true,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=false,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=bottom,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=bottom,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=bottom_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=bottom_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=bottom_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=bottom_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=center,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=center,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=top,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=top,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=top_left,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=top_left,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=top_right,powered=false": {
+      "model": "ad_astra:block/iron_sliding_door"
+    },
+    "facing=west,locked=true,open=true,part=top_right,powered=true": {
+      "model": "ad_astra:block/iron_sliding_door"
+    }
+  }
+}

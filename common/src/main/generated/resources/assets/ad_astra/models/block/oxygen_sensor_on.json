@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "ad_astra:block/oxygen_sensor_bottom",
+    "east": "ad_astra:block/oxygen_sensor_front_on",
+    "north": "ad_astra:block/oxygen_sensor_front_on",
+    "particle": "ad_astra:block/oxygen_sensor_front_on",
+    "south": "ad_astra:block/oxygen_sensor_front_on",
+    "up": "ad_astra:block/oxygen_sensor_top",
+    "west": "ad_astra:block/oxygen_sensor_front_on"
+  }
+}

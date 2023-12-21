@@ -1,0 +1,8 @@
+{
+  "type": "ad_astra:mars_block_blob",
+  "config": {
+    "state": {
+      "Name": "ad_astra:conglomerate"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:steel_ingot",
+    {
+      "id": "#c:steel_ingots",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/steel",
+      "required": false
+    }
+  ]
+}

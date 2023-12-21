@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "ad_astra:polished_permafrost"
-  },
-  "result": "ad_astra:polished_permafrost_stairs"
-}

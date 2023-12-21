@@ -1,0 +1,80 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"texture_size": [32, 32],
+	"elements": [
+		{
+			"from": [7, 0, 7],
+			"to": [9, 32, 9],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 16], "texture": "#0"},
+				"east": {"uv": [1, 0, 0, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 1, 16], "texture": "#0"},
+				"west": {"uv": [1, 0, 0, 16], "texture": "#0"},
+				"up": {"uv": [1, 2, 0, 3], "texture": "#0"},
+				"down": {"uv": [0, 15, 1, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, -8, 6],
+			"to": [10, 0, 10],
+			"faces": {
+				"north": {"uv": [3, 8.5, 5, 12.5], "texture": "#0"},
+				"east": {"uv": [3, 8.5, 5, 12.5], "texture": "#0"},
+				"south": {"uv": [3, 8.5, 5, 12.5], "texture": "#0"},
+				"west": {"uv": [3, 8.5, 5, 12.5], "texture": "#0"},
+				"up": {"uv": [1, 8.5, 3, 10.5], "texture": "#0"},
+				"down": {"uv": [1, 10.5, 3, 12.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [-15, 15, 8],
+			"to": [7, 31, 8],
+			"faces": {
+				"north": {"uv": [1, 0.5, 12, 8.5], "texture": "#0"},
+				"east": {"uv": [1, 0.5, 1.5, 8.5], "texture": "#0"},
+				"south": {"uv": [1, 0.5, 12, 8.5], "texture": "#0"},
+				"west": {"uv": [11.5, 0.5, 12, 8.5], "texture": "#0"},
+				"up": {"uv": [1, 0.5, 12, 1], "texture": "#0"},
+				"down": {"uv": [1, 8, 12, 8.5], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, 180, 0],
+			"translation": [0, 0, 1.75],
+			"scale": [0.75, 0.75, 0.75]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, 180, 0],
+			"translation": [0, 0, 1.75],
+			"scale": [0.75, 0.75, 0.75]
+		},
+		"firstperson_righthand": {
+			"rotation": [-4, 180, 0],
+			"scale": [0.65, 0.65, 0.65]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 180, 0],
+			"scale": [0.65, 0.65, 0.65]
+		},
+		"ground": {
+			"translation": [0, 4, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"rotation": [0, 180, 0],
+			"translation": [-2.75, -1.25, 0],
+			"scale": [0.35, 0.35, 0.35]
+		},
+		"head": {
+			"rotation": [0, 180, 0],
+			"scale": [0.75, 0.75, 0.75]
+		},
+		"fixed": {
+			"rotation": [-15, 0, 0],
+			"translation": [4, 11.75, -3.5]
+		}
+	}
+}

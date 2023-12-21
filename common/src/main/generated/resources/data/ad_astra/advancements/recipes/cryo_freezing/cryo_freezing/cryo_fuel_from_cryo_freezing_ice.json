@@ -1,0 +1,22 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:cryo_freezing/cryo_fuel_from_cryo_freezing_ice"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:cryo_freezing/cryo_fuel_from_cryo_freezing_ice"
+    ]
+  },
+  "sends_telemetry_event": true
+}

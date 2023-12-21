@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:calorite_plate",
+    {
+      "id": "#c:calorite_plates",
+      "required": false
+    },
+    {
+      "id": "#forge:plates/calorite",
+      "required": false
+    }
+  ]
+}

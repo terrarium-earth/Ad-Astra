@@ -1,0 +1,12 @@
+{
+  "type": "ad_astra:compressing",
+  "cookingtime": 800,
+  "energy": 20,
+  "ingredient": {
+    "tag": "ad_astra:calorite_blocks"
+  },
+  "result": {
+    "count": 9,
+    "id": "ad_astra:calorite_plate"
+  }
+}

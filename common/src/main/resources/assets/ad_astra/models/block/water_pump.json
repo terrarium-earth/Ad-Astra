@@ -1,6 +1,7 @@
 {
-	"parent": "block/block",
 	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"render_type": "cutout",
 	"texture_size": [64, 64],
 	"textures": {
   	 	"0": "ad_astra:block/water_pump",

@@ -1,0 +1,7 @@
+{
+  "parent": "ad_astra:block/cable",
+  "textures": {
+    "0": "ad_astra:block/pipe/steel_cable_extract",
+    "particle": "ad_astra:block/pipe/steel_cable_extract"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:raw_ostrum",
+    {
+      "id": "#c:raw_ostrum",
+      "required": false
+    },
+    {
+      "id": "#forge:raw_materials/ostrum",
+      "required": false
+    }
+  ]
+}

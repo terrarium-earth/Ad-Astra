@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:desh_nugget",
+    {
+      "id": "#c:desh_nuggets",
+      "required": false
+    },
+    {
+      "id": "#forge:nuggets/desh",
+      "required": false
+    }
+  ]
+}

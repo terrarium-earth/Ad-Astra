@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:calorite_nugget",
+    {
+      "id": "#c:calorite_nuggets",
+      "required": false
+    },
+    {
+      "id": "#forge:nuggets/calorite",
+      "required": false
+    }
+  ]
+}

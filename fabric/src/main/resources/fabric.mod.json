@@ -24,34 +24,28 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "earth.terrarium.ad_astra.fabric.AdAstraFabric::init",
-            "earth.terrarium.ad_astra.AdAstra::postInit"
+            "earth.terrarium.adastra.fabric.AdAstraFabric::init",
+            "earth.terrarium.adastra.AdAstra::postInit"
         ],
         "client": [
-            "earth.terrarium.ad_astra.client.fabric.AdAstraClientFabric::init"
-        ],
-        "jei_mod_plugin": [
-            "earth.terrarium.ad_astra.common.compat.jei.AdAstraJeiPlugin"
+            "earth.terrarium.adastra.client.fabric.AdAstraClientFabric::init"
         ],
         "rei_client": [
-            "earth.terrarium.ad_astra.common.compat.rei.AdAstraReiPlugin"
+            "earth.terrarium.adastra.common.compat.rei.AdAstraReiPlugin"
         ],
-        "rei_common": [
-            "earth.terrarium.ad_astra.common.compat.rei.AdAstraReiCommonPlugin"
-        ],
-        "modmenu": [
-            "earth.terrarium.ad_astra.common.config.fabric.ModMenuConfig"
+        "jei_mod_plugin": [
+            "earth.terrarium.adastra.common.compat.jei.AdAstraJeiPlugin"
         ]
     },
     "mixins": [
-        "ad_astra-common.mixins.json",
-        "ad_astra.mixins.json"
+        "adastra-common.mixins.json",
+        "adastra.mixins.json"
     ],
     "depends": {
         "fabric-api": "*",
         "minecraft": ">=1.20",
         "java": ">=17",
-        "resourcefullib": ">=2.1.11",
+        "resourcefullib": ">=2.1.19",
         "resourcefulconfig": ">=2.1.0",
         "botarium": ">=2.2.0"
     }

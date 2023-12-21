@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:desh_plate",
+    {
+      "id": "#c:desh_plates",
+      "required": false
+    },
+    {
+      "id": "#forge:plates/desh",
+      "required": false
+    }
+  ]
+}

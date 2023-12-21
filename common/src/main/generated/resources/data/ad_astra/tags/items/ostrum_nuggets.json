@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:ostrum_nugget",
+    {
+      "id": "#c:ostrum_nuggets",
+      "required": false
+    },
+    {
+      "id": "#forge:nuggets/ostrum",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "values": [
+    "ad_astra:ostrum_plate",
+    {
+      "id": "#c:ostrum_plates",
+      "required": false
+    },
+    {
+      "id": "#forge:plates/ostrum",
+      "required": false
+    }
+  ]
+}

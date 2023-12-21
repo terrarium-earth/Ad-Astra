@@ -5,7 +5,7 @@
     {
       "weight": 50,
       "element": {
-        "location": "ad_astra:crimson_rom_1",
+        "location": "ad_astra:crimson_room_1",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -14,7 +14,7 @@
     {
       "weight": 50,
       "element": {
-        "location": "ad_astra:crimson_rom_2",
+        "location": "ad_astra:crimson_room_2",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -23,7 +23,7 @@
     {
       "weight": 50,
       "element": {
-        "location": "ad_astra:crimson_rom_3",
+        "location": "ad_astra:crimson_room_3",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -32,7 +32,7 @@
     {
       "weight": 50,
       "element": {
-        "location": "ad_astra:crimson_rom_4",
+        "location": "ad_astra:crimson_room_4",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -41,7 +41,7 @@
     {
       "weight": 50,
       "element": {
-        "location": "ad_astra:crimson_rom_5",
+        "location": "ad_astra:crimson_room_5",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
