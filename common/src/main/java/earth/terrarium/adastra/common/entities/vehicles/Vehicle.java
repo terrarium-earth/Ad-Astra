@@ -1,10 +1,9 @@
 package earth.terrarium.adastra.common.entities.vehicles;
 
 import earth.terrarium.adastra.api.systems.GravityApi;
-import earth.terrarium.adastra.common.entities.base.VehicleContainer;
+import earth.terrarium.adastra.common.container.VehicleContainer;
 import earth.terrarium.adastra.common.entities.multipart.MultipartEntity;
 import earth.terrarium.adastra.common.entities.multipart.MultipartPartEntity;
-import earth.terrarium.adastra.common.container.VehicleContainer;
 import earth.terrarium.adastra.common.network.NetworkHandler;
 import earth.terrarium.adastra.common.network.messages.ServerboundVehicleControlPacket;
 import earth.terrarium.adastra.mixins.common.LivingEntityAccessor;
@@ -253,7 +252,7 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
     public void recreateFromPacket(ClientboundAddEntityPacket packet) {
         super.recreateFromPacket(packet);
 
-        for(int i = 0; i < this.parts.size(); ++i) {
+        for (int i = 0; i < this.parts.size(); ++i) {
             this.parts.get(i).setId(i + 1 + packet.getId());
         }
     }
