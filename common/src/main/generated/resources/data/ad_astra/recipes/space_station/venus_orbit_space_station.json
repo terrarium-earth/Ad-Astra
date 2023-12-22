@@ -1,0 +1,30 @@
+{
+  "type": "ad_astra:space_station_recipe",
+  "dimension": "ad_astra:venus_orbit",
+  "ingredients": [
+    {
+      "count": 64,
+      "ingredient": {
+        "tag": "ad_astra:steel_ingots"
+      }
+    },
+    {
+      "count": 64,
+      "ingredient": {
+        "tag": "ad_astra:steel_plates"
+      }
+    },
+    {
+      "count": 32,
+      "ingredient": {
+        "tag": "ad_astra:calorite_ingots"
+      }
+    },
+    {
+      "count": 32,
+      "ingredient": {
+        "tag": "ad_astra:calorite_plates"
+      }
+    }
+  ]
+}

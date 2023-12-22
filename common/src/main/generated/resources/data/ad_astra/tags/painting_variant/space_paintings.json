@@ -1,0 +1,18 @@
+{
+  "values": [
+    "ad_astra:mercury",
+    "ad_astra:moon",
+    "ad_astra:pluto",
+    "ad_astra:earth",
+    "ad_astra:glacio",
+    "ad_astra:mars",
+    "ad_astra:venus",
+    "ad_astra:jupiter",
+    "ad_astra:neptune",
+    "ad_astra:uranus",
+    "ad_astra:saturn",
+    "ad_astra:the_milky_way",
+    "ad_astra:alpha_centauri",
+    "ad_astra:sun"
+  ]
+}
