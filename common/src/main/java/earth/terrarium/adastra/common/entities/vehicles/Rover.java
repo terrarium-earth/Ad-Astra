@@ -192,8 +192,8 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
         speed = Mth.clamp(speed, -maxBlocksPerTick / 2, maxBlocksPerTick);
 
         // turning
-        if (xxa != 0 && (speed > 0.1f || speed < -0.1f)) {
-            angle += xxa * 0.6f * Math.signum(speed) * Math.abs(speed);
+        if (xxa != 0 && (speed > 0.05f || speed < -0.05f)) {
+            angle += xxa * Math.signum(speed) * Math.abs(speed);
         } else {
             angle *= noPassenger ? 0.95f : 0.75f;
         }

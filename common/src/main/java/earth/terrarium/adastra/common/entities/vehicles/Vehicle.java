@@ -53,7 +53,6 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
 
     public Vehicle(EntityType<?> type, Level level) {
         super(type, level);
-
     }
 
     protected void addPart(float width, float height, Vector3f offset, BiFunction<Player, InteractionHand, InteractionResult> handler) {
@@ -107,8 +106,6 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
             }
             move(MoverType.SELF, getDeltaMovement());
             tickFriction();
-        } else {
-            setDeltaMovement(Vec3.ZERO);
         }
 
         for (VehiclePart part : this.parts) {

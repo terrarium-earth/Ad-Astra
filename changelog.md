@@ -53,7 +53,7 @@ can only be opened with redstone, similar to iron doors.
 - The rover can now run over mobs
 - Fluid ducts now have the same internal mechanics as pipes so they can now be used exactly like them.
 - Added the radio. This is a real radio that'll play actual select radio stations. It's available as a
-screen in the rover. The default keybind is `R`.
+screen in the rover. You can open in by pressing `R` while in the rover or clicking on the screen on the rover.
 - The Rocket sound is now looped. This allows it to play for as long as the rocket is flying.
 - Fixed rocket sound not playing when leaving the world and rejoining while in a flying rocket.
 - Fixed rocket particles not visible above world height with Embeddium/Sodium installed.
