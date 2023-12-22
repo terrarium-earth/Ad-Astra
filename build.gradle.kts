@@ -18,6 +18,8 @@ architectury {
     minecraft = minecraftVersion
 }
 
+val stationsFile: String =  file("stations.json").absolutePath
+
 subprojects {
     apply(plugin = "maven-publish")
     apply(plugin = "dev.architectury.loom")
@@ -35,6 +37,17 @@ subprojects {
 
     configure<LoomGradleExtensionAPI> {
         silentMojangMappingsLicense()
+
+        runConfigs {
+            "client" {
+                property("adastra.stations", stationsFile)
+                property("mixin.debug", "true")
+            }
+            "server" {
+                property("adastra.stations", stationsFile)
+                property("mixin.debug", "true")
+            }
+        }
     }
 
     repositories {

@@ -1,0 +1,28 @@
+{
+    "stations": [
+        {
+            "url": "https://vrt.streamabc.net/vrt-mnm-mp3-128-9205274",
+            "title": "89.0 MNM",
+            "name": "VRT MNM"
+        },
+        {
+            "url": "https://ais-edge08-live365-dal02.cdnstream.com/a98605",
+            "title": "96.9 KHDR",
+            "name": "KHDR 96.9 FM The Drive"
+        },
+        {
+            "url": "https://live.leanstream.co/CFOXFM-MP3",
+            "title": "99.3 CFOX",
+            "name": "99.3 CFOX"
+        },
+        {
+            "url": "https://live.leanstream.co/CKIXFM-MP3",
+            "title": "HOT 99.1",
+            "name": "HOT 99.1"
+        },{
+            "url": "https://newcap.leanstream.co/CKXDFM-MP3",
+            "title": "97.5 K-Rock",
+            "name": "97.5 K-Rock"
+        }
+    ]
+}
