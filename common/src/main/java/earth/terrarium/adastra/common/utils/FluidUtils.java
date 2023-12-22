@@ -112,7 +112,7 @@ public class FluidUtils {
                 container.setItem(toSlot, fromResultStack);
             } else {
                 toStack.grow(fromResultStack.getCount());
-                insertFluidItemToContainer(container, toFluidContainer, fromSlot, toSlot, tank);
+                extractContainerFluidToItem(container, toFluidContainer, fromSlot, toSlot, tank);
             }
         } else container.setItem(fromSlot, fromResultStack);
     }

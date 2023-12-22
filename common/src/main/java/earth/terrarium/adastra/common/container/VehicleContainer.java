@@ -1,4 +1,4 @@
-package earth.terrarium.adastra.common.entities.base;
+package earth.terrarium.adastra.common.container;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -13,17 +13,17 @@ public class VehicleContainer extends SimpleContainer {
 
     @Override
     public void fromTag(ListTag containerNbt) {
-        for (int slot = 0; slot < containerNbt.size(); ++slot) {
-            var stack = ItemStack.of(containerNbt.getCompound(slot));
-            setItem(slot, stack);
+        for (int i = 0; i < containerNbt.size(); i++) {
+            var stack = ItemStack.of(containerNbt.getCompound(i));
+            setItem(i, stack);
         }
     }
 
     @Override
     public ListTag createTag() {
         ListTag containerNbt = new ListTag();
-        for (int slot = 0; slot < getContainerSize(); ++slot) {
-            var stack = getItem(slot);
+        for (int i = 0; i < getContainerSize(); i++) {
+            var stack = getItem(i);
             containerNbt.add(stack.save(new CompoundTag()));
         }
         return containerNbt;

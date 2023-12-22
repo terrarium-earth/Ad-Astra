@@ -25,34 +25,34 @@ public interface PlanetApi {
     boolean isPlanet(ResourceKey<Level> level);
 
     /**
-     * Returns true if the given level is isOrbit.
+     * Returns true if the given level is orbit.
      *
      * @param level The level to check.
-     * @return True if the level is isOrbit.
+     * @return True if the level is orbit.
      */
     boolean isSpace(Level level);
 
     /**
-     * Returns true if the given level is isOrbit.
+     * Returns true if the given level is orbit.
      *
      * @param level The level to check.
-     * @return True if the level is isOrbit.
+     * @return True if the level is orbit.
      */
     boolean isSpace(ResourceKey<Level> level);
 
     /**
-     * Returns true if the given level is a planet or isOrbit.
+     * Returns true if the given level is a planet or orbit.
      *
      * @param level The level to check.
-     * @return True if the level is a planet or isOrbit.
+     * @return True if the level is a planet or orbit.
      */
     boolean isExtraterrestrial(Level level);
 
     /**
-     * Returns true if the given level is a planet or isOrbit.
+     * Returns true if the given level is a planet or orbit.
      *
      * @param level The level to check.
-     * @return True if the level is a planet or isOrbit.
+     * @return True if the level is a planet or orbit.
      */
     boolean isExtraterrestrial(ResourceKey<Level> level);
 
