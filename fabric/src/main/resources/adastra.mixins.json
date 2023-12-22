@@ -4,6 +4,7 @@
   "package": "earth.terrarium.adastra.mixins.fabric",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "common.multipart.LevelMixin"
   ],
   "client": [
   ],

@@ -14,7 +14,6 @@
         "common.gravity.ThrownExperienceBottleMixin",
         "common.gravity.ThrownPotionMixin",
         "common.multipart.ChunkMapMixin",
-        "common.multipart.LevelMixin",
         "common.multipart.ServerLevelEntityCallbacksMixin",
         "common.multipart.ServerLevelMixin",
         "common.radio.LivingEntityMixin",

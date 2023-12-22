@@ -1,4 +1,4 @@
-package earth.terrarium.adastra.mixins.common.multipart;
+package earth.terrarium.adastra.mixins.fabric.common.multipart;
 
 import earth.terrarium.adastra.common.entities.multipart.MultipartEntity;
 import earth.terrarium.adastra.common.entities.multipart.MultipartPartEntity;
@@ -31,7 +31,7 @@ public class LevelMixin implements MultipartPartsHolder {
     }
 
     @Inject(
-        method = {"method_31593", "m_151518_"},
+        method = {"method_31593"},
         at = @At("TAIL")
     )
     private static void adastra$getEntities(Entity entity, Predicate<? super Entity> predicate, List<Entity> list, Entity entity2, CallbackInfo ci) {
@@ -46,7 +46,7 @@ public class LevelMixin implements MultipartPartsHolder {
     }
 
     @Inject(
-        method = {"method_47576", "m_260792_"},
+        method = {"method_47576"},
         at = @At(value = "RETURN", ordinal = 2),
         cancellable = true
     )

@@ -46,4 +46,6 @@ dependencies {
 
     forgeRuntimeLibrary("com.teamresourceful:yabn:1.0.3")
     forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2")
+
+    forgeRuntimeLibrary(group = "javazoom", name = "jlayer", version = "1.0.1")
 }

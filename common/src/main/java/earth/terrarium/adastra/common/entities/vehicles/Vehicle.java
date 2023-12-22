@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 
-public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDataMenuProvider, MultipartEntity {
+public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDataMenuProvider, MultipartEntity, HasCustomInventoryScreen {
     private int lerpSteps;
     private double lerpX;
     private double lerpY;
@@ -180,11 +180,19 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
     public @NotNull InteractionResult interact(Player player, InteractionHand hand) {
         if (!level().isClientSide()) {
             if (player.isSecondaryUseActive()) {
-                MenuHooks.openMenu((ServerPlayer) player, this);
+                this.openCustomInventoryScreen(player);
                 return InteractionResult.SUCCESS;
             }
             return player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
-        } else return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public void openCustomInventoryScreen(Player player) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            MenuHooks.openMenu(serverPlayer, this);
+        }
     }
 
     public void updateInput(float xxa, float zza) {

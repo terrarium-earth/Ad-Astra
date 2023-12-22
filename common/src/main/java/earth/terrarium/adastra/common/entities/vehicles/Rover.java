@@ -56,11 +56,21 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
         super(type, level);
         setMaxUpStep(1.0f);
 
-        addPart(0.6f, 0.8f, new Vector3f(0.6f, 1f, 0.5f), (player, hand) -> {
-            if (player.level().isClientSide()) {
-                RadioHandler.open();
+        addPart(0.6f, 0.7f, new Vector3f(0.6f, 1f, 0.5f), (player, hand) -> {
+            if (player.getVehicle() instanceof Rover) {
+                if (player.level().isClientSide()) {
+                    RadioHandler.open();
+                }
+                return InteractionResult.sidedSuccess(player.level().isClientSide());
             }
-            return InteractionResult.sidedSuccess(player.level().isClientSide());
+            return InteractionResult.PASS;
+        });
+
+        addPart(1.1f, 0.7f, new Vector3f(0.15f, 0.8f, -1.7f), (player, hand) -> {
+            if (!level().isClientSide()) {
+                this.openCustomInventoryScreen(player);
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide());
         });
     }
 
