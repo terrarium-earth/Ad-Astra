@@ -12,7 +12,9 @@
         "common.gravity.GravityEntityMixin",
         "common.gravity.ThrowableProjectileMixin",
         "common.gravity.ThrownExperienceBottleMixin",
-        "common.gravity.ThrownPotionMixin"
+        "common.gravity.ThrownPotionMixin",
+        "common.radio.LivingEntityMixin",
+        "common.radio.ServerPlayerMixin"
     ],
     "client": [
         "client.CameraMixin",

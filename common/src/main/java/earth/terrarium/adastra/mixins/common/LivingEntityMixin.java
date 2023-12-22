@@ -65,16 +65,6 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @Inject(method = "stopRiding", at = @At("HEAD"))
-    private void adastra$stopRiding(CallbackInfo ci) {
-        //noinspection ConstantValue
-        if ((Object) this instanceof Player p
-            && p.level().isClientSide()
-            && p.getVehicle() instanceof RadioHolder) {
-            RadioHandler.stop();
-        }
-    }
-
     @ModifyVariable(
         method = "causeFallDamage",
         at = @At("HEAD"),

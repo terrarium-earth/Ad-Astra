@@ -107,7 +107,7 @@ public final class RadioSoundInstance extends AbstractSoundInstance implements T
 
     // THIS IS USED BY FORGE, THIS IS A SOFT OVERRIDE DO NOT REMOVE
     @SuppressWarnings("unused")
-    public CompletableFuture<AudioStream> getAudioStream(SoundBufferLibrary library, Sound sound, boolean loop) {
+    public CompletableFuture<AudioStream> getStream(SoundBufferLibrary library, Sound sound, boolean loop) {
         return getStream();
     }
 }

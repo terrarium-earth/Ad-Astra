@@ -28,6 +28,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     public float wheelXRot;
     public float wheelYRot;
 
-    private String radioUrl;
+    private String radioUrl = "";
 
     public Rover(EntityType<?> type, Level level) {
         super(type, level);
@@ -231,12 +232,12 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     }
 
     @Override
-    public String getRadioUrl() {
+    public @NotNull String getRadioUrl() {
         return radioUrl;
     }
 
     @Override
-    public void setRadioUrl(String url) {
+    public void setRadioUrl(@NotNull String url) {
         this.radioUrl = url;
     }
 
