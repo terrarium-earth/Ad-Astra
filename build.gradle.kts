@@ -128,7 +128,7 @@ subprojects {
                 configurations = listOf(shadowCommon)
 
                 exclude(".cache/**") // Remove datagen cache from jar.
-                exclude("**/ad_astra/datagen/**") // Remove data gen code from jar.
+                exclude("**/adastra/datagen/**") // Remove data gen code from jar.
 
                 exclude("architectury.common.json")
             }
@@ -160,7 +160,7 @@ subprojects {
 
                     licenses {
                         license {
-                            name.set("MIT")
+                            name.set("Terrarium Licence (https://gist.github.com/CodexAdrian/4bb2a1868bb2d2a91ca74ea40424e69d)")
                         }
                     }
                 }

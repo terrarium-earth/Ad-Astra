@@ -30,8 +30,8 @@ public class AdAstraData extends SimpleJsonResourceReloadListener {
     protected void apply(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profiler) {
         PLANETS.clear();
         for (Map.Entry<ResourceLocation, JsonElement> entry : object.entrySet()) {
-            JsonObject jsonObject = GsonHelper.convertToJsonObject(entry.getValue(), "planets");
-            Planet planet = Planet.CODEC.parse(JsonOps.INSTANCE, jsonObject).getOrThrow(false, Constants.LOGGER::error);
+            JsonObject json = GsonHelper.convertToJsonObject(entry.getValue(), "planets");
+            Planet planet = Planet.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow(false, Constants.LOGGER::error);
             PLANETS.put(planet.dimension().location(), planet);
         }
     }

@@ -4,9 +4,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.utils.ComponentUtils;
-import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
+import earth.terrarium.botarium.common.energy.base.EnergyContainer;
+import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -52,7 +52,7 @@ public class GuiUtils {
     public static final ResourceLocation SUN = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/sun.png");
     public static final ResourceLocation FIRE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/fire.png");
 
-    public static void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, WrappedBlockEnergyContainer energyContainer, Component... tooltips) {
+    public static void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, EnergyContainer energyContainer, Component... tooltips) {
         drawEnergyBar(graphics, mouseX, mouseY, font, x, y, energyContainer.getStoredEnergy(), energyContainer.getMaxCapacity(), tooltips);
     }
 
@@ -69,7 +69,7 @@ public class GuiUtils {
         });
     }
 
-    public static void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, WrappedBlockFluidContainer fluidContainer, int tank, Component... tooltips) {
+    public static void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, FluidContainer fluidContainer, int tank, Component... tooltips) {
         drawFluidBar(graphics, mouseX, mouseY, font, x, y, fluidContainer.getFluids().get(tank), fluidContainer.getTankCapacity(tank), tooltips);
     }
 

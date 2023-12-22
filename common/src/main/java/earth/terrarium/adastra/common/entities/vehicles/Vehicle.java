@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.common.entities.vehicles;
 
 import earth.terrarium.adastra.api.systems.GravityApi;
-import earth.terrarium.adastra.common.entities.base.VehicleContainer;
+import earth.terrarium.adastra.common.container.VehicleContainer;
 import earth.terrarium.adastra.common.network.NetworkHandler;
 import earth.terrarium.adastra.common.network.messages.ServerboundVehicleControlPacket;
 import earth.terrarium.adastra.mixins.common.LivingEntityAccessor;
@@ -88,8 +88,6 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
             }
             move(MoverType.SELF, getDeltaMovement());
             tickFriction();
-        } else {
-            setDeltaMovement(Vec3.ZERO);
         }
     }
 
@@ -113,11 +111,9 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
     }
 
     public void tickGravity() {
-        if (!isNoGravity()) {
-            Vec3 velocity = getDeltaMovement();
-            double gravity = 0.05 * GravityApi.API.getGravity(this);
-            setDeltaMovement(velocity.x, velocity.y - gravity, velocity.z);
-        }
+        Vec3 velocity = getDeltaMovement();
+        double gravity = 0.05 * GravityApi.API.getGravity(this);
+        setDeltaMovement(velocity.x, velocity.y - gravity, velocity.z);
     }
 
     public void tickFriction() {

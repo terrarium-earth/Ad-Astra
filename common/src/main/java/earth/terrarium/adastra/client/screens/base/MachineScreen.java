@@ -17,8 +17,8 @@ import earth.terrarium.adastra.common.network.messages.ServerboundSetRedstoneCon
 import earth.terrarium.adastra.common.network.messages.ServerboundSetSideConfigPacket;
 import earth.terrarium.adastra.common.utils.ComponentUtils;
 import earth.terrarium.adastra.common.utils.ModUtils;
-import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
+import earth.terrarium.botarium.common.energy.base.EnergyContainer;
+import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import it.unimi.dsi.fastutil.ints.IntIntPair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
@@ -186,7 +186,7 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
         nextArrow.visible = showSideConfig;
     }
 
-    public void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, int xOffset, int yOffset, WrappedBlockEnergyContainer energy, long energyDifference) {
+    public void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, int xOffset, int yOffset, EnergyContainer energy, long energyDifference) {
         GuiUtils.drawEnergyBar(
             graphics, mouseX,
             mouseY, font,
@@ -198,7 +198,7 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
             ComponentUtils.getMaxEnergyOutComponent(energy.maxExtract()));
     }
 
-    public void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, int xOffset, int yOffset, WrappedBlockFluidContainer fluid, int tank, long fluidDifference) {
+    public void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, int xOffset, int yOffset, FluidContainer fluid, int tank, long fluidDifference) {
         int x = this.leftPos + xOffset;
         int y = this.topPos + yOffset;
         GuiUtils.drawFluidBar(

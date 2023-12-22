@@ -3,10 +3,8 @@ package earth.terrarium.adastra.mixins.common;
 import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
-import earth.terrarium.adastra.client.radio.audio.RadioHandler;
 import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
-import earth.terrarium.adastra.common.entities.base.RadioHolder;
 import earth.terrarium.adastra.common.handlers.base.PlanetData;
 import net.minecraft.Optionull;
 import net.minecraft.server.level.ServerLevel;
@@ -56,7 +54,10 @@ public abstract class LivingEntityMixin extends Entity {
             GravityApi.API.entityTick(this.level(), entity, travelVector, getBlockPosBelowThatAffectsMyMovement());
             ci.cancel();
         } else {
-            if (this.isInWater() || this.isInLava() || entity.isFallFlying() || entity.hasEffect(MobEffects.SLOW_FALLING)) {
+            if (this.isInWater()
+                || this.isInLava()
+                || entity.isFallFlying()
+                || entity.hasEffect(MobEffects.SLOW_FALLING)) {
                 return;
             }
             float newGravity = 0.08f * gravity;

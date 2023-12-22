@@ -43,10 +43,10 @@ public class AirVortex extends Entity {
     public void tick() {
         super.tick();
         if (!(this.level() instanceof ServerLevel level)) return;
-        if (this.source == null ||
-            this.positions == null ||
-            this.tickCount >= LIFE ||
-            level.getBlockState(this.source).isAir()) {
+        if (this.source == null
+            || this.positions == null
+            || this.tickCount >= LIFE
+            || level.getBlockState(this.source).isAir()) {
             this.discard();
             return;
         }
@@ -64,7 +64,7 @@ public class AirVortex extends Entity {
     protected void applyForce(Entity entity) {
         if (entity instanceof ServerPlayer player && player.getAbilities().flying) return;
         int time = this.tickCount;
-        BlockPos targetPosition = this.blockPosition().below().below();
+        BlockPos targetPosition = this.blockPosition().below(2);
         double altitude = 1000 * Math.exp(-0.005 * time) + LIFE;
 
         double power = Math.max(0.30, Math.pow(altitude, 2) / Math.pow(LIFE, 2));

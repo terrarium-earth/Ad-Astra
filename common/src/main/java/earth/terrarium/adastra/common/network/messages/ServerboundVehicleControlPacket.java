@@ -13,7 +13,7 @@ import net.minecraft.util.Mth;
 
 public record ServerboundVehicleControlPacket(float xxa, float zza) implements Packet<ServerboundVehicleControlPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "control");
+    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "vehicle_control");
     public static final Handler HANDLER = new Handler();
 
     @Override

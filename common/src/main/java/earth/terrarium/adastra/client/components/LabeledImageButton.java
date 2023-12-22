@@ -23,7 +23,7 @@ public class LabeledImageButton extends ImageButton {
         RenderSystem.enableBlend();
         renderTexture(graphics, resourceLocation, getX(), getY(), xTexStart, yTexStart, yDiffTex, width, height, textureWidth, textureHeight);
         RenderSystem.disableBlend();
-        int color = active ? 16777215 : 10526880;
+        int color = active ? 0xffffff : 0xa0a0a0;
         graphics.drawCenteredString(Minecraft.getInstance().font, getMessage(), getX() + width / 2, getY() + (height - 8) / 2, color | Mth.ceil(alpha * 255.0F) << 24);
     }
 }
