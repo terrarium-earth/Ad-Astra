@@ -9,7 +9,7 @@ import earth.terrarium.adastra.client.models.entities.vehicles.RoverModel;
 import earth.terrarium.adastra.client.particle.LargeFlameParticle;
 import earth.terrarium.adastra.client.particle.OxygenBubbleParticle;
 import earth.terrarium.adastra.client.particle.SmallFlameParticle;
-import earth.terrarium.adastra.client.radio.screen.RadioScreen;
+import earth.terrarium.adastra.client.radio.audio.RadioHandler;
 import earth.terrarium.adastra.client.renderers.blocks.EnergizerBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.FlagBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.GlobeBlockEntityRenderer;
@@ -145,7 +145,7 @@ public class AdAstraClient {
         if (player == null) return;
 
         if (KEY_OPEN_RADIO.consumeClick() && player.getVehicle() instanceof RadioHolder) {
-            Minecraft.getInstance().setScreen(new RadioScreen());
+            RadioHandler.open();
         }
     }
 }

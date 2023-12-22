@@ -2,6 +2,8 @@ package earth.terrarium.adastra.common.entities.vehicles;
 
 import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.common.entities.base.VehicleContainer;
+import earth.terrarium.adastra.common.entities.multipart.MultipartEntity;
+import earth.terrarium.adastra.common.entities.multipart.MultipartPartEntity;
 import earth.terrarium.adastra.common.network.NetworkHandler;
 import earth.terrarium.adastra.common.network.messages.ServerboundVehicleControlPacket;
 import earth.terrarium.adastra.mixins.common.LivingEntityAccessor;
@@ -10,6 +12,7 @@ import earth.terrarium.botarium.common.menu.MenuHooks;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
@@ -24,9 +27,15 @@ import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
-public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDataMenuProvider {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BiFunction;
+
+public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDataMenuProvider, MultipartEntity {
     private int lerpSteps;
     private double lerpX;
     private double lerpY;
@@ -39,8 +48,18 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
 
     protected final VehicleContainer inventory = new VehicleContainer(getInventorySize());
 
+    protected final List<VehiclePart> parts = new ArrayList<>();
+    private final List<MultipartPartEntity<?>> multipartParts = new ArrayList<>();
+
     public Vehicle(EntityType<?> type, Level level) {
         super(type, level);
+
+    }
+
+    protected void addPart(float width, float height, Vector3f offset, BiFunction<Player, InteractionHand, InteractionResult> handler) {
+        VehiclePart part = new VehiclePart(this, width, height, offset, handler);
+        this.parts.add(part);
+        this.multipartParts.add(part);
     }
 
     @Override
@@ -90,6 +109,10 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
             tickFriction();
         } else {
             setDeltaMovement(Vec3.ZERO);
+        }
+
+        for (VehiclePart part : this.parts) {
+            part.tickPart();
         }
     }
 
@@ -159,7 +182,7 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
     public abstract ItemStack getDropStack();
 
     @Override
-    public InteractionResult interact(Player player, InteractionHand hand) {
+    public @NotNull InteractionResult interact(Player player, InteractionHand hand) {
         if (!level().isClientSide()) {
             if (player.isSecondaryUseActive()) {
                 MenuHooks.openMenu((ServerPlayer) player, this);
@@ -220,5 +243,19 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
     @Override
     public void writeExtraData(ServerPlayer player, FriendlyByteBuf buffer) {
         buffer.writeVarInt(getId());
+    }
+
+    @Override
+    public List<MultipartPartEntity<?>> getParts() {
+        return multipartParts;
+    }
+
+    @Override
+    public void recreateFromPacket(ClientboundAddEntityPacket packet) {
+        super.recreateFromPacket(packet);
+
+        for(int i = 0; i < this.parts.size(); ++i) {
+            this.parts.get(i).setId(i + 1 + packet.getId());
+        }
     }
 }

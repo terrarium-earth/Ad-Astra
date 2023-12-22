@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.client.radio.audio;
 
 import com.teamresourceful.resourcefullib.common.utils.WebUtils;
+import earth.terrarium.adastra.client.radio.screen.RadioScreen;
 import earth.terrarium.adastra.mixins.client.SoundEngineAccessor;
 import earth.terrarium.adastra.mixins.client.SoundManagerAccessor;
 import net.minecraft.client.Minecraft;
@@ -24,6 +25,10 @@ public final class RadioHandler {
 
     private static final Map<String, CompletableFuture<InputStream>> IN_PROGRESS = new ConcurrentHashMap<>();
     private static RadioSoundInstance lastStation = null;
+
+    public static void open() {
+        Minecraft.getInstance().setScreen(new RadioScreen());
+    }
 
     /**
      * Returns an already existing stream or fetches a new one.

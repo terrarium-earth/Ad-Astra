@@ -20,6 +20,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -29,6 +30,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 import java.util.List;
 
@@ -52,6 +55,13 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     public Rover(EntityType<?> type, Level level) {
         super(type, level);
         setMaxUpStep(1.0f);
+
+        addPart(0.6f, 0.8f, new Vector3f(0.6f, 1f, 0.5f), (player, hand) -> {
+            if (player.level().isClientSide()) {
+                RadioHandler.open();
+            }
+            return InteractionResult.sidedSuccess(player.level().isClientSide());
+        });
     }
 
     @Override
@@ -108,7 +118,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     }
 
     @Override
-    public Vec3 getDismountLocationForPassenger(LivingEntity passenger) {
+    public @NotNull Vec3 getDismountLocationForPassenger(LivingEntity passenger) {
         float zOffset = getControllingPassenger() == passenger ? 1.75f : -1.75f;
         Vec3 position = new Vec3(-0.5, 0, zOffset).yRot(-getYRot() * (float) (Math.PI / 180) - (float) (Math.PI / 2));
         if (level().isClientSide()) {
@@ -269,5 +279,11 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     @Override
     public int getInventorySize() {
         return 18;
+    }
+
+    @Nullable
+    @Override
+    public ItemStack getPickResult() {
+        return new ItemStack(ModItems.ROVER.get());
     }
 }
