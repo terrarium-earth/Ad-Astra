@@ -13,6 +13,10 @@
         "common.gravity.ThrowableProjectileMixin",
         "common.gravity.ThrownExperienceBottleMixin",
         "common.gravity.ThrownPotionMixin",
+        "common.multipart.ChunkMapMixin",
+        "common.multipart.LevelMixin",
+        "common.multipart.ServerLevelEntityCallbacksMixin",
+        "common.multipart.ServerLevelMixin",
         "common.radio.LivingEntityMixin",
         "common.radio.ServerPlayerMixin"
     ],
@@ -20,7 +24,9 @@
         "client.CameraMixin",
         "client.HumanoidModelMixin",
         "client.SoundEngineAccessor",
-        "client.SoundManagerAccessor"
+        "client.SoundManagerAccessor",
+        "client.multipart.ClientLevelEntityCallbacksMixin",
+        "client.multipart.EntityRenderDispatcherMixin"
     ],
     "injectors": {
         "defaultRequire": 1
