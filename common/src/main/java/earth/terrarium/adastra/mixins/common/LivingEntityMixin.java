@@ -6,17 +6,22 @@ import earth.terrarium.adastra.api.systems.TemperatureApi;
 import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.handlers.base.PlanetData;
+import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
 import net.minecraft.Optionull;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -25,6 +30,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
+
+    @Shadow
+    public abstract ItemStack eat(Level level, ItemStack food);
 
     public LivingEntityMixin(EntityType<?> type, Level level) {
         super(type, level);
@@ -63,6 +71,16 @@ public abstract class LivingEntityMixin extends Entity {
             float newGravity = 0.08f * gravity;
             Vec3 velocity = this.getDeltaMovement();
             this.setDeltaMovement(velocity.x(), velocity.y() + 0.08f - newGravity, velocity.z());
+        }
+    }
+
+    @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
+    public void adastra$hurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        LivingEntity entity = ((LivingEntity) (Object) this);
+
+        if ((source.is(DamageTypeTags.IS_FIRE) || source.is(DamageTypes.HOT_FLOOR)) && SpaceSuitItem.hasFullNetheriteSet(entity)) {
+            entity.setRemainingFireTicks(0);
+            cir.setReturnValue(false);
         }
     }
 

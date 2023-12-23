@@ -34,8 +34,29 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         ModItems.FLAGS.stream().map(RegistryEntry::get).forEach(b -> tag(ModItemTags.FLAGS).add(TagEntry.element(BuiltInRegistries.ITEM.getKey(b))));
         ModItems.SLIDING_DOORS.stream().map(RegistryEntry::get).forEach(b -> tag(ModItemTags.SLIDING_DOORS).add(TagEntry.element(BuiltInRegistries.ITEM.getKey(b))));
         ModItems.VEHICLES.stream().map(RegistryEntry::get).forEach(b -> tag(ModItemTags.HELD_OVER_HEAD).add(TagEntry.element(BuiltInRegistries.ITEM.getKey(b))));
-        add(ModItemTags.HELD_OVER_HEAD, ModItems.LAUNCH_PAD.get());
 
+        add(ModItemTags.SPACE_SUITS, ModItems.SPACE_HELMET.get());
+        add(ModItemTags.SPACE_SUITS, ModItems.SPACE_SUIT.get());
+        add(ModItemTags.SPACE_SUITS, ModItems.SPACE_PANTS.get());
+        add(ModItemTags.SPACE_SUITS, ModItems.SPACE_BOOTS.get());
+        tag(ModItemTags.SPACE_SUITS).add(TagEntry.tag(ModItemTags.NETHERITE_SPACE_SUITS.location()));
+        tag(ModItemTags.SPACE_SUITS).add(TagEntry.tag(ModItemTags.JET_SUITS.location()));
+
+        add(ModItemTags.NETHERITE_SPACE_SUITS, ModItems.NETHERITE_SPACE_HELMET.get());
+        add(ModItemTags.NETHERITE_SPACE_SUITS, ModItems.NETHERITE_SPACE_SUIT.get());
+        add(ModItemTags.NETHERITE_SPACE_SUITS, ModItems.NETHERITE_SPACE_PANTS.get());
+        add(ModItemTags.NETHERITE_SPACE_SUITS, ModItems.NETHERITE_SPACE_BOOTS.get());
+        tag(ModItemTags.NETHERITE_SPACE_SUITS).add(TagEntry.tag(ModItemTags.JET_SUITS.location()));
+
+        add(ModItemTags.JET_SUITS, ModItems.JET_SUIT_HELMET.get());
+        add(ModItemTags.JET_SUITS, ModItems.JET_SUIT.get());
+        add(ModItemTags.JET_SUITS, ModItems.JET_SUIT_PANTS.get());
+        add(ModItemTags.JET_SUITS, ModItems.JET_SUIT_BOOTS.get());
+
+        tag(ModItemTags.FREEZE_RESISTANT_ARMOR).add(TagEntry.tag(ModItemTags.SPACE_SUITS.location()));
+        tag(ModItemTags.HEAT_RESISTANT_ARMOR).add(TagEntry.tag(ModItemTags.NETHERITE_SPACE_SUITS.location()));
+
+        add(ModItemTags.HELD_OVER_HEAD, ModItems.LAUNCH_PAD.get());
 
         add(ModItemTags.CABLE_DUCTS, ModItems.CABLE_DUCT.get());
         add(ModItemTags.FLUID_PIPE_DUCTS, ModItems.FLUID_PIPE_DUCT.get());

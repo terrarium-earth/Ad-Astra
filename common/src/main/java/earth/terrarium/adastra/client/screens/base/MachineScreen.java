@@ -15,7 +15,7 @@ import earth.terrarium.adastra.common.network.messages.ServerboundClearFluidTank
 import earth.terrarium.adastra.common.network.messages.ServerboundResetSideConfigPacket;
 import earth.terrarium.adastra.common.network.messages.ServerboundSetRedstoneControlPacket;
 import earth.terrarium.adastra.common.network.messages.ServerboundSetSideConfigPacket;
-import earth.terrarium.adastra.common.utils.ComponentUtils;
+import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
@@ -193,9 +193,9 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
             this.leftPos + xOffset,
             this.topPos + yOffset,
             energy,
-            ComponentUtils.getEnergyDifferenceComponent(energyDifference),
-            ComponentUtils.getMaxEnergyInComponent(energy.maxInsert()),
-            ComponentUtils.getMaxEnergyOutComponent(energy.maxExtract()));
+            TooltipUtils.getEnergyDifferenceComponent(energyDifference),
+            TooltipUtils.getMaxEnergyInComponent(energy.maxInsert()),
+            TooltipUtils.getMaxEnergyOutComponent(energy.maxExtract()));
     }
 
     public void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, int xOffset, int yOffset, FluidContainer fluid, int tank, long fluidDifference) {
@@ -206,7 +206,7 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
             mouseY, font,
             x, y,
             fluid, tank,
-            ComponentUtils.getFluidDifferenceComponent(fluidDifference),
+            TooltipUtils.getFluidDifferenceComponent(fluidDifference),
             !fluid.isEmpty() ? ConstantComponents.CLEAR_FLUID_TANK : Component.empty());
 
         clearOnClicks.add(new ClearOnClick(x + 6, y - 31, x + 22, y + 17, tank));
@@ -229,8 +229,8 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
             this.topPos + yOffset,
             width, height,
             progress, maxProgress, reverse,
-            ComponentUtils.getProgressComponent(progress, maxProgress),
-            ComponentUtils.getEtaComponent(progress, maxProgress, reverse));
+            TooltipUtils.getProgressComponent(progress, maxProgress),
+            TooltipUtils.getEtaComponent(progress, maxProgress, reverse));
     }
 
     public void drawVerticalProgressBar(GuiGraphics graphics, ResourceLocation texture, int mouseX, int mouseY, int xOffset, int yOffset, int width, int height, int progress, int maxProgress, boolean reverse) {
@@ -242,8 +242,8 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
             this.topPos + yOffset,
             width, height,
             progress, maxProgress, reverse,
-            ComponentUtils.getProgressComponent(progress, maxProgress),
-            ComponentUtils.getEtaComponent(progress, maxProgress, reverse));
+            TooltipUtils.getProgressComponent(progress, maxProgress),
+            TooltipUtils.getEtaComponent(progress, maxProgress, reverse));
     }
 
     @Override
@@ -290,7 +290,7 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
         return Component.empty()
             .append(Component.translatable("side_config.ad_astra.type.type", type.translation().getString()).withStyle(ChatFormatting.GREEN))
             .append("\n")
-            .append(Component.translatable("side_config.ad_astra.type.direction", ComponentUtils.getRelativeDirectionComponent(direction).getString(), ComponentUtils.getDirectionComponent(relative).getString()).withStyle(ChatFormatting.GOLD))
+            .append(Component.translatable("side_config.ad_astra.type.direction", TooltipUtils.getRelativeDirectionComponent(direction).getString(), TooltipUtils.getDirectionComponent(relative).getString()).withStyle(ChatFormatting.GOLD))
             .append("\n")
             .append(Component.translatable("side_config.ad_astra.type.action", action.translation().getString()).withStyle(ChatFormatting.GOLD));
     }

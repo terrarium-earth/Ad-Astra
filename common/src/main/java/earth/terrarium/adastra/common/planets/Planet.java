@@ -35,7 +35,7 @@ public record Planet(ResourceKey<Level> dimension,
         Codec.SHORT.fieldOf("temperature").forGetter(Planet::temperature),
         Codec.FLOAT.fieldOf("gravity").forGetter(Planet::gravity),
         Codec.INT.fieldOf("solar_power").forGetter(Planet::solarPower),
-        ResourceLocation.CODEC.fieldOf("solarSystem").forGetter(Planet::solarSystem),
+        ResourceLocation.CODEC.fieldOf("solar_system").forGetter(Planet::solarSystem),
         ResourceKey.codec(Registries.DIMENSION).optionalFieldOf("orbit").forGetter(Planet::orbit),
         Codec.INT.fieldOf("tier").forGetter(Planet::tier)
     ).apply(instance, Planet::new));

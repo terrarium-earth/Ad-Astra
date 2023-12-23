@@ -19,7 +19,6 @@ public abstract class HumanoidModelMixin {
 
         if (entity.getVehicle() instanceof Vehicle vehicle) {
             model.riding = vehicle.shouldSit(); // disable the sitting pose while standing in a rocket
-            model.setAllVisible(!vehicle.hideRider());
         }
     }
 

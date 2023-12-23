@@ -21,6 +21,7 @@
     ],
     "client": [
         "client.CameraMixin",
+        "client.EntityRendererMixin",
         "client.HumanoidModelMixin",
         "client.SoundEngineAccessor",
         "client.SoundManagerAccessor",

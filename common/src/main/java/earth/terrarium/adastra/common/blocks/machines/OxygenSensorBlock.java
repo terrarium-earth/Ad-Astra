@@ -36,14 +36,15 @@ public class OxygenSensorBlock extends MachineBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (level.isClientSide()) return InteractionResult.SUCCESS;
+        if (level.isClientSide()) return InteractionResult.PASS;
         if (player.isShiftKeyDown()) {
             level.setBlockAndUpdate(pos, state.cycle(INVERTED));
             player.displayClientMessage(!state.getValue(INVERTED) ?
                 ConstantComponents.DETECTOR_INVERTED_TRUE :
                 ConstantComponents.DETECTOR_INVERTED_FALSE, true);
+            return InteractionResult.SUCCESS;
         }
-        return InteractionResult.SUCCESS;
+        return InteractionResult.PASS;
     }
 
     @Override

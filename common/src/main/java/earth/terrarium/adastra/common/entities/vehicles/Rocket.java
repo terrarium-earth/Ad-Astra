@@ -29,6 +29,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,6 +42,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -73,6 +76,7 @@ public class Rocket extends Vehicle {
     private float angle;
 
     public boolean startedRocketSound;
+    private boolean showFuelMessage = true;
 
     public Rocket(EntityType<?> type, Level level) {
         this(type, level, ROCKET_TO_PROPERTIES.get(type));
@@ -167,12 +171,19 @@ public class Rocket extends Vehicle {
     }
 
     @Override
+    public @NotNull InteractionResult interact(Player player, InteractionHand hand) {
+        if (player.equals(getControllingPassenger())) return InteractionResult.PASS;
+        return super.interact(player, hand);
+    }
+
+    @Override
     public void tick() {
         super.tick();
         launchPadTick();
         if (canLaunch()) {
             initiateLaunchSequence();
-        } else if (!isLaunching() && yya() > 0 && getControllingPassenger() instanceof Player player) {
+            showFuelMessage = false;
+        } else if (showFuelMessage && !level().isClientSide() && yya() > 0 && getControllingPassenger() instanceof Player player) {
             player.displayClientMessage(ConstantComponents.NOT_ENOUGH_FUEL, true);
         }
 
@@ -324,8 +335,7 @@ public class Rocket extends Vehicle {
     }
 
     public boolean isObstructed() {
-        double y = getDeltaMovement().y();
-        return y < 0.05 && y > -0.000001;
+        return false;
     }
 
     public void explode() {

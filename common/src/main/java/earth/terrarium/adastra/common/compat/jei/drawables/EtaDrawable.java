@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.common.compat.jei.drawables;
 
 import earth.terrarium.adastra.client.utils.GuiUtils;
-import earth.terrarium.adastra.common.utils.ComponentUtils;
+import earth.terrarium.adastra.common.utils.TooltipUtils;
 import mezz.jei.api.gui.drawable.IDrawable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -55,8 +55,8 @@ public class EtaDrawable implements IDrawable {
             (int) amount,
             cookTime,
             false,
-            ComponentUtils.getProgressComponent((int) amount, cookTime),
-            ComponentUtils.getEtaComponent((int) amount, cookTime, false)
+            TooltipUtils.getProgressComponent((int) amount, cookTime),
+            TooltipUtils.getEtaComponent((int) amount, cookTime, false)
         );
     }
 }

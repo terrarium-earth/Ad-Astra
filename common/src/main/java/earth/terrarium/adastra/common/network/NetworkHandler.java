@@ -25,5 +25,6 @@ public final class NetworkHandler {
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundVehicleControlPacket.ID, ServerboundVehicleControlPacket.HANDLER, ServerboundVehicleControlPacket.class);
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundLandPacket.ID, ServerboundLandPacket.HANDLER, ServerboundLandPacket.class);
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundConstructSpaceStationPacket.ID, ServerboundConstructSpaceStationPacket.HANDLER, ServerboundConstructSpaceStationPacket.class);
+        CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundSyncKeybindPacket.ID, ServerboundSyncKeybindPacket.HANDLER, ServerboundSyncKeybindPacket.class);
     }
 }

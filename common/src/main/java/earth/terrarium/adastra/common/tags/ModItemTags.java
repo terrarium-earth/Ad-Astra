@@ -14,6 +14,13 @@ public final class ModItemTags {
     public static final TagKey<Item> CABLE_DUCTS = tag("cable_ducts");
     public static final TagKey<Item> FLUID_PIPE_DUCTS = tag("fluid_pipe_ducts");
 
+    public static final TagKey<Item> SPACE_SUITS = tag("space_suit_items");
+    public static final TagKey<Item> NETHERITE_SPACE_SUITS = tag("netherite_space_suit_items");
+    public static final TagKey<Item> JET_SUITS = tag("jet_suit_items");
+
+    public static final TagKey<Item> FREEZE_RESISTANT_ARMOR = tag("freeze_resistant_armor");
+    public static final TagKey<Item> HEAT_RESISTANT_ARMOR = tag("heat_resistant_armor");
+
     public static final TagKey<Item> HELD_OVER_HEAD = tag("held_over_head");
 
     public static final TagKey<Item> IRON_PLATES = tag("iron_plates");

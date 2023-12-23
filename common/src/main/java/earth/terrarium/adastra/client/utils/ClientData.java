@@ -4,7 +4,6 @@ import earth.terrarium.adastra.common.handlers.base.PlanetData;
 import org.jetbrains.annotations.Nullable;
 
 public class ClientData {
-    public static boolean suitFlightEnabled = true;
     @Nullable
     public static PlanetData localData;
 

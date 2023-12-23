@@ -3,7 +3,7 @@ package earth.terrarium.adastra.client.utils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.utils.ComponentUtils;
+import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
@@ -63,7 +63,7 @@ public class GuiUtils {
         }
 
         drawTooltips(graphics, font, mouseX, mouseY, x + 6, x + 19, y - 31, y + 15, list -> {
-            list.add(ComponentUtils.getEnergyComponent(energy, capacity));
+            list.add(TooltipUtils.getEnergyComponent(energy, capacity));
             Collections.addAll(list, tooltips);
             return list;
         });
@@ -94,7 +94,7 @@ public class GuiUtils {
         RenderSystem.disableBlend();
 
         drawTooltips(graphics, font, mouseX, mouseY, x + 6, x + 18, y - 31, y + 15, list -> {
-            list.add(ComponentUtils.getFluidComponent(fluid, capacity));
+            list.add(TooltipUtils.getFluidComponent(fluid, capacity));
             Collections.addAll(list, tooltips);
             return list;
         });

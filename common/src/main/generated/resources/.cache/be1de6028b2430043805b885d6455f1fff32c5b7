@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-21T12:35:21.520809	Item Models: ad_astra
+// 1.20.1	2023-12-22T14:30:56.158077	Item Models: ad_astra
 7d119b836785f643ace2c0509d054425c9f5b0b8 assets/ad_astra/models/item/aeronos_door.json
 2b767710184c7e073c9f542065103954b5375b1f assets/ad_astra/models/item/aeronos_mushroom.json
 d5a7a8a582c125092e7a873011879a09a9e58b46 assets/ad_astra/models/item/airlock.json
@@ -33,7 +33,13 @@ e7c46b77b464e662eb31395405b20884118cc91c assets/ad_astra/models/item/glacian_doo
 7d828e314b4ba4d5fa172b04c76b02fb45e69097 assets/ad_astra/models/item/iron_plate.json
 4715b78d10f24a12edfd8acdeb2f7d10ef1c0745 assets/ad_astra/models/item/iron_rod.json
 09ea937645ccc391e0603679f72d32843c9b8fc6 assets/ad_astra/models/item/iron_sliding_door.json
+d10f0ed7916f35494adec77799bfba9686a952ae assets/ad_astra/models/item/jet_suit.json
+0bdf79b01c61f76133c4dd95745dde29b99bfe84 assets/ad_astra/models/item/jet_suit_boots.json
+86feedba7d9290583ecc7fb8b6c195a679472779 assets/ad_astra/models/item/jet_suit_pants.json
 7909df816ab0ae10bc61d4b4b53e3ba7ea2d0359 assets/ad_astra/models/item/large_gas_tank.json
+deb9c159a1f646693d5aacbfae59b97b9dc324c5 assets/ad_astra/models/item/netherite_space_boots.json
+ebda1d52d7efc5d5c9079e6335c36cabab687151 assets/ad_astra/models/item/netherite_space_pants.json
+1b28cb074adb54efbb9ba61fb6eddf2d48edc010 assets/ad_astra/models/item/netherite_space_suit.json
 52a078d666c8864886f0d43ec1005a5c286a9000 assets/ad_astra/models/item/oil_bucket.json
 a0c1380b6740fe778ab186a3553e90683b9980fc assets/ad_astra/models/item/ostrum_engine.json
 cdf8f644e93576a3223a91a5d06ae60ab9269ac5 assets/ad_astra/models/item/ostrum_fluid_pipe.json
@@ -52,7 +58,11 @@ b8b4d56f7675407f8be3e6b84ef6e7c99d01eb7b assets/ad_astra/models/item/raw_ostrum.
 6f2abc149d576f9c884d92518eacc419bfa86227 assets/ad_astra/models/item/reinforced_door.json
 fc47c8b7322ae9e1ca1a6a46e7be27b7f945a7dc assets/ad_astra/models/item/rocket_fin.json
 b01f4f46a67d63be07a0497047a6fe800891283b assets/ad_astra/models/item/rocket_nose_cone.json
+798f217c49f206d4af55c0cf96457d5033d216fe assets/ad_astra/models/item/space_boots.json
+03d17367eccd987e7485c979daf310f1afc31e07 assets/ad_astra/models/item/space_helmet.json
 da00145cb4457f9d575cfeaa957e2dfe887cbd6a assets/ad_astra/models/item/space_painting.json
+55dba8cbf12ff6413f336a4458cadd8d93ceb589 assets/ad_astra/models/item/space_pants.json
+d6c14c9b043f0efd1b16b06f22428309a11f6f34 assets/ad_astra/models/item/space_suit.json
 35dddf7a8996040104f1b869aa50212b78a37c1b assets/ad_astra/models/item/steel_cable.json
 61ca34472a21ec3f4b79be369b8d19eb4fa7fd33 assets/ad_astra/models/item/steel_door.json
 720fbcaba5e46a4056257eec5bbc98982889c489 assets/ad_astra/models/item/steel_engine.json

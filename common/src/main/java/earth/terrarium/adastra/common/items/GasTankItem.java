@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.common.items;
 
 import earth.terrarium.adastra.common.constants.ConstantComponents;
-import earth.terrarium.adastra.common.utils.ComponentUtils;
+import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.botarium.common.fluid.FluidApi;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidItem;
@@ -100,9 +100,9 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
 
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        tooltipComponents.add(ComponentUtils.getFluidComponent(FluidUtils.getTank(stack), FluidUtils.getTankCapacity(stack)));
-        tooltipComponents.add(ComponentUtils.getMaxFluidOutComponent(FluidHooks.buckets(distributionAmount)));
-        ComponentUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.GAS_TANK_INFO);
+        tooltipComponents.add(TooltipUtils.getFluidComponent(FluidUtils.getTank(stack), FluidUtils.getTankCapacity(stack)));
+        tooltipComponents.add(TooltipUtils.getMaxFluidOutComponent(FluidHooks.buckets(distributionAmount)));
+        TooltipUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.GAS_TANK_INFO);
     }
 
     public int getUseDuration(@NotNull ItemStack stack) {

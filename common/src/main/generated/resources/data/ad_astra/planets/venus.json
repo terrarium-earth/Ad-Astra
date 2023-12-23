@@ -3,8 +3,8 @@
   "gravity": 8.87,
   "orbit": "ad_astra:venus_orbit",
   "oxygen": false,
-  "solarSystem": "ad_astra:solar_system",
   "solar_power": 8,
+  "solar_system": "ad_astra:solar_system",
   "temperature": 464,
   "tier": 3
 }

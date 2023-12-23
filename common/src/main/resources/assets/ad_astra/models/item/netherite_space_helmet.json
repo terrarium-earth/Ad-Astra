@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "ad_astra:item/advanced_visor",
+    "layer1": "ad_astra:item/netherite_space_helmet"
+  }
+}

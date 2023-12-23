@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.common.compat.jei.drawables;
 
 import earth.terrarium.adastra.client.utils.GuiUtils;
-import earth.terrarium.adastra.common.utils.ComponentUtils;
+import earth.terrarium.adastra.common.utils.TooltipUtils;
 import mezz.jei.api.gui.drawable.IDrawable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -55,9 +55,9 @@ public class EnergyBarDrawable implements IDrawable {
             yOffset,
             energy,
             capacity,
-            generate ? ComponentUtils.getEnergyGenerationPerTickComponent(perTick) : ComponentUtils.getEnergyUsePerTickComponent(perTick),
-            ComponentUtils.getMaxEnergyInComponent(maxIn),
-            ComponentUtils.getMaxEnergyOutComponent(maxOut)
+            generate ? TooltipUtils.getEnergyGenerationPerTickComponent(perTick) : TooltipUtils.getEnergyUsePerTickComponent(perTick),
+            TooltipUtils.getMaxEnergyInComponent(maxIn),
+            TooltipUtils.getMaxEnergyOutComponent(maxOut)
         );
     }
 }

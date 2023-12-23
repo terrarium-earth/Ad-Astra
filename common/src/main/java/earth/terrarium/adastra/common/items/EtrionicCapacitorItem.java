@@ -2,7 +2,7 @@ package earth.terrarium.adastra.common.items;
 
 import dev.architectury.injectables.annotations.PlatformOnly;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
-import earth.terrarium.adastra.common.utils.ComponentUtils;
+import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.adastra.common.utils.DistributionMode;
 import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyItem;
@@ -88,12 +88,12 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
         var energy = getEnergyStorage(stack);
-        tooltipComponents.add(ComponentUtils.getEnergyComponent(energy.getStoredEnergy(), energy.getMaxCapacity()));
-        tooltipComponents.add(ComponentUtils.getActiveInactiveComponent(active(stack)));
-        tooltipComponents.add(ComponentUtils.getDistributionModeComponent(mode(stack)));
-        tooltipComponents.add(ComponentUtils.getMaxEnergyInComponent(energy.maxInsert()));
-        tooltipComponents.add(ComponentUtils.getMaxEnergyOutComponent(energy.maxExtract()));
-        ComponentUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.ETRIONIC_CAPACITOR_INFO);
+        tooltipComponents.add(TooltipUtils.getEnergyComponent(energy.getStoredEnergy(), energy.getMaxCapacity()));
+        tooltipComponents.add(TooltipUtils.getActiveInactiveComponent(active(stack)));
+        tooltipComponents.add(TooltipUtils.getDistributionModeComponent(mode(stack)));
+        tooltipComponents.add(TooltipUtils.getMaxEnergyInComponent(energy.maxInsert()));
+        tooltipComponents.add(TooltipUtils.getMaxEnergyOutComponent(energy.maxExtract()));
+        TooltipUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.ETRIONIC_CAPACITOR_INFO);
     }
 
     @Override

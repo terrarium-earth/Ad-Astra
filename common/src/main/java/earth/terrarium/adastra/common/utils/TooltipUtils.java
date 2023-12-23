@@ -11,26 +11,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.material.Fluid;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
-public class ComponentUtils {
+public class TooltipUtils {
 
-    // No need to go beyond a trillion. We're not Mekanism.
     public static String getFormattedAmount(long number) {
         if (Screen.hasShiftDown()) {
             return DecimalFormat.getNumberInstance().format(number);
         }
-        String formatted;
-        if (number >= 1_000_000_000_000L) {
-            formatted = "%.2fT".formatted(number / 1_000_000_000_000f);
-        } else if (number >= 1_000_000_000L) {
-            formatted = "%.2fG".formatted(number / 1_000_000_000f);
-        } else if (number >= 1_000_000L) {
-            formatted = "%.2fM".formatted(number / 1_000_000f);
-        } else if (number >= 1_000L) {
-            formatted = "%.2fk".formatted(number / 1_000f);
-        } else return String.valueOf(number);
-        return formatted.replaceAll("(\\.?0+)([kMGT]?)$", "$2");
+        return DecimalFormat.getCompactNumberInstance(Locale.ROOT, NumberFormat.Style.SHORT).format(number);
     }
 
     public static Component getEnergyComponent(long energy, long capacity) {

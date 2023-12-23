@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.common.compat.rei.widgets;
 
 import earth.terrarium.adastra.client.utils.GuiUtils;
-import earth.terrarium.adastra.common.utils.ComponentUtils;
+import earth.terrarium.adastra.common.utils.TooltipUtils;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.widgets.BurningFire;
@@ -57,8 +57,8 @@ public class EtaWidget extends BurningFire {
             (int) amount,
             cookTime,
             false,
-            ComponentUtils.getProgressComponent((int) amount, cookTime),
-            ComponentUtils.getEtaComponent((int) amount, cookTime, false)
+            TooltipUtils.getProgressComponent((int) amount, cookTime),
+            TooltipUtils.getEtaComponent((int) amount, cookTime, false)
         );
     }
 

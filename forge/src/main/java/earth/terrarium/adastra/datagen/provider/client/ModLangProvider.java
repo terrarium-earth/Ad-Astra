@@ -243,6 +243,11 @@ public class ModLangProvider extends LanguageProvider {
         add("tag.item.ad_astra.globes", "Globes");
         add("tag.item.ad_astra.flags", "Flags");
         add("tag.item.ad_astra.sliding_doors", "Sliding Doors");
+        add("tag.item.ad_astra.space_suits", "Space Suits");
+        add("tag.item.ad_astra.netherite_space_suits", "Netherite Space Suits");
+        add("tag.item.ad_astra.jet_suits", "Jet Suits");
+        add("tag.item.ad_astra.freeze_resistant_armor", "Freeze-Resistant Armor");
+        add("tag.item.ad_astra.heat_resistant_armor", "Heat-Resistant Armor");
         add("tag.item.ad_astra.held_over_head", "Held Over Head");
         add("tag.item.ad_astra.cable_ducts", "Cable Ducts");
         add("tag.item.ad_astra.fluid_pipe_ducts", "Fluid Pipe Ducts");

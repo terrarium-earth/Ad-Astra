@@ -23,6 +23,7 @@ public class AdAstraClientForge {
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onClientTick);
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onRenderLevelStage);
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onRegisterClientHud);
+        MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onSetupItemColors);
 
         //noinspection deprecation
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.VENT.get(), RenderType.cutout());
@@ -66,5 +67,9 @@ public class AdAstraClientForge {
 
     private static void onRegisterClientHud(RenderGuiEvent.Post event) {
         AdAstraClient.onRegisterHud(hud -> hud.renderHud(event.getGuiGraphics(), event.getPartialTick()));
+    }
+
+    private static void onSetupItemColors(RegisterColorHandlersEvent.Item event) {
+        AdAstraClient.onAddItemColors(event::register);
     }
 }

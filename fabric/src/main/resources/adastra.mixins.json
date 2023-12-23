@@ -1,14 +1,15 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "earth.terrarium.adastra.mixins.fabric",
-  "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "common.multipart.LevelMixin"
-  ],
-  "client": [
-  ],
-  "injectors": {
-    "defaultRequire": 1
+    "required": true,
+    "minVersion": "0.8",
+    "package": "earth.terrarium.adastra.mixins.fabric",
+    "compatibilityLevel": "JAVA_17",
+    "mixins": [
+        "common.JetSuitItemMixin",
+        "common.multipart.LevelMixin"
+    ],
+    "client": [
+    ],
+    "injectors": {
+        "defaultRequire": 1
   }
 }

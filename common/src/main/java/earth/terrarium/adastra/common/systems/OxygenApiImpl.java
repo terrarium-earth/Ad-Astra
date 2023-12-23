@@ -2,6 +2,7 @@ package earth.terrarium.adastra.common.systems;
 
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
+import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
@@ -66,6 +67,7 @@ public class OxygenApiImpl implements OxygenApi {
         if (this.hasOxygen(entity)) return;
         if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_WITHOUT_OXYGEN)) return;
         if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE)) return;
+        if (SpaceSuitItem.hasFullSet(entity) && SpaceSuitItem.hasOxygen(entity)) return;
         entity.hurt(ModDamageSources.getOrCreate(level, ModDamageSources.OXYGEN), 2);
         entity.setAirSupply(-80);
     }

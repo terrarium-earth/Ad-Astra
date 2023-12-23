@@ -12,6 +12,7 @@ import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.container.BiFluidContainer;
 import earth.terrarium.adastra.common.entities.AirVortex;
 import earth.terrarium.adastra.common.menus.machines.OxygenDistributorMenu;
+import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.adastra.common.utils.floodfill.FloodFill3D;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
@@ -169,6 +170,12 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         OxygenApi.API.removeOxygen(level, lastDistributedBlocks);
         TemperatureApi.API.removeTemperature(level, lastDistributedBlocks); // TODO: separate machine
         lastDistributedBlocks.clear();
+    }
+
+    @Override
+    public void updateSlots() {
+        sync();
+        FluidUtils.insertFluidItemToContainer(this, getFluidContainer(), 1, 2, 0);
     }
 
     @Override

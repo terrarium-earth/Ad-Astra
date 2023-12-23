@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.common.compat.rei.widgets;
 
 import earth.terrarium.adastra.client.utils.GuiUtils;
-import earth.terrarium.adastra.common.utils.ComponentUtils;
+import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import me.shedaniel.math.Point;
@@ -62,8 +62,8 @@ public class FluidBarWidget extends BurningFire {
             this.bounds.y,
             FluidHooks.newFluidHolder(fluid, fluidAmount, null),
             capacity,
-            ComponentUtils.getTicksPerIterationComponent(cookTime),
-            gain ? ComponentUtils.getFluidGenerationPerIterationComponent(perTick) : ComponentUtils.getFluidUsePerIterationComponent(perTick)
+            TooltipUtils.getTicksPerIterationComponent(cookTime),
+            gain ? TooltipUtils.getFluidGenerationPerIterationComponent(perTick) : TooltipUtils.getFluidUsePerIterationComponent(perTick)
         );
     }
 

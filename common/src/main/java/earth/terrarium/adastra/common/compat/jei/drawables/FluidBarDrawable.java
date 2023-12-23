@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.common.compat.jei.drawables;
 
 import earth.terrarium.adastra.client.utils.GuiUtils;
-import earth.terrarium.adastra.common.utils.ComponentUtils;
+import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -59,8 +59,8 @@ public class FluidBarDrawable implements IDrawable {
             yOffset,
             FluidHooks.newFluidHolder(fluid, fluidAmount, null),
             capacity,
-            ComponentUtils.getTicksPerIterationComponent(cookTime),
-            gain ? ComponentUtils.getFluidGenerationPerIterationComponent(perTick) : ComponentUtils.getFluidUsePerIterationComponent(perTick)
+            TooltipUtils.getTicksPerIterationComponent(cookTime),
+            gain ? TooltipUtils.getFluidGenerationPerIterationComponent(perTick) : TooltipUtils.getFluidUsePerIterationComponent(perTick)
         );
     }
 }

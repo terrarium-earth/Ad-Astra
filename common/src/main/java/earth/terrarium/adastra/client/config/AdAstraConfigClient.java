@@ -17,4 +17,11 @@ public final class AdAstraConfigClient {
         translation = "Show Oxygen Distributor Area"
     )
     public static boolean showOxygenDistributorArea;
+
+    @ConfigEntry(
+        type = EntryType.BOOLEAN,
+        id = "jetSuitEnabled",
+        translation = "Jet Suit Enabled"
+    )
+    public static boolean jetSuitEnabled;
 }

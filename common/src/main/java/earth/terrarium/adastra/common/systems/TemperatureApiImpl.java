@@ -3,9 +3,11 @@ package earth.terrarium.adastra.common.systems;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
+import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.tags.ModEntityTypeTags;
+import earth.terrarium.adastra.common.tags.ModItemTags;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
@@ -85,10 +87,12 @@ public class TemperatureApiImpl implements TemperatureApi {
         if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE)) return;
         if (this.isHot(level, entity.blockPosition())) {
             if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_EXTREME_HEAT)) return;
+            if (SpaceSuitItem.hasFullSet(entity, ModItemTags.HEAT_RESISTANT_ARMOR)) return;
             entity.hurt(entity.damageSources().onFire(), 6);
             entity.setSecondsOnFire(10);
         } else if (this.isCold(level, entity.blockPosition())) {
             if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_EXTREME_COLD)) return;
+            if (SpaceSuitItem.hasFullSet(entity, ModItemTags.FREEZE_RESISTANT_ARMOR)) return;
             entity.hurt(entity.damageSources().freeze(), 3);
             entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze() + 20, entity.getTicksFrozen() + 5 * 10));
             ModUtils.sendParticles(level,

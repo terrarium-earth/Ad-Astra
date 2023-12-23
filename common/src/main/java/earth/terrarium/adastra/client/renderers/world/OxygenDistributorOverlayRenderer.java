@@ -50,6 +50,7 @@ public class OxygenDistributorOverlayRenderer {
             );
         }
 
+        poseStack.pushPose();
         var bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
         var consumer = bufferSource.getBuffer(RenderType.debugSectionQuads());
 
@@ -66,6 +67,7 @@ public class OxygenDistributorOverlayRenderer {
         RenderSystem.enableCull();
         RenderSystem.depthMask(true);
         RenderSystem.disableBlend();
+        poseStack.popPose();
     }
 
     private static void renderCube(PoseStack poseStack, VertexConsumer consumer, BlockPos pos, Set<BlockPos> others) {
@@ -126,5 +128,4 @@ public class OxygenDistributorOverlayRenderer {
             consumer.vertex(matrix, minX, minY, minZ).color(COLOR).endVertex();
         }
     }
-
 }

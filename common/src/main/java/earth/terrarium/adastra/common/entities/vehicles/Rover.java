@@ -234,8 +234,8 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
         List<LivingEntity> entities = level().getEntitiesOfClass(LivingEntity.class, aabb, entity -> !getPassengers().contains(entity));
         if (entities.isEmpty()) return;
 
-        double power = getDeltaMovement().length() * 0.75;
-        float damage = (float) (power * 0.5f) * 50;
+        double power = getDeltaMovement().length() * 0.4;
+        float damage = (float) (power * 0.5f) * 70;
         var yRot = getYRot() * (float) (Math.PI / 180);
         for (var entity : entities) {
             entity.setDeltaMovement(entity.getDeltaMovement().add(Mth.sin(-yRot) * 0.1, power, Mth.cos(yRot) * 0.1));
@@ -262,7 +262,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     }
 
     public void consumeFuel() {
-        if (level().isClientSide() || level().getGameTime() % 3 != 0) return;
+        if (level().isClientSide() || level().getGameTime() % 5 != 0) return;
         var toExtract = FluidHooks.newFluidHolder(fluidContainer.getFluids().get(0).getFluid(), FluidHooks.buckets(0.001), null);
         fluidContainer.extractFluid(toExtract, false);
     }

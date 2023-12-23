@@ -158,7 +158,8 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
     @Override
     public void updateSlots() {
         sync();
-        FluidUtils.insertFluidItemToContainer(this, fluidContainer, 1, 2, 0);
+        FluidUtils.insertFluidItemToContainer(this, getFluidContainer(), 1, 2, 0);
+        FluidUtils.extractContainerFluidToItem(this, getFluidContainer(), 3, 4, 1);
     }
 
     @Override

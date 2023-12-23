@@ -3,6 +3,7 @@ package earth.terrarium.adastra.client;
 import com.mojang.blaze3d.platform.InputConstants;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.config.AdAstraConfigClient;
+import earth.terrarium.adastra.client.models.armor.SpaceSuitModel;
 import earth.terrarium.adastra.client.models.entities.vehicles.LanderModel;
 import earth.terrarium.adastra.client.models.entities.vehicles.RocketModel;
 import earth.terrarium.adastra.client.models.entities.vehicles.RoverModel;
@@ -26,10 +27,16 @@ import earth.terrarium.adastra.client.screens.vehicles.RoverScreen;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.entities.base.RadioHolder;
 import earth.terrarium.adastra.common.items.EtrionicCapacitorItem;
+import earth.terrarium.adastra.common.network.NetworkHandler;
+import earth.terrarium.adastra.common.network.messages.ServerboundSyncKeybindPacket;
 import earth.terrarium.adastra.common.registry.*;
+import earth.terrarium.adastra.common.tags.ModItemTags;
+import earth.terrarium.adastra.common.utils.KeybindManager;
 import earth.terrarium.botarium.client.ClientHooks;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.Options;
+import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.particle.SplashParticle;
 import net.minecraft.client.player.LocalPlayer;
@@ -38,6 +45,8 @@ import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.DyeableArmorItem;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.function.BiConsumer;
@@ -62,6 +71,7 @@ public class AdAstraClient {
         registerEntityRenderers();
         registerItemRenderers();
         registerItemProperties();
+        registerArmor();
     }
 
     private static void registerScreens() {
@@ -99,10 +109,23 @@ public class AdAstraClient {
         ClientHooks.registerEntityRenderer(ModEntityTypes.LANDER, c -> new LanderRenderer(c, LanderModel.LAYER, LanderRenderer.TEXTURE));
     }
 
+    public static void registerArmor() {
+        ClientPlatformUtils.registerArmor(SpaceSuitModel.SPACE_SUIT_TEXTURE, SpaceSuitModel.SPACE_SUIT_LAYER, SpaceSuitModel::new,
+            ModItems.SPACE_HELMET.get(), ModItems.SPACE_SUIT.get(),
+            ModItems.SPACE_PANTS.get(), ModItems.SPACE_BOOTS.get());
+        ClientPlatformUtils.registerArmor(SpaceSuitModel.NETHERITE_SPACE_SUIT_TEXTURE, SpaceSuitModel.NETHERITE_SPACE_SUIT_LAYER, SpaceSuitModel::new,
+            ModItems.NETHERITE_SPACE_HELMET.get(), ModItems.NETHERITE_SPACE_SUIT.get(),
+            ModItems.NETHERITE_SPACE_PANTS.get(), ModItems.NETHERITE_SPACE_BOOTS.get());
+        ClientPlatformUtils.registerArmor(SpaceSuitModel.JET_SUIT_TEXTURE, SpaceSuitModel.JET_SUIT_LAYER, SpaceSuitModel::new,
+            ModItems.JET_SUIT_HELMET.get(), ModItems.JET_SUIT.get(),
+            ModItems.JET_SUIT_PANTS.get(), ModItems.JET_SUIT_BOOTS.get());
+    }
+
     public static void onRegisterEntityLayers(ClientPlatformUtils.LayerDefinitionRegistry consumer) {
         consumer.register(RoverModel.LAYER, RoverModel::createBodyLayer);
         RocketModel.register(consumer);
         consumer.register(LanderModel.LAYER, LanderModel::createBodyLayer);
+        SpaceSuitModel.register(consumer);
     }
 
     private static void registerItemRenderers() {
@@ -140,12 +163,39 @@ public class AdAstraClient {
         consumer.accept(OverlayScreen::render);
     }
 
+    public static void onAddItemColors(BiConsumer<ItemColor, ItemLike[]> register) {
+        register.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.SPACE_HELMET.get(), ModItems.SPACE_SUIT.get(), ModItems.SPACE_PANTS.get(), ModItems.SPACE_BOOTS.get()});
+        register.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.NETHERITE_SPACE_HELMET.get(), ModItems.NETHERITE_SPACE_SUIT.get(), ModItems.NETHERITE_SPACE_PANTS.get(), ModItems.NETHERITE_SPACE_BOOTS.get()});
+        register.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.JET_SUIT_HELMET.get(), ModItems.JET_SUIT.get(), ModItems.JET_SUIT_PANTS.get(), ModItems.JET_SUIT_BOOTS.get()});
+    }
+
     public static void clientTick(Minecraft minecraft) {
         LocalPlayer player = minecraft.player;
         if (player == null) return;
 
         if (KEY_OPEN_RADIO.consumeClick() && player.getVehicle() instanceof RadioHolder) {
             RadioHandler.open();
+        }
+
+        if (player.getItemBySlot(EquipmentSlot.CHEST).is(ModItemTags.JET_SUITS)) {
+            Options options = minecraft.options;
+
+            if (KEY_TOGGLE_SUIT_FLIGHT.consumeClick()) {
+                AdAstraConfigClient.jetSuitEnabled = !AdAstraConfigClient.jetSuitEnabled;
+                Minecraft.getInstance().tell(() -> AdAstra.CONFIGURATOR.saveConfig(AdAstraConfigClient.class));
+                player.displayClientMessage(AdAstraConfigClient.jetSuitEnabled ? ConstantComponents.SUIT_FLIGHT_ENABLED : ConstantComponents.SUIT_FLIGHT_DISABLED, true);
+            }
+
+            KeybindManager.set(player,
+                options.keyJump.isDown(),
+                options.keySprint.isDown(),
+                AdAstraConfigClient.jetSuitEnabled);
+
+            NetworkHandler.CHANNEL.sendToServer(new ServerboundSyncKeybindPacket(
+                options.keyJump.isDown(),
+                options.keySprint.isDown(),
+                AdAstraConfigClient.jetSuitEnabled
+            ));
         }
     }
 }
