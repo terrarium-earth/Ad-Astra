@@ -55,6 +55,8 @@ public class Mp3AudioStream extends InputStream implements AudioStream {
             if (decoder.decodeFrame(header, bitstream) != this.output) {
                 throw new IllegalStateException("Output buffers are different.");
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // This is thrown when the end of the stream is reached.
         } catch (Exception e) {
             throw new IOException(e);
         }
@@ -109,7 +111,7 @@ public class Mp3AudioStream extends InputStream implements AudioStream {
     @Override
     public @NotNull ByteBuffer read(int size) throws IOException {
         byte[] data = new byte[size];
-        int count = IOUtils.read(this, data, 0, size);
+        int count = IOUtils.read(this, data);
 
         ByteBuffer dest = ByteBuffer.allocateDirect(count);
         dest.order(ByteOrder.nativeOrder());

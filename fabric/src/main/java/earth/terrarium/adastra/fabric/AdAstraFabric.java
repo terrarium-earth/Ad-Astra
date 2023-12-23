@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.fabric;
 
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.commands.PlanetsCommand;
+import earth.terrarium.adastra.common.commands.AdAstraCommands;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -26,7 +26,7 @@ public class AdAstraFabric {
         ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register((player, joined) -> AdAstra.onDatapackSync(player));
         ServerTickEvents.END_SERVER_TICK.register(AdAstra::onServerTick);
         ModEntityTypes.registerAttributes((type, builder) -> FabricDefaultAttributeRegistry.register(type.get(), builder.get()));
-        CommandRegistrationCallback.EVENT.register((dispatcher, ctx, environment) -> PlanetsCommand.register(dispatcher));
+        CommandRegistrationCallback.EVENT.register((dispatcher, ctx, environment) -> AdAstraCommands.register(dispatcher));
     }
 
     public static void onAddReloadListener() {

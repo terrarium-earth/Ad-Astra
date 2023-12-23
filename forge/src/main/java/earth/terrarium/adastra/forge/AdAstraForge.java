@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.forge;
 
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.commands.PlanetsCommand;
+import earth.terrarium.adastra.common.commands.AdAstraCommands;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -48,6 +48,6 @@ public class AdAstraForge {
     }
 
     private static void registerCommands(RegisterCommandsEvent event) {
-        PlanetsCommand.register(event.getDispatcher());
+        AdAstraCommands.register(event.getDispatcher());
     }
 }

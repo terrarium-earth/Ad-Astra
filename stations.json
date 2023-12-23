@@ -19,10 +19,41 @@
             "url": "https://live.leanstream.co/CKIXFM-MP3",
             "title": "HOT 99.1",
             "name": "HOT 99.1"
-        },{
-            "url": "https://newcap.leanstream.co/CKXDFM-MP3",
+        },
+        {
+            "url": "https://live.leanstream.co/CKXDFM-MP3",
             "title": "97.5 K-Rock",
             "name": "97.5 K-Rock"
+        },
+        {
+            "url": "https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3",
+            "title": "Qmusic NL",
+            "name": "Qmusic NL"
+        },
+        {
+            "url": "https://ice2.somafm.com/missioncontrol-128-mp3",
+            "title": "Mission Control",
+            "name": "SomaFM Mission Control"
+        },
+        {
+            "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/ARN_KIIS1011.mp3",
+            "title": "KIIS 101.1",
+            "name": "KIIS 101.1"
+        },
+        {
+            "url": "https://0n-games.radionetz.de/0n-games.mp3",
+            "title": "0N Games",
+            "name": "0N Radio - Games"
+        },
+        {
+            "url": "https://0n-latin.radionetz.de/0n-latin.mp3",
+            "title": "0N Latin",
+            "name": "0N Radio - Latin"
+        },
+        {
+            "url": "https://0n-radio.radionetz.de/0n-radio.mp3",
+            "title": "0N Radio",
+            "name": "0N Radio"
         }
     ]
 }
