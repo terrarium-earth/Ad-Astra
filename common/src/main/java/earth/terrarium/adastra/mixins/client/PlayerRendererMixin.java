@@ -53,7 +53,7 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
         if (layer == null || texture == null) return;
         var root = Minecraft.getInstance().getEntityModels().bakeLayer(layer);
 
-        var spaceSuitModel = new SpaceSuitModel(root, EquipmentSlot.CHEST, null);
+        var spaceSuitModel = new SpaceSuitModel(root, EquipmentSlot.CHEST, stack, null);
         boolean isRightHand = rendererArm == spaceSuitModel.rightArm;
 
         int color = spaceSuit.getColor(stack);

@@ -23,5 +23,5 @@ public final class AdAstraConfigClient {
         id = "jetSuitEnabled",
         translation = "Jet Suit Enabled"
     )
-    public static boolean jetSuitEnabled;
+    public static boolean jetSuitEnabled = true;
 }

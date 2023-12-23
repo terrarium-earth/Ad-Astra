@@ -3,9 +3,12 @@ package earth.terrarium.adastra.client.models.armor;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import dev.architectury.injectables.targets.ArchitecturyTarget;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.ClientPlatformUtils;
 import earth.terrarium.adastra.common.registry.ModItems;
+import earth.terrarium.adastra.common.tags.ModItemTags;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,8 +17,10 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.DyeableArmorItem;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,11 +38,15 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
     private final ModelPart rightBoot;
     private final ModelPart leftBoot;
 
+    @Nullable
+    private final ResourceLocation texture;
     private final EquipmentSlot slot;
     @Nullable
     private final HumanoidModel<LivingEntity> parentModel;
 
-    public SpaceSuitModel(ModelPart root, EquipmentSlot slot, @Nullable HumanoidModel<LivingEntity> parentModel) {
+    private float r, g, b;
+
+    public SpaceSuitModel(ModelPart root, EquipmentSlot slot, ItemStack stack, @Nullable HumanoidModel<LivingEntity> parentModel) {
         super(root, RenderType::entityTranslucent);
 
         this.visor = root.getChild("visor");
@@ -46,11 +55,24 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
         this.leftBoot = root.getChild("right_boot");
         this.slot = slot;
         this.parentModel = parentModel;
+        this.texture = getTextureLocation(stack);
         this.setVisible();
+
+        if (stack.getItem() instanceof DyeableArmorItem armor) {
+            int color = armor.getColor(stack);
+            r = FastColor.ARGB32.red(color) / 255f;
+            g = FastColor.ARGB32.green(color) / 255f;
+            b = FastColor.ARGB32.blue(color) / 255f;
+        }
     }
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        if (ArchitecturyTarget.getCurrentTarget().equals("forge") && texture != null) {
+            var bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
+            buffer = bufferSource.getBuffer(RenderType.entityTranslucent(texture));
+        }
+
         if (this.parentModel == null) return;
         this.visor.copyFrom(parentModel.head);
         this.belt.copyFrom(parentModel.body);
@@ -58,7 +80,7 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
         this.leftBoot.copyFrom(parentModel.leftLeg);
         parentModel.copyPropertiesTo(this);
 
-        super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+        super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, r, g, b, alpha);
     }
 
     @Override
@@ -119,12 +141,12 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
 
     @Nullable
     public static ResourceLocation getTextureLocation(ItemStack stack) {
-        if (stack.is(ModItems.SPACE_SUIT.get())) {
-            return SPACE_SUIT_TEXTURE;
-        } else if (stack.is(ModItems.NETHERITE_SPACE_SUIT.get())) {
-            return NETHERITE_SPACE_SUIT_TEXTURE;
-        } else if (stack.is(ModItems.JET_SUIT.get())) {
-            return JET_SUIT_TEXTURE;
+        if (stack.is(ModItemTags.JET_SUITS)) {
+            return SpaceSuitModel.JET_SUIT_TEXTURE;
+        } else if (stack.is(ModItemTags.NETHERITE_SPACE_SUITS)) {
+            return SpaceSuitModel.NETHERITE_SPACE_SUIT_TEXTURE;
+        } else if (stack.is(ModItemTags.SPACE_SUITS)) {
+            return SpaceSuitModel.SPACE_SUIT_TEXTURE;
         } else {
             return null;
         }

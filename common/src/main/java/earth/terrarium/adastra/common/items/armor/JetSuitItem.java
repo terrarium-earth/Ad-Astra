@@ -103,7 +103,7 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
         return ((2 * peakAcceleration) / (1 + Math.exp(-t / peakTime)) - peakAcceleration) + initialAcceleration;
     }
 
-    public void spawnParticles(Level level, LivingEntity entity, HumanoidModel<LivingEntity> model, ItemStack stack) {
+    public void spawnParticles(Level level, LivingEntity entity, HumanoidModel<?> model, ItemStack stack) {
         if (!(entity instanceof Player player)) return;
         if (!canFly(player, stack)) return;
         if (!hasFullJetSuitSet(player)) return;

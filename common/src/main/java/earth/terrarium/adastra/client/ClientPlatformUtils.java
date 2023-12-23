@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.function.Supplier;
@@ -33,7 +34,7 @@ public class ClientPlatformUtils {
 
     @FunctionalInterface
     public interface ArmorFactory {
-        HumanoidModel<?> create(ModelPart root, EquipmentSlot slot, HumanoidModel<LivingEntity> parentModel);
+        HumanoidModel<?> create(ModelPart root, EquipmentSlot slot, ItemStack stack, HumanoidModel<LivingEntity> parentModel);
     }
 
     @FunctionalInterface
