@@ -284,6 +284,8 @@ public class ModLangProvider extends LanguageProvider {
         add("subtitles.ad_astra.block.wrench", "Wrench ratchets");
         add("subtitles.ad_astra.block.sliding_door_open", "Sliding door opens");
         add("subtitles.ad_astra.block.sliding_door_close", "Sliding door closes");
+        add("subtitles.ad_astra.entity.oxygen_intake", "Oxygen intake");
+        add("subtitles.ad_astra.entity.oxygen_outtake", "Oxygen outtake");
     }
 
     public void addFluid(Supplier<? extends Fluid> key, String name) {

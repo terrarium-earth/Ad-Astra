@@ -25,4 +25,10 @@ public class ModSoundEvents {
 
     public static final RegistryEntry<SoundEvent> SLIDING_DOOR_OPEN = SOUND_EVENTS.register("sliding_door_open", () ->
         SoundEvent.createVariableRangeEvent(new ResourceLocation(AdAstra.MOD_ID, "sliding_door_open")));
+
+    public static final RegistryEntry<SoundEvent> OXYGEN_INTAKE = SOUND_EVENTS.register("oxygen_intake", () ->
+        SoundEvent.createVariableRangeEvent(new ResourceLocation(AdAstra.MOD_ID, "oxygen_intake")));
+
+    public static final RegistryEntry<SoundEvent> OXYGEN_OUTTAKE = SOUND_EVENTS.register("oxygen_outtake", () ->
+        SoundEvent.createVariableRangeEvent(new ResourceLocation(AdAstra.MOD_ID, "oxygen_outtake")));
 }

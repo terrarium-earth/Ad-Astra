@@ -22,6 +22,6 @@ public class ModDamageSourceTagProvider extends TagsProvider<DamageType> {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(DamageTypeTags.BYPASSES_ARMOR).add(TagEntry.element(ModDamageSources.OXYGEN.location()));
+        tag(DamageTypeTags.BYPASSES_ARMOR).add(TagEntry.optionalElement(ModDamageSources.OXYGEN.location()));
     }
 }

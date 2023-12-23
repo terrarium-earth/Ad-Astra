@@ -38,7 +38,7 @@ public record ClientboundSyncLocalPlanetDataPacket(
 
         @Override
         public PacketContext handle(ClientboundSyncLocalPlanetDataPacket packet) {
-            return (player, level) -> ClientData.localData = packet.localData();
+            return (player, level) -> ClientData.updateLocalData(packet.localData());
         }
     }
 }

@@ -28,5 +28,21 @@
       "ad_astra:sliding_door_close"
     ],
     "subtitle": "subtitles.ad_astra.block.sliding_door_close"
+  },
+  "oxygen_intake": {
+    "sounds": [
+      "ad_astra:oxygen/intake_1",
+      "ad_astra:oxygen/intake_2",
+      "ad_astra:oxygen/intake_3"
+    ],
+    "subtitle": "subtitles.ad_astra.entity.oxygen_intake"
+  },
+  "oxygen_outtake": {
+      "sounds": [
+      "ad_astra:oxygen/outtake_1",
+      "ad_astra:oxygen/outtake_2",
+      "ad_astra:oxygen/outtake_3"
+      ],
+      "subtitle": "subtitles.ad_astra.entity.oxygen_outtake"
   }
 }

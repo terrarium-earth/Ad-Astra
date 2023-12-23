@@ -54,7 +54,7 @@ public abstract class LivingEntityMixin extends Entity {
         if (entity instanceof Player player) {
             if (player.getAbilities().flying) return;
             if (level().isClientSide()) {
-                gravity = Optionull.mapOrDefault(ClientData.localData, PlanetData::gravity, PlanetConstants.EARTH_GRAVITY);
+                gravity = Optionull.mapOrDefault(ClientData.getLocalData(), PlanetData::gravity, PlanetConstants.EARTH_GRAVITY);
             }
         }
 

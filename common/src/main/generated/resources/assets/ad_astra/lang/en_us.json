@@ -431,6 +431,8 @@
   "subtitles.ad_astra.block.sliding_door_close": "Sliding door closes",
   "subtitles.ad_astra.block.sliding_door_open": "Sliding door opens",
   "subtitles.ad_astra.block.wrench": "Wrench ratchets",
+  "subtitles.ad_astra.entity.oxygen_intake": "Oxygen intake",
+  "subtitles.ad_astra.entity.oxygen_outtake": "Oxygen outtake",
   "tag.item.ad_astra.cable_ducts": "Cable Ducts",
   "tag.item.ad_astra.calorite_blocks": "Calorite Blocks",
   "tag.item.ad_astra.calorite_ingots": "Calorite Ingots",

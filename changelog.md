@@ -53,7 +53,8 @@ can only be opened with redstone, similar to iron doors.
 - Each rocket now has its own fuel tag. This allows packmakers to require different fuels for different rockets.
 - Coal generator will no longer continue consuming fuel if it's full on energy.
 - Updated the rover driving mechanics to be more fluid and easier to control.
-- The rover can now run over mobs
+- The rover can now run over mobs.
+- Added oxygen intake and outtake sounds when entering and exiting oxygenated areas.
 - Fluid ducts now have the same internal mechanics as pipes so they can now be used exactly like them.
 - Added the radio. This is a real radio that'll play actual select radio stations. It's available as a
 screen in the rover. You can open in by pressing `R` while in the rover or clicking on the screen on the rover.
