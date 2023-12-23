@@ -5,6 +5,7 @@
     "compatibilityLevel": "JAVA_17",
     "mixins": [
         "common.CustomDyeableArmorItemMixin",
+        "common.RenderedItemMixin",
         "common.multipart.LevelMixin"
     ],
     "client": [

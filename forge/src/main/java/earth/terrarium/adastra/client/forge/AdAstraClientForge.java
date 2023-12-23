@@ -4,8 +4,10 @@ import earth.terrarium.adastra.client.AdAstraClient;
 import earth.terrarium.adastra.client.renderers.world.OxygenDistributorOverlayRenderer;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.common.MinecraftForge;
@@ -14,8 +16,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class AdAstraClientForge {
+    public static final Map<Item, BlockEntityWithoutLevelRenderer> ITEM_RENDERERS = new HashMap<>();
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
@@ -31,6 +37,7 @@ public class AdAstraClientForge {
 
     @SubscribeEvent
     public static void postInit(FMLClientSetupEvent event) {
+        AdAstraClient.onRegisterItemRenderers(ITEM_RENDERERS::put);
     }
 
     @SubscribeEvent

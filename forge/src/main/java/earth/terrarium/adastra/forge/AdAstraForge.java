@@ -10,6 +10,8 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(AdAstra.MOD_ID)
 public class AdAstraForge {
@@ -21,6 +23,7 @@ public class AdAstraForge {
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onServerTick);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onAttributes);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::registerCommands);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::commonSetup);
     }
 
     public static void onAddReloadListener(AddReloadListenerEvent event) {
@@ -45,6 +48,10 @@ public class AdAstraForge {
 
     public static void onAttributes(EntityAttributeCreationEvent event) {
         ModEntityTypes.registerAttributes((entityType, attribute) -> event.put(entityType.get(), attribute.get().build()));
+    }
+
+    public static void commonSetup(FMLCommonSetupEvent event) {
+        AdAstra.postInit();
     }
 
     private static void registerCommands(RegisterCommandsEvent event) {

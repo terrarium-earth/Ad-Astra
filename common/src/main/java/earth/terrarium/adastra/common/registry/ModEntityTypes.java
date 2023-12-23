@@ -71,4 +71,7 @@ public class ModEntityTypes {
 
     public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
     }
+
+    public static void registerSpawnPlacements() {
+    }
 }

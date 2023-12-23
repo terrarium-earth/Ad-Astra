@@ -13,6 +13,7 @@ import earth.terrarium.adastra.common.items.armor.materials.JetSuitMaterial;
 import earth.terrarium.adastra.common.items.armor.materials.NetheriteSpaceSuitMaterial;
 import earth.terrarium.adastra.common.items.armor.materials.SpaceSuitMaterial;
 import earth.terrarium.adastra.common.items.machines.EnergizerBlockItem;
+import earth.terrarium.adastra.common.items.rendered.RenderedBlockItem;
 import earth.terrarium.adastra.common.items.vehicles.RocketItem;
 import earth.terrarium.adastra.common.items.vehicles.VehicleItem;
 import earth.terrarium.adastra.common.tags.ModPaintingVariantTags;
@@ -82,12 +83,12 @@ public class ModItems {
     public static final RegistryEntry<Item> RED_FLAG = FLAGS.register("red_flag", () -> new BlockItem(ModBlocks.RED_FLAG.get(), new Item.Properties()));
     public static final RegistryEntry<Item> BLACK_FLAG = FLAGS.register("black_flag", () -> new BlockItem(ModBlocks.BLACK_FLAG.get(), new Item.Properties()));
 
-    public static final RegistryEntry<Item> EARTH_GLOBE = GLOBES.register("earth_globe", () -> new BlockItem(ModBlocks.EARTH_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
-    public static final RegistryEntry<Item> MOON_GLOBE = GLOBES.register("moon_globe", () -> new BlockItem(ModBlocks.MOON_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
-    public static final RegistryEntry<Item> MARS_GLOBE = GLOBES.register("mars_globe", () -> new BlockItem(ModBlocks.MARS_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
-    public static final RegistryEntry<Item> MERCURY_GLOBE = GLOBES.register("mercury_globe", () -> new BlockItem(ModBlocks.MERCURY_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
-    public static final RegistryEntry<Item> VENUS_GLOBE = GLOBES.register("venus_globe", () -> new BlockItem(ModBlocks.VENUS_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
-    public static final RegistryEntry<Item> GLACIO_GLOBE = GLOBES.register("glacio_globe", () -> new BlockItem(ModBlocks.GLACIO_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryEntry<Item> EARTH_GLOBE = GLOBES.register("earth_globe", () -> new RenderedBlockItem(ModBlocks.EARTH_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryEntry<Item> MOON_GLOBE = GLOBES.register("moon_globe", () -> new RenderedBlockItem(ModBlocks.MOON_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryEntry<Item> MARS_GLOBE = GLOBES.register("mars_globe", () -> new RenderedBlockItem(ModBlocks.MARS_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryEntry<Item> MERCURY_GLOBE = GLOBES.register("mercury_globe", () -> new RenderedBlockItem(ModBlocks.MERCURY_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryEntry<Item> VENUS_GLOBE = GLOBES.register("venus_globe", () -> new RenderedBlockItem(ModBlocks.VENUS_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryEntry<Item> GLACIO_GLOBE = GLOBES.register("glacio_globe", () -> new RenderedBlockItem(ModBlocks.GLACIO_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
 
     public static final RegistryEntry<Item> SPACE_HELMET = BASIC_ITEMS.register("space_helmet", () -> new CustomDyeableArmorItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryEntry<Item> SPACE_SUIT = BASIC_ITEMS.register("space_suit", () -> new SpaceSuitItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, 1, new Item.Properties()));

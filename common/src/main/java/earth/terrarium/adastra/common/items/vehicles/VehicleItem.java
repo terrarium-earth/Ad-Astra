@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.common.items.vehicles;
 
 import earth.terrarium.adastra.common.entities.vehicles.Rover;
+import earth.terrarium.adastra.common.items.rendered.RenderedItem;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.botarium.common.fluid.FluidApi;
@@ -14,7 +15,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
@@ -23,7 +23,7 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class VehicleItem extends Item implements BotariumFluidItem<WrappedItemFluidContainer> {
+public class VehicleItem extends RenderedItem implements BotariumFluidItem<WrappedItemFluidContainer> {
     private final Supplier<EntityType<?>> type;
 
     public VehicleItem(Supplier<EntityType<?>> type, Properties properties) {

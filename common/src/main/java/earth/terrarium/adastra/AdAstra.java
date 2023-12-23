@@ -12,6 +12,7 @@ import earth.terrarium.adastra.common.network.messages.ClientboundSyncPlanetsPac
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.registry.*;
 import earth.terrarium.adastra.common.utils.radio.StationLoader;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -50,7 +51,13 @@ public class AdAstra {
         ModDensityFunctionTypes.DENSITY_FUNCTION_TYPES.init();
     }
 
-    public static void postInit() {}
+    public static void postInit() {
+        CauldronInteraction.WATER.put(ModItems.SPACE_HELMET.get(), CauldronInteraction.DYED_ITEM);
+        CauldronInteraction.WATER.put(ModItems.SPACE_SUIT.get(), CauldronInteraction.DYED_ITEM);
+        CauldronInteraction.WATER.put(ModItems.SPACE_PANTS.get(), CauldronInteraction.DYED_ITEM);
+        CauldronInteraction.WATER.put(ModItems.SPACE_BOOTS.get(), CauldronInteraction.DYED_ITEM);
+        ModEntityTypes.registerSpawnPlacements();
+    }
 
     public static void onAddReloadListener(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {
         registry.accept(new ResourceLocation(AdAstra.MOD_ID, "planets"), new AdAstraData());
