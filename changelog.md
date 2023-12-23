@@ -43,6 +43,7 @@ This replaces the original oxygen bubble particle indicator. This is also now en
 client-side and saved to the client config.
 - Rewrote JEI and REI integration, with improved screens and tooltips.
 - Flags now render the second skin layer.
+- Fixed space suit arm glowing in first person with shaders
 - Set max flag URL length from 32 to 64 characters.
 - Fixed boots, pants, and helmet part of the space suit being able to hold energy and fluid.
 - Changed package name from `earth.terrarium.ad_astra` to `earth.terrarium.adastra`. The mod id has not changed.

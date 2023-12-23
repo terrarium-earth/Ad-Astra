@@ -23,6 +23,7 @@
         "client.CameraMixin",
         "client.EntityRendererMixin",
         "client.HumanoidModelMixin",
+        "client.PlayerRendererMixin",
         "client.SoundEngineAccessor",
         "client.SoundManagerAccessor",
         "client.multipart.ClientLevelEntityCallbacksMixin",

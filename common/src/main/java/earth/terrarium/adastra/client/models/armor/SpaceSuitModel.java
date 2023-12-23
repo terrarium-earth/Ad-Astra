@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.ClientPlatformUtils;
+import earth.terrarium.adastra.common.registry.ModItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -15,6 +16,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
     public static final ModelLayerLocation SPACE_SUIT_LAYER = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "space_suit"), "main");
@@ -31,9 +34,10 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
     private final ModelPart leftBoot;
 
     private final EquipmentSlot slot;
+    @Nullable
     private final HumanoidModel<LivingEntity> parentModel;
 
-    public SpaceSuitModel(ModelPart root, EquipmentSlot slot, HumanoidModel<LivingEntity> parentModel) {
+    public SpaceSuitModel(ModelPart root, EquipmentSlot slot, @Nullable HumanoidModel<LivingEntity> parentModel) {
         super(root, RenderType::entityTranslucent);
 
         this.visor = root.getChild("visor");
@@ -47,6 +51,7 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        if (this.parentModel == null) return;
         this.visor.copyFrom(parentModel.head);
         this.belt.copyFrom(parentModel.body);
         this.rightBoot.copyFrom(parentModel.rightLeg);
@@ -90,14 +95,40 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
     }
 
     @Override
-	protected Iterable<ModelPart> headParts() {
-		return ImmutableList.of(head, visor);
-	}
+    protected Iterable<ModelPart> headParts() {
+        return ImmutableList.of(head, visor);
+    }
 
-	@Override
-	protected Iterable<ModelPart> bodyParts() {
-		return ImmutableList.of(body, rightArm, leftArm, rightLeg, leftLeg, hat, belt, rightBoot, leftBoot);
-	}
+    @Override
+    protected Iterable<ModelPart> bodyParts() {
+        return ImmutableList.of(body, rightArm, leftArm, rightLeg, leftLeg, hat, belt, rightBoot, leftBoot);
+    }
+
+    @Nullable
+    public static ModelLayerLocation getLayerLocation(ItemStack stack) {
+        if (stack.is(ModItems.SPACE_SUIT.get())) {
+            return SPACE_SUIT_LAYER;
+        } else if (stack.is(ModItems.NETHERITE_SPACE_SUIT.get())) {
+            return NETHERITE_SPACE_SUIT_LAYER;
+        } else if (stack.is(ModItems.JET_SUIT.get())) {
+            return JET_SUIT_LAYER;
+        } else {
+            return null;
+        }
+    }
+
+    @Nullable
+    public static ResourceLocation getTextureLocation(ItemStack stack) {
+        if (stack.is(ModItems.SPACE_SUIT.get())) {
+            return SPACE_SUIT_TEXTURE;
+        } else if (stack.is(ModItems.NETHERITE_SPACE_SUIT.get())) {
+            return NETHERITE_SPACE_SUIT_TEXTURE;
+        } else if (stack.is(ModItems.JET_SUIT.get())) {
+            return JET_SUIT_TEXTURE;
+        } else {
+            return null;
+        }
+    }
 
     @SuppressWarnings("unused")
     public static LayerDefinition createSpaceSuitLayer() {
@@ -152,12 +183,12 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
         PartDefinition right_arm = modelPartData.addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.offset(-5.0f, 1.0f, 0.0f));
 
         PartDefinition cube_r1 = right_arm.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(16, 32).addBox(-2.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(1.0f))
-                .texOffs(16, 48).addBox(-2.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offsetAndRotation(-1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+            .texOffs(16, 48).addBox(-2.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offsetAndRotation(-1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
 
         PartDefinition left_arm = modelPartData.addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.offset(5.0f, 1.0f, 0.0f));
 
         PartDefinition cube_r2 = left_arm.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(16, 32).mirror().addBox(-1.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(1.0f))
-                .texOffs(16, 48).addBox(-1.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offsetAndRotation(1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+            .texOffs(16, 48).addBox(-1.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offsetAndRotation(1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
 
         PartDefinition right_leg = modelPartData.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 32).addBox(-2.0f, 0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(0.7f)), PartPose.offset(-1.9f, 12.0f, 0.0f));
 
@@ -181,8 +212,8 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
         PartDefinition visor = modelPartData.addOrReplaceChild("visor", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0f, -8.0f, -4.0f, 8.0f, 8.0f, 8.0f, new CubeDeformation(1.0f)), PartPose.offset(0.0f, 0.0f, 0.0f));
 
         PartDefinition body = modelPartData.addOrReplaceChild("body", CubeListBuilder.create().texOffs(24, 16).addBox(-4.0f, 0.0f, -2.0f, 8.0f, 12.0f, 4.0f, new CubeDeformation(0.6f))
-                .texOffs(32, 48).addBox(-4.0f, -1.0f, 3.0f, 8.0f, 12.0f, 4.0f, new CubeDeformation(0.5f))
-                .texOffs(32, 32).addBox(-4.0f, 0.0f, -2.0f, 8.0f, 12.0f, 4.0f, new CubeDeformation(0.9f)), PartPose.offset(1.0f, 0.5f, 0.0f));
+            .texOffs(32, 48).addBox(-4.0f, -1.0f, 3.0f, 8.0f, 12.0f, 4.0f, new CubeDeformation(0.5f))
+            .texOffs(32, 32).addBox(-4.0f, 0.0f, -2.0f, 8.0f, 12.0f, 4.0f, new CubeDeformation(0.9f)), PartPose.offset(1.0f, 0.5f, 0.0f));
         PartDefinition belt = modelPartData.addOrReplaceChild("belt", CubeListBuilder.create().texOffs(0, 16).addBox(-4.0f, 0.0f, -2.0f, 8.0f, 12.0f, 4.0f, new CubeDeformation(0.5f)), PartPose.offset(0.0f, -0.5f, 0.0f));
 
         PartDefinition backpack = body.addOrReplaceChild("backpack", CubeListBuilder.create(), PartPose.offset(0.0f, 5.0f, 5.0f));
@@ -190,12 +221,12 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
         PartDefinition right_arm = modelPartData.addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.offset(-4.5f, 2.0f, 0.0f));
 
         PartDefinition cube_r1 = right_arm.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(16, 32).addBox(-2.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(1.0f))
-                .texOffs(16, 48).addBox(-2.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offsetAndRotation(-1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+            .texOffs(16, 48).addBox(-2.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offsetAndRotation(-1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
 
         PartDefinition left_arm = modelPartData.addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.offset(4.5f, 2.0f, 0.0f));
 
         PartDefinition cube_r2 = left_arm.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(16, 32).mirror().addBox(-1.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(1.0f))
-                .texOffs(16, 48).addBox(-1.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offsetAndRotation(1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+            .texOffs(16, 48).addBox(-1.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offsetAndRotation(1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
 
         PartDefinition right_leg = modelPartData.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 32).addBox(-2.0f, 0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(0.7f)), PartPose.offset(-1.9f, 12.0f, 0.0f));
 
