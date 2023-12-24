@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-18T03:47:17.179481	Loot Tables
+// 1.20.1	2023-12-23T19:47:26.940569	Loot Tables
 4efe4f28604ed0c37ff7f8af4947a23faab3382d data/ad_astra/loot_tables/blocks/aeronos_cap.json
 20680115dd11f036d8d02873251e6d46a9536722 data/ad_astra/loot_tables/blocks/aeronos_door.json
 02ee1849c554327df21d9c76f6fee2ae6d79b550 data/ad_astra/loot_tables/blocks/aeronos_fence.json
@@ -111,6 +111,7 @@ b41c4af37a0fcde8ef7bc5f2831379dc3b51be77 data/ad_astra/loot_tables/blocks/glowin
 1dc5ddfe7c3413159576688c851c5d5447c5c96c data/ad_astra/loot_tables/blocks/glowing_steel_pillar.json
 7e1ee0904e716c1aa2db0b58df2e1ee60686fa32 data/ad_astra/loot_tables/blocks/gray_flag.json
 0d0295fab65e6280ba9474c17b13e922f8ce12ad data/ad_astra/loot_tables/blocks/green_flag.json
+244e393e879ed24845a019602aa2a2165b2b8c7b data/ad_astra/loot_tables/blocks/industrial_lamp.json
 c1ee7b6ae0d2c69ffe92e01a25fc31d22babb801 data/ad_astra/loot_tables/blocks/infernal_spire_block.json
 eaffddd2a3c6a6aefda5ae8aca14d9c99196b583 data/ad_astra/loot_tables/blocks/iron_pillar.json
 b935ca264d9c00aaccebeb10f12a2c6e1bc25e3a data/ad_astra/loot_tables/blocks/iron_plating.json

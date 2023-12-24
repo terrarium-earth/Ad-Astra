@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-18T03:47:17.175381	Block States: ad_astra
+// 1.20.1	2023-12-23T19:53:24.328819	Block States: ad_astra
 3b0e47b473b6710ddeb7f46108de3f3ad99e83e3 assets/ad_astra/blockstates/aeronos_cap.json
 97fb99c686b024024655b4d9507104dc77161f29 assets/ad_astra/blockstates/aeronos_door.json
 0f6adcffc18bba1418df5c168e72a767e1075feb assets/ad_astra/blockstates/aeronos_fence.json
@@ -111,6 +111,7 @@ f35c00dc75cf23742b3d5d00c8b83bf0315c6e15 assets/ad_astra/blockstates/glowing_ste
 0d095271c674119d160d09cc7f4ded7eddc54534 assets/ad_astra/blockstates/gray_flag.json
 f567be72a1c8b8133c30fb7bf1409150709f3f47 assets/ad_astra/blockstates/green_flag.json
 610ba3dfd81c45cc2c739004b4e0a3bf3fe44895 assets/ad_astra/blockstates/hydrogen.json
+a2d3c47c1201ea5c06c885994ad1574e46b786a6 assets/ad_astra/blockstates/industrial_lamp.json
 b465de0fa61771d9fe6a1fc3d1285a070934a876 assets/ad_astra/blockstates/infernal_spire_block.json
 813136db0a70aa7f809338116c7acb69ce8d37e8 assets/ad_astra/blockstates/iron_pillar.json
 a7695ff4914865c7a64ee81b19975dd6a09eb89e assets/ad_astra/blockstates/iron_plating.json
@@ -476,6 +477,7 @@ c61983450eefa3d146852597eb0984b7f0c5cf43 assets/ad_astra/models/block/glowing_st
 e06531e79fd61bb68b5d2f326bf3312c6c9670d6 assets/ad_astra/models/block/gray_flag.json
 c8b86a85c58b809d8cf3bf03b166cde30ddfdcd4 assets/ad_astra/models/block/green_flag.json
 50812bd51e14ec5ea223afe239c89730a63e43b1 assets/ad_astra/models/block/hydrogen.json
+bf21a9e8fbc5a3846fb05b4fa0859e0917b2202f assets/ad_astra/models/block/industrial_lamp.json
 30686736cab48b2a7a1264fd0f79743ed4590957 assets/ad_astra/models/block/infernal_spire_block.json
 5593797b169fbe8e915f010648dce7dd1b96bf03 assets/ad_astra/models/block/iron_pillar.json
 25f4030a3e10aaf6923499bd0c9d0d812a560ccc assets/ad_astra/models/block/iron_pillar_horizontal.json
@@ -865,6 +867,7 @@ fafe215eae4aac49876bedb82993ac7ceaf05d6d assets/ad_astra/models/item/glacio_ston
 f8e51f0d2b3109c9e2ac459ef8cbad79f6d032ab assets/ad_astra/models/item/glowing_steel_pillar.json
 f300115a277b036091d9fdbb78a497c8f7649329 assets/ad_astra/models/item/gray_flag.json
 93c93e489b712e748af4bca9ca6c09fe286ea966 assets/ad_astra/models/item/green_flag.json
+63b2be2210ecc8b367c19913f43410c9910b6c2c assets/ad_astra/models/item/industrial_lamp.json
 3ecc5c78c844653a0ea676ae71ddfc78dc450437 assets/ad_astra/models/item/infernal_spire_block.json
 c1616deba3854912e3e81525928e92869fb7c213 assets/ad_astra/models/item/iron_pillar.json
 4ffcff0639e856cc9d83bf0c14aeffa82d4b0861 assets/ad_astra/models/item/iron_plating.json

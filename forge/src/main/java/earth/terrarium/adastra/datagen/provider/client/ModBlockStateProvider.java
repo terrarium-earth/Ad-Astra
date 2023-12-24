@@ -104,6 +104,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         pipe(ModBlocks.OSTRUM_FLUID_PIPE.get(), "fluid_pipe");
         basicBlock(ModBlocks.CABLE_DUCT.get());
         basicBlock(ModBlocks.FLUID_PIPE_DUCT.get());
+
+        horizontalFaceBlock(ModBlocks.INDUSTRIAL_LAMP.get(), models().getExistingFile(modLoc("block/industrial_lamp")));
+        simpleBlockItem(ModBlocks.INDUSTRIAL_LAMP.get(), models().getBuilder(name(ModBlocks.INDUSTRIAL_LAMP.get())));
     }
 
     public void basicBlock(Block block) {

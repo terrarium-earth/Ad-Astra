@@ -30,6 +30,7 @@ public class AdAstraClientFabric {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SOLAR_PANEL.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WATER_PUMP.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ENERGIZER.get(), RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.INDUSTRIAL_LAMP.get(), RenderType.cutout());
         ModBlocks.GLOBES.stream().forEach(globe -> BlockRenderLayerMap.INSTANCE.putBlock(globe.get(), RenderType.cutout()));
         ModBlocks.SLIDING_DOORS.stream().forEach(globe -> BlockRenderLayerMap.INSTANCE.putBlock(globe.get(), RenderType.cutout()));
     }

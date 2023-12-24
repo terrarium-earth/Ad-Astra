@@ -4,10 +4,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.blocks.FlagBlock;
-import earth.terrarium.adastra.common.blocks.GlobeBlock;
-import earth.terrarium.adastra.common.blocks.LaunchPadBlock;
-import earth.terrarium.adastra.common.blocks.SlidingDoorBlock;
+import earth.terrarium.adastra.common.blocks.*;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.blocks.fluids.CryoFuelLiquidBlock;
 import earth.terrarium.adastra.common.blocks.machines.EnergizerBlock;
@@ -104,6 +101,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> CHEESE_BLOCK = CUBES.register("cheese_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SPONGE).sound(SoundType.SLIME_BLOCK)));
     public static final RegistryEntry<Block> SKY_STONE = CUBES.register("sky_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
+    public static final RegistryEntry<Block> INDUSTRIAL_LAMP = BLOCKS.register("industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
     public static final RegistryEntry<Block> VENT = CUBES.register("vent", () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).noOcclusion()));
     public static final RegistryEntry<Block> IRON_PLATING = CUBES.register("iron_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
     public static final RegistryEntry<Block> IRON_PLATING_STAIRS = STAIRS.register("iron_plating_stairs", () -> new StairBlock(IRON_PLATING.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
