@@ -54,12 +54,14 @@ can only be opened with redstone, similar to iron doors.
 - Coal generator will no longer continue consuming fuel if it's full on energy.
 - Updated the rover driving mechanics to be more fluid and easier to control.
 - The rover can now run over mobs.
+- Improved and added many new descriptions to blocks and items.
 - Added oxygen intake and outtake sounds when entering and exiting oxygenated areas.
 - Fluid ducts now have the same internal mechanics as pipes so they can now be used exactly like them.
 - Added the radio. This is a real radio that'll play actual select radio stations. It's available as a
 screen in the rover. You can open in by pressing `R` while in the rover or clicking on the screen on the rover.
 - The chest on the back of the rover is now clickable.
 - Opening your inventory while in the rover now opens the rover inventory.
+- Rockets and rovers can no longer carry items. Breaking the them will cause the items to drop.
 - The Rocket sound is now looped. This allows it to play for as long as the rocket is flying.
 - Fixed rocket sound not playing when leaving the world and rejoining while in a flying rocket.
 - Fixed rocket particles not visible above world height with Embeddium/Sodium installed.
@@ -79,6 +81,7 @@ a new space station on an existing one.
 should now be clear when you want to land on the planet, land on the space station or build a new space station.
 - You can no longer teleport to orbit directly in the planets menu.
 You must build a space station and land on that space station first.
+- Added industrial lamps.
 
 ## Breaking Changes
 - storage blocks like desh blocks, steel blocks, etc. have had an ID change. Turn them into ingots before
@@ -109,6 +112,3 @@ Hopefully this will prevent people from missing it and crashing.
 - Updated the oxygen distributor model. It now spins and can be placed on any block face.
 - Added the gravity normalizer. This allows you to control the gravity of a local area, similar
 to the oxygen distributor. It's especially important in orbit due to the zero gravity environment.
-
-// TODO: drop vehicle contents when broken
-// TODO: fix clouds disappearing when oxygen distributor area is shown

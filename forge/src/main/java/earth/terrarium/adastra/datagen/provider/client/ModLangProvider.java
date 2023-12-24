@@ -147,10 +147,39 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.CHANGE_MODE_ROUND_ROBIN.getString(), "Set capacitor mode to \"Round Robin\"");
 
         add(ConstantComponents.SHIFT_DESCRIPTION.getString(), "Hold SHIFT for more information");
-        add(ConstantComponents.TI_69_INFO.getString(), "Displays important information\nRight-click to change the current app");
-        add(ConstantComponents.ETRIONIC_CAPACITOR_INFO.getString(), "Right-click to toggle\nShift-right-click to change the distribution mode");
-        add(ConstantComponents.ZIP_GUN_INFO.getString(), "Propels you forward\nUse a second one in your offhand to propel even further");
-        add(ConstantComponents.GAS_TANK_INFO.getString(), "Stores fluids and gases\nRight-click to distribute into your inventory");
+        add(ConstantComponents.TI_69_INFO.getString(), "Displays important information. Right-click to change the current app.");
+        add(ConstantComponents.ETRIONIC_CAPACITOR_INFO.getString(), "Stores energy. Right-click to toggle. Shift-right-click to change the distribution mode.");
+        add(ConstantComponents.ZIP_GUN_INFO.getString(), "Propels you forward. Use a second one in your offhand to propel even further.");
+        add(ConstantComponents.GAS_TANK_INFO.getString(), "Stores fluids and gases. Right-click to distribute into your inventory.");
+        add(ConstantComponents.CABLE_INFO.getString(), "Transfers energy. Right-click with a wrench to change the distribution mode.");
+        add(ConstantComponents.FLUID_PIPE_INFO.getString(), "Transfers fluids. Right-click with a wrench to change the distribution mode.");
+        add(ConstantComponents.CABLE_DUCT.getString(), "Works like cables, but fully-conceals oxygen, preventing leaks.");
+        add(ConstantComponents.FLUID_DUCT_INFO.getString(), "Works like fluid pipes, but fully-conceals oxygen, preventing leaks.");
+        add(ConstantComponents.SPACE_SUIT_INFO.getString(), "Supplies the wearer with oxygen and protects them from the extreme-cold of space.");
+        add(ConstantComponents.NETHERITE_SPACE_SUIT_INFO.getString(), "Works like the Space Suit, with the added advantage of protecting the wearer from extreme heat.");
+        add(ConstantComponents.JET_SUIT_INFO.getString(), "Works like the Netherite Space Suit, with jets installed to propel the wearer forward with extreme force.");
+        add(ConstantComponents.SLIDING_DOOR_INFO.getString(), "A large 3x3 door. Shift-right-click with a wrench to lock it. Locked doors can only be opened with redstone.");
+        add(ConstantComponents.FLAG_INFO.getString(), "A flag with your face on it. Right-click to add an image from a URL.");
+        add(ConstantComponents.LAUNCH_PAD_INFO.getString(), "Launches rockets. Power the center part with redstone to automatically launch placed rockets.");
+        add(ConstantComponents.GLOBE_INFO.getString(), "Right-click to spin the globe. Power it with redstone to make it constantly spin.");
+
+        add(ConstantComponents.ROCKET_INFO.getString(), "A rocket used for interplanetary travel. Must be placed on a launch pad. Shift-right-click to access its fuel and inventory.");
+        add(ConstantComponents.ROVER_INFO.getString(), "An all-terrain vehicle. Shift-right-click to access its inventory. Click on the screen to access the rover's radio. This radio can play real radio stations.");
+
+        add(ConstantComponents.COAL_GENERATOR_INFO.getString(), "The simplest of generators. Generates energy from burnable materials.");
+        add(ConstantComponents.COMPRESSOR_INFO.getString(), "Compresses materials into plates.");
+        add(ConstantComponents.NASA_WORKBENCH_INFO.getString(), "Used to craft rockets.");
+        add(ConstantComponents.FUEL_REFINERY_INFO.getString(), "Refines fuel from oil.");
+        add(ConstantComponents.OXYGEN_LOADER_INFO.getString(), "Converts water into oxygen. Use it to fill up space suits and gas tanks.");
+        add(ConstantComponents.SOLAR_PANEL_INFO.getString(), "Generates energy from the sun during the dat. Note that the energy generated is dependent on the planet.");
+        add(ConstantComponents.WATER_PUMP_INFO.getString(), "Pumps water. Ensure a water source is below the pump for it to function.");
+        add(ConstantComponents.OXYGEN_DISTRIBUTOR_INFO.getString(), "Distributes oxygen and regulates the temperature. Use it to create livable environments.");
+        add(ConstantComponents.ENERGIZER_INFO.getString(), "Stores a large amount of energy. Right-click with an item to charge it. Retains its charge when broken.");
+        add(ConstantComponents.CRYO_FREEZER_INFO.getString(), "Converts ice materials into cryo fuel.");
+        add(ConstantComponents.OXYGEN_SENSOR_INFO.getString(), "Emits a redstone signal when oxygen is detected. Shift-right-click to invert the signal.");
+
+        add("tooltip.ad_astra.energy_transfer_tick", "Transfer: %s ⚡/t");
+        add("tooltip.ad_astra.fluid_transfer_tick", "Transfer: %s 🪣/t");
 
         add(ConstantComponents.UPGRADES.getString(), "Upgrades");
         add("tooltip.ad_astra.upgrades.entry", "- %sx %s");

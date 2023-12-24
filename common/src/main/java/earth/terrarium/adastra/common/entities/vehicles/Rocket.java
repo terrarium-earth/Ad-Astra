@@ -28,7 +28,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -208,7 +207,7 @@ public class Rocket extends Vehicle {
         var state = level().getBlockState(blockPosition());
         if (!state.hasProperty(LaunchPadBlock.PART)) {
             if (launchpadBound) {
-                Containers.dropItemStack(level(), getX(), getY(), getZ(), getDropStack());
+                drop();
                 playSound(SoundEvents.NETHERITE_BLOCK_BREAK);
                 discard();
             }

@@ -5,8 +5,10 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.items.*;
 import earth.terrarium.adastra.common.items.armor.JetSuitItem;
+import earth.terrarium.adastra.common.items.armor.NetheriteSpaceSuitItem;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
 import earth.terrarium.adastra.common.items.armor.base.CustomDyeableArmorItem;
 import earth.terrarium.adastra.common.items.armor.materials.JetSuitMaterial;
@@ -15,7 +17,7 @@ import earth.terrarium.adastra.common.items.armor.materials.SpaceSuitMaterial;
 import earth.terrarium.adastra.common.items.machines.EnergizerBlockItem;
 import earth.terrarium.adastra.common.items.rendered.RenderedBlockItem;
 import earth.terrarium.adastra.common.items.vehicles.RocketItem;
-import earth.terrarium.adastra.common.items.vehicles.VehicleItem;
+import earth.terrarium.adastra.common.items.vehicles.RoverItem;
 import earth.terrarium.adastra.common.tags.ModPaintingVariantTags;
 import earth.terrarium.botarium.common.registry.fluid.FluidBucketItem;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -43,7 +45,7 @@ public class ModItems {
     public static final RegistryEntry<Item> TIER_2_ROCKET = VEHICLES.register("tier_2_rocket", () -> new RocketItem(ModEntityTypes.TIER_2_ROCKET::get, new Item.Properties().stacksTo(1).fireResistant()));
     public static final RegistryEntry<Item> TIER_3_ROCKET = VEHICLES.register("tier_3_rocket", () -> new RocketItem(ModEntityTypes.TIER_3_ROCKET::get, new Item.Properties().stacksTo(1).fireResistant()));
     public static final RegistryEntry<Item> TIER_4_ROCKET = VEHICLES.register("tier_4_rocket", () -> new RocketItem(ModEntityTypes.TIER_4_ROCKET::get, new Item.Properties().stacksTo(1).fireResistant()));
-    public static final RegistryEntry<Item> ROVER = VEHICLES.register("tier_1_rover", () -> new VehicleItem(ModEntityTypes.ROVER::get, new Item.Properties().stacksTo(1).fireResistant()));
+    public static final RegistryEntry<Item> ROVER = VEHICLES.register("tier_1_rover", () -> new RoverItem(ModEntityTypes.ROVER::get, new Item.Properties().stacksTo(1).fireResistant()));
     public static final RegistryEntry<Item> LAUNCH_PAD = ITEMS.register("launch_pad", () -> new BlockItem(ModBlocks.LAUNCH_PAD.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> STEEL_CABLE = PIPES.register("steel_cable", () -> new BlockItem(ModBlocks.STEEL_CABLE.get(), new Item.Properties()));
@@ -54,17 +56,17 @@ public class ModItems {
     public static final RegistryEntry<Item> CABLE_DUCT = ITEMS.register("cable_duct", () -> new BlockItem(ModBlocks.CABLE_DUCT.get(), new Item.Properties()));
     public static final RegistryEntry<Item> FLUID_PIPE_DUCT = ITEMS.register("fluid_pipe_duct", () -> new BlockItem(ModBlocks.FLUID_PIPE_DUCT.get(), new Item.Properties()));
 
-    public static final RegistryEntry<Item> COAL_GENERATOR = ITEMS.register("coal_generator", () -> new BlockItem(ModBlocks.COAL_GENERATOR.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> COMPRESSOR = ITEMS.register("compressor", () -> new BlockItem(ModBlocks.COMPRESSOR.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> NASA_WORKBENCH = ITEMS.register("nasa_workbench", () -> new BlockItem(ModBlocks.NASA_WORKBENCH.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> FUEL_REFINERY = ITEMS.register("fuel_refinery", () -> new BlockItem(ModBlocks.FUEL_REFINERY.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> OXYGEN_LOADER = ITEMS.register("oxygen_loader", () -> new BlockItem(ModBlocks.OXYGEN_LOADER.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> SOLAR_PANEL = ITEMS.register("solar_panel", () -> new BlockItem(ModBlocks.SOLAR_PANEL.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> WATER_PUMP = ITEMS.register("water_pump", () -> new BlockItem(ModBlocks.WATER_PUMP.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> OXYGEN_DISTRIBUTOR = ITEMS.register("oxygen_distributor", () -> new BlockItem(ModBlocks.OXYGEN_DISTRIBUTOR.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> ENERGIZER = ITEMS.register("energizer", () -> new EnergizerBlockItem(ModBlocks.ENERGIZER.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> CRYO_FREEZER = ITEMS.register("cryo_freezer", () -> new BlockItem(ModBlocks.CRYO_FREEZER.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> OXYGEN_SENSOR = ITEMS.register("oxygen_sensor", () -> new BlockItem(ModBlocks.OXYGEN_SENSOR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> COAL_GENERATOR = ITEMS.register("coal_generator", () -> new TooltipBlockItem(ModBlocks.COAL_GENERATOR.get(), ConstantComponents.COAL_GENERATOR_INFO, new Item.Properties()));
+    public static final RegistryEntry<Item> COMPRESSOR = ITEMS.register("compressor", () -> new TooltipBlockItem(ModBlocks.COMPRESSOR.get(), ConstantComponents.COMPRESSOR_INFO, new Item.Properties()));
+    public static final RegistryEntry<Item> NASA_WORKBENCH = ITEMS.register("nasa_workbench", () -> new TooltipBlockItem(ModBlocks.NASA_WORKBENCH.get(), ConstantComponents.NASA_WORKBENCH_INFO, new Item.Properties()));
+    public static final RegistryEntry<Item> FUEL_REFINERY = ITEMS.register("fuel_refinery", () -> new TooltipBlockItem(ModBlocks.FUEL_REFINERY.get(), ConstantComponents.FUEL_REFINERY_INFO, new Item.Properties()));
+    public static final RegistryEntry<Item> OXYGEN_LOADER = ITEMS.register("oxygen_loader", () -> new TooltipBlockItem(ModBlocks.OXYGEN_LOADER.get(), ConstantComponents.OXYGEN_LOADER_INFO, new Item.Properties()));
+    public static final RegistryEntry<Item> SOLAR_PANEL = ITEMS.register("solar_panel", () -> new TooltipBlockItem(ModBlocks.SOLAR_PANEL.get(), ConstantComponents.SOLAR_PANEL_INFO, new Item.Properties()));
+    public static final RegistryEntry<Item> WATER_PUMP = ITEMS.register("water_pump", () -> new TooltipBlockItem(ModBlocks.WATER_PUMP.get(), ConstantComponents.WATER_PUMP_INFO, new Item.Properties()));
+    public static final RegistryEntry<Item> OXYGEN_DISTRIBUTOR = ITEMS.register("oxygen_distributor", () -> new TooltipBlockItem(ModBlocks.OXYGEN_DISTRIBUTOR.get(), ConstantComponents.OXYGEN_DISTRIBUTOR_INFO, new Item.Properties()));
+    public static final RegistryEntry<Item> ENERGIZER = ITEMS.register("energizer", () -> new EnergizerBlockItem(ModBlocks.ENERGIZER.get(), new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> CRYO_FREEZER = ITEMS.register("cryo_freezer", () -> new TooltipBlockItem(ModBlocks.CRYO_FREEZER.get(), ConstantComponents.CRYO_FREEZER_INFO, new Item.Properties()));
+    public static final RegistryEntry<Item> OXYGEN_SENSOR = ITEMS.register("oxygen_sensor", () -> new TooltipBlockItem(ModBlocks.OXYGEN_SENSOR.get(), ConstantComponents.OXYGEN_SENSOR_INFO, new Item.Properties()));
 
     public static final RegistryEntry<Item> WHITE_FLAG = FLAGS.register("white_flag", () -> new BlockItem(ModBlocks.WHITE_FLAG.get(), new Item.Properties()));
     public static final RegistryEntry<Item> ORANGE_FLAG = FLAGS.register("orange_flag", () -> new BlockItem(ModBlocks.ORANGE_FLAG.get(), new Item.Properties()));
@@ -96,7 +98,7 @@ public class ModItems {
     public static final RegistryEntry<Item> SPACE_BOOTS = BASIC_ITEMS.register("space_boots", () -> new CustomDyeableArmorItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     public static final RegistryEntry<Item> NETHERITE_SPACE_HELMET = ITEMS.register("netherite_space_helmet", () -> new CustomDyeableArmorItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> NETHERITE_SPACE_SUIT = BASIC_ITEMS.register("netherite_space_suit", () -> new SpaceSuitItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, 2, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> NETHERITE_SPACE_SUIT = BASIC_ITEMS.register("netherite_space_suit", () -> new NetheriteSpaceSuitItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, 2, new Item.Properties().fireResistant()));
     public static final RegistryEntry<Item> NETHERITE_SPACE_PANTS = BASIC_ITEMS.register("netherite_space_pants", () -> new CustomDyeableArmorItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().fireResistant()));
     public static final RegistryEntry<Item> NETHERITE_SPACE_BOOTS = BASIC_ITEMS.register("netherite_space_boots", () -> new CustomDyeableArmorItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().fireResistant()));
 

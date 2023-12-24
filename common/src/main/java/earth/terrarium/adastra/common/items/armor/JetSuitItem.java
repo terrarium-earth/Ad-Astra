@@ -1,10 +1,14 @@
 package earth.terrarium.adastra.common.items.armor;
 
+import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.adastra.common.registry.ModFluids;
+import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.KeybindManager;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyItem;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -33,10 +37,14 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
 
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
-        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
+        tooltipComponents.add(TooltipUtils.getFluidComponent(
+            FluidUtils.getTank(stack),
+            FluidHooks.buckets(tankSize),
+            ModFluids.OXYGEN.get()));
         var energy = getEnergyStorage(stack);
         tooltipComponents.add(TooltipUtils.getEnergyComponent(energy.getStoredEnergy(), energyCapacity));
         tooltipComponents.add(TooltipUtils.getMaxEnergyInComponent(energy.maxInsert()));
+        TooltipUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.JET_SUIT_INFO);
     }
 
     @Override

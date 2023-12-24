@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.common.items.armor;
 
 import earth.terrarium.adastra.api.systems.OxygenApi;
+import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.items.armor.base.CustomDyeableArmorItem;
 import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
@@ -32,7 +33,7 @@ import java.util.List;
 import java.util.stream.StreamSupport;
 
 public class SpaceSuitItem extends CustomDyeableArmorItem implements BotariumFluidItem<WrappedItemFluidContainer> {
-    private final long tankSize;
+    protected final long tankSize;
 
     public SpaceSuitItem(ArmorMaterial material, Type type, long buckets, Properties properties) {
         super(material, type, properties);
@@ -45,6 +46,7 @@ public class SpaceSuitItem extends CustomDyeableArmorItem implements BotariumFlu
             FluidUtils.getTank(stack),
             FluidHooks.buckets(tankSize),
             ModFluids.OXYGEN.get()));
+        TooltipUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.SPACE_SUIT_INFO);
     }
 
     @Override
@@ -81,7 +83,7 @@ public class SpaceSuitItem extends CustomDyeableArmorItem implements BotariumFlu
         if (!(entity instanceof LivingEntity livingEntity)) return;
         if (livingEntity instanceof Player player && player.isCreative()) return;
         if (livingEntity.getItemBySlot(EquipmentSlot.CHEST) != stack) return;
-
+        livingEntity.setTicksFrozen(0);
         // Every 12 ticks = 10 minutes per 1,000 mB (1 bucket) oxygen
         if (level.getGameTime() % 12 == 0 && hasOxygen(entity)) {
             if (!OxygenApi.API.hasOxygen(entity)) {

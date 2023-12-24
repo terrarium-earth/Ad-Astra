@@ -3,6 +3,9 @@ package earth.terrarium.adastra.common.blocks.machines;
 import earth.terrarium.adastra.common.blockentities.machines.EnergizerBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.registry.ModItems;
+import earth.terrarium.botarium.common.energy.EnergyApi;
+import earth.terrarium.botarium.common.energy.base.EnergyContainer;
+import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -64,8 +67,10 @@ public class EnergizerBlock extends MachineBlock {
     public List<ItemStack> getDrops(BlockState blockState, LootParams.Builder builder) {
         BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if (!(blockEntity instanceof EnergizerBlockEntity entity)) return super.getDrops(blockState, builder);
-        ItemStack stack = ModItems.ENERGIZER.get().getDefaultInstance();
-        stack.getOrCreateTag().putLong("Energy", entity.getEnergyStorage().getStoredEnergy());
-        return List.of(stack);
+        ItemStackHolder stack = new ItemStackHolder(ModItems.ENERGIZER.get().getDefaultInstance());
+        EnergyContainer itemEnergyContainer = EnergyApi.getItemEnergyContainer(stack);
+        if (itemEnergyContainer == null) return super.getDrops(blockState, builder);
+        EnergyApi.moveEnergy(entity.getEnergyStorage(), itemEnergyContainer, entity.getEnergyStorage().getStoredEnergy(), false);
+        return List.of(stack.getStack());
     }
 }

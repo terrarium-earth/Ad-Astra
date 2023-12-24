@@ -77,11 +77,6 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
                 public long maxExtract() {
                     return 20_000;
                 }
-
-                @Override
-                public void setEnergy(long energy) {
-                    super.setEnergy(energy);
-                }
             });
     }
 

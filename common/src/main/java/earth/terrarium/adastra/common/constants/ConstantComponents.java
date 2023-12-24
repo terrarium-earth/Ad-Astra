@@ -35,6 +35,32 @@ public class ConstantComponents {
     public static final Component ETRIONIC_CAPACITOR_INFO = Component.translatable("info.ad_astra.etrionic_capacitor").withStyle(ChatFormatting.GRAY);
     public static final Component ZIP_GUN_INFO = Component.translatable("info.ad_astra.zip_gun").withStyle(ChatFormatting.GRAY);
     public static final Component GAS_TANK_INFO = Component.translatable("info.ad_astra.gas_tank").withStyle(ChatFormatting.GRAY);
+    public static final Component CABLE_INFO = Component.translatable("info.ad_astra.cable").withStyle(ChatFormatting.GRAY);
+    public static final Component FLUID_PIPE_INFO = Component.translatable("info.ad_astra.fluid_pipe").withStyle(ChatFormatting.GRAY);
+    public static final Component CABLE_DUCT = Component.translatable("info.ad_astra.cable_duct").withStyle(ChatFormatting.GRAY);
+    public static final Component FLUID_DUCT_INFO = Component.translatable("info.ad_astra.fluid_duct").withStyle(ChatFormatting.GRAY);
+    public static final Component SPACE_SUIT_INFO = Component.translatable("info.ad_astra.space_suit").withStyle(ChatFormatting.GRAY);
+    public static final Component NETHERITE_SPACE_SUIT_INFO = Component.translatable("info.ad_astra.netherite_space_suit").withStyle(ChatFormatting.GRAY);
+    public static final Component JET_SUIT_INFO = Component.translatable("info.ad_astra.jet_suit").withStyle(ChatFormatting.GRAY);
+    public static final Component SLIDING_DOOR_INFO = Component.translatable("info.ad_astra.sliding_door").withStyle(ChatFormatting.GRAY);
+    public static final Component FLAG_INFO = Component.translatable("info.ad_astra.flag").withStyle(ChatFormatting.GRAY);
+    public static final Component LAUNCH_PAD_INFO = Component.translatable("info.ad_astra.launch_pad").withStyle(ChatFormatting.GRAY);
+    public static final Component GLOBE_INFO = Component.translatable("info.ad_astra.globe").withStyle(ChatFormatting.GRAY);
+
+    public static final Component ROCKET_INFO = Component.translatable("info.ad_astra.rocket").withStyle(ChatFormatting.GRAY);
+    public static final Component ROVER_INFO = Component.translatable("info.ad_astra.rover").withStyle(ChatFormatting.GRAY);
+
+    public static final Component COAL_GENERATOR_INFO = Component.translatable("info.ad_astra.coal_generator").withStyle(ChatFormatting.GRAY);
+    public static final Component COMPRESSOR_INFO = Component.translatable("info.ad_astra.compressor").withStyle(ChatFormatting.GRAY);
+    public static final Component NASA_WORKBENCH_INFO = Component.translatable("info.ad_astra.nasa_workbench").withStyle(ChatFormatting.GRAY);
+    public static final Component FUEL_REFINERY_INFO = Component.translatable("info.ad_astra.fuel_refinery").withStyle(ChatFormatting.GRAY);
+    public static final Component OXYGEN_LOADER_INFO = Component.translatable("info.ad_astra.oxygen_loader").withStyle(ChatFormatting.GRAY);
+    public static final Component SOLAR_PANEL_INFO = Component.translatable("info.ad_astra.solar_panel").withStyle(ChatFormatting.GRAY);
+    public static final Component WATER_PUMP_INFO = Component.translatable("info.ad_astra.water_pump").withStyle(ChatFormatting.GRAY);
+    public static final Component OXYGEN_DISTRIBUTOR_INFO = Component.translatable("info.ad_astra.oxygen_distributor").withStyle(ChatFormatting.GRAY);
+    public static final Component ENERGIZER_INFO = Component.translatable("info.ad_astra.energizer").withStyle(ChatFormatting.GRAY);
+    public static final Component CRYO_FREEZER_INFO = Component.translatable("info.ad_astra.cryo_freezer").withStyle(ChatFormatting.GRAY);
+    public static final Component OXYGEN_SENSOR_INFO = Component.translatable("info.ad_astra.oxygen_sensor").withStyle(ChatFormatting.GRAY);
 
     public static final Component UPGRADES = Component.translatable("tooltip.ad_astra.upgrades").withStyle(ChatFormatting.LIGHT_PURPLE);
     public static final Component CLEAR_FLUID_TANK = Component.translatable("tooltip.ad_astra.clear_fluid_tank").withStyle(ChatFormatting.DARK_RED);

@@ -5,9 +5,11 @@ import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.level.material.Fluid;
 
 import java.text.DecimalFormat;
@@ -125,7 +127,20 @@ public class TooltipUtils {
     }
 
     public static void addDescriptionComponent(List<Component> tooltipComponents, Component description) {
-        tooltipComponents.add(Screen.hasShiftDown() ? description : ConstantComponents.SHIFT_DESCRIPTION);
+        if (!Screen.hasShiftDown()) {
+            tooltipComponents.add(ConstantComponents.SHIFT_DESCRIPTION);
+            return;
+        }
+
+        // Split the description into multiple lines if it's too long
+        for (FormattedCharSequence text : Minecraft.getInstance().font.split(description, 200)) {
+            StringBuilder builder = new StringBuilder();
+            text.accept((i, style, codePoint) -> {
+                builder.appendCodePoint(codePoint);
+                return true;
+            });
+            tooltipComponents.add(Component.literal(builder.toString()).withStyle(description.getStyle()));
+        }
     }
 
     public static Component getProgressComponent(int progress, int maxProgress) {

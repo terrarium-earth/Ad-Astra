@@ -166,12 +166,19 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
             && (player.getVehicle() == null || !player.getVehicle().equals(this))) {
             playSound(SoundEvents.NETHERITE_BLOCK_BREAK);
             if (!player.getAbilities().instabuild) {
-                Containers.dropItemStack(level(), getX(), getY(), getZ(), getDropStack());
+                drop();
             }
             discard();
             return true;
         }
         return false;
+    }
+
+    public void drop() {
+        Containers.dropItemStack(level(), getX(), getY(), getZ(), getDropStack());
+        if (inventory.getContainerSize() > 0) {
+            Containers.dropContents(level(), blockPosition(), inventory);
+        }
     }
 
     public abstract ItemStack getDropStack();

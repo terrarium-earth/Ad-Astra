@@ -4,15 +4,19 @@ import earth.terrarium.adastra.common.blockentities.SlidingDoorBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.blocks.base.Wrenchable;
 import earth.terrarium.adastra.common.blocks.properties.SlidingDoorPartProperty;
+import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.registry.ModSoundEvents;
+import earth.terrarium.adastra.common.utils.TooltipUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
@@ -35,6 +39,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class SlidingDoorBlock extends BasicEntityBlock implements Wrenchable {
@@ -72,6 +79,11 @@ public class SlidingDoorBlock extends BasicEntityBlock implements Wrenchable {
             case SOUTH -> SOUTH_SHAPE;
             case WEST -> WEST_SHAPE;
         };
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
+        TooltipUtils.addDescriptionComponent(tooltip, ConstantComponents.SLIDING_DOOR_INFO);
     }
 
     @Override
