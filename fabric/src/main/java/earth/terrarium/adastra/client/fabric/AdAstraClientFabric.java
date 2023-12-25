@@ -22,8 +22,7 @@ public class AdAstraClientFabric {
         AdAstraClient.onRegisterEntityLayers((location, definition) -> EntityModelLayerRegistry.registerModelLayer(location, definition::get));
         AdAstraClient.onRegisterHud(hud -> HudRenderCallback.EVENT.register(hud::renderHud));
         ModelLoadingPlugin.register(ctx -> AdAstraClient.onRegisterModels(ctx::addModels));
-        WorldRenderEvents.AFTER_TRANSLUCENT.register(ctx ->
-            OxygenDistributorOverlayRenderer.render(ctx.matrixStack(), ctx.camera()));
+        WorldRenderEvents.AFTER_TRANSLUCENT.register(ctx -> OxygenDistributorOverlayRenderer.render(ctx.matrixStack(), ctx.camera()));
         AdAstraClient.onAddItemColors(ColorProviderRegistry.ITEM::register);
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VENT.get(), RenderType.cutout());

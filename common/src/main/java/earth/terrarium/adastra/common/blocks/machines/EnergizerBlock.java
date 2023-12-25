@@ -3,6 +3,7 @@ package earth.terrarium.adastra.common.blocks.machines;
 import earth.terrarium.adastra.common.blockentities.machines.EnergizerBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.registry.ModItems;
+import earth.terrarium.botarium.Botarium;
 import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
@@ -70,7 +71,10 @@ public class EnergizerBlock extends MachineBlock {
         ItemStackHolder stack = new ItemStackHolder(ModItems.ENERGIZER.get().getDefaultInstance());
         EnergyContainer itemEnergyContainer = EnergyApi.getItemEnergyContainer(stack);
         if (itemEnergyContainer == null) return super.getDrops(blockState, builder);
-        EnergyApi.moveEnergy(entity.getEnergyStorage(), itemEnergyContainer, entity.getEnergyStorage().getStoredEnergy(), false);
+        itemEnergyContainer.setEnergy(entity.getEnergyStorage().getStoredEnergy());
+        stack.getStack().getOrCreateTag()
+            .getCompound(Botarium.BOTARIUM_DATA)
+            .putLong("Energy", entity.getEnergyStorage().getStoredEnergy());
         return List.of(stack.getStack());
     }
 }

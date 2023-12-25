@@ -19,5 +19,4 @@ public class LivingEntityMixin {
             RadioHandler.stop();
         }
     }
-
 }

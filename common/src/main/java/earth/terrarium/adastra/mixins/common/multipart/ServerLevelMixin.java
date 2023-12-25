@@ -22,5 +22,4 @@ public abstract class ServerLevelMixin implements MultipartPartsHolder {
             cir.setReturnValue(entity);
         }
     }
-
 }

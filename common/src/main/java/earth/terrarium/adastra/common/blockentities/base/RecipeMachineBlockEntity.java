@@ -25,6 +25,13 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<?>> extends Ener
         if (recipe != null && canFunction()) recipeTick(level, getEnergyStorage());
         if (time % 20 == 0 && recipe == null && shouldUpdate()) update();
         if (recipe == null) cookTimeTotal = 0;
+        if (time % 10 == 0) setLit(recipe != null && canFunction() && canCraft(getEnergyStorage()));
+
+        // Manually update it on an interval. This'll update it in cases where for example, energy has been added but
+        // the player never actually clicked the slot, so it didn't update.
+        if (time % 100 == 0 && recipe == null) {
+            update();
+        }
     }
 
     public boolean shouldUpdate() {

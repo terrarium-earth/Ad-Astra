@@ -54,7 +54,7 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
             new SimpleEnergyContainer(energyCapacity) {
                 @Override
                 public long maxInsert() {
-                    return 500;
+                    return 1000;
                 }
             });
     }

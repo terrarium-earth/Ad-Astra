@@ -72,5 +72,4 @@ public class RoverRenderer extends EntityRenderer<Rover> {
             }
         }
     }
-
 }

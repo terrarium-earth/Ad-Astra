@@ -67,7 +67,7 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
         if (!canFunction()) return;
         tickSideInteractions(pos, d -> true);
         distributeToChargeSlot(level, pos);
-        if (time % 5 == 0) setLit(!getItem(0).isEmpty());
+        if (time % 10 == 0) setLit(!getItem(0).isEmpty());
     }
 
     @Override

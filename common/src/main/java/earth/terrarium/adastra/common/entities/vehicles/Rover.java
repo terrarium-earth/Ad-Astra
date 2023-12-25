@@ -230,7 +230,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
         if (entities.isEmpty()) return;
 
         double power = getDeltaMovement().length() * 0.4;
-        float damage = (float) (power * 0.5f) * 70;
+        float damage = (float) (power * 0.5f) * 100;
         var yRot = getYRot() * (float) (Math.PI / 180);
         for (var entity : entities) {
             entity.setDeltaMovement(entity.getDeltaMovement().add(Mth.sin(-yRot) * 0.1, power, Mth.cos(yRot) * 0.1));

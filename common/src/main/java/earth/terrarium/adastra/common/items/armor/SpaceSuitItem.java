@@ -12,6 +12,7 @@ import earth.terrarium.botarium.common.fluid.base.BotariumFluidItem;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedItemFluidContainer;
+import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.network.chat.Component;
@@ -114,5 +115,21 @@ public class SpaceSuitItem extends CustomDyeableArmorItem implements BotariumFlu
 
     public static boolean hasOxygen(Entity entity) {
         return getOxygenAmount(entity) > FluidHooks.buckets(0.001);
+    }
+
+    @Override
+    public boolean isBarVisible(@NotNull ItemStack stack) {
+        return FluidUtils.hasFluid(stack);
+    }
+
+    @Override
+    public int getBarWidth(@NotNull ItemStack stack) {
+        var fluidContainer = getFluidContainer(stack);
+        return (int) (((double) fluidContainer.getFluids().get(0).getFluidAmount() / fluidContainer.getTankCapacity(0)) * 13);
+    }
+
+    @Override
+    public int getBarColor(@NotNull ItemStack stack) {
+        return ClientFluidHooks.getFluidColor(FluidUtils.getTank(stack));
     }
 }

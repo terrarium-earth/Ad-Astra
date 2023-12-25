@@ -73,7 +73,7 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         if (!canFunction()) return;
         tickSideInteractions(pos, d -> true);
-        if (time % 5 == 0) setLit(cookTimeTotal > 0);
+        if (time % 10 == 0) setLit(cookTimeTotal > 0);
         var input = getItem(1);
         if (getEnergyStorage().internalInsert(20, true) == 0) return;
 

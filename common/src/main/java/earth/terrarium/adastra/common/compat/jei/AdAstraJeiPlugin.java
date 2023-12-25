@@ -3,15 +3,13 @@ package earth.terrarium.adastra.common.compat.jei;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.screens.machines.*;
 import earth.terrarium.adastra.common.compat.jei.categories.*;
+import earth.terrarium.adastra.common.registry.ModCreativeTab;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.registration.IGuiHandlerRegistration;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
@@ -65,5 +63,10 @@ public class AdAstraJeiPlugin implements IModPlugin {
         registration.addRecipeClickArea(FuelRefineryScreen.class, FuelRefineryScreen.CLICK_AREA.getX(), FuelRefineryScreen.CLICK_AREA.getY(), FuelRefineryScreen.CLICK_AREA.getWidth(), FuelRefineryScreen.CLICK_AREA.getHeight(), RefiningCategory.RECIPE);
         registration.addRecipeClickArea(CryoFreezerScreen.class, CryoFreezerScreen.CLICK_AREA.getX(), CryoFreezerScreen.CLICK_AREA.getY(), CryoFreezerScreen.CLICK_AREA.getWidth(), CryoFreezerScreen.CLICK_AREA.getHeight(), CryoFreezingCategory.RECIPE);
         registration.addRecipeClickArea(NasaWorkbenchScreen.class, NasaWorkbenchScreen.CLICK_AREA.getX(), NasaWorkbenchScreen.CLICK_AREA.getY(), NasaWorkbenchScreen.CLICK_AREA.getWidth(), NasaWorkbenchScreen.CLICK_AREA.getHeight(), NasaWorkbenchCategory.RECIPE);
+    }
+
+    @Override
+    public void registerItemSubtypes(ISubtypeRegistration registration) {
+        ModCreativeTab.getCustomNbtItems().forEach(stack -> registration.useNbtForSubtypes(stack.getItem()));
     }
 }

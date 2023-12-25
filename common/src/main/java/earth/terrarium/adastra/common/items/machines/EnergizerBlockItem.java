@@ -19,6 +19,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class EnergizerBlockItem extends BlockItem implements BotariumEnergyItem<
         ItemStackHolder holder = new ItemStackHolder(stack);
         EnergyContainer itemEnergyContainer = EnergyApi.getItemEnergyContainer(holder);
         if (itemEnergyContainer == null) return super.updateCustomBlockEntityTag(pos, level, player, stack, state);
-        EnergyApi.moveEnergy(itemEnergyContainer, entity.getEnergyStorage(), itemEnergyContainer.getStoredEnergy(), false);
+        entity.getEnergyStorage().setEnergy(itemEnergyContainer.getStoredEnergy());
         entity.onEnergyChange();
 
         return super.updateCustomBlockEntityTag(pos, level, player, stack, state);
@@ -48,8 +49,35 @@ public class EnergizerBlockItem extends BlockItem implements BotariumEnergyItem<
     public WrappedItemEnergyContainer getEnergyStorage(ItemStack holder) {
         return new WrappedItemEnergyContainer(
             holder,
-            new SimpleEnergyContainer(2_000_000));
+            new SimpleEnergyContainer(2_000_000) {
+                @Override
+                public long maxInsert() {
+                    return 1_000;
+                }
+
+                @Override
+                public long maxExtract() {
+                    return 1_000;
+                }
+            });
     }
+
+    @Override
+    public boolean isBarVisible(@NotNull ItemStack stack) {
+        return getEnergyStorage(stack).getStoredEnergy() > 0;
+    }
+
+    @Override
+    public int getBarWidth(@NotNull ItemStack stack) {
+        var energyStorage = getEnergyStorage(stack);
+        return (int) (((double) energyStorage.getStoredEnergy() / energyStorage.getMaxCapacity()) * 13);
+    }
+
+    @Override
+    public int getBarColor(@NotNull ItemStack stack) {
+        return 0x63dcc2;
+    }
+
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {

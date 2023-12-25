@@ -66,6 +66,4 @@ public class AdAstraReiPlugin implements REIClientPlugin {
             }
         });
     }
-
-
 }
