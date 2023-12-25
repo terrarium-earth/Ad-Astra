@@ -209,14 +209,14 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
 
     public abstract int getInventorySize();
 
-    /*
+    /**
      * Checks if the rider should be sitting in the vehicle.
      */
     public boolean shouldSit() {
         return true;
     }
 
-    /*
+    /**
      * Prevents the rider from rendering.
      */
     public boolean hideRider() {

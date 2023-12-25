@@ -23,7 +23,9 @@ public class TooltipUtils {
         if (Screen.hasShiftDown()) {
             return DecimalFormat.getNumberInstance().format(number);
         }
-        return DecimalFormat.getCompactNumberInstance(Locale.ROOT, NumberFormat.Style.SHORT).format(number);
+        NumberFormat compactFormat = NumberFormat.getCompactNumberInstance(Locale.ROOT, NumberFormat.Style.SHORT);
+        compactFormat.setMaximumFractionDigits(2);
+        return compactFormat.format(number);
     }
 
     public static Component getEnergyComponent(long energy, long capacity) {

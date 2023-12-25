@@ -19,14 +19,17 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
         super(pos, state, containerSize);
     }
 
-    public boolean hasBatterySlot() {
-        return true;
+    public ChargeSlotType getChargeSlotType() {
+        return ChargeSlotType.POWER_MACHINE;
     }
 
     @Override
     public void internalServerTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         super.internalServerTick(level, time, state, pos);
-        if (hasBatterySlot()) extractBatterySlot();
+        switch (getChargeSlotType()) {
+            case POWER_ITEM -> insertBatterySlot();
+            case POWER_MACHINE -> extractBatterySlot();
+        }
     }
 
     @Override
@@ -49,5 +52,22 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
         if (holder.isDirty()) {
             this.setItem(0, holder.getStack());
         }
+    }
+
+    public void insertBatterySlot() {
+        ItemStack stack = this.getItem(0);
+        if (stack.isEmpty()) return;
+        if (!EnergyApi.isEnergyItem(stack)) return;
+        ItemStackHolder holder = new ItemStackHolder(stack);
+        EnergyApi.moveEnergy(this, null, holder, energyContainer.maxExtract(), false);
+        if (holder.isDirty()) {
+            this.setItem(0, holder.getStack());
+        }
+    }
+
+    public enum ChargeSlotType {
+        NONE,
+        POWER_MACHINE,
+        POWER_ITEM
     }
 }

@@ -44,8 +44,8 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
             this,
             new ExtractOnlyEnergyContainer(10_000) {
                 @Override
-                public long maxInsert() {
-                    return 2_000;
+                public long maxExtract() {
+                    return 250;
                 }
             });
     }
@@ -65,29 +65,29 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
     }
 
     @Override
+    public ChargeSlotType getChargeSlotType() {
+        return ChargeSlotType.POWER_ITEM;
+    }
+
+    @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         if (!canFunction()) return;
         tickSideInteractions(pos, d -> true);
+        if (time % 5 == 0) setLit(cookTimeTotal > 0);
         var input = getItem(1);
-        if (getEnergyStorage().internalInsert(10, true) == 0) {
-            setLit(false);
-            return;
-        }
+        if (getEnergyStorage().internalInsert(20, true) == 0) return;
 
         if (cookTime > 0) {
             cookTime--;
-            getEnergyStorage().internalInsert(10, false);
-            setLit(true);
+            getEnergyStorage().internalInsert(20, false);
         } else if (!input.isEmpty()
             && !(input.getItem() instanceof BucketItem)) {
-            int burnTime = Math.min(20000, CommonHooks.getBurnTime(input));
+            int burnTime = Math.min(20_000, CommonHooks.getBurnTime(input));
             if (burnTime > 0) {
                 input.shrink(1);
                 cookTimeTotal = burnTime;
                 cookTime = burnTime;
             }
-        } else {
-            setLit(false);
         }
     }
 

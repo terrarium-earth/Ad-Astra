@@ -49,6 +49,11 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
     }
 
     @Override
+    public ChargeSlotType getChargeSlotType() {
+        return ChargeSlotType.POWER_ITEM;
+    }
+
+    @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         if (canFunction()) {
             tickSideInteractions(pos, d -> true);

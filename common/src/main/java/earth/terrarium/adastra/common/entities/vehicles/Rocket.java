@@ -192,8 +192,8 @@ public class Rocket extends Vehicle {
             spawnSmokeParticles();
         } else if (hasLaunched()) flightTick();
         if (!level().isClientSide()) {
-            FluidUtils.insertFluidItemToContainer(inventory, fluidContainer, 0, 1, 0);
-            FluidUtils.extractContainerFluidToItem(inventory, fluidContainer, 0, 1, 0);
+            FluidUtils.moveItemToContainer(inventory, fluidContainer, 0, 1, 0);
+            FluidUtils.moveContainerToItem(inventory, fluidContainer, 0, 1, 0);
 
             var fluidHolder = fluidContainer.getFluids().get(0);
             entityData.set(FUEL, fluidHolder.getFluidAmount());

@@ -67,7 +67,7 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
             new InsertOnlyEnergyContainer(20_000) {
                 @Override
                 public long maxInsert() {
-                    return 2_000;
+                    return 500;
                 }
             });
     }
@@ -158,8 +158,8 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
     @Override
     public void updateSlots() {
         sync();
-        FluidUtils.insertFluidItemToContainer(this, getFluidContainer(), 1, 2, 0);
-        FluidUtils.extractContainerFluidToItem(this, getFluidContainer(), 3, 4, 1);
+        FluidUtils.moveItemToContainer(this, getFluidContainer(), 1, 2, 0);
+        FluidUtils.moveContainerToItem(this, getFluidContainer(), 3, 4, 1);
     }
 
     @Override

@@ -64,6 +64,6 @@ public class CompressingCategory implements IRecipeCategory<CompressingRecipe> {
         graphics.blit(CompressorScreen.TEXTURE, 2, 100, 0, 189, 177, 7, 177, 196);
 
         new EtaDrawable(mouseX, mouseY, recipe.cookingTime(), GuiUtils.HAMMER, 13, 13).draw(graphics, 80, 53);
-        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), 10_000, 2_000, 0).draw(graphics, 143, 57);
+        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), 10_000, 250, 0).draw(graphics, 143, 57);
     }
 }

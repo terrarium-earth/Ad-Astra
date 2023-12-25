@@ -65,7 +65,7 @@ public class RefiningCategory implements IRecipeCategory<RefiningRecipe> {
         graphics.blit(FuelRefineryScreen.TEXTURE, 2, -4, 0, 0, 177, 100, 177, 184);
         graphics.blit(FuelRefineryScreen.TEXTURE, 2, 96, 0, 177, 177, 7, 177, 184);
 
-        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), 20_000, 2_000, 0).draw(graphics, 146, 50);
+        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), 20_000, 500, 0).draw(graphics, 146, 50);
 
         int cookTime = recipe.cookingTime();
         long capacity = FluidHooks.buckets(6);

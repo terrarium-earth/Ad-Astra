@@ -59,7 +59,7 @@ public class CompressingCategory implements DisplayCategory<CompressingDisplay> 
         widgets.add(Widgets.createSlot(new Point(bounds.x + 100, bounds.y + 56)).backgroundEnabled(false).entries(display.getOutputEntries().get(0)).markOutput());
 
         widgets.add(new EtaWidget(new Point(bounds.x + 78, bounds.y + 57), display.recipe().cookingTime(), GuiUtils.HAMMER, 13, 13));
-        widgets.add(new EnergyBarWidget(new Point(bounds.x + 141, bounds.y + 61), -display.recipe().energy(), 10_000, 2_000, 0));
+        widgets.add(new EnergyBarWidget(new Point(bounds.x + 141, bounds.y + 61), -display.recipe().energy(), 10_000, 250, 0));
 
         return widgets;
     }

@@ -150,7 +150,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
     @Override
     public void updateSlots() {
         sync();
-        FluidUtils.extractContainerFluidToItem(this, fluidContainer, 2, 3, 0);
+        FluidUtils.moveContainerToItem(this, fluidContainer, 2, 3, 0);
     }
 
     @Override

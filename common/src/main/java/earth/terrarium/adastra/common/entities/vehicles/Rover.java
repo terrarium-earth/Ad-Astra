@@ -157,8 +157,8 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
         handleVehicleMovementTick();
         doEntityCollisionTick();
         if (!level().isClientSide()) {
-            FluidUtils.insertFluidItemToContainer(inventory, fluidContainer, 0, 1, 0);
-            FluidUtils.extractContainerFluidToItem(inventory, fluidContainer, 0, 1, 0);
+            FluidUtils.moveItemToContainer(inventory, fluidContainer, 0, 1, 0);
+            FluidUtils.moveContainerToItem(inventory, fluidContainer, 0, 1, 0);
 
             var fluidHolder = fluidContainer.getFluids().get(0);
             entityData.set(FUEL, fluidHolder.getFluidAmount());
@@ -170,11 +170,6 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
         boolean noPassenger = getControllingPassenger() == null;
         float xxa = -xxa(); // right/left
         float zza = zza(); // forward/backward
-
-        if (getControllingPassenger() instanceof Mob) {
-            xxa = random.nextFloat() * 2 - 1;
-            zza = random.nextFloat() * 2 - 1;
-        }
 
         if (!onGround()) {
             xxa *= 0.2f;

@@ -12,6 +12,7 @@ import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.container.BiFluidContainer;
 import earth.terrarium.adastra.common.entities.AirVortex;
 import earth.terrarium.adastra.common.menus.machines.OxygenDistributorMenu;
+import earth.terrarium.adastra.common.registry.ModSoundEvents;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.adastra.common.utils.floodfill.FloodFill3D;
@@ -24,6 +25,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -83,7 +85,12 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         if (this.energyContainer != null) return this.energyContainer;
         return this.energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(50_000));
+            new InsertOnlyEnergyContainer(50_000) {
+                @Override
+                public long maxInsert() {
+                    return 1_000;
+                }
+            });
     }
 
     @Override
@@ -103,6 +110,12 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
             }
 
             if (time % 40 == 0) tickOxygen(level, pos);
+
+            if (time % 200 == 0) {
+                level.playSound(null, pos, ModSoundEvents.OXYGEN_OUTTAKE.get(), SoundSource.BLOCKS, 0.2f, 1);
+            } else if (time % 100 == 0) {
+                level.playSound(null, pos, ModSoundEvents.OXYGEN_INTAKE.get(), SoundSource.BLOCKS, 0.2f, 1);
+            }
         }
 
         energyPerTick = (recipe != null && canCraft(getEnergyStorage()) ? recipe.energy() : 0) + (canDistribute ? calculateEnergyPerTick() : 0);
@@ -175,7 +188,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     @Override
     public void updateSlots() {
         sync();
-        FluidUtils.insertFluidItemToContainer(this, getFluidContainer(), 1, 2, 0);
+        FluidUtils.moveItemToContainer(this, getFluidContainer(), 1, 2, 0);
     }
 
     @Override

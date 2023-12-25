@@ -62,7 +62,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
             new InsertOnlyEnergyContainer(20_000) {
                 @Override
                 public long maxInsert() {
-                    return 2_000;
+                    return 500;
                 }
             });
     }
@@ -153,8 +153,8 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
     @Override
     public void updateSlots() {
         sync();
-        FluidUtils.insertFluidItemToContainer(this, fluidContainer, 1, 2, 0);
-        FluidUtils.extractContainerFluidToItem(this, fluidContainer, 3, 4, 1);
+        FluidUtils.moveItemToContainer(this, fluidContainer, 1, 2, 0);
+        FluidUtils.moveContainerToItem(this, fluidContainer, 3, 4, 1);
     }
 
     @Override

@@ -3,11 +3,11 @@
   "cookingtime": 1,
   "energy": 30,
   "ingredient": {
-    "buckets": 0.011,
+    "buckets": 0.005,
     "fluid": "ad_astra:oil"
   },
   "result_fluid": {
-    "buckets": 0.011,
+    "buckets": 0.005,
     "fluid": "ad_astra:fuel"
   }
 }

@@ -60,7 +60,7 @@ public class RefiningCategory implements DisplayCategory<RefiningDisplay> {
         widgets.add(Widgets.createSlot(new Point(bounds.x + 127, bounds.y + 22)).backgroundEnabled(false));
         widgets.add(Widgets.createSlot(new Point(bounds.x + 127, bounds.y + 52)).backgroundEnabled(false));
 
-        widgets.add(new EnergyBarWidget(new Point(bounds.x + 144, bounds.y + 54), -display.recipe().energy(), 20_000, 2_000, 0));
+        widgets.add(new EnergyBarWidget(new Point(bounds.x + 144, bounds.y + 54), -display.recipe().energy(), 20_000, 500, 0));
 
         int cookTime = display.recipe().cookingTime();
         long capacity = FluidHooks.buckets(6);

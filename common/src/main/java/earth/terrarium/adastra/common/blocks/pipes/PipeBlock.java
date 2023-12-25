@@ -100,7 +100,7 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
             tooltip.add(Component.translatable("tooltip.ad_astra.energy_transfer_tick", transferRate));
             TooltipUtils.addDescriptionComponent(tooltip, ConstantComponents.CABLE_INFO);
         } else {
-            tooltip.add(Component.translatable("tooltip.ad_astra.fluid_transfer_tick", FluidHooks.buckets(transferRate)));
+            tooltip.add(Component.translatable("tooltip.ad_astra.fluid_transfer_tick", FluidHooks.toMillibuckets(transferRate)));
             TooltipUtils.addDescriptionComponent(tooltip, ConstantComponents.FLUID_PIPE_INFO);
         }
     }

@@ -45,12 +45,12 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
             new SimpleEnergyContainer(2_000_000) {
                 @Override
                 public long maxInsert() {
-                    return 2_000;
+                    return 1_000;
                 }
 
                 @Override
                 public long maxExtract() {
-                    return 2_000;
+                    return 1_000;
                 }
 
                 @Override
@@ -67,7 +67,7 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
         if (!canFunction()) return;
         tickSideInteractions(pos, d -> true);
         distributeToChargeSlot(level, pos);
-        setLit(!getItem(0).isEmpty());
+        if (time % 5 == 0) setLit(!getItem(0).isEmpty());
     }
 
     @Override
@@ -89,8 +89,8 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
     }
 
     @Override
-    public boolean hasBatterySlot() {
-        return false;
+    public ChargeSlotType getChargeSlotType() {
+        return ChargeSlotType.NONE;
     }
 
     public void onEnergyChange() {

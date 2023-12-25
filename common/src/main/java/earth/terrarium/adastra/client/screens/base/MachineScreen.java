@@ -15,8 +15,8 @@ import earth.terrarium.adastra.common.network.messages.ServerboundClearFluidTank
 import earth.terrarium.adastra.common.network.messages.ServerboundResetSideConfigPacket;
 import earth.terrarium.adastra.common.network.messages.ServerboundSetRedstoneControlPacket;
 import earth.terrarium.adastra.common.network.messages.ServerboundSetSideConfigPacket;
-import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.adastra.common.utils.ModUtils;
+import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import it.unimi.dsi.fastutil.ints.IntIntPair;
@@ -331,7 +331,7 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
         return this.topPos;
     }
 
-    /*
+    /**
      * Used for testing click areas for JEI/REI. Renders a yellow box where the clickable area is.
      */
     @SuppressWarnings("unused")

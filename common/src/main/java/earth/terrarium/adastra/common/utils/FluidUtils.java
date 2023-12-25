@@ -4,7 +4,6 @@ import earth.terrarium.botarium.common.fluid.FluidApi;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.base.ItemFluidContainer;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -60,101 +59,118 @@ public class FluidUtils {
         return FluidApi.getItemFluidContainer(stack).extractFluid(fluid, false);
     }
 
-    public static void insertFluidItemToContainer(Container container, FluidContainer toFluidContainer, int fromSlot, int toSlot, int tank) {
-        var fromStack = container.getItem(fromSlot);
-        if (fromStack.isEmpty()) return;
-        var toStack = container.getItem(toSlot);
-        ItemStackHolder fromHolder = new ItemStackHolder(fromStack.copyWithCount(1));
-        ItemFluidContainer fromFluidContainer = FluidApi.getItemFluidContainer(fromHolder);
-        FluidHolder fromFluid = fromFluidContainer.getFluids().get(0);
-        if (fromFluid.isEmpty()) return;
+    /**
+     * Moves fluid from a stack to a fluid container
+     *
+     * @param container      The container that has the stack
+     * @param fluidContainer The fluid container to move the fluid to
+     * @param slot           The slot of the stack
+     * @param resultSlot     The slot where the emptied stack will be moved to if successful
+     * @param tank           The fluid container tank to insert the fluid to.
+     */
+    public static void moveItemToContainer(Container container, FluidContainer fluidContainer, int slot, int resultSlot, int tank) {
+        var stack = container.getItem(slot);
+        // Don't do anything if the stack is empty or doesn't contain a fluid container.
+        if (stack.isEmpty() || !FluidApi.isFluidContainingItem(stack)) return;
+        var resultStack = container.getItem(resultSlot);
 
-        if (!canExtractSlotToTank(fromHolder, tank, toFluidContainer.insertFluid(fromFluid, true))) return;
-        if (!simulateSlotToTank(fromHolder, toStack)) return;
+        // Get the fluid container from the item
+        ItemStackHolder stackHolder = new ItemStackHolder(stack.copyWithCount(1));
+        FluidContainer itemFluidContainer = FluidApi.getItemFluidContainer(stackHolder);
+        FluidHolder amount = itemFluidContainer.getFluids().get(tank).copyHolder();
+        if (amount.isEmpty()) return;
 
-        if (FluidApi.moveFluid(fromFluidContainer, toFluidContainer, fromFluid, true) == 0) return;
-        FluidApi.moveFluid(fromFluidContainer, toFluidContainer, fromFluid, false);
+        // Don't do anything if the resulting emptied stack can not be moved to the result slot.
+        if (!resultStack.isEmpty()) {
+            var emptyStack = getEmptyStack(stackHolder, amount);
+            if (!ItemUtils.canAddItem(emptyStack, resultStack)) return;
+        }
 
-        var fromResultStack = fromHolder.getStack();
+        // Move the fluid from the item to the container
+        if (FluidApi.moveFluid(itemFluidContainer, fluidContainer, amount, true) == 0) return;
+        FluidApi.moveFluid(itemFluidContainer, fluidContainer, amount, false);
 
-        if (toStack.isEmpty() || ItemStack.isSameItemSameTags(fromResultStack, toStack)) {
-            fromStack.shrink(1);
-            if (toStack.isEmpty()) {
-                container.setItem(toSlot, fromResultStack);
-            } else {
-                toStack.grow(fromResultStack.getCount());
-            }
-        } else container.setItem(fromSlot, fromResultStack);
+        var result = stackHolder.getStack();
+
+        if (resultStack.isEmpty()) {
+            // If the result slot is empty, move the item there.
+            stack.shrink(1);
+            container.setItem(resultSlot, result);
+        } else if (ItemUtils.canAddItem(result, resultStack)) {
+            // Or else increment the result slot.
+            stack.shrink(1);
+            resultStack.grow(1);
+        }
     }
 
+    /**
+     * Moves fluid from a fluid container to a stack
+     *
+     * @param container      The container that has the stack
+     * @param fluidContainer The fluid container to move the fluid from
+     * @param slot           The slot of the stack
+     * @param resultSlot     The slot where the filled stack will be moved to if successful
+     * @param tank           The fluid container tank to extract the fluid from
+     */
+    public static void moveContainerToItem(Container container, FluidContainer fluidContainer, int slot, int resultSlot, int tank) {
+        var stack = container.getItem(slot);
+        // Don't do anything if the stack is empty or doesn't contain a fluid container.
+        if (stack.isEmpty() || !FluidApi.isFluidContainingItem(stack)) return;
+        var resultStack = container.getItem(resultSlot);
 
-    public static void extractContainerFluidToItem(Container container, FluidContainer fromFluidContainer, int fromSlot, int toSlot, int tank) {
-        var fromStack = container.getItem(fromSlot);
-        if (fromStack.isEmpty()) return;
-        var toStack = container.getItem(toSlot);
-        ItemStackHolder fromHolder = new ItemStackHolder(fromStack.copyWithCount(1));
-        ItemFluidContainer toFluidContainer = FluidApi.getItemFluidContainer(fromHolder);
-        FluidHolder fromFluid = fromFluidContainer.getFluids().get(tank);
-        if (fromFluid.isEmpty()) return;
+        // Get the fluid container from the item
+        ItemStackHolder stackHolder = new ItemStackHolder(stack.copyWithCount(1));
+        ItemFluidContainer itemFluidContainer = FluidApi.getItemFluidContainer(stackHolder);
+        FluidHolder amount = fluidContainer.getFluids().get(tank).copyHolder();
+        if (amount.isEmpty()) return;
 
-        if (!canInsertTankToSlot(fromHolder, fromFluid)) return;
-        if (!simulateTankToSlot(fromHolder, toStack, fromFluid)) return;
+        // Don't do anything if the resulting filled stack can not be moved to the result slot.
+        if (!resultStack.isEmpty()) {
+            var filledStack = getFilledStack(stackHolder, amount);
+            if (!ItemUtils.canAddItem(filledStack, resultStack)) return;
+        }
 
-        if (FluidApi.moveFluid(fromFluidContainer, toFluidContainer, fromFluid, true) == 0) return;
-        FluidApi.moveFluid(fromFluidContainer, toFluidContainer, fromFluid, false);
+        if (FluidApi.moveFluid(fluidContainer, itemFluidContainer, amount, true) == 0) return;
+        FluidApi.moveFluid(fluidContainer, itemFluidContainer, amount, false);
 
-        var fromResultStack = fromHolder.getStack();
+        var result = stackHolder.getStack();
 
-        if (toStack.isEmpty() || ItemStack.isSameItemSameTags(fromResultStack, toStack)) {
-            fromStack.shrink(1);
-            if (toStack.isEmpty()) {
-                container.setItem(toSlot, fromResultStack);
-            } else {
-                toStack.grow(fromResultStack.getCount());
-            }
-        } else container.setItem(fromSlot, fromResultStack);
+        if (resultStack.isEmpty()) {
+            // If the result slot is empty, move the item there.
+            stack.shrink(1);
+            container.setItem(resultSlot, result);
+        } else if (ItemUtils.canAddItem(result, resultStack)) {
+            // Or else increment the result slot.
+            stack.shrink(1);
+            resultStack.grow(1);
+        }
     }
 
-    public static boolean canInsertItem(ItemStack stack, ItemStack to) {
-        return to.isEmpty() || (ItemStack.isSameItemSameTags(stack, to) && to.getCount() + stack.getCount() <= to.getMaxStackSize());
+    /**
+     * Gets the filled version of an item container by simulating the insertion of the fluid and returning the result stack.
+     *
+     * @param emptyStack The empty item stack
+     * @param amount     The fluid to insert
+     * @return The filled item stack
+     */
+    public static ItemStack getFilledStack(ItemStackHolder emptyStack, FluidHolder amount) {
+        var copy = emptyStack.copy();
+        var container = FluidApi.getItemFluidContainer(copy);
+        container.insertFluid(amount, false);
+        return copy.getStack();
     }
 
-    public static boolean simulateSlotToTank(ItemStackHolder holder, ItemStack outputStack) {
-        ItemStack resultStack = getExtractedFluidItem(holder);
-        if (resultStack.isEmpty()) return false;
-        return canInsertItem(resultStack, outputStack);
-    }
-
-    public static boolean simulateTankToSlot(ItemStackHolder holder, ItemStack outputStack, FluidHolder tankFluid) {
-        ItemStack resultStack = getFilledFluidItem(holder, tankFluid);
-        if (resultStack.isEmpty()) return false;
-        return canInsertItem(resultStack, outputStack);
-    }
-
-    public static ItemStack getExtractedFluidItem(ItemStackHolder holder) {
-        ItemFluidContainer handler = FluidApi.getItemFluidContainer(holder);
-        if (handler == null) return ItemStack.EMPTY;
-
-        handler.extractFluid(handler.getFluids().get(0), false);
-        return holder.getStack();
-    }
-
-    public static ItemStack getFilledFluidItem(ItemStackHolder holder, FluidHolder fluid) {
-        ItemFluidContainer handler = FluidApi.getItemFluidContainer(holder);
-        if (handler == null) return ItemStack.EMPTY;
-
-        handler.insertFluid(fluid, false);
-        return holder.getStack();
-    }
-
-    public static boolean canInsertTankToSlot(ItemStackHolder holder, FluidHolder toInsert) {
-        ItemFluidContainer handler = FluidApi.getItemFluidContainer(holder);
-        return handler.insertFluid(toInsert, false) != 0;
-    }
-
-    public static boolean canExtractSlotToTank(ItemStackHolder holder, int tank, long toExtract) {
-        ItemFluidContainer handler = FluidApi.getItemFluidContainer(holder);
-        FluidHolder fluid = FluidHooks.newFluidHolder(handler.getFluids().get(tank).getFluid(), toExtract, null);
-        return handler.extractFluid(fluid, false).getFluidAmount() != 0;
+    /**
+     * Gets the empty version of an item container by simulating the extraction of the fluid and returning the result stack.
+     *
+     * @param filledStack The filled item stack
+     * @param amount      The fluid to extract
+     * @return The empty item stack
+     */
+    public static ItemStack getEmptyStack(ItemStackHolder filledStack, FluidHolder amount) {
+        var copy = filledStack.copy();
+        var container = FluidApi.getItemFluidContainer(copy);
+        container.extractFluid(amount, false);
+        return copy.getStack();
     }
 }

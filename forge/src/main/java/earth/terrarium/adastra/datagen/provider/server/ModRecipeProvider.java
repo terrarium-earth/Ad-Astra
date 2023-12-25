@@ -55,8 +55,8 @@ public class ModRecipeProvider extends RecipeProvider {
         );
 
         createRefining(writer, 1, 30,
-            FluidHooks.newFluidHolder(ModFluids.OIL.get(), 11, null),
-            FluidHooks.newFluidHolder(ModFluids.FUEL.get(), 11, null)
+            FluidHooks.newFluidHolder(ModFluids.OIL.get(), 5, null),
+            FluidHooks.newFluidHolder(ModFluids.FUEL.get(), 5, null)
         );
 
         createCryoFreezing(writer, 60, 40,

@@ -67,15 +67,15 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
     public WrappedItemEnergyContainer getEnergyStorage(ItemStack holder) {
         return new WrappedItemEnergyContainer(
             holder,
-            new SimpleEnergyContainer(500_000) {
+            new SimpleEnergyContainer(250_000) {
                 @Override
                 public long maxInsert() {
-                    return 10_000;
+                    return 250;
                 }
 
                 @Override
                 public long maxExtract() {
-                    return 20_000;
+                    return 500;
                 }
             });
     }

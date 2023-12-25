@@ -42,7 +42,7 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
             new InsertOnlyEnergyContainer(10_000) {
                 @Override
                 public long maxInsert() {
-                    return 2_000;
+                    return 250;
                 }
             });
     }

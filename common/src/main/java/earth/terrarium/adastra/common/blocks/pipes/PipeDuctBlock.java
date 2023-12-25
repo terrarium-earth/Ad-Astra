@@ -31,7 +31,7 @@ public class PipeDuctBlock extends PipeBlock {
             tooltip.add(Component.translatable("tooltip.ad_astra.energy_transfer_tick", transferRate()));
             TooltipUtils.addDescriptionComponent(tooltip, ConstantComponents.CABLE_DUCT);
         } else {
-            tooltip.add(Component.translatable("tooltip.ad_astra.fluid_transfer_tick", FluidHooks.buckets(transferRate())));
+            tooltip.add(Component.translatable("tooltip.ad_astra.fluid_transfer_tick", FluidHooks.toMillibuckets(transferRate())));
             TooltipUtils.addDescriptionComponent(tooltip, ConstantComponents.FLUID_DUCT_INFO);
         }
     }

@@ -65,9 +65,10 @@ screen in the rover. You can open in by pressing `R` while in the rover or click
 - The Rocket sound is now looped. This allows it to play for as long as the rocket is flying.
 - Fixed rocket sound not playing when leaving the world and rejoining while in a flying rocket.
 - Fixed rocket particles not visible above world height with Embeddium/Sodium installed.
+- Filled energy and fluid items are now in the creative tab.
 - Fixed rocket particles lagging behind the rocket on servers.
 - Fixed DFU running on all Ad Astra structures due to them being saved on an older version
-- Added a keybind to enable and disable the Jetsuit.
+- Added a keybind `V` to enable and disable the Jetsuit.
 - Removed the hammer. Use the compressor to obtain plates instead.
 - Each orbit can now have its owned recipe defined via datapack, instead of all of them using the same recipe.
 - Reduced oil well spawn rates.
