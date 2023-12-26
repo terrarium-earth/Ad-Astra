@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.datagen.provider.server.registry;
 
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.client.dimension.ModEffects;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -10,7 +11,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
 
 import java.util.OptionalLong;
@@ -34,12 +34,12 @@ public class ModDimensionTypeProvider {
     }
 
     public static void bootstrap(BootstapContext<DimensionType> context) {
-        orbit(context, EARTH_ORBIT);
-        orbit(context, MOON_ORBIT);
-        orbit(context, MARS_ORBIT);
-        orbit(context, VENUS_ORBIT);
-        orbit(context, MERCURY_ORBIT);
-        orbit(context, GLACIO_ORBIT);
+        orbit(context, EARTH_ORBIT, ModEffects.EARTH_ORBIT_EFFECTS);
+        orbit(context, MOON_ORBIT, ModEffects.MOON_ORBIT_EFFECTS);
+        orbit(context, MARS_ORBIT, ModEffects.MARS_ORBIT_EFFECTS);
+        orbit(context, VENUS_ORBIT, ModEffects.VENUS_ORBIT_EFFECTS);
+        orbit(context, MERCURY_ORBIT, ModEffects.MERCURY_ORBIT_EFFECTS);
+        orbit(context, GLACIO_ORBIT, ModEffects.GLACIO_ORBIT_EFFECTS);
 
         context.register(
             MOON,
@@ -56,7 +56,7 @@ public class ModDimensionTypeProvider {
                 384,
                 384,
                 BlockTags.INFINIBURN_OVERWORLD,
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS, // TODO
+                ModEffects.MOON_EFFECTS,
                 0.0f,
                 createMonsterSettings(
                     false,
@@ -79,7 +79,7 @@ public class ModDimensionTypeProvider {
                 384,
                 384,
                 BlockTags.INFINIBURN_OVERWORLD,
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS, // TODO
+                ModEffects.MARS_EFFECTS,
                 0.0f,
                 createMonsterSettings(
                     false,
@@ -102,7 +102,7 @@ public class ModDimensionTypeProvider {
                 384,
                 384,
                 BlockTags.INFINIBURN_OVERWORLD,
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS, // TODO
+                ModEffects.VENUS_EFFECTS,
                 0.0f,
                 createMonsterSettings(
                     true,
@@ -125,7 +125,7 @@ public class ModDimensionTypeProvider {
                 384,
                 384,
                 BlockTags.INFINIBURN_OVERWORLD,
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS, // TODO
+                ModEffects.MERCURY_EFFECTS,
                 0.0f,
                 createMonsterSettings(
                     true,
@@ -148,7 +148,7 @@ public class ModDimensionTypeProvider {
                 384,
                 384,
                 BlockTags.INFINIBURN_OVERWORLD,
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS, // TODO
+                ModEffects.GLACIO_EFFECTS,
                 0.0f,
                 createMonsterSettings(
                     false,
@@ -157,7 +157,7 @@ public class ModDimensionTypeProvider {
                     0)));
     }
 
-    private static void orbit(BootstapContext<DimensionType> context, ResourceKey<DimensionType> key) {
+    private static void orbit(BootstapContext<DimensionType> context, ResourceKey<DimensionType> key, ResourceLocation dimensionSpecialEffects) {
         context.register(
             key,
             create(
@@ -173,7 +173,7 @@ public class ModDimensionTypeProvider {
                 384,
                 384,
                 BlockTags.INFINIBURN_OVERWORLD,
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS,
+                dimensionSpecialEffects,
                 0.0f,
                 createMonsterSettings(
                     false,

@@ -56,8 +56,8 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
         ItemStack offhandItem = entity.getOffhandItem();
 
         float fuelUsage = 0.001f;
-        boolean mainHandBoost = consumeFuel(mainHandItem, fuelUsage);
-        boolean offHandBoost = consumeFuel(offhandItem, fuelUsage);
+        boolean mainHandBoost = consumeFuel(player, mainHandItem, fuelUsage);
+        boolean offHandBoost = consumeFuel(player, offhandItem, fuelUsage);
         if (!mainHandBoost && !offHandBoost && !player.isCreative()) {
             player.stopUsingItem();
             return;
@@ -106,7 +106,8 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
         }
     }
 
-    public boolean consumeFuel(ItemStack stack, float amount) {
+    public boolean consumeFuel(Player player, ItemStack stack, float amount) {
+        if (player.isCreative()) return true;
         if (!(stack.getItem() instanceof ZipGunItem)) return false;
         ItemStackHolder holder = new ItemStackHolder(stack);
         var container = FluidApi.getItemFluidContainer(holder);

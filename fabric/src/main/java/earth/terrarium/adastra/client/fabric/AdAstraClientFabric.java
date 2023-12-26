@@ -1,7 +1,9 @@
 package earth.terrarium.adastra.client.fabric;
 
 import earth.terrarium.adastra.client.AdAstraClient;
+import earth.terrarium.adastra.client.dimension.ModEffects;
 import earth.terrarium.adastra.client.renderers.world.OxygenDistributorOverlayRenderer;
+import earth.terrarium.adastra.client.utils.DimensionUtils;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -25,12 +27,53 @@ public class AdAstraClientFabric {
         WorldRenderEvents.AFTER_TRANSLUCENT.register(ctx -> OxygenDistributorOverlayRenderer.render(ctx.matrixStack(), ctx.camera()));
         AdAstraClient.onAddItemColors(ColorProviderRegistry.ITEM::register);
 
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VENT.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SOLAR_PANEL.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WATER_PUMP.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ENERGIZER.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.INDUSTRIAL_LAMP.get(), RenderType.cutout());
         ModBlocks.GLOBES.stream().forEach(globe -> BlockRenderLayerMap.INSTANCE.putBlock(globe.get(), RenderType.cutout()));
         ModBlocks.SLIDING_DOORS.stream().forEach(globe -> BlockRenderLayerMap.INSTANCE.putBlock(globe.get(), RenderType.cutout()));
+
+        ModEffects.onRegisterDimensionSpecialEffects((dimension, effects) -> {
+            DimensionRenderingRegistry.registerDimensionEffects(dimension.location(), effects);
+            if (effects.hasCustomClouds()) {
+                DimensionRenderingRegistry.registerCloudRenderer(dimension, context -> {
+                    var camera = context.camera().getPosition();
+                    effects.renderClouds(
+                        context.world(),
+                        DimensionUtils.getTicks(),
+                        context.tickDelta(),
+                        context.matrixStack(),
+                        camera.x, camera.y, camera.z,
+                        context.projectionMatrix());
+                });
+            }
+
+            if (effects.hasCustomSky()) {
+                DimensionRenderingRegistry.registerSkyRenderer(dimension, context -> effects.renderSky(
+                    context.world(),
+                    DimensionUtils.getTicks(),
+                    context.tickDelta(),
+                    context.matrixStack(),
+                    context.camera(),
+                    context.projectionMatrix(),
+                    false,
+                    () -> {}
+                ));
+            }
+
+            if (effects.hasCustomWeather()) {
+                DimensionRenderingRegistry.registerWeatherRenderer(dimension, context -> {
+                    var camera = context.camera().getPosition();
+                    effects.renderSnowAndRain(
+                        context.world(),
+                        DimensionUtils.getTicks(),
+                        context.tickDelta(),
+                        context.lightmapTextureManager(),
+                        camera.x, camera.y, camera.z
+                    );
+                });
+            }
+        });
     }
 }

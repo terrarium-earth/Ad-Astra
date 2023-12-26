@@ -41,6 +41,7 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.particle.SplashParticle;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -91,6 +92,8 @@ public class AdAstraClient {
         MenuScreens.register(ModMenus.LANDER.get(), LanderScreen::new);
 
         MenuScreens.register(ModMenus.PLANETS.get(), PlanetsScreen::new);
+
+        ClientHooks.setRenderLayer(ModBlocks.VENT.get(), RenderType.cutout());
     }
 
     private static void registerBlockEntityRenderers() {

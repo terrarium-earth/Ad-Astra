@@ -2,7 +2,7 @@
   "ambient_light": 0.0,
   "bed_works": true,
   "coordinate_scale": 1.0,
-  "effects": "minecraft:overworld",
+  "effects": "ad_astra:moon_orbit",
   "has_ceiling": false,
   "has_raids": false,
   "has_skylight": true,
