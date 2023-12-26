@@ -8,8 +8,12 @@ import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.BiFunction;
 
 /**
@@ -23,19 +27,21 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
     private final BiFunction<Integer, Integer, Boolean> isFoggyAt;
 
 
-    public ModDimensionSpecialEffects(float cloudLevel,
-                                      boolean hasGround,
-                                      SkyType skyType,
-                                      boolean forceBrightLightmap,
-                                      boolean constantAmbientLight,
-                                      BiFunction<Vec3, Float, Vec3> fogColor,
-                                      BiFunction<Integer, Integer, Boolean> isFoggyAt,
-                                      int stars,
-                                      BiFunction<ClientLevel, Float, Float> starBrightness,
-                                      SimpleWeightedRandomList<Integer> starColors
+    public ModDimensionSpecialEffects(
+        float cloudLevel,
+        boolean hasGround,
+        SkyType skyType,
+        boolean forceBrightLightmap,
+        boolean constantAmbientLight,
+        BiFunction<Vec3, Float, Vec3> fogColor,
+        BiFunction<Integer, Integer, Boolean> isFoggyAt,
+        int stars,
+        BiFunction<ClientLevel, Float, Float> starBrightness,
+        SimpleWeightedRandomList<Integer> starColors,
+        List<SkyRenderable> skyRenderables
     ) {
         super(cloudLevel, hasGround, skyType, forceBrightLightmap, constantAmbientLight);
-        this.skyRenderer = new ModSkyRenderer(stars, starBrightness, starColors);
+        this.skyRenderer = new ModSkyRenderer(stars, starBrightness, starColors, skyRenderables);
         this.fogColor = fogColor;
         this.isFoggyAt = isFoggyAt;
     }
@@ -90,13 +96,22 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
         return this.isFoggyAt.apply(x, y);
     }
 
+    @Nullable
+    @Override
+    public float[] getSunriseColor(float timeOfDay, float partialTicks) {
+        return super.getSunriseColor(timeOfDay, partialTicks);
+    }
+
     public static class Builder {
+        private boolean customClouds = false;
+        private boolean customSky = false;
+        private boolean customWeather = false;
+
         private float cloudLevel = OverworldEffects.CLOUD_LEVEL;
         private boolean hasGround = true;
         private SkyType skyType = SkyType.NORMAL;
         private boolean forceBrightLightmap = false;
         private boolean constantAmbientLight = false;
-
 
         private BiFunction<ClientLevel, Float, Float> starBrightness = (level, partialTick) -> {
             float rainLevel = 1 - level.getRainLevel(partialTick);
@@ -115,7 +130,21 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
             .add(0xffffffff, 1)
             .build();
 
-        public Builder() {
+        private final List<SkyRenderable> skyRenderables = new ArrayList<>();
+
+        public Builder customClouds() {
+            this.customClouds = true;
+            return this;
+        }
+
+        public Builder customSky() {
+            this.customSky = true;
+            return this;
+        }
+
+        public Builder customWeather() {
+            this.customWeather = true;
+            return this;
         }
 
         public Builder cloudLevel(float cloudLevel) {
@@ -168,6 +197,11 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
             return this;
         }
 
+        public Builder addSkyRenderables(SkyRenderable... renderables) {
+            Collections.addAll(skyRenderables, renderables);
+            return this;
+        }
+
         public ModDimensionSpecialEffects build() {
             return new ModDimensionSpecialEffects(
                 cloudLevel,
@@ -179,7 +213,23 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
                 isFoggyAt,
                 stars,
                 starBrightness,
-                starColors) {
+                starColors,
+                skyRenderables
+            ) {
+                @Override
+                public boolean hasCustomClouds() {
+                    return customClouds;
+                }
+
+                @Override
+                public boolean hasCustomSky() {
+                    return customSky;
+                }
+
+                @Override
+                public boolean hasCustomWeather() {
+                    return customWeather;
+                }
             };
         }
     }
