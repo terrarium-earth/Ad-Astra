@@ -1,0 +1,57 @@
+{
+  "variants": {
+    "face=ceiling,facing=east": {
+      "model": "ad_astra:block/gray_industrial_lamp",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=north": {
+      "model": "ad_astra:block/gray_industrial_lamp",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=south": {
+      "model": "ad_astra:block/gray_industrial_lamp",
+      "x": 180
+    },
+    "face=ceiling,facing=west": {
+      "model": "ad_astra:block/gray_industrial_lamp",
+      "x": 180,
+      "y": 90
+    },
+    "face=floor,facing=east": {
+      "model": "ad_astra:block/gray_industrial_lamp",
+      "y": 90
+    },
+    "face=floor,facing=north": {
+      "model": "ad_astra:block/gray_industrial_lamp"
+    },
+    "face=floor,facing=south": {
+      "model": "ad_astra:block/gray_industrial_lamp",
+      "y": 180
+    },
+    "face=floor,facing=west": {
+      "model": "ad_astra:block/gray_industrial_lamp",
+      "y": 270
+    },
+    "face=wall,facing=east": {
+      "model": "ad_astra:block/gray_industrial_lamp",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=north": {
+      "model": "ad_astra:block/gray_industrial_lamp",
+      "x": 90
+    },
+    "face=wall,facing=south": {
+      "model": "ad_astra:block/gray_industrial_lamp",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=west": {
+      "model": "ad_astra:block/gray_industrial_lamp",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

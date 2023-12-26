@@ -1,0 +1,6 @@
+{
+  "parent": "ad_astra:block/small_industrial_lamp",
+  "textures": {
+    "0": "ad_astra:block/lamp/small_black_industrial_lamp"
+  }
+}

@@ -12,6 +12,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -105,8 +107,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         basicBlock(ModBlocks.CABLE_DUCT.get());
         basicBlock(ModBlocks.FLUID_PIPE_DUCT.get());
 
-        horizontalFaceBlock(ModBlocks.INDUSTRIAL_LAMP.get(), models().getExistingFile(modLoc("block/industrial_lamp")));
-        simpleBlockItem(ModBlocks.INDUSTRIAL_LAMP.get(), models().getBuilder(name(ModBlocks.INDUSTRIAL_LAMP.get())));
+        ModBlocks.INDUSTRIAL_LAMPS.stream().map(RegistryEntry::get).forEach(b -> industrialLamp(b, "industrial_lamp"));
+        ModBlocks.SMALL_INDUSTRIAL_LAMPS.stream().map(RegistryEntry::get).forEach(b -> industrialLamp(b, "small_industrial_lamp"));
     }
 
     public void basicBlock(Block block) {
@@ -459,6 +461,22 @@ public class ModBlockStateProvider extends BlockStateProvider {
             .addModel()
             .condition(PipeBlock.CONNECTED_DOWN, PipeProperty.EXTRACT)
             .end();
+    }
+
+    public void industrialLamp(Block block, String parent) {
+        simpleBlockItem(block, models().getBuilder("block/%s".formatted(name(block))));
+        getVariantBuilder(block).forAllStates(state -> {
+            String name = this.name(block);
+            ResourceLocation texture = modLoc("block/lamp/%s".formatted(name));
+
+            return ConfiguredModel.builder()
+                .modelFile(models().getBuilder(name)
+                    .texture("0", texture)
+                    .parent(models().getExistingFile(modLoc("block/%s".formatted(parent)))))
+                .rotationX(state.getValue(BlockStateProperties.ATTACH_FACE).ordinal() * 90)
+                .rotationY((((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.CEILING ? 180 : 0)) % 360)
+                .build();
+        });
     }
 
     private ResourceLocation findTexture(Block block, String replace) {

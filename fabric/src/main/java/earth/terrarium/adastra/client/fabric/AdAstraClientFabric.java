@@ -30,9 +30,10 @@ public class AdAstraClientFabric {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SOLAR_PANEL.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WATER_PUMP.get(), RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ENERGIZER.get(), RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.INDUSTRIAL_LAMP.get(), RenderType.cutout());
-        ModBlocks.GLOBES.stream().forEach(globe -> BlockRenderLayerMap.INSTANCE.putBlock(globe.get(), RenderType.cutout()));
-        ModBlocks.SLIDING_DOORS.stream().forEach(globe -> BlockRenderLayerMap.INSTANCE.putBlock(globe.get(), RenderType.cutout()));
+        ModBlocks.GLOBES.stream().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block.get(), RenderType.cutout()));
+        ModBlocks.SLIDING_DOORS.stream().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block.get(), RenderType.cutout()));
+        ModBlocks.INDUSTRIAL_LAMPS.stream().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block.get(), RenderType.cutout()));
+        ModBlocks.SMALL_INDUSTRIAL_LAMPS.stream().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block.get(), RenderType.cutout()));
 
         ModEffects.onRegisterDimensionSpecialEffects((dimension, effects) -> {
             DimensionRenderingRegistry.registerDimensionEffects(dimension.location(), effects);

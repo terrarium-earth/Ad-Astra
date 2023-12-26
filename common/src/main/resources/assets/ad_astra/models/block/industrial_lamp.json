@@ -4,8 +4,7 @@
 	"render_type": "cutout",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "ad_astra:block/industrial_lamp",
-		"particle": "ad_astra:block/industrial_lamp"
+		"particle": "#0"
 	},
 	"elements": [
 		{

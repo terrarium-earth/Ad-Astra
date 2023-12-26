@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ad_astra:industrial_lamp"
+          "name": "ad_astra:small_yellow_industrial_lamp"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "ad_astra:blocks/industrial_lamp"
+  "random_sequence": "ad_astra:blocks/small_yellow_industrial_lamp"
 }

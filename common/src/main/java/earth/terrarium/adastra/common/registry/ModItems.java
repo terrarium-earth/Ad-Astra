@@ -39,6 +39,8 @@ public class ModItems {
     public static final RegistryEntry<Item> TIER_4_ROCKET = VEHICLES.register("tier_4_rocket", () -> new RocketItem(ModEntityTypes.TIER_4_ROCKET::get, new Item.Properties().stacksTo(1).fireResistant()));
     public static final RegistryEntry<Item> ROVER = VEHICLES.register("tier_1_rover", () -> new RoverItem(ModEntityTypes.ROVER::get, new Item.Properties().stacksTo(1).fireResistant()));
     public static final RegistryEntry<Item> LAUNCH_PAD = ITEMS.register("launch_pad", () -> new BlockItem(ModBlocks.LAUNCH_PAD.get(), new Item.Properties()));
+    public static final ResourcefulRegistry<Item> INDUSTRIAL_LAMPS = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> SMALL_INDUSTRIAL_LAMPS = ResourcefulRegistries.create(ITEMS);
 
     public static final RegistryEntry<Item> STEEL_CABLE = PIPES.register("steel_cable", () -> new BlockItem(ModBlocks.STEEL_CABLE.get(), new Item.Properties()));
     public static final RegistryEntry<Item> DESH_CABLE = PIPES.register("desh_cable", () -> new BlockItem(ModBlocks.DESH_CABLE.get(), new Item.Properties()));
@@ -190,7 +192,6 @@ public class ModItems {
     public static final RegistryEntry<Item> CHEESE_BLOCK = ITEMS.register("cheese_block", () -> new BlockItem(ModBlocks.CHEESE_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> SKY_STONE = ITEMS.register("sky_stone", () -> new BlockItem(ModBlocks.SKY_STONE.get(), new Item.Properties()));
 
-    public static final RegistryEntry<Item> INDUSTRIAL_LAMP = ITEMS.register("industrial_lamp", () -> new BlockItem(ModBlocks.INDUSTRIAL_LAMP.get(), new Item.Properties()));
     public static final RegistryEntry<Item> VENT = ITEMS.register("vent", () -> new BlockItem(ModBlocks.VENT.get(), new Item.Properties()));
     public static final RegistryEntry<Item> IRON_PLATING = ITEMS.register("iron_plating", () -> new BlockItem(ModBlocks.IRON_PLATING.get(), new Item.Properties()));
     public static final RegistryEntry<Item> IRON_PLATING_STAIRS = ITEMS.register("iron_plating_stairs", () -> new BlockItem(ModBlocks.IRON_PLATING_STAIRS.get(), new Item.Properties()));
@@ -250,6 +251,40 @@ public class ModItems {
     public static final RegistryEntry<Item> CALORITE_PLATING_BUTTON = ITEMS.register("calorite_plating_button", () -> new BlockItem(ModBlocks.CALORITE_PLATING_BUTTON.get(), new Item.Properties()));
     public static final RegistryEntry<Item> CALORITE_PLATING_PRESSURE_PLATE = ITEMS.register("calorite_plating_pressure_plate", () -> new BlockItem(ModBlocks.CALORITE_PLATING_PRESSURE_PLATE.get(), new Item.Properties()));
     public static final RegistryEntry<Item> CALORITE_SLIDING_DOOR = SLIDING_DOORS.register("calorite_sliding_door", () -> new BlockItem(ModBlocks.CALORITE_SLIDING_DOOR.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> BLACK_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("black_industrial_lamp", () -> new BlockItem(ModBlocks.BLACK_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> BLUE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("blue_industrial_lamp", () -> new BlockItem(ModBlocks.BLUE_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> BROWN_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("brown_industrial_lamp", () -> new BlockItem(ModBlocks.BROWN_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CYAN_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("cyan_industrial_lamp", () -> new BlockItem(ModBlocks.CYAN_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GRAY_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("gray_industrial_lamp", () -> new BlockItem(ModBlocks.GRAY_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GREEN_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("green_industrial_lamp", () -> new BlockItem(ModBlocks.GREEN_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> LIGHT_BLUE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("light_blue_industrial_lamp", () -> new BlockItem(ModBlocks.LIGHT_BLUE_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> LIGHT_GRAY_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("light_gray_industrial_lamp", () -> new BlockItem(ModBlocks.LIGHT_GRAY_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> LIME_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("lime_industrial_lamp", () -> new BlockItem(ModBlocks.LIME_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MAGENTA_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("magenta_industrial_lamp", () -> new BlockItem(ModBlocks.MAGENTA_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ORANGE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("orange_industrial_lamp", () -> new BlockItem(ModBlocks.ORANGE_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> PINK_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("pink_industrial_lamp", () -> new BlockItem(ModBlocks.PINK_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> PURPLE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("purple_industrial_lamp", () -> new BlockItem(ModBlocks.PURPLE_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> RED_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("red_industrial_lamp", () -> new BlockItem(ModBlocks.RED_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> WHITE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("white_industrial_lamp", () -> new BlockItem(ModBlocks.WHITE_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> YELLOW_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("yellow_industrial_lamp", () -> new BlockItem(ModBlocks.YELLOW_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> SMALL_BLACK_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_black_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_BLACK_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_BLUE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_blue_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_BLUE_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_BROWN_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_brown_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_BROWN_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_CYAN_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_cyan_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_CYAN_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_GRAY_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_gray_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_GRAY_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_GREEN_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_green_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_GREEN_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_LIGHT_BLUE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_light_blue_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_LIGHT_BLUE_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_LIGHT_GRAY_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_light_gray_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_LIGHT_GRAY_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_LIME_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_lime_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_LIME_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_MAGENTA_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_magenta_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_MAGENTA_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_ORANGE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_orange_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_ORANGE_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_PINK_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_pink_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_PINK_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_PURPLE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_purple_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_PURPLE_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_RED_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_red_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_RED_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_WHITE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_white_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_WHITE_INDUSTRIAL_LAMP.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SMALL_YELLOW_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_yellow_industrial_lamp", () -> new BlockItem(ModBlocks.SMALL_YELLOW_INDUSTRIAL_LAMP.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> MOON_SAND = ITEMS.register("moon_sand", () -> new BlockItem(ModBlocks.MOON_SAND.get(), new Item.Properties()));
     public static final RegistryEntry<Item> MOON_STONE = ITEMS.register("moon_stone", () -> new BlockItem(ModBlocks.MOON_STONE.get(), new Item.Properties()));

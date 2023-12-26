@@ -7,6 +7,8 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blocks.*;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.blocks.fluids.CryoFuelLiquidBlock;
+import earth.terrarium.adastra.common.blocks.lamps.IndustrialLampBlock;
+import earth.terrarium.adastra.common.blocks.lamps.SmallIndustrialLampBlock;
 import earth.terrarium.adastra.common.blocks.machines.EnergizerBlock;
 import earth.terrarium.adastra.common.blocks.machines.OxygenSensorBlock;
 import earth.terrarium.adastra.common.blocks.pipes.Pipe;
@@ -42,6 +44,8 @@ public class ModBlocks {
     public static final ResourcefulRegistry<Block> GLOBES = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> FLAGS = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> PIPES = ResourcefulRegistries.create(BLOCKS);
+    public static final ResourcefulRegistry<Block> INDUSTRIAL_LAMPS = ResourcefulRegistries.create(BLOCKS);
+    public static final ResourcefulRegistry<Block> SMALL_INDUSTRIAL_LAMPS = ResourcefulRegistries.create(BLOCKS);
 
     public static final RegistryEntry<Block> LAUNCH_PAD = BLOCKS.register("launch_pad", () -> new LaunchPadBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).pushReaction(PushReaction.BLOCK)));
 
@@ -101,7 +105,6 @@ public class ModBlocks {
     public static final RegistryEntry<Block> CHEESE_BLOCK = CUBES.register("cheese_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SPONGE).sound(SoundType.SLIME_BLOCK)));
     public static final RegistryEntry<Block> SKY_STONE = CUBES.register("sky_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
-    public static final RegistryEntry<Block> INDUSTRIAL_LAMP = BLOCKS.register("industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
     public static final RegistryEntry<Block> VENT = CUBES.register("vent", () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).noOcclusion()));
     public static final RegistryEntry<Block> IRON_PLATING = CUBES.register("iron_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
     public static final RegistryEntry<Block> IRON_PLATING_STAIRS = STAIRS.register("iron_plating_stairs", () -> new StairBlock(IRON_PLATING.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
@@ -161,6 +164,40 @@ public class ModBlocks {
     public static final RegistryEntry<Block> CALORITE_PLATING_BUTTON = BUTTONS.register("calorite_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).mapColor(MapColor.COLOR_RED), BlockSetType.IRON, 20, false) {});
     public static final RegistryEntry<Block> CALORITE_PLATING_PRESSURE_PLATE = PRESSURE_PLATES.register("calorite_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.COLOR_RED), BlockSetType.IRON) {});
     public static final RegistryEntry<Block> CALORITE_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("calorite_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.COLOR_RED)));
+
+    public static final RegistryEntry<Block> BLACK_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("black_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> BLUE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("blue_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> BROWN_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("brown_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> CYAN_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("cyan_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> GRAY_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("gray_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> GREEN_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("green_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> LIGHT_BLUE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("light_blue_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> LIGHT_GRAY_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("light_gray_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> LIME_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("lime_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> MAGENTA_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("magenta_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> ORANGE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("orange_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> PINK_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("pink_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> PURPLE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("purple_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> RED_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("red_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> WHITE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("white_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> YELLOW_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("yellow_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+
+    public static final RegistryEntry<Block> SMALL_BLACK_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_black_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_BLUE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_blue_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_BROWN_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_brown_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_CYAN_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_cyan_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_GRAY_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_gray_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_GREEN_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_green_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_LIGHT_BLUE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_light_blue_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_LIGHT_GRAY_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_light_gray_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_LIME_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_lime_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_MAGENTA_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_magenta_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_ORANGE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_orange_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_PINK_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_pink_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_PURPLE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_purple_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_RED_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_red_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_WHITE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_white_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
+    public static final RegistryEntry<Block> SMALL_YELLOW_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_yellow_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15)));
 
     public static final RegistryEntry<Block> MOON_SAND = CUBES.register("moon_sand", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.SAND).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY)));
     public static final RegistryEntry<Block> MOON_STONE = CUBES.register("moon_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY)));

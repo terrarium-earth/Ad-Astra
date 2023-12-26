@@ -1,4 +1,4 @@
-package earth.terrarium.adastra.common.blocks;
+package earth.terrarium.adastra.common.blocks.lamps;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,11 +32,19 @@ public class IndustrialLampBlock extends FaceAttachedHorizontalDirectionalBlock 
         Block.box(14, 3, 0, 16, 13, 16),
         Block.box(8, 4, 1, 14, 12, 15), BooleanOp.OR);
 
-    public static final VoxelShape UP_SHAPE = Shapes.join(
+    public static final VoxelShape UP_SHAPE_X = Shapes.join(
+        Block.box(3, 14, 0, 13, 16, 16),
+        Block.box(4, 8, 1, 12, 14, 15), BooleanOp.OR);
+
+    public static final VoxelShape UP_SHAPE_Z = Shapes.join(
         Block.box(0, 14, 3, 16, 16, 13),
         Block.box(1, 8, 4, 15, 14, 12), BooleanOp.OR);
 
-    public static final VoxelShape DOWN_SHAPE = Shapes.join(
+    public static final VoxelShape DOWN_SHAPE_X = Shapes.join(
+        Block.box(3, 0, 0, 13, 2, 16),
+        Block.box(4, 2, 1, 12, 8, 15), BooleanOp.OR);
+
+    public static final VoxelShape DOWN_SHAPE_Z = Shapes.join(
         Block.box(0, 0, 3, 16, 2, 13),
         Block.box(1, 2, 4, 15, 8, 12), BooleanOp.OR);
 
@@ -50,15 +58,15 @@ public class IndustrialLampBlock extends FaceAttachedHorizontalDirectionalBlock 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return switch (state.getValue(FACE)) {
-            case FLOOR -> DOWN_SHAPE;
+            case FLOOR -> state.getValue(FACING).getAxis() == Direction.Axis.X ? DOWN_SHAPE_X : DOWN_SHAPE_Z;
             case WALL -> switch (state.getValue(FACING)) {
                 case NORTH -> NORTH_SHAPE;
                 case EAST -> EAST_SHAPE;
                 case SOUTH -> SOUTH_SHAPE;
                 case WEST -> WEST_SHAPE;
-                default -> UP_SHAPE;
+                default -> NORTH_SHAPE;
             };
-            case CEILING -> UP_SHAPE;
+            case CEILING -> state.getValue(FACING).getAxis() == Direction.Axis.X ? UP_SHAPE_X : UP_SHAPE_Z;
         };
     }
 

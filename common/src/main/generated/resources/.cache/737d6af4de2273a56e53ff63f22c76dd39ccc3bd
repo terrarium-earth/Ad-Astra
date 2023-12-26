@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-25T00:35:55.994923	Tags for minecraft:block mod id ad_astra
+// 1.20.1	2023-12-25T19:50:54.953742	Tags for minecraft:block mod id ad_astra
 8030232b3adfa6e804799644b412d6697c9f985a data/ad_astra/tags/blocks/cable_ducts.json
 2f052cbf86442d117c2bf601e2977e7e3b850551 data/ad_astra/tags/blocks/calorite_blocks.json
 d72b1740931f3a5fbf4f9be102fd33adb58cf55f data/ad_astra/tags/blocks/desh_blocks.json
@@ -46,9 +46,9 @@ e7756a05d3658940079b4f65fc227c293ffca182 data/minecraft/tags/blocks/coal_ores.js
 d64abb70838db795f8039bd9f88a42b2241a646b data/minecraft/tags/blocks/lapis_ores.json
 b220dfe6b8a3eba7159b1cecfde26b3dd6c9a55f data/minecraft/tags/blocks/leaves.json
 fad1a2f6e701404905657b1d4cd73049b2722c81 data/minecraft/tags/blocks/logs_that_burn.json
-d1e5a25d5623208b676546780b1a9772a3305263 data/minecraft/tags/blocks/mineable/axe.json
-8496bbdd6bfd1c3c68c058b5982146176cd7242c data/minecraft/tags/blocks/mineable/pickaxe.json
-650c392f6517cdd0fc6d7c98030b5bdcb5847087 data/minecraft/tags/blocks/mineable/shovel.json
+2a0598db82d48bd8d8a3880b97b74da48bb0e7cf data/minecraft/tags/blocks/mineable/axe.json
+70da35f179d19f5c39e55f24c3ef8eec59aae732 data/minecraft/tags/blocks/mineable/pickaxe.json
+9ae953d2dab7e111cd75eebef57ac922b3d1f07d data/minecraft/tags/blocks/mineable/shovel.json
 688f97b1a399030bbe76443718ea3b3a9ac1f362 data/minecraft/tags/blocks/needs_iron_tool.json
 2d047412ab848ca9bb946d0a4f919fcc251635b0 data/minecraft/tags/blocks/overworld_carver_replaceables.json
 85ec1e10da0a245eb33efa95920b5eb6b5fc83c9 data/minecraft/tags/blocks/planks.json
