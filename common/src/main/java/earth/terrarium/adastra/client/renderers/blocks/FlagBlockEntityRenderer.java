@@ -4,8 +4,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.teamresourceful.resourcefullib.client.CloseablePoseStack;
-import earth.terrarium.adastra.client.renderers.textures.FlagTexture;
-import earth.terrarium.adastra.common.blockentities.FlagBlockEntity;
+import earth.terrarium.adastra.client.renderers.textures.FlagImageTexture;
+import earth.terrarium.adastra.client.renderers.textures.FlagUrlTexture;
+import earth.terrarium.adastra.common.blockentities.flag.FlagBlockEntity;
+import earth.terrarium.adastra.common.blockentities.flag.content.FlagContent;
+import earth.terrarium.adastra.common.blockentities.flag.content.ImageContent;
+import earth.terrarium.adastra.common.blockentities.flag.content.UrlContent;
 import earth.terrarium.adastra.common.blocks.FlagBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.SkullModel;
@@ -48,8 +52,8 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
                     1f, 1f, 1f,
                     packedLight, packedOverlay);
             } else {
-                String url = entity.getUrl();
-                if (url == null) {
+                FlagContent content = entity.getContent();
+                if (content == null) {
                     pose.translate(-0.75, 0.19, 0.495);
                     pose.scale(1, 1, 0.1f / 16f);
                     SkullModelBase model = new SkullModel(minecraft.getEntityModels().bakeLayer(ModelLayers.PLAYER_HEAD));
@@ -63,7 +67,7 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 
                     SkullBlockRenderer.renderSkull(null, 0, 0, pose, buffer, packedLight, model, renderType);
                 } else {
-                    var consumer = buffer.getBuffer(getFlagImage(entity.getUrl()));
+                    var consumer = buffer.getBuffer(getFlagImage(content));
                     Matrix4f matrix4f = poseStack.last().pose();
                     Matrix3f matrix3fNormal = poseStack.last().normal();
                     Vec3i normal = direction.normal();
@@ -96,11 +100,17 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
         consumer.vertex(pose, width, 0, 0).color(255, 255, 255, 255).uv(u + uWidth, v).overlayCoords(overlay).uv2(light).normal(matrix3fNormal, normal.getX(), normal.getY(), normal.getZ()).endVertex();
     }
 
-    private static RenderType getFlagImage(String url) {
-        ResourceLocation id = FlagTexture.getTextureId(url);
+    private static RenderType getFlagImage(FlagContent content) {
+        ResourceLocation id = content.toTexture();
         TextureManager manager = Minecraft.getInstance().getTextureManager();
         AbstractTexture texture = manager.getTexture(id, MissingTextureAtlasSprite.getTexture());
-        if (texture == MissingTextureAtlasSprite.getTexture()) manager.register(id, new FlagTexture(url));
+        if (texture == MissingTextureAtlasSprite.getTexture()) {
+            if (content instanceof UrlContent url) {
+                manager.register(id, new FlagUrlTexture(url.url()));
+            } else if (content instanceof ImageContent image) {
+                manager.register(id, new FlagImageTexture(image.data()));
+            }
+        }
         return RenderType.entitySolid(id);
     }
 }

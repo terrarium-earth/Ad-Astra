@@ -1,7 +1,9 @@
-package earth.terrarium.adastra.common.blockentities;
+package earth.terrarium.adastra.common.blockentities.flag;
 
 import com.mojang.authlib.GameProfile;
 import dev.architectury.injectables.annotations.PlatformOnly;
+import earth.terrarium.adastra.common.blockentities.flag.content.FlagContent;
+import earth.terrarium.adastra.common.blockentities.flag.content.UrlContent;
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -21,8 +23,9 @@ public class FlagBlockEntity extends BlockEntity {
 
     @Nullable
     private GameProfile owner;
+
     @Nullable
-    private String id;
+    private FlagContent content;
 
     public FlagBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityTypes.FLAG.get(), pos, state);
@@ -36,8 +39,8 @@ public class FlagBlockEntity extends BlockEntity {
             NbtUtils.writeGameProfile(compound, owner);
             tag.put("FlagOwner", compound);
         }
-        if (id != null) {
-            tag.putString("FlagUrl", id);
+        if (content != null) {
+            tag.put("FlagContent", content.toFullTag());
         }
     }
 
@@ -48,7 +51,10 @@ public class FlagBlockEntity extends BlockEntity {
             setOwner(NbtUtils.readGameProfile(tag.getCompound("FlagOwner")));
         }
         if (tag.contains("FlagUrl", Tag.TAG_STRING)) {
-            setId(tag.getString("FlagUrl"));
+            this.content = UrlContent.of("https://imgur.com/" + tag.getString("FlagUrl"));
+        }
+        if (tag.contains("FlagContent", Tag.TAG_COMPOUND)) {
+            this.content = FlagContent.fromTag(tag.getCompound("FlagContent"));
         }
     }
 
@@ -64,10 +70,6 @@ public class FlagBlockEntity extends BlockEntity {
         this.loadOwnerProperties();
     }
 
-    public void setId(@Nullable String id) {
-        this.id = id;
-    }
-
     private void loadOwnerProperties() {
         SkullBlockEntity.updateGameprofile(this.owner, (owner) -> {
             this.owner = owner;
@@ -76,11 +78,12 @@ public class FlagBlockEntity extends BlockEntity {
     }
 
     @Nullable
-    public String getUrl() {
-        if (this.id == null) {
-            return null;
-        }
-        return "https://i.imgur.com/%s.png".formatted(id);
+    public FlagContent getContent() {
+        return this.content;
+    }
+
+    public void setContent(@Nullable FlagContent content) {
+        this.content = content;
     }
 
     @Override

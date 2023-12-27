@@ -1,6 +1,5 @@
 package earth.terrarium.adastra.client.renderers.textures;
 
-import com.google.common.hash.Hashing;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.platform.TextureUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -22,7 +21,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 
-public class FlagTexture extends SimpleTexture {
+public class FlagUrlTexture extends SimpleTexture {
 
     private static final HttpClient CLIENT = HttpClient.newBuilder().build();
 
@@ -33,17 +32,12 @@ public class FlagTexture extends SimpleTexture {
     private boolean loaded;
     private CompletableFuture<?> loader;
 
-    public FlagTexture(String url) {
+    public FlagUrlTexture(String url) {
         super(DEFAULT_FLAG);
         this.request = HttpRequest.newBuilder()
             .uri(URI.create(url))
             .header("User-Agent", "Ad Astra (Minecraft Mod)")
             .build();
-    }
-
-    @SuppressWarnings("deprecation")
-    public static ResourceLocation getTextureId(String url) {
-        return new ResourceLocation(AdAstra.MOD_ID, "flagtextures/" + Hashing.sha1().hashUnencodedChars(url));
     }
 
     private void upload(NativeImage image) {

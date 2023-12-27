@@ -38,7 +38,7 @@ public class FlagUrlScreen extends Screen {
         this.button = addRenderableWidget(new Button(x + 50, y + 30, 100, 20, ConstantComponents.CONFIRM, (button) -> {
             var matcher = URL_REGEX.matcher(this.urlField.getValue());
             if (matcher.matches()) {
-                NetworkHandler.CHANNEL.sendToServer(new ServerboundSetFlagUrlPacket(this.pos, matcher.group(1)));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundSetFlagUrlPacket(this.pos, matcher.group()));
                 this.onClose();
             }
         }, Supplier::get) {});

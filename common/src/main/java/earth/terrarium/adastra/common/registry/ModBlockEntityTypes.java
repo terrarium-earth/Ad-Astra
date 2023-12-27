@@ -5,7 +5,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.screens.machines.NasaWorkbenchBlockEntity;
-import earth.terrarium.adastra.common.blockentities.FlagBlockEntity;
+import earth.terrarium.adastra.common.blockentities.flag.FlagBlockEntity;
 import earth.terrarium.adastra.common.blockentities.GlobeBlockEntity;
 import earth.terrarium.adastra.common.blockentities.PipeBlockEntity;
 import earth.terrarium.adastra.common.blockentities.SlidingDoorBlockEntity;

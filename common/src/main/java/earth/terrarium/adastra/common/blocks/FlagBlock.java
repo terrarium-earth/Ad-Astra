@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.common.blocks;
 
 import earth.terrarium.adastra.client.screens.blocks.FlagUrlScreen;
-import earth.terrarium.adastra.common.blockentities.FlagBlockEntity;
+import earth.terrarium.adastra.common.blockentities.flag.FlagBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.blocks.base.DoubleMachineBlock;
 import earth.terrarium.adastra.common.blocks.properties.EightDirectionProperty;
@@ -75,7 +75,7 @@ public class FlagBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (level.isClientSide() && (AdAstraConfig.allowFlagImages || player.canUseGameMasterBlocks())) {
             if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
                 return action(level, pos.above(), player);
@@ -111,7 +111,7 @@ public class FlagBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return state.getValue(HALF) == DoubleBlockHalf.LOWER ? SHAPE_BOTTOM : SHAPE_TOP;
     }
 
