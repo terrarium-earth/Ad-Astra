@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.client.fabric;
 
 import earth.terrarium.adastra.client.AdAstraClient;
-import earth.terrarium.adastra.client.dimension.ModEffects;
+import earth.terrarium.adastra.client.dimension.ModDimensionRenderers;
 import earth.terrarium.adastra.client.renderers.world.OxygenDistributorOverlayRenderer;
 import earth.terrarium.adastra.client.utils.DimensionUtils;
 import earth.terrarium.adastra.common.registry.ModBlocks;
@@ -35,7 +35,7 @@ public class AdAstraClientFabric {
         ModBlocks.INDUSTRIAL_LAMPS.stream().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block.get(), RenderType.cutout()));
         ModBlocks.SMALL_INDUSTRIAL_LAMPS.stream().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block.get(), RenderType.cutout()));
 
-        ModEffects.onRegisterDimensionSpecialEffects((dimension, effects) -> {
+        ModDimensionRenderers.onRegisterDimensionSpecialEffects((dimension, effects) -> {
             DimensionRenderingRegistry.registerDimensionEffects(dimension.location(), effects);
             if (effects.hasCustomClouds()) {
                 DimensionRenderingRegistry.registerCloudRenderer(dimension, context -> {

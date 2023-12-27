@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.client.forge;
 
 import earth.terrarium.adastra.client.AdAstraClient;
-import earth.terrarium.adastra.client.dimension.ModEffects;
+import earth.terrarium.adastra.client.dimension.ModDimensionRenderers;
 import earth.terrarium.adastra.client.renderers.world.OxygenDistributorOverlayRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -49,7 +49,7 @@ public class AdAstraClientForge {
 
     @SubscribeEvent
     public static void onRegisterDimensionSpecialEffects(RegisterDimensionSpecialEffectsEvent event) {
-        ModEffects.onRegisterDimensionSpecialEffects((dimension, effects) -> event.register(dimension.location(), effects));
+        ModDimensionRenderers.onRegisterDimensionSpecialEffects((dimension, effects) -> event.register(dimension.location(), effects));
     }
 
     @SubscribeEvent

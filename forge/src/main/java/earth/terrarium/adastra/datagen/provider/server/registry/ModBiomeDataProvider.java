@@ -46,6 +46,8 @@ public class ModBiomeDataProvider {
             false,
             0.5f,
             0,
+            0x000000,
+            0x000000,
             new MobSpawnSettings.Builder(),
             new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers),
             null));
@@ -54,6 +56,8 @@ public class ModBiomeDataProvider {
             false,
             0.7f,
             0,
+            0x000000,
+            0x161614,
             new MobSpawnSettings.Builder(),
             moon(placedFeatures, configuredCarvers),
             null));
@@ -62,6 +66,8 @@ public class ModBiomeDataProvider {
             false,
             0.8f,
             0,
+            0xe6ac84,
+            0xe6ac84,
             new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f),
             new MobSpawnSettings.Builder(),
             marsCanyonCreek(placedFeatures, configuredCarvers),
@@ -71,6 +77,8 @@ public class ModBiomeDataProvider {
             true,
             -0.7f,
             1,
+            0xe6ac84,
+            0xe6ac84,
             new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f),
             new MobSpawnSettings.Builder(),
             marsPolarCaps(placedFeatures, configuredCarvers),
@@ -80,6 +88,8 @@ public class ModBiomeDataProvider {
             false,
             0.8f,
             0,
+            0xe6ac84,
+            0xe6ac84,
             new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f),
             new MobSpawnSettings.Builder(),
             mars(placedFeatures, configuredCarvers),
@@ -89,6 +99,8 @@ public class ModBiomeDataProvider {
             true,
             1.6f,
             1,
+            0xd18b52,
+            0xd18b52,
             new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f),
             new MobSpawnSettings.Builder(),
             venusInfernalBarrens(placedFeatures, configuredCarvers),
@@ -98,6 +110,8 @@ public class ModBiomeDataProvider {
             true,
             1.6f,
             1,
+            0xd18b52,
+            0xd18b52,
             new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f),
             new MobSpawnSettings.Builder(),
             venus(placedFeatures, configuredCarvers),
@@ -107,6 +121,8 @@ public class ModBiomeDataProvider {
             false,
             1.6f,
             0,
+            0x8b0000,
+            0x000000,
             new MobSpawnSettings.Builder(),
             mercury(placedFeatures, configuredCarvers),
             null));
@@ -115,6 +131,8 @@ public class ModBiomeDataProvider {
             true,
             -0.7f,
             1,
+            0xc0d8ff,
+            0xc0d8ff,
             new MobSpawnSettings.Builder(),
             glacioIcePeaks(placedFeatures, configuredCarvers),
             null));
@@ -123,6 +141,8 @@ public class ModBiomeDataProvider {
             true,
             -0.7f,
             1,
+            0xc0d8ff,
+            0xc0d8ff,
             new MobSpawnSettings.Builder(),
             glacio(placedFeatures, configuredCarvers),
             null));
@@ -222,16 +242,16 @@ public class ModBiomeDataProvider {
             .addCarver(GenerationStep.Carving.AIR, Carvers.CANYON);
     }
 
-    public static Biome biome(boolean hasPrecipitation, float temperature, float downfall, MobSpawnSettings.Builder mobSpawnSettings, BiomeGenerationSettings.Builder generationSettings, @Nullable Music backgroundMusic) {
-        return biome(hasPrecipitation, temperature, downfall, null, 0x3f76e4, 0x50533, null, null, mobSpawnSettings, generationSettings, backgroundMusic);
+    public static Biome biome(boolean hasPrecipitation, float temperature, float downfall, int skyColor, int fogColor, MobSpawnSettings.Builder mobSpawnSettings, BiomeGenerationSettings.Builder generationSettings, @Nullable Music backgroundMusic) {
+        return biome(hasPrecipitation, temperature, downfall, skyColor, fogColor, null, 0x3f76e4, 0x50533, null, null, mobSpawnSettings, generationSettings, backgroundMusic);
     }
 
-    public static Biome biome(boolean hasPrecipitation, float temperature, float downfall, @Nullable AmbientParticleSettings particles, MobSpawnSettings.Builder mobSpawnSettings, BiomeGenerationSettings.Builder generationSettings, @Nullable Music backgroundMusic) {
-        return biome(hasPrecipitation, temperature, downfall, particles, 0x3f76e4, 0x50533, null, null, mobSpawnSettings, generationSettings, backgroundMusic);
+    public static Biome biome(boolean hasPrecipitation, float temperature, float downfall, int skyColor, int fogColor, @Nullable AmbientParticleSettings particles, MobSpawnSettings.Builder mobSpawnSettings, BiomeGenerationSettings.Builder generationSettings, @Nullable Music backgroundMusic) {
+        return biome(hasPrecipitation, temperature, downfall, skyColor, fogColor, particles, 0x3f76e4, 0x50533, null, null, mobSpawnSettings, generationSettings, backgroundMusic);
     }
 
-    public static Biome biome(boolean hasPrecipitation, float temperature, float downfall, AmbientParticleSettings particles, int waterColor, int waterFogColor, @Nullable Integer grassColorOverride, @Nullable Integer foliageColorOverride, MobSpawnSettings.Builder mobSpawnSettings, BiomeGenerationSettings.Builder generationSettings, @Nullable Music backgroundMusic) {
-        var specoalEffectsBuilder = (new BiomeSpecialEffects.Builder()).waterColor(waterColor).waterFogColor(waterFogColor).fogColor(0xc0d8ff).skyColor(calculateSkyColor(temperature)).ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).backgroundMusic(backgroundMusic);
+    public static Biome biome(boolean hasPrecipitation, float temperature, float downfall, int skyColor, int fogColor, AmbientParticleSettings particles, int waterColor, int waterFogColor, @Nullable Integer grassColorOverride, @Nullable Integer foliageColorOverride, MobSpawnSettings.Builder mobSpawnSettings, BiomeGenerationSettings.Builder generationSettings, @Nullable Music backgroundMusic) {
+        var specoalEffectsBuilder = (new BiomeSpecialEffects.Builder()).waterColor(waterColor).waterFogColor(waterFogColor).fogColor(skyColor).skyColor(fogColor).ambientMoodSound(AmbientMoodSettings.LEGACY_CAVE_SETTINGS).backgroundMusic(backgroundMusic);
         if (grassColorOverride != null) {
             specoalEffectsBuilder.grassColorOverride(grassColorOverride);
         }

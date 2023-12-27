@@ -6,6 +6,8 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.util.FastColor;
+import net.minecraft.util.Mth;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -24,8 +26,9 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
     private final ModSkyRenderer skyRenderer;
 
     private final BiFunction<Vec3, Float, Vec3> fogColor;
-    private final BiFunction<Integer, Integer, Boolean> isFoggyAt;
-
+    private final boolean foggy;
+    private final int sunriseColor;
+    private final int sunriseAngle;
 
     public ModDimensionSpecialEffects(
         float cloudLevel,
@@ -34,16 +37,21 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
         boolean forceBrightLightmap,
         boolean constantAmbientLight,
         BiFunction<Vec3, Float, Vec3> fogColor,
-        BiFunction<Integer, Integer, Boolean> isFoggyAt,
+        boolean foggy,
+        int sunriseColor,
         int stars,
+        int sunriseAngle,
+        boolean renderInRain,
         BiFunction<ClientLevel, Float, Float> starBrightness,
         SimpleWeightedRandomList<Integer> starColors,
         List<SkyRenderable> skyRenderables
     ) {
-        super(cloudLevel, hasGround, skyType, forceBrightLightmap, constantAmbientLight);
-        this.skyRenderer = new ModSkyRenderer(stars, starBrightness, starColors, skyRenderables);
+        super(192, true, DimensionSpecialEffects.SkyType.NORMAL, false, false);
+        this.skyRenderer = new ModSkyRenderer(stars, sunriseAngle, renderInRain, sunriseColor, starBrightness, starColors, skyRenderables);
         this.fogColor = fogColor;
-        this.isFoggyAt = isFoggyAt;
+        this.foggy = foggy;
+        this.sunriseColor = sunriseColor;
+        this.sunriseAngle = sunriseAngle;
     }
 
     public boolean hasCustomClouds() {
@@ -93,13 +101,33 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
 
     @Override
     public boolean isFoggyAt(int x, int y) {
-        return this.isFoggyAt.apply(x, y);
+        return foggy;
     }
 
     @Nullable
     @Override
     public float[] getSunriseColor(float timeOfDay, float partialTicks) {
-        return super.getSunriseColor(timeOfDay, partialTicks);
+        // Prevent the FogRenderer from rendering the sunrise if the sun isn't setting in the west.
+        if (sunriseAngle != 0) return null;
+        return getSunriseColor(timeOfDay, partialTicks, sunriseColor);
+    }
+
+    @Nullable
+    public static float[] getSunriseColor(float timeOfDay, float partialTicks, int sunColor) {
+        float timeCos = Mth.cos(timeOfDay * (float) (Math.PI * 2));
+        if (timeCos >= -0.4f && timeCos <= 0.4f) {
+            float time = timeCos / 0.4f * 0.5f + 0.5f;
+            float alpha = 1 - (1 - Mth.sin(time * (float) Math.PI)) * 0.99F;
+            alpha *= alpha;
+            var rgba = new float[4];
+            rgba[0] = time * 0.3f + FastColor.ARGB32.red(sunColor) / 255f * 0.7f;
+            rgba[1] = time * time * 0.7f + FastColor.ARGB32.green(sunColor) / 255f * 0.5f;
+            rgba[2] = FastColor.ARGB32.blue(sunColor) / 255f * 0.6f;
+            rgba[3] = alpha;
+            return rgba;
+        } else {
+            return null;
+        }
     }
 
     public static class Builder {
@@ -123,9 +151,13 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
             brightness * 0.94 + 0.06,
             brightness * 0.91 + 0.09);
 
-        private BiFunction<Integer, Integer, Boolean> isFoggyAt = (x, y) -> false;
+        private boolean foggy = false;
+
+        private int sunriseColor = 0xd85f33;
 
         private int stars = 1500;
+        private int sunriseAngle;
+        private boolean renderInRain;
         private SimpleWeightedRandomList<Integer> starColors = SimpleWeightedRandomList.<Integer>builder()
             .add(0xffffffff, 1)
             .build();
@@ -139,7 +171,7 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
 
         public Builder customSky() {
             this.customSky = true;
-            return this;
+            return skyType(DimensionSpecialEffects.SkyType.NONE);
         }
 
         public Builder customWeather() {
@@ -152,8 +184,8 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
             return this;
         }
 
-        public Builder hasGround(boolean hasGround) {
-            this.hasGround = hasGround;
+        public Builder noGround() {
+            this.hasGround = false;
             return this;
         }
 
@@ -162,13 +194,13 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
             return this;
         }
 
-        public Builder forceBrightLightmap(boolean forceBrightLightmap) {
-            this.forceBrightLightmap = forceBrightLightmap;
+        public Builder forceBrightLightmap() {
+            this.forceBrightLightmap = true;
             return this;
         }
 
-        public Builder constantAmbientLight(boolean constantAmbientLight) {
-            this.constantAmbientLight = constantAmbientLight;
+        public Builder constantAmbientLight() {
+            this.constantAmbientLight = true;
             return this;
         }
 
@@ -177,13 +209,28 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
             return this;
         }
 
-        public Builder isFoggyAt(BiFunction<Integer, Integer, Boolean> isFoggyAt) {
-            this.isFoggyAt = isFoggyAt;
+        public Builder foggy() {
+            this.foggy = true;
+            return this;
+        }
+
+        public Builder sunriseColor(int color) {
+            this.sunriseColor = color;
             return this;
         }
 
         public Builder stars(int stars) {
             this.stars = stars;
+            return this;
+        }
+
+        public Builder sunriseAngle(int sunriseAngle) {
+            this.sunriseAngle = sunriseAngle;
+            return this;
+        }
+
+        public Builder renderInRain() {
+            this.renderInRain = true;
             return this;
         }
 
@@ -210,8 +257,11 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
                 forceBrightLightmap,
                 constantAmbientLight,
                 fogColor,
-                isFoggyAt,
+                foggy,
+                sunriseColor,
                 stars,
+                sunriseAngle,
+                renderInRain,
                 starBrightness,
                 starColors,
                 skyRenderables
