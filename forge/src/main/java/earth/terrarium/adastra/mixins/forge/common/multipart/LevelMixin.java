@@ -55,7 +55,7 @@ public class LevelMixin implements MultipartPartsHolder {
     ) {
 
         if (entity instanceof MultipartEntity multipartEntity) {
-            for(MultipartPartEntity<?> part : multipartEntity.getParts()) {
+            for (MultipartPartEntity<?> part : multipartEntity.getParts()) {
                 T entity2 = entityTypeTest.tryCast((Entity) part);
                 if (entity2 != null && predicate.test(entity2)) {
                     output.add(entity2);

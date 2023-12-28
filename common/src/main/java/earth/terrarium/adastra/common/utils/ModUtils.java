@@ -25,11 +25,6 @@ public final class ModUtils {
         }
     }
 
-    // Marks this player's velocity as changed, so that it can be re-synced with the client later
-    public static void sendUpdatePacket(ServerPlayer player) {
-        player.hurtMarked = true;
-    }
-
     public static Optional<ContainerMachineBlockEntity> getMachineFromMenuPacket(BlockPos pos, Player player, Level level) {
         if (!(player.containerMenu instanceof BaseContainerMenu<?>))
             return Optional.empty(); // ensure the sender has the menu open

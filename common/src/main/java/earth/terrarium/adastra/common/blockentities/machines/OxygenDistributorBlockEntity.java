@@ -116,6 +116,8 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
             } else if (time % 100 == 0) {
                 level.playSound(null, pos, ModSoundEvents.OXYGEN_INTAKE.get(), SoundSource.BLOCKS, 0.2f, 1);
             }
+        } else if (time % 20 == 0 && !lastDistributedBlocks.isEmpty()) {
+            clearOxygenBlocks();
         }
 
         energyPerTick = (recipe != null && canCraft(getEnergyStorage()) ? recipe.energy() : 0) + (canDistribute ? calculateEnergyPerTick() : 0);
@@ -151,7 +153,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
 
     protected void tickOxygen(ServerLevel level, BlockPos pos) {
         int limit = MAX_BLOCKS;
-        Set<BlockPos> positions = FloodFill3D.run(level, pos.above(), limit, FloodFill3D.TEST_FULL_SEAL, true); // TODO
+        Set<BlockPos> positions = FloodFill3D.run(level, pos.above(), limit, FloodFill3D.TEST_FULL_SEAL, true);
         OxygenApi.API.setOxygen(level, positions, true);
         TemperatureApi.API.setTemperature(level, positions, PlanetConstants.COMFY_EARTH_TEMPERATURE); // TODO: separate machine
 

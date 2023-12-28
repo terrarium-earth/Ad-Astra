@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "ad_astra:venus_wastelands",
+      "required": false
+    },
+    {
+      "id": "ad_astra:infernal_venus_barrens",
+      "required": false
+    }
+  ]
+}

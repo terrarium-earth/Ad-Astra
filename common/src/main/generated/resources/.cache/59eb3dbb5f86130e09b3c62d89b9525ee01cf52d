@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-25T19:47:27.208199	Loot Tables
+// 1.20.1	2023-12-27T22:11:33.273875	Loot Tables
 4efe4f28604ed0c37ff7f8af4947a23faab3382d data/ad_astra/loot_tables/blocks/aeronos_cap.json
 20680115dd11f036d8d02873251e6d46a9536722 data/ad_astra/loot_tables/blocks/aeronos_door.json
 02ee1849c554327df21d9c76f6fee2ae6d79b550 data/ad_astra/loot_tables/blocks/aeronos_fence.json
@@ -227,6 +227,7 @@ d95080896c60a0e532eda38ae6626f159ef85c98 data/ad_astra/loot_tables/blocks/polish
 c73031e06ee89584bfb2821b6005b14fb0922a47 data/ad_astra/loot_tables/blocks/polished_venus_stone_stairs.json
 b2479ee1a848e48002c39785d89b7011522c30da data/ad_astra/loot_tables/blocks/purple_flag.json
 bfbb568e9294da639b3c5681cf3803ca017b7fb1 data/ad_astra/loot_tables/blocks/purple_industrial_lamp.json
+ee1da7ee7f6fb95b27c28341b308e61d67f541f9 data/ad_astra/loot_tables/blocks/radio.json
 522fdbcab33aa7a31714e3ebd023fb4654e25f77 data/ad_astra/loot_tables/blocks/raw_calorite_block.json
 ca3ea6d3f5af6b9fc46f34606932c940b173e6c7 data/ad_astra/loot_tables/blocks/raw_desh_block.json
 1f633d7fd3b53870c8a6bdcfbed0eb1b55100166 data/ad_astra/loot_tables/blocks/raw_ostrum_block.json

@@ -3,7 +3,6 @@ package earth.terrarium.adastra.common.entities;
 import earth.terrarium.adastra.common.blockentities.machines.OxygenDistributorBlockEntity;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.tags.ModEntityTypeTags;
-import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -72,7 +71,7 @@ public class AirVortex extends Entity {
         entity.push(scale.x, scale.y, scale.z);
 
         if (entity instanceof ServerPlayer player) {
-            ModUtils.sendUpdatePacket(player);
+            player.hurtMarked = true;
         }
     }
 

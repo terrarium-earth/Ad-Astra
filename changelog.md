@@ -59,6 +59,7 @@ can only be opened with redstone, similar to iron doors.
 - Fluid ducts now have the same internal mechanics as pipes so they can now be used exactly like them.
 - Added the radio. This is a real radio that'll play actual select radio stations. It's available as a
 screen in the rover. You can open in by pressing `R` while in the rover or clicking on the screen on the rover.
+- Added the radio block. It'll play real radio stations to everyone in the area like a jukebox.
 - The chest on the back of the rover is now clickable.
 - Opening your inventory while in the rover now opens the rover inventory.
 - Rockets and rovers can no longer carry items. Breaking the them will cause the items to drop.

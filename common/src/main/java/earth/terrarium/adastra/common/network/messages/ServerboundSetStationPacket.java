@@ -15,7 +15,8 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.Optional;
 
-public record ServerboundSetStationPacket(String url, Optional<BlockPos> pos) implements Packet<ServerboundSetStationPacket> {
+public record ServerboundSetStationPacket(String url,
+                                          Optional<BlockPos> pos) implements Packet<ServerboundSetStationPacket> {
 
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "set_station");
     public static final Handler HANDLER = new Handler();

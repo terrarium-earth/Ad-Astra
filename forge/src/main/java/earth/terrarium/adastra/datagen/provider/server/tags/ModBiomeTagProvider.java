@@ -21,6 +21,9 @@ public class ModBiomeTagProvider extends TagsProvider<Biome> {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        tag(ModBiomeTags.HAS_ACID_RAIN).addOptional(ModBiomeDataProvider.VENUS_WASTELANDS.location());
+        tag(ModBiomeTags.HAS_ACID_RAIN).addOptional(ModBiomeDataProvider.INFERNAL_VENUS_BARRENS.location());
+
         tag(ModBiomeTags.OIL_WELL).addTag(BiomeTags.IS_OCEAN);
         tag(ModBiomeTags.LUNARIAN_VILLAGE).addOptional(ModBiomeDataProvider.LUNAR_WASTELANDS.location());
         tag(ModBiomeTags.MOON_DUNGEON).addOptional(ModBiomeDataProvider.LUNAR_WASTELANDS.location());

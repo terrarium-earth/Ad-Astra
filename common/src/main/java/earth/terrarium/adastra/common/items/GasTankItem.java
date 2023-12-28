@@ -1,8 +1,8 @@
 package earth.terrarium.adastra.common.items;
 
 import earth.terrarium.adastra.common.constants.ConstantComponents;
-import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.adastra.common.utils.FluidUtils;
+import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.fluid.FluidApi;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidItem;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;

@@ -24,16 +24,19 @@ public final class FloodFill3D {
 
     public static final SolidBlockPredicate TEST_FULL_SEAL = (level, pos, direction) -> {
         BlockState state = level.getBlockState(pos);
-        if (state.isAir()) return true;
-        if (state.is(ModBlockTags.PASSES_FLOOD_FILL)) return true;
-        if (state.is(ModBlockTags.BLOCKS_FLOOD_FILL)) return false;
+        if (state.isAir()) return FillResult.AIR;
+        if (state.is(ModBlockTags.PASSES_FLOOD_FILL)) return FillResult.AIR;
+        if (state.is(ModBlockTags.BLOCKS_FLOOD_FILL)) return FillResult.CUBE;
+
+        if (state.isCollisionShapeFullBlock(level, pos)) return FillResult.CUBE;
         VoxelShape collisionShape = state.getCollisionShape(level, pos);
         if (state.getBlock() instanceof SlidingDoorBlock block) {
             collisionShape = block.getCollisionShape(state, level, pos, CollisionContext.empty());
         }
-        if (collisionShape.isEmpty()) return true;
-        if (!isSideSolid(collisionShape, direction)) return true;
-        return !isFaceSturdy(collisionShape, direction);
+
+        if (collisionShape.isEmpty()) return FillResult.AIR;
+        if (!isSideSolid(collisionShape, direction)) return FillResult.AIR;
+        return isFaceSturdy(collisionShape, direction) ? FillResult.PARTIAL : FillResult.AIR;
     };
 
     public static Set<BlockPos> run(Level level, BlockPos start, int limit, SolidBlockPredicate predicate, boolean retainOrder) {
@@ -52,7 +55,13 @@ public final class FloodFill3D {
             for (Direction direction : DIRECTIONS) {
                 mutable.set(pos);
                 mutable.move(direction);
-                if (!predicate.test(level, mutable, direction)) continue;
+
+                FillResult result = predicate.test(level, mutable, direction);
+                switch (result) {
+                    case CUBE -> {continue;}
+                    case PARTIAL -> positions.add(mutable.asLong());
+                }
+
                 queue.enqueue(mutable.asLong());
             }
         }
@@ -110,6 +119,12 @@ public final class FloodFill3D {
 
     @FunctionalInterface
     public interface SolidBlockPredicate {
-        boolean test(Level level, BlockPos pos, Direction direction);
+        FillResult test(Level level, BlockPos pos, Direction direction);
+    }
+
+    public enum FillResult {
+        CUBE,
+        PARTIAL,
+        AIR
     }
 }

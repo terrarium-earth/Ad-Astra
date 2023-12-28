@@ -2,8 +2,8 @@ package earth.terrarium.adastra.common.items;
 
 import dev.architectury.injectables.annotations.PlatformOnly;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
-import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.adastra.common.utils.DistributionMode;
+import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyItem;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;

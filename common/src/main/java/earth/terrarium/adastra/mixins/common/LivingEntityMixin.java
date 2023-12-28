@@ -7,8 +7,8 @@ import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.handlers.base.PlanetData;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
-import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
+import earth.terrarium.adastra.common.tags.ModBiomeTags;
 import earth.terrarium.adastra.common.tags.ModEntityTypeTags;
 import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
@@ -48,9 +48,10 @@ public abstract class LivingEntityMixin extends Entity {
         TemperatureApi.API.entityTick(level, entity);
 
         if (level().getGameTime() % 10 == 0
-            && Planet.VENUS.equals(level().dimension()) // TODO check any dimension, not just venus
+            && level().getBiome(blockPosition()).is(ModBiomeTags.HAS_ACID_RAIN)
             && !getType().is(ModEntityTypeTags.CAN_SURVIVE_ACID_RAIN)
-            && adastra$isInRain()) {
+            && adastra$isInRain()
+        ) {
             entity.hurt(ModDamageSources.create(level(), ModDamageSources.ACID_RAIN), 3);
             playSound(SoundEvents.GENERIC_BURN, 0.4f, 2 + random.nextFloat() * 0.4f);
         }

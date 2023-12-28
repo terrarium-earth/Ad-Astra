@@ -26,7 +26,9 @@ import net.minecraft.world.item.*;
 public class ModItems {
     public static final ResourcefulRegistry<Item> ITEMS = ResourcefulRegistries.create(BuiltInRegistries.ITEM, AdAstra.MOD_ID);
 
+    // Items with item textures.
     public static final ResourcefulRegistry<Item> BASIC_ITEMS = ResourcefulRegistries.create(ITEMS);
+
     public static final ResourcefulRegistry<Item> SLIDING_DOORS = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> GLOBES = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> FLAGS = ResourcefulRegistries.create(ITEMS);
@@ -86,7 +88,7 @@ public class ModItems {
     public static final RegistryEntry<Item> VENUS_GLOBE = GLOBES.register("venus_globe", () -> new RenderedBlockItem(ModBlocks.VENUS_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryEntry<Item> GLACIO_GLOBE = GLOBES.register("glacio_globe", () -> new RenderedBlockItem(ModBlocks.GLACIO_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
 
-    public static final RegistryEntry<Item> RADIO = BASIC_ITEMS.register("radio", () -> new BlockItem(ModBlocks.RADIO.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> RADIO = ITEMS.register("radio", () -> new BlockItem(ModBlocks.RADIO.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> SPACE_HELMET = BASIC_ITEMS.register("space_helmet", () -> new CustomDyeableArmorItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryEntry<Item> SPACE_SUIT = BASIC_ITEMS.register("space_suit", () -> new SpaceSuitItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, 1, new Item.Properties()));

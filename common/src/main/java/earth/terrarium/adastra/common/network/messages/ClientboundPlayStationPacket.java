@@ -14,7 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.Optional;
 
-public record ClientboundPlayStationPacket(String url, Optional<BlockPos> pos) implements Packet<ClientboundPlayStationPacket> {
+public record ClientboundPlayStationPacket(String url,
+                                           Optional<BlockPos> pos) implements Packet<ClientboundPlayStationPacket> {
 
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "play_station");
     public static final Handler HANDLER = new Handler();

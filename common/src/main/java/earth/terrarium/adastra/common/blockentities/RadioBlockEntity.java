@@ -1,10 +1,10 @@
 package earth.terrarium.adastra.common.blockentities;
 
 import earth.terrarium.adastra.client.radio.audio.RadioHandler;
-import earth.terrarium.adastra.common.utils.radio.RadioHolder;
 import earth.terrarium.adastra.common.network.NetworkHandler;
 import earth.terrarium.adastra.common.network.messages.ClientboundPlayStationPacket;
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
+import earth.terrarium.adastra.common.utils.radio.RadioHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;

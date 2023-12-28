@@ -72,7 +72,7 @@ public class FlagImageTexture extends SimpleTexture {
                 }
             }
             return nativeImage;
-        }catch (Exception e) {
+        } catch (Exception e) {
             LOGGER.warn("Failed to load texture: {}", this.location, e);
             return null;
         }

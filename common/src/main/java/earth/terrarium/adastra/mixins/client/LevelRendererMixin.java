@@ -1,21 +1,26 @@
 package earth.terrarium.adastra.mixins.client;
 
 import earth.terrarium.adastra.client.utils.DimensionUtils;
-import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.registry.ModParticleTypes;
+import earth.terrarium.adastra.common.tags.ModBiomeTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.RenderBuffers;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-import java.util.Objects;
-
 @Mixin(LevelRenderer.class)
 public abstract class LevelRendererMixin {
+
+    @Shadow
+    @Final
+    private RenderBuffers renderBuffers;
 
     @ModifyArg(method = "tickRain", at = @At(
         value = "INVOKE",
@@ -43,6 +48,8 @@ public abstract class LevelRendererMixin {
 
     @Unique
     private boolean adastra$hasAcidRain() {
-        return Planet.VENUS.equals(Objects.requireNonNull(Minecraft.getInstance().level).dimension()); // TODO check any dimension, not just venus
+        var player = Minecraft.getInstance().player;
+        if (player == null) return false;
+        return player.level().getBiome(player.blockPosition()).is(ModBiomeTags.HAS_ACID_RAIN);
     }
 }
