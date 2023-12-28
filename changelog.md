@@ -14,6 +14,8 @@ may be unstable.
   oxygen when you first open a world because it hasn't been calculated yet.
 - Added public APIs for planets, oxygen, gravity, and temperature. Please use those instead of the internal ones
   when creating addons.
+- Added events for oxygen, gravity, and temperature entity ticking. Please use those instead of mixing into the internal
+tick methods.
 - Improved many tooltips. They now have more info and colored elements.
 - Machines now display energy/fluid in/out per tick.
 - Energy and fluid numbers now have prefixes (K, M, G). Shifting will show the full number.

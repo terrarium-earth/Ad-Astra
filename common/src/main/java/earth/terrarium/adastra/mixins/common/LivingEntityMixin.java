@@ -5,6 +5,7 @@ import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
 import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
+import earth.terrarium.adastra.common.events.ModEvents;
 import earth.terrarium.adastra.common.handlers.base.PlanetData;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
@@ -44,16 +45,22 @@ public abstract class LivingEntityMixin extends Entity {
         if (!(level() instanceof ServerLevel level)) return;
         LivingEntity entity = (LivingEntity) (Object) this;
         if (entity instanceof Player p && (p.isCreative() || p.isSpectator())) return;
-        OxygenApi.API.entityTick(level, entity);
-        TemperatureApi.API.entityTick(level, entity);
+        if (ModEvents.entityOxygenTick(level, entity)) {
+            OxygenApi.API.entityTick(level, entity);
+        }
+        if (ModEvents.entityTemperatureTick(level, entity)) {
+            TemperatureApi.API.entityTick(level, entity);
+        }
 
-        if (level().getGameTime() % 10 == 0
-            && level().getBiome(blockPosition()).is(ModBiomeTags.HAS_ACID_RAIN)
-            && !getType().is(ModEntityTypeTags.CAN_SURVIVE_ACID_RAIN)
-            && adastra$isInRain()
-        ) {
-            entity.hurt(ModDamageSources.create(level(), ModDamageSources.ACID_RAIN), 3);
-            playSound(SoundEvents.GENERIC_BURN, 0.4f, 2 + random.nextFloat() * 0.4f);
+        if (ModEvents.entityAcidRainTick(level, entity)) {
+            if (entity.tickCount % 10 == 0
+                && level().getBiome(blockPosition()).is(ModBiomeTags.HAS_ACID_RAIN)
+                && !getType().is(ModEntityTypeTags.CAN_SURVIVE_ACID_RAIN)
+                && adastra$isInRain()
+            ) {
+                entity.hurt(ModDamageSources.create(level(), ModDamageSources.ACID_RAIN), 3);
+                playSound(SoundEvents.GENERIC_BURN, 0.4f, 2 + random.nextFloat() * 0.4f);
+            }
         }
     }
 
@@ -68,10 +75,13 @@ public abstract class LivingEntityMixin extends Entity {
             }
         }
 
+        var movementAffectingPos = getBlockPosBelowThatAffectsMyMovement();
         if (gravity <= PlanetConstants.ZERO_GRAVITY_THRESHOLD) {
-            GravityApi.API.entityTick(this.level(), entity, travelVector, getBlockPosBelowThatAffectsMyMovement());
-            ci.cancel();
-        } else {
+            if (ModEvents.entityZeroGravityTick(level(), entity, travelVector, movementAffectingPos)) {
+                GravityApi.API.entityTick(level(), entity, travelVector, movementAffectingPos);
+                ci.cancel();
+            }
+        } else if (ModEvents.entityGravityTick(level(), entity, travelVector, movementAffectingPos)) {
             if (this.isInWater()
                 || this.isInLava()
                 || entity.isFallFlying()
