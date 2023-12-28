@@ -5,7 +5,7 @@ import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
 import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
-import earth.terrarium.adastra.common.events.ModEvents;
+import earth.terrarium.adastra.api.events.AdAstraEvents;
 import earth.terrarium.adastra.common.handlers.base.PlanetData;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
@@ -47,11 +47,11 @@ public abstract class LivingEntityMixin extends Entity {
         if (entity instanceof Player p && (p.isCreative() || p.isSpectator())) return;
 
         if (entity.tickCount % 20 == 0) {
-            if (ModEvents.entityOxygenTick(level, entity)) {
+            if (AdAstraEvents.entityOxygenTick(level, entity)) {
                 OxygenApi.API.entityTick(level, entity);
             }
 
-            if (ModEvents.entityTemperatureTick(level, entity)) {
+            if (AdAstraEvents.entityTemperatureTick(level, entity)) {
                 TemperatureApi.API.entityTick(level, entity);
             }
         }
@@ -61,7 +61,7 @@ public abstract class LivingEntityMixin extends Entity {
             && !getType().is(ModEntityTypeTags.CAN_SURVIVE_ACID_RAIN)
             && adastra$isInRain()
         ) {
-            if (ModEvents.entityAcidRainTick(level, entity)) {
+            if (AdAstraEvents.entityAcidRainTick(level, entity)) {
                 entity.hurt(ModDamageSources.create(level(), ModDamageSources.ACID_RAIN), 3);
                 playSound(SoundEvents.GENERIC_BURN, 0.4f, 2 + random.nextFloat() * 0.4f);
             }
@@ -81,11 +81,11 @@ public abstract class LivingEntityMixin extends Entity {
 
         var movementAffectingPos = getBlockPosBelowThatAffectsMyMovement();
         if (gravity <= PlanetConstants.ZERO_GRAVITY_THRESHOLD) {
-            if (ModEvents.entityZeroGravityTick(level(), entity, travelVector, movementAffectingPos)) {
+            if (AdAstraEvents.entityZeroGravityTick(level(), entity, travelVector, movementAffectingPos)) {
                 GravityApi.API.entityTick(level(), entity, travelVector, movementAffectingPos);
                 ci.cancel();
             }
-        } else if (ModEvents.entityGravityTick(level(), entity, travelVector, movementAffectingPos)) {
+        } else if (AdAstraEvents.entityGravityTick(level(), entity, travelVector, movementAffectingPos)) {
             if (this.isInWater()
                 || this.isInLava()
                 || entity.isFallFlying()
