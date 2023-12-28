@@ -11,6 +11,7 @@ import earth.terrarium.adastra.common.blocks.lamps.IndustrialLampBlock;
 import earth.terrarium.adastra.common.blocks.lamps.SmallIndustrialLampBlock;
 import earth.terrarium.adastra.common.blocks.machines.EnergizerBlock;
 import earth.terrarium.adastra.common.blocks.machines.OxygenSensorBlock;
+import earth.terrarium.adastra.common.blocks.machines.WaterPumpBlock;
 import earth.terrarium.adastra.common.blocks.pipes.Pipe;
 import earth.terrarium.adastra.common.blocks.pipes.PipeBlock;
 import earth.terrarium.adastra.common.blocks.pipes.PipeDuctBlock;
@@ -63,7 +64,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> FUEL_REFINERY = MACHINES.register("fuel_refinery", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
     public static final RegistryEntry<Block> OXYGEN_LOADER = MACHINES.register("oxygen_loader", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
     public static final RegistryEntry<Block> SOLAR_PANEL = MACHINES.register("solar_panel", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
-    public static final RegistryEntry<Block> WATER_PUMP = MACHINES.register("water_pump", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
+    public static final RegistryEntry<Block> WATER_PUMP = MACHINES.register("water_pump", () -> new WaterPumpBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
     public static final RegistryEntry<Block> OXYGEN_DISTRIBUTOR = MACHINES.register("oxygen_distributor", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
     public static final RegistryEntry<Block> ENERGIZER = MACHINES.register("energizer", () -> new EnergizerBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
     public static final RegistryEntry<Block> CRYO_FREEZER = MACHINES.register("cryo_freezer", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
