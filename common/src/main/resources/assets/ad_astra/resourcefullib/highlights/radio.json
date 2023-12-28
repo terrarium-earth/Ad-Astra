@@ -1,0 +1,42 @@
+{
+    "variants": {
+        "facing=north": "ad_astra:radio_shape",
+        "facing=north_east": "ad_astra:radio_45_shape",
+        "facing=east": {
+            "highlight": "ad_astra:radio_shape",
+            "rotation": {
+                "y": 90
+            }
+        },
+        "facing=south_east": {
+            "highlight": "ad_astra:radio_45_shape",
+            "rotation": {
+                "y": 90
+            }
+        },
+        "facing=south": {
+            "highlight": "ad_astra:radio_shape",
+            "rotation": {
+                "y": 180
+            }
+        },
+        "facing=south_west": {
+            "highlight": "ad_astra:radio_45_shape",
+            "rotation": {
+                "y": 180
+            }
+        },
+        "facing=west": {
+            "highlight": "ad_astra:radio_shape",
+            "rotation": {
+                "y": 270
+            }
+        },
+        "facing=north_west": {
+            "highlight": "ad_astra:radio_45_shape",
+            "rotation": {
+                "y": 270
+            }
+        }
+    }
+}

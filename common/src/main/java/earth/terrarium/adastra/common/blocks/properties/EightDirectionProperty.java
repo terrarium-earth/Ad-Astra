@@ -13,6 +13,8 @@ import java.util.Locale;
 
 public class EightDirectionProperty extends EnumProperty<EightDirectionProperty.Direction> {
 
+    public static final EightDirectionProperty FACING = new EightDirectionProperty();
+
     public EightDirectionProperty() {
         super("facing", Direction.class, List.of(Direction.VALUES));
     }

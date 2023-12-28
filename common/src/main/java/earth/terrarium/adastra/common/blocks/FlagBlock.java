@@ -45,7 +45,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class FlagBlock extends BasicEntityBlock implements SimpleWaterloggedBlock {
-    public static final EightDirectionProperty FACING = new EightDirectionProperty();
+    public static final EightDirectionProperty FACING = EightDirectionProperty.FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 

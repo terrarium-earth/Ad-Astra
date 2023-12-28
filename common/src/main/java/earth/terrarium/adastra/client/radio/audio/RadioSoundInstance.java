@@ -21,10 +21,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 
-public final class RadioSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
+public sealed class RadioSoundInstance extends AbstractSoundInstance implements TickableSoundInstance permits StaticRadioSoundInstance {
 
-    private final String url;
-    private boolean stopped = false;
+    protected final String url;
+    protected boolean stopped = false;
 
     @SuppressWarnings("deprecation")
     public RadioSoundInstance(String url, RandomSource randomSource) {

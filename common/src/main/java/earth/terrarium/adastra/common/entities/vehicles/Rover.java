@@ -1,8 +1,10 @@
 package earth.terrarium.adastra.common.entities.vehicles;
 
 import earth.terrarium.adastra.client.radio.audio.RadioHandler;
-import earth.terrarium.adastra.common.entities.base.RadioHolder;
+import earth.terrarium.adastra.common.utils.radio.RadioHolder;
 import earth.terrarium.adastra.common.menus.vehicles.RoverMenu;
+import earth.terrarium.adastra.common.network.NetworkHandler;
+import earth.terrarium.adastra.common.network.messages.ClientboundPlayStationPacket;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
@@ -59,7 +61,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
         addPart(0.6f, 0.7f, new Vector3f(0.6f, 1f, 0.5f), (player, hand) -> {
             if (player.getVehicle() instanceof Rover) {
                 if (player.level().isClientSide()) {
-                    RadioHandler.open();
+                    RadioHandler.open(null);
                 }
                 return InteractionResult.sidedSuccess(player.level().isClientSide());
             }
@@ -254,6 +256,12 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     @Override
     public void setRadioUrl(@NotNull String url) {
         this.radioUrl = url;
+
+        for (Entity passenger : getPassengers()) {
+            if (passenger instanceof Player player) {
+                NetworkHandler.CHANNEL.sendToPlayer(new ClientboundPlayStationPacket(url), player);
+            }
+        }
     }
 
     public void consumeFuel() {

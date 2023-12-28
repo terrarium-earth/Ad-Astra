@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "ad_astra:block/radio"
+    },
+    "facing=north_east": {
+      "model": "ad_astra:block/radio_45"
+    },
+    "facing=east": {
+      "model": "ad_astra:block/radio",
+      "y": 90
+    },
+    "facing=south_east": {
+      "model": "ad_astra:block/radio_45",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "ad_astra:block/radio",
+      "y": 180
+    },
+    "facing=south_west": {
+      "model": "ad_astra:block/radio_45",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ad_astra:block/radio",
+      "y": 270
+    },
+    "facing=north_west": {
+      "model": "ad_astra:block/radio_45",
+      "y": 270
+    }
+  }
+}

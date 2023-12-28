@@ -24,7 +24,7 @@ import earth.terrarium.adastra.client.screens.vehicles.LanderScreen;
 import earth.terrarium.adastra.client.screens.vehicles.RocketScreen;
 import earth.terrarium.adastra.client.screens.vehicles.RoverScreen;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
-import earth.terrarium.adastra.common.entities.base.RadioHolder;
+import earth.terrarium.adastra.common.utils.radio.RadioHolder;
 import earth.terrarium.adastra.common.items.EtrionicCapacitorItem;
 import earth.terrarium.adastra.common.network.NetworkHandler;
 import earth.terrarium.adastra.common.network.messages.ServerboundSyncKeybindPacket;
@@ -175,7 +175,7 @@ public class AdAstraClient {
         if (player == null) return;
 
         if (KEY_OPEN_RADIO.consumeClick() && player.getVehicle() instanceof RadioHolder) {
-            RadioHandler.open();
+            RadioHandler.open(null);
         }
 
         if (player.getItemBySlot(EquipmentSlot.CHEST).is(ModItemTags.JET_SUITS)) {

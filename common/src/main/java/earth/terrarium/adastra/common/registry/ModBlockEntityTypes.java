@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.screens.machines.NasaWorkbenchBlockEntity;
+import earth.terrarium.adastra.common.blockentities.RadioBlockEntity;
 import earth.terrarium.adastra.common.blockentities.flag.FlagBlockEntity;
 import earth.terrarium.adastra.common.blockentities.GlobeBlockEntity;
 import earth.terrarium.adastra.common.blockentities.PipeBlockEntity;
@@ -116,6 +117,12 @@ public class ModBlockEntityTypes {
         () -> createBlockEntityType(
             PipeBlockEntity::new,
             ModBlocks.PIPES));
+
+    public static final RegistryEntry<BlockEntityType<RadioBlockEntity>> RADIO = BLOCK_ENTITY_TYPES.register(
+        "radio",
+        () -> RegistryHelpers.createBlockEntityType(
+            RadioBlockEntity::new,
+            ModBlocks.RADIO.get()));
 
 
     @SuppressWarnings("DataFlowIssue")

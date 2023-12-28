@@ -16,6 +16,7 @@ import earth.terrarium.adastra.common.network.messages.ServerboundSetStationPack
 import earth.terrarium.adastra.common.utils.radio.StationInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
@@ -30,14 +31,14 @@ public class RadioList extends SelectionList<RadioList.RadioEntry> {
     private List<StationInfo> stations = new ArrayList<>();
     private String playing = null;
 
-    public RadioList(int x, int y) {
+    public RadioList(int x, int y, @Nullable BlockPos pos) {
         super(x, y, 91, 41, 12, entry -> {
             if (entry != null) {
                 StationInfo info = entry.info;
                 if (info == null) {
-                    NetworkHandler.CHANNEL.sendToServer(new ServerboundSetStationPacket(""));
+                    NetworkHandler.CHANNEL.sendToServer(new ServerboundSetStationPacket("", pos));
                 } else if (!Objects.equals(RadioHandler.getPlaying(), info.url())) {
-                    NetworkHandler.CHANNEL.sendToServer(new ServerboundSetStationPacket(info.url()));
+                    NetworkHandler.CHANNEL.sendToServer(new ServerboundSetStationPacket(info.url(), pos));
                 }
             }
         }, true);

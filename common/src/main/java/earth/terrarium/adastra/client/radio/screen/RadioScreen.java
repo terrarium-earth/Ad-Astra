@@ -15,11 +15,13 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -34,10 +36,14 @@ public class RadioScreen extends BaseCursorScreen {
     private final List<StationInfo> stations = new ArrayList<>();
     private final Map<String, String> stationNames = new HashMap<>();
 
+    @Nullable
+    private final BlockPos pos;
+
     private RadioList list;
 
-    public RadioScreen() {
+    public RadioScreen(@Nullable BlockPos pos) {
         super(CommonComponents.EMPTY);
+        this.pos = pos;
         NetworkHandler.CHANNEL.sendToServer(new ServerboundRequestStationsPacket());
     }
 
@@ -56,7 +62,7 @@ public class RadioScreen extends BaseCursorScreen {
             VOLUME_DEBOUNCER.debounce(RadioScreen::saveConfigOnThread, 5000);
         }));
 
-        this.list = addRenderableWidget(new RadioList(left + 149, top + 84));
+        this.list = addRenderableWidget(new RadioList(left + 149, top + 84, this.pos));
         if (!this.stations.isEmpty()) {
             this.list.update(this.stations, RadioHandler.getPlaying());
         }

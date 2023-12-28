@@ -8,8 +8,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.HttpUtil;
 import net.minecraft.util.RandomSource;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,8 +28,8 @@ public final class RadioHandler {
     private static final Map<String, CompletableFuture<InputStream>> IN_PROGRESS = new ConcurrentHashMap<>();
     private static RadioSoundInstance lastStation = null;
 
-    public static void open() {
-        Minecraft.getInstance().setScreen(new RadioScreen());
+    public static void open(@Nullable BlockPos pos) {
+        Minecraft.getInstance().setScreen(new RadioScreen(pos));
     }
 
     /**
@@ -68,6 +70,12 @@ public final class RadioHandler {
                 throw new CompletionException(e);
             }
         }, HttpUtil.DOWNLOAD_EXECUTOR);
+    }
+
+    public static void play(String url, RandomSource random, BlockPos pos) {
+        stopRadioInstances();
+        lastStation = new StaticRadioSoundInstance(url, random, pos);
+        Minecraft.getInstance().getSoundManager().play(lastStation);
     }
 
     public static void play(String url, RandomSource random) {

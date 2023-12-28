@@ -99,6 +99,8 @@ public class ModBlocks {
     public static final RegistryEntry<Block> VENUS_GLOBE = GLOBES.register("venus_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
     public static final RegistryEntry<Block> GLACIO_GLOBE = GLOBES.register("glacio_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
 
+    public static final RegistryEntry<Block> RADIO = BLOCKS.register("radio", () -> new RadioBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(1)));
+
     public static final RegistryEntry<Block> AERONOS_MUSHROOM = BLOCKS.register("aeronos_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).sound(SoundType.STEM).lightLevel(state -> 6), TreeFeatures.HUGE_RED_MUSHROOM));
     public static final RegistryEntry<Block> STROPHAR_MUSHROOM = BLOCKS.register("strophar_mushroom", () -> new MushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM).sound(SoundType.STEM).lightLevel(state -> 6), TreeFeatures.HUGE_RED_MUSHROOM));
 
