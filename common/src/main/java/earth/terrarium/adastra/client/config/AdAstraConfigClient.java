@@ -24,4 +24,46 @@ public final class AdAstraConfigClient {
         translation = "Jet Suit Enabled"
     )
     public static boolean jetSuitEnabled = true;
+
+    @ConfigEntry(
+        type = EntryType.INTEGER,
+        id = "oxygenBarX",
+        translation = "Oxygen Bar X"
+    )
+    public static int oxygenBarX = 5;
+
+    @ConfigEntry(
+        type = EntryType.INTEGER,
+        id = "oxygenBarY",
+        translation = "Oxygen Bar Y"
+    )
+    public static int oxygenBarY = 25;
+
+    @ConfigEntry(
+        type = EntryType.FLOAT,
+        id = "oxygenBarScale",
+        translation = "Oxygen Bar Scale"
+    )
+    public static float oxygenBarScale = 1;
+
+    @ConfigEntry(
+        type = EntryType.INTEGER,
+        id = "energyBarX",
+        translation = "Energy Bar X"
+    )
+    public static int energyBarX = 11;
+
+    @ConfigEntry(
+        type = EntryType.INTEGER,
+        id = "energyBarY",
+        translation = "Energy Bar Y"
+    )
+    public static int energyBarY = 95;
+
+    @ConfigEntry(
+        type = EntryType.FLOAT,
+        id = "energyBarScale",
+        translation = "Energy Bar Scale"
+    )
+    public static float energyBarScale = 1;
 }

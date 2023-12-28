@@ -75,10 +75,10 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
 
         if (KeybindManager.sprintDown(player)) {
             fullFlight(player);
-            consume(player, stack, 80);
+            consume(player, stack, 100);
         } else {
             upwardsFlight(player);
-            consume(player, stack, 40);
+            consume(player, stack, 50);
         }
     }
 

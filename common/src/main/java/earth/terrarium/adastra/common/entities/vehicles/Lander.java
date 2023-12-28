@@ -146,7 +146,7 @@ public class Lander extends Vehicle {
         if (!level().isClientSide()) return;
         for (int i = 0; i < 10; i++) {
             level().addParticle(ModParticleTypes.LARGE_FLAME.get(),
-                getX(), getY() - 1, getZ(),
+                getX(), getY() - 0.2, getZ(),
                 Mth.nextDouble(level().random, -0.05, 0.05),
                 Mth.nextDouble(level().random, -0.05, 0.05),
                 Mth.nextDouble(level().random, -0.05, 0.05));
@@ -154,7 +154,7 @@ public class Lander extends Vehicle {
 
         for (int i = 0; i < 10; i++) {
             level().addParticle(ModParticleTypes.LARGE_SMOKE.get(),
-                getX(), getY() - 1, getZ(),
+                getX(), getY() - 0.2, getZ(),
                 Mth.nextDouble(level().random, -0.05, 0.05),
                 Mth.nextDouble(level().random, -0.05, 0.05),
                 Mth.nextDouble(level().random, -0.05, 0.05));
