@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.config.AdAstraConfigClient;
 import earth.terrarium.adastra.client.utils.ClientData;
+import earth.terrarium.adastra.common.entities.vehicles.Lander;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.handlers.base.PlanetData;
 import earth.terrarium.adastra.common.items.armor.JetSuitItem;
@@ -12,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.levelgen.Heightmap;
 
 public class OverlayScreen {
 
@@ -25,6 +27,7 @@ public class OverlayScreen {
     public static void render(GuiGraphics graphics, float partialTick) {
         var player = Minecraft.getInstance().player;
         if (player == null || player.isSpectator()) return;
+        var level = player.level();
 
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.options.renderDebug) return;
@@ -33,6 +36,7 @@ public class OverlayScreen {
         int height = minecraft.getWindow().getGuiScaledHeight();
         PoseStack poseStack = graphics.pose();
 
+        // Rocket overlay
         if (player.getVehicle() instanceof Rocket rocket) {
             int countdown = Mth.ceil(rocket.launchTicks() / 20f);
             if (rocket.isLaunching()) {
@@ -52,6 +56,7 @@ public class OverlayScreen {
             poseStack.popPose();
         }
 
+        // Oxygen overlay
         var chestStack = player.getInventory().getArmor(2);
         if (SpaceSuitItem.hasFullSet(player) && chestStack.getItem() instanceof SpaceSuitItem spaceSuit) {
             long amount = SpaceSuitItem.getOxygenAmount(player);
@@ -79,6 +84,7 @@ public class OverlayScreen {
             poseStack.popPose();
         }
 
+        // Battery overlay
         if (JetSuitItem.hasFullSet(player) && chestStack.getItem() instanceof JetSuitItem jetSuit) {
             long amount = jetSuit.getEnergyStorage(chestStack).getStoredEnergy();
             long capacity = jetSuit.getEnergyStorage(chestStack).getMaxCapacity();
@@ -102,6 +108,10 @@ public class OverlayScreen {
             poseStack.popPose();
         }
 
-        // TODO: Add lander overlay
+        // Lander overlay TODO
+        if (player.getVehicle() instanceof Lander lander) {
+            int ground = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, lander.blockPosition()).getY();
+            int distance = lander.blockPosition().getY() - ground;
+        }
     }
 }

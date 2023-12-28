@@ -45,19 +45,23 @@ public abstract class LivingEntityMixin extends Entity {
         if (!(level() instanceof ServerLevel level)) return;
         LivingEntity entity = (LivingEntity) (Object) this;
         if (entity instanceof Player p && (p.isCreative() || p.isSpectator())) return;
-        if (ModEvents.entityOxygenTick(level, entity)) {
-            OxygenApi.API.entityTick(level, entity);
-        }
-        if (ModEvents.entityTemperatureTick(level, entity)) {
-            TemperatureApi.API.entityTick(level, entity);
+
+        if (entity.tickCount % 20 == 0) {
+            if (ModEvents.entityOxygenTick(level, entity)) {
+                OxygenApi.API.entityTick(level, entity);
+            }
+
+            if (ModEvents.entityTemperatureTick(level, entity)) {
+                TemperatureApi.API.entityTick(level, entity);
+            }
         }
 
-        if (ModEvents.entityAcidRainTick(level, entity)) {
-            if (entity.tickCount % 10 == 0
-                && level().getBiome(blockPosition()).is(ModBiomeTags.HAS_ACID_RAIN)
-                && !getType().is(ModEntityTypeTags.CAN_SURVIVE_ACID_RAIN)
-                && adastra$isInRain()
-            ) {
+        if (entity.tickCount % 10 == 0
+            && level().getBiome(blockPosition()).is(ModBiomeTags.HAS_ACID_RAIN)
+            && !getType().is(ModEntityTypeTags.CAN_SURVIVE_ACID_RAIN)
+            && adastra$isInRain()
+        ) {
+            if (ModEvents.entityAcidRainTick(level, entity)) {
                 entity.hurt(ModDamageSources.create(level(), ModDamageSources.ACID_RAIN), 3);
                 playSound(SoundEvents.GENERIC_BURN, 0.4f, 2 + random.nextFloat() * 0.4f);
             }

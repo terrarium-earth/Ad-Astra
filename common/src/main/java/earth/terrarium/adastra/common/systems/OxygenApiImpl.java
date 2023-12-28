@@ -63,7 +63,6 @@ public class OxygenApiImpl implements OxygenApi {
 
     @Override
     public void entityTick(ServerLevel level, LivingEntity entity) {
-        if (entity.tickCount % 20 != 0) return;
         if (this.hasOxygen(entity)) return;
         if (entity.getType().is(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN)) return;
         if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE)) return;

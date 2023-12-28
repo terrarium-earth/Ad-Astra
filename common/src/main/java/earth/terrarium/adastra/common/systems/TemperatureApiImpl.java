@@ -84,7 +84,6 @@ public class TemperatureApiImpl implements TemperatureApi {
 
     @Override
     public void entityTick(ServerLevel level, LivingEntity entity) {
-        if (entity.tickCount % 20 != 0) return;
         if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE)) return;
         if (this.isHot(level, entity.blockPosition())) {
             if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_EXTREME_HEAT)) return;

@@ -43,7 +43,7 @@ public final class ModEvents {
     }
 
     /**
-     * @return false to prevent ticking of gravity.
+     * @return false to prevent ticking of acid rain.
      */
     @ExpectPlatform
     public static boolean entityAcidRainTick(ServerLevel level, LivingEntity entity) {

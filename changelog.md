@@ -18,7 +18,7 @@ may be unstable.
 tick methods.
 - Improved many tooltips. They now have more info and colored elements.
 - Machines now display energy/fluid in/out per tick.
-- Energy and fluid numbers now have prefixes (K, M, G). Shifting will show the full number.
+- Energy and fluid numbers now have suffixes (K, M, G). Shifting will show the full number.
 - Fluid tanks can now be cleared by shift-right clicking
 - Updated the plate and rod textures
 - Added gas tanks. these replace oxygen tanks and can hold any fluid. Using them will distribute the
