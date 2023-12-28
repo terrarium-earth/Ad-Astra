@@ -117,3 +117,4 @@ Hopefully this will prevent people from missing it and crashing.
 - Updated the oxygen distributor model. It now spins and can be placed on any block face.
 - Added the gravity normalizer. This allows you to control the gravity of a local area, similar
 to the oxygen distributor. It's especially important in orbit due to the zero gravity environment.
+- Redid all the recipes
