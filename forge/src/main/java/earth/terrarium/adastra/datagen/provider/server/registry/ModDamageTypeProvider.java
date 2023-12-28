@@ -12,5 +12,6 @@ public class ModDamageTypeProvider {
         context.register(ModDamageSources.CRYO_FUEL, new DamageType("cryo_fuel", 0.1f, DamageEffects.BURNING));
         context.register(ModDamageSources.ROCKET_FLAMES, new DamageType("rocket_flames", 0.1f, DamageEffects.BURNING));
         context.register(ModDamageSources.RAN_OVER, new DamageType("ran_over", 0.1f));
+        context.register(ModDamageSources.ACID_RAIN, new DamageType("acid_rain", 0.1f));
     }
 }

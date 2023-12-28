@@ -31,9 +31,13 @@ public class ModEntityTypeTagProvider extends TagsProvider<EntityType<?>> {
         tag(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.WITHER)));
         tag(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.ALLAY)));
 
-        tag(ModEntityTypeTags.CAN_SURVIVE_WITHOUT_OXYGEN).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.ZOMBIE)));
-        tag(ModEntityTypeTags.CAN_SURVIVE_WITHOUT_OXYGEN).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.HUSK)));
-        tag(ModEntityTypeTags.CAN_SURVIVE_WITHOUT_OXYGEN).add(TagEntry.tag(EntityTypeTags.SKELETONS.location()));
+        tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.ZOMBIE)));
+        tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.HUSK)));
+        tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.tag(EntityTypeTags.SKELETONS.location()));
+
+        tag(ModEntityTypeTags.CAN_SURVIVE_EXTREME_COLD).add(TagEntry.tag(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES.location()));
+
+        tag(ModEntityTypeTags.CAN_SURVIVE_ACID_RAIN).add(TagEntry.tag(ModEntityTypeTags.CAN_SURVIVE_EXTREME_HEAT.location()));
 
         tag(ModEntityTypeTags.IGNORES_AIR_VORTEX).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.LEASH_KNOT)));
 
@@ -47,12 +51,12 @@ public class ModEntityTypeTagProvider extends TagsProvider<EntityType<?>> {
     }
 
     private void surviveHeat(EntityType<?> type) {
-        tag(ModEntityTypeTags.CAN_SURVIVE_WITHOUT_OXYGEN).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
+        tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
         tag(ModEntityTypeTags.CAN_SURVIVE_EXTREME_HEAT).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
     }
 
     private void surviveCold(EntityType<?> type) {
-        tag(ModEntityTypeTags.CAN_SURVIVE_WITHOUT_OXYGEN).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
+        tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
         tag(ModEntityTypeTags.CAN_SURVIVE_EXTREME_COLD).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
     }
 }

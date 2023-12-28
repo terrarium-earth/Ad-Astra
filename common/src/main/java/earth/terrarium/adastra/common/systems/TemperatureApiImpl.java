@@ -15,6 +15,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -88,6 +89,7 @@ public class TemperatureApiImpl implements TemperatureApi {
         if (this.isHot(level, entity.blockPosition())) {
             if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_EXTREME_HEAT)) return;
             if (SpaceSuitItem.hasFullSet(entity, ModItemTags.HEAT_RESISTANT_ARMOR)) return;
+            if (entity.hasEffect(MobEffects.FIRE_RESISTANCE)) return;
             entity.hurt(entity.damageSources().onFire(), 6);
             entity.setSecondsOnFire(10);
         } else if (this.isCold(level, entity.blockPosition())) {

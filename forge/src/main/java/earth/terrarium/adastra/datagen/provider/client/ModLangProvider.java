@@ -77,6 +77,9 @@ public class ModLangProvider extends LanguageProvider {
         add("death.attack.rocket_flames", "%1$s melted under an active rocket");
         add("death.attack.rocket_flames.player", "%1$s melted under an active rocket whilst trying to escape %2$s");
 
+        add("death.attack.acid_rain", "%1$s was melted by acid rain");
+        add("death.attack.acid_rain.player", "%1$s was melted by acid rain whilst trying to escape %2$s");
+
         add(ConstantComponents.TOGGLE_SUIT_FLIGHT_KEY.getString(), "Toggle suit flight");
         add(ConstantComponents.OPEN_RADIO_KEY.getString(), "Open radio");
         add(ConstantComponents.AD_ASTRA_CATEGORY.getString(), "Ad Astra");

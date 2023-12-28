@@ -54,6 +54,8 @@ public class OxygenDistributorOverlayRenderer {
         var bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
         var consumer = bufferSource.getBuffer(RenderType.debugSectionQuads());
 
+        RenderSystem.polygonOffset(-3, -3);
+        RenderSystem.enablePolygonOffset();
         RenderSystem.disableCull();
         RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
         RenderSystem.depthMask(false);
@@ -65,6 +67,8 @@ public class OxygenDistributorOverlayRenderer {
 
         bufferSource.endBatch();
         RenderSystem.enableCull();
+        RenderSystem.polygonOffset(0, 0);
+        RenderSystem.disablePolygonOffset();
         RenderSystem.depthMask(true);
         RenderSystem.disableBlend();
         poseStack.popPose();

@@ -21,7 +21,7 @@ public abstract class LevelRendererMixin {
         value = "INVOKE",
         target = "Lnet/minecraft/client/multiplayer/ClientLevel;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V"
     ), index = 0)
-    public ParticleOptions adastra$tickRain(ParticleOptions original) {
+    private ParticleOptions adastra$tickRain(ParticleOptions original) {
         return adastra$hasAcidRain() ? ModParticleTypes.ACID_RAIN.get() : original;
     }
 

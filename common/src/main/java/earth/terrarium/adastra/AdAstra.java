@@ -66,7 +66,6 @@ public class AdAstra {
 
     public static void onDatapackSync(ServerPlayer player) {
         NetworkHandler.CHANNEL.sendToPlayer(new ClientboundSyncPlanetsPacket(AdAstraData.planets()), player);
-        ModDamageSources.clear();
     }
 
     public static void onServerTick(MinecraftServer server) {

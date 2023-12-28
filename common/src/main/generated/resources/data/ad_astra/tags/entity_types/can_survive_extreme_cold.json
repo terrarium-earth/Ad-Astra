@@ -1,5 +1,6 @@
 {
   "values": [
+    "#minecraft:freeze_immune_entity_types",
     "minecraft:snow_golem",
     "minecraft:stray"
   ]

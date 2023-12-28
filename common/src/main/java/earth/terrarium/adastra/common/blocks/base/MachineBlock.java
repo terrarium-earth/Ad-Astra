@@ -77,15 +77,14 @@ public class MachineBlock extends BasicEntityBlock {
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moved) {
-        if (level.getBlockEntity(pos) instanceof MachineBlockEntity machine) {
-            machine.onRemoved();
-        }
-
         if (state.getBlock() != newState.getBlock()) {
             if (level.getBlockEntity(pos) instanceof BasicContainer container) {
                 if (container.getContainerSize() > 0) {
                     Containers.dropContents(level, pos, container);
                     level.updateNeighbourForOutputSignal(pos, this);
+                }
+                if (level.getBlockEntity(pos) instanceof MachineBlockEntity machine) {
+                    machine.onRemoved();
                 }
             }
             super.onRemove(state, level, pos, newState, moved);

@@ -7,8 +7,13 @@ import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.handlers.base.PlanetData;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
+import earth.terrarium.adastra.common.planets.Planet;
+import earth.terrarium.adastra.common.registry.ModDamageSources;
+import earth.terrarium.adastra.common.tags.ModEntityTypeTags;
 import net.minecraft.Optionull;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -17,11 +22,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -30,9 +34,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
-
-    @Shadow
-    public abstract ItemStack eat(Level level, ItemStack food);
 
     public LivingEntityMixin(EntityType<?> type, Level level) {
         super(type, level);
@@ -45,6 +46,14 @@ public abstract class LivingEntityMixin extends Entity {
         if (entity instanceof Player p && (p.isCreative() || p.isSpectator())) return;
         OxygenApi.API.entityTick(level, entity);
         TemperatureApi.API.entityTick(level, entity);
+
+        if (level().getGameTime() % 10 == 0
+            && Planet.VENUS.equals(level().dimension()) // TODO check any dimension, not just venus
+            && !getType().is(ModEntityTypeTags.CAN_SURVIVE_ACID_RAIN)
+            && adastra$isInRain()) {
+            entity.hurt(ModDamageSources.create(level(), ModDamageSources.ACID_RAIN), 3);
+            playSound(SoundEvents.GENERIC_BURN, 0.4f, 2 + random.nextFloat() * 0.4f);
+        }
     }
 
     @Inject(method = "travel", at = @At("HEAD"), cancellable = true)
@@ -97,5 +106,11 @@ public abstract class LivingEntityMixin extends Entity {
     private void adastra$causeFallDamage(float fallDistance, float multiplier, DamageSource source, CallbackInfoReturnable<Boolean> cir) {
         if (!(fallDistance <= 3 / GravityApi.API.getGravity(this))) return;
         cir.setReturnValue(false);
+    }
+
+    @Unique
+    private boolean adastra$isInRain() {
+        var pos = blockPosition();
+        return level().isRainingAt(pos) || level().isRainingAt(BlockPos.containing(pos.getX(), getBoundingBox().maxY, pos.getZ()));
     }
 }

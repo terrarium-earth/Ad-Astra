@@ -42,7 +42,7 @@ public class CryoFuelLiquidBlock extends BotariumLiquidBlock {
             entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze(), entity.getTicksFrozen() + 5));
             if (!level.isClientSide()) {
                 entity.setSharedFlagOnFire(false);
-                entity.hurt(ModDamageSources.getOrCreate(level, ModDamageSources.CRYO_FUEL), 4 * (entity.fireImmune() ? 2 : 1));
+                entity.hurt(ModDamageSources.create(level, ModDamageSources.CRYO_FUEL), 4 * (entity.fireImmune() ? 2 : 1));
             }
         }
     }

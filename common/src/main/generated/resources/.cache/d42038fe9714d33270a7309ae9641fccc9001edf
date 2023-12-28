@@ -1,6 +1,7 @@
-// 1.20.1	2023-12-19T01:49:48.070688	Tags for minecraft:entity_type mod id ad_astra
-6ee92c5c1aa1e11e42dd86a04cac8d864f8cfbb8 data/ad_astra/tags/entity_types/can_survive_extreme_cold.json
+// 1.20.1	2023-12-27T20:02:59.072283	Tags for minecraft:entity_type mod id ad_astra
+2ded281942c67a8d99a58762fe77372bbf488e7e data/ad_astra/tags/entity_types/can_survive_extreme_cold.json
 68b0da066fd014874f1d7b886cd84b74d69bf3db data/ad_astra/tags/entity_types/can_survive_extreme_heat.json
+90e1ebb1e309d0a7ab9f016d8aa69e08193be82d data/ad_astra/tags/entity_types/can_survive_in_acid_rain.json
 7b94778a998a2b28e9882b1d60d1b4653cc0fdfd data/ad_astra/tags/entity_types/can_survive_in_space.json
-a0bf22c6fa8cd459ed108aa49b2a1e4adc9c7929 data/ad_astra/tags/entity_types/can_survive_without_oxygen.json
 986ca8aa79b13bb6cb03aced4009597e607d57ac data/ad_astra/tags/entity_types/ignores_air_vortex.json
+a0bf22c6fa8cd459ed108aa49b2a1e4adc9c7929 data/ad_astra/tags/entity_types/lives_without_oxygen.json

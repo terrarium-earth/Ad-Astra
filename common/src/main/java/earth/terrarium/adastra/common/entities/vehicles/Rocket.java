@@ -329,7 +329,7 @@ public class Rocket extends Vehicle {
             .inflate(2, 30, 2)
             .move(0, -37, 0), e -> true)) {
             entity.setSecondsOnFire(10);
-            entity.hurt(ModDamageSources.getOrCreate(level(), ModDamageSources.ROCKET_FLAMES), 10);
+            entity.hurt(ModDamageSources.create(level(), ModDamageSources.ROCKET_FLAMES), 10);
         }
     }
 
