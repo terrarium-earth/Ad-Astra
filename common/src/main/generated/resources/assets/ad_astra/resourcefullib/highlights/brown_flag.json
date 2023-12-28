@@ -1,0 +1,140 @@
+{
+  "variants": {
+    "facing=east,half=lower": {
+      "highlight": "ad_astra:flag_shape",
+      "rotation": {
+        "y": 90
+      }
+    },
+    "facing=east,half=upper": {
+      "highlight": "ad_astra:flag_shape",
+      "rotation": {
+        "y": 90
+      },
+      "translation": [
+        0,
+        -1,
+        0
+      ]
+    },
+    "facing=north,half=lower": {
+      "highlight": "ad_astra:flag_shape",
+      "rotation": {
+        "y": 0
+      }
+    },
+    "facing=north,half=upper": {
+      "highlight": "ad_astra:flag_shape",
+      "rotation": {
+        "y": 0
+      },
+      "translation": [
+        0,
+        -1,
+        0
+      ]
+    },
+    "facing=north_east,half=lower": {
+      "highlight": "ad_astra:flag_45_shape",
+      "rotation": {
+        "y": 0
+      }
+    },
+    "facing=north_east,half=upper": {
+      "highlight": "ad_astra:flag_45_shape",
+      "rotation": {
+        "y": 0
+      },
+      "translation": [
+        0,
+        -1,
+        0
+      ]
+    },
+    "facing=north_west,half=lower": {
+      "highlight": "ad_astra:flag_45_shape",
+      "rotation": {
+        "y": 270
+      }
+    },
+    "facing=north_west,half=upper": {
+      "highlight": "ad_astra:flag_45_shape",
+      "rotation": {
+        "y": 270
+      },
+      "translation": [
+        0,
+        -1,
+        0
+      ]
+    },
+    "facing=south,half=lower": {
+      "highlight": "ad_astra:flag_shape",
+      "rotation": {
+        "y": 180
+      }
+    },
+    "facing=south,half=upper": {
+      "highlight": "ad_astra:flag_shape",
+      "rotation": {
+        "y": 180
+      },
+      "translation": [
+        0,
+        -1,
+        0
+      ]
+    },
+    "facing=south_east,half=lower": {
+      "highlight": "ad_astra:flag_45_shape",
+      "rotation": {
+        "y": 90
+      }
+    },
+    "facing=south_east,half=upper": {
+      "highlight": "ad_astra:flag_45_shape",
+      "rotation": {
+        "y": 90
+      },
+      "translation": [
+        0,
+        -1,
+        0
+      ]
+    },
+    "facing=south_west,half=lower": {
+      "highlight": "ad_astra:flag_45_shape",
+      "rotation": {
+        "y": 180
+      }
+    },
+    "facing=south_west,half=upper": {
+      "highlight": "ad_astra:flag_45_shape",
+      "rotation": {
+        "y": 180
+      },
+      "translation": [
+        0,
+        -1,
+        0
+      ]
+    },
+    "facing=west,half=lower": {
+      "highlight": "ad_astra:flag_shape",
+      "rotation": {
+        "y": 270
+      }
+    },
+    "facing=west,half=upper": {
+      "highlight": "ad_astra:flag_shape",
+      "rotation": {
+        "y": 270
+      },
+      "translation": [
+        0,
+        -1,
+        0
+      ]
+    }
+  }
+}

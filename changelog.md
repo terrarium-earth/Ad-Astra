@@ -54,6 +54,8 @@ can only be opened with redstone, similar to iron doors.
 - Coal generator will no longer continue consuming fuel if it's full on energy.
 - Updated the rover driving mechanics to be more fluid and easier to control.
 - The rover can now run over mobs.
+- Fix water pump collision shape.
+- Add resourcefullib highlight support to flags. This makes their interaction shape look correct.
 - Improved and added many new descriptions to blocks and items.
 - Added oxygen intake and outtake sounds when entering and exiting oxygenated areas.
 - Fluid ducts now have the same internal mechanics as pipes so they can now be used exactly like them.
@@ -85,7 +87,7 @@ should now be clear when you want to land on the planet, land on the space stati
 You must build a space station and land on that space station first.
 - Added industrial lamps and small industrial lamps. These are available in all 16 colors.
 - Updated star colors to be more vibrant and have some colors be more rare than others.
-- Improved planet skyboxes
+- Improved planet skyboxes.
 
 ## Breaking Changes
 - storage blocks like desh blocks, steel blocks, etc. have had an ID change. Turn them into ingots before
@@ -107,7 +109,6 @@ and prevent players from spawning a new space station at any claimed chunks.
 - Added Argonauts compat to space stations. Players on the same guild will be
 able to share space stations.
 - Copper no longer oxidizes in environments with no oxygen.
-- New Glacian Ram model.
 - Added the Ti-69. It's a device that displays the local oxygen, temperature, and gravity.
 - The warning to hold space when landing is now displayed boldly on screen instead of a chat message.
 Hopefully this will prevent people from missing it and crashing.
