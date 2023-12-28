@@ -37,7 +37,7 @@ public class GravityApiImpl implements GravityApi {
 
     @Override
     public float getGravity(Entity entity) {
-        return getGravity(entity.level(), entity.blockPosition());
+        return getGravity(entity.level(), BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ()));
     }
 
     @Override

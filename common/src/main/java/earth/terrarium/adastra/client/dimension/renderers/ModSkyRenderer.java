@@ -60,6 +60,7 @@ public class ModSkyRenderer {
     public void render(ClientLevel level, float partialTick, PoseStack poseStack, Camera camera, Matrix4f projectionMatrix, boolean isFoggy, Runnable setupFog) {
         setupFog.run();
         if (isFoggy || inFog(camera)) return;
+        if (!renderInRain && level.isRaining()) return;
         if (starBuffer == null) createStars();
         BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
 

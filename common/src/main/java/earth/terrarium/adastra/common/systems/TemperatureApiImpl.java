@@ -41,7 +41,7 @@ public class TemperatureApiImpl implements TemperatureApi {
 
     @Override
     public short getTemperature(Entity entity) {
-        return getTemperature(entity.level(), entity.blockPosition());
+        return getTemperature(entity.level(), BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ()));
     }
 
     @Override

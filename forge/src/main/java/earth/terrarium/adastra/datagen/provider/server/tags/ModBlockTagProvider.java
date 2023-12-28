@@ -92,7 +92,7 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         add(ModBlockTags.PASSES_FLOOD_FILL, Blocks.TNT);
         add(ModBlockTags.PASSES_FLOOD_FILL, ModBlocks.VENT.get());
         add(ModBlockTags.PASSES_FLOOD_FILL, ModBlocks.OXYGEN_DISTRIBUTOR.get());
-//        add(ModBlockTags.PASSES_FLOOD_FILL, ModBlocks.GRAVITY_NORMALIZER.get()); // TODO
+//        add(ModBlockTags.PASSES_FLOOD_FILL, ModBlocks.GRAVITY_NORMALIZER.get()); // TODO add gravity normalizer
 
         add(ModBlockTags.MOON_STONE_REPLACEABLES, ModBlocks.MOON_STONE.get());
         add(ModBlockTags.MOON_STONE_REPLACEABLES, ModBlocks.MOON_DEEPSLATE.get());

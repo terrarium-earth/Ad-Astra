@@ -194,7 +194,16 @@ public class SlidingDoorBlock extends BasicEntityBlock implements Wrenchable {
 
     @Override
     public void wasExploded(Level level, BlockPos pos, Explosion explosion) {
-        destroy(level, pos, level.getBlockState(pos));
+        if (!level.isClientSide()) {
+            for (var direction : Direction.values()) {
+                BlockPos offset = pos.relative(direction);
+                BlockState state = level.getBlockState(offset);
+                if (state.getBlock().equals(this)) {
+                    destroy(level, offset, state);
+                    break;
+                }
+            }
+        }
         super.wasExploded(level, pos, explosion);
     }
 

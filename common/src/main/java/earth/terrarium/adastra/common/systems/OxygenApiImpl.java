@@ -36,7 +36,7 @@ public class OxygenApiImpl implements OxygenApi {
 
     @Override
     public boolean hasOxygen(Entity entity) {
-        return hasOxygen(entity.level(), entity.blockPosition().above());
+        return hasOxygen(entity.level(), BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ()));
     }
 
     @Override

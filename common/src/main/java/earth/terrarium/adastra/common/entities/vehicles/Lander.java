@@ -95,6 +95,7 @@ public class Lander extends Vehicle {
 
         if (yya > 0 && delta.y < -0.05) {
             speed += 0.01f;
+            fallDistance *= 0.9f;
             spawnLanderParticles();
             if (level().isClientSide() && !startedRocketSound) {
                 startedRocketSound = true;
@@ -134,11 +135,9 @@ public class Lander extends Vehicle {
 
     @Override
     public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
-        if (getDeltaMovement().y() < -1.2) { // TODO
-            if (this.onGround()) {
-                this.explode();
-                return true;
-            }
+        if (fallDistance > 40 && onGround()) {
+            explode();
+            return true;
         }
         return false;
     }

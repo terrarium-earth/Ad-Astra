@@ -155,7 +155,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         int limit = MAX_BLOCKS;
         Set<BlockPos> positions = FloodFill3D.run(level, pos.above(), limit, FloodFill3D.TEST_FULL_SEAL, true);
         OxygenApi.API.setOxygen(level, positions, true);
-        TemperatureApi.API.setTemperature(level, positions, PlanetConstants.COMFY_EARTH_TEMPERATURE); // TODO: separate machine
+        TemperatureApi.API.setTemperature(level, positions, PlanetConstants.COMFY_EARTH_TEMPERATURE); // TODO: move to Temperature Regulator machine
 
         Set<BlockPos> lastPositionsCopy = new HashSet<>(lastDistributedBlocks);
         this.resetLastDistributedBlocks(positions);
@@ -183,7 +183,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
 
     protected void clearOxygenBlocks() {
         OxygenApi.API.removeOxygen(level, lastDistributedBlocks);
-        TemperatureApi.API.removeTemperature(level, lastDistributedBlocks); // TODO: separate machine
+        TemperatureApi.API.removeTemperature(level, lastDistributedBlocks); // TODO: move to Temperature Regulator machine
         lastDistributedBlocks.clear();
     }
 
