@@ -18,21 +18,21 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
 public class ModBlockTagProvider extends TagsProvider<Block> {
 
-    private static final Set<Supplier<Block>> MINEABLE_WITH_SHOVEL = Set.of(
+    private static final List<Supplier<Block>> MINEABLE_WITH_SHOVEL = List.of(
         ModBlocks.MOON_SAND,
         ModBlocks.MARS_SAND,
         ModBlocks.VENUS_SAND
     );
 
-    private static final Set<Supplier<Block>> MINEABLE_WITH_AXE = Set.of(
+    private static final List<Supplier<Block>> MINEABLE_WITH_AXE = List.of(
         ModBlocks.AERONOS_CAP,
         ModBlocks.AERONOS_STEM,
         ModBlocks.AERONOS_PLANKS,
@@ -66,7 +66,7 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         ModBlocks.GLACIAN_PRESSURE_PLATE
     );
 
-    private static final Set<Supplier<Block>> NOT_MINED_WITH_PICKAXE = Set.of(
+    private static final List<Supplier<Block>> NOT_MINED_WITH_PICKAXE = List.of(
         ModBlocks.CHEESE_BLOCK,
         ModBlocks.GLACIAN_FUR,
         ModBlocks.GLACIAN_LEAVES
