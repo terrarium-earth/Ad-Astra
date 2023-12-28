@@ -24,6 +24,7 @@
         "client.EntityRendererMixin",
         "client.HumanoidModelMixin",
         "client.LevelRendererAccessor",
+        "client.LevelRendererMixin",
         "client.PlayerRendererMixin",
         "client.SoundEngineAccessor",
         "client.SoundManagerAccessor",

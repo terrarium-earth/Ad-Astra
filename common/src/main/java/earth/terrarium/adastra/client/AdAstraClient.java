@@ -9,7 +9,6 @@ import earth.terrarium.adastra.client.models.entities.vehicles.RocketModel;
 import earth.terrarium.adastra.client.models.entities.vehicles.RoverModel;
 import earth.terrarium.adastra.client.particle.LargeFlameParticle;
 import earth.terrarium.adastra.client.particle.OxygenBubbleParticle;
-import earth.terrarium.adastra.client.particle.SmallFlameParticle;
 import earth.terrarium.adastra.client.radio.audio.RadioHandler;
 import earth.terrarium.adastra.client.renderers.blocks.EnergizerBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.FlagBlockEntityRenderer;
@@ -140,11 +139,9 @@ public class AdAstraClient {
     }
 
     public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientPlatformUtils.SpriteParticleRegistration<SimpleParticleType>> consumer) {
-        consumer.accept(ModParticleTypes.VENUS_RAIN.get(), SplashParticle.Provider::new);
+        consumer.accept(ModParticleTypes.ACID_RAIN.get(), SplashParticle.Provider::new);
         consumer.accept(ModParticleTypes.LARGE_FLAME.get(), LargeFlameParticle.Provider::new);
         consumer.accept(ModParticleTypes.LARGE_SMOKE.get(), LargeFlameParticle.Provider::new);
-        consumer.accept(ModParticleTypes.SMALL_FLAME.get(), SmallFlameParticle.Provider::new);
-        consumer.accept(ModParticleTypes.SMALL_SMOKE.get(), SmallFlameParticle.Provider::new);
         consumer.accept(ModParticleTypes.OXYGEN_BUBBLE.get(), OxygenBubbleParticle.Provider::new);
     }
 

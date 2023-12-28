@@ -23,6 +23,9 @@ public class DimensionUtils {
     public static final ResourceLocation DEIMOS = new ResourceLocation(AdAstra.MOD_ID, "textures/environment/deimos.png");
     public static final ResourceLocation VICINUS = new ResourceLocation(AdAstra.MOD_ID, "textures/environment/vicinus.png");
 
+    public static final ResourceLocation ACID_RAIN = new ResourceLocation(AdAstra.MOD_ID, "textures/environment/acid_rain.png");
+    public static final ResourceLocation VENUS_CLOUDS = new ResourceLocation(AdAstra.MOD_ID, "textures/environment/venus_clouds.png");
+
     public static int getTicks() {
         return ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).getTicks();
     }
