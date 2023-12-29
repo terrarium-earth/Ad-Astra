@@ -3,6 +3,7 @@ package earth.terrarium.adastra.common.entities.vehicles;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.client.utils.SoundUtils;
 import earth.terrarium.adastra.common.blocks.LaunchPadBlock;
+import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
 import earth.terrarium.adastra.common.menus.vehicles.RocketMenu;
@@ -60,7 +61,7 @@ public class Rocket extends Vehicle {
         ModEntityTypes.TIER_3_ROCKET.get(), TIER_3_PROPERTIES,
         ModEntityTypes.TIER_4_ROCKET.get(), TIER_4_PROPERTIES);
 
-    public static final int COUNTDOWN_LENGTH = 20 * 10;
+    public static final int COUNTDOWN_LENGTH = 20 * 10; // 10 seconds
     public static final EntityDataAccessor<Boolean> IS_LAUNCHING = SynchedEntityData.defineId(Rocket.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> LAUNCH_TICKS = SynchedEntityData.defineId(Rocket.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> HAS_LAUNCHED = SynchedEntityData.defineId(Rocket.class, EntityDataSerializers.BOOLEAN);
@@ -95,7 +96,7 @@ public class Rocket extends Vehicle {
         this.entityData.define(IS_LAUNCHING, false);
         this.entityData.define(LAUNCH_TICKS, -1);
         this.entityData.define(HAS_LAUNCHED, false);
-        this.entityData.define(IS_IN_VALID_DIMENSION, AdAstraData.canLaunchFrom(this.level().dimension()));
+        this.entityData.define(IS_IN_VALID_DIMENSION, AdAstraConfig.launchFromAnywhere || AdAstraData.canLaunchFrom(this.level().dimension()));
         this.entityData.define(FUEL, 0L);
         this.entityData.define(FUEL_TYPE, "air");
     }
@@ -103,9 +104,9 @@ public class Rocket extends Vehicle {
     @Override
     protected void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        entityData.set(IS_LAUNCHING, compound.getBoolean("launching"));
+        entityData.set(IS_LAUNCHING, compound.getBoolean("Launching"));
         entityData.set(LAUNCH_TICKS, compound.getInt("launchTicks"));
-        entityData.set(HAS_LAUNCHED, compound.getBoolean("hasLaunched"));
+        entityData.set(HAS_LAUNCHED, compound.getBoolean("HasLaunched"));
         speed = compound.getFloat("Speed");
         angle = compound.getFloat("Angle");
         fluidContainer.deserialize(compound);
@@ -114,9 +115,9 @@ public class Rocket extends Vehicle {
     @Override
     protected void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putBoolean("launching", isLaunching());
-        compound.putInt("launchTicks", launchTicks());
-        compound.putBoolean("hasLaunched", hasLaunched());
+        compound.putBoolean("Launching", isLaunching());
+        compound.putInt("LaunchTicks", launchTicks());
+        compound.putBoolean("HasLaunched", hasLaunched());
         compound.putFloat("Speed", speed);
         compound.putFloat("Angle", angle);
         fluidContainer.serialize(compound);
@@ -267,7 +268,7 @@ public class Rocket extends Vehicle {
 
     public boolean canLaunch() {
         if (isLaunching() || hasLaunched()) return false;
-        if (!entityData.get(IS_IN_VALID_DIMENSION)) {
+        if (!AdAstraConfig.launchFromAnywhere && !entityData.get(IS_IN_VALID_DIMENSION)) {
             if (getControllingPassenger() instanceof Player player) {
                 player.displayClientMessage(ConstantComponents.INVALID_LAUNCHING_DIMENSION, true);
             }

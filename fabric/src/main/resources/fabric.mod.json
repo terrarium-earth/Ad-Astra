@@ -35,6 +35,9 @@
         ],
         "jei_mod_plugin": [
             "earth.terrarium.adastra.common.compat.jei.AdAstraJeiPlugin"
+        ],
+        "modmenu": [
+            "earth.terrarium.adastra.common.config.fabric.ModMenuConfig"
         ]
     },
     "mixins": [
@@ -43,9 +46,9 @@
     ],
     "depends": {
         "fabric-api": "*",
-        "minecraft": ">=1.20",
+        "minecraft": ">=1.20.1",
         "java": ">=17",
-        "resourcefullib": ">=2.1.19",
+        "resourcefullib": ">=2.1.20",
         "resourcefulconfig": ">=2.1.0",
         "botarium": ">=2.2.0"
     }

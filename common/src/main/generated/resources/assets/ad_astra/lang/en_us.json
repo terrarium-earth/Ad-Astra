@@ -307,6 +307,7 @@
   "block.ad_astra.yellow_flag": "Yellow Flag",
   "block.ad_astra.yellow_industrial_lamp": "Yellow Industrial Lamp",
   "config.ad_astra.allowFlagImages": "Allow flag images",
+  "config.ad_astra.launchFromAnywhere": "Launch from anywhere",
   "death.attack.acid_rain": "%1$s was melted by acid rain",
   "death.attack.acid_rain.player": "%1$s was melted by acid rain whilst trying to escape %2$s",
   "death.attack.cryo_fuel": "%1$s became an ice cube",

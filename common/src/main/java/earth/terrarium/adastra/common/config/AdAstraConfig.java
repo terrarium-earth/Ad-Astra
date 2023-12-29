@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.config;
 
+import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
 import com.teamresourceful.resourcefulconfig.common.annotations.Config;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
@@ -30,5 +31,14 @@ public final class AdAstraConfig {
         type = EntryType.BOOLEAN,
         translation = "config.ad_astra.allowFlagImages"
     )
+    @Comment("Allow players to set custom flag images for their rockets.")
     public static boolean allowFlagImages = true;
+
+    @ConfigEntry(
+        id = "launchAnywhere",
+        type = EntryType.BOOLEAN,
+        translation = "config.ad_astra.launchFromAnywhere"
+    )
+    @Comment("Allow rockets to be launched from any dimension, even if it's not considered a planet.")
+    public static boolean launchFromAnywhere;
 }

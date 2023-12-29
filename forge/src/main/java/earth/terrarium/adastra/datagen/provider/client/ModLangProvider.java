@@ -311,6 +311,7 @@ public class ModLangProvider extends LanguageProvider {
         add("tag.item.ad_astra.raw_calorite_blocks", "Raw Calorite Blocks");
 
         add("config.ad_astra.allowFlagImages", "Allow flag images");
+        add("config.ad_astra.launchFromAnywhere", "Launch from anywhere");
 
         add("subtitles.ad_astra.block.rocket_launch", "Rocket launches");
         add("subtitles.ad_astra.block.rocket", "Rocket flies");
