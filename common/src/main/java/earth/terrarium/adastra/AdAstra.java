@@ -70,7 +70,7 @@ public class AdAstra {
 
     public static void onServerTick(MinecraftServer server) {
         server.getPlayerList().getPlayers().forEach(player -> {
-            if (player.level().getGameTime() % 5 == 0) {
+            if (player.tickCount % 5 == 0) {
                 boolean oxygen = OxygenApi.API.hasOxygen(player);
                 short temperature = TemperatureApi.API.getTemperature(player);
                 float gravity = GravityApi.API.getGravity(player);

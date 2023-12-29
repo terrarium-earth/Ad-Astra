@@ -46,6 +46,7 @@ public class ConstantComponents {
     public static final Component FLAG_INFO = Component.translatable("info.ad_astra.flag").withStyle(ChatFormatting.GRAY);
     public static final Component LAUNCH_PAD_INFO = Component.translatable("info.ad_astra.launch_pad").withStyle(ChatFormatting.GRAY);
     public static final Component GLOBE_INFO = Component.translatable("info.ad_astra.globe").withStyle(ChatFormatting.GRAY);
+    public static final Component VENT_INFO = Component.translatable("info.ad_astra.vent").withStyle(ChatFormatting.GRAY);
 
     public static final Component ROCKET_INFO = Component.translatable("info.ad_astra.rocket").withStyle(ChatFormatting.GRAY);
     public static final Component ROVER_INFO = Component.translatable("info.ad_astra.rover").withStyle(ChatFormatting.GRAY);

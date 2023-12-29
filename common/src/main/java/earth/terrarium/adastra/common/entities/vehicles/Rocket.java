@@ -206,7 +206,7 @@ public class Rocket extends Vehicle {
     }
 
     private void launchPadTick() {
-        if (level().isClientSide() || level().getGameTime() % 5 != 0) return;
+        if (level().isClientSide() || tickCount % 5 != 0) return;
         if (isLaunching() || hasLaunched()) return;
         var state = level().getBlockState(blockPosition());
         if (!state.hasProperty(LaunchPadBlock.PART)) {

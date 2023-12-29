@@ -268,7 +268,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     }
 
     public void consumeFuel() {
-        if (level().isClientSide() || level().getGameTime() % 5 != 0) return;
+        if (level().isClientSide() || tickCount % 5 != 0) return;
         var toExtract = FluidHooks.newFluidHolder(fluidContainer.getFluids().get(0).getFluid(), FluidHooks.buckets(0.001), null);
         fluidContainer.extractFluid(toExtract, false);
     }

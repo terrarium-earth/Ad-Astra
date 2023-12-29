@@ -59,7 +59,7 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
         if (from.isDirty()) {
             stack.setTag(from.getStack().getTag());
         }
-        if (level.getGameTime() % 4 == 0) {
+        if (entity.tickCount % 4 == 0) {
             level.playSound(null, player.blockPosition(), SoundEvents.GENERIC_DRINK, player.getSoundSource(), 1.0F, 1.0F);
         }
     }

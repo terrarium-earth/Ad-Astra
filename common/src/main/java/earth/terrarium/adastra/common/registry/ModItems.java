@@ -200,7 +200,7 @@ public class ModItems {
     public static final RegistryEntry<Item> CHEESE_BLOCK = ITEMS.register("cheese_block", () -> new BlockItem(ModBlocks.CHEESE_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> SKY_STONE = ITEMS.register("sky_stone", () -> new BlockItem(ModBlocks.SKY_STONE.get(), new Item.Properties()));
 
-    public static final RegistryEntry<Item> VENT = ITEMS.register("vent", () -> new BlockItem(ModBlocks.VENT.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VENT = ITEMS.register("vent", () -> new TooltipBlockItem(ModBlocks.VENT.get(), ConstantComponents.VENT_INFO, new Item.Properties()));
     public static final RegistryEntry<Item> IRON_FACTORY_BLOCK = ITEMS.register("iron_factory_block", () -> new BlockItem(ModBlocks.IRON_FACTORY_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> ENCASED_IRON_BLOCK = ITEMS.register("encased_iron_block", () -> new BlockItem(ModBlocks.ENCASED_IRON_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> IRON_PLATEBLOCK = ITEMS.register("iron_plateblock", () -> new BlockItem(ModBlocks.IRON_PLATEBLOCK.get(), new Item.Properties()));

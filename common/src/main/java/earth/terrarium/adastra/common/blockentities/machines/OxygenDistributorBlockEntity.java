@@ -225,7 +225,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     }
 
     private float calculateFluidPerTick() {
-        return lastDistributedBlocks.size() / 1500f;
+        return Math.max(1, lastDistributedBlocks.size() / 1500f);
     }
 
     @Override
