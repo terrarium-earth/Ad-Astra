@@ -65,6 +65,7 @@ public class TransferUtils {
             if (!filter.test(direction)) continue;
             BlockEntity nearbyEntity = machine.level().getBlockEntity(pos.relative(direction));
             if (nearbyEntity == null) continue;
+            if (!FluidApi.isFluidContainingBlock(nearbyEntity, direction)) continue;
             FluidContainer nearbyContainer = FluidApi.getBlockFluidContainer(nearbyEntity, direction);
             if (nearbyContainer == null) continue;
             FluidHolder holder = container.getFluids().get(tank);
@@ -81,6 +82,7 @@ public class TransferUtils {
             if (!filter.test(direction)) continue;
             BlockEntity nearbyEntity = machine.level().getBlockEntity(pos.relative(direction));
             if (nearbyEntity == null) continue;
+            if (!FluidApi.isFluidContainingBlock(nearbyEntity, direction)) continue;
             FluidContainer nearbyContainer = FluidApi.getBlockFluidContainer(nearbyEntity, direction);
             if (nearbyContainer == null) continue;
             FluidHolder holder = nearbyContainer.getFluids().get(tank);
