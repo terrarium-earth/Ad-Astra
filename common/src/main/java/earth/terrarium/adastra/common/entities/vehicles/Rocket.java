@@ -6,6 +6,7 @@ import earth.terrarium.adastra.common.blocks.LaunchPadBlock;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
 import earth.terrarium.adastra.common.menus.vehicles.RocketMenu;
+import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.registry.*;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.utils.FluidUtils;
@@ -63,6 +64,7 @@ public class Rocket extends Vehicle {
     public static final EntityDataAccessor<Boolean> IS_LAUNCHING = SynchedEntityData.defineId(Rocket.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> LAUNCH_TICKS = SynchedEntityData.defineId(Rocket.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> HAS_LAUNCHED = SynchedEntityData.defineId(Rocket.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> IS_IN_VALID_DIMENSION = SynchedEntityData.defineId(Rocket.class, EntityDataSerializers.BOOLEAN);
 
     public static final EntityDataAccessor<Long> FUEL = SynchedEntityData.defineId(Rocket.class, EntityDataSerializers.LONG);
     public static final EntityDataAccessor<String> FUEL_TYPE = SynchedEntityData.defineId(Rocket.class, EntityDataSerializers.STRING);
@@ -93,6 +95,7 @@ public class Rocket extends Vehicle {
         this.entityData.define(IS_LAUNCHING, false);
         this.entityData.define(LAUNCH_TICKS, -1);
         this.entityData.define(HAS_LAUNCHED, false);
+        this.entityData.define(IS_IN_VALID_DIMENSION, AdAstraData.canLaunchFrom(this.level().dimension()));
         this.entityData.define(FUEL, 0L);
         this.entityData.define(FUEL_TYPE, "air");
     }
@@ -264,6 +267,13 @@ public class Rocket extends Vehicle {
 
     public boolean canLaunch() {
         if (isLaunching() || hasLaunched()) return false;
+        if (!entityData.get(IS_IN_VALID_DIMENSION)) {
+            if (getControllingPassenger() instanceof Player player) {
+                player.displayClientMessage(ConstantComponents.INVALID_LAUNCHING_DIMENSION, true);
+            }
+            this.showFuelMessage = false;
+            return false;
+        }
         if (!hasEnoughFuel()) return false;
         return yya() > 0;
     }

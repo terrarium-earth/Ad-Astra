@@ -241,6 +241,7 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.NOT_THE_OWNER.getString(), "You do not own this flag!");
 
         add(ConstantComponents.NOT_ENOUGH_FUEL.getString(), "Not enough fuel!");
+        add(ConstantComponents.INVALID_LAUNCHING_DIMENSION.getString(), "You cannot launch from this dimension!");
 
         add(ConstantComponents.CATALOG.getString(), "Catalog");
         add(ConstantComponents.LAND.getString(), "Land");
