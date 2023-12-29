@@ -8,13 +8,17 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
+import java.util.List;
 import java.util.Optional;
 
-public record Planet(ResourceKey<Level> dimension,
-                     boolean oxygen, short temperature,
-                     float gravity, int solarPower,
-                     ResourceLocation solarSystem,
-                     Optional<ResourceKey<Level>> orbit, int tier) {
+public record Planet(
+    ResourceKey<Level> dimension,
+    boolean oxygen, short temperature,
+    float gravity, int solarPower,
+    ResourceLocation solarSystem,
+    Optional<ResourceKey<Level>> orbit, int tier,
+    List<ResourceKey<Level>> additionalLaunchDimensions
+) {
 
     public static final ResourceKey<Level> EARTH_ORBIT = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "earth_orbit"));
     public static final ResourceKey<Level> MOON_ORBIT = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "moon_orbit"));
@@ -37,7 +41,8 @@ public record Planet(ResourceKey<Level> dimension,
         Codec.INT.fieldOf("solar_power").forGetter(Planet::solarPower),
         ResourceLocation.CODEC.fieldOf("solar_system").forGetter(Planet::solarSystem),
         ResourceKey.codec(Registries.DIMENSION).optionalFieldOf("orbit").forGetter(Planet::orbit),
-        Codec.INT.fieldOf("tier").forGetter(Planet::tier)
+        Codec.INT.fieldOf("tier").forGetter(Planet::tier),
+        ResourceKey.codec(Registries.DIMENSION).listOf().optionalFieldOf("additional_launch_dimensions", List.of()).forGetter(Planet::additionalLaunchDimensions)
     ).apply(instance, Planet::new));
 
     public ResourceKey<Level> orbitIfPresent() {

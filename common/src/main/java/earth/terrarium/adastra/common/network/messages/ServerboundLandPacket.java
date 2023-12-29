@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.network.messages;
 
+import com.teamresourceful.bytecodecs.base.ByteCodec;
 import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
 import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
@@ -9,18 +10,20 @@ import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.entities.vehicles.Lander;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
+import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.GlobalPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 
 public record ServerboundLandPacket(ResourceLocation dimensionLocation,
-                                    BlockPos targetPos) implements Packet<ServerboundLandPacket> {
+                                    BlockPos targetPos, boolean tryPreviousLocation) implements Packet<ServerboundLandPacket> {
 
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "land");
     public static final Handler HANDLER = new Handler();
@@ -40,6 +43,7 @@ public record ServerboundLandPacket(ResourceLocation dimensionLocation,
             super(ObjectByteCodec.create(
                 ExtraByteCodecs.RESOURCE_LOCATION.fieldOf(ServerboundLandPacket::dimensionLocation),
                 ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundLandPacket::targetPos),
+                ByteCodec.BOOLEAN.fieldOf(ServerboundLandPacket::tryPreviousLocation),
                 ServerboundLandPacket::new
             ));
         }
@@ -52,13 +56,28 @@ public record ServerboundLandPacket(ResourceLocation dimensionLocation,
                 Planet planet = AdAstraData.getPlanet(packet.dimensionLocation);
                 if (planet == null) return;
                 var server = serverLevel.getServer();
-                ServerLevel targetLevel = server.getLevel(planet.dimension());
+                boolean landingNormally = packet.tryPreviousLocation() && player.getVehicle() instanceof Rocket;
+                GlobalPos newPos = landingNormally ? LaunchingDimensionHandler.getSpawningLocation(player, planet)
+                    .orElse(null) : null;
+                ServerLevel targetLevel = null;
+                BlockPos targetPos = null;
+                if (newPos != null) {
+                    targetLevel = server.getLevel(newPos.dimension());
+                    targetPos = newPos.pos();
+                }
+                if (targetLevel == null) {
+                    targetLevel = server.getLevel(planet.dimension());
+                    targetPos = null;
+                }
                 if (targetLevel == null)
                     throw new IllegalStateException("Dimension %s does not exist! Try restarting your %s!"
                         .formatted(planet.dimension(), server.isDedicatedServer() ? "server" : "singleplayer world"));
+                LaunchingDimensionHandler.addSpawnLocation(player);
                 Entity vehicle = player.getVehicle();
 
-                if (player.blockPosition().distManhattan(packet.targetPos()) < 16) {
+                if (targetPos != null) {
+                    player.moveTo(targetPos.getX(), packet.targetPos().getY(), targetPos.getZ());
+                } else if (player.blockPosition().distManhattan(packet.targetPos()) < 16) {
                     player.moveTo(packet.targetPos().getX(), packet.targetPos().getY(), packet.targetPos().getZ());
                 }
 

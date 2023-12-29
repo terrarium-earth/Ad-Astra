@@ -9,7 +9,9 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
@@ -39,7 +41,9 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.EARTH_GRAVITY,
                 PlanetConstants.EARTH_SOLAR_POWER,
                 PlanetConstants.SOLAR_SYSTEM,
-                Optional.of(Planet.EARTH_ORBIT), 1));
+                Optional.of(Planet.EARTH_ORBIT), 1, List.of()
+            )
+        );
 
         consumer.accept(
             new ResourceLocation(AdAstra.MOD_ID, "moon"),
@@ -49,7 +53,10 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.MOON_GRAVITY,
                 PlanetConstants.MOON_SOLAR_POWER,
                 PlanetConstants.SOLAR_SYSTEM,
-                Optional.of(Planet.MOON_ORBIT), 1));
+                Optional.of(Planet.MOON_ORBIT), 1,
+                List.of()
+            )
+        );
 
         consumer.accept(
             new ResourceLocation(AdAstra.MOD_ID, "mars"),
@@ -59,7 +66,10 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.MARS_GRAVITY,
                 PlanetConstants.MARS_SOLAR_POWER,
                 PlanetConstants.SOLAR_SYSTEM,
-                Optional.of(Planet.MARS_ORBIT), 2));
+                Optional.of(Planet.MARS_ORBIT), 2,
+                List.of()
+            )
+        );
 
         consumer.accept(
             new ResourceLocation(AdAstra.MOD_ID, "venus"),
@@ -69,7 +79,10 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.VENUS_GRAVITY,
                 PlanetConstants.VENUS_SOLAR_POWER,
                 PlanetConstants.SOLAR_SYSTEM,
-                Optional.of(Planet.VENUS_ORBIT), 3));
+                Optional.of(Planet.VENUS_ORBIT), 3,
+                List.of()
+            )
+        );
 
         consumer.accept(
             new ResourceLocation(AdAstra.MOD_ID, "mercury"),
@@ -79,7 +92,10 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.MERCURY_GRAVITY,
                 PlanetConstants.MERCURY_SOLAR_POWER,
                 PlanetConstants.SOLAR_SYSTEM,
-                Optional.of(Planet.MERCURY_ORBIT), 3));
+                Optional.of(Planet.MERCURY_ORBIT), 3,
+                List.of()
+            )
+        );
 
         consumer.accept(
             new ResourceLocation(AdAstra.MOD_ID, "glacio"),
@@ -89,7 +105,10 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.GLACIO_GRAVITY,
                 PlanetConstants.GLACIO_SOLAR_POWER,
                 PlanetConstants.PROXIMA_CENTAURI,
-                Optional.of(Planet.GLACIO_ORBIT), 4));
+                Optional.of(Planet.GLACIO_ORBIT), 4,
+                List.of()
+            )
+        );
     }
 
     private static void orbit(BiConsumer<ResourceLocation, Planet> consumer, String name, ResourceKey<Level> planet, int solarPower, ResourceLocation galaxy, int tier) {
@@ -101,11 +120,14 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.SPACE_GRAVITY,
                 solarPower,
                 galaxy,
-                Optional.empty(), tier));
+                Optional.empty(), tier,
+                List.of()
+            )
+        );
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "Planets";
     }
 }

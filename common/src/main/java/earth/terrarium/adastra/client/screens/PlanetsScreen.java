@@ -303,12 +303,12 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
 
     public void visitSpaceStation(Planet planet, ChunkPos pos) {
         var orbit = planet.orbitIfPresent();
-        NetworkHandler.CHANNEL.sendToServer(new ServerboundLandPacket(orbit.location(), pos.getMiddleBlockPosition(100)));
+        NetworkHandler.CHANNEL.sendToServer(new ServerboundLandPacket(orbit.location(), pos.getMiddleBlockPosition(100), false));
         onClose();
     }
 
     public void land(Planet planet) {
-        NetworkHandler.CHANNEL.sendToServer(new ServerboundLandPacket(planet.dimensionLocation(), menu.player().blockPosition()));
+        NetworkHandler.CHANNEL.sendToServer(new ServerboundLandPacket(planet.dimensionLocation(), menu.player().blockPosition(), true));
         onClose();
     }
 
