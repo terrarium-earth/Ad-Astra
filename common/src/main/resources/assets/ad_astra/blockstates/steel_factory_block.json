@@ -1,0 +1,15 @@
+{
+    "athena:loader": "athena:ctm",
+    "ctm_textures": {
+        "center": "ad_astra:block/ctm/steel_factory_block/3",
+        "empty": "ad_astra:block/ctm/empty",
+        "horizontal": "ad_astra:block/ctm/steel_factory_block/2",
+        "particle": "ad_astra:block/steel_factory_block",
+        "vertical": "ad_astra:block/ctm/steel_factory_block/1"
+    },
+    "variants": {
+        "": {
+            "model": "ad_astra:block/steel_factory_block"
+        }
+    }
+}

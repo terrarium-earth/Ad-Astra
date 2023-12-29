@@ -90,7 +90,10 @@ You must build a space station and land on that space station first.
 - Added industrial lamps and small industrial lamps. These are available in all 16 colors.
 - Updated star colors to be more vibrant and have some colors be more rare than others.
 - Improved planet skyboxes.
-- Added shimmer compat. This adds bloom to the rocket particles and adds colored lighting to the new industrial lamps.
+- Added [Shimmer](https://modrinth.com/mod/shimmer!) compat. This adds bloom to the rocket particles and adds colored lighting to the new industrial lamps.
+- Added Factory blocks. These are decorative blocks that support connected textures if you have [Athena](https://modrinth.com/mod/athena-ctm) installed.
+These are available for all metals.
+- Added Encased Plateblocks, and Panel blocks. These are are available for all metals.
 
 ## Breaking Changes
 - storage blocks like desh blocks, steel blocks, etc. have had an ID change. Turn them into ingots before

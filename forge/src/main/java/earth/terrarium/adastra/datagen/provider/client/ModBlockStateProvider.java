@@ -33,6 +33,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         ModBlocks.FLUIDS.stream().map(RegistryEntry::get).forEach(this::fluidBlock);
 
         ModBlocks.CUBES.stream().map(RegistryEntry::get).forEach(this::basicBlock);
+        ModBlocks.CTM_CUBES.stream().map(RegistryEntry::get).forEach(this::basicBlockNoState);
         ModBlocks.CUBE_COLUMNS.stream().map(RegistryEntry::get).forEach(this::basicCubeColumn);
         ModBlocks.PILLARS.stream().map(RegistryEntry::get).forEach(b -> logBlock((RotatedPillarBlock) b));
         ModBlocks.STAIRS.stream().map(RegistryEntry::get).forEach(b -> stairsBlock((StairBlock) b, findTexture(b, "_stairs")));
@@ -119,6 +120,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
     public void basicBlock(Block block, ModelFile model) {
         simpleBlockItem(block, models().getBuilder(name(block)));
         simpleBlock(block, model);
+    }
+
+    public void basicBlockNoState(Block block) {
+        simpleBlockItem(block, models().getBuilder(name(block)));
+        cubeAll(block);
     }
 
     public void basicCubeColumn(Block block) {

@@ -20,6 +20,7 @@ import earth.terrarium.botarium.common.registry.fluid.BotariumLiquidBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -33,6 +34,7 @@ public class ModBlocks {
     public static final ResourcefulRegistry<Block> MACHINES = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> FLUIDS = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> CUBES = ResourcefulRegistries.create(BLOCKS);
+    public static final ResourcefulRegistry<Block> CTM_CUBES = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> CUBE_COLUMNS = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> PILLARS = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> STAIRS = ResourcefulRegistries.create(BLOCKS);
@@ -109,6 +111,11 @@ public class ModBlocks {
     public static final RegistryEntry<Block> SKY_STONE = CUBES.register("sky_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
     public static final RegistryEntry<Block> VENT = CUBES.register("vent", () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).noOcclusion()));
+
+    public static final RegistryEntry<Block> IRON_FACTORY_BLOCK = CTM_CUBES.register("iron_factory_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
+    public static final RegistryEntry<Block> ENCASED_IRON_BLOCK = CUBES.register("encased_iron_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
+    public static final RegistryEntry<Block> IRON_PLATEBLOCK = CUBES.register("iron_plateblock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
+    public static final RegistryEntry<Block> IRON_PANEL = CUBES.register("iron_panel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
     public static final RegistryEntry<Block> IRON_PLATING = CUBES.register("iron_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
     public static final RegistryEntry<Block> IRON_PLATING_STAIRS = STAIRS.register("iron_plating_stairs", () -> new StairBlock(IRON_PLATING.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
     public static final RegistryEntry<Block> IRON_PLATING_SLAB = SLABS.register("iron_plating_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
@@ -119,6 +126,10 @@ public class ModBlocks {
     public static final RegistryEntry<Block> IRON_PLATING_PRESSURE_PLATE = PRESSURE_PLATES.register("iron_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.METAL), BlockSetType.IRON) {});
     public static final RegistryEntry<Block> IRON_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("iron_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.METAL)));
 
+    public static final RegistryEntry<Block> STEEL_FACTORY_BLOCK = CTM_CUBES.register("steel_factory_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
+    public static final RegistryEntry<Block> ENCASED_STEEL_BLOCK = CUBES.register("encased_steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
+    public static final RegistryEntry<Block> STEEL_PLATEBLOCK = CUBES.register("steel_plateblock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
+    public static final RegistryEntry<Block> STEEL_PANEL = CUBES.register("steel_panel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
     public static final RegistryEntry<Block> BLOCK_OF_STEEL = CUBES.register("block_of_steel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
     public static final RegistryEntry<Block> STEEL_PLATING = CUBES.register("steel_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
     public static final RegistryEntry<Block> STEEL_PLATING_STAIRS = STAIRS.register("steel_plating_stairs", () -> new StairBlock(STEEL_PLATING.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
@@ -133,8 +144,16 @@ public class ModBlocks {
     public static final RegistryEntry<Block> STEEL_DOOR = BLOCKS.register("steel_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.COLOR_GRAY), BlockSetType.IRON) {});
     public static final RegistryEntry<Block> STEEL_TRAPDOOR = BLOCKS.register("steel_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_TRAPDOOR).mapColor(MapColor.COLOR_GRAY), BlockSetType.IRON) {});
 
+    public static final RegistryEntry<Block> ETRIUM_FACTORY_BLOCK = CTM_CUBES.register("etrium_factory_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GREEN)));
+    public static final RegistryEntry<Block> ENCASED_ETRIUM_BLOCK = CUBES.register("encased_etrium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GREEN)));
+    public static final RegistryEntry<Block> ETRIUM_PLATEBLOCK = CUBES.register("etrium_plateblock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GREEN)));
+    public static final RegistryEntry<Block> ETRIUM_PANEL = CUBES.register("etrium_panel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GREEN)));
     public static final RegistryEntry<Block> BLOCK_OF_ETRIUM = CUBES.register("block_of_etrium", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
+    public static final RegistryEntry<Block> DESH_FACTORY_BLOCK = CTM_CUBES.register("desh_factory_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_ORANGE)));
+    public static final RegistryEntry<Block> ENCASED_DESH_BLOCK = CUBES.register("encased_desh_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_ORANGE)));
+    public static final RegistryEntry<Block> DESH_PLATEBLOCK = CUBES.register("desh_plateblock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_ORANGE)));
+    public static final RegistryEntry<Block> DESH_PANEL = CUBES.register("desh_panel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_ORANGE)));
     public static final RegistryEntry<Block> BLOCK_OF_DESH = CUBES.register("block_of_desh", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).mapColor(MapColor.COLOR_ORANGE)));
     public static final RegistryEntry<Block> RAW_DESH_BLOCK = CUBES.register("raw_desh_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK).mapColor(MapColor.COLOR_ORANGE)));
     public static final RegistryEntry<Block> DESH_PLATING = CUBES.register("desh_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_ORANGE)));
@@ -146,6 +165,10 @@ public class ModBlocks {
     public static final RegistryEntry<Block> DESH_PLATING_PRESSURE_PLATE = PRESSURE_PLATES.register("desh_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.COLOR_ORANGE), BlockSetType.IRON) {});
     public static final RegistryEntry<Block> DESH_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("desh_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.COLOR_ORANGE)));
 
+    public static final RegistryEntry<Block> OSTRUM_FACTORY_BLOCK = CTM_CUBES.register("ostrum_factory_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_PURPLE)));
+    public static final RegistryEntry<Block> ENCASED_OSTRUM_BLOCK = CUBES.register("encased_ostrum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_PURPLE)));
+    public static final RegistryEntry<Block> OSTRUM_PLATEBLOCK = CUBES.register("ostrum_plateblock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_PURPLE)));
+    public static final RegistryEntry<Block> OSTRUM_PANEL = CUBES.register("ostrum_panel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_PURPLE)));
     public static final RegistryEntry<Block> BLOCK_OF_OSTRUM = CUBES.register("block_of_ostrum", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
     public static final RegistryEntry<Block> RAW_OSTRUM_BLOCK = CUBES.register("raw_ostrum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK).mapColor(MapColor.COLOR_PURPLE)));
     public static final RegistryEntry<Block> OSTRUM_PLATING = CUBES.register("ostrum_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_PURPLE)));
@@ -157,6 +180,10 @@ public class ModBlocks {
     public static final RegistryEntry<Block> OSTRUM_PLATING_PRESSURE_PLATE = PRESSURE_PLATES.register("ostrum_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.COLOR_PURPLE), BlockSetType.IRON) {});
     public static final RegistryEntry<Block> OSTRUM_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("ostrum_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.COLOR_PURPLE)));
 
+    public static final RegistryEntry<Block> CALORITE_FACTORY_BLOCK = CTM_CUBES.register("calorite_factory_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_RED)));
+    public static final RegistryEntry<Block> ENCASED_CALORITE_BLOCK = CUBES.register("encased_calorite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_RED)));
+    public static final RegistryEntry<Block> CALORITE_PLATEBLOCK = CUBES.register("calorite_plateblock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_RED)));
+    public static final RegistryEntry<Block> CALORITE_PANEL = CUBES.register("calorite_panel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_RED)));
     public static final RegistryEntry<Block> BLOCK_OF_CALORITE = CUBES.register("block_of_calorite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
     public static final RegistryEntry<Block> RAW_CALORITE_BLOCK = CUBES.register("raw_calorite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK).mapColor(MapColor.COLOR_RED)));
     public static final RegistryEntry<Block> CALORITE_PLATING = CUBES.register("calorite_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_RED)));

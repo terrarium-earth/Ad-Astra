@@ -72,6 +72,7 @@ public class AdAstraClient {
         registerEntityRenderers();
         registerItemRenderers();
         registerItemProperties();
+        registerRenderLayers();
         registerArmor();
     }
 
@@ -91,8 +92,6 @@ public class AdAstraClient {
         MenuScreens.register(ModMenus.LANDER.get(), LanderScreen::new);
 
         MenuScreens.register(ModMenus.PLANETS.get(), PlanetsScreen::new);
-
-        ClientHooks.setRenderLayer(ModBlocks.VENT.get(), RenderType.cutout());
     }
 
     private static void registerBlockEntityRenderers() {
@@ -136,6 +135,12 @@ public class AdAstraClient {
 
     private static void registerItemProperties() {
         ClientHooks.registerItemProperty(ModItems.ETRIONIC_CAPACITOR.get(), new ResourceLocation(AdAstra.MOD_ID, "toggled"), (stack, level, entity, i) -> EtrionicCapacitorItem.active(stack) ? 0 : 1);
+    }
+
+    public static void registerRenderLayers() {
+        ClientHooks.setRenderLayer(ModBlocks.VENT.get(), RenderType.cutout());
+        ClientHooks.setRenderLayer(ModBlocks.STEEL_DOOR.get(), RenderType.cutout());
+        ClientHooks.setRenderLayer(ModBlocks.STEEL_TRAPDOOR.get(), RenderType.cutout());
     }
 
     public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientPlatformUtils.SpriteParticleRegistration<SimpleParticleType>> consumer) {
