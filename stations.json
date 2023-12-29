@@ -1,11 +1,6 @@
 {
     "stations": [
         {
-            "url": "https://vrt.streamabc.net/vrt-mnm-mp3-128-9205274",
-            "title": "89.0 MNM",
-            "name": "VRT MNM"
-        },
-        {
             "url": "https://ais-edge08-live365-dal02.cdnstream.com/a98605",
             "title": "96.9 KHDR",
             "name": "KHDR 96.9 FM The Drive"
