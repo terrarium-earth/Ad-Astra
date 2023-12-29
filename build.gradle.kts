@@ -18,7 +18,7 @@ architectury {
     minecraft = minecraftVersion
 }
 
-val stationsFile: String =  file("stations.json").absolutePath
+val stationsFile: String = file("stations.json").absolutePath
 
 subprojects {
     apply(plugin = "maven-publish")
@@ -51,8 +51,10 @@ subprojects {
     }
 
     repositories {
+        mavenCentral()
         maven(url = "https://maven.architectury.dev/")
         maven(url = "https://maven.teamresourceful.com/repository/maven-public/")
+        maven(url = "https://maven.firstdarkdev.xyz/snapshots")
         maven {
             url = uri("https://www.cursemaven.com")
             content {
@@ -79,6 +81,7 @@ subprojects {
         val jeiVersion: String by project
         val reiVersion: String by project
         val patchouliVersion: String by project
+        val shimmerVersion: String by project
 
         "minecraft"("::$minecraftVersion")
 
@@ -102,7 +105,9 @@ subprojects {
             "modApi"(group = "mezz.jei", name = "jei-$minecraftVersion-common-api", version = jeiVersion)
             "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-api", version = reiVersion)
         } else {
+            "modLocalRuntime"(group = "me.shedaniel", name = "RoughlyEnoughItems-$modLoader", version = reiVersion)
             "modLocalRuntime"(group = "vazkii.patchouli", name = "Patchouli", version = "$minecraftVersion-$patchouliVersion-${modLoader.uppercase()}")
+            "modLocalRuntime"(group = "com.lowdragmc.shimmer", name = "Shimmer-$modLoader", version = "$minecraftVersion-$shimmerVersion") { isTransitive = false }
         }
     }
 

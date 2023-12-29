@@ -124,6 +124,7 @@ public class Lander extends Vehicle {
     }
 
     public void explode() {
+        if (level().isClientSide()) return;
         level().explode(
             this,
             getX(), getY(), getZ(),
@@ -135,7 +136,7 @@ public class Lander extends Vehicle {
 
     @Override
     public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
-        if (level().isClientSide()) super.causeFallDamage(fallDistance, damageMultiplier, damageSource);
+        if (level().isClientSide()) return false;
         if (fallDistance > 40 && onGround()) {
             explode();
             return true;

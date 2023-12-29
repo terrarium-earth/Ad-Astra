@@ -39,7 +39,6 @@ dependencies {
 
     forge(group = "net.minecraftforge", name = "forge", version = "$minecraftVersion-$forgeVersion")
     modCompileOnly(group = "me.shedaniel", name = "RoughlyEnoughItems-api-forge", version = reiVersion)
-    modLocalRuntime(group = "me.shedaniel", name = "RoughlyEnoughItems-forge", version = reiVersion)
 
     modLocalRuntime(group = "maven.modrinth", name = "jade", version = "2iRQrBk4")
     modLocalRuntime(group = "maven.modrinth", name = "mekanism", version = "10.4.2.16")
@@ -48,4 +47,9 @@ dependencies {
     forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2")
 
     forgeRuntimeLibrary(group = "javazoom", name = "jlayer", version = "1.0.1")
+
+    // TODO: remove in neoforge
+    "annotationProcessor"(group = "io.github.llamalad7", name = "mixinextras-forge", version = "0.3.2").apply {
+        implementation(this)
+    }
 }
