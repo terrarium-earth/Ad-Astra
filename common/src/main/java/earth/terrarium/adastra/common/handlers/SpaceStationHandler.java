@@ -15,14 +15,23 @@ public class SpaceStationHandler extends SaveHandler {
 
     @Override
     public void loadData(CompoundTag tag) {
-        tag.getAllKeys().forEach(key ->
-            spaceStationData.put(new ChunkPos(Long.parseLong(key)), tag.getUUID(key)));
+        var data = tag.getLongArray("");
+        if (data.length % 3 != 0) throw new RuntimeException("Invalid data length");
+        for (int i = 0; i < data.length; i += 3) {
+            spaceStationData.put(new ChunkPos(data[i]), new UUID(data[i + 1], data[i + 2]));
+        }
     }
 
     @Override
     public void saveData(CompoundTag tag) {
-        spaceStationData.forEach((pos, owner) ->
-            tag.putUUID(String.valueOf(pos.toLong()), owner));
+        long[] data = new long[spaceStationData.size() * 3];
+        int i = 0;
+        for (var entry : spaceStationData.entrySet()) {
+            data[i++] = entry.getKey().toLong();
+            data[i++] = entry.getValue().getMostSignificantBits();
+            data[i++] = entry.getValue().getLeastSignificantBits();
+        }
+        tag.putLongArray("", data);
     }
 
     public static SpaceStationHandler read(ServerLevel level) {

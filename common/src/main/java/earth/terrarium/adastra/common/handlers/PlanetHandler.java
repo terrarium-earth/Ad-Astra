@@ -5,6 +5,7 @@ import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
 import earth.terrarium.adastra.common.handlers.base.PlanetData;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -23,8 +24,18 @@ public class PlanetHandler extends SaveHandler {
 
     @Override
     public void loadData(CompoundTag tag) {
-        tag.getAllKeys().forEach(key ->
-            planetData.put(BlockPos.of(Long.parseLong(key)), PlanetData.unpack(tag.getInt(key))));
+        var data = tag.getIntArray("");
+        if (data.length % 3 != 0) {
+            throw new RuntimeException("Invalid data length");
+        }
+        for (int i = 0; i < data.length; i += 3) {
+            int firstPos = data[i];
+            int secondPos = data[i + 1];
+            planetData.put(
+                BlockPos.of(((long) firstPos << 32) | (secondPos & 0xFFFFFFFFL)),
+                PlanetData.unpack(data[i + 2])
+            );
+        }
     }
 
     @Override
@@ -32,12 +43,20 @@ public class PlanetHandler extends SaveHandler {
         boolean defaultOxygen = OxygenApi.API.hasOxygen(level);
         short defaultTemperature = TemperatureApi.API.getTemperature(level);
         float defaultGravity = GravityApi.API.getGravity(level);
-        planetData.forEach((pos, data) -> {
+        IntArrayList dataArray = new IntArrayList(this.planetData.size() * 3);
+        var entries = planetData.entrySet();
+        for (var entry : entries) {
+            var data = entry.getValue();
             // Don't save positions that are identical to the default planet values.
             if (data.oxygen() != defaultOxygen || data.temperature() != defaultTemperature || data.gravity() != defaultGravity) {
-                tag.putInt(String.valueOf(pos.asLong()), data.pack());
+                long pos = entry.getKey().asLong();
+                dataArray.add((int) (pos >> 32));
+                dataArray.add((int) pos);
+                dataArray.add(entry.getValue().pack());
             }
-        });
+        }
+
+        tag.putIntArray("", dataArray.toIntArray());
     }
 
     public static PlanetHandler read(ServerLevel level) {
