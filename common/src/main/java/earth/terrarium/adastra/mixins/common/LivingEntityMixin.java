@@ -1,11 +1,11 @@
 package earth.terrarium.adastra.mixins.common;
 
+import earth.terrarium.adastra.api.events.AdAstraEvents;
 import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
 import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
-import earth.terrarium.adastra.api.events.AdAstraEvents;
 import earth.terrarium.adastra.common.handlers.base.PlanetData;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
@@ -59,8 +59,10 @@ public abstract class LivingEntityMixin extends Entity {
         if (entity.tickCount % 10 == 0
             && level().getBiome(blockPosition()).is(ModBiomeTags.HAS_ACID_RAIN)
             && !getType().is(ModEntityTypeTags.CAN_SURVIVE_ACID_RAIN)
+            && !getType().is(ModEntityTypeTags.ACID_RAIN_IMMUNE)
             && adastra$isInRain()
         ) {
+            if (getVehicle() != null && getVehicle().getType().is(ModEntityTypeTags.ACID_RAIN_IMMUNE)) return;
             if (AdAstraEvents.entityAcidRainTick(level, entity)) {
                 entity.hurt(ModDamageSources.create(level(), ModDamageSources.ACID_RAIN), 3);
                 playSound(SoundEvents.GENERIC_BURN, 0.4f, 2 + random.nextFloat() * 0.4f);

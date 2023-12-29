@@ -2,6 +2,7 @@ package earth.terrarium.adastra.datagen.provider.server.tags;
 
 
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.tags.ModEntityTypeTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -40,6 +41,12 @@ public class ModEntityTypeTagProvider extends TagsProvider<EntityType<?>> {
         tag(ModEntityTypeTags.CAN_SURVIVE_ACID_RAIN).add(TagEntry.tag(ModEntityTypeTags.CAN_SURVIVE_EXTREME_HEAT.location()));
 
         tag(ModEntityTypeTags.IGNORES_AIR_VORTEX).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.LEASH_KNOT)));
+
+        tag(ModEntityTypeTags.ACID_RAIN_IMMUNE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(ModEntityTypes.TIER_1_ROCKET.get())));
+        tag(ModEntityTypeTags.ACID_RAIN_IMMUNE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(ModEntityTypes.TIER_2_ROCKET.get())));
+        tag(ModEntityTypeTags.ACID_RAIN_IMMUNE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(ModEntityTypes.TIER_3_ROCKET.get())));
+        tag(ModEntityTypeTags.ACID_RAIN_IMMUNE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(ModEntityTypes.TIER_4_ROCKET.get())));
+        tag(ModEntityTypeTags.ACID_RAIN_IMMUNE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(ModEntityTypes.LANDER.get())));
 
         surviveCold(EntityType.SNOW_GOLEM);
         surviveCold(EntityType.STRAY);
