@@ -5,6 +5,7 @@ import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.KeybindManager;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
+import earth.terrarium.adastra.mixins.common.LivingEntityAccessor;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyItem;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
@@ -70,10 +71,10 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
         if (!hasFullJetSuitSet(player)) return;
 
         if (!KeybindManager.suitFlightEnabled(player)) return;
-        if (!KeybindManager.jumpDown(player)) return;
+        if (!isJumping(player)) return;
         if (!canFly(player, stack)) return;
 
-        if (KeybindManager.sprintDown(player)) {
+        if (player.isSprinting()) {
             fullFlight(player);
             consume(player, stack, 100);
         } else {
@@ -99,6 +100,10 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
         }
     }
 
+    private boolean isJumping(Player player) {
+        return ((LivingEntityAccessor) player).isJumping();
+    }
+
     private boolean canFly(Player player, ItemStack stack) {
         return player.isCreative() || getEnergyStorage(stack).getStoredEnergy() > 0;
     }
@@ -109,7 +114,7 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
     }
 
     protected boolean isFullFlightEnabled(Player player) {
-        return KeybindManager.suitFlightEnabled(player) && KeybindManager.jumpDown(player) && KeybindManager.sprintDown(player);
+        return KeybindManager.suitFlightEnabled(player) && isJumping(player) && player.isSprinting();
     }
 
     public static double sigmoidAcceleration(double t, double peakTime, double peakAcceleration, double initialAcceleration) {
@@ -121,7 +126,7 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
         if (!canFly(player, stack)) return;
         if (!hasFullJetSuitSet(player)) return;
         if (!KeybindManager.suitFlightEnabled(player)) return;
-        if (!KeybindManager.jumpDown(player) || (!KeybindManager.jumpDown(player) && !KeybindManager.sprintDown(player)))
+        if (!isJumping(player) || (!isJumping(player) && !player.isSprinting()))
             return;
 
         spawnParticles(level, entity, model.rightArm.xRot + 0.05, entity.isFallFlying() ? 0.0 : 0.8, -0.45);

@@ -11,12 +11,6 @@ public class ClientData {
     @Nullable
     private static PlanetData localData;
 
-    public static int clearTime;
-    public static int rainTime;
-    public static int thunderTime;
-    public static boolean raining;
-    public static boolean thundering;
-
     public static void updateLocalData(PlanetData data) {
         if (localData != null && localData.oxygen() != data.oxygen()) {
             SoundEvent sound = data.oxygen() ? ModSoundEvents.OXYGEN_INTAKE.get() : ModSoundEvents.OXYGEN_OUTTAKE.get();
