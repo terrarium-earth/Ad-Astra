@@ -51,6 +51,7 @@ client-side and saved to the client config.
 - Changed package name from `earth.terrarium.ad_astra` to `earth.terrarium.adastra`. The mod id has not changed.
 - Sliding doors can now be locked by right-clicking with a wrench. Locked sliding doors
 can only be opened with redstone, similar to iron doors.
+- Increased max oxygen distributor size from 3,000 blocks to 6,000 blocks.
 - Fixed being able to interact with the rocket while inside of it.
 - Each rocket now has its own fuel tag. This allows packmakers to require different fuels for different rockets.
 - Coal generator will no longer continue consuming fuel if it's full on energy.

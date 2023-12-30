@@ -4,6 +4,7 @@
     "package": "earth.terrarium.adastra.mixins",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
+        "common.EntityBelowWorldMixin",
         "common.LivingEntityAccessor",
         "common.LivingEntityMixin",
         "common.gravity.AbstractArrowMixin",

@@ -56,4 +56,12 @@ public record Planet(
     public ResourceLocation dimensionLocation() {
         return dimension.location();
     }
+
+    public Optional<ResourceKey<Level>> getOrbitPlanet() {
+        for (var planet : AdAstraData.planets().values()) {
+            if (planet.orbit().isEmpty()) continue;
+            if (planet.orbit().get().equals(dimension)) return Optional.of(planet.dimension());
+        }
+        return Optional.empty();
+    }
 }
