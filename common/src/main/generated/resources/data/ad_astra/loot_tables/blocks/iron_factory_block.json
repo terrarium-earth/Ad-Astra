@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ad_astra:steel_factory_block"
+          "name": "ad_astra:iron_factory_block"
         }
       ],
       "rolls": 1.0

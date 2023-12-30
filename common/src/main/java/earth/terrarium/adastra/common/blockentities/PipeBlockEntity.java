@@ -120,7 +120,7 @@ public class PipeBlockEntity extends BlockEntity {
                     var consumerContainer = FluidApi.getBlockFluidContainer(entity, direction);
                     if (container != null) {
                         for (var fluid : container.getFluids()) {
-                            var toTransfer = FluidHooks.newFluidHolder(fluid.getFluid(), transferRate, null);
+                            var toTransfer = FluidHooks.newFluidHolder(fluid.getFluid(), Math.min(transferRate, fluid.getFluidAmount()), null);
                             FluidApi.moveFluid(container, consumerContainer, toTransfer, false);
                         }
                     }

@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-29T13:40:27.592159	Loot Tables
+// 1.20.1	2023-12-30T14:18:34.68801	Loot Tables
 4efe4f28604ed0c37ff7f8af4947a23faab3382d data/ad_astra/loot_tables/blocks/aeronos_cap.json
 20680115dd11f036d8d02873251e6d46a9536722 data/ad_astra/loot_tables/blocks/aeronos_door.json
 02ee1849c554327df21d9c76f6fee2ae6d79b550 data/ad_astra/loot_tables/blocks/aeronos_fence.json
@@ -133,7 +133,7 @@ b41c4af37a0fcde8ef7bc5f2831379dc3b51be77 data/ad_astra/loot_tables/blocks/glowin
 0d0295fab65e6280ba9474c17b13e922f8ce12ad data/ad_astra/loot_tables/blocks/green_flag.json
 c810c55d70d5c85922281238aa95197741ad22c1 data/ad_astra/loot_tables/blocks/green_industrial_lamp.json
 c1ee7b6ae0d2c69ffe92e01a25fc31d22babb801 data/ad_astra/loot_tables/blocks/infernal_spire_block.json
-495101cb449fcc42d6b3ea8b598f9abf28854c10 data/ad_astra/loot_tables/blocks/iron_factory_block.json
+a7936a3524bcfe9d2c3ceb88ed4429e3017b1c98 data/ad_astra/loot_tables/blocks/iron_factory_block.json
 33c364c62a289badda7c7121217508eb02e9f1ac data/ad_astra/loot_tables/blocks/iron_panel.json
 eaffddd2a3c6a6aefda5ae8aca14d9c99196b583 data/ad_astra/loot_tables/blocks/iron_pillar.json
 c2a98de6f7d4ee48383baec1ee45e8815bc2d62e data/ad_astra/loot_tables/blocks/iron_plateblock.json
@@ -275,7 +275,7 @@ d2cf9c0ab4388d4f1fbfbb2cf0a936a85b96778d data/ad_astra/loot_tables/blocks/small_
 e4c1ea52a0a50691a208a50601acc1cf8cddc282 data/ad_astra/loot_tables/blocks/solar_panel.json
 479aa171aba51bc90e9eceb8837ab3eeee0c51b8 data/ad_astra/loot_tables/blocks/steel_cable.json
 d9f40722d41a7e4481e47fdc9b0ea83e30a44814 data/ad_astra/loot_tables/blocks/steel_door.json
-a7a659ed8c130b8e9f9e33b304794a9bcdd120ac data/ad_astra/loot_tables/blocks/steel_factory_block.json
+30c676387eeabfaa72a8aab4907fc6184aaba223 data/ad_astra/loot_tables/blocks/steel_factory_block.json
 08eadaeab0a1bc8910a28a6aa8e8060013b4be92 data/ad_astra/loot_tables/blocks/steel_panel.json
 f940bceba61a15ac13840b2a0efdec4c2feb5e28 data/ad_astra/loot_tables/blocks/steel_pillar.json
 02f7bfcca11c5214643c4b2f1886f5c26c61ab42 data/ad_astra/loot_tables/blocks/steel_plateblock.json

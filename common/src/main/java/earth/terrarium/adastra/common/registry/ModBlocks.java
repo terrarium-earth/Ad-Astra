@@ -20,10 +20,10 @@ import earth.terrarium.botarium.common.registry.fluid.BotariumLiquidBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -50,27 +50,63 @@ public class ModBlocks {
     public static final ResourcefulRegistry<Block> INDUSTRIAL_LAMPS = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> SMALL_INDUSTRIAL_LAMPS = ResourcefulRegistries.create(BLOCKS);
 
-    public static final RegistryEntry<Block> LAUNCH_PAD = BLOCKS.register("launch_pad", () -> new LaunchPadBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).pushReaction(PushReaction.BLOCK)));
+    public static final BlockBehaviour.Properties IRON_PROPERTIES = BlockBehaviour.Properties.of()
+        .mapColor(MapColor.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+        .requiresCorrectToolForDrops()
+        .strength(5, 6)
+        .sound(SoundType.COPPER);
 
-    public static final RegistryEntry<Block> STEEL_CABLE = PIPES.register("steel_cable", () -> new PipeBlock(128, PipeBlock.Type.ENERGY, 0.344, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f).noOcclusion()));
-    public static final RegistryEntry<Block> DESH_CABLE = PIPES.register("desh_cable", () -> new PipeBlock(512, PipeBlock.Type.ENERGY, 0.344, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f).noOcclusion()));
-    public static final RegistryEntry<Block> DESH_FLUID_PIPE = PIPES.register("desh_fluid_pipe", () -> new PipeBlock(FluidHooks.buckets(0.128f), PipeBlock.Type.FLUID, 0.185, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f).noOcclusion()));
-    public static final RegistryEntry<Block> OSTRUM_FLUID_PIPE = PIPES.register("ostrum_fluid_pipe", () -> new PipeBlock(FluidHooks.buckets(0.512f), PipeBlock.Type.FLUID, 0.185, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f).noOcclusion()));
+    public static final BlockBehaviour.Properties STEEL_PROPERTIES = BlockBehaviour.Properties.of()
+        .mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+        .requiresCorrectToolForDrops()
+        .strength(5, 12)
+        .sound(SoundType.COPPER);
 
-    public static final RegistryEntry<Block> CABLE_DUCT = PIPES.register("cable_duct", () -> new PipeDuctBlock(256, Pipe.Type.ENERGY, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
-    public static final RegistryEntry<Block> FLUID_PIPE_DUCT = PIPES.register("fluid_pipe_duct", () -> new PipeDuctBlock(FluidHooks.buckets(0.256f), Pipe.Type.FLUID, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
+    public static final BlockBehaviour.Properties ETRIUM_PROPERTIES = BlockBehaviour.Properties.of()
+        .mapColor(MapColor.COLOR_BLUE).instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+        .requiresCorrectToolForDrops()
+        .strength(5, 5)
+        .sound(SoundType.COPPER);
 
-    public static final RegistryEntry<Block> COAL_GENERATOR = MACHINES.register("coal_generator", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
-    public static final RegistryEntry<Block> COMPRESSOR = MACHINES.register("compressor", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
-    public static final RegistryEntry<Block> NASA_WORKBENCH = MACHINES.register("nasa_workbench", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
-    public static final RegistryEntry<Block> FUEL_REFINERY = MACHINES.register("fuel_refinery", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
-    public static final RegistryEntry<Block> OXYGEN_LOADER = MACHINES.register("oxygen_loader", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
-    public static final RegistryEntry<Block> SOLAR_PANEL = MACHINES.register("solar_panel", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
-    public static final RegistryEntry<Block> WATER_PUMP = MACHINES.register("water_pump", () -> new WaterPumpBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
-    public static final RegistryEntry<Block> OXYGEN_DISTRIBUTOR = MACHINES.register("oxygen_distributor", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
-    public static final RegistryEntry<Block> ENERGIZER = MACHINES.register("energizer", () -> new EnergizerBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
-    public static final RegistryEntry<Block> CRYO_FREEZER = MACHINES.register("cryo_freezer", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
-    public static final RegistryEntry<Block> OXYGEN_SENSOR = MACHINES.register("oxygen_sensor", () -> new OxygenSensorBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+    public static final BlockBehaviour.Properties DESH_PROPERTIES = BlockBehaviour.Properties.of()
+        .mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+        .requiresCorrectToolForDrops()
+        .strength(5, 9)
+        .sound(SoundType.COPPER);
+
+    public static final BlockBehaviour.Properties OSTRUM_PROPERTIES = BlockBehaviour.Properties.of()
+        .mapColor(MapColor.COLOR_PURPLE).instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+        .requiresCorrectToolForDrops()
+        .strength(5, 16)
+        .sound(SoundType.COPPER);
+
+    public static final BlockBehaviour.Properties CALORITE_PROPERTIES = BlockBehaviour.Properties.of()
+        .mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+        .requiresCorrectToolForDrops()
+        .strength(7, 22)
+        .sound(SoundType.NETHERITE_BLOCK);
+
+    public static final RegistryEntry<Block> LAUNCH_PAD = BLOCKS.register("launch_pad", () -> new LaunchPadBlock(STEEL_PROPERTIES.pushReaction(PushReaction.BLOCK)));
+
+    public static final RegistryEntry<Block> STEEL_CABLE = PIPES.register("steel_cable", () -> new PipeBlock(128, PipeBlock.Type.ENERGY, 0.344, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 12).noOcclusion()));
+    public static final RegistryEntry<Block> DESH_CABLE = PIPES.register("desh_cable", () -> new PipeBlock(512, PipeBlock.Type.ENERGY, 0.344, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 9).noOcclusion()));
+    public static final RegistryEntry<Block> DESH_FLUID_PIPE = PIPES.register("desh_fluid_pipe", () -> new PipeBlock(FluidHooks.buckets(0.128f), PipeBlock.Type.FLUID, 0.185, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 9).noOcclusion()));
+    public static final RegistryEntry<Block> OSTRUM_FLUID_PIPE = PIPES.register("ostrum_fluid_pipe", () -> new PipeBlock(FluidHooks.buckets(0.512f), PipeBlock.Type.FLUID, 0.185, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 16).noOcclusion()));
+
+    public static final RegistryEntry<Block> CABLE_DUCT = PIPES.register("cable_duct", () -> new PipeDuctBlock(256, Pipe.Type.ENERGY, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 12f)));
+    public static final RegistryEntry<Block> FLUID_PIPE_DUCT = PIPES.register("fluid_pipe_duct", () -> new PipeDuctBlock(FluidHooks.buckets(0.256f), Pipe.Type.FLUID, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 9)));
+
+    public static final RegistryEntry<Block> COAL_GENERATOR = MACHINES.register("coal_generator", () -> new MachineBlock(IRON_PROPERTIES));
+    public static final RegistryEntry<Block> COMPRESSOR = MACHINES.register("compressor", () -> new MachineBlock(IRON_PROPERTIES));
+    public static final RegistryEntry<Block> NASA_WORKBENCH = MACHINES.register("nasa_workbench", () -> new MachineBlock(STEEL_PROPERTIES.noOcclusion()));
+    public static final RegistryEntry<Block> FUEL_REFINERY = MACHINES.register("fuel_refinery", () -> new MachineBlock(STEEL_PROPERTIES));
+    public static final RegistryEntry<Block> OXYGEN_LOADER = MACHINES.register("oxygen_loader", () -> new MachineBlock(STEEL_PROPERTIES));
+    public static final RegistryEntry<Block> SOLAR_PANEL = MACHINES.register("solar_panel", () -> new MachineBlock(DESH_PROPERTIES));
+    public static final RegistryEntry<Block> WATER_PUMP = MACHINES.register("water_pump", () -> new WaterPumpBlock(DESH_PROPERTIES.noOcclusion()));
+    public static final RegistryEntry<Block> OXYGEN_DISTRIBUTOR = MACHINES.register("oxygen_distributor", () -> new MachineBlock(DESH_PROPERTIES));
+    public static final RegistryEntry<Block> ENERGIZER = MACHINES.register("energizer", () -> new EnergizerBlock(OSTRUM_PROPERTIES.noOcclusion()));
+    public static final RegistryEntry<Block> CRYO_FREEZER = MACHINES.register("cryo_freezer", () -> new MachineBlock(OSTRUM_PROPERTIES));
+    public static final RegistryEntry<Block> OXYGEN_SENSOR = MACHINES.register("oxygen_sensor", () -> new OxygenSensorBlock(OSTRUM_PROPERTIES));
 
     public static final RegistryEntry<Block> OXYGEN = FLUIDS.register("oxygen", () -> new BotariumLiquidBlock(ModFluidProperties.OXYGEN, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryEntry<Block> HYDROGEN = FLUIDS.register("hydrogen", () -> new BotariumLiquidBlock(ModFluidProperties.HYDROGEN, BlockBehaviour.Properties.copy(Blocks.WATER)));
@@ -110,124 +146,123 @@ public class ModBlocks {
     public static final RegistryEntry<Block> CHEESE_BLOCK = CUBES.register("cheese_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SPONGE).sound(SoundType.SLIME_BLOCK)));
     public static final RegistryEntry<Block> SKY_STONE = CUBES.register("sky_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
-    public static final RegistryEntry<Block> VENT = CUBES.register("vent", () -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).noOcclusion()));
-
-    public static final RegistryEntry<Block> IRON_FACTORY_BLOCK = CTM_CUBES.register("iron_factory_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
-    public static final RegistryEntry<Block> ENCASED_IRON_BLOCK = CUBES.register("encased_iron_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
-    public static final RegistryEntry<Block> IRON_PLATEBLOCK = CUBES.register("iron_plateblock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
-    public static final RegistryEntry<Block> IRON_PANEL = CUBES.register("iron_panel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
-    public static final RegistryEntry<Block> IRON_PLATING = CUBES.register("iron_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
-    public static final RegistryEntry<Block> IRON_PLATING_STAIRS = STAIRS.register("iron_plating_stairs", () -> new StairBlock(IRON_PLATING.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
-    public static final RegistryEntry<Block> IRON_PLATING_SLAB = SLABS.register("iron_plating_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
-    public static final RegistryEntry<Block> IRON_PILLAR = PILLARS.register("iron_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
-    public static final RegistryEntry<Block> GLOWING_IRON_PILLAR = PILLARS.register("glowing_iron_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15).mapColor(MapColor.METAL)));
-    public static final RegistryEntry<Block> MARKED_IRON_PILLAR = PILLARS.register("marked_iron_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.METAL)));
+    public static final RegistryEntry<Block> VENT = CUBES.register("vent", () -> new GlassBlock(IRON_PROPERTIES.noOcclusion()));
+    public static final RegistryEntry<Block> IRON_FACTORY_BLOCK = CTM_CUBES.register("iron_factory_block", () -> new Block(IRON_PROPERTIES));
+    public static final RegistryEntry<Block> ENCASED_IRON_BLOCK = CUBES.register("encased_iron_block", () -> new Block(IRON_PROPERTIES));
+    public static final RegistryEntry<Block> IRON_PLATEBLOCK = CUBES.register("iron_plateblock", () -> new Block(IRON_PROPERTIES));
+    public static final RegistryEntry<Block> IRON_PANEL = CUBES.register("iron_panel", () -> new Block(IRON_PROPERTIES));
+    public static final RegistryEntry<Block> IRON_PLATING = CUBES.register("iron_plating", () -> new Block(IRON_PROPERTIES));
+    public static final RegistryEntry<Block> IRON_PLATING_STAIRS = STAIRS.register("iron_plating_stairs", () -> new StairBlock(IRON_PLATING.get().defaultBlockState(), IRON_PROPERTIES));
+    public static final RegistryEntry<Block> IRON_PLATING_SLAB = SLABS.register("iron_plating_slab", () -> new SlabBlock(IRON_PROPERTIES));
+    public static final RegistryEntry<Block> IRON_PILLAR = PILLARS.register("iron_pillar", () -> new RotatedPillarBlock(IRON_PROPERTIES));
+    public static final RegistryEntry<Block> GLOWING_IRON_PILLAR = PILLARS.register("glowing_iron_pillar", () -> new RotatedPillarBlock(IRON_PROPERTIES.lightLevel(state -> 15).mapColor(MapColor.METAL)));
+    public static final RegistryEntry<Block> MARKED_IRON_PILLAR = PILLARS.register("marked_iron_pillar", () -> new RotatedPillarBlock(IRON_PROPERTIES));
     public static final RegistryEntry<Block> IRON_PLATING_BUTTON = BUTTONS.register("iron_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).mapColor(MapColor.METAL), BlockSetType.IRON, 20, false) {});
     public static final RegistryEntry<Block> IRON_PLATING_PRESSURE_PLATE = PRESSURE_PLATES.register("iron_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.METAL), BlockSetType.IRON) {});
-    public static final RegistryEntry<Block> IRON_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("iron_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.METAL)));
+    public static final RegistryEntry<Block> IRON_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("iron_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).explosionResistance(6).mapColor(MapColor.METAL)));
 
-    public static final RegistryEntry<Block> STEEL_FACTORY_BLOCK = CTM_CUBES.register("steel_factory_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
-    public static final RegistryEntry<Block> ENCASED_STEEL_BLOCK = CUBES.register("encased_steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
-    public static final RegistryEntry<Block> STEEL_PLATEBLOCK = CUBES.register("steel_plateblock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
-    public static final RegistryEntry<Block> STEEL_PANEL = CUBES.register("steel_panel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
+    public static final RegistryEntry<Block> STEEL_FACTORY_BLOCK = CTM_CUBES.register("steel_factory_block", () -> new Block(STEEL_PROPERTIES));
+    public static final RegistryEntry<Block> ENCASED_STEEL_BLOCK = CUBES.register("encased_steel_block", () -> new Block(STEEL_PROPERTIES));
+    public static final RegistryEntry<Block> STEEL_PLATEBLOCK = CUBES.register("steel_plateblock", () -> new Block(STEEL_PROPERTIES));
+    public static final RegistryEntry<Block> STEEL_PANEL = CUBES.register("steel_panel", () -> new Block(STEEL_PROPERTIES));
     public static final RegistryEntry<Block> BLOCK_OF_STEEL = CUBES.register("block_of_steel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
-    public static final RegistryEntry<Block> STEEL_PLATING = CUBES.register("steel_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
-    public static final RegistryEntry<Block> STEEL_PLATING_STAIRS = STAIRS.register("steel_plating_stairs", () -> new StairBlock(STEEL_PLATING.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
-    public static final RegistryEntry<Block> STEEL_PLATING_SLAB = SLABS.register("steel_plating_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
-    public static final RegistryEntry<Block> STEEL_PILLAR = PILLARS.register("steel_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GRAY)));
-    public static final RegistryEntry<Block> GLOWING_STEEL_PILLAR = PILLARS.register("glowing_steel_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15).mapColor(MapColor.COLOR_GRAY)));
+    public static final RegistryEntry<Block> STEEL_PLATING = CUBES.register("steel_plating", () -> new Block(STEEL_PROPERTIES));
+    public static final RegistryEntry<Block> STEEL_PLATING_STAIRS = STAIRS.register("steel_plating_stairs", () -> new StairBlock(STEEL_PLATING.get().defaultBlockState(), STEEL_PROPERTIES));
+    public static final RegistryEntry<Block> STEEL_PLATING_SLAB = SLABS.register("steel_plating_slab", () -> new SlabBlock(STEEL_PROPERTIES));
+    public static final RegistryEntry<Block> STEEL_PILLAR = PILLARS.register("steel_pillar", () -> new RotatedPillarBlock(STEEL_PROPERTIES));
+    public static final RegistryEntry<Block> GLOWING_STEEL_PILLAR = PILLARS.register("glowing_steel_pillar", () -> new RotatedPillarBlock(STEEL_PROPERTIES.lightLevel(state -> 15).mapColor(MapColor.COLOR_GRAY)));
     public static final RegistryEntry<Block> STEEL_PLATING_BUTTON = BUTTONS.register("steel_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).mapColor(MapColor.COLOR_GRAY), BlockSetType.IRON, 20, false) {});
     public static final RegistryEntry<Block> STEEL_PLATING_PRESSURE_PLATE = PRESSURE_PLATES.register("steel_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.COLOR_GRAY), BlockSetType.IRON) {});
-    public static final RegistryEntry<Block> STEEL_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("steel_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.COLOR_GRAY)));
-    public static final RegistryEntry<Block> AIRLOCK = SLIDING_DOORS.register("airlock", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.COLOR_GRAY)));
-    public static final RegistryEntry<Block> REINFORCED_DOOR = SLIDING_DOORS.register("reinforced_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).strength(25.0f, 40.0f).mapColor(MapColor.COLOR_GRAY)));
+    public static final RegistryEntry<Block> STEEL_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("steel_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).explosionResistance(12).mapColor(MapColor.COLOR_GRAY)));
+    public static final RegistryEntry<Block> AIRLOCK = SLIDING_DOORS.register("airlock", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).explosionResistance(18).mapColor(MapColor.COLOR_GRAY)));
+    public static final RegistryEntry<Block> REINFORCED_DOOR = SLIDING_DOORS.register("reinforced_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).strength(25, 40).mapColor(MapColor.COLOR_GRAY)));
     public static final RegistryEntry<Block> STEEL_DOOR = BLOCKS.register("steel_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.COLOR_GRAY), BlockSetType.IRON) {});
     public static final RegistryEntry<Block> STEEL_TRAPDOOR = BLOCKS.register("steel_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_TRAPDOOR).mapColor(MapColor.COLOR_GRAY), BlockSetType.IRON) {});
 
-    public static final RegistryEntry<Block> ETRIUM_FACTORY_BLOCK = CTM_CUBES.register("etrium_factory_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GREEN)));
-    public static final RegistryEntry<Block> ENCASED_ETRIUM_BLOCK = CUBES.register("encased_etrium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GREEN)));
-    public static final RegistryEntry<Block> ETRIUM_PLATEBLOCK = CUBES.register("etrium_plateblock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GREEN)));
-    public static final RegistryEntry<Block> ETRIUM_PANEL = CUBES.register("etrium_panel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_GREEN)));
+    public static final RegistryEntry<Block> ETRIUM_FACTORY_BLOCK = CTM_CUBES.register("etrium_factory_block", () -> new Block(ETRIUM_PROPERTIES));
+    public static final RegistryEntry<Block> ENCASED_ETRIUM_BLOCK = CUBES.register("encased_etrium_block", () -> new Block(ETRIUM_PROPERTIES));
+    public static final RegistryEntry<Block> ETRIUM_PLATEBLOCK = CUBES.register("etrium_plateblock", () -> new Block(ETRIUM_PROPERTIES));
+    public static final RegistryEntry<Block> ETRIUM_PANEL = CUBES.register("etrium_panel", () -> new Block(ETRIUM_PROPERTIES));
     public static final RegistryEntry<Block> BLOCK_OF_ETRIUM = CUBES.register("block_of_etrium", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
 
-    public static final RegistryEntry<Block> DESH_FACTORY_BLOCK = CTM_CUBES.register("desh_factory_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_ORANGE)));
-    public static final RegistryEntry<Block> ENCASED_DESH_BLOCK = CUBES.register("encased_desh_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_ORANGE)));
-    public static final RegistryEntry<Block> DESH_PLATEBLOCK = CUBES.register("desh_plateblock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_ORANGE)));
-    public static final RegistryEntry<Block> DESH_PANEL = CUBES.register("desh_panel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_ORANGE)));
-    public static final RegistryEntry<Block> BLOCK_OF_DESH = CUBES.register("block_of_desh", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).mapColor(MapColor.COLOR_ORANGE)));
+    public static final RegistryEntry<Block> DESH_FACTORY_BLOCK = CTM_CUBES.register("desh_factory_block", () -> new Block(DESH_PROPERTIES));
+    public static final RegistryEntry<Block> ENCASED_DESH_BLOCK = CUBES.register("encased_desh_block", () -> new Block(DESH_PROPERTIES));
+    public static final RegistryEntry<Block> DESH_PLATEBLOCK = CUBES.register("desh_plateblock", () -> new Block(DESH_PROPERTIES));
+    public static final RegistryEntry<Block> DESH_PANEL = CUBES.register("desh_panel", () -> new Block(DESH_PROPERTIES));
+    public static final RegistryEntry<Block> BLOCK_OF_DESH = CUBES.register("block_of_desh", () -> new Block(DESH_PROPERTIES));
     public static final RegistryEntry<Block> RAW_DESH_BLOCK = CUBES.register("raw_desh_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK).mapColor(MapColor.COLOR_ORANGE)));
-    public static final RegistryEntry<Block> DESH_PLATING = CUBES.register("desh_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_ORANGE)));
-    public static final RegistryEntry<Block> DESH_PLATING_STAIRS = STAIRS.register("desh_plating_stairs", () -> new StairBlock(DESH_PLATING.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_ORANGE)));
-    public static final RegistryEntry<Block> DESH_PLATING_SLAB = SLABS.register("desh_plating_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_ORANGE)));
-    public static final RegistryEntry<Block> DESH_PILLAR = PILLARS.register("desh_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_ORANGE)));
-    public static final RegistryEntry<Block> GLOWING_DESH_PILLAR = PILLARS.register("glowing_desh_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15).mapColor(MapColor.COLOR_ORANGE)));
+    public static final RegistryEntry<Block> DESH_PLATING = CUBES.register("desh_plating", () -> new Block(DESH_PROPERTIES));
+    public static final RegistryEntry<Block> DESH_PLATING_STAIRS = STAIRS.register("desh_plating_stairs", () -> new StairBlock(DESH_PLATING.get().defaultBlockState(), DESH_PROPERTIES));
+    public static final RegistryEntry<Block> DESH_PLATING_SLAB = SLABS.register("desh_plating_slab", () -> new SlabBlock(DESH_PROPERTIES));
+    public static final RegistryEntry<Block> DESH_PILLAR = PILLARS.register("desh_pillar", () -> new RotatedPillarBlock(DESH_PROPERTIES));
+    public static final RegistryEntry<Block> GLOWING_DESH_PILLAR = PILLARS.register("glowing_desh_pillar", () -> new RotatedPillarBlock(DESH_PROPERTIES.lightLevel(state -> 15).mapColor(MapColor.COLOR_ORANGE)));
     public static final RegistryEntry<Block> DESH_PLATING_BUTTON = BUTTONS.register("desh_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).mapColor(MapColor.COLOR_ORANGE), BlockSetType.IRON, 20, false) {});
     public static final RegistryEntry<Block> DESH_PLATING_PRESSURE_PLATE = PRESSURE_PLATES.register("desh_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.COLOR_ORANGE), BlockSetType.IRON) {});
-    public static final RegistryEntry<Block> DESH_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("desh_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.COLOR_ORANGE)));
+    public static final RegistryEntry<Block> DESH_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("desh_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).explosionResistance(9).mapColor(MapColor.COLOR_ORANGE)));
 
-    public static final RegistryEntry<Block> OSTRUM_FACTORY_BLOCK = CTM_CUBES.register("ostrum_factory_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_PURPLE)));
-    public static final RegistryEntry<Block> ENCASED_OSTRUM_BLOCK = CUBES.register("encased_ostrum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_PURPLE)));
-    public static final RegistryEntry<Block> OSTRUM_PLATEBLOCK = CUBES.register("ostrum_plateblock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_PURPLE)));
-    public static final RegistryEntry<Block> OSTRUM_PANEL = CUBES.register("ostrum_panel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_PURPLE)));
-    public static final RegistryEntry<Block> BLOCK_OF_OSTRUM = CUBES.register("block_of_ostrum", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+    public static final RegistryEntry<Block> OSTRUM_FACTORY_BLOCK = CTM_CUBES.register("ostrum_factory_block", () -> new Block(OSTRUM_PROPERTIES));
+    public static final RegistryEntry<Block> ENCASED_OSTRUM_BLOCK = CUBES.register("encased_ostrum_block", () -> new Block(OSTRUM_PROPERTIES));
+    public static final RegistryEntry<Block> OSTRUM_PLATEBLOCK = CUBES.register("ostrum_plateblock", () -> new Block(OSTRUM_PROPERTIES));
+    public static final RegistryEntry<Block> OSTRUM_PANEL = CUBES.register("ostrum_panel", () -> new Block(OSTRUM_PROPERTIES));
+    public static final RegistryEntry<Block> BLOCK_OF_OSTRUM = CUBES.register("block_of_ostrum", () -> new Block(OSTRUM_PROPERTIES));
     public static final RegistryEntry<Block> RAW_OSTRUM_BLOCK = CUBES.register("raw_ostrum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK).mapColor(MapColor.COLOR_PURPLE)));
-    public static final RegistryEntry<Block> OSTRUM_PLATING = CUBES.register("ostrum_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_PURPLE)));
-    public static final RegistryEntry<Block> OSTRUM_PLATING_STAIRS = STAIRS.register("ostrum_plating_stairs", () -> new StairBlock(OSTRUM_PLATING.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_PURPLE)));
-    public static final RegistryEntry<Block> OSTRUM_PLATING_SLAB = SLABS.register("ostrum_plating_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_PURPLE)));
-    public static final RegistryEntry<Block> OSTRUM_PILLAR = PILLARS.register("ostrum_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_PURPLE)));
-    public static final RegistryEntry<Block> GLOWING_OSTRUM_PILLAR = PILLARS.register("glowing_ostrum_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15).mapColor(MapColor.COLOR_PURPLE)));
+    public static final RegistryEntry<Block> OSTRUM_PLATING = CUBES.register("ostrum_plating", () -> new Block(OSTRUM_PROPERTIES));
+    public static final RegistryEntry<Block> OSTRUM_PLATING_STAIRS = STAIRS.register("ostrum_plating_stairs", () -> new StairBlock(OSTRUM_PLATING.get().defaultBlockState(), OSTRUM_PROPERTIES));
+    public static final RegistryEntry<Block> OSTRUM_PLATING_SLAB = SLABS.register("ostrum_plating_slab", () -> new SlabBlock(OSTRUM_PROPERTIES));
+    public static final RegistryEntry<Block> OSTRUM_PILLAR = PILLARS.register("ostrum_pillar", () -> new RotatedPillarBlock(OSTRUM_PROPERTIES));
+    public static final RegistryEntry<Block> GLOWING_OSTRUM_PILLAR = PILLARS.register("glowing_ostrum_pillar", () -> new RotatedPillarBlock(OSTRUM_PROPERTIES.lightLevel(state -> 15).mapColor(MapColor.COLOR_PURPLE)));
     public static final RegistryEntry<Block> OSTRUM_PLATING_BUTTON = BUTTONS.register("ostrum_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).mapColor(MapColor.COLOR_PURPLE), BlockSetType.IRON, 20, false) {});
     public static final RegistryEntry<Block> OSTRUM_PLATING_PRESSURE_PLATE = PRESSURE_PLATES.register("ostrum_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.COLOR_PURPLE), BlockSetType.IRON) {});
-    public static final RegistryEntry<Block> OSTRUM_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("ostrum_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.COLOR_PURPLE)));
+    public static final RegistryEntry<Block> OSTRUM_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("ostrum_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).explosionResistance(16).mapColor(MapColor.COLOR_PURPLE)));
 
-    public static final RegistryEntry<Block> CALORITE_FACTORY_BLOCK = CTM_CUBES.register("calorite_factory_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_RED)));
-    public static final RegistryEntry<Block> ENCASED_CALORITE_BLOCK = CUBES.register("encased_calorite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_RED)));
-    public static final RegistryEntry<Block> CALORITE_PLATEBLOCK = CUBES.register("calorite_plateblock", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_RED)));
-    public static final RegistryEntry<Block> CALORITE_PANEL = CUBES.register("calorite_panel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_RED)));
-    public static final RegistryEntry<Block> BLOCK_OF_CALORITE = CUBES.register("block_of_calorite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+    public static final RegistryEntry<Block> CALORITE_FACTORY_BLOCK = CTM_CUBES.register("calorite_factory_block", () -> new Block(CALORITE_PROPERTIES));
+    public static final RegistryEntry<Block> ENCASED_CALORITE_BLOCK = CUBES.register("encased_calorite_block", () -> new Block(CALORITE_PROPERTIES));
+    public static final RegistryEntry<Block> CALORITE_PLATEBLOCK = CUBES.register("calorite_plateblock", () -> new Block(CALORITE_PROPERTIES));
+    public static final RegistryEntry<Block> CALORITE_PANEL = CUBES.register("calorite_panel", () -> new Block(CALORITE_PROPERTIES));
+    public static final RegistryEntry<Block> BLOCK_OF_CALORITE = CUBES.register("block_of_calorite", () -> new Block(CALORITE_PROPERTIES));
     public static final RegistryEntry<Block> RAW_CALORITE_BLOCK = CUBES.register("raw_calorite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK).mapColor(MapColor.COLOR_RED)));
-    public static final RegistryEntry<Block> CALORITE_PLATING = CUBES.register("calorite_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_RED)));
-    public static final RegistryEntry<Block> CALORITE_PLATING_STAIRS = STAIRS.register("calorite_plating_stairs", () -> new StairBlock(CALORITE_PLATING.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_RED)));
-    public static final RegistryEntry<Block> CALORITE_PLATING_SLAB = SLABS.register("calorite_plating_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_RED)));
-    public static final RegistryEntry<Block> CALORITE_PILLAR = PILLARS.register("calorite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).mapColor(MapColor.COLOR_RED)));
-    public static final RegistryEntry<Block> GLOWING_CALORITE_PILLAR = PILLARS.register("glowing_calorite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15).mapColor(MapColor.COLOR_RED)));
+    public static final RegistryEntry<Block> CALORITE_PLATING = CUBES.register("calorite_plating", () -> new Block(CALORITE_PROPERTIES));
+    public static final RegistryEntry<Block> CALORITE_PLATING_STAIRS = STAIRS.register("calorite_plating_stairs", () -> new StairBlock(CALORITE_PLATING.get().defaultBlockState(), CALORITE_PROPERTIES));
+    public static final RegistryEntry<Block> CALORITE_PLATING_SLAB = SLABS.register("calorite_plating_slab", () -> new SlabBlock(CALORITE_PROPERTIES));
+    public static final RegistryEntry<Block> CALORITE_PILLAR = PILLARS.register("calorite_pillar", () -> new RotatedPillarBlock(CALORITE_PROPERTIES));
+    public static final RegistryEntry<Block> GLOWING_CALORITE_PILLAR = PILLARS.register("glowing_calorite_pillar", () -> new RotatedPillarBlock(CALORITE_PROPERTIES.lightLevel(state -> 15).mapColor(MapColor.COLOR_RED)));
     public static final RegistryEntry<Block> CALORITE_PLATING_BUTTON = BUTTONS.register("calorite_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).mapColor(MapColor.COLOR_RED), BlockSetType.IRON, 20, false) {});
     public static final RegistryEntry<Block> CALORITE_PLATING_PRESSURE_PLATE = PRESSURE_PLATES.register("calorite_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(MapColor.COLOR_RED), BlockSetType.IRON) {});
-    public static final RegistryEntry<Block> CALORITE_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("calorite_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.COLOR_RED)));
+    public static final RegistryEntry<Block> CALORITE_SLIDING_DOOR = SIMPLE_SLIDING_DOORS.register("calorite_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).explosionResistance(22).mapColor(MapColor.COLOR_RED)));
 
-    public static final RegistryEntry<Block> BLACK_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("black_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> BLUE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("blue_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> BROWN_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("brown_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> CYAN_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("cyan_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> GRAY_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("gray_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> GREEN_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("green_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> LIGHT_BLUE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("light_blue_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> LIGHT_GRAY_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("light_gray_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> LIME_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("lime_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> MAGENTA_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("magenta_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> ORANGE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("orange_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> PINK_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("pink_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> PURPLE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("purple_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> RED_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("red_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> WHITE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("white_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
-    public static final RegistryEntry<Block> YELLOW_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("yellow_industrial_lamp", () -> new IndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> BLACK_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("black_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> BLUE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("blue_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> BROWN_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("brown_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> CYAN_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("cyan_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> GRAY_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("gray_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> GREEN_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("green_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> LIGHT_BLUE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("light_blue_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> LIGHT_GRAY_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("light_gray_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> LIME_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("lime_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> MAGENTA_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("magenta_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> ORANGE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("orange_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> PINK_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("pink_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> PURPLE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("purple_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> RED_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("red_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> WHITE_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("white_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
+    public static final RegistryEntry<Block> YELLOW_INDUSTRIAL_LAMP = INDUSTRIAL_LAMPS.register("yellow_industrial_lamp", () -> new IndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 12)));
 
-    public static final RegistryEntry<Block> SMALL_BLACK_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_black_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_BLUE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_blue_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_BROWN_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_brown_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_CYAN_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_cyan_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_GRAY_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_gray_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_GREEN_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_green_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_LIGHT_BLUE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_light_blue_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_LIGHT_GRAY_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_light_gray_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_LIME_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_lime_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_MAGENTA_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_magenta_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_ORANGE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_orange_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_PINK_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_pink_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_PURPLE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_purple_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_RED_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_red_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_WHITE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_white_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
-    public static final RegistryEntry<Block> SMALL_YELLOW_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_yellow_industrial_lamp", () -> new SmallIndustrialLampBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_BLACK_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_black_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_BLUE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_blue_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_BROWN_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_brown_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_CYAN_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_cyan_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_GRAY_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_gray_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_GREEN_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_green_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_LIGHT_BLUE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_light_blue_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_LIGHT_GRAY_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_light_gray_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_LIME_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_lime_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_MAGENTA_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_magenta_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_ORANGE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_orange_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_PINK_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_pink_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_PURPLE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_purple_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_RED_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_red_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_WHITE_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_white_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
+    public static final RegistryEntry<Block> SMALL_YELLOW_INDUSTRIAL_LAMP = SMALL_INDUSTRIAL_LAMPS.register("small_yellow_industrial_lamp", () -> new SmallIndustrialLampBlock(STEEL_PROPERTIES.lightLevel(state -> 8)));
 
     public static final RegistryEntry<Block> MOON_SAND = CUBES.register("moon_sand", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.SAND).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY)));
     public static final RegistryEntry<Block> MOON_STONE = CUBES.register("moon_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY)));

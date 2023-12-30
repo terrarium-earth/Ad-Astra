@@ -3,11 +3,11 @@
   "cookingtime": 1,
   "energy": 30,
   "ingredient": {
-    "buckets": 0.05,
+    "buckets": 0.1,
     "fluid": "minecraft:water"
   },
   "result_fluid": {
-    "buckets": 0.002,
+    "buckets": 0.004,
     "fluid": "ad_astra:oxygen"
   }
 }

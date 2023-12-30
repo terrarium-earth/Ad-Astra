@@ -45,8 +45,8 @@ public class ModRecipeProvider extends RecipeProvider {
         createCompressing(writer, 800, 20, ModItemTags.CALORITE_BLOCKS, new ItemStack(ModItems.CALORITE_PLATE.get(), 9));
 
         createOxygenLoading(writer, 1, 30,
-            FluidHooks.newFluidHolder(Fluids.WATER, 50, null),
-            FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), 2, null)
+            FluidHooks.newFluidHolder(Fluids.WATER, 100, null),
+            FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), 4, null)
         );
 
         createOxygenLoading(writer, 1, 30,

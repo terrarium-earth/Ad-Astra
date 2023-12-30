@@ -398,6 +398,7 @@
   "info.ad_astra.solar_panel": "Generates energy from the sun during the dat. Note that the energy generated is dependent on the planet.",
   "info.ad_astra.space_suit": "Supplies the wearer with oxygen and protects them from the extreme-cold of space.",
   "info.ad_astra.ti_69": "Displays important information. Right-click to change the current app.",
+  "info.ad_astra.vent": "Allows oxygen to flow through.",
   "info.ad_astra.water_pump": "Pumps water. Ensure a water source is below the pump for it to function.",
   "info.ad_astra.zip_gun": "Propels you forward. Use a second one in your offhand to propel even further. Excellent for maneuvering in zero-gravity.",
   "item.ad_astra.calorite_engine": "Calorite Engine",

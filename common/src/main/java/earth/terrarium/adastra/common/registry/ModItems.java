@@ -21,10 +21,6 @@ import earth.terrarium.adastra.common.tags.ModPaintingVariantTags;
 import earth.terrarium.botarium.common.registry.fluid.FluidBucketItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
 
 @SuppressWarnings("unused")
 public class ModItems {
@@ -221,7 +217,7 @@ public class ModItems {
     public static final RegistryEntry<Item> ETRIUM_PANEL = ITEMS.register("etrium_panel", () -> new BlockItem(ModBlocks.ETRIUM_PANEL.get(), new Item.Properties()));
     public static final RegistryEntry<Item> BLOCK_OF_ETRIUM = ITEMS.register("block_of_etrium", () -> new BlockItem(ModBlocks.BLOCK_OF_ETRIUM.get(), new Item.Properties()));
 
-    public static final RegistryEntry<Item> STEEL_FACTORY_BLOCK = ITEMS.register("steel_factory_block", () -> new BlockItem(ModBlocks.IRON_FACTORY_BLOCK.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_FACTORY_BLOCK = ITEMS.register("steel_factory_block", () -> new BlockItem(ModBlocks.STEEL_FACTORY_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> ENCASED_STEEL_BLOCK = ITEMS.register("encased_steel_block", () -> new BlockItem(ModBlocks.ENCASED_STEEL_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> STEEL_PLATEBLOCK = ITEMS.register("steel_plateblock", () -> new BlockItem(ModBlocks.STEEL_PLATEBLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> STEEL_PANEL = ITEMS.register("steel_panel", () -> new BlockItem(ModBlocks.STEEL_PANEL.get(), new Item.Properties()));
