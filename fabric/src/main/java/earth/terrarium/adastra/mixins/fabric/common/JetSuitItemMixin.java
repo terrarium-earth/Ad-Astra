@@ -6,6 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 
+@SuppressWarnings("DataFlowIssue")
 @Mixin(JetSuitItem.class)
 public abstract class JetSuitItemMixin implements FabricElytraItem {
     @Override

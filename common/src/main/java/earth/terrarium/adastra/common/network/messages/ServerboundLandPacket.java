@@ -23,7 +23,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 
 public record ServerboundLandPacket(ResourceLocation dimensionLocation,
-                                    BlockPos targetPos, boolean tryPreviousLocation) implements Packet<ServerboundLandPacket> {
+                                    BlockPos targetPos,
+                                    boolean tryPreviousLocation) implements Packet<ServerboundLandPacket> {
 
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "land");
     public static final Handler HANDLER = new Handler();
@@ -61,17 +62,22 @@ public record ServerboundLandPacket(ResourceLocation dimensionLocation,
                     .orElse(null) : null;
                 ServerLevel targetLevel = null;
                 BlockPos targetPos = null;
+
                 if (newPos != null) {
                     targetLevel = server.getLevel(newPos.dimension());
                     targetPos = newPos.pos();
                 }
+
                 if (targetLevel == null) {
                     targetLevel = server.getLevel(planet.dimension());
                     targetPos = null;
                 }
-                if (targetLevel == null)
+
+                if (targetLevel == null) {
                     throw new IllegalStateException("Dimension %s does not exist! Try restarting your %s!"
                         .formatted(planet.dimension(), server.isDedicatedServer() ? "server" : "singleplayer world"));
+                }
+
                 LaunchingDimensionHandler.addSpawnLocation(player);
                 Entity vehicle = player.getVehicle();
 

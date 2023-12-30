@@ -5,7 +5,6 @@ import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.KeybindManager;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.adastra.mixins.common.LivingEntityAccessor;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyItem;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
@@ -71,10 +70,10 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
         if (!hasFullJetSuitSet(player)) return;
 
         if (!KeybindManager.suitFlightEnabled(player)) return;
-        if (!isJumping(player)) return;
+        if (!KeybindManager.jumpDown(player)) return;
         if (!canFly(player, stack)) return;
 
-        if (player.isSprinting()) {
+        if (KeybindManager.sprintDown(player)) {
             fullFlight(player);
             consume(player, stack, 100);
         } else {
@@ -100,21 +99,17 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
         }
     }
 
-    private boolean isJumping(Player player) {
-        return ((LivingEntityAccessor) player).isJumping();
-    }
-
     private boolean canFly(Player player, ItemStack stack) {
         return player.isCreative() || getEnergyStorage(stack).getStoredEnergy() > 0;
     }
 
     private void consume(Player player, ItemStack stack, int amount) {
-        if (player.isCreative() || player.level().isClientSide()) return;
+        if (player.isCreative() || player.isSpectator() || player.level().isClientSide()) return;
         getEnergyStorage(stack).internalExtract(amount, false);
     }
 
     protected boolean isFullFlightEnabled(Player player) {
-        return KeybindManager.suitFlightEnabled(player) && isJumping(player) && player.isSprinting();
+        return KeybindManager.suitFlightEnabled(player) && KeybindManager.jumpDown(player) && KeybindManager.sprintDown(player);
     }
 
     public static double sigmoidAcceleration(double t, double peakTime, double peakAcceleration, double initialAcceleration) {
@@ -126,7 +121,7 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
         if (!canFly(player, stack)) return;
         if (!hasFullJetSuitSet(player)) return;
         if (!KeybindManager.suitFlightEnabled(player)) return;
-        if (!isJumping(player) || (!isJumping(player) && !player.isSprinting()))
+        if (!KeybindManager.jumpDown(player) || (!KeybindManager.jumpDown(player) && !KeybindManager.sprintDown(player)))
             return;
 
         spawnParticles(level, entity, model.rightArm.xRot + 0.05, entity.isFallFlying() ? 0.0 : 0.8, -0.45);
@@ -138,12 +133,16 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
     // Spawns particles at the limbs of the player
     private void spawnParticles(Level level, LivingEntity entity, double pitch, double yOffset, double zOffset) {
         double yRot = entity.yBodyRot;
-        double xRotator = Math.cos(yRot * Math.PI / 180.0) * zOffset;
-        double zRotator = Math.sin(yRot * Math.PI / 180.0) * zOffset;
-        double xRotator1 = Math.cos((yRot - 90) * Math.PI / 180.0) * pitch;
-        double zRotator1 = Math.sin((yRot - 90) * Math.PI / 180.0) * pitch;
+        double forwardOffsetX = Math.cos(yRot * Math.PI / 180) * zOffset;
+        double forwardOffsetZ = Math.sin(yRot * Math.PI / 180) * zOffset;
+        double sideOffsetX = Math.cos((yRot - 90) * Math.PI / 180) * pitch;
+        double sideOffsetZ = Math.sin((yRot - 90) * Math.PI / 180) * pitch;
 
-        level.addParticle(ParticleTypes.FLAME, true, entity.getX() + xRotator + xRotator1, entity.getY() + yOffset, entity.getZ() + zRotator1 + zRotator, 0.0, 0.0, 0.0);
+        level.addParticle(ParticleTypes.FLAME, true,
+            entity.getX() + forwardOffsetX + sideOffsetX,
+            entity.getY() + yOffset,
+            entity.getZ() + sideOffsetZ + forwardOffsetZ,
+            0, 0, 0);
     }
 
     @SuppressWarnings("unused") // Forge

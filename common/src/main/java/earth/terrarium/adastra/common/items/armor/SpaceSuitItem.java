@@ -82,7 +82,7 @@ public class SpaceSuitItem extends CustomDyeableArmorItem implements BotariumFlu
         super.inventoryTick(stack, level, entity, slotId, isSelected);
         if (level.isClientSide()) return;
         if (!(entity instanceof LivingEntity livingEntity)) return;
-        if (livingEntity instanceof Player player && player.isCreative()) return;
+        if (livingEntity instanceof Player player && (player.isCreative() || player.isSpectator())) return;
         if (livingEntity.getItemBySlot(EquipmentSlot.CHEST) != stack) return;
         livingEntity.setTicksFrozen(0);
         // Every 12 ticks = 10 minutes per 1,000 mB (1 bucket) oxygen

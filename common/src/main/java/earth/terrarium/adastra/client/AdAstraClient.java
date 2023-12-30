@@ -26,7 +26,7 @@ import earth.terrarium.adastra.client.screens.vehicles.RoverScreen;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.items.EtrionicCapacitorItem;
 import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ServerboundSyncJetSuitEnabled;
+import earth.terrarium.adastra.common.network.messages.ServerboundSyncKeybindPacket;
 import earth.terrarium.adastra.common.registry.*;
 import earth.terrarium.adastra.common.tags.ModItemTags;
 import earth.terrarium.adastra.common.utils.KeybindManager;
@@ -34,6 +34,7 @@ import earth.terrarium.adastra.common.utils.radio.RadioHolder;
 import earth.terrarium.botarium.client.ClientHooks;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.Options;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.particle.SplashParticle;
@@ -183,14 +184,24 @@ public class AdAstraClient {
         }
 
         if (player.getItemBySlot(EquipmentSlot.CHEST).is(ModItemTags.JET_SUITS)) {
+            Options options = minecraft.options;
+
             if (KEY_TOGGLE_SUIT_FLIGHT.consumeClick()) {
                 AdAstraConfigClient.jetSuitEnabled = !AdAstraConfigClient.jetSuitEnabled;
                 Minecraft.getInstance().tell(() -> AdAstra.CONFIGURATOR.saveConfig(AdAstraConfigClient.class));
                 player.displayClientMessage(AdAstraConfigClient.jetSuitEnabled ? ConstantComponents.SUIT_FLIGHT_ENABLED : ConstantComponents.SUIT_FLIGHT_DISABLED, true);
             }
 
-            KeybindManager.set(player, AdAstraConfigClient.jetSuitEnabled);
-            NetworkHandler.CHANNEL.sendToServer(new ServerboundSyncJetSuitEnabled(AdAstraConfigClient.jetSuitEnabled));
+            KeybindManager.set(player,
+                options.keyJump.isDown(),
+                options.keySprint.isDown(),
+                AdAstraConfigClient.jetSuitEnabled);
+
+            NetworkHandler.CHANNEL.sendToServer(new ServerboundSyncKeybindPacket(
+                options.keyJump.isDown(),
+                options.keySprint.isDown(),
+                AdAstraConfigClient.jetSuitEnabled
+            ));
         }
     }
 }
