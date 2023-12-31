@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:steel_plates"
+    }
+  },
+  "pattern": [
+    " # ",
+    "###",
+    "# #"
+  ],
+  "result": {
+    "count": 4,
+    "item": "ad_astra:rocket_fin"
+  },
+  "show_notification": true
+}

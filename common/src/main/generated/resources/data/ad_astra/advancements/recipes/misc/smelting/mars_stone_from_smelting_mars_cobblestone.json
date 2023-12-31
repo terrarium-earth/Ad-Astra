@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mars_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:mars_cobblestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:smelting/mars_stone_from_smelting_mars_cobblestone"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_mars_stone",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:smelting/mars_stone_from_smelting_mars_cobblestone"
+    ]
+  },
+  "sends_telemetry_event": false
+}

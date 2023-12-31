@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "ad_astra:raw_ostrum_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "ad_astra:raw_ostrum"
+  }
+}

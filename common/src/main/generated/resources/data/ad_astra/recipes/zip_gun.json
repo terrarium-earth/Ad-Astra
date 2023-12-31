@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:steel_plates"
+    },
+    "G": {
+      "item": "ad_astra:large_gas_tank"
+    },
+    "|": {
+      "tag": "ad_astra:steel_rods"
+    }
+  },
+  "pattern": [
+    "##|",
+    "G  "
+  ],
+  "result": {
+    "item": "ad_astra:zip_gun"
+  },
+  "show_notification": true
+}

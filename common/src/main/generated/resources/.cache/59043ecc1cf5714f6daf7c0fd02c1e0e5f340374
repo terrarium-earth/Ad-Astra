@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-31T02:18:03.290696	Tags for minecraft:item mod id ad_astra
+// 1.20.1	2023-12-31T17:30:12.477838	Tags for minecraft:item mod id ad_astra
 8030232b3adfa6e804799644b412d6697c9f985a data/ad_astra/tags/items/cable_ducts.json
 9e5430f8f65b6281a9fe76442a62537371f1da72 data/ad_astra/tags/items/calorite_blocks.json
 19b0f60e06dec4769b066c94d255c43f3b685c18 data/ad_astra/tags/items/calorite_ingots.json
@@ -110,7 +110,7 @@ edf2c312fdde23509667eafb3022b4d35ad28743 data/minecraft/tags/items/slabs.json
 aa092701693917f18e7ef32cdad274dbb7b9864b data/minecraft/tags/items/stairs.json
 32dd0c7ce53c46cf245a98486277a026e277a859 data/minecraft/tags/items/stone_bricks.json
 1e3f55f3589436f1db28fd1378ff261836e1f696 data/minecraft/tags/items/stone_crafting_materials.json
-9caa50066e7eaf326350dce0b9ed3be414613fa9 data/minecraft/tags/items/stone_tool_materials.json
+1e3f55f3589436f1db28fd1378ff261836e1f696 data/minecraft/tags/items/stone_tool_materials.json
 892b3a6ca289bdebd74fcec309ef9b35b2f2b54e data/minecraft/tags/items/trapdoors.json
 a4002c0d36d1ca0635d5034d789fc9673c2981ca data/minecraft/tags/items/walls.json
 23af9eb135e31baad3fb7330ee4282867f808042 data/minecraft/tags/items/wooden_buttons.json

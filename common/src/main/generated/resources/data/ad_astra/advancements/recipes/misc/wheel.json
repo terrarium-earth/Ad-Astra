@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:wheel"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wheel": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "ad_astra:steel_plates"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_wheel",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:wheel"
+    ]
+  },
+  "sends_telemetry_event": false
+}

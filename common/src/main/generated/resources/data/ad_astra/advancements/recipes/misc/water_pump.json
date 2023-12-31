@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:water_pump"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_water_pump": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "ad_astra:desh_plates"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_water_pump",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:water_pump"
+    ]
+  },
+  "sends_telemetry_event": false
+}

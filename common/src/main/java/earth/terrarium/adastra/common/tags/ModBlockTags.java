@@ -33,6 +33,9 @@ public final class ModBlockTags {
     public static final TagKey<Block> CALORITE_BLOCKS = tag("calorite_blocks");
     public static final TagKey<Block> RAW_CALORITE_BLOCKS = tag("raw_calorite_blocks");
 
+    public static final TagKey<Block> GLACIAN_LOGS = tag("glacian_logs");
+    public static final TagKey<Block> AERONOS_CAPS = tag("aeronos_caps");
+    public static final TagKey<Block> STROPHAR_CAPS = tag("strophar_caps");
 
     private static TagKey<Block> tag(String name) {
         return TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, name));

@@ -177,11 +177,11 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         tag(ItemTags.STONE_CRAFTING_MATERIALS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MERCURY_COBBLESTONE.get())));
         tag(ItemTags.STONE_CRAFTING_MATERIALS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIO_COBBLESTONE.get())));
 
-        tag(ItemTags.STONE_TOOL_MATERIALS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MOON_STONE.get())));
-        tag(ItemTags.STONE_TOOL_MATERIALS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MARS_STONE.get())));
-        tag(ItemTags.STONE_TOOL_MATERIALS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_STONE.get())));
-        tag(ItemTags.STONE_TOOL_MATERIALS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MERCURY_STONE.get())));
-        tag(ItemTags.STONE_TOOL_MATERIALS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIO_STONE.get())));
+        tag(ItemTags.STONE_TOOL_MATERIALS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MOON_COBBLESTONE.get())));
+        tag(ItemTags.STONE_TOOL_MATERIALS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MARS_COBBLESTONE.get())));
+        tag(ItemTags.STONE_TOOL_MATERIALS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_COBBLESTONE.get())));
+        tag(ItemTags.STONE_TOOL_MATERIALS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MERCURY_COBBLESTONE.get())));
+        tag(ItemTags.STONE_TOOL_MATERIALS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIO_COBBLESTONE.get())));
 
         tag(ItemTags.TRAPDOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STEEL_TRAPDOOR.get())));
         tag(ItemTags.WOODEN_TRAPDOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_TRAPDOOR.get())));

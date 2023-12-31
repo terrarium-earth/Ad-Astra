@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_calorite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:venus_calorite_ore"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:blasting/calorite_ingot_from_blasting_venus_calorite_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_calorite_ingot",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:blasting/calorite_ingot_from_blasting_venus_calorite_ore"
+    ]
+  },
+  "sends_telemetry_event": false
+}

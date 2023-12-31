@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "ad_astra:mercury_iron_ore"
+  },
+  "result": "minecraft:iron_ingot"
+}

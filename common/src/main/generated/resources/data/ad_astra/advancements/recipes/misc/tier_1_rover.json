@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:tier_1_rover"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tier_1_rover": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:desh_engine"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_tier_1_rover",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:tier_1_rover"
+    ]
+  },
+  "sends_telemetry_event": false
+}

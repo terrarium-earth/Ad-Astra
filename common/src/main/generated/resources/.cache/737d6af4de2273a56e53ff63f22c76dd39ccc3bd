@@ -1,9 +1,11 @@
-// 1.20.1	2023-12-31T02:18:03.291165	Tags for minecraft:block mod id ad_astra
+// 1.20.1	2023-12-31T17:04:03.416258	Tags for minecraft:block mod id ad_astra
+375e4bc49d396a2ae2b2a9dcddc300ab07a3aa48 data/ad_astra/tags/blocks/aeronos_caps.json
 8030232b3adfa6e804799644b412d6697c9f985a data/ad_astra/tags/blocks/cable_ducts.json
 9e5430f8f65b6281a9fe76442a62537371f1da72 data/ad_astra/tags/blocks/calorite_blocks.json
 1c3b5f4f600d0258598142a532fa9c870e58dc06 data/ad_astra/tags/blocks/desh_blocks.json
 49278667ca98b5260c0d1482db7a8783f77eaef4 data/ad_astra/tags/blocks/flags.json
 d10acd25289b91dd382a0b3b47088961846033c6 data/ad_astra/tags/blocks/fluid_pipe_ducts.json
+e5e2d1a810418e09c6d0059a742a494f43fcd81e data/ad_astra/tags/blocks/glacian_logs.json
 b2aa5eed7b47157f4fb4f9695530c8e9be22dc7e data/ad_astra/tags/blocks/glacio_stone_replaceables.json
 f8fd8be682f32975426f904d4f7a022c6d7bf39f data/ad_astra/tags/blocks/globes.json
 a20e261a07e1e22d9ae7c5cc3e9df15dbc303d21 data/ad_astra/tags/blocks/launch_pads.json
@@ -17,6 +19,7 @@ ffb01c7f1027d82018d51bb21f7ddd68ea6bee5a data/ad_astra/tags/blocks/moon_stone_re
 984c9ff8412957e65d0fc861af4f765b55c07564 data/ad_astra/tags/blocks/raw_ostrum_blocks.json
 bcb57fc6e31c0f265fe07d507e4f2bc84dcaadcd data/ad_astra/tags/blocks/sliding_doors.json
 07393b1b831839b0db3cd48cb48b3bf985e490de data/ad_astra/tags/blocks/steel_blocks.json
+8ab58327558f09297f12a44aefd3254382c4e224 data/ad_astra/tags/blocks/strophar_caps.json
 745729209d9209464123824e34ad09665e7bb55e data/ad_astra/tags/blocks/venus_stone_replaceables.json
 8d5e80ce8d227e8bb4980a0060fac973aae3924e data/c/tags/blocks/calorite_blocks.json
 eb291297801c6ab3ad1d141cbf1ff496b2c15da5 data/c/tags/blocks/desh_blocks.json

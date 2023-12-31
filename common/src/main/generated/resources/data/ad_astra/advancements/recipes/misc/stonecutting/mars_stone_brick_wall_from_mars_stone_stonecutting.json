@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mars_stone_brick_wall": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:mars_stone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:stonecutting/mars_stone_brick_wall_from_mars_stone_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_mars_stone_brick_wall",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:stonecutting/mars_stone_brick_wall_from_mars_stone_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

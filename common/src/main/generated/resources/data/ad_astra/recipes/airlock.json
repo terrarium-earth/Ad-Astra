@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:steel_plates"
+    },
+    "B": {
+      "tag": "ad_astra:steel_blocks"
+    }
+  },
+  "pattern": [
+    "##B",
+    "###",
+    "B##"
+  ],
+  "result": {
+    "item": "ad_astra:airlock"
+  },
+  "show_notification": true
+}

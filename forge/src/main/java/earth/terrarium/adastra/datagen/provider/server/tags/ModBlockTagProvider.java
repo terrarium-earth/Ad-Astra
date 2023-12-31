@@ -113,6 +113,16 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         add(ModBlockTags.RAW_OSTRUM_BLOCKS, ModBlocks.RAW_OSTRUM_BLOCK.get(), "raw_ostrum_blocks", "storage_blocks/raw_ostrum");
         add(ModBlockTags.CALORITE_BLOCKS, ModBlocks.CALORITE_BLOCK.get(), "calorite_blocks", "storage_blocks/calorite");
         add(ModBlockTags.RAW_CALORITE_BLOCKS, ModBlocks.RAW_CALORITE_BLOCK.get(), "raw_calorite_blocks", "storage_blocks/raw_calorite");
+
+        add(ModBlockTags.GLACIAN_LOGS, ModBlocks.GLACIAN_LOG.get());
+        add(ModBlockTags.GLACIAN_LOGS, ModBlocks.STRIPPED_GLACIAN_LOG.get());
+
+        add(ModBlockTags.AERONOS_CAPS, ModBlocks.AERONOS_CAP.get());
+        add(ModBlockTags.AERONOS_CAPS, ModBlocks.AERONOS_STEM.get());
+
+        add(ModBlockTags.STROPHAR_CAPS, ModBlocks.STROPHAR_CAP.get());
+        add(ModBlockTags.STROPHAR_CAPS, ModBlocks.STROPHAR_STEM.get());
+
         addVanillaTags();
     }
 

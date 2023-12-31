@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "ad_astra:calorite_plating"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "item": "ad_astra:calorite_plating_pressure_plate"
+  },
+  "show_notification": true
+}

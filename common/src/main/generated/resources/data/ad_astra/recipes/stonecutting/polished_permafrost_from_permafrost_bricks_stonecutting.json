@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "ad_astra:permafrost_bricks"
+  },
+  "result": "ad_astra:polished_permafrost"
+}

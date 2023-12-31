@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:gray_dye"
+    },
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "I": {
+      "tag": "ad_astra:steel_ingots"
+    }
+  },
+  "pattern": [
+    "GG",
+    "#I"
+  ],
+  "result": {
+    "count": 8,
+    "item": "ad_astra:small_gray_industrial_lamp"
+  },
+  "show_notification": true
+}

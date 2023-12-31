@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "ad_astra:mars_stone_bricks"
+  },
+  "result": "ad_astra:chiseled_mars_stone_bricks"
+}

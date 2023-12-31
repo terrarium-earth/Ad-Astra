@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": {
+    "tag": "ad_astra:raw_calorite"
+  },
+  "result": "ad_astra:calorite_ingot"
+}

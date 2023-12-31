@@ -101,11 +101,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ad_astra:hammer",
-          "weight": 10
-        },
-        {
-          "type": "minecraft:item",
           "name": "ad_astra:fuel_bucket",
           "weight": 5
         },
@@ -116,7 +111,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "ad_astra:oxygen_tank",
+          "name": "ad_astra:gas_tank",
           "weight": 5
         },
         {

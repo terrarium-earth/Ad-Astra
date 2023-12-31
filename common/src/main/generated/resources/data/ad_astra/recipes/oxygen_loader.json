@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:steel_plates"
+    },
+    "F": {
+      "item": "ad_astra:fan"
+    },
+    "G": {
+      "item": "ad_astra:gas_tank"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "|": {
+      "item": "minecraft:lightning_rod"
+    }
+  },
+  "pattern": [
+    "#F#",
+    "G|G",
+    "#R#"
+  ],
+  "result": {
+    "item": "ad_astra:oxygen_loader"
+  },
+  "show_notification": true
+}

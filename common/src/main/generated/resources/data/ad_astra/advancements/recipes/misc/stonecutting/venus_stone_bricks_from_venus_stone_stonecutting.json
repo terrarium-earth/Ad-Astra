@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:stonecutting/venus_stone_bricks_from_venus_stone_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_venus_stone_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:venus_stone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_venus_stone_bricks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:stonecutting/venus_stone_bricks_from_venus_stone_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

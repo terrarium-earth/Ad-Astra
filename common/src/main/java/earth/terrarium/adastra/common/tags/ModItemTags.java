@@ -53,6 +53,10 @@ public final class ModItemTags {
     public static final TagKey<Item> CALORITE_BLOCKS = tag("calorite_blocks");
     public static final TagKey<Item> RAW_CALORITE_BLOCKS = tag("raw_calorite_blocks");
 
+    public static final TagKey<Item> GLACIAN_LOGS = tag("glacian_logs");
+    public static final TagKey<Item> AERONOS_CAPS = tag("aeronos_caps");
+    public static final TagKey<Item> STROPHAR_CAPS = tag("strophar_caps");
+
     private static TagKey<Item> tag(String name) {
         return TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, name));
     }

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "ad_astra:moon_cheese_ore"
+  },
+  "result": "ad_astra:cheese"
+}

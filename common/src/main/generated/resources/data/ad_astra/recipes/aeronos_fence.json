@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "ad_astra:aeronos_planks"
+    },
+    "|": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "#|#",
+    "#|#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "ad_astra:aeronos_fence"
+  },
+  "show_notification": true
+}

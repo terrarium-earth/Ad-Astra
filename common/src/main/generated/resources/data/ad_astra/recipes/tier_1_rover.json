@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "ad_astra:desh_engine"
+    },
+    "D": {
+      "tag": "ad_astra:desh_blocks"
+    },
+    "G": {
+      "item": "ad_astra:large_gas_tank"
+    },
+    "P": {
+      "tag": "ad_astra:desh_plates"
+    },
+    "R": {
+      "item": "ad_astra:radio"
+    },
+    "W": {
+      "item": "ad_astra:wheel"
+    },
+    "|": {
+      "tag": "ad_astra:steel_rods"
+    }
+  },
+  "pattern": [
+    "D |",
+    "GR#",
+    "WPW"
+  ],
+  "result": {
+    "item": "ad_astra:tier_1_rover"
+  },
+  "show_notification": true
+}

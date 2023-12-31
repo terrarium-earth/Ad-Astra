@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:ostrum_plates"
+    },
+    "B": {
+      "tag": "ad_astra:ostrum_blocks"
+    },
+    "P": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "pattern": [
+    "###",
+    "PBP",
+    "###"
+  ],
+  "result": {
+    "item": "ad_astra:ostrum_sliding_door"
+  },
+  "show_notification": true
+}

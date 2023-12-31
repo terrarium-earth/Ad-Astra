@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:steel_plates"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "R#R",
+    "#D#",
+    "D#D"
+  ],
+  "result": {
+    "item": "ad_astra:etrionic_capacitor"
+  },
+  "show_notification": true
+}

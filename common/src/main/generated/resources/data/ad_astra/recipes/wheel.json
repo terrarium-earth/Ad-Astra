@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:steel_plates"
+    },
+    "B": {
+      "item": "minecraft:black_wool"
+    }
+  },
+  "pattern": [
+    " B ",
+    "B#B",
+    " B "
+  ],
+  "result": {
+    "item": "ad_astra:wheel"
+  },
+  "show_notification": true
+}

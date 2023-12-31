@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:steel_plates"
+    },
+    "|": {
+      "item": "minecraft:lightning_rod"
+    }
+  },
+  "pattern": [
+    " | ",
+    " # ",
+    "###"
+  ],
+  "result": {
+    "item": "ad_astra:rocket_nose_cone"
+  },
+  "show_notification": true
+}

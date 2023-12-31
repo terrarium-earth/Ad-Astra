@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "ad_astra:chiseled_glacio_stone_bricks"
+  },
+  "result": "ad_astra:chiseled_glacio_stone_slab"
+}

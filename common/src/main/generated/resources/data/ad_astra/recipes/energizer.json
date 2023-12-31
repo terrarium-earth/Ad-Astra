@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:ostrum_plates"
+    },
+    "B": {
+      "tag": "ad_astra:ostrum_blocks"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "E": {
+      "item": "ad_astra:etrionic_capacitor"
+    }
+  },
+  "pattern": [
+    "#E#",
+    "BDB",
+    "#E#"
+  ],
+  "result": {
+    "item": "ad_astra:energizer"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:steel_plates"
+    },
+    "S": {
+      "tag": "ad_astra:steel_ingots"
+    }
+  },
+  "pattern": [
+    "###",
+    "#S#",
+    "###"
+  ],
+  "result": {
+    "count": 64,
+    "item": "ad_astra:steel_factory_block"
+  },
+  "show_notification": true
+}

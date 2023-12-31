@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mercury_cobblestone_stairs": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:mercury_cobblestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:stonecutting/mercury_cobblestone_stairs_from_mercury_cobblestone_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_mercury_cobblestone_stairs",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:stonecutting/mercury_cobblestone_stairs_from_mercury_cobblestone_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

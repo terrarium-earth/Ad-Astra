@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:iron_plates"
+    },
+    "|": {
+      "tag": "ad_astra:iron_rods"
+    }
+  },
+  "pattern": [
+    "# #",
+    " | ",
+    " | "
+  ],
+  "result": {
+    "item": "ad_astra:wrench"
+  },
+  "show_notification": true
+}

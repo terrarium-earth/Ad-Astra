@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "ad_astra:aeronos_caps"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "ad_astra:aeronos_planks"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:desh_plates"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "S": {
+      "item": "ad_astra:desh_fluid_pipe"
+    }
+  },
+  "pattern": [
+    "#C#",
+    "CSC",
+    "#C#"
+  ],
+  "result": {
+    "count": 2,
+    "item": "ad_astra:fluid_pipe_duct"
+  },
+  "show_notification": true
+}

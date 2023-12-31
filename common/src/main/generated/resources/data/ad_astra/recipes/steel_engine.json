@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:steel_plates"
+    },
+    "E": {
+      "item": "ad_astra:engine_frame"
+    },
+    "F": {
+      "item": "ad_astra:fan"
+    }
+  },
+  "pattern": [
+    "###",
+    "#E#",
+    " F "
+  ],
+  "result": {
+    "item": "ad_astra:steel_engine"
+  },
+  "show_notification": true
+}

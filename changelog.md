@@ -1,5 +1,5 @@
 This update brings a lot of internal changes from the rework into the release version of Ad Astra.
-It is initially marked as an alpha as there are a lot of internal changes, so it may break addons and
+It is initially marked as a beta as there are a lot of internal changes, so it may break addons and
 may be unstable.
 
 ## Changes
@@ -78,6 +78,7 @@ screen in the rover. You can open in by pressing `R` while in the rover or click
 - Removed the hammer. Use the compressor to obtain plates instead.
 - Each orbit can now have its owned recipe defined via datapack, instead of all of them using the same recipe.
 - Reduced oil well spawn rates.
+- Removed the `ad_astra_platform` tags. forge and fabric specific tags are now part of the "ad_astra" namespace as optional tags.
 - Launchpads can now launch rockets when powered with redstone.
 - Lander boosters now have a sound when used.
 - The compressor can now compress storage blocks into 9 plates at once.

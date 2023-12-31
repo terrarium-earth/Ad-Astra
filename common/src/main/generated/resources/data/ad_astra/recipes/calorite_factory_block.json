@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:calorite_plates"
+    },
+    "C": {
+      "tag": "ad_astra:calorite_ingots"
+    }
+  },
+  "pattern": [
+    "###",
+    "#C#",
+    "###"
+  ],
+  "result": {
+    "count": 64,
+    "item": "ad_astra:calorite_factory_block"
+  },
+  "show_notification": true
+}

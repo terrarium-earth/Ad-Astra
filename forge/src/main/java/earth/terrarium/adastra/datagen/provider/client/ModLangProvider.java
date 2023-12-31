@@ -152,6 +152,7 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.SHIFT_DESCRIPTION.getString(), "Hold SHIFT for more information");
         add(ConstantComponents.TI_69_INFO.getString(), "Displays important information. Right-click to change the current app.");
         add(ConstantComponents.ETRIONIC_CAPACITOR_INFO.getString(), "Stores energy. Right-click to toggle. Shift-right-click to change the distribution mode.");
+        add(ConstantComponents.WRENCH_INFO.getString(), "Used to configure pipes and various other blocks.");
         add(ConstantComponents.ZIP_GUN_INFO.getString(), "Propels you forward. Use a second one in your offhand to propel even further. Excellent for maneuvering in zero-gravity.");
         add(ConstantComponents.GAS_TANK_INFO.getString(), "Stores fluids and gases. Right-click to distribute into your inventory.");
         add(ConstantComponents.CABLE_INFO.getString(), "Transfers energy. Right-click with a wrench to change the distribution mode.");

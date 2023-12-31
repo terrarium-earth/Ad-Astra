@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "ad_astra:glacio_stone"
+  },
+  "result": "ad_astra:polished_glacio_stone_stairs"
+}

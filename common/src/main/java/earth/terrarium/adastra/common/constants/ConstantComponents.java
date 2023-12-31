@@ -33,6 +33,7 @@ public class ConstantComponents {
     public static final Component SHIFT_DESCRIPTION = Component.translatable("tooltip.ad_astra.shift_description").withStyle(ChatFormatting.GRAY);
     public static final Component TI_69_INFO = Component.translatable("info.ad_astra.ti_69").withStyle(ChatFormatting.GRAY);
     public static final Component ETRIONIC_CAPACITOR_INFO = Component.translatable("info.ad_astra.etrionic_capacitor").withStyle(ChatFormatting.GRAY);
+    public static final Component WRENCH_INFO = Component.translatable("info.ad_astra.wrench").withStyle(ChatFormatting.GRAY);
     public static final Component ZIP_GUN_INFO = Component.translatable("info.ad_astra.zip_gun").withStyle(ChatFormatting.GRAY);
     public static final Component GAS_TANK_INFO = Component.translatable("info.ad_astra.gas_tank").withStyle(ChatFormatting.GRAY);
     public static final Component CABLE_INFO = Component.translatable("info.ad_astra.cable").withStyle(ChatFormatting.GRAY);

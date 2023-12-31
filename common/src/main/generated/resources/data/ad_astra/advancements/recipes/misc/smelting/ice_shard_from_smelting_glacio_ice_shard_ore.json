@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ice_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:glacio_ice_shard_ore"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:smelting/ice_shard_from_smelting_glacio_ice_shard_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_ice_shard",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:smelting/ice_shard_from_smelting_glacio_ice_shard_ore"
+    ]
+  },
+  "sends_telemetry_event": false
+}

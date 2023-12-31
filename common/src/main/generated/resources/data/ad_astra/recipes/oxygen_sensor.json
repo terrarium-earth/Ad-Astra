@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:ostrum_plates"
+    },
+    "F": {
+      "item": "ad_astra:fan"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "pattern": [
+    "#F#",
+    "#R#",
+    "###"
+  ],
+  "result": {
+    "item": "ad_astra:oxygen_sensor"
+  },
+  "show_notification": true
+}
