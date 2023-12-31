@@ -94,6 +94,8 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
                 cookTimeTotal = burnTime;
                 cookTime = burnTime;
             }
+        } else {
+            if (time % 10 == 0) setLit(false);
         }
     }
 

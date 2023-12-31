@@ -43,13 +43,45 @@
     ]
   ],
   "has_precipitation": true,
-  "spawn_costs": {},
+  "spawn_costs": {
+    "ad_astra:mogler": {
+      "charge": 0.2,
+      "energy_budget": 0.015
+    },
+    "ad_astra:sulfur_creeper": {
+      "charge": 0.4,
+      "energy_budget": 0.02
+    },
+    "ad_astra:zombified_pygro": {
+      "charge": 0.2,
+      "energy_budget": 0.012
+    }
+  },
   "spawners": {
     "ambient": [],
     "axolotls": [],
     "creature": [],
     "misc": [],
-    "monster": [],
+    "monster": [
+      {
+        "type": "ad_astra:mogler",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 100
+      },
+      {
+        "type": "ad_astra:sulfur_creeper",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 100
+      },
+      {
+        "type": "ad_astra:zombified_pygro",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 100
+      }
+    ],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

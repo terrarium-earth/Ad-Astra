@@ -56,7 +56,14 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
+    "creature": [
+      {
+        "type": "ad_astra:glacian_ram",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 12
+      }
+    ],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],

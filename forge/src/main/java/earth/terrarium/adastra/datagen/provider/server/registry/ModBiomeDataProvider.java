@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.datagen.provider.server.registry;
 
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -13,7 +14,8 @@ import net.minecraft.data.worldgen.placement.OrePlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Music;
-import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
@@ -58,7 +60,11 @@ public class ModBiomeDataProvider {
             0,
             0x000000,
             0x161614,
-            new MobSpawnSettings.Builder(),
+            new MobSpawnSettings.Builder()
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntityTypes.CORRUPTED_LUNARIAN.get(), 100, 1, 3))
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntityTypes.STAR_CRAWLER.get(), 100, 1, 3))
+                .addMobCharge(ModEntityTypes.CORRUPTED_LUNARIAN.get(), 0.2, 0.015)
+                .addMobCharge(ModEntityTypes.STAR_CRAWLER.get(), 0.4, 0.015),
             moon(placedFeatures, configuredCarvers),
             null));
 
@@ -69,7 +75,9 @@ public class ModBiomeDataProvider {
             0xe6ac84,
             0xe6ac84,
             new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f),
-            new MobSpawnSettings.Builder(),
+            new MobSpawnSettings.Builder()
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntityTypes.MARTIAN_RAPTOR.get(), 100, 1, 3))
+                .addMobCharge(ModEntityTypes.MARTIAN_RAPTOR.get(), 0.2, 0.015),
             marsCanyonCreek(placedFeatures, configuredCarvers),
             null));
 
@@ -80,7 +88,9 @@ public class ModBiomeDataProvider {
             0xe6ac84,
             0xe6ac84,
             new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f),
-            new MobSpawnSettings.Builder(),
+            new MobSpawnSettings.Builder()
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntityTypes.MARTIAN_RAPTOR.get(), 100, 1, 3))
+                .addMobCharge(ModEntityTypes.MARTIAN_RAPTOR.get(), 0.2, 0.015),
             marsPolarCaps(placedFeatures, configuredCarvers),
             null));
 
@@ -91,7 +101,9 @@ public class ModBiomeDataProvider {
             0xe6ac84,
             0xe6ac84,
             new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f),
-            new MobSpawnSettings.Builder(),
+            new MobSpawnSettings.Builder()
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntityTypes.MARTIAN_RAPTOR.get(), 100, 1, 3))
+                .addMobCharge(ModEntityTypes.MARTIAN_RAPTOR.get(), 0.2, 0.015),
             mars(placedFeatures, configuredCarvers),
             null));
 
@@ -102,7 +114,13 @@ public class ModBiomeDataProvider {
             0xd18b52,
             0xd18b52,
             new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f),
-            new MobSpawnSettings.Builder(),
+            new MobSpawnSettings.Builder()
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntityTypes.MOGLER.get(), 100, 1, 3))
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntityTypes.SULFUR_CREEPER.get(), 100, 1, 3))
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntityTypes.ZOMBIFIED_PYGRO.get(), 100, 1, 2))
+                .addMobCharge(ModEntityTypes.MOGLER.get(), 0.2, 0.015)
+                .addMobCharge(ModEntityTypes.SULFUR_CREEPER.get(), 0.4, 0.02)
+                .addMobCharge(ModEntityTypes.ZOMBIFIED_PYGRO.get(), 0.2, 0.012),
             venusInfernalBarrens(placedFeatures, configuredCarvers),
             null));
 
@@ -113,7 +131,13 @@ public class ModBiomeDataProvider {
             0xd18b52,
             0xd18b52,
             new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f),
-            new MobSpawnSettings.Builder(),
+            new MobSpawnSettings.Builder()
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntityTypes.MOGLER.get(), 100, 1, 3))
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntityTypes.SULFUR_CREEPER.get(), 100, 1, 3))
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntityTypes.ZOMBIFIED_PYGRO.get(), 100, 1, 2))
+                .addMobCharge(ModEntityTypes.MOGLER.get(), 0.2, 0.015)
+                .addMobCharge(ModEntityTypes.SULFUR_CREEPER.get(), 0.4, 0.02)
+                .addMobCharge(ModEntityTypes.ZOMBIFIED_PYGRO.get(), 0.2, 0.012),
             venus(placedFeatures, configuredCarvers),
             null));
 
@@ -123,7 +147,9 @@ public class ModBiomeDataProvider {
             0,
             0x8b0000,
             0x000000,
-            new MobSpawnSettings.Builder(),
+            new MobSpawnSettings.Builder()
+                .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.MAGMA_CUBE, 100, 1, 3))
+                .addMobCharge(EntityType.MAGMA_CUBE, 0.4, 0.015),
             mercury(placedFeatures, configuredCarvers),
             null));
 
@@ -133,7 +159,8 @@ public class ModBiomeDataProvider {
             1,
             0xc0d8ff,
             0xc0d8ff,
-            new MobSpawnSettings.Builder(),
+            new MobSpawnSettings.Builder()
+                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntityTypes.GLACIAN_RAM.get(), 12, 2, 4)),
             glacioIcePeaks(placedFeatures, configuredCarvers),
             null));
 
@@ -143,7 +170,8 @@ public class ModBiomeDataProvider {
             1,
             0xc0d8ff,
             0xc0d8ff,
-            new MobSpawnSettings.Builder(),
+            new MobSpawnSettings.Builder()
+                .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(ModEntityTypes.GLACIAN_RAM.get(), 12, 2, 4)),
             glacio(placedFeatures, configuredCarvers),
             null));
     }
@@ -265,11 +293,5 @@ public class ModBiomeDataProvider {
         }
 
         return (new Biome.BiomeBuilder()).hasPrecipitation(hasPrecipitation).temperature(temperature).downfall(downfall).specialEffects(specoalEffectsBuilder.build()).mobSpawnSettings(mobSpawnSettings.build()).generationSettings(generationSettings.build()).build();
-    }
-
-    public static int calculateSkyColor(float temperature) {
-        float f = temperature / 3.0F;
-        f = Mth.clamp(f, -1.0F, 1.0F);
-        return Mth.hsvToRgb(0.62222224F - f * 0.05F, 0.5F + f * 0.1F, 1.0F);
     }
 }

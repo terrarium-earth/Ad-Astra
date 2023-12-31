@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.common.entities.mob;
 
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
+import earth.terrarium.botarium.common.fluid.FluidApi;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
@@ -41,14 +42,16 @@ public class SulfurCreeper extends Creeper {
         this.discard();
 
         for (Player player : explosion.getHitPlayers().keySet()) {
-            ItemStackHolder chest = new ItemStackHolder(player.getItemBySlot(EquipmentSlot.CHEST));
-            if (chest.getStack().getItem() instanceof SpaceSuitItem suit) {
-                FluidContainer fluidContainer = suit.getFluidContainer(chest.getStack());
+            var stack = player.getItemBySlot(EquipmentSlot.CHEST);
+            if (SpaceSuitItem.hasFullSet(player)) {
+                ItemStackHolder holder = new ItemStackHolder(stack);
+                if (!FluidApi.isFluidContainingItem(stack)) continue;
+                FluidContainer fluidContainer = FluidApi.getItemFluidContainer(holder);
                 long amount = Math.max(0, (long) ((7 - player.getPosition(0).distanceTo(player.getPosition(0))) * (FluidHooks.buckets(1f) / 8)));
                 FluidHolder toExtract = FluidHooks.newFluidHolder(fluidContainer.getFluids().get(0).getFluid(), amount, null);
                 fluidContainer.extractFluid(toExtract, false);
+                player.setItemSlot(EquipmentSlot.CHEST, holder.getStack());
             }
-            if (chest.isDirty()) player.setItemSlot(EquipmentSlot.CHEST, chest.getStack());
         }
 
         Collection<MobEffectInstance> effects = this.getActiveEffects();
