@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.config.AdAstraConfigClient;
 import earth.terrarium.adastra.client.models.armor.SpaceSuitModel;
+import earth.terrarium.adastra.client.models.entities.mobs.*;
 import earth.terrarium.adastra.client.models.entities.vehicles.LanderModel;
 import earth.terrarium.adastra.client.models.entities.vehicles.RocketModel;
 import earth.terrarium.adastra.client.models.entities.vehicles.RoverModel;
@@ -14,6 +15,7 @@ import earth.terrarium.adastra.client.renderers.blocks.EnergizerBlockEntityRende
 import earth.terrarium.adastra.client.renderers.blocks.FlagBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.GlobeBlockEntityRenderer;
 import earth.terrarium.adastra.client.renderers.blocks.SlidingDoorBlockEntityRenderer;
+import earth.terrarium.adastra.client.renderers.entities.mobs.*;
 import earth.terrarium.adastra.client.renderers.entities.vehicles.LanderRenderer;
 import earth.terrarium.adastra.client.renderers.entities.vehicles.RocketRenderer;
 import earth.terrarium.adastra.client.renderers.entities.vehicles.RoverRenderer;
@@ -42,6 +44,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
@@ -109,6 +112,20 @@ public class AdAstraClient {
         ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_3_ROCKET, c -> new RocketRenderer(c, RocketModel.TIER_3_LAYER, RocketRenderer.TIER_3_TEXTURE));
         ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_4_ROCKET, c -> new RocketRenderer(c, RocketModel.TIER_4_LAYER, RocketRenderer.TIER_4_TEXTURE));
         ClientHooks.registerEntityRenderer(ModEntityTypes.LANDER, c -> new LanderRenderer(c, LanderModel.LAYER, LanderRenderer.TEXTURE));
+
+        ClientHooks.registerEntityRenderer(ModEntityTypes.LUNARIAN, LunarianRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.CORRUPTED_LUNARIAN, CorruptedLunarianRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.STAR_CRAWLER, StarCrawlerRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.MARTIAN_RAPTOR, MartianRaptorRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.PYGRO, PygroRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.ZOMBIFIED_PYGRO, ZombifiedPygroRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.PYGRO_BRUTE, PygroBruteRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.MOGLER, MoglerRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.ZOMBIFIED_MOGLER, ZombifiedMoglerRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.SULFUR_CREEPER, SulfurCreeperRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.LUNARIAN_WANDERING_TRADER, LunarianWanderingTraderRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.GLACIAN_RAM, GlacianRamRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.ICE_SPIT, ThrownItemRenderer::new);
     }
 
     public static void registerArmor() {
@@ -128,6 +145,17 @@ public class AdAstraClient {
         RocketModel.register(consumer);
         consumer.register(LanderModel.LAYER, LanderModel::createBodyLayer);
         SpaceSuitModel.register(consumer);
+
+        consumer.register(LunarianModel.LAYER_LOCATION, LunarianModel::createBodyLayer);
+        consumer.register(CorruptedLunarianModel.LAYER_LOCATION, CorruptedLunarianModel::createBodyLayer);
+        consumer.register(StarCrawlerModel.LAYER_LOCATION, StarCrawlerModel::createBodyLayer);
+        consumer.register(MartianRaptorModel.LAYER_LOCATION, MartianRaptorModel::createBodyLayer);
+        consumer.register(PygroModel.LAYER_LOCATION, PygroModel::createBodyLayer);
+        consumer.register(PygroBruteModel.LAYER_LOCATION, PygroBruteModel::createBodyLayer);
+        consumer.register(ZombifiedPygroModel.LAYER_LOCATION, ZombifiedPygroModel::createBodyLayer);
+        consumer.register(MoglerModel.LAYER_LOCATION, MoglerModel::createBodyLayer);
+        consumer.register(SulfurCreeperModel.LAYER_LOCATION, SulfurCreeperModel::createBodyLayer);
+        consumer.register(GlacianRamModel.LAYER_LOCATION, GlacianRamModel::createBodyLayer);
     }
 
     private static void registerItemRenderers() {

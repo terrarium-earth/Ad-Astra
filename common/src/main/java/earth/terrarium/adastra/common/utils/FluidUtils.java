@@ -1,11 +1,14 @@
 package earth.terrarium.adastra.common.utils;
 
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.botarium.common.fluid.FluidApi;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.base.ItemFluidContainer;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.world.Container;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 
@@ -57,6 +60,14 @@ public class FluidUtils {
 
     public static FluidHolder extract(ItemStackHolder stack, FluidHolder fluid) {
         return FluidApi.getItemFluidContainer(stack).extractFluid(fluid, false);
+    }
+
+    public static ItemStack fluidFilledItem(RegistryEntry<Item> item, RegistryEntry<Fluid> fluid) {
+        var stack = new ItemStackHolder(item.get().getDefaultInstance());
+        var container = FluidApi.getItemFluidContainer(stack);
+        var holder = FluidHooks.newFluidHolder(fluid.get(), container.getTankCapacity(0), null);
+        container.insertFluid(holder, false);
+        return stack.getStack();
     }
 
     /**

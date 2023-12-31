@@ -32,12 +32,12 @@ public class CryoFreezingCategory implements DisplayCategory<CryoFreezingDisplay
 
     @Override
     public Component getTitle() {
-        return Component.translatable(ModBlocks.OXYGEN_LOADER.get().getDescriptionId());
+        return Component.translatable(ModBlocks.CRYO_FREEZER.get().getDescriptionId());
     }
 
     @Override
     public Renderer getIcon() {
-        return EntryStacks.of(ModBlocks.OXYGEN_LOADER.get());
+        return EntryStacks.of(ModBlocks.CRYO_FREEZER.get());
     }
 
     @Override

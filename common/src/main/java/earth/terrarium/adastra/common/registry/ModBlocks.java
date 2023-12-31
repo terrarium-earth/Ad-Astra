@@ -131,12 +131,12 @@ public class ModBlocks {
     public static final RegistryEntry<Block> RED_FLAG = FLAGS.register("red_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(1)));
     public static final RegistryEntry<Block> YELLOW_FLAG = FLAGS.register("yellow_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(1)));
 
-    public static final RegistryEntry<Block> EARTH_GLOBE = GLOBES.register("earth_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
-    public static final RegistryEntry<Block> MOON_GLOBE = GLOBES.register("moon_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
-    public static final RegistryEntry<Block> MARS_GLOBE = GLOBES.register("mars_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
-    public static final RegistryEntry<Block> MERCURY_GLOBE = GLOBES.register("mercury_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
-    public static final RegistryEntry<Block> VENUS_GLOBE = GLOBES.register("venus_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
-    public static final RegistryEntry<Block> GLACIO_GLOBE = GLOBES.register("glacio_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
+    public static final RegistryEntry<Block> EARTH_GLOBE = GLOBES.register("earth_globe", () -> new GlobeBlock(IRON_PROPERTIES.noOcclusion()));
+    public static final RegistryEntry<Block> MOON_GLOBE = GLOBES.register("moon_globe", () -> new GlobeBlock(IRON_PROPERTIES.noOcclusion()));
+    public static final RegistryEntry<Block> MARS_GLOBE = GLOBES.register("mars_globe", () -> new GlobeBlock(IRON_PROPERTIES.noOcclusion()));
+    public static final RegistryEntry<Block> MERCURY_GLOBE = GLOBES.register("mercury_globe", () -> new GlobeBlock(IRON_PROPERTIES.noOcclusion()));
+    public static final RegistryEntry<Block> VENUS_GLOBE = GLOBES.register("venus_globe", () -> new GlobeBlock(IRON_PROPERTIES.noOcclusion()));
+    public static final RegistryEntry<Block> GLACIO_GLOBE = GLOBES.register("glacio_globe", () -> new GlobeBlock(IRON_PROPERTIES.noOcclusion()));
 
     public static final RegistryEntry<Block> RADIO = BLOCKS.register("radio", () -> new RadioBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(1)));
 
@@ -165,7 +165,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> ENCASED_STEEL_BLOCK = CUBES.register("encased_steel_block", () -> new Block(STEEL_PROPERTIES));
     public static final RegistryEntry<Block> STEEL_PLATEBLOCK = CUBES.register("steel_plateblock", () -> new Block(STEEL_PROPERTIES));
     public static final RegistryEntry<Block> STEEL_PANEL = CUBES.register("steel_panel", () -> new Block(STEEL_PROPERTIES));
-    public static final RegistryEntry<Block> BLOCK_OF_STEEL = CUBES.register("block_of_steel", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+    public static final RegistryEntry<Block> BLOCK_OF_STEEL = CUBES.register("block_of_steel", () -> new Block(STEEL_PROPERTIES));
     public static final RegistryEntry<Block> STEEL_PLATING = CUBES.register("steel_plating", () -> new Block(STEEL_PROPERTIES));
     public static final RegistryEntry<Block> STEEL_PLATING_STAIRS = STAIRS.register("steel_plating_stairs", () -> new StairBlock(STEEL_PLATING.get().defaultBlockState(), STEEL_PROPERTIES));
     public static final RegistryEntry<Block> STEEL_PLATING_SLAB = SLABS.register("steel_plating_slab", () -> new SlabBlock(STEEL_PROPERTIES));
@@ -183,7 +183,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> ENCASED_ETRIUM_BLOCK = CUBES.register("encased_etrium_block", () -> new Block(ETRIUM_PROPERTIES));
     public static final RegistryEntry<Block> ETRIUM_PLATEBLOCK = CUBES.register("etrium_plateblock", () -> new Block(ETRIUM_PROPERTIES));
     public static final RegistryEntry<Block> ETRIUM_PANEL = CUBES.register("etrium_panel", () -> new Block(ETRIUM_PROPERTIES));
-    public static final RegistryEntry<Block> BLOCK_OF_ETRIUM = CUBES.register("block_of_etrium", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)));
+    public static final RegistryEntry<Block> BLOCK_OF_ETRIUM = CUBES.register("block_of_etrium", () -> new Block(ETRIUM_PROPERTIES));
 
     public static final RegistryEntry<Block> DESH_FACTORY_BLOCK = CTM_CUBES.register("desh_factory_block", () -> new Block(DESH_PROPERTIES));
     public static final RegistryEntry<Block> ENCASED_DESH_BLOCK = CUBES.register("encased_desh_block", () -> new Block(DESH_PROPERTIES));

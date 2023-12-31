@@ -18,6 +18,7 @@ import earth.terrarium.adastra.common.items.rendered.RenderedBlockItem;
 import earth.terrarium.adastra.common.items.vehicles.RocketItem;
 import earth.terrarium.adastra.common.items.vehicles.RoverItem;
 import earth.terrarium.adastra.common.tags.ModPaintingVariantTags;
+import earth.terrarium.adastra.common.utils.PlatformUtils;
 import earth.terrarium.botarium.common.registry.fluid.FluidBucketItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.*;
@@ -34,6 +35,7 @@ public class ModItems {
     public static final ResourcefulRegistry<Item> FLAGS = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> PIPES = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> VEHICLES = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> SPAWN_EGGS = ResourcefulRegistries.create(ITEMS);
 
     public static final RegistryEntry<Item> TIER_1_ROCKET = VEHICLES.register("tier_1_rocket", () -> new RocketItem(ModEntityTypes.TIER_1_ROCKET::get, new Item.Properties().stacksTo(1).fireResistant()));
     public static final RegistryEntry<Item> TIER_2_ROCKET = VEHICLES.register("tier_2_rocket", () -> new RocketItem(ModEntityTypes.TIER_2_ROCKET::get, new Item.Properties().stacksTo(1).fireResistant()));
@@ -501,4 +503,18 @@ public class ModItems {
     public static final RegistryEntry<Item> GLACIAN_BUTTON = ITEMS.register("glacian_button", () -> new BlockItem(ModBlocks.GLACIAN_BUTTON.get(), new Item.Properties()));
     public static final RegistryEntry<Item> GLACIAN_PRESSURE_PLATE = ITEMS.register("glacian_pressure_plate", () -> new BlockItem(ModBlocks.GLACIAN_PRESSURE_PLATE.get(), new Item.Properties()));
     public static final RegistryEntry<Item> GLACIAN_FUR = ITEMS.register("glacian_fur", () -> new BlockItem(ModBlocks.GLACIAN_FUR.get(), new Item.Properties()));
+
+    // LEGACY ENTITIES. WILL BE REPLACED IN THE FUTURE
+    public static final RegistryEntry<Item> LUNARIAN_SPAWN_EGG = SPAWN_EGGS.register("lunarian_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.LUNARIAN, 0xff33ccff, 0xff4e3923, new Item.Properties()));
+    public static final RegistryEntry<Item> CORRUPTED_LUNARIAN_SPAWN_EGG = SPAWN_EGGS.register("corrupted_lunarian_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.CORRUPTED_LUNARIAN, 0xff1e1b19, 0xff0090c1, new Item.Properties()));
+    public static final RegistryEntry<Item> STAR_CRAWLER_SPAWN_EGG = SPAWN_EGGS.register("star_crawler_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.STAR_CRAWLER, 0xff333333, 0xff00cccc, new Item.Properties()));
+    public static final RegistryEntry<Item> MARTIAN_RAPTOR_SPAWN_EGG = SPAWN_EGGS.register("martian_raptor_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.MARTIAN_RAPTOR, 0x51a03e, 0xffffcc00, new Item.Properties()));
+    public static final RegistryEntry<Item> PYGRO_SPAWN_EGG = SPAWN_EGGS.register("pygro_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.PYGRO, 0xffcc6600, 0xff990000, new Item.Properties()));
+    public static final RegistryEntry<Item> ZOMBIFIED_PYGRO_SPAWN_EGG = SPAWN_EGGS.register("zombified_pygro_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.ZOMBIFIED_PYGRO, 0x814a25, 0x5d8e47, new Item.Properties()));
+    public static final RegistryEntry<Item> PYGRO_BRUTE_SPAWN_EGG = SPAWN_EGGS.register("pygro_brute_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.PYGRO_BRUTE, 0xffcc6600, 0xfffef978, new Item.Properties()));
+    public static final RegistryEntry<Item> MOGLER_SPAWN_EGG = SPAWN_EGGS.register("mogler_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.MOGLER, 0xffffcc00, 0xffcc0000, new Item.Properties()));
+    public static final RegistryEntry<Item> ZOMBIFIED_MOGLER_SPAWN_EGG = SPAWN_EGGS.register("zombified_mogler_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.ZOMBIFIED_MOGLER, 0xbf4e41, 0x79e655, new Item.Properties()));
+    public static final RegistryEntry<Item> SULFUR_CREEPER_SPAWN_EGG = SPAWN_EGGS.register("sulfur_creeper_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.SULFUR_CREEPER, 0xd48f30, 0xac791c, new Item.Properties()));
+    public static final RegistryEntry<Item> GLACIAN_RAM_SPAWN_EGG = SPAWN_EGGS.register("glacian_ram_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.GLACIAN_RAM, 0xffe6ff, 0x433d3d, new Item.Properties()));
+    public static final RegistryEntry<Item> LUNARIAN_WANDERING_TRADER_SPAWN_EGG = SPAWN_EGGS.register("lunarian_wandering_trader_spawn_egg", PlatformUtils.createSpawnEggItem(ModEntityTypes.LUNARIAN_WANDERING_TRADER, 0x5b73c7, 0x8244d5, new Item.Properties()));
 }

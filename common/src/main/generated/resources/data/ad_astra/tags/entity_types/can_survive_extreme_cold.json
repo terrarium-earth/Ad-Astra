@@ -2,6 +2,10 @@
   "values": [
     "#minecraft:freeze_immune_entity_types",
     "minecraft:snow_golem",
-    "minecraft:stray"
+    "minecraft:stray",
+    "ad_astra:corrupted_lunarian",
+    "ad_astra:star_crawler",
+    "ad_astra:martian_raptor",
+    "ad_astra:lunarian"
   ]
 }
