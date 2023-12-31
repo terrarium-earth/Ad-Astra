@@ -1,6 +1,9 @@
-package earth.terrarium.adastra.client.screens.machines;
+package earth.terrarium.adastra.common.blockentities.machines;
 
+import com.mojang.datafixers.util.Pair;
+import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
+import earth.terrarium.adastra.common.blockentities.base.RedstoneControl;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
@@ -10,6 +13,7 @@ import earth.terrarium.adastra.common.recipes.machines.NasaWorkbenchRecipe;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
+import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -27,14 +31,19 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.IntStream;
 
 public class NasaWorkbenchBlockEntity extends ContainerMachineBlockEntity {
+
+    private static final int[] INPUT_SLOTS = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+
+
     @Nullable
     protected NasaWorkbenchRecipe recipe;
 
     public NasaWorkbenchBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 15);
+
+        this.setRedstoneControl(RedstoneControl.NEVER_ON);
     }
 
     @Override
@@ -54,6 +63,10 @@ public class NasaWorkbenchBlockEntity extends ContainerMachineBlockEntity {
             }
         }
 
+        if (time % 30 == 0 && canFunction() && canCraft()) {
+            craft();
+        }
+
         if (recipe != null && canCraft()) {
             setItem(14, recipe.result());
         } else {
@@ -63,27 +76,23 @@ public class NasaWorkbenchBlockEntity extends ContainerMachineBlockEntity {
 
     @Override
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
-        TransferUtils.pushItemsNearby(this, pos, new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}, getSideConfig().get(0), filter);
-        TransferUtils.pullItemsNearby(this, pos, new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}, getSideConfig().get(0), filter);
+        TransferUtils.pushItemsNearby(this, pos, INPUT_SLOTS, getSideConfig().get(0), filter);
+        TransferUtils.pullItemsNearby(this, pos, INPUT_SLOTS, getSideConfig().get(0), filter);
     }
 
     @Override
     public void update() {
         if (level().isClientSide()) return;
-        level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.NASA_WORKBENCH.get())
-            .stream()
-            .filter(r -> IntStream.range(0, 14)
-                .allMatch(i -> r.ingredients().get(i).test(getItem(i))))
-            .findFirst()
+        level().getRecipeManager().getRecipeFor(
+                ModRecipeTypes.NASA_WORKBENCH.get(), this,
+                level(), Optionull.map(recipe, CodecRecipe::id)
+            )
+            .map(Pair::getSecond)
             .ifPresent(r -> recipe = r);
     }
 
     public boolean canCraft() {
-        if (recipe == null) return false;
-        for (int i = 0; i < 14; i++) {
-            if (!recipe.ingredients().get(i).test(getItem(i))) return false;
-        }
-        return true;
+        return recipe != null && recipe.matches(this, level());
     }
 
     public void craft() {
@@ -135,6 +144,6 @@ public class NasaWorkbenchBlockEntity extends ContainerMachineBlockEntity {
 
     @Override
     public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
-        return new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+        return INPUT_SLOTS;
     }
 }

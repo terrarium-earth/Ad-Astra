@@ -4,7 +4,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.client.screens.machines.NasaWorkbenchBlockEntity;
+import earth.terrarium.adastra.common.blockentities.machines.NasaWorkbenchBlockEntity;
 import earth.terrarium.adastra.common.blockentities.machines.*;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
 import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;

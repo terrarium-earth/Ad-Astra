@@ -1,6 +1,6 @@
 package earth.terrarium.adastra.common.menus.machines;
 
-import earth.terrarium.adastra.client.screens.machines.NasaWorkbenchBlockEntity;
+import earth.terrarium.adastra.common.blockentities.machines.NasaWorkbenchBlockEntity;
 import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.world.entity.player.Inventory;

@@ -2,6 +2,7 @@ package earth.terrarium.adastra.client.screens.machines;
 
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.screens.base.MachineScreen;
+import earth.terrarium.adastra.common.blockentities.machines.NasaWorkbenchBlockEntity;
 import earth.terrarium.adastra.common.menus.machines.NasaWorkbenchMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
