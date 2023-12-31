@@ -39,13 +39,14 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
-    public static final int MAX_BLOCKS = 3_000;
+    public static final int MAX_BLOCKS = 6_000;
 
     private final Set<BlockPos> lastDistributedBlocks = new HashSet<>();
     private long energyPerTick;
     private float fluidPerTick;
     private int distributedBlocksCount;
     private float accumulatedFluid;
+    private int shutDownTicks;
 
     public OxygenDistributorBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 3);
@@ -96,8 +97,12 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         super.serverTick(level, time, state, pos);
-        float fluidPerTick = calculateFluidPerTick();
+        if (shutDownTicks > 0) {
+            shutDownTicks--;
+            return;
+        }
 
+        float fluidPerTick = calculateFluidPerTick();
         boolean canDistribute = canCraftDistribution(FluidHooks.buckets(Math.max(0.001, fluidPerTick / 1000)));
         if (canFunction() && canDistribute) {
             getEnergyStorage().internalExtract(calculateEnergyPerTick(), false);
@@ -116,8 +121,9 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
             } else if (time % 100 == 0) {
                 level.playSound(null, pos, ModSoundEvents.OXYGEN_INTAKE.get(), SoundSource.BLOCKS, 0.2f, 1);
             }
-        } else if (time % 20 == 0 && !lastDistributedBlocks.isEmpty()) {
+        } else if (!lastDistributedBlocks.isEmpty()) {
             clearOxygenBlocks();
+            shutDownTicks = 60;
         }
 
         energyPerTick = (recipe != null && canCraft(getEnergyStorage()) ? recipe.energy() : 0) + (canDistribute ? calculateEnergyPerTick() : 0);

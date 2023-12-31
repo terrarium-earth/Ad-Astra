@@ -89,7 +89,7 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
 
     private void pump(ServerLevel level, WrappedBlockEnergyContainer energyStorage) {
         energyStorage.internalExtract(20, false);
-        fluidContainer.internalInsert(FluidHooks.newFluidHolder(Fluids.WATER, FluidHooks.buckets(0.2f), null), false);
+        fluidContainer.internalInsert(FluidHooks.newFluidHolder(Fluids.WATER, FluidHooks.buckets(0.05f), null), false);
         ModUtils.sendParticles(level,
             ModParticleTypes.OXYGEN_BUBBLE.get(),
             getBlockPos().getX() + 0.5,
@@ -103,7 +103,7 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
     @Override
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
         TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), getSideConfig().get(0), filter);
-        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.2f), 0, getSideConfig().get(1), filter);
+        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.05f), 0, getSideConfig().get(1), filter);
     }
 
     @Override

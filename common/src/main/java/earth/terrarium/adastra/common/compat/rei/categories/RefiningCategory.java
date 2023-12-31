@@ -30,12 +30,12 @@ public class RefiningCategory implements DisplayCategory<RefiningDisplay> {
 
     @Override
     public Component getTitle() {
-        return Component.translatable(ModBlocks.OXYGEN_LOADER.get().getDescriptionId());
+        return Component.translatable(ModBlocks.FUEL_REFINERY.get().getDescriptionId());
     }
 
     @Override
     public Renderer getIcon() {
-        return EntryStacks.of(ModBlocks.OXYGEN_LOADER.get());
+        return EntryStacks.of(ModBlocks.FUEL_REFINERY.get());
     }
 
     @Override

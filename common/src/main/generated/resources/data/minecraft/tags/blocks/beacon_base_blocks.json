@@ -1,9 +1,9 @@
 {
   "values": [
-    "ad_astra:block_of_steel",
-    "ad_astra:block_of_etrium",
-    "ad_astra:block_of_desh",
-    "ad_astra:block_of_ostrum",
-    "ad_astra:block_of_calorite"
+    "ad_astra:steel_block",
+    "ad_astra:etrium_block",
+    "ad_astra:desh_block",
+    "ad_astra:ostrum_block",
+    "ad_astra:calorite_block"
   ]
 }

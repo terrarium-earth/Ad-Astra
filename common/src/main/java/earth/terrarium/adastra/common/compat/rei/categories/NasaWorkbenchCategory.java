@@ -27,12 +27,12 @@ public class NasaWorkbenchCategory implements DisplayCategory<NasaWorkbenchDispl
 
     @Override
     public Component getTitle() {
-        return Component.translatable(ModBlocks.COMPRESSOR.get().getDescriptionId());
+        return Component.translatable(ModBlocks.NASA_WORKBENCH.get().getDescriptionId());
     }
 
     @Override
     public Renderer getIcon() {
-        return EntryStacks.of(ModBlocks.COMPRESSOR.get());
+        return EntryStacks.of(ModBlocks.NASA_WORKBENCH.get());
     }
 
     @Override

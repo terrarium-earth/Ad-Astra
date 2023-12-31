@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-22T14:30:56.158077	Item Models: ad_astra
+// 1.20.1	2023-12-30T16:57:03.243134	Item Models: ad_astra
 7d119b836785f643ace2c0509d054425c9f5b0b8 assets/ad_astra/models/item/aeronos_door.json
 2b767710184c7e073c9f542065103954b5375b1f assets/ad_astra/models/item/aeronos_mushroom.json
 d5a7a8a582c125092e7a873011879a09a9e58b46 assets/ad_astra/models/item/airlock.json
@@ -9,6 +9,7 @@ ac74a23cdd8f97796d423184aff6eb8e50271cd9 assets/ad_astra/models/item/calorite_nu
 a0692ea8673e441fc319dc22fff612b395a41345 assets/ad_astra/models/item/calorite_sliding_door.json
 b5696741dc78b04bab025db27ce183f481c6ae30 assets/ad_astra/models/item/calorite_tank.json
 980486a0063737de17483c775d0810e2ed89b7a4 assets/ad_astra/models/item/cheese.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ad_astra/models/item/corrupted_lunarian_spawn_egg.json
 b4388d5ed807bf5f940ed84028ff1e3ff38ac080 assets/ad_astra/models/item/cryo_fuel_bucket.json
 5096c5e9e03f59faf478fbe04a7d86e25986831a assets/ad_astra/models/item/desh_cable.json
 cbc72d4249297441ed3db508ddc3ee5ac7582d16 assets/ad_astra/models/item/desh_engine.json
@@ -28,6 +29,7 @@ dc42478a15863b26ff715d358214ad145f42c1e6 assets/ad_astra/models/item/fan.json
 0fa8395573ddf328461f91dfac8a2a9b0aa183ac assets/ad_astra/models/item/fuel_bucket.json
 95b45fc25151c1597117721d59eae188ba408ae4 assets/ad_astra/models/item/gas_tank.json
 e7c46b77b464e662eb31395405b20884118cc91c assets/ad_astra/models/item/glacian_door.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ad_astra/models/item/glacian_ram_spawn_egg.json
 94880a02ec8d259ab370c1a6fe5f083998f148ac assets/ad_astra/models/item/hydrogen_bucket.json
 095e25cf5d65e28d4f201176a30ccca2bed2d6d8 assets/ad_astra/models/item/ice_shard.json
 7d828e314b4ba4d5fa172b04c76b02fb45e69097 assets/ad_astra/models/item/iron_plate.json
@@ -37,6 +39,10 @@ d10f0ed7916f35494adec77799bfba9686a952ae assets/ad_astra/models/item/jet_suit.js
 0bdf79b01c61f76133c4dd95745dde29b99bfe84 assets/ad_astra/models/item/jet_suit_boots.json
 86feedba7d9290583ecc7fb8b6c195a679472779 assets/ad_astra/models/item/jet_suit_pants.json
 7909df816ab0ae10bc61d4b4b53e3ba7ea2d0359 assets/ad_astra/models/item/large_gas_tank.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ad_astra/models/item/lunarian_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ad_astra/models/item/lunarian_wandering_trader_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ad_astra/models/item/martian_raptor_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ad_astra/models/item/mogler_spawn_egg.json
 deb9c159a1f646693d5aacbfae59b97b9dc324c5 assets/ad_astra/models/item/netherite_space_boots.json
 ebda1d52d7efc5d5c9079e6335c36cabab687151 assets/ad_astra/models/item/netherite_space_pants.json
 1b28cb074adb54efbb9ba61fb6eddf2d48edc010 assets/ad_astra/models/item/netherite_space_suit.json
@@ -52,6 +58,8 @@ e7109879102051dadd8fba71f2568154a2282248 assets/ad_astra/models/item/oxygen_buck
 bdab27bdb4a023a6ee32998e0c070d2bbc313d26 assets/ad_astra/models/item/oxygen_gear.json
 6323e89e35c52c06f7c77fc8c1447d5535381ddf assets/ad_astra/models/item/photovoltaic_etrium_cell.json
 1a6682c40393e66f79705a1b243c6e2e42b54696 assets/ad_astra/models/item/photovoltaic_vesnium_cell.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ad_astra/models/item/pygro_brute_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ad_astra/models/item/pygro_spawn_egg.json
 17c58b6e2aedc9c7d5ced2b77103fadaf6f2094c assets/ad_astra/models/item/raw_calorite.json
 737f6345a63012e82e2cc791dea37cfc021217bc assets/ad_astra/models/item/raw_desh.json
 b8b4d56f7675407f8be3e6b84ef6e7c99d01eb7b assets/ad_astra/models/item/raw_ostrum.json
@@ -63,6 +71,7 @@ b01f4f46a67d63be07a0497047a6fe800891283b assets/ad_astra/models/item/rocket_nose
 da00145cb4457f9d575cfeaa957e2dfe887cbd6a assets/ad_astra/models/item/space_painting.json
 55dba8cbf12ff6413f336a4458cadd8d93ceb589 assets/ad_astra/models/item/space_pants.json
 d6c14c9b043f0efd1b16b06f22428309a11f6f34 assets/ad_astra/models/item/space_suit.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ad_astra/models/item/star_crawler_spawn_egg.json
 35dddf7a8996040104f1b869aa50212b78a37c1b assets/ad_astra/models/item/steel_cable.json
 61ca34472a21ec3f4b79be369b8d19eb4fa7fd33 assets/ad_astra/models/item/steel_door.json
 720fbcaba5e46a4056257eec5bbc98982889c489 assets/ad_astra/models/item/steel_engine.json
@@ -74,5 +83,8 @@ b7b6067cc59b36f133c6c9d9b82ec12a04b5e4ef assets/ad_astra/models/item/steel_plate
 b45f380c03fb7dd7b823435e9fd572992dd9a9e6 assets/ad_astra/models/item/steel_tank.json
 c72e5b54182168485ba2bc9eab52ba452776a9d9 assets/ad_astra/models/item/strophar_door.json
 6078e0115c7d40936b0cf16eefd0cf11a4e3dd33 assets/ad_astra/models/item/strophar_mushroom.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ad_astra/models/item/sulfur_creeper_spawn_egg.json
 93fd85463176296536696a33cbe9447a3dd1ec00 assets/ad_astra/models/item/wheel.json
 9f95296cd28f3863946094b9e4e8b84f9b52779b assets/ad_astra/models/item/wrench.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ad_astra/models/item/zombified_mogler_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/ad_astra/models/item/zombified_pygro_spawn_egg.json

@@ -1,0 +1,22 @@
+{
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "mekanism"
+		}
+	],
+	"type": "mekanism:sawing",
+	"input": {
+		"ingredient": {
+			"tag": "ad_astra:strophar_caps"
+		}
+	},
+	"mainOutput": {
+		"count": 6,
+		"item": "ad_astra:strophar_planks"
+	},
+	"secondaryChance": 0.25,
+	"secondaryOutput": {
+		"item": "mekanism:sawdust"
+	}
+}

@@ -1,0 +1,25 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "techreborn"
+      ]
+    }
+  ],
+  "type": "techreborn:compressor",
+  "power": 2,
+  "time": 400,
+  "ingredients": [
+    {
+      "tag": "c:calorite_blocks",
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "item": "ad_astra:calorite_plate",
+      "count": 9
+    }
+  ]
+}
