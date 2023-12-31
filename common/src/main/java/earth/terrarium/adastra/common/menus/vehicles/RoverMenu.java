@@ -2,10 +2,10 @@ package earth.terrarium.adastra.common.menus.vehicles;
 
 import earth.terrarium.adastra.common.entities.vehicles.Rover;
 import earth.terrarium.adastra.common.menus.base.BaseEntityContainerMenu;
+import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.FurnaceResultSlot;
 import net.minecraft.world.inventory.Slot;
 
 public class RoverMenu extends BaseEntityContainerMenu<Rover> {
@@ -47,6 +47,6 @@ public class RoverMenu extends BaseEntityContainerMenu<Rover> {
         }
 
         addSlot(new Slot(entity.inventory(), 0, 12, 26));
-        addSlot(new FurnaceResultSlot(player, entity.inventory(), 1, 12, 56));
+        addSlot(CustomSlot.noPlace(entity.inventory(), 1, 12, 56));
     }
 }

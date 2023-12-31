@@ -4,9 +4,9 @@ import earth.terrarium.adastra.common.blockentities.machines.CompressorBlockEnti
 import earth.terrarium.adastra.common.menus.base.MachineMenu;
 import earth.terrarium.adastra.common.menus.configuration.EnergyConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.SlotConfiguration;
+import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.FurnaceResultSlot;
 import net.minecraft.world.inventory.Slot;
 
 public class CompressorMenu extends MachineMenu<CompressorBlockEntity> {
@@ -38,7 +38,7 @@ public class CompressorMenu extends MachineMenu<CompressorBlockEntity> {
     @Override
     protected void addMenuSlots() {
         addSlot(new Slot(entity, 1, 53, 56));
-        addSlot(new FurnaceResultSlot(player, entity, 2, 100, 56));
+        addSlot(CustomSlot.noPlace(entity, 2, 100, 56));
     }
 
     @Override

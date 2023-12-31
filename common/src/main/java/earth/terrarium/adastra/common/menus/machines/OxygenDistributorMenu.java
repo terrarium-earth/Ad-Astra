@@ -5,9 +5,9 @@ import earth.terrarium.adastra.common.menus.base.MachineMenu;
 import earth.terrarium.adastra.common.menus.configuration.EnergyConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.FluidConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.SlotConfiguration;
+import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.FurnaceResultSlot;
 import net.minecraft.world.inventory.Slot;
 
 public class OxygenDistributorMenu extends MachineMenu<OxygenDistributorBlockEntity> {
@@ -39,7 +39,7 @@ public class OxygenDistributorMenu extends MachineMenu<OxygenDistributorBlockEnt
     @Override
     protected void addMenuSlots() {
         addSlot(new Slot(entity, 1, 17, 82));
-        addSlot(new FurnaceResultSlot(player, entity, 2, 17, 112));
+        addSlot(CustomSlot.noPlace(entity, 2, 17, 112));
     }
 
     @Override

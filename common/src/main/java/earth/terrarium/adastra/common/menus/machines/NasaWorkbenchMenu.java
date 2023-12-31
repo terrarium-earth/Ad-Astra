@@ -2,11 +2,11 @@ package earth.terrarium.adastra.common.menus.machines;
 
 import earth.terrarium.adastra.common.blockentities.machines.NasaWorkbenchBlockEntity;
 import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
+import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
-import net.minecraft.world.inventory.FurnaceResultSlot;
 import net.minecraft.world.inventory.Slot;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,12 +58,7 @@ public class NasaWorkbenchMenu extends BaseContainerMenu<NasaWorkbenchBlockEntit
         addSlot(new Slot(entity, 12, 56, 110));
         addSlot(new Slot(entity, 13, 83, 110));
 
-        addSlot(new FurnaceResultSlot(player, entity, 14, 129, 56) {
-            @Override
-            public boolean mayPickup(Player player) {
-                return false;
-            }
-        });
+        addSlot(CustomSlot.noPlaceOrTake(entity, 14, 129, 56));
     }
 
     @Override
