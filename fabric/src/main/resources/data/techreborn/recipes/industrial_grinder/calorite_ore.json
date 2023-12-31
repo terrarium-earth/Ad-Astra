@@ -1,0 +1,32 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "techreborn"
+      ]
+    }
+  ],
+  "type": "techreborn:industrial_grinder",
+  "power": 64,
+  "time": 100,
+  "tank": {
+    "fluid": "minecraft:water",
+    "amount": 1000
+  },
+  "ingredients": [
+    {
+      "tag": "c:calorite_ores"
+    }
+  ],
+  "results": [
+    {
+      "item": "ad_astra:raw_calorite",
+      "count": 3
+    },
+    {
+      "item": "ad_astra:calorite_nugget",
+      "count": 3
+    }
+  ]
+}

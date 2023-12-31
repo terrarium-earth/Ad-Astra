@@ -1,6 +1,6 @@
 {
   "values": [
-    "ad_astra:block_of_calorite",
+    "ad_astra:calorite_block",
     {
       "id": "#c:calorite_blocks",
       "required": false

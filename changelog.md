@@ -97,8 +97,6 @@ These are available for all metals.
 - Added Encased Plateblocks, and Panel blocks. These are are available for all metals.
 
 ## Breaking Changes
-- storage blocks like desh blocks, steel blocks, etc. have had an ID change. Turn them into ingots before
-updating so that you don't lose them.
 - Removed Glacian signs, and aeronos and strophar chests.
 - The JSON format for Ad Astra planets has changed a bit. You'll need
 to update your existing planet file for it to work. Check the GitHub wiki (when it's updated).

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "ad_astra:tier_1_rover",
+    "ad_astra:tier_1_rocket",
+    "ad_astra:tier_2_rocket",
+    "ad_astra:tier_3_rocket",
+    "ad_astra:tier_4_rocket"
+  ]
+}

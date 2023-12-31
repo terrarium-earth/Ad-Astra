@@ -165,7 +165,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> ENCASED_STEEL_BLOCK = CUBES.register("encased_steel_block", () -> new Block(STEEL_PROPERTIES));
     public static final RegistryEntry<Block> STEEL_PLATEBLOCK = CUBES.register("steel_plateblock", () -> new Block(STEEL_PROPERTIES));
     public static final RegistryEntry<Block> STEEL_PANEL = CUBES.register("steel_panel", () -> new Block(STEEL_PROPERTIES));
-    public static final RegistryEntry<Block> BLOCK_OF_STEEL = CUBES.register("block_of_steel", () -> new Block(STEEL_PROPERTIES));
+    public static final RegistryEntry<Block> STEEL_BLOCK = CUBES.register("steel_block", () -> new Block(STEEL_PROPERTIES));
     public static final RegistryEntry<Block> STEEL_PLATING = CUBES.register("steel_plating", () -> new Block(STEEL_PROPERTIES));
     public static final RegistryEntry<Block> STEEL_PLATING_STAIRS = STAIRS.register("steel_plating_stairs", () -> new StairBlock(STEEL_PLATING.get().defaultBlockState(), STEEL_PROPERTIES));
     public static final RegistryEntry<Block> STEEL_PLATING_SLAB = SLABS.register("steel_plating_slab", () -> new SlabBlock(STEEL_PROPERTIES));
@@ -183,13 +183,13 @@ public class ModBlocks {
     public static final RegistryEntry<Block> ENCASED_ETRIUM_BLOCK = CUBES.register("encased_etrium_block", () -> new Block(ETRIUM_PROPERTIES));
     public static final RegistryEntry<Block> ETRIUM_PLATEBLOCK = CUBES.register("etrium_plateblock", () -> new Block(ETRIUM_PROPERTIES));
     public static final RegistryEntry<Block> ETRIUM_PANEL = CUBES.register("etrium_panel", () -> new Block(ETRIUM_PROPERTIES));
-    public static final RegistryEntry<Block> BLOCK_OF_ETRIUM = CUBES.register("block_of_etrium", () -> new Block(ETRIUM_PROPERTIES));
+    public static final RegistryEntry<Block> ETRIUM_BLOCK = CUBES.register("etrium_block", () -> new Block(ETRIUM_PROPERTIES));
 
     public static final RegistryEntry<Block> DESH_FACTORY_BLOCK = CTM_CUBES.register("desh_factory_block", () -> new Block(DESH_PROPERTIES));
     public static final RegistryEntry<Block> ENCASED_DESH_BLOCK = CUBES.register("encased_desh_block", () -> new Block(DESH_PROPERTIES));
     public static final RegistryEntry<Block> DESH_PLATEBLOCK = CUBES.register("desh_plateblock", () -> new Block(DESH_PROPERTIES));
     public static final RegistryEntry<Block> DESH_PANEL = CUBES.register("desh_panel", () -> new Block(DESH_PROPERTIES));
-    public static final RegistryEntry<Block> BLOCK_OF_DESH = CUBES.register("block_of_desh", () -> new Block(DESH_PROPERTIES));
+    public static final RegistryEntry<Block> DESH_BLOCK = CUBES.register("desh_block", () -> new Block(DESH_PROPERTIES));
     public static final RegistryEntry<Block> RAW_DESH_BLOCK = CUBES.register("raw_desh_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK).mapColor(MapColor.COLOR_ORANGE)));
     public static final RegistryEntry<Block> DESH_PLATING = CUBES.register("desh_plating", () -> new Block(DESH_PROPERTIES));
     public static final RegistryEntry<Block> DESH_PLATING_STAIRS = STAIRS.register("desh_plating_stairs", () -> new StairBlock(DESH_PLATING.get().defaultBlockState(), DESH_PROPERTIES));
@@ -204,7 +204,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> ENCASED_OSTRUM_BLOCK = CUBES.register("encased_ostrum_block", () -> new Block(OSTRUM_PROPERTIES));
     public static final RegistryEntry<Block> OSTRUM_PLATEBLOCK = CUBES.register("ostrum_plateblock", () -> new Block(OSTRUM_PROPERTIES));
     public static final RegistryEntry<Block> OSTRUM_PANEL = CUBES.register("ostrum_panel", () -> new Block(OSTRUM_PROPERTIES));
-    public static final RegistryEntry<Block> BLOCK_OF_OSTRUM = CUBES.register("block_of_ostrum", () -> new Block(OSTRUM_PROPERTIES));
+    public static final RegistryEntry<Block> OSTRUM_BLOCK = CUBES.register("ostrum_block", () -> new Block(OSTRUM_PROPERTIES));
     public static final RegistryEntry<Block> RAW_OSTRUM_BLOCK = CUBES.register("raw_ostrum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK).mapColor(MapColor.COLOR_PURPLE)));
     public static final RegistryEntry<Block> OSTRUM_PLATING = CUBES.register("ostrum_plating", () -> new Block(OSTRUM_PROPERTIES));
     public static final RegistryEntry<Block> OSTRUM_PLATING_STAIRS = STAIRS.register("ostrum_plating_stairs", () -> new StairBlock(OSTRUM_PLATING.get().defaultBlockState(), OSTRUM_PROPERTIES));
@@ -219,7 +219,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> ENCASED_CALORITE_BLOCK = CUBES.register("encased_calorite_block", () -> new Block(CALORITE_PROPERTIES));
     public static final RegistryEntry<Block> CALORITE_PLATEBLOCK = CUBES.register("calorite_plateblock", () -> new Block(CALORITE_PROPERTIES));
     public static final RegistryEntry<Block> CALORITE_PANEL = CUBES.register("calorite_panel", () -> new Block(CALORITE_PROPERTIES));
-    public static final RegistryEntry<Block> BLOCK_OF_CALORITE = CUBES.register("block_of_calorite", () -> new Block(CALORITE_PROPERTIES));
+    public static final RegistryEntry<Block> CALORITE_BLOCK = CUBES.register("calorite_block", () -> new Block(CALORITE_PROPERTIES));
     public static final RegistryEntry<Block> RAW_CALORITE_BLOCK = CUBES.register("raw_calorite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK).mapColor(MapColor.COLOR_RED)));
     public static final RegistryEntry<Block> CALORITE_PLATING = CUBES.register("calorite_plating", () -> new Block(CALORITE_PROPERTIES));
     public static final RegistryEntry<Block> CALORITE_PLATING_STAIRS = STAIRS.register("calorite_plating_stairs", () -> new StairBlock(CALORITE_PLATING.get().defaultBlockState(), CALORITE_PROPERTIES));

@@ -106,12 +106,12 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         add(ModBlockTags.GLACIO_STONE_REPLACEABLES, ModBlocks.GLACIO_STONE.get());
         add(ModBlockTags.GLACIO_STONE_REPLACEABLES, ModBlocks.PERMAFROST.get());
 
-        add(ModBlockTags.STEEL_BLOCKS, ModBlocks.BLOCK_OF_STEEL.get(), "steel_blocks", "storage_blocks/steel");
-        add(ModBlockTags.DESH_BLOCKS, ModBlocks.BLOCK_OF_DESH.get(), "desh_blocks", "storage_blocks/desh");
+        add(ModBlockTags.STEEL_BLOCKS, ModBlocks.STEEL_BLOCK.get(), "steel_blocks", "storage_blocks/steel");
+        add(ModBlockTags.DESH_BLOCKS, ModBlocks.DESH_BLOCK.get(), "desh_blocks", "storage_blocks/desh");
         add(ModBlockTags.RAW_DESH_BLOCKS, ModBlocks.RAW_DESH_BLOCK.get(), "raw_desh_blocks", "storage_blocks/raw_desh");
-        add(ModBlockTags.OSTRUM_BLOCKS, ModBlocks.BLOCK_OF_OSTRUM.get(), "ostrum_blocks", "storage_blocks/ostrum");
+        add(ModBlockTags.OSTRUM_BLOCKS, ModBlocks.OSTRUM_BLOCK.get(), "ostrum_blocks", "storage_blocks/ostrum");
         add(ModBlockTags.RAW_OSTRUM_BLOCKS, ModBlocks.RAW_OSTRUM_BLOCK.get(), "raw_ostrum_blocks", "storage_blocks/raw_ostrum");
-        add(ModBlockTags.CALORITE_BLOCKS, ModBlocks.BLOCK_OF_CALORITE.get(), "calorite_blocks", "storage_blocks/calorite");
+        add(ModBlockTags.CALORITE_BLOCKS, ModBlocks.CALORITE_BLOCK.get(), "calorite_blocks", "storage_blocks/calorite");
         add(ModBlockTags.RAW_CALORITE_BLOCKS, ModBlocks.RAW_CALORITE_BLOCK.get(), "raw_calorite_blocks", "storage_blocks/raw_calorite");
         addVanillaTags();
     }
@@ -207,11 +207,11 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
 
         tag(BlockTags.WOOL).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_FUR.get())));
 
-        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.BLOCK_OF_STEEL.get())));
-        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.BLOCK_OF_ETRIUM.get())));
-        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.BLOCK_OF_DESH.get())));
-        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.BLOCK_OF_OSTRUM.get())));
-        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.BLOCK_OF_CALORITE.get())));
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STEEL_BLOCK.get())));
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.ETRIUM_BLOCK.get())));
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.DESH_BLOCK.get())));
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.OSTRUM_BLOCK.get())));
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.CALORITE_BLOCK.get())));
 
         tag(BlockTags.CLIMBABLE).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_LADDER.get())));
         tag(BlockTags.CLIMBABLE).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STROPHAR_LADDER.get())));

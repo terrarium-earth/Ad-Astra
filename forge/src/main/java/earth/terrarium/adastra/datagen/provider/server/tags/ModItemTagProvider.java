@@ -68,27 +68,27 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         add(ModItemTags.STEEL_NUGGETS, ModItems.STEEL_NUGGET.get(), "steel_nuggets", "nuggets/steel");
         add(ModItemTags.STEEL_PLATES, ModItems.STEEL_PLATE.get(), "steel_plates", "plates/steel");
         add(ModItemTags.STEEL_RODS, ModItems.STEEL_ROD.get(), "steel_rods", "rods/steel");
-        add(ModItemTags.STEEL_BLOCKS, ModItems.BLOCK_OF_STEEL.get(), "steel_blocks", "storage_blocks/steel");
+        add(ModItemTags.STEEL_BLOCKS, ModItems.STEEL_BLOCK.get(), "steel_blocks", "storage_blocks/steel");
 
         add(ModItemTags.DESH_INGOTS, ModItems.DESH_INGOT.get(), "desh_ingots", "ingots/desh");
         add(ModItemTags.DESH_NUGGETS, ModItems.DESH_NUGGET.get(), "desh_nuggets", "nuggets/desh");
         add(ModItemTags.DESH_PLATES, ModItems.DESH_PLATE.get(), "desh_plates", "plates/desh");
         add(ModItemTags.RAW_DESH, ModItems.RAW_DESH.get(), "raw_desh", "raw_materials/desh");
-        add(ModItemTags.DESH_BLOCKS, ModItems.BLOCK_OF_DESH.get(), "desh_blocks", "storage_blocks/desh");
+        add(ModItemTags.DESH_BLOCKS, ModItems.DESH_BLOCK.get(), "desh_blocks", "storage_blocks/desh");
         add(ModItemTags.RAW_DESH_BLOCKS, ModItems.RAW_DESH_BLOCK.get(), "raw_desh_blocks", "storage_blocks/raw_desh");
 
         add(ModItemTags.OSTRUM_INGOTS, ModItems.OSTRUM_INGOT.get(), "ostrum_ingots", "ingots/ostrum");
         add(ModItemTags.OSTRUM_NUGGETS, ModItems.OSTRUM_NUGGET.get(), "ostrum_nuggets", "nuggets/ostrum");
         add(ModItemTags.OSTRUM_PLATES, ModItems.OSTRUM_PLATE.get(), "ostrum_plates", "plates/ostrum");
         add(ModItemTags.RAW_OSTRUM, ModItems.RAW_OSTRUM.get(), "raw_ostrum", "raw_materials/ostrum");
-        add(ModItemTags.OSTRUM_BLOCKS, ModItems.BLOCK_OF_OSTRUM.get(), "ostrum_blocks", "storage_blocks/ostrum");
+        add(ModItemTags.OSTRUM_BLOCKS, ModItems.OSTRUM_BLOCK.get(), "ostrum_blocks", "storage_blocks/ostrum");
         add(ModItemTags.RAW_OSTRUM_BLOCKS, ModItems.RAW_OSTRUM_BLOCK.get(), "raw_ostrum_blocks", "storage_blocks/raw_ostrum");
 
         add(ModItemTags.CALORITE_INGOTS, ModItems.CALORITE_INGOT.get(), "calorite_ingots", "ingots/calorite");
         add(ModItemTags.CALORITE_NUGGETS, ModItems.CALORITE_NUGGET.get(), "calorite_nuggets", "nuggets/calorite");
         add(ModItemTags.CALORITE_PLATES, ModItems.CALORITE_PLATE.get(), "calorite_plates", "plates/calorite");
         add(ModItemTags.RAW_CALORITE, ModItems.RAW_CALORITE.get(), "raw_calorite", "raw_materials/calorite");
-        add(ModItemTags.CALORITE_BLOCKS, ModItems.BLOCK_OF_CALORITE.get(), "calorite_blocks", "storage_blocks/calorite");
+        add(ModItemTags.CALORITE_BLOCKS, ModItems.CALORITE_BLOCK.get(), "calorite_blocks", "storage_blocks/calorite");
         add(ModItemTags.RAW_CALORITE_BLOCKS, ModItems.RAW_CALORITE_BLOCK.get(), "raw_calorite_blocks", "storage_blocks/raw_calorite");
 
         addVanillaTags();

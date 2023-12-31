@@ -1,0 +1,44 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "ad_astra:venus_gold_ore"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:raw_gold",
+      "count": 1
+    },
+    {
+      "item": "minecraft:raw_gold",
+      "count": 1,
+      "chance": 0.75
+    },
+    {
+      "item": "create:experience_nugget",
+      "count": 2,
+      "chance": 0.75
+    },
+    {
+      "item": "ad_astra:venus_cobblestone",
+      "count": 1,
+      "chance": 0.125
+    }
+  ],
+  "processingTime": 300
+}

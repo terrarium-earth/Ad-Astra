@@ -217,13 +217,13 @@ public class ModItems {
     public static final RegistryEntry<Item> ENCASED_ETRIUM_BLOCK = ITEMS.register("encased_etrium_block", () -> new BlockItem(ModBlocks.ENCASED_ETRIUM_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> ETRIUM_PLATEBLOCK = ITEMS.register("etrium_plateblock", () -> new BlockItem(ModBlocks.ETRIUM_PLATEBLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> ETRIUM_PANEL = ITEMS.register("etrium_panel", () -> new BlockItem(ModBlocks.ETRIUM_PANEL.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> BLOCK_OF_ETRIUM = ITEMS.register("block_of_etrium", () -> new BlockItem(ModBlocks.BLOCK_OF_ETRIUM.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_BLOCK = ITEMS.register("etrium_block", () -> new BlockItem(ModBlocks.ETRIUM_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> STEEL_FACTORY_BLOCK = ITEMS.register("steel_factory_block", () -> new BlockItem(ModBlocks.STEEL_FACTORY_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> ENCASED_STEEL_BLOCK = ITEMS.register("encased_steel_block", () -> new BlockItem(ModBlocks.ENCASED_STEEL_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> STEEL_PLATEBLOCK = ITEMS.register("steel_plateblock", () -> new BlockItem(ModBlocks.STEEL_PLATEBLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> STEEL_PANEL = ITEMS.register("steel_panel", () -> new BlockItem(ModBlocks.STEEL_PANEL.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> BLOCK_OF_STEEL = ITEMS.register("block_of_steel", () -> new BlockItem(ModBlocks.BLOCK_OF_STEEL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_BLOCK = ITEMS.register("steel_block", () -> new BlockItem(ModBlocks.STEEL_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> STEEL_PLATING = ITEMS.register("steel_plating", () -> new BlockItem(ModBlocks.STEEL_PLATING.get(), new Item.Properties()));
     public static final RegistryEntry<Item> STEEL_PLATING_STAIRS = ITEMS.register("steel_plating_stairs", () -> new BlockItem(ModBlocks.STEEL_PLATING_STAIRS.get(), new Item.Properties()));
     public static final RegistryEntry<Item> STEEL_PLATING_SLAB = ITEMS.register("steel_plating_slab", () -> new BlockItem(ModBlocks.STEEL_PLATING_SLAB.get(), new Item.Properties()));
@@ -241,7 +241,7 @@ public class ModItems {
     public static final RegistryEntry<Item> ENCASED_DESH_BLOCK = ITEMS.register("encased_desh_block", () -> new BlockItem(ModBlocks.ENCASED_DESH_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> DESH_PLATEBLOCK = ITEMS.register("desh_plateblock", () -> new BlockItem(ModBlocks.DESH_PLATEBLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> DESH_PANEL = ITEMS.register("desh_panel", () -> new BlockItem(ModBlocks.DESH_PANEL.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> BLOCK_OF_DESH = ITEMS.register("block_of_desh", () -> new BlockItem(ModBlocks.BLOCK_OF_DESH.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> DESH_BLOCK = ITEMS.register("desh_block", () -> new BlockItem(ModBlocks.DESH_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> RAW_DESH_BLOCK = ITEMS.register("raw_desh_block", () -> new BlockItem(ModBlocks.RAW_DESH_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> DESH_PLATING = ITEMS.register("desh_plating", () -> new BlockItem(ModBlocks.DESH_PLATING.get(), new Item.Properties()));
     public static final RegistryEntry<Item> DESH_PLATING_STAIRS = ITEMS.register("desh_plating_stairs", () -> new BlockItem(ModBlocks.DESH_PLATING_STAIRS.get(), new Item.Properties()));
@@ -256,7 +256,7 @@ public class ModItems {
     public static final RegistryEntry<Item> ENCASED_OSTRUM_BLOCK = ITEMS.register("encased_ostrum_block", () -> new BlockItem(ModBlocks.ENCASED_OSTRUM_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> OSTRUM_PLATEBLOCK = ITEMS.register("ostrum_plateblock", () -> new BlockItem(ModBlocks.OSTRUM_PLATEBLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> OSTRUM_PANEL = ITEMS.register("ostrum_panel", () -> new BlockItem(ModBlocks.OSTRUM_PANEL.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> BLOCK_OF_OSTRUM = ITEMS.register("block_of_ostrum", () -> new BlockItem(ModBlocks.BLOCK_OF_OSTRUM.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> OSTRUM_BLOCK = ITEMS.register("ostrum_block", () -> new BlockItem(ModBlocks.OSTRUM_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> RAW_OSTRUM_BLOCK = ITEMS.register("raw_ostrum_block", () -> new BlockItem(ModBlocks.RAW_OSTRUM_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> OSTRUM_PLATING = ITEMS.register("ostrum_plating", () -> new BlockItem(ModBlocks.OSTRUM_PLATING.get(), new Item.Properties()));
     public static final RegistryEntry<Item> OSTRUM_PLATING_STAIRS = ITEMS.register("ostrum_plating_stairs", () -> new BlockItem(ModBlocks.OSTRUM_PLATING_STAIRS.get(), new Item.Properties()));
@@ -271,7 +271,7 @@ public class ModItems {
     public static final RegistryEntry<Item> ENCASED_CALORITE_BLOCK = ITEMS.register("encased_calorite_block", () -> new BlockItem(ModBlocks.ENCASED_CALORITE_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> CALORITE_PLATEBLOCK = ITEMS.register("calorite_plateblock", () -> new BlockItem(ModBlocks.CALORITE_PLATEBLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> CALORITE_PANEL = ITEMS.register("calorite_panel", () -> new BlockItem(ModBlocks.CALORITE_PANEL.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> BLOCK_OF_CALORITE = ITEMS.register("block_of_calorite", () -> new BlockItem(ModBlocks.BLOCK_OF_CALORITE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CALORITE_BLOCK = ITEMS.register("calorite_block", () -> new BlockItem(ModBlocks.CALORITE_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> RAW_CALORITE_BLOCK = ITEMS.register("raw_calorite_block", () -> new BlockItem(ModBlocks.RAW_CALORITE_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> CALORITE_PLATING = ITEMS.register("calorite_plating", () -> new BlockItem(ModBlocks.CALORITE_PLATING.get(), new Item.Properties()));
     public static final RegistryEntry<Item> CALORITE_PLATING_STAIRS = ITEMS.register("calorite_plating_stairs", () -> new BlockItem(ModBlocks.CALORITE_PLATING_STAIRS.get(), new Item.Properties()));

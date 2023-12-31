@@ -1,0 +1,18 @@
+{
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "mekanism"
+		}
+	],
+	"type": "mekanism:sawing",
+	"input": {
+		"ingredient": {
+			"item": "ad_astra:aeronos_chest"
+		}
+	},
+	"mainOutput": {
+		"count": 8,
+		"item": "ad_astra:aeronos_planks"
+	}
+}

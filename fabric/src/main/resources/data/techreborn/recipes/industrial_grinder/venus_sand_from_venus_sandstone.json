@@ -1,0 +1,25 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "techreborn"
+      ]
+    }
+  ],
+  "type": "techreborn:grinder",
+  "ingredients": [
+    {
+      "count": 1,
+      "tag": "ad_astra:venus_sandstone"
+    }
+  ],
+  "power": 4,
+  "results": [
+    {
+      "count": 4,
+      "item": "ad_astra:venus_sand"
+    }
+  ],
+  "time": 200
+}
