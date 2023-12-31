@@ -1,14 +1,14 @@
 package earth.terrarium.adastra.common.menus.base;
 
-import com.mojang.datafixers.util.Pair;
-import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.common.menus.slots.InventorySlot;
 import earth.terrarium.adastra.common.utils.WorldUtils;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -24,8 +24,6 @@ import org.jetbrains.annotations.Nullable;
 public abstract class BaseContainerMenu<T extends BlockEntity> extends AbstractContainerMenu {
 
     private static final int START_INDEX = 0;
-
-    public static final ResourceLocation BATTERY_SLOT_ICON = new ResourceLocation(AdAstra.MOD_ID, "item/icons/battery_slot_icon");
 
     protected final T entity;
     protected final Inventory inventory;
@@ -91,10 +89,6 @@ public abstract class BaseContainerMenu<T extends BlockEntity> extends AbstractC
         return itemStack;
     }
 
-    public void togglePlayerInvSlots() {
-        slots.stream().filter(slot -> slot instanceof InventorySlot).forEach(slot -> ((InventorySlot) slot).toggleActive());
-    }
-
     protected void addPlayerInvSlots() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
@@ -113,40 +107,10 @@ public abstract class BaseContainerMenu<T extends BlockEntity> extends AbstractC
         broadcastFullState();
     }
 
-    protected static <T extends BlockEntity> T getBlockEntityFromBuf(Level level, FriendlyByteBuf buf, Class<T> type) {
+    public static <T extends BlockEntity> T getBlockEntityFromBuf(Level level, FriendlyByteBuf buf, Class<T> type) {
         if (buf == null) return null;
         if (!level.isClientSide) return null;
         return WorldUtils.getTileEntity(type, level, buf.readBlockPos());
     }
 
-    protected static class ImageSlot extends Slot {
-        private final ResourceLocation icon;
-
-        public ImageSlot(Container container, int slot, int xPosition, int yPosition, ResourceLocation icon) {
-            super(container, slot, xPosition, yPosition);
-            this.icon = icon;
-        }
-
-        @Override
-        public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-            return Pair.of(InventoryMenu.BLOCK_ATLAS, icon);
-        }
-    }
-
-    private static class InventorySlot extends Slot {
-        private boolean active = true;
-
-        public InventorySlot(Container container, int slot, int x, int y) {
-            super(container, slot, x, y);
-        }
-
-        @Override
-        public boolean isActive() {
-            return active;
-        }
-
-        public void toggleActive() {
-            this.active = !this.active;
-        }
-    }
 }

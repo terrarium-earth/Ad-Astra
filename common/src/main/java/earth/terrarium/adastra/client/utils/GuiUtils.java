@@ -2,10 +2,9 @@ package earth.terrarium.adastra.client.utils;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
+import com.teamresourceful.resourcefullib.client.utils.ScreenUtils;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.energy.base.EnergyContainer;
-import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import net.minecraft.client.Minecraft;
@@ -33,9 +32,6 @@ public class GuiUtils {
     public static final ResourceLocation BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/button.png");
     public static final ResourceLocation SQUARE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/square_button.png");
     public static final ResourceLocation SETTINGS_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/settings_button.png");
-    public static final ResourceLocation ARROWS = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/arrows.png");
-    public static final ResourceLocation OPTIONS_BAR = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/options_bar.png");
-    public static final ResourceLocation SMALL_OPTIONS_BAR = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/small_options_bar.png");
 
     public static final ResourceLocation NONE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/side_config/none.png");
     public static final ResourceLocation PUSH_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/side_config/push.png");
@@ -52,10 +48,6 @@ public class GuiUtils {
     public static final ResourceLocation SUN = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/sun.png");
     public static final ResourceLocation FIRE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/fire.png");
 
-    public static void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, EnergyContainer energyContainer, Component... tooltips) {
-        drawEnergyBar(graphics, mouseX, mouseY, font, x, y, energyContainer.getStoredEnergy(), energyContainer.getMaxCapacity(), tooltips);
-    }
-
     public static void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, long energy, long capacity, Component... tooltips) {
         float ratio = energy / (float) capacity;
         try (var ignored = RenderUtils.createScissorBox(Minecraft.getInstance(), graphics.pose(), x + 6, y - 31 + ENERGY_BAR_HEIGHT - (int) (ENERGY_BAR_HEIGHT * ratio), ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT)) {
@@ -67,10 +59,6 @@ public class GuiUtils {
             Collections.addAll(list, tooltips);
             return list;
         });
-    }
-
-    public static void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, FluidContainer fluidContainer, int tank, Component... tooltips) {
-        drawFluidBar(graphics, mouseX, mouseY, font, x, y, fluidContainer.getFluids().get(tank), fluidContainer.getTankCapacity(tank), tooltips);
     }
 
     public static void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, FluidHolder fluid, long capacity, Component... tooltips) {
@@ -126,8 +114,7 @@ public class GuiUtils {
         if (mouseX >= minX && mouseX <= maxX && mouseY >= minY && mouseY <= maxY) {
             List<Component> lines = tooltips.apply(new ArrayList<>());
             lines.removeIf(c -> c.getString().isEmpty());
-            graphics.renderComponentTooltip(font, lines, mouseX, mouseY);
-            graphics.flush();
+            ScreenUtils.setTooltip(lines);
         }
     }
 }

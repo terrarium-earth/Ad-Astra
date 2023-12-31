@@ -1,19 +1,16 @@
 package earth.terrarium.adastra.common.menus.machines;
 
 import earth.terrarium.adastra.common.blockentities.machines.WaterPumpBlockEntity;
-import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
+import earth.terrarium.adastra.common.menus.base.MachineMenu;
+import earth.terrarium.adastra.common.menus.configuration.EnergyConfiguration;
+import earth.terrarium.adastra.common.menus.configuration.FluidConfiguration;
 import earth.terrarium.adastra.common.registry.ModMenus;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 
-public class WaterPumpMenu extends BaseContainerMenu<WaterPumpBlockEntity> {
+public class WaterPumpMenu extends MachineMenu<WaterPumpBlockEntity> {
 
     public WaterPumpMenu(int id, Inventory inventory, WaterPumpBlockEntity entity) {
         super(ModMenus.WATER_PUMP.get(), id, inventory, entity);
-    }
-
-    public WaterPumpMenu(int id, Inventory inventory, FriendlyByteBuf buf) {
-        super(ModMenus.WATER_PUMP.get(), id, inventory, getBlockEntityFromBuf(inventory.player.level(), buf, WaterPumpBlockEntity.class));
     }
 
     @Override
@@ -32,17 +29,13 @@ public class WaterPumpMenu extends BaseContainerMenu<WaterPumpBlockEntity> {
     }
 
     @Override
-    public int getPlayerInvXOffset() {
-        return 0;
-    }
-
-    @Override
     public int getPlayerInvYOffset() {
         return 98;
     }
 
     @Override
-    protected void addMenuSlots() {
-        addSlot(new ImageSlot(entity, 0, 146, -25, BATTERY_SLOT_ICON));
+    protected void addConfigSlots() {
+        addConfigSlot(new EnergyConfiguration(0, 146, 30, entity.getEnergyStorage()));
+        addConfigSlot(new FluidConfiguration(1, 81, 31, entity.getFluidContainer(), 0));
     }
 }
