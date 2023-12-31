@@ -1,19 +1,15 @@
 package earth.terrarium.adastra.common.menus.machines;
 
 import earth.terrarium.adastra.common.blockentities.machines.SolarPanelBlockEntity;
-import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
+import earth.terrarium.adastra.common.menus.base.MachineMenu;
+import earth.terrarium.adastra.common.menus.configuration.EnergyConfiguration;
 import earth.terrarium.adastra.common.registry.ModMenus;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 
-public class SolarPanelMenu extends BaseContainerMenu<SolarPanelBlockEntity> {
+public class SolarPanelMenu extends MachineMenu<SolarPanelBlockEntity> {
 
     public SolarPanelMenu(int id, Inventory inventory, SolarPanelBlockEntity entity) {
         super(ModMenus.SOLAR_PANEL.get(), id, inventory, entity);
-    }
-
-    public SolarPanelMenu(int id, Inventory inventory, FriendlyByteBuf buf) {
-        super(ModMenus.SOLAR_PANEL.get(), id, inventory, getBlockEntityFromBuf(inventory.player.level(), buf, SolarPanelBlockEntity.class));
     }
 
     @Override
@@ -32,17 +28,12 @@ public class SolarPanelMenu extends BaseContainerMenu<SolarPanelBlockEntity> {
     }
 
     @Override
-    public int getPlayerInvXOffset() {
-        return 0;
-    }
-
-    @Override
     public int getPlayerInvYOffset() {
-        return 146;
+        return 148;
     }
 
     @Override
-    protected void addMenuSlots() {
-        addSlot(new ImageSlot(entity, 0, 146, -25, BATTERY_SLOT_ICON));
+    protected void addConfigSlots() {
+        addConfigSlot(new EnergyConfiguration(0, 108, 69, entity.getEnergyStorage()));
     }
 }

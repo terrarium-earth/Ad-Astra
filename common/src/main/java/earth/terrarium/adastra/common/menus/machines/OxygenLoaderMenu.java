@@ -1,21 +1,19 @@
 package earth.terrarium.adastra.common.menus.machines;
 
 import earth.terrarium.adastra.common.blockentities.machines.OxygenLoaderBlockEntity;
-import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
+import earth.terrarium.adastra.common.menus.base.MachineMenu;
+import earth.terrarium.adastra.common.menus.configuration.EnergyConfiguration;
+import earth.terrarium.adastra.common.menus.configuration.FluidConfiguration;
+import earth.terrarium.adastra.common.menus.configuration.SlotConfiguration;
 import earth.terrarium.adastra.common.registry.ModMenus;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.FurnaceResultSlot;
 import net.minecraft.world.inventory.Slot;
 
-public class OxygenLoaderMenu extends BaseContainerMenu<OxygenLoaderBlockEntity> {
+public class OxygenLoaderMenu extends MachineMenu<OxygenLoaderBlockEntity> {
 
     public OxygenLoaderMenu(int id, Inventory inventory, OxygenLoaderBlockEntity entity) {
         super(ModMenus.OXYGEN_LOADER.get(), id, inventory, entity);
-    }
-
-    public OxygenLoaderMenu(int id, Inventory inventory, FriendlyByteBuf buf) {
-        super(ModMenus.OXYGEN_LOADER.get(), id, inventory, getBlockEntityFromBuf(inventory.player.level(), buf, OxygenLoaderBlockEntity.class));
     }
 
     @Override
@@ -34,23 +32,28 @@ public class OxygenLoaderMenu extends BaseContainerMenu<OxygenLoaderBlockEntity>
     }
 
     @Override
-    public int getPlayerInvXOffset() {
-        return 0;
-    }
-
-    @Override
     public int getPlayerInvYOffset() {
         return 102;
     }
 
     @Override
     protected void addMenuSlots() {
-        addSlot(new ImageSlot(entity, 0, 146, -25, BATTERY_SLOT_ICON));
+        addSlot(new Slot(entity, 1, 12, 22));
+        addSlot(new FurnaceResultSlot(player, entity, 2, 12, 52));
 
-        addSlot(new Slot(entity, 1, 4, 22));
-        addSlot(new FurnaceResultSlot(player, entity, 2, 4, 52));
+        addSlot(new Slot(entity, 3, 127, 22));
+        addSlot(new FurnaceResultSlot(player, entity, 4, 127, 52));
+    }
 
-        addSlot(new Slot(entity, 3, 119, 22));
-        addSlot(new FurnaceResultSlot(player, entity, 4, 119, 52));
+    @Override
+    protected void addConfigSlots() {
+        addConfigSlot(new SlotConfiguration(0, 12, 22));
+        addConfigSlot(new SlotConfiguration(1, 127, 22));
+        addConfigSlot(new SlotConfiguration(2, 12, 52));
+        addConfigSlot(new SlotConfiguration(2, 127, 52));
+
+        addConfigSlot(new EnergyConfiguration(3, 150, 22, entity.getEnergyStorage()));
+        addConfigSlot(new FluidConfiguration(4, 43, 22, entity.getFluidContainer(), 0));
+        addConfigSlot(new FluidConfiguration(5, 100, 22, entity.getFluidContainer(), 1));
     }
 }

@@ -57,7 +57,6 @@ public class FluidBarWidget extends BurningFire {
             graphics,
             mouseX,
             mouseY,
-            font,
             this.bounds.x,
             this.bounds.y,
             FluidHooks.newFluidHolder(fluid, fluidAmount, null),
@@ -68,7 +67,7 @@ public class FluidBarWidget extends BurningFire {
     }
 
     @Override
-    public List<? extends GuiEventListener> children() {
+    public @NotNull List<? extends GuiEventListener> children() {
         return List.of();
     }
 }

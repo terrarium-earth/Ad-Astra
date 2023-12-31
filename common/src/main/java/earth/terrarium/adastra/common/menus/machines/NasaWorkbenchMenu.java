@@ -3,7 +3,6 @@ package earth.terrarium.adastra.common.menus.machines;
 import earth.terrarium.adastra.client.screens.machines.NasaWorkbenchBlockEntity;
 import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
 import earth.terrarium.adastra.common.registry.ModMenus;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
@@ -15,10 +14,6 @@ public class NasaWorkbenchMenu extends BaseContainerMenu<NasaWorkbenchBlockEntit
 
     public NasaWorkbenchMenu(int id, Inventory inventory, NasaWorkbenchBlockEntity entity) {
         super(ModMenus.NASA_WORKBENCH.get(), id, inventory, entity);
-    }
-
-    public NasaWorkbenchMenu(int id, Inventory inventory, FriendlyByteBuf buf) {
-        super(ModMenus.NASA_WORKBENCH.get(), id, inventory, getBlockEntityFromBuf(inventory.player.level(), buf, NasaWorkbenchBlockEntity.class));
     }
 
     @Override
@@ -38,7 +33,7 @@ public class NasaWorkbenchMenu extends BaseContainerMenu<NasaWorkbenchBlockEntit
 
     @Override
     public int getPlayerInvXOffset() {
-        return 0;
+        return 8;
     }
 
     @Override
@@ -48,23 +43,22 @@ public class NasaWorkbenchMenu extends BaseContainerMenu<NasaWorkbenchBlockEntit
 
     @Override
     protected void addMenuSlots() {
-        addSlot(new Slot(entity, 0, 48, 20));
-        addSlot(new Slot(entity, 1, 39, 38));
-        addSlot(new Slot(entity, 2, 57, 38));
-        addSlot(new Slot(entity, 3, 39, 56));
-        addSlot(new Slot(entity, 4, 57, 56));
-        addSlot(new Slot(entity, 5, 39, 74));
-        addSlot(new Slot(entity, 6, 57, 74));
-        addSlot(new Slot(entity, 7, 21, 92));
-        addSlot(new Slot(entity, 8, 39, 92));
-        addSlot(new Slot(entity, 9, 57, 92));
-        addSlot(new Slot(entity, 10, 75, 92));
-        addSlot(new Slot(entity, 11, 21, 110));
-        addSlot(new Slot(entity, 12, 48, 110));
-        addSlot(new Slot(entity, 13, 75, 110));
+        addSlot(new Slot(entity, 0, 56, 20));
+        addSlot(new Slot(entity, 1, 47, 38));
+        addSlot(new Slot(entity, 2, 65, 38));
+        addSlot(new Slot(entity, 3, 47, 56));
+        addSlot(new Slot(entity, 4, 65, 56));
+        addSlot(new Slot(entity, 5, 47, 74));
+        addSlot(new Slot(entity, 6, 65, 74));
+        addSlot(new Slot(entity, 7, 29, 92));
+        addSlot(new Slot(entity, 8, 47, 92));
+        addSlot(new Slot(entity, 9, 65, 92));
+        addSlot(new Slot(entity, 10, 83, 92));
+        addSlot(new Slot(entity, 11, 29, 110));
+        addSlot(new Slot(entity, 12, 56, 110));
+        addSlot(new Slot(entity, 13, 83, 110));
 
-
-        addSlot(new FurnaceResultSlot(player, entity, 14, 121, 56) {
+        addSlot(new FurnaceResultSlot(player, entity, 14, 129, 56) {
             @Override
             public boolean mayPickup(Player player) {
                 return false;

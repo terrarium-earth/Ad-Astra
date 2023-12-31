@@ -6,7 +6,6 @@ import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import mezz.jei.api.gui.drawable.IDrawable;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.level.material.Fluid;
 import org.jetbrains.annotations.NotNull;
@@ -44,8 +43,6 @@ public class FluidBarDrawable implements IDrawable {
 
     @Override
     public void draw(@NotNull GuiGraphics graphics, int xOffset, int yOffset) {
-        Font font = Minecraft.getInstance().font;
-
         long time = Objects.requireNonNull(Minecraft.getInstance().level).getGameTime();
         long amount = (time % (capacity / perTick) * perTick);
         long fluidAmount = gain ? amount : capacity - amount;
@@ -54,7 +51,6 @@ public class FluidBarDrawable implements IDrawable {
             graphics,
             mouseX,
             mouseY,
-            font,
             xOffset,
             yOffset,
             FluidHooks.newFluidHolder(fluid, fluidAmount, null),

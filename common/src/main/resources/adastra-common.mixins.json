@@ -7,6 +7,7 @@
         "common.EntityBelowWorldMixin",
         "common.LivingEntityAccessor",
         "common.LivingEntityMixin",
+        "common.SlotAccessor",
         "common.ServerLevelMixin",
         "common.gravity.AbstractArrowMixin",
         "common.gravity.BoatMixin",
@@ -22,6 +23,7 @@
         "common.radio.ServerPlayerMixin"
     ],
     "client": [
+        "client.AbstractContainerScreenMixin",
         "client.CameraMixin",
         "client.EntityRendererMixin",
         "client.HumanoidModelMixin",
