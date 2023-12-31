@@ -15,7 +15,6 @@ import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
 import earth.terrarium.botarium.common.fluid.impl.ExtractOnlyFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -31,9 +30,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity implements BotariumFluidBlock<WrappedBlockFluidContainer> {
-
-    private long lastFluid;
-    private long fluidDifference;
     private WrappedBlockFluidContainer fluidContainer;
 
     public WaterPumpBlockEntity(BlockPos pos, BlockState state) {
@@ -104,18 +100,6 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
         TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), getSideConfig().get(0), filter);
         TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.05f), 0, getSideConfig().get(1), filter);
-    }
-
-    @Override
-    public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
-        super.clientTick(level, time, state, pos);
-        if (time % 2 == 0) return;
-        fluidDifference = getFluidContainer().getFluids().get(0).getFluidAmount() - lastFluid;
-        lastFluid = getFluidContainer().getFluids().get(0).getFluidAmount();
-    }
-
-    public long fluidDifference() {
-        return fluidDifference;
     }
 
     @Override

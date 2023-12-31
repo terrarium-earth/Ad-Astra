@@ -16,7 +16,6 @@ import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
 import earth.terrarium.botarium.common.fluid.impl.ExtractOnlyFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -30,8 +29,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezingRecipe> implements BotariumFluidBlock<WrappedBlockFluidContainer> {
-    private long lastFluid;
-    private long fluidDifference;
     private WrappedBlockFluidContainer fluidContainer;
 
     public CryoFreezerBlockEntity(BlockPos pos, BlockState state) {
@@ -151,18 +148,6 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
     public void updateSlots() {
         sync();
         FluidUtils.moveContainerToItem(this, fluidContainer, 2, 3, 0);
-    }
-
-    @Override
-    public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
-        super.clientTick(level, time, state, pos);
-        if (time % 2 == 0) return;
-        fluidDifference = getFluidContainer().getFluids().get(0).getFluidAmount() - lastFluid;
-        lastFluid = getFluidContainer().getFluids().get(0).getFluidAmount();
-    }
-
-    public long fluidDifference() {
-        return fluidDifference;
     }
 
     @Override

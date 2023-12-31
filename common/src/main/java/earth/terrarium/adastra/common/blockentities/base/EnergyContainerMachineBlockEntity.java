@@ -4,7 +4,6 @@ import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -12,8 +11,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class EnergyContainerMachineBlockEntity extends ContainerMachineBlockEntity implements BotariumEnergyBlock<WrappedBlockEnergyContainer> {
     protected WrappedBlockEnergyContainer energyContainer;
-    private long lastEnergy;
-    private long energyDifference;
 
     public EnergyContainerMachineBlockEntity(BlockPos pos, BlockState state, int containerSize) {
         super(pos, state, containerSize);
@@ -30,17 +27,6 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
             case POWER_ITEM -> insertBatterySlot();
             case POWER_MACHINE -> extractBatterySlot();
         }
-    }
-
-    @Override
-    public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
-        var energy = this.getEnergyStorage();
-        this.energyDifference = energy.getStoredEnergy() - this.lastEnergy;
-        this.lastEnergy = energy.getStoredEnergy();
-    }
-
-    public long energyDifference() {
-        return this.energyDifference;
     }
 
     public void extractBatterySlot() {

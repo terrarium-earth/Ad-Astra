@@ -45,7 +45,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     private long energyPerTick;
     private float fluidPerTick;
     private int distributedBlocksCount;
-    private float accumulatedFluid;
+    private double accumulatedFluid;
     private int shutDownTicks;
 
     public OxygenDistributorBlockEntity(BlockPos pos, BlockState state) {
@@ -63,7 +63,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         energyPerTick = tag.getLong("EnergyPerTick");
         fluidPerTick = tag.getFloat("FluidPerTick");
         distributedBlocksCount = tag.getInt("DistributedBlocksCount");
-        accumulatedFluid = tag.getFloat("AccumulatedFluid");
+        accumulatedFluid = tag.getDouble("AccumulatedFluid");
     }
 
     @Override
@@ -73,7 +73,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         tag.putLong("EnergyPerTick", energyPerTick);
         tag.putFloat("FluidPerTick", fluidPerTick);
         tag.putInt("DistributedBlocksCount", distributedBlocksCount);
-        tag.putFloat("AccumulatedFluid", accumulatedFluid);
+        tag.putDouble("AccumulatedFluid", accumulatedFluid);
     }
 
     @Override
@@ -201,7 +201,6 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
 
     @Override
     public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
-        super.clientTick(level, time, state, pos);
         if (time % 40 == 0) {
             if (AdAstraConfigClient.showOxygenDistributorArea) {
                 OxygenDistributorOverlayRenderer.removePositions(pos);

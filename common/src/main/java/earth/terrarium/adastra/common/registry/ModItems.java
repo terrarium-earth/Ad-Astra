@@ -36,6 +36,8 @@ public class ModItems {
     public static final ResourcefulRegistry<Item> PIPES = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> VEHICLES = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> SPAWN_EGGS = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> INDUSTRIAL_LAMPS = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> SMALL_INDUSTRIAL_LAMPS = ResourcefulRegistries.create(ITEMS);
 
     public static final RegistryEntry<Item> TIER_1_ROCKET = VEHICLES.register("tier_1_rocket", () -> new RocketItem(ModEntityTypes.TIER_1_ROCKET::get, new Item.Properties().stacksTo(1).fireResistant()));
     public static final RegistryEntry<Item> TIER_2_ROCKET = VEHICLES.register("tier_2_rocket", () -> new RocketItem(ModEntityTypes.TIER_2_ROCKET::get, new Item.Properties().stacksTo(1).fireResistant()));
@@ -43,8 +45,6 @@ public class ModItems {
     public static final RegistryEntry<Item> TIER_4_ROCKET = VEHICLES.register("tier_4_rocket", () -> new RocketItem(ModEntityTypes.TIER_4_ROCKET::get, new Item.Properties().stacksTo(1).fireResistant()));
     public static final RegistryEntry<Item> ROVER = VEHICLES.register("tier_1_rover", () -> new RoverItem(ModEntityTypes.ROVER::get, new Item.Properties().stacksTo(1).fireResistant()));
     public static final RegistryEntry<Item> LAUNCH_PAD = ITEMS.register("launch_pad", () -> new BlockItem(ModBlocks.LAUNCH_PAD.get(), new Item.Properties()));
-    public static final ResourcefulRegistry<Item> INDUSTRIAL_LAMPS = ResourcefulRegistries.create(ITEMS);
-    public static final ResourcefulRegistry<Item> SMALL_INDUSTRIAL_LAMPS = ResourcefulRegistries.create(ITEMS);
 
     public static final RegistryEntry<Item> STEEL_CABLE = PIPES.register("steel_cable", () -> new BlockItem(ModBlocks.STEEL_CABLE.get(), new Item.Properties()));
     public static final RegistryEntry<Item> DESH_CABLE = PIPES.register("desh_cable", () -> new BlockItem(ModBlocks.DESH_CABLE.get(), new Item.Properties()));
