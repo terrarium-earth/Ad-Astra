@@ -7,7 +7,7 @@
         "common.EntityBelowWorldMixin",
         "common.LivingEntityAccessor",
         "common.LivingEntityMixin",
-        "common.SlotMixin",
+        "common.SlotAccessor",
         "common.gravity.AbstractArrowMixin",
         "common.gravity.BoatMixin",
         "common.gravity.FishingHookMixin",

@@ -29,7 +29,7 @@ public class SolarPanelMenu extends MachineMenu<SolarPanelBlockEntity> {
 
     @Override
     public int getPlayerInvYOffset() {
-        return 146;
+        return 148;
     }
 
     @Override

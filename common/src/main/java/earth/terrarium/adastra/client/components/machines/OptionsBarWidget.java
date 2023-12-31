@@ -16,6 +16,7 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.layouts.SpacerElement;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
@@ -96,10 +97,10 @@ public class OptionsBarWidget extends ContainerWidget {
     }
 
     public static Component getRedstoneControlTooltip(RedstoneControl redstoneControl) {
-        return Component.empty()
-            .append(ConstantComponents.REDSTONE_CONTROL).withStyle(ChatFormatting.RED)
-            .append("\n")
-            .append(Component.translatable("tooltip.ad_astra.redstone_control.mode", redstoneControl.translation().getString()).withStyle(ChatFormatting.GOLD));
+        return CommonComponents.joinLines(
+            ConstantComponents.REDSTONE_CONTROL,
+            Component.translatable("tooltip.ad_astra.redstone_control.mode", redstoneControl.translation().getString()).withStyle(ChatFormatting.GOLD)
+        );
     }
 
     @Override

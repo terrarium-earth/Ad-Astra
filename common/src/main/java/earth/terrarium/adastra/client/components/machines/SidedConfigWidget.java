@@ -5,14 +5,14 @@ import earth.terrarium.adastra.client.components.base.ContainerWidget;
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
+import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
 import earth.terrarium.adastra.common.menus.slots.InventorySlot;
 import earth.terrarium.adastra.common.network.NetworkHandler;
 import earth.terrarium.adastra.common.network.messages.ServerboundResetSideConfigPacket;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.network.chat.Component;
-
-import java.util.List;
 
 public class SidedConfigWidget extends ContainerWidget {
 
@@ -51,21 +51,21 @@ public class SidedConfigWidget extends ContainerWidget {
                 NetworkHandler.CHANNEL.sendToServer(new ServerboundResetSideConfigPacket(entity.getBlockPos(), this.index));
                 init();
             }
-        ));
+        ))
+        .setTooltip(Tooltip.create(ConstantComponents.RESET_TO_DEFAULT));
 
         buttons.center(this.getX(), this.getY(), this.getWidth(), this.getHeight());
     }
 
     private SideConfigButtons createSideButtons(int i) {
         GridLayout layout = new GridLayout().spacing(3);
-        List<ConfigurationEntry> configs = this.entity.getSideConfig();
-        ConfigurationEntry entry = configs.get(i);
-        final int configIndex = i;
-        entry.sides().forEach((direction, inital) -> {
-            ConfigurationButton button = new ConfigurationButton(this.entity, configIndex, entry, direction, inital);
-            button.visible = this.index == configIndex;
+        ConfigurationEntry entry = this.entity.getSideConfig().get(i);
 
-            switch (direction) {
+        for (var side : entry.sides().entrySet()) {
+            ConfigurationButton button = new ConfigurationButton(this.entity, i, entry, side.getKey(), side.getValue());
+            button.visible = this.index == i;
+
+            switch (side.getKey()) {
                 case UP -> layout.addChild(button, 0, 1);
                 case DOWN -> layout.addChild(button, 2, 1);
                 case NORTH -> layout.addChild(button, 1, 1);
@@ -73,7 +73,7 @@ public class SidedConfigWidget extends ContainerWidget {
                 case EAST -> layout.addChild(button, 1, 0);
                 case WEST -> layout.addChild(button, 1, 2);
             }
-        });
+        }
 
         layout.visitWidgets(this::addRenderableWidget);
         return new SideConfigButtons(layout);
@@ -99,7 +99,7 @@ public class SidedConfigWidget extends ContainerWidget {
     }
 
     public Component getMessage() {
-        return Component.translatable("side_config.ad_astra.title", entity.getSideConfig().get(index).title().getString());
+        return Component.translatable("side_config.ad_astra.title", entity.getSideConfig().get(index).title());
     }
 
     private record SideConfigButtons(GridLayout layout) {

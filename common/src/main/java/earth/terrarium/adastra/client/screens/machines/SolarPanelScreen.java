@@ -17,7 +17,7 @@ public class SolarPanelScreen extends MachineScreen<SolarPanelMenu, SolarPanelBl
     public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/solar_panel.png");
 
     public SolarPanelScreen(SolarPanelMenu menu, Inventory inventory, Component component) {
-        super(menu, inventory, component, TEXTURE, STEEL_SLOT, 177, 228);
+        super(menu, inventory, component, TEXTURE, STEEL_SLOT, 177, 230);
     }
 
     @Override

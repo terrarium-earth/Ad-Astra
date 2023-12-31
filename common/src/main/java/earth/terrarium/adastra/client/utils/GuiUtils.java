@@ -8,7 +8,6 @@ import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
@@ -48,20 +47,20 @@ public class GuiUtils {
     public static final ResourceLocation SUN = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/sun.png");
     public static final ResourceLocation FIRE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/fire.png");
 
-    public static void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, long energy, long capacity, Component... tooltips) {
+    public static void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, int x, int y, long energy, long capacity, Component... tooltips) {
         float ratio = energy / (float) capacity;
         try (var ignored = RenderUtils.createScissorBox(Minecraft.getInstance(), graphics.pose(), x + 6, y - 31 + ENERGY_BAR_HEIGHT - (int) (ENERGY_BAR_HEIGHT * ratio), ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT)) {
             graphics.blit(ENERGY_BAR, x + 6, y - 31, 0, 0, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT);
         }
 
-        drawTooltips(graphics, font, mouseX, mouseY, x + 6, x + 19, y - 31, y + 15, list -> {
+        drawTooltips(mouseX, mouseY, x + 6, x + 19, y - 31, y + 15, list -> {
             list.add(TooltipUtils.getEnergyComponent(energy, capacity));
             Collections.addAll(list, tooltips);
             return list;
         });
     }
 
-    public static void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, Font font, int x, int y, FluidHolder fluid, long capacity, Component... tooltips) {
+    public static void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, int x, int y, FluidHolder fluid, long capacity, Component... tooltips) {
         if (!fluid.isEmpty()) {
             float ratio = fluid.getFluidAmount() / (float) capacity;
             TextureAtlasSprite sprite = ClientFluidHooks.getFluidSprite(fluid);
@@ -81,36 +80,36 @@ public class GuiUtils {
         graphics.blit(FLUID_BAR, x + 6, y - 31, 0, 0, FLUID_BAR_WIDTH, FLUID_BAR_HEIGHT, FLUID_BAR_WIDTH, FLUID_BAR_HEIGHT);
         RenderSystem.disableBlend();
 
-        drawTooltips(graphics, font, mouseX, mouseY, x + 6, x + 18, y - 31, y + 15, list -> {
+        drawTooltips(mouseX, mouseY, x + 6, x + 18, y - 31, y + 15, list -> {
             list.add(TooltipUtils.getFluidComponent(fluid, capacity));
             Collections.addAll(list, tooltips);
             return list;
         });
     }
 
-    public static void drawHorizontalProgressBar(GuiGraphics graphics, ResourceLocation texture, int mouseX, int mouseY, Font font, int x, int y, int width, int height, int progress, int maxProgress, boolean reverse, Component... tooltips) {
+    public static void drawHorizontalProgressBar(GuiGraphics graphics, ResourceLocation texture, int mouseX, int mouseY, int x, int y, int width, int height, int progress, int maxProgress, boolean reverse, Component... tooltips) {
         int widthProgress = (int) (width * (progress / (float) maxProgress));
         if (reverse) widthProgress = width - widthProgress;
         graphics.blit(texture, x, y, 0, 0, widthProgress, height, width, height);
 
-        drawTooltips(graphics, font, mouseX, mouseY, x, x + width, y, y + height, list -> {
+        drawTooltips(mouseX, mouseY, x, x + width, y, y + height, list -> {
             Collections.addAll(list, tooltips);
             return list;
         });
     }
 
-    public static void drawVerticalProgressBar(GuiGraphics graphics, ResourceLocation texture, int mouseX, int mouseY, Font font, int x, int y, int width, int height, int progress, int maxProgress, boolean reverse, Component... tooltips) {
+    public static void drawVerticalProgressBar(GuiGraphics graphics, ResourceLocation texture, int mouseX, int mouseY, int x, int y, int width, int height, int progress, int maxProgress, Component... tooltips) {
         int heightProgress = (int) (height * (progress / (float) maxProgress));
         heightProgress = height - heightProgress;
         graphics.blit(texture, x, y + heightProgress, 0, heightProgress, width, height - heightProgress, width, height);
 
-        drawTooltips(graphics, font, mouseX, mouseY, x, x + width, y, y + height, list -> {
+        drawTooltips(mouseX, mouseY, x, x + width, y, y + height, list -> {
             Collections.addAll(list, tooltips);
             return list;
         });
     }
 
-    public static void drawTooltips(GuiGraphics graphics, Font font, int mouseX, int mouseY, int minX, int maxX, int minY, int maxY, Function<List<Component>, List<Component>> tooltips) {
+    public static void drawTooltips(int mouseX, int mouseY, int minX, int maxX, int minY, int maxY, Function<List<Component>, List<Component>> tooltips) {
         if (mouseX >= minX && mouseX <= maxX && mouseY >= minY && mouseY <= maxY) {
             List<Component> lines = tooltips.apply(new ArrayList<>());
             lines.removeIf(c -> c.getString().isEmpty());

@@ -52,7 +52,6 @@ public class EnergyBarWidget extends BurningFire {
             graphics,
             mouseX,
             mouseY,
-            font,
             this.bounds.x,
             this.bounds.y,
             energy,
@@ -64,7 +63,7 @@ public class EnergyBarWidget extends BurningFire {
     }
 
     @Override
-    public List<? extends GuiEventListener> children() {
+    public @NotNull List<? extends GuiEventListener> children() {
         return List.of();
     }
 }

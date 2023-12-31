@@ -12,6 +12,6 @@ public class WaterPumpScreen extends MachineScreen<WaterPumpMenu, WaterPumpBlock
     public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/water_pump.png");
 
     public WaterPumpScreen(WaterPumpMenu menu, Inventory inventory, Component component) {
-        super(menu, inventory, component, TEXTURE, STEEL_SLOT, 177, 180);
+        super(menu, inventory, component, TEXTURE, STEEL_SLOT, 177, 191);
     }
 }

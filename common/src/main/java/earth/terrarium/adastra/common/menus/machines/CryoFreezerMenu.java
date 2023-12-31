@@ -33,7 +33,7 @@ public class CryoFreezerMenu extends MachineMenu<CryoFreezerBlockEntity> {
 
     @Override
     public int getPlayerInvYOffset() {
-        return 99;
+        return 102;
     }
 
     @Override

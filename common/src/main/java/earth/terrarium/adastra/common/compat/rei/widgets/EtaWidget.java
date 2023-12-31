@@ -51,7 +51,6 @@ public class EtaWidget extends BurningFire {
             graphics,
             texture,
             mouseX, mouseY,
-            font,
             bounds.x, bounds.y,
             textureWidth, textureHeight,
             (int) amount,
@@ -63,7 +62,7 @@ public class EtaWidget extends BurningFire {
     }
 
     @Override
-    public List<? extends GuiEventListener> children() {
+    public @NotNull List<? extends GuiEventListener> children() {
         return List.of();
     }
 }

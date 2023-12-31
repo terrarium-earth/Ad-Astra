@@ -19,12 +19,12 @@ public class CryoFreezerScreen extends MachineScreen<CryoFreezerMenu, CryoFreeze
     public static final Rect2i CLICK_AREA = new Rect2i(108, 10, 26, 25);
 
     public CryoFreezerScreen(CryoFreezerMenu menu, Inventory inventory, Component component) {
-        super(menu, inventory, component, TEXTURE, CRYO_SLOT, 177, 181);
+        super(menu, inventory, component, TEXTURE, CRYO_SLOT, 177, 184);
     }
 
     @Override
     protected void renderBg(@NotNull GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         super.renderBg(graphics, partialTick, mouseX, mouseY);
-        this.drawHorizontalProgressBar(graphics, GuiUtils.SNOWFLAKE, mouseX, mouseY, 46, 71, 13, 13, entity.cookTime(), entity.cookTimeTotal(), false);
+        this.drawHorizontalProgressBar(graphics, GuiUtils.SNOWFLAKE, mouseX, mouseY, 54, 71, 13, 13, entity.cookTime(), entity.cookTimeTotal(), false);
     }
 }

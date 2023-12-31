@@ -15,8 +15,8 @@ import earth.terrarium.adastra.common.menus.configuration.MenuConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.SlotConfiguration;
 import earth.terrarium.adastra.common.menus.slots.ImageSlot;
 import earth.terrarium.adastra.common.menus.slots.InventorySlot;
-import earth.terrarium.adastra.common.utils.MoveableSlot;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
+import earth.terrarium.adastra.mixins.common.SlotAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -37,11 +37,10 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
     private final ResourceLocation slotTexture;
 
     private final Rect2i inventoryRect;
-
+    protected final U entity;
 
     protected SidedConfigWidget sideConfigWidget;
     protected OptionsBarWidget optionsBarWidget;
-    protected U entity;
 
     public MachineScreen(
         T menu, Inventory inventory, Component component,
@@ -68,7 +67,7 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
             maxYInventorySlot - minYInventorySlot + 18
         );
 
-        this.inventoryLabelY = this.inventoryRect.getY() - 4 - Minecraft.getInstance().font.lineHeight;
+        this.inventoryLabelY = this.inventoryRect.getY() - 2 - Minecraft.getInstance().font.lineHeight;
     }
 
     @Override
@@ -104,10 +103,9 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
 
     protected void moveBatterySlot() {
         if (this.menu instanceof MachineMenu<?> machineMenu && machineMenu.getBatterySlot() != null) {
-            ((MoveableSlot)machineMenu.getBatterySlot()).adastra$moveTo(
-                this.optionsBarWidget.getX() + this.optionsBarWidget.getWidth() - OptionsBarWidget.PADDING - this.leftPos + 1 - 18,
-                this.optionsBarWidget.getY() + OptionsBarWidget.PADDING - this.topPos + 1
-            );
+            SlotAccessor accessor = (SlotAccessor) machineMenu.getBatterySlot();
+            accessor.setX(this.optionsBarWidget.getX() + this.optionsBarWidget.getWidth() - OptionsBarWidget.PADDING - this.leftPos + 1 - 18);
+            accessor.setY(this.optionsBarWidget.getY() + OptionsBarWidget.PADDING - this.topPos + 1);
         }
     }
 
@@ -159,7 +157,6 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
         GuiUtils.drawHorizontalProgressBar(
             graphics, texture,
             mouseX, mouseY,
-            font,
             this.leftPos + xOffset,
             this.topPos + yOffset,
             width, height,
@@ -172,11 +169,10 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
         GuiUtils.drawVerticalProgressBar(
             graphics, texture,
             mouseX, mouseY,
-            font,
             this.leftPos + xOffset,
             this.topPos + yOffset,
             width, height,
-            progress, maxProgress, reverse,
+            progress, maxProgress,
             TooltipUtils.getProgressComponent(progress, maxProgress),
             TooltipUtils.getEtaComponent(progress, maxProgress, reverse));
     }

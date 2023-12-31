@@ -4,7 +4,6 @@ import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import mezz.jei.api.gui.drawable.IDrawable;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
@@ -40,8 +39,6 @@ public class EtaDrawable implements IDrawable {
 
     @Override
     public void draw(@NotNull GuiGraphics graphics, int xOffset, int yOffset) {
-        Font font = Minecraft.getInstance().font;
-
         long time = Objects.requireNonNull(Minecraft.getInstance().level).getGameTime();
         long amount = time % cookTime;
 
@@ -49,7 +46,6 @@ public class EtaDrawable implements IDrawable {
             graphics,
             texture,
             mouseX, mouseY,
-            font,
             xOffset, yOffset,
             textureWidth, textureHeight,
             (int) amount,

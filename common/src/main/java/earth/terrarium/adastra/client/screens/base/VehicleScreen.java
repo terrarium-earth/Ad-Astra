@@ -58,7 +58,7 @@ public abstract class VehicleScreen<T extends BaseEntityContainerMenu<U>, U exte
         int y = this.topPos + yOffset;
         GuiUtils.drawFluidBar(
             graphics, mouseX,
-            mouseY, font,
+            mouseY,
             x, y,
             fluid, capacity);
     }

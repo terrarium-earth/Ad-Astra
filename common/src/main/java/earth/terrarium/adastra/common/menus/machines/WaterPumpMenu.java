@@ -30,7 +30,7 @@ public class WaterPumpMenu extends MachineMenu<WaterPumpBlockEntity> {
 
     @Override
     public int getPlayerInvYOffset() {
-        return 98;
+        return 109;
     }
 
     @Override

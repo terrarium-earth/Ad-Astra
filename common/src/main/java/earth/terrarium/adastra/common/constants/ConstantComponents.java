@@ -16,7 +16,7 @@ public class ConstantComponents {
     public static final Component FALSE = Component.translatable("text.ad_astra.oxygen_false");
 
     public static final Component SIDE_CONFIG = Component.translatable("tooltip.ad_astra.side_config").copy().withStyle(ChatFormatting.GRAY);
-    public static final Component REDSTONE_CONTROL = Component.translatable("tooltip.ad_astra.redstone_control");
+    public static final Component REDSTONE_CONTROL = Component.translatable("tooltip.ad_astra.redstone_control").withStyle(ChatFormatting.RED);
 
     public static final Component ACTIVE = Component.translatable("tooltip.ad_astra.active");
     public static final Component INACTIVE = Component.translatable("tooltip.ad_astra.inactive");

@@ -4,7 +4,6 @@ import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import mezz.jei.api.gui.drawable.IDrawable;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,8 +38,6 @@ public class EnergyBarDrawable implements IDrawable {
 
     @Override
     public void draw(@NotNull GuiGraphics graphics, int xOffset, int yOffset) {
-        Font font = Minecraft.getInstance().font;
-
         boolean generate = perTick > 0;
         long time = Objects.requireNonNull(Minecraft.getInstance().level).getGameTime();
         long amount = time % (capacity / perTick) * -perTick;
@@ -50,7 +47,6 @@ public class EnergyBarDrawable implements IDrawable {
             graphics,
             mouseX,
             mouseY,
-            font,
             xOffset,
             yOffset,
             energy,
