@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:steel_plates"
+    },
+    "O": {
+      "item": "ad_astra:oxygen_gear"
+    },
+    "T": {
+      "item": "ad_astra:gas_tank"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "# #",
+    "TOT",
+    "#W#"
+  ],
+  "result": {
+    "item": "ad_astra:space_suit"
+  },
+  "show_notification": true
+}

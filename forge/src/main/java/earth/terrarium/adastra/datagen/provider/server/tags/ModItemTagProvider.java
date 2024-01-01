@@ -4,6 +4,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
+import earth.terrarium.adastra.common.tags.ModBlockTags;
 import earth.terrarium.adastra.common.tags.ModItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -90,6 +91,15 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         add(ModItemTags.RAW_CALORITE, ModItems.RAW_CALORITE.get(), "raw_calorite", "raw_materials/calorite");
         add(ModItemTags.CALORITE_BLOCKS, ModItems.CALORITE_BLOCK.get(), "calorite_blocks", "storage_blocks/calorite");
         add(ModItemTags.RAW_CALORITE_BLOCKS, ModItems.RAW_CALORITE_BLOCK.get(), "raw_calorite_blocks", "storage_blocks/raw_calorite");
+
+        add(ModItemTags.GLACIAN_LOGS, ModItems.GLACIAN_LOG.get());
+        add(ModItemTags.GLACIAN_LOGS, ModItems.STRIPPED_GLACIAN_LOG.get());
+
+        add(ModItemTags.AERONOS_CAPS, ModItems.AERONOS_CAP.get());
+        add(ModItemTags.AERONOS_CAPS, ModItems.AERONOS_STEM.get());
+
+        add(ModItemTags.STROPHAR_CAPS, ModItems.STROPHAR_CAP.get());
+        add(ModItemTags.STROPHAR_CAPS, ModItems.STROPHAR_STEM.get());
 
         addVanillaTags();
     }

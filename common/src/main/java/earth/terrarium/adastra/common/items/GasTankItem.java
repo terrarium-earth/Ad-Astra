@@ -28,9 +28,9 @@ import java.util.List;
 
 public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFluidContainer> {
     private final long tankSize;
-    private final float distributionAmount;
+    private final double distributionAmount;
 
-    public GasTankItem(Properties properties, long tankSize, float distributionAmount) {
+    public GasTankItem(Properties properties, long tankSize, double distributionAmount) {
         super(properties);
         this.tankSize = tankSize;
         this.distributionAmount = distributionAmount;

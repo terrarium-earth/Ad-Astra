@@ -9,6 +9,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -183,7 +184,86 @@ public class ModRecipeProvider extends RecipeProvider {
             .pattern("###")
             .pattern("###"));
 
-        // TODO: Space suits with custom nbt recipe
+        shaped(ModItems.SPACE_HELMET, 1, ModItemTags.STEEL_PLATES, r -> r
+            .define('G', Items.GLASS_PANE)
+            .pattern("###")
+            .pattern("#G#"));
+
+        shaped(ModItems.SPACE_SUIT, 1, ModItemTags.STEEL_PLATES, r -> r
+            .define('O', ModItems.OXYGEN_GEAR.get())
+            .define('T', ModItems.GAS_TANK.get())
+            .define('W', ItemTags.WOOL)
+            .pattern("# #")
+            .pattern("TOT")
+            .pattern("#W#"));
+
+        shaped(ModItems.SPACE_PANTS, 1, ModItemTags.STEEL_PLATES, r -> r
+            .define('W', ItemTags.WOOL)
+            .pattern("###")
+            .pattern("W W")
+            .pattern("# #"));
+
+        shaped(ModItems.SPACE_BOOTS, 1, ModItemTags.STEEL_PLATES, r -> r
+            .define('W', ItemTags.WOOL)
+            .pattern("W W")
+            .pattern("# #"));
+
+        shaped(ModItems.NETHERITE_SPACE_HELMET, 1, ModItemTags.OSTRUM_PLATES, r -> r
+            .define('G', Items.GLASS)
+            .define('N', Items.NETHERITE_HELMET)
+            .pattern("#N#")
+            .pattern("#G#"));
+
+        shaped(ModItems.NETHERITE_SPACE_SUIT, 1, ModItemTags.OSTRUM_PLATES, r -> r
+            .define('O', ModItems.OXYGEN_GEAR.get())
+            .define('T', ModItems.LARGE_GAS_TANK.get())
+            .define('N', Items.NETHERITE_CHESTPLATE)
+            .pattern("# #")
+            .pattern("TOT")
+            .pattern("#N#"));
+
+        shaped(ModItems.NETHERITE_SPACE_PANTS, 1, ModItemTags.OSTRUM_PLATES, r -> r
+            .define('D', ModItemTags.DESH_PLATES)
+            .define('N', Items.NETHERITE_LEGGINGS)
+            .pattern("#N#")
+            .pattern("D D")
+            .pattern("# #"));
+
+        shaped(ModItems.NETHERITE_SPACE_BOOTS, 1, ModItemTags.OSTRUM_PLATES, r -> r
+            .define('D', ModItemTags.DESH_PLATES)
+            .define('N', Items.NETHERITE_BOOTS)
+            .pattern(" N ")
+            .pattern("D D")
+            .pattern("# #"));
+
+        shaped(ModItems.JET_SUIT_HELMET, 1, ModItemTags.CALORITE_PLATES, r -> r
+            .define('N', ModItems.NETHERITE_SPACE_HELMET.get())
+            .define('G', Items.TINTED_GLASS)
+            .pattern("#N#")
+            .pattern("#G#"));
+
+        shaped(ModItems.JET_SUIT, 1, ModItemTags.CALORITE_PLATES, r -> r
+            .define('N', ModItems.NETHERITE_SPACE_SUIT.get())
+            .define('E', ModItems.CALORITE_ENGINE.get())
+            .define('T', ModItems.CALORITE_TANK.get())
+            .define('C', ModItems.ETRIONIC_CAPACITOR.get())
+            .pattern("# #")
+            .pattern("TNT")
+            .pattern("CEC"));
+
+        shaped(ModItems.JET_SUIT_PANTS, 1, ModItemTags.CALORITE_PLATES, r -> r
+            .define('N', ModItems.NETHERITE_SPACE_PANTS.get())
+            .define('B', ModItems.CALORITE_BLOCK.get())
+            .pattern("BNB")
+            .pattern("# #")
+            .pattern("# #"));
+
+        shaped(ModItems.JET_SUIT_BOOTS, 1, ModItemTags.CALORITE_PLATES, r -> r
+            .define('N', ModItems.NETHERITE_SPACE_BOOTS.get())
+            .define('B', ModItems.CALORITE_BLOCK.get())
+            .pattern(" N ")
+            .pattern("# #")
+            .pattern("B B"));
 
         shaped(ModItems.WRENCH, 1, ModItemTags.IRON_PLATES, r -> r
             .define('|', ModItemTags.IRON_RODS)

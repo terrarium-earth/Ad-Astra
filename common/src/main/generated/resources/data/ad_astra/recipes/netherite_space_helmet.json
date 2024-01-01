@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:ostrum_plates"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "N": {
+      "item": "minecraft:netherite_helmet"
+    }
+  },
+  "pattern": [
+    "#N#",
+    "#G#"
+  ],
+  "result": {
+    "item": "ad_astra:netherite_space_helmet"
+  },
+  "show_notification": true
+}

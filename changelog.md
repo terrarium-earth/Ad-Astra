@@ -23,6 +23,8 @@ tick methods.
 - Updated the plate and rod textures
 - Added gas tanks. these replace oxygen tanks and can hold any fluid. Using them will distribute the
   stored fluid into any container in your inventory, with armor being the first priority.
+- Added the etrionic capacitor. This is an item that can hold a large amount of energy and can be discharged
+into energy items in your inventory.
 - Added the zip gun. When filled with oxygen, it propels you forward. Holding two at the same time will propel you
   further.
 - Separated the config into a common config and client config.
@@ -96,6 +98,8 @@ You must build a space station and land on that space station first.
 - Added Factory blocks. These are decorative blocks that support connected textures if you have [Athena](https://modrinth.com/mod/athena-ctm) installed.
 These are available for all metals.
 - Added Encased Plateblocks, and Panel blocks. These are are available for all metals.
+- Redid many of the recipes.
+- Added higher blast resistance for higher tier metals.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.
@@ -107,6 +111,8 @@ if you're using these recipes in modpacks, you'll need to change them. This incl
   - "ad_astra:cryo_fuel_conversion" -> "ad_astra:cryo_freezing"
   - "ad_astra:fuel_conversion" -> "ad_astra:refining"
   - "ad_astra:oxygen_conversion" -> "ad_astra:oxygen_loading"
+- Removed the sky renderer JSON API. Sky renderers should now be done in code.
+- Removed the JSON APIs for adding planets, galaxies and info in the planets screen.
 
 ## TODO: Not sure if this'll be in this release
 
@@ -123,4 +129,3 @@ Hopefully this will prevent people from missing it and crashing.
 - Updated the oxygen distributor model. It now spins and can be placed on any block face.
 - Added the gravity normalizer. This allows you to control the gravity of a local area, similar
 to the oxygen distributor. It's especially important in orbit due to the zero gravity environment.
-- Redid all the recipes

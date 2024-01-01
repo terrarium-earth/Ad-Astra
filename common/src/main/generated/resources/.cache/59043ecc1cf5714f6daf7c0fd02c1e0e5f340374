@@ -1,4 +1,5 @@
-// 1.20.1	2023-12-31T17:30:12.477838	Tags for minecraft:item mod id ad_astra
+// 1.20.1	2023-12-31T21:33:50.102661	Tags for minecraft:item mod id ad_astra
+375e4bc49d396a2ae2b2a9dcddc300ab07a3aa48 data/ad_astra/tags/items/aeronos_caps.json
 8030232b3adfa6e804799644b412d6697c9f985a data/ad_astra/tags/items/cable_ducts.json
 9e5430f8f65b6281a9fe76442a62537371f1da72 data/ad_astra/tags/items/calorite_blocks.json
 19b0f60e06dec4769b066c94d255c43f3b685c18 data/ad_astra/tags/items/calorite_ingots.json
@@ -11,6 +12,7 @@ ed289cc805bd3fd911e1f135adc0a2808ed56025 data/ad_astra/tags/items/desh_ingots.js
 322406e5b1fcfe1533ab85e2d773eff44fe88039 data/ad_astra/tags/items/flags.json
 d10acd25289b91dd382a0b3b47088961846033c6 data/ad_astra/tags/items/fluid_pipe_ducts.json
 7ead9b5710c97d56e46885d3ac8947f4784c164a data/ad_astra/tags/items/freeze_resistant_armor.json
+e5e2d1a810418e09c6d0059a742a494f43fcd81e data/ad_astra/tags/items/glacian_logs.json
 f8fd8be682f32975426f904d4f7a022c6d7bf39f data/ad_astra/tags/items/globes.json
 2b62110b91f25bd210f1c46e8d1e3ed65cc20da5 data/ad_astra/tags/items/heat_resistant_armor.json
 55467742a07025d217b3d8f9cc3a3dbd516b579a data/ad_astra/tags/items/held_over_head.json
@@ -35,6 +37,7 @@ b11e527e582d4acf094fda236e3a25a37bcd8c71 data/ad_astra/tags/items/steel_ingots.j
 d2a2ceb94c3d334e4067eebbaf23d5cb53681d51 data/ad_astra/tags/items/steel_nuggets.json
 fbe4dc474f0945340197b94bb71dd7ba6e64c0e4 data/ad_astra/tags/items/steel_plates.json
 aae4da863d2012d9d2a2c5c131f0c2801a72ea3e data/ad_astra/tags/items/steel_rods.json
+8ab58327558f09297f12a44aefd3254382c4e224 data/ad_astra/tags/items/strophar_caps.json
 8d5e80ce8d227e8bb4980a0060fac973aae3924e data/c/tags/items/calorite_blocks.json
 6723d71c744cd2453f0d096f1818e9d720576a94 data/c/tags/items/calorite_ingots.json
 8845a0eac7e756c25b6702b88ef8dcbc0bb77d23 data/c/tags/items/calorite_nuggets.json
