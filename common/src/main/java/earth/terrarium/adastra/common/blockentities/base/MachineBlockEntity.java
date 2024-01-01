@@ -2,20 +2,19 @@ package earth.terrarium.adastra.common.blockentities.base;
 
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class MachineBlockEntity extends BlockEntity {
+public abstract class MachineBlockEntity extends BlockEntity implements TickableBlockEntity {
     private boolean initialized;
 
     public MachineBlockEntity(BlockPos pos, BlockState state) {
@@ -26,20 +25,22 @@ public abstract class MachineBlockEntity extends BlockEntity {
         super(type, pos, state);
     }
 
-    public void tick(Level level, long time, BlockState state, BlockPos pos) {}
-
-    public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {}
-
-    public void internalServerTick(ServerLevel level, long time, BlockState state, BlockPos pos) {}
-
-    public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {}
-
+    @Override
     public void firstTick(Level level, BlockPos pos, BlockState state) {
         this.initialized = true;
     }
 
-    public void onRemoved() {}
+    @Override
+    public boolean isInitialized() {
+        return this.initialized;
+    }
 
+    @Override
+    public void sync() {
+        level().sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
+    }
+
+    // level getter that's specifically not null so avoid the annoying warning
     @SuppressWarnings("DataFlowIssue")
     @NotNull
     public Level level() {
@@ -66,15 +67,5 @@ public abstract class MachineBlockEntity extends BlockEntity {
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    public boolean isInitialized() {
-        return this.initialized;
-    }
-
-    public void sync() {
-        if (level() instanceof ServerLevel serverLevel) {
-            serverLevel.getChunkSource().blockChanged(this.worldPosition);
-        }
     }
 }

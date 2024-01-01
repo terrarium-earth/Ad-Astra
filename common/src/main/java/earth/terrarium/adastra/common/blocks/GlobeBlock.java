@@ -19,9 +19,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -43,7 +40,7 @@ public class GlobeBlock extends BasicEntityBlock implements SimpleWaterloggedBlo
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
     public GlobeBlock(Properties properties) {
-        super(properties);
+        super(properties, true);
         registerDefaultState(stateDefinition.any()
             .setValue(WATERLOGGED, false)
             .setValue(POWERED, false));
@@ -73,15 +70,6 @@ public class GlobeBlock extends BasicEntityBlock implements SimpleWaterloggedBlo
             entity.rotateGlobe();
         }
         super.onProjectileHit(level, state, hit, projectile);
-    }
-
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return (entityLevel, blockPos, blockState, blockEntity) -> {
-            if (blockEntity instanceof GlobeBlockEntity entity) {
-                entity.tick();
-            }
-        };
     }
 
     @Override

@@ -1,6 +1,5 @@
 package earth.terrarium.adastra.common.blocks;
 
-import earth.terrarium.adastra.common.blockentities.SlidingDoorBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.blocks.base.Wrenchable;
 import earth.terrarium.adastra.common.blocks.properties.SlidingDoorPartProperty;
@@ -24,8 +23,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -57,7 +54,7 @@ public class SlidingDoorBlock extends BasicEntityBlock implements Wrenchable {
     private static final VoxelShape WEST_SHAPE = Block.box(1, 0, 0, 4, 16, 16);
 
     public SlidingDoorBlock(Properties properties) {
-        super(properties);
+        super(properties, true);
         registerDefaultState(stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
             .setValue(OPEN, false)
@@ -108,15 +105,6 @@ public class SlidingDoorBlock extends BasicEntityBlock implements Wrenchable {
     @Override
     public @NotNull RenderShape getRenderShape(BlockState state) {
         return RenderShape.ENTITYBLOCK_ANIMATED; // Rendering is done in the BER
-    }
-
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return (entityLevel, blockPos, blockState, blockEntity) -> {
-            if (blockEntity instanceof SlidingDoorBlockEntity entity) {
-                entity.tick();
-            }
-        };
     }
 
     @Override

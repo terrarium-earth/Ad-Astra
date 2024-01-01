@@ -4,14 +4,13 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.blockentities.machines.NasaWorkbenchBlockEntity;
 import earth.terrarium.adastra.common.blockentities.GlobeBlockEntity;
-import earth.terrarium.adastra.common.blockentities.PipeBlockEntity;
 import earth.terrarium.adastra.common.blockentities.RadioBlockEntity;
 import earth.terrarium.adastra.common.blockentities.SlidingDoorBlockEntity;
-import earth.terrarium.adastra.common.blockentities.base.ContainerMachineExtensionBlockEntity;
 import earth.terrarium.adastra.common.blockentities.flag.FlagBlockEntity;
 import earth.terrarium.adastra.common.blockentities.machines.*;
+import earth.terrarium.adastra.common.blockentities.pipes.CableBlockEntity;
+import earth.terrarium.adastra.common.blockentities.pipes.FluidPipeBlockEntity;
 import earth.terrarium.botarium.common.registry.RegistryHelpers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
@@ -21,12 +20,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 @SuppressWarnings("unused")
 public class ModBlockEntityTypes {
     public static final ResourcefulRegistry<BlockEntityType<?>> BLOCK_ENTITY_TYPES = ResourcefulRegistries.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, AdAstra.MOD_ID);
-
-    public static final RegistryEntry<BlockEntityType<ContainerMachineExtensionBlockEntity>> MACHINE_EXTENSION = BLOCK_ENTITY_TYPES.register(
-        "machine_extension",
-        () -> RegistryHelpers.createBlockEntityType(
-            ContainerMachineExtensionBlockEntity::new,
-            ModBlocks.MACHINES.stream().map(RegistryEntry::get).toArray(Block[]::new)));
 
     public static final RegistryEntry<BlockEntityType<CompressorBlockEntity>> COMPRESSOR = BLOCK_ENTITY_TYPES.register(
         "compressor",
@@ -112,11 +105,17 @@ public class ModBlockEntityTypes {
             SlidingDoorBlockEntity::new,
             ModBlocks.SLIDING_DOORS));
 
-    public static final RegistryEntry<BlockEntityType<PipeBlockEntity>> PIPE = BLOCK_ENTITY_TYPES.register(
-        "pipe",
+    public static final RegistryEntry<BlockEntityType<CableBlockEntity>> CABLE = BLOCK_ENTITY_TYPES.register(
+        "cable",
         () -> createBlockEntityType(
-            PipeBlockEntity::new,
-            ModBlocks.PIPES));
+            CableBlockEntity::new,
+            ModBlocks.CABLES));
+
+    public static final RegistryEntry<BlockEntityType<FluidPipeBlockEntity>> FLUID_PIPE = BLOCK_ENTITY_TYPES.register(
+        "fluid_pipe",
+        () -> createBlockEntityType(
+            FluidPipeBlockEntity::new,
+            ModBlocks.FLUID_PIPES));
 
     public static final RegistryEntry<BlockEntityType<RadioBlockEntity>> RADIO = BLOCK_ENTITY_TYPES.register(
         "radio",

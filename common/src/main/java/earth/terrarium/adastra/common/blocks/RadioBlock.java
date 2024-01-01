@@ -27,7 +27,7 @@ public class RadioBlock extends BasicEntityBlock {
     private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 8, 15);
 
     public RadioBlock(Properties properties) {
-        super(properties);
+        super(properties, false);
 
         registerDefaultState(defaultBlockState()
             .setValue(FACING, EightDirectionProperty.Direction.NORTH));

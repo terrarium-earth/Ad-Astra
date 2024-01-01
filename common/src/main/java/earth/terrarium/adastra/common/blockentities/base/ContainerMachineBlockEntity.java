@@ -44,7 +44,13 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
 
     @Override
     public void internalServerTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
-        if (time % 2 == 0 && shouldSync()) sync();
+        if (time % 30 == 0 && shouldUpdate()) {
+            update();
+        }
+    }
+
+    public boolean shouldUpdate() {
+        return true;
     }
 
     @Override
@@ -78,15 +84,15 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
         return getBlockState().getBlock().getName();
     }
 
-    public boolean shouldSync() {
-        return false;
-    }
-
     @Override
     public NonNullList<ItemStack> items() {
         return this.items;
     }
 
+    /**
+     * Checks if the machine's redstone configuration allows it to function.
+     * @return True if the machine can function, false otherwise.
+     */
     public boolean canFunction() {
         return getRedstoneControl().canPower(isRedstonePowered());
     }

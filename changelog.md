@@ -32,6 +32,8 @@ into energy items in your inventory.
   `ON_WHEN_NOT_POWERED`, and `NEVER_ON`.
 - Added a slot in energy machines for powering them with items.
 - Added side configuration to all machines. This allows you to control what each element
+- Cables and fluid pipes are now much more performant and should now be smarter i.e. automatically
+  figure out the sources and consumers without having to explicitly configure them.
 of the machine does to all sides. For example, you can configure a machine to pull items on
 one side, extract energy from another side, and push fluid to another side.
 - Added experimental orbit physics. This enables zero gravity movement while in orbit.

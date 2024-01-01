@@ -195,8 +195,8 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
 
     @Override
     public void updateSlots() {
-        sync();
         FluidUtils.moveItemToContainer(this, getFluidContainer(), 1, 2, 0);
+        sync();
     }
 
     @Override

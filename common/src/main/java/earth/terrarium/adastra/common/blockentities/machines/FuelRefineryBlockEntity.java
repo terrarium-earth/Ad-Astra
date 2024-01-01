@@ -42,16 +42,6 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
     }
 
     @Override
-    public boolean shouldSync() {
-        return true;
-    }
-
-    @Override
-    public boolean shouldUpdate() {
-        return shouldSync();
-    }
-
-    @Override
     public WrappedBlockEnergyContainer getEnergyStorage() {
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
@@ -149,9 +139,9 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
 
     @Override
     public void updateSlots() {
-        sync();
         FluidUtils.moveItemToContainer(this, fluidContainer, 1, 2, 0);
         FluidUtils.moveContainerToItem(this, fluidContainer, 3, 4, 1);
+        sync();
     }
 
     @Override

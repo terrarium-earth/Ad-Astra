@@ -1,13 +1,10 @@
 package earth.terrarium.adastra.common.blocks.base;
 
 import earth.terrarium.adastra.common.blockentities.base.BasicContainer;
-import earth.terrarium.adastra.common.blockentities.base.MachineBlockEntity;
 import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
 import earth.terrarium.botarium.common.menu.MenuHooks;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -19,9 +16,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -36,7 +30,7 @@ public class MachineBlock extends BasicEntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
     public MachineBlock(Properties properties) {
-        super(properties);
+        super(properties, true);
         registerDefaultState(stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
             .setValue(POWERED, false)
@@ -54,23 +48,6 @@ public class MachineBlock extends BasicEntityBlock {
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return (entityLevel, blockPos, blockState, blockEntity) -> {
-            if (blockEntity instanceof MachineBlockEntity machine) {
-                long time = level.getGameTime() - blockPos.asLong();
-                machine.tick(level, time, state, blockPos);
-                if (level.isClientSide()) {
-                    machine.clientTick((ClientLevel) level, time, state, blockPos);
-                } else {
-                    machine.serverTick((ServerLevel) level, time, state, blockPos);
-                    machine.internalServerTick((ServerLevel) level, time, state, blockPos);
-                }
-                if (!machine.isInitialized()) machine.firstTick(level, blockPos, state);
-            }
-        };
-    }
-
-    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, POWERED, LIT);
     }
@@ -82,9 +59,6 @@ public class MachineBlock extends BasicEntityBlock {
                 if (container.getContainerSize() > 0) {
                     Containers.dropContents(level, pos, container);
                     level.updateNeighbourForOutputSignal(pos, this);
-                }
-                if (level.getBlockEntity(pos) instanceof MachineBlockEntity machine) {
-                    machine.onRemoved();
                 }
             }
             super.onRemove(state, level, pos, newState, moved);

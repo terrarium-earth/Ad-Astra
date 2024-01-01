@@ -15,7 +15,7 @@ public class ConstantComponents {
     public static final Component TRUE = Component.translatable("text.ad_astra.oxygen_true");
     public static final Component FALSE = Component.translatable("text.ad_astra.oxygen_false");
 
-    public static final Component SIDE_CONFIG = Component.translatable("tooltip.ad_astra.side_config").copy().withStyle(ChatFormatting.GRAY);
+    public static final Component SIDE_CONFIG = Component.translatable("tooltip.ad_astra.side_config").withStyle(ChatFormatting.GRAY);
     public static final Component REDSTONE_CONTROL = Component.translatable("tooltip.ad_astra.redstone_control").withStyle(ChatFormatting.RED);
 
     public static final Component ACTIVE = Component.translatable("tooltip.ad_astra.active");
@@ -65,11 +65,11 @@ public class ConstantComponents {
     public static final Component OXYGEN_SENSOR_INFO = Component.translatable("info.ad_astra.oxygen_sensor").withStyle(ChatFormatting.GRAY);
 
     public static final Component UPGRADES = Component.translatable("tooltip.ad_astra.upgrades").withStyle(ChatFormatting.LIGHT_PURPLE);
-    public static final Component CLEAR_FLUID_TANK = Component.translatable("tooltip.ad_astra.clear_fluid_tank").withStyle(ChatFormatting.DARK_RED);
+    public static final Component CLEAR_FLUID_TANK = Component.translatable("tooltip.ad_astra.clear_fluid_tank").withStyle(ChatFormatting.RED);
 
-    public static final Component NEXT = Component.translatable("tooltip.ad_astra.next").copy().withStyle(ChatFormatting.GRAY);
-    public static final Component PREVIOUS = Component.translatable("tooltip.ad_astra.previous").copy().withStyle(ChatFormatting.GRAY);
-    public static final Component RESET_TO_DEFAULT = Component.translatable("tooltip.ad_astra.reset_to_default");
+    public static final Component NEXT = Component.translatable("tooltip.ad_astra.next").withStyle(ChatFormatting.GRAY);
+    public static final Component PREVIOUS = Component.translatable("tooltip.ad_astra.previous").withStyle(ChatFormatting.GRAY);
+    public static final Component RESET_TO_DEFAULT = Component.translatable("tooltip.ad_astra.reset_to_default").withStyle(ChatFormatting.RED);
 
     public static final Component SIDE_CONFIG_SLOTS = Component.translatable("side_config.ad_astra.slots");
     public static final Component SIDE_CONFIG_ENERGY = Component.translatable("side_config.ad_astra.energy");

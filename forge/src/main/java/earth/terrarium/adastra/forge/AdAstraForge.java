@@ -24,8 +24,8 @@ public class AdAstraForge {
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onAddReloadListener);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onDatapackSync);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onServerTick);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onAttributes);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::registerCommands);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::onAttributes);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::commonSetup);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AdAstraClientForge::init);
     }

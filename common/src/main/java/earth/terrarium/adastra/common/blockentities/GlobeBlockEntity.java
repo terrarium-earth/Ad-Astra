@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blockentities;
 
+import earth.terrarium.adastra.common.blockentities.base.TickableBlockEntity;
 import earth.terrarium.adastra.common.blocks.GlobeBlock;
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
@@ -8,10 +9,11 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class GlobeBlockEntity extends BlockEntity {
+public class GlobeBlockEntity extends BlockEntity implements TickableBlockEntity {
     private float torque;
     private float yRot;
     private float lastYRot;
@@ -20,7 +22,8 @@ public class GlobeBlockEntity extends BlockEntity {
         super(ModBlockEntityTypes.GLOBE.get(), pos, state);
     }
 
-    public void tick() {
+    @Override
+    public void tick(Level level, long time, BlockState state, BlockPos pos) {
         if (getBlockState().getValue(GlobeBlock.POWERED) && torque <= 3f) {
             torque = 3f;
         }

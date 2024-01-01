@@ -46,17 +46,6 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
     }
 
     @Override
-    public boolean shouldSync() {
-        return getEnergyStorage().getStoredEnergy() > 0 &&
-            (!getFluidContainer().getFluids().get(0).isEmpty() || !getFluidContainer().getFluids().get(1).isEmpty());
-    }
-
-    @Override
-    public boolean shouldUpdate() {
-        return shouldSync();
-    }
-
-    @Override
     public WrappedBlockEnergyContainer getEnergyStorage() {
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
@@ -75,7 +64,7 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
         return fluidContainer = new WrappedBlockFluidContainer(
             this,
             new BiFluidContainer(
-                FluidHooks.buckets(6),
+                FluidHooks.buckets(60), // TODO
                 1,
                 1,
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get())
@@ -154,9 +143,9 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
 
     @Override
     public void updateSlots() {
-        sync();
         FluidUtils.moveItemToContainer(this, getFluidContainer(), 1, 2, 0);
         FluidUtils.moveContainerToItem(this, getFluidContainer(), 3, 4, 1);
+        sync();
     }
 
     @Override

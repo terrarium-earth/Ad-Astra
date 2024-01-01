@@ -70,7 +70,9 @@ public class TransferUtils {
             if (nearbyContainer == null) continue;
             FluidHolder holder = container.getFluids().get(tank);
             if (holder.isEmpty()) continue;
-            FluidApi.moveFluid(container, nearbyContainer, FluidHooks.newFluidHolder(holder.getFluid(), amount, null), false);
+            if (FluidApi.moveFluid(container, nearbyContainer, FluidHooks.newFluidHolder(holder.getFluid(), amount, null), false) > 0) {
+                machine.sync();
+            }
         }
     }
 
@@ -87,7 +89,9 @@ public class TransferUtils {
             if (nearbyContainer == null) continue;
             FluidHolder holder = nearbyContainer.getFluids().get(tank);
             if (holder.isEmpty()) continue;
-            FluidApi.moveFluid(nearbyContainer, container, FluidHooks.newFluidHolder(holder.getFluid(), amount, null), false);
+            if (FluidApi.moveFluid(nearbyContainer, container, FluidHooks.newFluidHolder(holder.getFluid(), amount, null), false) > 0) {
+                machine.sync();
+            }
         }
     }
 

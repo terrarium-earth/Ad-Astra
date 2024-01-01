@@ -22,20 +22,14 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<?>> extends Ener
     @Override
     public void internalServerTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         super.internalServerTick(level, time, state, pos);
-        if (recipe != null && canFunction()) recipeTick(level, getEnergyStorage());
-        if (time % 20 == 0 && recipe == null && shouldUpdate()) update();
-        if (recipe == null) cookTimeTotal = 0;
-        if (time % 10 == 0) setLit(recipe != null && canFunction() && canCraft(getEnergyStorage()));
-
-        // Manually update it on an interval. This'll update it in cases where for example, energy has been added but
-        // the player never actually clicked the slot, so it didn't update.
-        if (time % 100 == 0 && recipe == null) {
-            update();
+        if (recipe != null && canFunction()) {
+            recipeTick(level, getEnergyStorage());
         }
     }
 
+    @Override
     public boolean shouldUpdate() {
-        return canCraft(getEnergyStorage());
+        return recipe == null;
     }
 
     public abstract void recipeTick(ServerLevel level, WrappedBlockEnergyContainer energyStorage);

@@ -42,11 +42,6 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
     }
 
     @Override
-    public boolean shouldSync() {
-        return getEnergyStorage().getStoredEnergy() > 0 && !getFluidContainer().getFluids().get(0).isEmpty();
-    }
-
-    @Override
     public WrappedBlockEnergyContainer getEnergyStorage() {
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(

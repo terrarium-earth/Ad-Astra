@@ -41,16 +41,6 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
     }
 
     @Override
-    public boolean shouldSync() {
-        return getEnergyStorage().getStoredEnergy() > 0 && !getFluidContainer().getFluids().get(0).isEmpty();
-    }
-
-    @Override
-    public boolean shouldUpdate() {
-        return shouldSync();
-    }
-
-    @Override
     public WrappedBlockEnergyContainer getEnergyStorage() {
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
@@ -146,8 +136,8 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
 
     @Override
     public void updateSlots() {
-        sync();
         FluidUtils.moveContainerToItem(this, fluidContainer, 2, 3, 0);
+        sync();
     }
 
     @Override

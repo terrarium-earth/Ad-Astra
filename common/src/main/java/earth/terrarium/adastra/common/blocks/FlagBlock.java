@@ -3,7 +3,6 @@ package earth.terrarium.adastra.common.blocks;
 import earth.terrarium.adastra.client.screens.blocks.FlagUrlScreen;
 import earth.terrarium.adastra.common.blockentities.flag.FlagBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
-import earth.terrarium.adastra.common.blocks.base.DoubleMachineBlock;
 import earth.terrarium.adastra.common.blocks.properties.EightDirectionProperty;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
@@ -56,7 +55,7 @@ public class FlagBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     private static final VoxelShape SHAPE_TOP = Block.box(7, 0, 7, 9, 24, 9);
 
     public FlagBlock(Properties properties) {
-        super(properties);
+        super(properties, false);
         registerDefaultState(defaultBlockState()
             .setValue(HALF, DoubleBlockHalf.LOWER)
             .setValue(FACING, EightDirectionProperty.Direction.NORTH)
@@ -104,7 +103,7 @@ public class FlagBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide() && player.isCreative()) {
-            DoubleMachineBlock.preventCreativeDropFromBottomPart(level, pos, state, player);
+            preventCreativeDropFromBottomPart(level, pos, state, player);
         }
 
         super.playerWillDestroy(level, pos, state, player);

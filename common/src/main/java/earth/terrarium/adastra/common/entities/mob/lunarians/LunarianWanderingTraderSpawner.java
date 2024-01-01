@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.entities.mob.lunarians;
 
+import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -69,6 +70,7 @@ public class LunarianWanderingTraderSpawner implements CustomSpawner {
         ServerPlayer playerEntity = level.getRandomPlayer();
         if (playerEntity == null) return true;
         if (this.random.nextInt(10) != 0) return false;
+        if (!PlanetApi.API.isPlanet(level.dimension())) return false;
 
         BlockPos blockPos = playerEntity.blockPosition();
         PoiManager pointOfInterestStorage = level.getPoiManager();
