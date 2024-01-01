@@ -123,8 +123,6 @@ public class ModBlockEntityTypes {
             RadioBlockEntity::new,
             ModBlocks.RADIO.get()));
 
-
-    @SuppressWarnings("DataFlowIssue")
     public static <E extends BlockEntity> BlockEntityType<E> createBlockEntityType(BlockEntityType.BlockEntitySupplier<E> factory, ResourcefulRegistry<Block> registry) {
         return BlockEntityType.Builder.of(factory,
                 registry.stream()

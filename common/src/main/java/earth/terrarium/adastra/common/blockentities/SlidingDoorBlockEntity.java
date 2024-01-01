@@ -7,7 +7,6 @@ import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.adastra.common.registry.ModSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;

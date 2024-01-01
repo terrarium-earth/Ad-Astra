@@ -1,6 +1,6 @@
 package earth.terrarium.adastra.common.blocks.pipes;
 
-public interface Pipe {
+public interface TransferablePipe {
 
     long transferRate();
 

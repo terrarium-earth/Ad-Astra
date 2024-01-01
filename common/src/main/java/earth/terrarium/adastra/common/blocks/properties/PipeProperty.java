@@ -20,4 +20,20 @@ public enum PipeProperty implements StringRepresentable {
     public String toString() {
         return getSerializedName();
     }
+
+    public boolean isNone() {
+        return this == NONE;
+    }
+
+    public boolean isNormal() {
+        return this == NORMAL;
+    }
+
+    public boolean isInsert() {
+        return this == INSERT;
+    }
+
+    public boolean isExtract() {
+        return this == EXTRACT;
+    }
 }

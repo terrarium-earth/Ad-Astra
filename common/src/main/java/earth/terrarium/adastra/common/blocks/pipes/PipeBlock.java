@@ -1,6 +1,6 @@
 package earth.terrarium.adastra.common.blocks.pipes;
 
-import earth.terrarium.adastra.common.blockentities.PipeBlockEntity;
+import earth.terrarium.adastra.common.blockentities.pipes.PipeBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.blocks.base.Wrenchable;
 import earth.terrarium.adastra.common.blocks.properties.PipeProperty;
@@ -10,10 +10,10 @@ import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.fluid.FluidApi;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -25,9 +25,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -40,13 +37,10 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @SuppressWarnings("deprecation")
-public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBlock, Wrenchable, Pipe {
+public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBlock, Wrenchable, TransferablePipe {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public static final EnumProperty<PipeProperty> CONNECTED_UP = EnumProperty.create("connected_up", PipeProperty.class);
@@ -56,13 +50,14 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     public static final EnumProperty<PipeProperty> CONNECTED_SOUTH = EnumProperty.create("connected_south", PipeProperty.class);
     public static final EnumProperty<PipeProperty> CONNECTED_WEST = EnumProperty.create("connected_west", PipeProperty.class);
 
-    public static final Map<Direction, EnumProperty<PipeProperty>> DIRECTION_TO_CONNECTION = Map.of(
-        Direction.UP, CONNECTED_UP,
-        Direction.DOWN, CONNECTED_DOWN,
-        Direction.NORTH, CONNECTED_NORTH,
-        Direction.EAST, CONNECTED_EAST,
-        Direction.SOUTH, CONNECTED_SOUTH,
-        Direction.WEST, CONNECTED_WEST);
+    public static final EnumMap<Direction, EnumProperty<PipeProperty>> DIRECTION_TO_CONNECTION = Util.make(new EnumMap<>(Direction.class), map -> {
+        map.put(Direction.UP, CONNECTED_UP);
+        map.put(Direction.DOWN, CONNECTED_DOWN);
+        map.put(Direction.NORTH, CONNECTED_NORTH);
+        map.put(Direction.EAST, CONNECTED_EAST);
+        map.put(Direction.SOUTH, CONNECTED_SOUTH);
+        map.put(Direction.WEST, CONNECTED_WEST);
+    });
 
     private final Map<BlockState, VoxelShape> shapes = new HashMap<>();
 
@@ -70,7 +65,7 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     private final Type type;
 
     public PipeBlock(long transferRate, Type type, double size, Properties properties) {
-        super(properties);
+        super(properties, true);
         this.transferRate = transferRate;
         this.type = type;
         registerDefaultState(stateDefinition.any()
@@ -154,18 +149,6 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return (entityLevel, blockPos, blockState, blockEntity) -> {
-            if (blockEntity instanceof PipeBlockEntity entity) {
-                long time = level.getGameTime() - blockPos.asLong();
-                if (!level.isClientSide()) {
-                    entity.serverTick((ServerLevel) level, time, blockPos);
-                }
-            }
-        };
-    }
-
-    @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         update(level, pos);
     }
@@ -176,6 +159,9 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
             level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
         update((Level) level, pos, state, direction);
+        if (level.getBlockEntity(pos) instanceof PipeBlockEntity pipe) {
+            pipe.pipeChanged((Level) level, pos);
+        }
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
@@ -183,6 +169,10 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
         if (level.isClientSide()) return;
         for (var direction : Direction.values()) {
             update(level, pos, level.getBlockState(pos), direction);
+        }
+
+        if (level.getBlockEntity(pos) instanceof PipeBlockEntity pipe) {
+            pipe.pipeChanged(level, pos);
         }
     }
 
@@ -200,7 +190,7 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     private boolean canConnect(Level level, BlockPos pos, Direction direction) {
         var connectPos = pos.relative(direction);
         var connectState = level.getBlockState(connectPos);
-        if (connectState.getBlock() instanceof Pipe pipe) {
+        if (connectState.getBlock() instanceof TransferablePipe pipe) {
             return pipe.type() == type;
         }
 
@@ -216,8 +206,9 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     }
 
     public static Direction[] getConnectedDirections(BlockState state) {
-        return DIRECTION_TO_CONNECTION.entrySet().stream()
-            .filter(entry -> state.getValue(entry.getValue()) != PipeProperty.NONE)
+        return DIRECTION_TO_CONNECTION.entrySet()
+            .stream()
+            .filter(entry -> !state.getValue(entry.getValue()).isNone())
             .map(Map.Entry::getKey)
             .toArray(Direction[]::new);
     }
@@ -225,22 +216,22 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     public static VoxelShape makeShape(BlockState state, double size) {
         VoxelShape shape = Shapes.box(size, size, size, 1 - size, 1 - size, 1 - size);
 
-        if (state.getValue(CONNECTED_UP) != PipeProperty.NONE) {
+        if (!state.getValue(CONNECTED_UP).isNone()) {
             shape = Shapes.or(shape, Shapes.box(size, size, size, 1 - size, 1, 1 - size));
         }
-        if (state.getValue(CONNECTED_DOWN) != PipeProperty.NONE) {
+        if (!state.getValue(CONNECTED_DOWN).isNone()) {
             shape = Shapes.or(shape, Shapes.box(size, 0, size, 1 - size, 1 - size, 1 - size));
         }
-        if (state.getValue(CONNECTED_NORTH) != PipeProperty.NONE) {
+        if (!state.getValue(CONNECTED_NORTH).isNone()) {
             shape = Shapes.or(shape, Shapes.box(size, size, 0, 1 - size, 1 - size, 1 - size));
         }
-        if (state.getValue(CONNECTED_EAST) != PipeProperty.NONE) {
+        if (!state.getValue(CONNECTED_EAST).isNone()) {
             shape = Shapes.or(shape, Shapes.box(size, size, size, 1, 1 - size, 1 - size));
         }
-        if (state.getValue(CONNECTED_SOUTH) != PipeProperty.NONE) {
+        if (!state.getValue(CONNECTED_SOUTH).isNone()) {
             shape = Shapes.or(shape, Shapes.box(size, size, size, 1 - size, 1 - size, 1));
         }
-        if (state.getValue(CONNECTED_WEST) != PipeProperty.NONE) {
+        if (!state.getValue(CONNECTED_WEST).isNone()) {
             shape = Shapes.or(shape, Shapes.box(0, size, size, 1 - size, 1 - size, 1 - size));
         }
 
