@@ -5,8 +5,14 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 public record SlotConfiguration(
     int index,
     int x,
-    int y
+    int y,
+    int width,
+    int height
 ) implements MenuConfiguration {
+
+    public SlotConfiguration(int index, int x, int y) {
+        this(index, x, y, 16, 16);
+    }
 
     @Override
     public ConfigurationType type() {

@@ -6,13 +6,12 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 public record ConfigurationEntry(
     ConfigurationType type,
-    Map<Direction, Configuration> sides,
+    EnumMap<Direction, Configuration> sides,
     Component title) {
 
     public ConfigurationEntry(ConfigurationType type, Configuration defaultValue, Component title) {
@@ -52,7 +51,7 @@ public record ConfigurationEntry(
             CompoundTag entryTag = list.getCompound(i);
             ConfigurationType type = ConfigurationType.values()[entryTag.getByte("Type")];
 
-            Map<Direction, Configuration> sides = new HashMap<>();
+            EnumMap<Direction, Configuration> sides = new EnumMap<>(Direction.class);
             for (var direction : Direction.values()) {
                 sides.put(direction, Configuration.values()[entryTag.getByte(direction.getName())]);
             }
@@ -67,14 +66,11 @@ public record ConfigurationEntry(
         return sideConfig;
     }
 
-    private static Map<Direction, Configuration> createConfiguration(Configuration value) {
-        return Map.of(
-            Direction.UP, value,
-            Direction.DOWN, value,
-            Direction.NORTH, value,
-            Direction.SOUTH, value,
-            Direction.EAST, value,
-            Direction.WEST, value
-        );
+    private static EnumMap<Direction, Configuration> createConfiguration(Configuration value) {
+        EnumMap<Direction, Configuration> configurations = new EnumMap<>(Direction.class);
+        for (Direction direction : Direction.values()) {
+            configurations.put(direction, value);
+        }
+        return configurations;
     }
 }

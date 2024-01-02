@@ -8,7 +8,7 @@ import net.minecraft.client.gui.GuiGraphics;
 public class SlotWidget extends ConfigurationWidget implements CursorWidget {
 
     public SlotWidget(SlotConfiguration configuration) {
-        super(configuration, 16, 16);
+        super(configuration, configuration.width(), configuration.height());
     }
 
     @Override
