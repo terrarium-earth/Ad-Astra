@@ -7,6 +7,7 @@ import earth.terrarium.adastra.client.renderers.world.OxygenDistributorOverlayRe
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
+import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.container.BiFluidContainer;
@@ -39,7 +40,13 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
-    public static final int MAX_BLOCKS = 6_000;
+    public static final List<ConfigurationEntry> SIDE_CONFIG = List.of(
+        new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
+        new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_SLOTS),
+        new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.NONE, ConstantComponents.SIDE_CONFIG_ENERGY),
+        new ConfigurationEntry(ConfigurationType.FLUID, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_FLUID),
+        new ConfigurationEntry(ConfigurationType.FLUID, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID)
+    );
 
     private final Set<BlockPos> lastDistributedBlocks = new HashSet<>();
     private long energyPerTick;
@@ -47,6 +54,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     private int distributedBlocksCount;
     private double accumulatedFluid;
     private int shutDownTicks;
+    private int limit;
 
     public OxygenDistributorBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 3);
@@ -64,6 +72,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         fluidPerTick = tag.getFloat("FluidPerTick");
         distributedBlocksCount = tag.getInt("DistributedBlocksCount");
         accumulatedFluid = tag.getDouble("AccumulatedFluid");
+        limit = tag.getInt("Limit");
     }
 
     @Override
@@ -74,6 +83,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         tag.putFloat("FluidPerTick", fluidPerTick);
         tag.putInt("DistributedBlocksCount", distributedBlocksCount);
         tag.putDouble("AccumulatedFluid", accumulatedFluid);
+        tag.putInt("Limit", limit);
     }
 
     @Override
@@ -114,7 +124,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
                 accumulatedFluid -= wholeBuckets;
             }
 
-            if (time % 40 == 0) tickOxygen(level, pos);
+            if (time % 100 == 0) tickOxygen(level, pos);
 
             if (time % 200 == 0) {
                 level.playSound(null, pos, ModSoundEvents.OXYGEN_OUTTAKE.get(), SoundSource.BLOCKS, 0.2f, 1);
@@ -158,8 +168,9 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     }
 
     protected void tickOxygen(ServerLevel level, BlockPos pos) {
-        int limit = MAX_BLOCKS;
+        limit = AdAstraConfig.maxDistributionBlocks;
         Set<BlockPos> positions = FloodFill3D.run(level, pos.above(), limit, FloodFill3D.TEST_FULL_SEAL, true);
+
         OxygenApi.API.setOxygen(level, positions, true);
         TemperatureApi.API.setTemperature(level, positions, PlanetConstants.COMFY_EARTH_TEMPERATURE); // TODO: move to Temperature Regulator machine
 
@@ -217,6 +228,10 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         return canFunction() ? distributedBlocksCount : 0;
     }
 
+    public int distributedBlocksLimit() {
+        return limit;
+    }
+
     public long energyPerTick() {
         return canFunction() ? energyPerTick : 0;
     }
@@ -235,13 +250,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
 
     @Override
     public List<ConfigurationEntry> getDefaultConfig() {
-        return List.of(
-            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
-            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_SLOTS),
-            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.NONE, ConstantComponents.SIDE_CONFIG_ENERGY),
-            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_FLUID),
-            new ConfigurationEntry(ConfigurationType.FLUID, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID)
-        );
+        return SIDE_CONFIG;
     }
 
     @Override

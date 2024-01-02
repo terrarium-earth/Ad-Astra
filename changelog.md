@@ -102,6 +102,9 @@ These are available for all metals.
 - Added Encased Plateblocks, and Panel blocks. These are available for all metals.
 - Redid many of the recipes.
 - Added higher blast resistance for higher tier metals.
+- Water will not longer instantly freeze, and it can now be placed on Venus and Mercury. It will now
+simply freeze or evaporate over time.
+- Plants now break over time when placed in non-oxygenated planets.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.

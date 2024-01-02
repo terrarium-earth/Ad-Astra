@@ -15,6 +15,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
+import java.util.Collection;
 import java.util.Set;
 
 public class OxygenApiImpl implements OxygenApi {
@@ -46,7 +47,7 @@ public class OxygenApiImpl implements OxygenApi {
     }
 
     @Override
-    public void setOxygen(Level level, Set<BlockPos> positions, boolean oxygen) {
+    public void setOxygen(Level level, Collection<BlockPos> positions, boolean oxygen) {
         if (level.isClientSide()) return;
         PlanetHandler.setOxygen((ServerLevel) level, positions, oxygen);
     }
@@ -57,7 +58,7 @@ public class OxygenApiImpl implements OxygenApi {
     }
 
     @Override
-    public void removeOxygen(Level level, Set<BlockPos> positions) {
+    public void removeOxygen(Level level, Collection<BlockPos> positions) {
         setOxygen(level, positions, hasOxygen(level));
     }
 

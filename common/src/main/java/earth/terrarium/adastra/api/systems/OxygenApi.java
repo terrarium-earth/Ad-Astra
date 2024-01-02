@@ -8,7 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface OxygenApi {
 
@@ -63,7 +63,7 @@ public interface OxygenApi {
      * @param positions The position to add oxygen to.
      * @param oxygen    The oxygen to set.
      */
-    void setOxygen(Level level, Set<BlockPos> positions, boolean oxygen);
+    void setOxygen(Level level, Collection<BlockPos> positions, boolean oxygen);
 
     /**
      * Sets the oxygen of the given position to the dimension's default oxygen.
@@ -79,7 +79,7 @@ public interface OxygenApi {
      * @param level     The level to check.
      * @param positions The positions to remove oxygen from.
      */
-    void removeOxygen(Level level, Set<BlockPos> positions);
+    void removeOxygen(Level level, Collection<BlockPos> positions);
 
     void entityTick(ServerLevel level, LivingEntity entity);
 }

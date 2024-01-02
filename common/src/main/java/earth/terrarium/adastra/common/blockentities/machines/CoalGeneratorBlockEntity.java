@@ -25,6 +25,11 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity {
+    public static final List<ConfigurationEntry> SIDE_CONFIG = List.of(
+        new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
+        new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.PUSH, ConstantComponents.SIDE_CONFIG_ENERGY)
+    );
+
     protected int cookTime;
     protected int cookTimeTotal;
 
@@ -108,10 +113,7 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
 
     @Override
     public List<ConfigurationEntry> getDefaultConfig() {
-        return List.of(
-            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
-            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.PUSH, ConstantComponents.SIDE_CONFIG_ENERGY)
-        );
+        return SIDE_CONFIG;
     }
 
     public int cookTime() {

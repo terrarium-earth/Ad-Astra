@@ -38,7 +38,10 @@ public class FluidPipeBlockEntity extends PipeBlockEntity {
             if (fluid.isEmpty()) continue;
             var toTransfer = FluidHooks.newFluidHolder(fluid.getFluid(), Math.min(transferRate, fluid.getFluidAmount()), null);
             if (toTransfer.isEmpty()) continue;
-            FluidApi.moveFluid(sourceContainer, consumerContainer, toTransfer, false);
+            try {
+                FluidApi.moveFluid(sourceContainer, consumerContainer, toTransfer, true);
+                FluidApi.moveFluid(sourceContainer, consumerContainer, toTransfer, false);
+            } catch (IllegalArgumentException ignored) {}
         }
     }
 

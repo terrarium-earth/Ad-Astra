@@ -8,7 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface TemperatureApi {
 
@@ -63,7 +63,7 @@ public interface TemperatureApi {
      * @param positions   The position to check.
      * @param temperature The temperature to set.
      */
-    void setTemperature(Level level, Set<BlockPos> positions, short temperature);
+    void setTemperature(Level level, Collection<BlockPos> positions, short temperature);
 
     /**
      * Sets the temperature of the given position to the dimension's default temperature.
@@ -79,7 +79,7 @@ public interface TemperatureApi {
      * @param level     The level to check.
      * @param positions The position to check.
      */
-    void removeTemperature(Level level, Set<BlockPos> positions);
+    void removeTemperature(Level level, Collection<BlockPos> positions);
 
     /**
      * Returns whether the temperature of the given position is within a liveable range.

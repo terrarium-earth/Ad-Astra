@@ -27,6 +27,9 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
+    public static final List<ConfigurationEntry> SIDE_CONFIG = List.of(
+        new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.NONE, ConstantComponents.SIDE_CONFIG_ENERGY)
+    );
 
     public EnergizerBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 1);
@@ -78,9 +81,7 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
 
     @Override
     public List<ConfigurationEntry> getDefaultConfig() {
-        return List.of(
-            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.NONE, ConstantComponents.SIDE_CONFIG_ENERGY)
-        );
+        return SIDE_CONFIG;
     }
 
     @Override

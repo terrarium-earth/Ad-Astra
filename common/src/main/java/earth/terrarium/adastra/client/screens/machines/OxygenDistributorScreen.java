@@ -71,7 +71,7 @@ public class OxygenDistributorScreen extends MachineScreen<OxygenDistributorMenu
         );
         graphics.drawString(
             font,
-            Component.translatable("tooltip.ad_astra.blocks_distributed", entity.distributedBlocksCount(), OxygenDistributorBlockEntity.MAX_BLOCKS),
+            Component.translatable("tooltip.ad_astra.blocks_distributed", entity.distributedBlocksCount(), entity.distributedBlocksLimit()),
             leftPos + 11,
             topPos + 31,
             0x68d975

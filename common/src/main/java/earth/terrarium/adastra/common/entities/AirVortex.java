@@ -49,7 +49,7 @@ public class AirVortex extends Entity {
             this.discard();
             return;
         }
-        if (level.getBlockEntity(this.source) instanceof OxygenDistributorBlockEntity e && e.distributedBlocksCount() < OxygenDistributorBlockEntity.MAX_BLOCKS) {
+        if (level.getBlockEntity(this.source) instanceof OxygenDistributorBlockEntity e && e.distributedBlocksCount() < e.distributedBlocksLimit()) {
             this.discard();
             return;
         }

@@ -57,4 +57,12 @@ public final class AdAstraConfig {
     )
     @Comment("The y level where rockets should leave the dimension and enter space.")
     public static int atmosphereLeave = 600;
+
+    @ConfigEntry(
+        id = "maxDistributionBlocks",
+        type = EntryType.INTEGER,
+        translation = "config.ad_astra.maxDistributionBlocks"
+    )
+    @Comment("The maximum number of blocks that an oxygen distributor can distribute to.")
+    public static int maxDistributionBlocks = 6_000;
 }

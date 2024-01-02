@@ -8,7 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface GravityApi {
 
@@ -65,7 +65,7 @@ public interface GravityApi {
      * @param positions The position to check.
      * @param gravity   The gravity to set.
      */
-    void setGravity(Level level, Set<BlockPos> positions, float gravity);
+    void setGravity(Level level, Collection<BlockPos> positions, float gravity);
 
     /**
      * Sets the gravity of the given position to the dimension's default gravity.
@@ -81,7 +81,7 @@ public interface GravityApi {
      * @param level     The level to check.
      * @param positions The position to check.
      */
-    void removeGravity(Level level, Set<BlockPos> positions);
+    void removeGravity(Level level, Collection<BlockPos> positions);
 
     void entityTick(Level level, LivingEntity entity, Vec3 travelVector, BlockPos movementAffectingPos);
 }

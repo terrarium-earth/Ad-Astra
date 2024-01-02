@@ -91,6 +91,7 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
 
     /**
      * Checks if the machine's redstone configuration allows it to function.
+     *
      * @return True if the machine can function, false otherwise.
      */
     public boolean canFunction() {

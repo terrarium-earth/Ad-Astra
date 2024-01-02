@@ -333,6 +333,7 @@
   "config.ad_astra.allowFlagImages": "Allow flag images",
   "config.ad_astra.atmosphereLeave": "Atmosphere leave",
   "config.ad_astra.launchFromAnywhere": "Launch from anywhere",
+  "config.ad_astra.maxDistributionBlocks": "Max distribution blocks",
   "config.ad_astra.planetRandomTickSpeed": "Planet random tick speed",
   "death.attack.acid_rain": "%1$s was melted by acid rain",
   "death.attack.acid_rain.player": "%1$s was melted by acid rain whilst trying to escape %2$s",

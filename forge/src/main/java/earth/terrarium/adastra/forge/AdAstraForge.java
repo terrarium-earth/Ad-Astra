@@ -69,6 +69,7 @@ public class AdAstraForge {
 
     private static void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
         if (event.getPlacedBlock().is(ModBlockTags.DESTROYED_IN_SPACE)
+            && !event.getPlacedBlock().isRandomlyTicking()
             && (event.getLevel() instanceof Level level)
             && !OxygenApi.API.hasOxygen(level, event.getPos())) {
             event.setCanceled(true);

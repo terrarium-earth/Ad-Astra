@@ -64,7 +64,7 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
         return fluidContainer = new WrappedBlockFluidContainer(
             this,
             new BiFluidContainer(
-                FluidHooks.buckets(60), // TODO
+                FluidHooks.buckets(6),
                 1,
                 1,
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get())

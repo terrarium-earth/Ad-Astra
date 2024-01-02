@@ -10,9 +10,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class PlanetHandler extends SaveHandler {
     private final Map<BlockPos, PlanetData> planetData = new HashMap<>();
@@ -96,7 +96,7 @@ public class PlanetHandler extends SaveHandler {
             .setGravity(gravity);
     }
 
-    public static void setOxygen(ServerLevel level, Set<BlockPos> positions, boolean oxygen) {
+    public static void setOxygen(ServerLevel level, Collection<BlockPos> positions, boolean oxygen) {
         var data = read(level);
         for (BlockPos pos : positions) {
             data.planetData.computeIfAbsent(pos, p -> new PlanetData(oxygen, getTemperature(level, p), getGravity(level, p)))
@@ -104,7 +104,7 @@ public class PlanetHandler extends SaveHandler {
         }
     }
 
-    public static void setTemperature(ServerLevel level, Set<BlockPos> positions, short temperature) {
+    public static void setTemperature(ServerLevel level, Collection<BlockPos> positions, short temperature) {
         var data = read(level);
         for (BlockPos pos : positions) {
             data.planetData.computeIfAbsent(pos, p -> new PlanetData(hasOxygen(level, p), temperature, getGravity(level, p)))
@@ -112,7 +112,7 @@ public class PlanetHandler extends SaveHandler {
         }
     }
 
-    public static void setGravity(ServerLevel level, Set<BlockPos> positions, float gravity) {
+    public static void setGravity(ServerLevel level, Collection<BlockPos> positions, float gravity) {
         var data = read(level);
         for (BlockPos pos : positions) {
             data.planetData.computeIfAbsent(pos, p -> new PlanetData(hasOxygen(level, p), getTemperature(level, p), gravity))

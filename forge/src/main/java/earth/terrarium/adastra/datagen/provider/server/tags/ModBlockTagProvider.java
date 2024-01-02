@@ -80,6 +80,7 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         ModBlocks.FLAGS.stream().map(RegistryEntry::get).forEach(b -> tag(ModBlockTags.FLAGS).add(element(b)));
         ModBlocks.SLIDING_DOORS.stream().map(RegistryEntry::get).forEach(b -> tag(ModBlockTags.SLIDING_DOORS).add(element(b)));
         tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.tag(BlockTags.FENCES.location()));
+        tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.tag(BlockTags.LEAVES.location()));
 
         add(ModBlockTags.CABLE_DUCTS, ModBlocks.CABLE_DUCT.get());
         add(ModBlockTags.FLUID_PIPE_DUCTS, ModBlocks.FLUID_PIPE_DUCT.get());
@@ -135,6 +136,14 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
             .add(element(Blocks.JACK_O_LANTERN))
             .add(element(Blocks.COCOA))
             .add(element(Blocks.VINE))
+            .add(element(Blocks.BROWN_MUSHROOM_BLOCK))
+            .add(element(Blocks.RED_MUSHROOM_BLOCK))
+            .add(element(Blocks.BIG_DRIPLEAF))
+            .add(element(Blocks.BIG_DRIPLEAF_STEM))
+            .add(element(Blocks.SMALL_DRIPLEAF))
+            .add(element(Blocks.GRASS))
+            .add(element(Blocks.TALL_GRASS))
+            .add(element(Blocks.SWEET_BERRY_BUSH))
             .add(element(Blocks.BAMBOO));
 
         addVanillaTags();

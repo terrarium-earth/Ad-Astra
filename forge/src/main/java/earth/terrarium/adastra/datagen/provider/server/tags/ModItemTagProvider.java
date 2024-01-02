@@ -16,6 +16,7 @@ import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
@@ -110,6 +111,13 @@ public class ModItemTagProvider extends TagsProvider<Item> {
             .add(element(Items.JACK_O_LANTERN))
             .add(element(Items.COCOA_BEANS))
             .add(element(Items.VINE))
+            .add(element(Items.BROWN_MUSHROOM_BLOCK))
+            .add(element(Items.RED_MUSHROOM_BLOCK))
+            .add(element(Items.BIG_DRIPLEAF))
+            .add(element(Items.SMALL_DRIPLEAF))
+            .add(element(Items.GRASS))
+            .add(element(Items.TALL_GRASS))
+            .add(element(Items.SWEET_BERRIES))
             .add(element(Items.BAMBOO));
 
         addVanillaTags();

@@ -16,7 +16,7 @@ public record ConfigurationEntry(
     Component title) {
 
     public ConfigurationEntry(ConfigurationType type, Configuration defaultValue, Component title) {
-        this(type, getDefault(defaultValue), title);
+        this(type, createConfiguration(defaultValue), title);
     }
 
     public Configuration get(Direction direction) {
@@ -31,7 +31,7 @@ public record ConfigurationEntry(
     public static void save(CompoundTag tag, List<ConfigurationEntry> sideConfig) {
         ListTag list = new ListTag();
 
-        for (ConfigurationEntry entry : sideConfig) {
+        for (var entry : sideConfig) {
             CompoundTag entryTag = new CompoundTag();
             entryTag.putByte("Type", (byte) entry.type.ordinal());
 
@@ -67,11 +67,14 @@ public record ConfigurationEntry(
         return sideConfig;
     }
 
-    private static Map<Direction, Configuration> getDefault(Configuration value) {
-        HashMap<Direction, Configuration> sides = new HashMap<>();
-        for (Direction direction : Direction.values()) {
-            sides.put(direction, value);
-        }
-        return sides;
+    private static Map<Direction, Configuration> createConfiguration(Configuration value) {
+        return Map.of(
+            Direction.UP, value,
+            Direction.DOWN, value,
+            Direction.NORTH, value,
+            Direction.SOUTH, value,
+            Direction.EAST, value,
+            Direction.WEST, value
+        );
     }
 }

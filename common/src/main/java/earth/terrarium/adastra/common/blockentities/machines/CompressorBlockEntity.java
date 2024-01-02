@@ -25,6 +25,12 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingRecipe> {
+    public static final List<ConfigurationEntry> SIDE_CONFIG = List.of(
+        new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
+        new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_SLOTS),
+        new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.NONE, ConstantComponents.SIDE_CONFIG_ENERGY)
+    );
+
     public CompressorBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 3);
     }
@@ -108,11 +114,7 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
 
     @Override
     public List<ConfigurationEntry> getDefaultConfig() {
-        return List.of(
-            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
-            new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_SLOTS),
-            new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.NONE, ConstantComponents.SIDE_CONFIG_ENERGY)
-        );
+        return SIDE_CONFIG;
     }
 
     @Override

@@ -16,6 +16,7 @@ import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Collection;
 import java.util.Set;
 
 public class GravityApiImpl implements GravityApi {
@@ -47,7 +48,7 @@ public class GravityApiImpl implements GravityApi {
     }
 
     @Override
-    public void setGravity(Level level, Set<BlockPos> positions, float gravity) {
+    public void setGravity(Level level, Collection<BlockPos> positions, float gravity) {
         if (level.isClientSide()) return;
         PlanetHandler.setGravity((ServerLevel) level, positions, gravity);
     }
@@ -58,7 +59,7 @@ public class GravityApiImpl implements GravityApi {
     }
 
     @Override
-    public void removeGravity(Level level, Set<BlockPos> positions) {
+    public void removeGravity(Level level, Collection<BlockPos> positions) {
         setGravity(level, positions, getGravity(level));
     }
 
