@@ -16,10 +16,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
@@ -78,9 +76,9 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        ModBlocks.GLOBES.stream().map(RegistryEntry::get).forEach(b -> tag(ModBlockTags.GLOBES).add(TagEntry.element(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(b)))));
-        ModBlocks.FLAGS.stream().map(RegistryEntry::get).forEach(b -> tag(ModBlockTags.FLAGS).add(TagEntry.element(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(b)))));
-        ModBlocks.SLIDING_DOORS.stream().map(RegistryEntry::get).forEach(b -> tag(ModBlockTags.SLIDING_DOORS).add(TagEntry.element(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(b)))));
+        ModBlocks.GLOBES.stream().map(RegistryEntry::get).forEach(b -> tag(ModBlockTags.GLOBES).add(element(b)));
+        ModBlocks.FLAGS.stream().map(RegistryEntry::get).forEach(b -> tag(ModBlockTags.FLAGS).add(element(b)));
+        ModBlocks.SLIDING_DOORS.stream().map(RegistryEntry::get).forEach(b -> tag(ModBlockTags.SLIDING_DOORS).add(element(b)));
         tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.tag(BlockTags.FENCES.location()));
 
         add(ModBlockTags.CABLE_DUCTS, ModBlocks.CABLE_DUCT.get());
@@ -123,136 +121,152 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         add(ModBlockTags.STROPHAR_CAPS, ModBlocks.STROPHAR_CAP.get());
         add(ModBlockTags.STROPHAR_CAPS, ModBlocks.STROPHAR_STEM.get());
 
+        tag(ModBlockTags.DESTROYED_IN_SPACE)
+            .addTag(BlockTags.SAPLINGS)
+            .addTag(BlockTags.LEAVES)
+            .addTag(BlockTags.FLOWERS)
+            .addTag(BlockTags.CORALS)
+            .addTag(BlockTags.CROPS)
+            .addTag(BlockTags.FIRE)
+            .addTag(BlockTags.CAVE_VINES)
+            .add(element(Blocks.TORCH))
+            .add(element(Blocks.WALL_TORCH))
+            .add(element(Blocks.LANTERN))
+            .add(element(Blocks.JACK_O_LANTERN))
+            .add(element(Blocks.COCOA))
+            .add(element(Blocks.VINE))
+            .add(element(Blocks.BAMBOO));
+
         addVanillaTags();
     }
 
     private void addVanillaTags() {
-        ModBlocks.STAIRS.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.STAIRS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(b))));
-        ModBlocks.SLABS.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.SLABS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(b))));
-        ModBlocks.PRESSURE_PLATES.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.PRESSURE_PLATES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(b))));
-        ModBlocks.BUTTONS.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.BUTTONS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(b))));
-        ModBlocks.WALLS.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.WALLS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(b))));
-        ModBlocks.MACHINES.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.NEEDS_IRON_TOOL).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(b))));
-        ModBlocks.SLIDING_DOORS.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.NEEDS_IRON_TOOL).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(b))));
+        ModBlocks.STAIRS.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.STAIRS).add(element(b)));
+        ModBlocks.SLABS.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.SLABS).add(element(b)));
+        ModBlocks.PRESSURE_PLATES.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.PRESSURE_PLATES).add(element(b)));
+        ModBlocks.BUTTONS.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.BUTTONS).add(element(b)));
+        ModBlocks.WALLS.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.WALLS).add(element(b)));
+        ModBlocks.MACHINES.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.NEEDS_IRON_TOOL).add(element(b)));
+        ModBlocks.SLIDING_DOORS.stream().map(RegistryEntry::get).forEach(b -> tag(BlockTags.NEEDS_IRON_TOOL).add(element(b)));
 
-        tag(BlockTags.COAL_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_COAL_ORE.get())));
-        tag(BlockTags.COAL_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIO_COAL_ORE.get())));
+        tag(BlockTags.COAL_ORES).add(element(ModBlocks.VENUS_COAL_ORE.get()));
+        tag(BlockTags.COAL_ORES).add(element(ModBlocks.GLACIO_COAL_ORE.get()));
 
-        tag(BlockTags.COPPER_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIO_COPPER_ORE.get())));
-        tag(BlockTags.COPPER_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MARS_DIAMOND_ORE.get())));
-        tag(BlockTags.COPPER_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_DIAMOND_ORE.get())));
+        tag(BlockTags.COPPER_ORES).add(element(ModBlocks.GLACIO_COPPER_ORE.get()));
+        tag(BlockTags.COPPER_ORES).add(element(ModBlocks.MARS_DIAMOND_ORE.get()));
+        tag(BlockTags.COPPER_ORES).add(element(ModBlocks.VENUS_DIAMOND_ORE.get()));
 
-        tag(BlockTags.DOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STEEL_DOOR.get())));
-        tag(BlockTags.WOODEN_DOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_DOOR.get())));
-        tag(BlockTags.WOODEN_DOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STROPHAR_DOOR.get())));
-        tag(BlockTags.WOODEN_DOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_DOOR.get())));
+        tag(BlockTags.DOORS).add(element(ModBlocks.STEEL_DOOR.get()));
+        tag(BlockTags.WOODEN_DOORS).add(element(ModBlocks.AERONOS_DOOR.get()));
+        tag(BlockTags.WOODEN_DOORS).add(element(ModBlocks.STROPHAR_DOOR.get()));
+        tag(BlockTags.WOODEN_DOORS).add(element(ModBlocks.GLACIAN_DOOR.get()));
 
-        tag(BlockTags.WOODEN_FENCES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_FENCE.get())));
-        tag(BlockTags.WOODEN_FENCES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STROPHAR_FENCE.get())));
-        tag(BlockTags.WOODEN_FENCES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_FENCE.get())));
+        tag(BlockTags.WOODEN_FENCES).add(element(ModBlocks.AERONOS_FENCE.get()));
+        tag(BlockTags.WOODEN_FENCES).add(element(ModBlocks.STROPHAR_FENCE.get()));
+        tag(BlockTags.WOODEN_FENCES).add(element(ModBlocks.GLACIAN_FENCE.get()));
 
-        tag(BlockTags.FENCE_GATES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_FENCE_GATE.get())));
-        tag(BlockTags.FENCE_GATES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STROPHAR_FENCE_GATE.get())));
-        tag(BlockTags.FENCE_GATES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_FENCE_GATE.get())));
+        tag(BlockTags.FENCE_GATES).add(element(ModBlocks.AERONOS_FENCE_GATE.get()));
+        tag(BlockTags.FENCE_GATES).add(element(ModBlocks.STROPHAR_FENCE_GATE.get()));
+        tag(BlockTags.FENCE_GATES).add(element(ModBlocks.GLACIAN_FENCE_GATE.get()));
 
-        tag(BlockTags.GOLD_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_GOLD_ORE.get())));
+        tag(BlockTags.GOLD_ORES).add(element(ModBlocks.VENUS_GOLD_ORE.get()));
 
-        tag(BlockTags.IRON_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MOON_IRON_ORE.get())));
-        tag(BlockTags.IRON_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MARS_IRON_ORE.get())));
-        tag(BlockTags.IRON_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MERCURY_IRON_ORE.get())));
-        tag(BlockTags.IRON_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIO_IRON_ORE.get())));
+        tag(BlockTags.IRON_ORES).add(element(ModBlocks.MOON_IRON_ORE.get()));
+        tag(BlockTags.IRON_ORES).add(element(ModBlocks.MARS_IRON_ORE.get()));
+        tag(BlockTags.IRON_ORES).add(element(ModBlocks.MERCURY_IRON_ORE.get()));
+        tag(BlockTags.IRON_ORES).add(element(ModBlocks.GLACIO_IRON_ORE.get()));
 
-        tag(BlockTags.LAPIS_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIO_LAPIS_ORE.get())));
+        tag(BlockTags.LAPIS_ORES).add(element(ModBlocks.GLACIO_LAPIS_ORE.get()));
 
-        tag(BlockTags.LEAVES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_LEAVES.get())));
+        tag(BlockTags.LEAVES).add(element(ModBlocks.GLACIAN_LEAVES.get()));
 
-        tag(BlockTags.LOGS_THAT_BURN).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_LOG.get())));
+        tag(BlockTags.LOGS_THAT_BURN).add(element(ModBlocks.GLACIAN_LOG.get()));
 
-        tag(BlockTags.PLANKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_PLANKS.get())));
-        tag(BlockTags.PLANKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STROPHAR_PLANKS.get())));
-        tag(BlockTags.PLANKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_PLANKS.get())));
+        tag(BlockTags.PLANKS).add(element(ModBlocks.AERONOS_PLANKS.get()));
+        tag(BlockTags.PLANKS).add(element(ModBlocks.STROPHAR_PLANKS.get()));
+        tag(BlockTags.PLANKS).add(element(ModBlocks.GLACIAN_PLANKS.get()));
 
-        tag(BlockTags.SAND).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MOON_SAND.get())));
-        tag(BlockTags.SAND).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MARS_SAND.get())));
-        tag(BlockTags.SAND).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_SAND.get())));
+        tag(BlockTags.SAND).add(element(ModBlocks.MOON_SAND.get()));
+        tag(BlockTags.SAND).add(element(ModBlocks.MARS_SAND.get()));
+        tag(BlockTags.SAND).add(element(ModBlocks.VENUS_SAND.get()));
 
-        tag(BlockTags.SMELTS_TO_GLASS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MOON_SAND.get())));
-        tag(BlockTags.SMELTS_TO_GLASS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MARS_SAND.get())));
-        tag(BlockTags.SMELTS_TO_GLASS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_SAND.get())));
+        tag(BlockTags.SMELTS_TO_GLASS).add(element(ModBlocks.MOON_SAND.get()));
+        tag(BlockTags.SMELTS_TO_GLASS).add(element(ModBlocks.MARS_SAND.get()));
+        tag(BlockTags.SMELTS_TO_GLASS).add(element(ModBlocks.VENUS_SAND.get()));
 
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MOON_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.CRACKED_MOON_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.CHISELED_MOON_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MARS_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.CRACKED_MARS_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.CHISELED_MARS_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.CRACKED_VENUS_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.CHISELED_VENUS_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MERCURY_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.CRACKED_MERCURY_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.CHISELED_MERCURY_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIO_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.CRACKED_GLACIO_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.CHISELED_GLACIO_STONE_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.PERMAFROST_BRICKS.get())));
-        tag(BlockTags.STONE_BRICKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.PERMAFROST_TILES.get())));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.MOON_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.CRACKED_MOON_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.CHISELED_MOON_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.MARS_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.CRACKED_MARS_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.CHISELED_MARS_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.VENUS_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.CRACKED_VENUS_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.CHISELED_VENUS_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.MERCURY_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.CRACKED_MERCURY_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.CHISELED_MERCURY_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.GLACIO_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.CRACKED_GLACIO_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.CHISELED_GLACIO_STONE_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.PERMAFROST_BRICKS.get()));
+        tag(BlockTags.STONE_BRICKS).add(element(ModBlocks.PERMAFROST_TILES.get()));
 
-        tag(BlockTags.TRAPDOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STEEL_TRAPDOOR.get())));
-        tag(BlockTags.WOODEN_TRAPDOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_TRAPDOOR.get())));
-        tag(BlockTags.WOODEN_TRAPDOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STROPHAR_TRAPDOOR.get())));
-        tag(BlockTags.WOODEN_TRAPDOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_TRAPDOOR.get())));
+        tag(BlockTags.TRAPDOORS).add(element(ModBlocks.STEEL_TRAPDOOR.get()));
+        tag(BlockTags.WOODEN_TRAPDOORS).add(element(ModBlocks.AERONOS_TRAPDOOR.get()));
+        tag(BlockTags.WOODEN_TRAPDOORS).add(element(ModBlocks.STROPHAR_TRAPDOOR.get()));
+        tag(BlockTags.WOODEN_TRAPDOORS).add(element(ModBlocks.GLACIAN_TRAPDOOR.get()));
 
-        tag(BlockTags.WOODEN_BUTTONS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_BUTTON.get())));
+        tag(BlockTags.WOODEN_BUTTONS).add(element(ModBlocks.GLACIAN_BUTTON.get()));
 
-        tag(BlockTags.WOODEN_PRESSURE_PLATES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_PRESSURE_PLATE.get())));
+        tag(BlockTags.WOODEN_PRESSURE_PLATES).add(element(ModBlocks.GLACIAN_PRESSURE_PLATE.get()));
 
-        tag(BlockTags.WOODEN_SLABS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_SLAB.get())));
-        tag(BlockTags.WOODEN_SLABS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STROPHAR_SLAB.get())));
-        tag(BlockTags.WOODEN_SLABS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_SLAB.get())));
+        tag(BlockTags.WOODEN_SLABS).add(element(ModBlocks.AERONOS_SLAB.get()));
+        tag(BlockTags.WOODEN_SLABS).add(element(ModBlocks.STROPHAR_SLAB.get()));
+        tag(BlockTags.WOODEN_SLABS).add(element(ModBlocks.GLACIAN_SLAB.get()));
 
-        tag(BlockTags.WOODEN_STAIRS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_STAIRS.get())));
-        tag(BlockTags.WOODEN_STAIRS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STROPHAR_STAIRS.get())));
-        tag(BlockTags.WOODEN_STAIRS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_STAIRS.get())));
+        tag(BlockTags.WOODEN_STAIRS).add(element(ModBlocks.AERONOS_STAIRS.get()));
+        tag(BlockTags.WOODEN_STAIRS).add(element(ModBlocks.STROPHAR_STAIRS.get()));
+        tag(BlockTags.WOODEN_STAIRS).add(element(ModBlocks.GLACIAN_STAIRS.get()));
 
-        tag(BlockTags.WOOL).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_FUR.get())));
+        tag(BlockTags.WOOL).add(element(ModBlocks.GLACIAN_FUR.get()));
 
-        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STEEL_BLOCK.get())));
-        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.ETRIUM_BLOCK.get())));
-        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.DESH_BLOCK.get())));
-        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.OSTRUM_BLOCK.get())));
-        tag(BlockTags.BEACON_BASE_BLOCKS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.CALORITE_BLOCK.get())));
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(element(ModBlocks.STEEL_BLOCK.get()));
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(element(ModBlocks.ETRIUM_BLOCK.get()));
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(element(ModBlocks.DESH_BLOCK.get()));
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(element(ModBlocks.OSTRUM_BLOCK.get()));
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(element(ModBlocks.CALORITE_BLOCK.get()));
 
-        tag(BlockTags.CLIMBABLE).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_LADDER.get())));
-        tag(BlockTags.CLIMBABLE).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STROPHAR_LADDER.get())));
+        tag(BlockTags.CLIMBABLE).add(element(ModBlocks.AERONOS_LADDER.get()));
+        tag(BlockTags.CLIMBABLE).add(element(ModBlocks.STROPHAR_LADDER.get()));
 
-        tag(BlockTags.GUARDED_BY_PIGLINS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_GOLD_ORE.get())));
+        tag(BlockTags.GUARDED_BY_PIGLINS).add(element(ModBlocks.VENUS_GOLD_ORE.get()));
 
-        tag(BlockTags.NEEDS_IRON_TOOL).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MARS_DIAMOND_ORE.get())));
-        tag(BlockTags.NEEDS_IRON_TOOL).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MARS_DIAMOND_ORE.get())));
-        tag(BlockTags.NEEDS_IRON_TOOL).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_GOLD_ORE.get())));
-        tag(BlockTags.NEEDS_IRON_TOOL).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIO_LAPIS_ORE.get())));
-        tag(BlockTags.NEEDS_IRON_TOOL).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STEEL_DOOR.get())));
-        tag(BlockTags.NEEDS_IRON_TOOL).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STEEL_TRAPDOOR.get())));
+        tag(BlockTags.NEEDS_IRON_TOOL).add(element(ModBlocks.MARS_DIAMOND_ORE.get()));
+        tag(BlockTags.NEEDS_IRON_TOOL).add(element(ModBlocks.MARS_DIAMOND_ORE.get()));
+        tag(BlockTags.NEEDS_IRON_TOOL).add(element(ModBlocks.VENUS_GOLD_ORE.get()));
+        tag(BlockTags.NEEDS_IRON_TOOL).add(element(ModBlocks.GLACIO_LAPIS_ORE.get()));
+        tag(BlockTags.NEEDS_IRON_TOOL).add(element(ModBlocks.STEEL_DOOR.get()));
+        tag(BlockTags.NEEDS_IRON_TOOL).add(element(ModBlocks.STEEL_TRAPDOOR.get()));
 
-        tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MOON_STONE.get())));
-        tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MARS_STONE.get())));
-        tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_STONE.get())));
-        tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MERCURY_STONE.get())));
-        tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIO_STONE.get())));
-        tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.PERMAFROST.get())));
+        tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(element(ModBlocks.MOON_STONE.get()));
+        tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(element(ModBlocks.MARS_STONE.get()));
+        tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(element(ModBlocks.VENUS_STONE.get()));
+        tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(element(ModBlocks.MERCURY_STONE.get()));
+        tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(element(ModBlocks.GLACIO_STONE.get()));
+        tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(element(ModBlocks.PERMAFROST.get()));
 
-        MINEABLE_WITH_SHOVEL.stream().map(Supplier::get).forEach(b -> tag(BlockTags.MINEABLE_WITH_SHOVEL).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(b))));
-        MINEABLE_WITH_AXE.stream().map(Supplier::get).forEach(b -> tag(BlockTags.MINEABLE_WITH_AXE).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(b))));
+        MINEABLE_WITH_SHOVEL.stream().map(Supplier::get).forEach(b -> tag(BlockTags.MINEABLE_WITH_SHOVEL).add(element(b)));
+        MINEABLE_WITH_AXE.stream().map(Supplier::get).forEach(b -> tag(BlockTags.MINEABLE_WITH_AXE).add(element(b)));
 
         ModBlocks.BLOCKS.stream()
             .filter(b -> !MINEABLE_WITH_SHOVEL.contains(b) && !MINEABLE_WITH_AXE.contains(b) && !NOT_MINED_WITH_PICKAXE.contains(b))
             .map(RegistryEntry::get)
-            .forEach(b -> tag(BlockTags.MINEABLE_WITH_PICKAXE).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(b))));
+            .forEach(b -> tag(BlockTags.MINEABLE_WITH_PICKAXE).add(element(b)));
     }
 
     private void add(TagKey<Block> tag, Block block) {
-        tag(tag).add(TagEntry.element(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block))));
+        tag(tag).add(element(block));
     }
 
     private void add(TagKey<Block> tag, Block item, String fabricCommonTag, String forgeCommonTag) {
@@ -265,16 +279,24 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         tag(tag).add(TagEntry.optionalTag(new ResourceLocation("c", fabricCommonTag)));
 
         var commonTag = TagKey.create(Registries.BLOCK, new ResourceLocation("c", fabricCommonTag));
-        tag(commonTag).add(TagEntry.element(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(item))));
+        tag(commonTag).add(element(item));
     }
 
     private void addForgeTag(Block item, TagKey<Block> tag, String forgeCommonTag) {
         tag(tag).add(TagEntry.optionalTag(new ResourceLocation("forge", forgeCommonTag)));
 
         var commonTag = TagKey.create(Registries.BLOCK, new ResourceLocation("forge", forgeCommonTag));
-        tag(commonTag).add(TagEntry.element(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(item))));
+        tag(commonTag).add(element(item));
 
         var folderTag = TagKey.create(Registries.BLOCK, new ResourceLocation("forge", forgeCommonTag.split("/")[0]));
         tag(folderTag).add(TagEntry.tag(commonTag.location()));
+    }
+
+    private static TagEntry element(Block block) {
+        return TagEntry.element(loc(block));
+    }
+
+    private static ResourceLocation loc(Block block) {
+        return BuiltInRegistries.BLOCK.getKey(block);
     }
 }

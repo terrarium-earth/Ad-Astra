@@ -17,11 +17,11 @@ public class FluidPipeBlockEntity extends PipeBlockEntity {
 
     @Override
     public void addNode(@NotNull BlockEntity entity, PipeProperty pipeProperty, Direction direction, BlockPos pos) {
+        if (pipeProperty.isNone()) return;
         var container = FluidApi.getBlockFluidContainer(entity, direction);
         if (container == null) return;
-
-        if (pipeProperty.isNone()) return;
-        if (!pipeProperty.isInsert() && (pipeProperty.isExtract() || container.extractFluid(container.getFluids().get(0), true).getFluidAmount() > 0)) {
+        var toTransfer = container.getFluids().get(0);
+        if (!pipeProperty.isInsert() && !toTransfer.isEmpty() && (pipeProperty.isExtract() || container.extractFluid(toTransfer, true).getFluidAmount() > 0)) {
             sources.put(pos, direction);
         } else if (pipeProperty.isNormal() || pipeProperty.isInsert()) {
             consumers.put(pos, direction);
@@ -37,6 +37,7 @@ public class FluidPipeBlockEntity extends PipeBlockEntity {
         for (var fluid : sourceContainer.getFluids()) {
             if (fluid.isEmpty()) continue;
             var toTransfer = FluidHooks.newFluidHolder(fluid.getFluid(), Math.min(transferRate, fluid.getFluidAmount()), null);
+            if (toTransfer.isEmpty()) continue;
             FluidApi.moveFluid(sourceContainer, consumerContainer, toTransfer, false);
         }
     }

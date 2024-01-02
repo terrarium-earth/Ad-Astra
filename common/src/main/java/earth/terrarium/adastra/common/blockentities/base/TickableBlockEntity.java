@@ -10,7 +10,7 @@ public interface TickableBlockEntity {
 
     /**
      * Called every tick on both the client and the server. Should be used for common logic
-     * the client and the server.
+     * on both sides.
      *
      * @param level The level
      * @param time  The game time, offset by the block's position
@@ -30,7 +30,7 @@ public interface TickableBlockEntity {
     default void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {}
 
     /**
-     * Called every tick on the server. Should be used for internal logic.
+     * Called every tick on the server. Should be used for internal server-side logic.
      *
      * @param level The level
      * @param time  The game time, offset by the block's position

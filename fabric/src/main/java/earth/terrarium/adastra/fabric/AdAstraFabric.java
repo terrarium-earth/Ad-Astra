@@ -1,11 +1,14 @@
 package earth.terrarium.adastra.fabric;
 
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.common.commands.AdAstraCommands;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
+import earth.terrarium.adastra.common.tags.ModItemTags;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -13,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.InteractionResult;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -27,6 +31,17 @@ public class AdAstraFabric {
         ServerTickEvents.END_SERVER_TICK.register(AdAstra::onServerTick);
         ModEntityTypes.registerAttributes((type, builder) -> FabricDefaultAttributeRegistry.register(type.get(), builder.get()));
         CommandRegistrationCallback.EVENT.register((dispatcher, ctx, environment) -> AdAstraCommands.register(dispatcher));
+
+        UseBlockCallback.EVENT.register((player, level, hand, hitResult) -> {
+            var stack = player.getItemInHand(hand);
+            if (!level.isClientSide()
+                && stack.is(ModItemTags.DESTROYED_IN_SPACE)
+                && !OxygenApi.API.hasOxygen(level, hitResult.getBlockPos().immutable().relative(hitResult.getDirection()))
+            ) {
+                return InteractionResult.FAIL;
+            }
+            return InteractionResult.PASS;
+        });
     }
 
     public static void onAddReloadListener() {

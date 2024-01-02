@@ -41,4 +41,20 @@ public final class AdAstraConfig {
     )
     @Comment("Allow rockets to be launched from any dimension, even if it's not considered a planet.")
     public static boolean launchFromAnywhere;
+
+    @ConfigEntry(
+        id = "planetRandomTickSpeed",
+        type = EntryType.INTEGER,
+        translation = "config.ad_astra.planetRandomTickSpeed"
+    )
+    @Comment("The random tick for breaking plants, torches, freezing water, etc. on planets.")
+    public static int planetRandomTickSpeed = 20;
+
+    @ConfigEntry(
+        id = "atmosphereLeave",
+        type = EntryType.INTEGER,
+        translation = "config.ad_astra.atmosphereLeave"
+    )
+    @Comment("The y level where rockets should leave the dimension and enter space.")
+    public static int atmosphereLeave = 600;
 }

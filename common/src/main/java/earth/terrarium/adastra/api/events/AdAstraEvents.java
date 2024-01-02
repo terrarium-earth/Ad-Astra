@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -16,6 +17,7 @@ public final class AdAstraEvents {
     private static final List<GravityTickEvent> GRAVITY_TICK_LISTENERS = new ArrayList<>();
     private static final List<ZeroGravityTickEvent> ZERO_GRAVITY_TICK_LISTENERS = new ArrayList<>();
     private static final List<AcidRainTickEvent> ACID_RAIN_TICK_LISTENERS = new ArrayList<>();
+    private static final List<EnvironmentTickEvent> ENVIRONMENT_TICK_LISTENERS = new ArrayList<>();
 
     /**
      * @return false to prevent ticking of oxygen
@@ -82,6 +84,21 @@ public final class AdAstraEvents {
         return true;
     }
 
+    /**
+     * Random planet tick for breaking plants, torches, freezing water, etc. on planets.
+     *
+     * @return false to prevent ticking of environment
+     */
+    @ApiStatus.Internal
+    public static boolean environmentTick(ServerLevel level, BlockPos pos, BlockState state, short temperature) {
+        for (var listener : ENVIRONMENT_TICK_LISTENERS) {
+            if (!listener.tick(level, pos, state, temperature)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @FunctionalInterface
     public interface OxygenTickEvent {
         boolean tick(ServerLevel level, LivingEntity entity);
@@ -124,6 +141,15 @@ public final class AdAstraEvents {
 
         static void register(AcidRainTickEvent listener) {
             ACID_RAIN_TICK_LISTENERS.add(listener);
+        }
+    }
+
+    @FunctionalInterface
+    public interface EnvironmentTickEvent {
+        boolean tick(ServerLevel level, BlockPos pos, BlockState state, short temperature);
+
+        static void register(EnvironmentTickEvent listener) {
+            ENVIRONMENT_TICK_LISTENERS.add(listener);
         }
     }
 }

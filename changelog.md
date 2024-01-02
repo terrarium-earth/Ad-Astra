@@ -65,13 +65,13 @@ can only be opened with redstone, similar to iron doors.
 - Add resourcefullib highlight support to flags. This makes their interaction shape look correct.
 - Improved and added many new descriptions to blocks and items.
 - Added oxygen intake and outtake sounds when entering and exiting oxygenated areas.
-- Fluid ducts now have the same internal mechanics as pipes so they can now be used exactly like them.
+- Fluid ducts now have the same internal mechanics as pipes, so they can now be used exactly like them.
 - Added the radio. This is a real radio that'll play actual select radio stations. It's available as a
 screen in the rover. You can open in by pressing `R` while in the rover or clicking on the screen on the rover.
 - Added the radio block. It'll play real radio stations to everyone in the area like a jukebox.
 - The chest on the back of the rover is now clickable.
 - Opening your inventory while in the rover now opens the rover inventory.
-- Rockets and rovers can no longer carry items. Breaking the them will cause the items to drop.
+- Rockets and rovers can no longer carry items. Breaking them will cause the items to drop.
 - The Rocket sound is now looped. This allows it to play for as long as the rocket is flying.
 - Fixed rocket sound not playing when leaving the world and rejoining while in a flying rocket.
 - Fixed rocket particles not visible above world height with Embeddium/Sodium installed.
@@ -99,7 +99,7 @@ You must build a space station and land on that space station first.
 - Added [Shimmer](https://modrinth.com/mod/shimmer!) compat. This adds bloom to the rocket particles and adds colored lighting to the new industrial lamps.
 - Added Factory blocks. These are decorative blocks that support connected textures if you have [Athena](https://modrinth.com/mod/athena-ctm) installed.
 These are available for all metals.
-- Added Encased Plateblocks, and Panel blocks. These are are available for all metals.
+- Added Encased Plateblocks, and Panel blocks. These are available for all metals.
 - Redid many of the recipes.
 - Added higher blast resistance for higher tier metals.
 

@@ -4,7 +4,6 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
-import earth.terrarium.adastra.common.tags.ModBlockTags;
 import earth.terrarium.adastra.common.tags.ModItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -16,10 +15,9 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("deprecation")
@@ -31,10 +29,10 @@ public class ModItemTagProvider extends TagsProvider<Item> {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        ModItems.GLOBES.stream().map(RegistryEntry::get).forEach(b -> tag(ModItemTags.GLOBES).add(TagEntry.element(BuiltInRegistries.ITEM.getKey(b))));
-        ModItems.FLAGS.stream().map(RegistryEntry::get).forEach(b -> tag(ModItemTags.FLAGS).add(TagEntry.element(BuiltInRegistries.ITEM.getKey(b))));
-        ModItems.SLIDING_DOORS.stream().map(RegistryEntry::get).forEach(b -> tag(ModItemTags.SLIDING_DOORS).add(TagEntry.element(BuiltInRegistries.ITEM.getKey(b))));
-        ModItems.VEHICLES.stream().map(RegistryEntry::get).forEach(b -> tag(ModItemTags.HELD_OVER_HEAD).add(TagEntry.element(BuiltInRegistries.ITEM.getKey(b))));
+        ModItems.GLOBES.stream().map(RegistryEntry::get).forEach(b -> tag(ModItemTags.GLOBES).add(element(b)));
+        ModItems.FLAGS.stream().map(RegistryEntry::get).forEach(b -> tag(ModItemTags.FLAGS).add(element(b)));
+        ModItems.SLIDING_DOORS.stream().map(RegistryEntry::get).forEach(b -> tag(ModItemTags.SLIDING_DOORS).add(element(b)));
+        ModItems.VEHICLES.stream().map(RegistryEntry::get).forEach(b -> tag(ModItemTags.HELD_OVER_HEAD).add(element(b)));
 
         add(ModItemTags.SPACE_SUITS, ModItems.SPACE_HELMET.get());
         add(ModItemTags.SPACE_SUITS, ModItems.SPACE_SUIT.get());
@@ -101,6 +99,19 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         add(ModItemTags.STROPHAR_CAPS, ModItems.STROPHAR_CAP.get());
         add(ModItemTags.STROPHAR_CAPS, ModItems.STROPHAR_STEM.get());
 
+        tag(ModItemTags.DESTROYED_IN_SPACE)
+            .addTag(ItemTags.SAPLINGS)
+            .addTag(ItemTags.LEAVES)
+            .addTag(ItemTags.FLOWERS)
+            .addTag(ItemTags.CANDLES)
+            .add(element(Items.TORCH))
+            .add(element(Items.LANTERN))
+            .add(element(Items.CAMPFIRE))
+            .add(element(Items.JACK_O_LANTERN))
+            .add(element(Items.COCOA_BEANS))
+            .add(element(Items.VINE))
+            .add(element(Items.BAMBOO));
+
         addVanillaTags();
     }
 
@@ -110,11 +121,11 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         ModBlocks.BUTTONS.stream().map(RegistryEntry::get).forEach(b -> tag(ItemTags.BUTTONS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(b))));
         ModBlocks.WALLS.stream().map(RegistryEntry::get).forEach(b -> tag(ItemTags.WALLS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(b))));
 
-        tag(ItemTags.BEACON_PAYMENT_ITEMS).add(TagEntry.element(BuiltInRegistries.ITEM.getKey(ModItems.STEEL_INGOT.get())));
-        tag(ItemTags.BEACON_PAYMENT_ITEMS).add(TagEntry.element(BuiltInRegistries.ITEM.getKey(ModItems.ETRIUM_INGOT.get())));
-        tag(ItemTags.BEACON_PAYMENT_ITEMS).add(TagEntry.element(BuiltInRegistries.ITEM.getKey(ModItems.DESH_INGOT.get())));
-        tag(ItemTags.BEACON_PAYMENT_ITEMS).add(TagEntry.element(BuiltInRegistries.ITEM.getKey(ModItems.OSTRUM_INGOT.get())));
-        tag(ItemTags.BEACON_PAYMENT_ITEMS).add(TagEntry.element(BuiltInRegistries.ITEM.getKey(ModItems.CALORITE_INGOT.get())));
+        tag(ItemTags.BEACON_PAYMENT_ITEMS).add(element(ModItems.STEEL_INGOT.get()));
+        tag(ItemTags.BEACON_PAYMENT_ITEMS).add(element(ModItems.ETRIUM_INGOT.get()));
+        tag(ItemTags.BEACON_PAYMENT_ITEMS).add(element(ModItems.DESH_INGOT.get()));
+        tag(ItemTags.BEACON_PAYMENT_ITEMS).add(element(ModItems.OSTRUM_INGOT.get()));
+        tag(ItemTags.BEACON_PAYMENT_ITEMS).add(element(ModItems.CALORITE_INGOT.get()));
 
         tag(ItemTags.COAL_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_COAL_ORE.get())));
         tag(ItemTags.COAL_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIO_COAL_ORE.get())));
@@ -214,7 +225,7 @@ public class ModItemTagProvider extends TagsProvider<Item> {
     }
 
     private void add(TagKey<Item> tag, Item item) {
-        tag(tag).add(TagEntry.element(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item))));
+        tag(tag).add(element(item));
     }
 
     private void add(TagKey<Item> tag, Item item, String fabricCommonTag, String forgeCommonTag) {
@@ -227,16 +238,24 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         tag(tag).add(TagEntry.optionalTag(new ResourceLocation("c", fabricCommonTag)));
 
         var commonTag = TagKey.create(Registries.ITEM, new ResourceLocation("c", fabricCommonTag));
-        tag(commonTag).add(TagEntry.element(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item))));
+        tag(commonTag).add(element(item));
     }
 
     private void addForgeTag(Item item, TagKey<Item> tag, String forgeCommonTag) {
         tag(tag).add(TagEntry.optionalTag(new ResourceLocation("forge", forgeCommonTag)));
 
         var commonTag = TagKey.create(Registries.ITEM, new ResourceLocation("forge", forgeCommonTag));
-        tag(commonTag).add(TagEntry.element(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item))));
+        tag(commonTag).add(element(item));
 
         var folderTag = TagKey.create(Registries.ITEM, new ResourceLocation("forge", forgeCommonTag.split("/")[0]));
         tag(folderTag).add(TagEntry.tag(commonTag.location()));
+    }
+
+    private static TagEntry element(Item item) {
+        return TagEntry.element(loc(item));
+    }
+
+    private static ResourceLocation loc(Item item) {
+        return BuiltInRegistries.ITEM.getKey(item);
     }
 }

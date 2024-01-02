@@ -16,10 +16,10 @@ public class CableBlockEntity extends PipeBlockEntity {
 
     @Override
     public void addNode(@NotNull BlockEntity entity, PipeProperty pipeProperty, Direction direction, BlockPos pos) {
+        if (pipeProperty.isNone()) return;
         var container = EnergyApi.getBlockEnergyContainer(entity, direction);
         if (container == null) return;
 
-        if (pipeProperty.isNone()) return;
         if (!pipeProperty.isInsert() && (pipeProperty.isExtract() || container.extractEnergy(container.getStoredEnergy(), true) > 0)) {
             sources.put(pos, direction);
         } else if (pipeProperty.isNormal() || pipeProperty.isInsert()) {

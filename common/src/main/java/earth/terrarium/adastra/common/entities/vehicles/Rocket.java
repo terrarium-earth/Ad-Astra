@@ -48,8 +48,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 
 public class Rocket extends Vehicle {
-    public static final int ATMOSPHERE_LEAVE = 600;
-
     private static final RocketProperties TIER_1_PROPERTIES = new RocketProperties(1, ModItems.TIER_1_ROCKET.get(), 1.0f, ModFluidTags.TIER_1_ROCKET_FUEL);
     private static final RocketProperties TIER_2_PROPERTIES = new RocketProperties(2, ModItems.TIER_2_ROCKET.get(), 1.0f, ModFluidTags.TIER_2_ROCKET_FUEL);
     private static final RocketProperties TIER_3_PROPERTIES = new RocketProperties(3, ModItems.TIER_3_ROCKET.get(), 1.0f, ModFluidTags.TIER_3_ROCKET_FUEL);
@@ -224,7 +222,7 @@ public class Rocket extends Vehicle {
     }
 
     private void flightTick() {
-        if (!level().isClientSide() && getY() >= ATMOSPHERE_LEAVE) {
+        if (!level().isClientSide() && getY() >= AdAstraConfig.atmosphereLeave) {
             if (getControllingPassenger() instanceof ServerPlayer player) {
                 openPlanetsScreen(player);
             } else explode();

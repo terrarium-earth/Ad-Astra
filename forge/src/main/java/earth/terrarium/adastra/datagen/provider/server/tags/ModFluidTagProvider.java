@@ -9,6 +9,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.TagEntry;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -37,5 +38,8 @@ public class ModFluidTagProvider extends TagsProvider<Fluid> {
         tag(ModFluidTags.TIER_1_ROVER_FUEL).add(TagEntry.tag(ModFluidTags.FUEL.location()));
 
         tag(ModFluidTags.ZIP_GUN_PROPELLANTS).addTag(ModFluidTags.OXYGEN).addTag(ModFluidTags.HYDROGEN);
+
+        tag(ModFluidTags.FREEZES_IN_SPACE).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(Fluids.WATER)));
+        tag(ModFluidTags.EVAPORATES_IN_SPACE).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(Fluids.WATER)));
     }
 }

@@ -1,9 +1,12 @@
 package earth.terrarium.adastra.forge;
 
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.client.forge.AdAstraClientForge;
 import earth.terrarium.adastra.common.commands.AdAstraCommands;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
+import earth.terrarium.adastra.common.tags.ModBlockTags;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -11,6 +14,7 @@ import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -25,6 +29,7 @@ public class AdAstraForge {
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onDatapackSync);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onServerTick);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::registerCommands);
+        MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onBlockPlace);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::onAttributes);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::commonSetup);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AdAstraClientForge::init);
@@ -60,5 +65,13 @@ public class AdAstraForge {
 
     private static void registerCommands(RegisterCommandsEvent event) {
         AdAstraCommands.register(event.getDispatcher());
+    }
+
+    private static void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
+        if (event.getPlacedBlock().is(ModBlockTags.DESTROYED_IN_SPACE)
+            && (event.getLevel() instanceof Level level)
+            && !OxygenApi.API.hasOxygen(level, event.getPos())) {
+            event.setCanceled(true);
+        }
     }
 }

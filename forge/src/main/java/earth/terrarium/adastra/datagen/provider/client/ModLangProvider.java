@@ -314,9 +314,12 @@ public class ModLangProvider extends LanguageProvider {
         add("tag.item.ad_astra.glacian_logs", "Glacian Logs");
         add("tag.item.ad_astra.aeronos_caps", "Aeronos Caps");
         add("tag.item.ad_astra.strophar_caps", "Strophar Caps");
+        add("tag.item.ad_astra.destroyed_in_space", "Destroyed in Space");
 
         add("config.ad_astra.allowFlagImages", "Allow flag images");
         add("config.ad_astra.launchFromAnywhere", "Launch from anywhere");
+        add("config.ad_astra.planetRandomTickSpeed", "Planet random tick speed");
+        add("config.ad_astra.atmosphereLeave", "Atmosphere leave");
 
         add("subtitles.ad_astra.block.rocket_launch", "Rocket launches");
         add("subtitles.ad_astra.block.rocket", "Rocket flies");

@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.config.AdAstraConfigClient;
 import earth.terrarium.adastra.client.utils.ClientData;
+import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.entities.vehicles.Lander;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.handlers.base.PlanetData;
@@ -50,8 +51,8 @@ public class OverlayScreen {
             graphics.blit(ROCKET_BAR, 0, height / 2, 0, 0, 16, 128, 15, 128);
 
             poseStack.pushPose();
-            double y = Mth.clamp(rocket.getY(), 100, Rocket.ATMOSPHERE_LEAVE);
-            poseStack.translate(0.3f, (Rocket.ATMOSPHERE_LEAVE - y - 500) / 4.5, 0);
+            double y = Mth.clamp(rocket.getY(), 100, AdAstraConfig.atmosphereLeave);
+            poseStack.translate(0.3f, (AdAstraConfig.atmosphereLeave - y - 500) / 4.5, 0);
             graphics.blit(ROCKET, 3, height / 2 + 113, 0, 0, 8, 11, 8, 11);
             poseStack.popPose();
         }

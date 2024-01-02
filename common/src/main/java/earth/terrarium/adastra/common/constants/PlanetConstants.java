@@ -42,6 +42,7 @@ public class PlanetConstants {
     public static final int GLACIO_SOLAR_POWER = 14;
     public static final int GLACIO_ORBIT_SOLAR_POWER = 36;
 
+    public static final int FREEZE_TEMPERATURE = -20;
     public static final int MIN_LIVEABLE_TEMPERATURE = -50;
     public static final int MAX_LIVEABLE_TEMPERATURE = 70;
 

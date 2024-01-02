@@ -37,6 +37,8 @@ public final class ModBlockTags {
     public static final TagKey<Block> AERONOS_CAPS = tag("aeronos_caps");
     public static final TagKey<Block> STROPHAR_CAPS = tag("strophar_caps");
 
+    public static final TagKey<Block> DESTROYED_IN_SPACE = tag("destroyed_in_space");
+
     private static TagKey<Block> tag(String name) {
         return TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, name));
     }

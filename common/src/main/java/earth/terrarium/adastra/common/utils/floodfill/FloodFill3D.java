@@ -39,8 +39,18 @@ public final class FloodFill3D {
         return isFaceSturdy(collisionShape, direction) ? FillResult.PARTIAL : FillResult.AIR;
     };
 
+    /**
+     * Flood fills a 3D space.
+     *
+     * @param level       The level
+     * @param start       The starting position.
+     * @param limit       The maximum number of blocks to fill.
+     * @param predicate   A predicate to test if the block can provide a seal.
+     * @param retainOrder Whether to retain the order of the blocks. The order is retained by using a {@link LinkedHashSet}, which will have a higher memory footprint.
+     * @return The set of positions that were filled.
+     */
     public static Set<BlockPos> run(Level level, BlockPos start, int limit, SolidBlockPredicate predicate, boolean retainOrder) {
-        level.getProfiler().push("adastra-floodfill");
+        level.getProfiler().push("adastra$floodfill");
 
         LongSet positions = retainOrder ? new LongLinkedOpenHashSet(limit) : new LongOpenHashSet(limit);
         LongArrayFIFOQueue queue = new LongArrayFIFOQueue(limit);

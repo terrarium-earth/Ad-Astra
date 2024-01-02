@@ -75,6 +75,7 @@ subprojects {
     }
 
     dependencies {
+        val mixinExtrasVersion: String by project
         val resourcefulLibVersion: String by project
         val resourcefulConfigVersion: String by project
         val botariumVersion: String by project
@@ -105,6 +106,7 @@ subprojects {
             "modCompileOnly"(group = "vazkii.patchouli", name = "Patchouli-xplat", version = "$minecraftVersion-$patchouliVersion")
             "modApi"(group = "mezz.jei", name = "jei-$minecraftVersion-common-api", version = jeiVersion)
             "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-api", version = reiVersion)
+            implementation("annotationProcessor"(group = "io.github.llamalad7", name = "mixinextras-common", version = mixinExtrasVersion))
         } else {
             "modLocalRuntime"(group = "earth.terrarium.athena", name = "athena-$modLoader-$minecraftVersion", version = athenaVersion)
             "modLocalRuntime"(group = "me.shedaniel", name = "RoughlyEnoughItems-$modLoader", version = reiVersion)

@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-31T01:54:11.061073	Registries
+// 1.20.1	2024-01-01T17:03:00.739736	Registries
 e52785fed6fbde205eeb715e4df129c9106079c0 data/ad_astra/damage_type/acid_rain.json
 eb986d9a028ee9d00e09e9b6786f3d2c1064f602 data/ad_astra/damage_type/cryo_fuel.json
 a01ddce420ff2235fcbe262415985c4326d85f83 data/ad_astra/damage_type/oxygen.json
@@ -15,11 +15,11 @@ e6ed022c7b12b529818d44e2c82a48ea8ba1f4d6 data/ad_astra/dimension_type/glacio.jso
 e37c3f36fda081de048672ca1c25e1c25a2d1a30 data/ad_astra/dimension_type/glacio_orbit.json
 01b6f177c4af90ffa9684519ea990b779832095c data/ad_astra/dimension_type/mars.json
 7c7faab1341aa75351536e7b92672414943ce4c0 data/ad_astra/dimension_type/mars_orbit.json
-65fba60fd8de6cc367cae0f4d5c7a35aafc57745 data/ad_astra/dimension_type/mercury.json
+c25b6183585d6f4052f2e3ad48e3e9d154abfe8c data/ad_astra/dimension_type/mercury.json
 dee6ea83e8d6dd22e10729a581dac4cb5c240eeb data/ad_astra/dimension_type/mercury_orbit.json
 d5a57323749e10fca6d68124be18dcd2114003fe data/ad_astra/dimension_type/moon.json
 93996f5ecdb6cc042aeefbc5e2f5a54e110bee23 data/ad_astra/dimension_type/moon_orbit.json
-9521e5c8d1ca3186cca71ae045177789de59a623 data/ad_astra/dimension_type/venus.json
+697834b7aa8dd7f89a8a3a5e3f29c5fb9a09b331 data/ad_astra/dimension_type/venus.json
 1702930e2bfbf7a0b316c5b8dbceb6666d059d10 data/ad_astra/dimension_type/venus_orbit.json
 24528aa1053a48eb344ea073ac78c9b948dec77d data/ad_astra/worldgen/biome/glacio_ice_peaks.json
 0149288af039875de7d15ac2558d68ffe613c906 data/ad_astra/worldgen/biome/glacio_snowy_barrens.json

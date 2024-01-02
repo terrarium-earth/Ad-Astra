@@ -63,8 +63,8 @@ public class FluidBarWidget extends ConfigurationWidget implements CursorWidget,
             float b = FastColor.ARGB32.blue(color) / 255f;
 
             try (var ignored = RenderUtils.createScissorBox(Minecraft.getInstance(), graphics.pose(), x, y + GuiUtils.FLUID_BAR_HEIGHT - (int) (GuiUtils.FLUID_BAR_HEIGHT * ratio), GuiUtils.FLUID_BAR_WIDTH, GuiUtils.FLUID_BAR_HEIGHT)) {
-                for (int j = 1; j < 5; j++) {
-                    graphics.blit(x, y + GuiUtils.FLUID_BAR_HEIGHT - j * 16, 0, 16, 16, sprite, r, g, b, 1);
+                for (int i = 1; i < 5; i++) {
+                    graphics.blit(x, y + GuiUtils.FLUID_BAR_HEIGHT - i * 16, 0, 16, 16, sprite, r, g, b, 1);
                 }
             }
         }

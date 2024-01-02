@@ -70,8 +70,8 @@ public class GuiUtils {
             float b = FastColor.ARGB32.blue(color) / 255f;
 
             try (var ignored = RenderUtils.createScissorBox(Minecraft.getInstance(), graphics.pose(), x + 6, y - 31 + FLUID_BAR_HEIGHT - (int) (FLUID_BAR_HEIGHT * ratio), FLUID_BAR_WIDTH, FLUID_BAR_HEIGHT)) {
-                for (int j = 1; j < 5; j++) {
-                    graphics.blit(x + 7, y - 34 + FLUID_BAR_HEIGHT - j * 12, 0, 14, 14, sprite, r, g, b, 1);
+                for (int i = 1; i < 5; i++) {
+                    graphics.blit(x + 7, y - 34 + FLUID_BAR_HEIGHT - i * 12, 0, 14, 14, sprite, r, g, b, 1);
                 }
             }
         }

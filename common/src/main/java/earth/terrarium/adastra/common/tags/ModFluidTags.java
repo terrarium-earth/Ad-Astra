@@ -21,6 +21,9 @@ public final class ModFluidTags {
 
     public static final TagKey<Fluid> ZIP_GUN_PROPELLANTS = tag("zip_gun_propellants");
 
+    public static final TagKey<Fluid> FREEZES_IN_SPACE = tag("freezes_in_space");
+    public static final TagKey<Fluid> EVAPORATES_IN_SPACE = tag("evaporates_in_space");
+
     private static TagKey<Fluid> tag(String name) {
         return TagKey.create(Registries.FLUID, new ResourceLocation(AdAstra.MOD_ID, name));
     }

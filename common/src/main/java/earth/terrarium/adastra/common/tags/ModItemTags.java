@@ -57,6 +57,8 @@ public final class ModItemTags {
     public static final TagKey<Item> AERONOS_CAPS = tag("aeronos_caps");
     public static final TagKey<Item> STROPHAR_CAPS = tag("strophar_caps");
 
+    public static final TagKey<Item> DESTROYED_IN_SPACE = tag("destroyed_in_space");
+
     private static TagKey<Item> tag(String name) {
         return TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, name));
     }

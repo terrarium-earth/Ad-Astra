@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.mixins.client;
 
+import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.entities.vehicles.Vehicle;
 import net.minecraft.client.renderer.culling.Frustum;
@@ -18,7 +19,7 @@ public abstract class EntityRendererMixin {
 
         // Make rocket invisible when player is in planets screen.
         if (entity instanceof Rocket rocket) {
-            if (rocket.getY() > Rocket.ATMOSPHERE_LEAVE) {
+            if (rocket.getY() > AdAstraConfig.atmosphereLeave) {
                 cir.setReturnValue(false);
             }
         }
@@ -30,7 +31,7 @@ public abstract class EntityRendererMixin {
 
             // Make players that are in the planet selection screen invisible.
             if (entity.getVehicle() instanceof Rocket rocket) {
-                if (rocket.getY() > Rocket.ATMOSPHERE_LEAVE) {
+                if (rocket.getY() > AdAstraConfig.atmosphereLeave) {
                     cir.setReturnValue(false);
                 }
             }

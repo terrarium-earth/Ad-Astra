@@ -32,7 +32,7 @@ public abstract class PipeBlockEntity extends BlockEntity implements TickableBlo
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         // Only run if it's a controller i.e. at least one side is connected to something
         if (isController) {
-            if (time % 30 == 0) {
+            if (time % 50 == 0) {
                 sources.clear();
                 consumers.clear();
                 findNodes(level, pos);

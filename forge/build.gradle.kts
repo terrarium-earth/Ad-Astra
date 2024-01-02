@@ -34,6 +34,7 @@ dependencies {
     }
 
     val minecraftVersion: String by project
+    val mixinExtrasVersion: String by project
     val forgeVersion: String by project
     val reiVersion: String by project
 
@@ -49,7 +50,8 @@ dependencies {
     forgeRuntimeLibrary(group = "javazoom", name = "jlayer", version = "1.0.1")
 
     // TODO: remove in neoforge
-    "annotationProcessor"(group = "io.github.llamalad7", name = "mixinextras-forge", version = "0.3.2").apply {
+    "annotationProcessor"(group = "io.github.llamalad7", name = "mixinextras-forge", version = mixinExtrasVersion).apply {
         implementation(this)
+        "include"(this)
     }
 }

@@ -1,0 +1,15 @@
+{
+  "values": [
+    "#minecraft:saplings",
+    "#minecraft:leaves",
+    "#minecraft:flowers",
+    "#minecraft:candles",
+    "minecraft:torch",
+    "minecraft:lantern",
+    "minecraft:campfire",
+    "minecraft:jack_o_lantern",
+    "minecraft:cocoa_beans",
+    "minecraft:vine",
+    "minecraft:bamboo"
+  ]
+}

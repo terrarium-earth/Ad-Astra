@@ -1,13 +1,13 @@
-// 1.20.1	2023-12-22T01:43:10.369305	Planets
+// 1.20.1	2024-01-01T05:26:10.327939	Planets
 7ff8e15eb52cec6d155e11503485930cf7360cd7 data/ad_astra/planets/earth.json
 a6105c1763d338ff6ff4ad5cdfa99b6bd20a66f6 data/ad_astra/planets/earth_orbit.json
 69b0d72fca823e12049923131e04f2295c2894c5 data/ad_astra/planets/glacio.json
-a39f923e2e535d9b2416076602b78d85342458b1 data/ad_astra/planets/glacio_orbit.json
+9f45e5edc01e708cebae07b5f094b8289421a08f data/ad_astra/planets/glacio_orbit.json
 71bcbc3a416d83de65518f940980a6bc65c272f6 data/ad_astra/planets/mars.json
-b3ad10f6f08e49d39c356ffdbb27e31dede379b1 data/ad_astra/planets/mars_orbit.json
+f4681e95ec69ddaab08e69d31e495becfaadfbc2 data/ad_astra/planets/mars_orbit.json
 a5e9759adc8dc0e99747bdfa827a38e784b7badb data/ad_astra/planets/mercury.json
-03b2fdc3e162f05ba91eb1c45a54dc85ede3437e data/ad_astra/planets/mercury_orbit.json
+3654668a4a0a74a3801e552f4f198b5ea49ac71b data/ad_astra/planets/mercury_orbit.json
 3530ec6f197c97924896da9da44100d9b60a1868 data/ad_astra/planets/moon.json
-35e0a39d7fae580b2ed7d36dbe9f59a25a08f06f data/ad_astra/planets/moon_orbit.json
+5af73ba2a0d1dfe3d2cc6e03c081c7258d82db31 data/ad_astra/planets/moon_orbit.json
 6222b06aa229ab551118dcb5c5d914e25df28b52 data/ad_astra/planets/venus.json
-09c4ad9bfdb3e5ebee440a14f597cfa65d8948e2 data/ad_astra/planets/venus_orbit.json
+9dff87029b81adbe80ed86932fc3e0912306c63e data/ad_astra/planets/venus_orbit.json

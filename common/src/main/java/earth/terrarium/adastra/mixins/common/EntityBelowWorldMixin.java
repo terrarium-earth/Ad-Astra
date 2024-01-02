@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.mixins.common;
 
 import earth.terrarium.adastra.api.planets.PlanetApi;
-import earth.terrarium.adastra.common.entities.vehicles.Rocket;
+import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.server.MinecraftServer;
@@ -32,7 +32,7 @@ public abstract class EntityBelowWorldMixin {
             var targetLevel = server.getLevel(targetLevelKey);
 
             List<Entity> passengers = entity.getPassengers();
-            entity.setPos(entity.getX(), Rocket.ATMOSPHERE_LEAVE, entity.getZ());
+            entity.setPos(entity.getX(), AdAstraConfig.atmosphereLeave, entity.getZ());
 
             var teleportedEntity = ModUtils.teleportToDimension(entity, targetLevel);
             for (var passenger : passengers) {
