@@ -105,6 +105,7 @@ These are available for all metals.
 - Water will not longer instantly freeze, and it can now be placed on Venus and Mercury. It will now
 simply freeze or evaporate over time.
 - Plants now break over time when placed in non-oxygenated planets.
+- Fixed sleeping on planets not advancing the night.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.

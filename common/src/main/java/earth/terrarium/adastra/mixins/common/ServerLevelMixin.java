@@ -27,6 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 import java.util.concurrent.Executor;
+import java.util.function.BooleanSupplier;
 
 @Mixin(ServerLevel.class)
 public abstract class ServerLevelMixin {
@@ -36,7 +37,7 @@ public abstract class ServerLevelMixin {
     @Final
     private List<CustomSpawner> customSpawners;
 
-    @Inject(method = "<init>", at = @At(value = "TAIL"))
+    @Inject(method = "<init>", at = @At("TAIL"))
     public void adastra$init(
         MinecraftServer server,
         Executor dispatcher,
@@ -58,13 +59,30 @@ public abstract class ServerLevelMixin {
             .build();
     }
 
-    @Inject(method = "tickChunk", at = @At(value = "TAIL"))
+    @Inject(method = "tickChunk", at = @At("TAIL"))
     public void tickChunk(LevelChunk chunk, int randomTickSpeed, CallbackInfo ci) {
         if (!OxygenApi.API.hasOxygen(chunk.getLevel())) {
             var level = chunk.getLevel();
             level.getProfiler().popPush("adastra$spaceeffects");
             EnvironmentEffects.tickChunk((ServerLevel) level, chunk);
             level.getProfiler().pop();
+        }
+    }
+
+    @Inject(
+        method = "tick",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/level/ServerLevel;setDayTime(J)V",
+            shift = At.Shift.AFTER
+        )
+    )
+    public void adastra$tick(BooleanSupplier hasTimeLeft, CallbackInfo ci) {
+        ServerLevel level = (ServerLevel) (Object) this;
+        if (PlanetApi.API.isExtraterrestrial(level)) {
+            // Fix night not advancing when sleeping in space
+            long time = level.getLevelData().getDayTime() + 24000L;
+            level.getServer().getAllLevels().forEach(l -> l.setDayTime(time - time % 24000L));
         }
     }
 }
