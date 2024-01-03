@@ -198,9 +198,9 @@ public class ModRecipeProvider extends RecipeProvider {
             .pattern("###"));
 
         shaped(ModItems.SPACE_HELMET, 1, ModItemTags.STEEL_PLATES, r -> r
-            .define('G', Items.GLASS_PANE)
+            .define('P', Items.GLASS_PANE)
             .pattern("###")
-            .pattern("#G#"));
+            .pattern("#P#"));
 
         shaped(ModItems.SPACE_SUIT, 1, ModItemTags.STEEL_PLATES, r -> r
             .define('O', ModItems.OXYGEN_GEAR.get())
@@ -277,6 +277,13 @@ public class ModRecipeProvider extends RecipeProvider {
             .pattern(" N ")
             .pattern("# #")
             .pattern("B B"));
+
+        shaped(ModItems.TI_69, 1, ModItemTags.STEEL_PLATES, r -> r
+            .define('G', Items.GLASS_PANE)
+            .define('R', Items.REDSTONE)
+            .pattern("GGG")
+            .pattern("#R#")
+            .pattern("###"));
 
         shaped(ModItems.WRENCH, 1, ModItemTags.IRON_PLATES, r -> r
             .define('|', ModItemTags.IRON_RODS)

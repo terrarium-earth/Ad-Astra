@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-03T00:06:35.055944	Recipes
+// 1.20.1	2024-01-03T04:45:36.340268	Recipes
 481a7a12680a5a71351fab3ad0c50a2685b35e76 data/ad_astra/advancements/recipes/alloying/alloying/steel_ingot_from_alloying_iron_ingot_and_coals.json
 3ac35e52b6621df50667886cac9704c72fa49fcf data/ad_astra/advancements/recipes/compressing/compressing/calorite_plate_from_compressing_calorite_blocks.json
 e44dc8c470cc479c0af089304a223e75d3bea1cc data/ad_astra/advancements/recipes/compressing/compressing/calorite_plate_from_compressing_calorite_ingots.json
@@ -495,6 +495,7 @@ cdcf86c224c4018d244f0962e468dae9fbc82ed8 data/ad_astra/advancements/recipes/misc
 dad361b2fa024194750f498aed2f10fdd6ad4a32 data/ad_astra/advancements/recipes/misc/strophar_slab.json
 9003f5ea4b5f0318b6be6513ef1cd1b69539237c data/ad_astra/advancements/recipes/misc/strophar_stairs.json
 9f4541bf081ad865772a5e0010927cb5076e6c40 data/ad_astra/advancements/recipes/misc/strophar_trapdoor.json
+63130b74c115a1fe13cdddd15bac7ec403bcb90d data/ad_astra/advancements/recipes/misc/ti_69.json
 40f2da734935865aabc33d75bb7a4deeeb269669 data/ad_astra/advancements/recipes/misc/tier_1_rover.json
 a00624b5896ba789f2b7b1d98c252bc293125551 data/ad_astra/advancements/recipes/misc/vent.json
 03d2c55d6049f78c912fa40ebdb8a4c392da719e data/ad_astra/advancements/recipes/misc/venus_cobblestone_slab.json
@@ -873,7 +874,7 @@ e468e236a92230e65a46471b4fd2be5a0800276e data/ad_astra/recipes/smelting/ostrum_i
 f7dee7034a78f96a0a4a7b7844d3e62bef7c500e data/ad_astra/recipes/smelting/venus_stone_from_smelting_venus_cobblestone.json
 63581bfe6791cf71e21cf87a73c70b397f56b091 data/ad_astra/recipes/solar_panel.json
 b37f0355b2a2568bb0c9fe7018837dd9baa1b810 data/ad_astra/recipes/space_boots.json
-3b86aa20b15aae1e5cf11f59116a6a46a290ddab data/ad_astra/recipes/space_helmet.json
+709706ad2b3466455eea79505c8caf165a9cb426 data/ad_astra/recipes/space_helmet.json
 54dfabcd919c0f780ccc27c448d762a29312320e data/ad_astra/recipes/space_pants.json
 29fbe0cb810fd7e0cbdcc7db63ddbfcee7ad1356 data/ad_astra/recipes/space_station/earth_orbit_space_station.json
 b66066e4ccb511d1a33b9e5143057388ac828aff data/ad_astra/recipes/space_station/glacio_orbit_space_station.json
@@ -1040,6 +1041,7 @@ a30dde0770d46989e83a545bd7c977a9f2d17950 data/ad_astra/recipes/strophar_planks.j
 d647944e15ead75145c5b0968f4c28c0314b66a5 data/ad_astra/recipes/strophar_slab.json
 17ee962ecd1fcd4680b351b67c2193539c39974e data/ad_astra/recipes/strophar_stairs.json
 1cd52531b9f09753e896a56e4d2f059af068fa68 data/ad_astra/recipes/strophar_trapdoor.json
+30d304139760396afe2cdf9a815f51a470352f83 data/ad_astra/recipes/ti_69.json
 d0d83d892c7649ac5891514e0c471a4fda99e32c data/ad_astra/recipes/tier_1_rover.json
 46c938982b2875ce9c44d09113578f0f3a07fee7 data/ad_astra/recipes/vent.json
 10a4efbad1ec9451b665221e3cf97594b6781502 data/ad_astra/recipes/venus_cobblestone_slab.json

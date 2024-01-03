@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:ti_69"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_ti_69": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "ad_astra:steel_plates"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_ti_69",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:ti_69"
+    ]
+  },
+  "sends_telemetry_event": false
+}

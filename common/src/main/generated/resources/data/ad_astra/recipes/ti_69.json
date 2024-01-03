@@ -5,16 +5,20 @@
     "#": {
       "tag": "ad_astra:steel_plates"
     },
-    "P": {
+    "G": {
       "item": "minecraft:glass_pane"
+    },
+    "R": {
+      "item": "minecraft:redstone"
     }
   },
   "pattern": [
-    "###",
-    "#P#"
+    "GGG",
+    "#R#",
+    "###"
   ],
   "result": {
-    "item": "ad_astra:space_helmet"
+    "item": "ad_astra:ti_69"
   },
   "show_notification": true
 }

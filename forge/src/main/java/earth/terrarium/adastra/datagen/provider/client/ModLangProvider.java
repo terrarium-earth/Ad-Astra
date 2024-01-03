@@ -27,7 +27,7 @@ public class ModLangProvider extends LanguageProvider {
         super(output, AdAstra.MOD_ID, "en_us");
     }
 
-    private static final Set<RegistryEntry<Item>> CUSTOM_ITEM_NAMES = Set.of();
+    private static final Set<RegistryEntry<Item>> CUSTOM_ITEM_NAMES = Set.of(ModItems.TI_69);
     private static final Set<RegistryEntry<Block>> CUSTOM_BLOCK_NAMES = Set.of();
 
     @Override
@@ -64,6 +64,8 @@ public class ModLangProvider extends LanguageProvider {
                     .replace("_", " "))));
 
         add("itemGroup.ad_astra.main", "Ad Astra");
+
+        addItem(ModItems.TI_69, "TI-69");
 
         add("death.attack.oxygen", "%1$s couldn't breathe anymore");
         add("death.attack.oxygen.player", "%1$s lost their breath whilst trying to escape %2$s");
@@ -158,7 +160,7 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.CHANGE_MODE_ROUND_ROBIN, "Set capacitor mode to \"Round Robin\"");
 
         add(ConstantComponents.SHIFT_DESCRIPTION, "Hold SHIFT for more information");
-        add(ConstantComponents.TI_69_INFO, "Displays important information. Right-click to change the current app.");
+        add(ConstantComponents.TI_69_INFO, "Displays local oxygen, temperature, and gravity information.");
         add(ConstantComponents.ETRIONIC_CAPACITOR_INFO, "Stores energy. Right-click to toggle. Shift-right-click to change the distribution mode.");
         add(ConstantComponents.WRENCH_INFO, "Used to configure pipes and various other blocks.");
         add(ConstantComponents.ZIP_GUN_INFO, "Propels you forward. Use a second one in your offhand to propel even further. Excellent for maneuvering in zero-gravity.");

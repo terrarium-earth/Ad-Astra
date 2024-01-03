@@ -108,6 +108,8 @@ simply freeze or evaporate over time.
 - Fixed sleeping on planets not advancing the night.
 - Added the Etrionic Blast furnace. This is a better version of the blast furnace that uses energy, has 4 slots, and is now used
 to smelt steel. The blast furnace steel recipe have been removed.
+- Added the gravity normalizer. This allows you to control the gravity of a local area, similar
+to the oxygen distributor. It's especially important in orbit due to the zero gravity environment.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.
@@ -135,5 +137,3 @@ able to share space stations.
 Hopefully this will prevent people from missing it and crashing.
 - Fixed players dismounting landers with some mods like Transit Railway.
 - Sliding doors can now be redstone powered from any of its blocks, instead of just the bottom middle one.
-- Added the gravity normalizer. This allows you to control the gravity of a local area, similar
-to the oxygen distributor. It's especially important in orbit due to the zero gravity environment.
