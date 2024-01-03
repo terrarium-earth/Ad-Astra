@@ -42,10 +42,10 @@ public class EtrionicBlastFurnaceMenu extends MachineMenu<EtrionicBlastFurnaceBl
 
     @Override
     protected void addMenuSlots() {
-        addSlot(new Slot(entity, 1, 28, 38));
-        addSlot(new Slot(entity, 2, 48, 38));
-        addSlot(new Slot(entity, 3, 28, 58));
-        addSlot(new Slot(entity, 4, 48, 58));
+        addSlot(new Slot(entity, 1, 29, 38));
+        addSlot(new Slot(entity, 2, 47, 38));
+        addSlot(new Slot(entity, 3, 29, 58));
+        addSlot(new Slot(entity, 4, 47, 58));
 
         addSlot(CustomSlot.noPlace(entity, 5, 101, 38));
         addSlot(CustomSlot.noPlace(entity, 6, 119, 38));
@@ -55,8 +55,8 @@ public class EtrionicBlastFurnaceMenu extends MachineMenu<EtrionicBlastFurnaceBl
 
     @Override
     protected void addConfigSlots() {
-        addConfigSlot(new SlotConfiguration(0, 28, 38, 36, 36));
-        addConfigSlot(new SlotConfiguration(1, 100, 38, 36, 36));
+        addConfigSlot(new SlotConfiguration(0, 29, 38, 34, 36));
+        addConfigSlot(new SlotConfiguration(1, 101, 38, 34, 36));
 
         addConfigSlot(new EnergyConfiguration(2, 152, 35, entity.getEnergyStorage()));
     }
