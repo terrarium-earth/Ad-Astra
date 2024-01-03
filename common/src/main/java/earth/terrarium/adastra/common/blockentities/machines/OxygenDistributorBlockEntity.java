@@ -56,6 +56,9 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     private int shutDownTicks;
     private int limit;
 
+    private float yRot;
+    private float lastYRot;
+
     public OxygenDistributorBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 3);
     }
@@ -116,7 +119,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         boolean canDistribute = canCraftDistribution(FluidHooks.buckets(Math.max(0.001, fluidPerTick / 1000)));
         if (canFunction() && canDistribute) {
             getEnergyStorage().internalExtract(calculateEnergyPerTick(), false);
-
+            setLit(true);
             accumulatedFluid += fluidPerTick;
             int wholeBuckets = (int) accumulatedFluid;
             if (wholeBuckets > 0) {
@@ -134,6 +137,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         } else if (!lastDistributedBlocks.isEmpty()) {
             clearOxygenBlocks();
             shutDownTicks = 60;
+            setLit(false);
         }
 
         energyPerTick = (recipe != null && canCraft(getEnergyStorage()) ? recipe.energy() : 0) + (canDistribute ? calculateEnergyPerTick() : 0);
@@ -222,6 +226,16 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
                 }
             } else OxygenDistributorOverlayRenderer.clearPositions();
         }
+
+        lastYRot = yRot;
+        if (isLit()) {
+            yRot += 10;
+        }
+    }
+
+    @Override
+    public boolean shouldAutomaticallyUpdateLitState() {
+        return false;
     }
 
     public int distributedBlocksCount() {
@@ -240,6 +254,14 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         return canFunction() ? fluidPerTick : 0;
     }
 
+    public float yRot() {
+        return yRot;
+    }
+
+    public float lastYRot() {
+        return lastYRot;
+    }
+
     private long calculateEnergyPerTick() {
         return Math.max(1, lastDistributedBlocks.size() / 50);
     }
@@ -256,5 +278,10 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     @Override
     public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
         return new int[]{1, 2};
+    }
+
+    @Override
+    public @NotNull CompoundTag getUpdateTag() {
+        return super.getUpdateTag();
     }
 }

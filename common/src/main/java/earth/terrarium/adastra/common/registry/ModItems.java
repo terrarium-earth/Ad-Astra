@@ -15,6 +15,7 @@ import earth.terrarium.adastra.common.items.armor.materials.NetheriteSpaceSuitMa
 import earth.terrarium.adastra.common.items.armor.materials.SpaceSuitMaterial;
 import earth.terrarium.adastra.common.items.machines.EnergizerBlockItem;
 import earth.terrarium.adastra.common.items.rendered.RenderedBlockItem;
+import earth.terrarium.adastra.common.items.rendered.TooltipRenderedBlockItem;
 import earth.terrarium.adastra.common.items.vehicles.RocketItem;
 import earth.terrarium.adastra.common.items.vehicles.RoverItem;
 import earth.terrarium.adastra.common.tags.ModPaintingVariantTags;
@@ -62,7 +63,7 @@ public class ModItems {
     public static final RegistryEntry<Item> OXYGEN_LOADER = ITEMS.register("oxygen_loader", () -> new TooltipBlockItem(ModBlocks.OXYGEN_LOADER.get(), ConstantComponents.OXYGEN_LOADER_INFO, new Item.Properties()));
     public static final RegistryEntry<Item> SOLAR_PANEL = ITEMS.register("solar_panel", () -> new TooltipBlockItem(ModBlocks.SOLAR_PANEL.get(), ConstantComponents.SOLAR_PANEL_INFO, new Item.Properties()));
     public static final RegistryEntry<Item> WATER_PUMP = ITEMS.register("water_pump", () -> new TooltipBlockItem(ModBlocks.WATER_PUMP.get(), ConstantComponents.WATER_PUMP_INFO, new Item.Properties()));
-    public static final RegistryEntry<Item> OXYGEN_DISTRIBUTOR = ITEMS.register("oxygen_distributor", () -> new TooltipBlockItem(ModBlocks.OXYGEN_DISTRIBUTOR.get(), ConstantComponents.OXYGEN_DISTRIBUTOR_INFO, new Item.Properties()));
+    public static final RegistryEntry<Item> OXYGEN_DISTRIBUTOR = ITEMS.register("oxygen_distributor", () -> new TooltipRenderedBlockItem(ModBlocks.OXYGEN_DISTRIBUTOR.get(), ConstantComponents.OXYGEN_DISTRIBUTOR_INFO, new Item.Properties()));
     public static final RegistryEntry<Item> ENERGIZER = ITEMS.register("energizer", () -> new EnergizerBlockItem(ModBlocks.ENERGIZER.get(), new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> CRYO_FREEZER = ITEMS.register("cryo_freezer", () -> new TooltipBlockItem(ModBlocks.CRYO_FREEZER.get(), ConstantComponents.CRYO_FREEZER_INFO, new Item.Properties()));
     public static final RegistryEntry<Item> OXYGEN_SENSOR = ITEMS.register("oxygen_sensor", () -> new TooltipBlockItem(ModBlocks.OXYGEN_SENSOR.get(), ConstantComponents.OXYGEN_SENSOR_INFO, new Item.Properties()));

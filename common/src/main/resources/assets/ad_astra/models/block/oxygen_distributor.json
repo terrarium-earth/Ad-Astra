@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "ad_astra:block/oxygen_distributor",
+		"particle": "ad_astra:block/oxygen_distributor"
+	},
+	"elements": [
+		{
+			"from": [1, 0, 1],
+			"to": [15, 5, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 7, 7, 9.5], "texture": "#0"},
+				"east": {"uv": [0, 7, 7, 9.5], "texture": "#0"},
+				"south": {"uv": [0, 7, 7, 9.5], "texture": "#0"},
+				"west": {"uv": [0, 7, 7, 9.5], "texture": "#0"},
+				"up": {"uv": [7, 7, 0, 0], "texture": "#0"},
+				"down": {"uv": [7, 9, 0, 16], "texture": "#0"}
+			}
+		}
+	]
+}

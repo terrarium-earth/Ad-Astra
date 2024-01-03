@@ -87,7 +87,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         steelMachine(ModBlocks.FUEL_REFINERY.get());
         complexMachine(ModBlocks.WATER_PUMP.get());
         complexMachine(ModBlocks.SOLAR_PANEL.get());
-        steelMachine(ModBlocks.OXYGEN_DISTRIBUTOR.get());
+        sidedRenderedBlock(ModBlocks.OXYGEN_DISTRIBUTOR.get());
         energizer(ModBlocks.ENERGIZER.get());
         cryoFreezer(ModBlocks.CRYO_FREEZER.get());
         oxygenSensor(ModBlocks.OXYGEN_SENSOR.get());
@@ -497,6 +497,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .modelFile(models().getBuilder(name)
                     .texture("0", texture)
                     .parent(models().getExistingFile(modLoc("block/%s".formatted(parent)))))
+                .rotationX(state.getValue(BlockStateProperties.ATTACH_FACE).ordinal() * 90)
+                .rotationY((((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.CEILING ? 180 : 0)) % 360)
+                .build();
+        });
+    }
+
+    public void sidedRenderedBlock(Block block) {
+        simpleBlockItem(block, itemModels().getExistingFile(ModItemModelProvider.RENDERED_ITEM));
+        getVariantBuilder(block).forAllStates(state -> {
+            String name = this.name(block);
+            return ConfiguredModel.builder()
+                .modelFile(models().getExistingFile(modLoc("block/%s".formatted(name))))
                 .rotationX(state.getValue(BlockStateProperties.ATTACH_FACE).ordinal() * 90)
                 .rotationY((((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.CEILING ? 180 : 0)) % 360)
                 .build();

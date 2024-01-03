@@ -50,6 +50,7 @@ public class GuiUtils {
     public static final ResourceLocation SUN = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/sun.png");
     public static final ResourceLocation FIRE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/fire.png");
     public static final ResourceLocation ARROW = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/arrow.png");
+    public static final ResourceLocation SLIDER = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/slider.png");
 
     public static void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, int x, int y, long energy, long capacity, Component... tooltips) {
         float ratio = energy / (float) capacity;

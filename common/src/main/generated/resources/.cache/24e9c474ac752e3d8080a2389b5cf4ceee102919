@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-02T02:18:44.737698	Block States: ad_astra
+// 1.20.1	2024-01-02T23:10:08.570588	Block States: ad_astra
 3b0e47b473b6710ddeb7f46108de3f3ad99e83e3 assets/ad_astra/blockstates/aeronos_cap.json
 97fb99c686b024024655b4d9507104dc77161f29 assets/ad_astra/blockstates/aeronos_door.json
 0f6adcffc18bba1418df5c168e72a767e1075feb assets/ad_astra/blockstates/aeronos_fence.json
@@ -212,7 +212,7 @@ b503616df33b4fdde46e89222ce2c06cee6e8abb assets/ad_astra/blockstates/ostrum_plat
 44f4936980429e8c093d5a9bfdd24f881407e972 assets/ad_astra/blockstates/ostrum_plating_stairs.json
 d0833115d3cae9b0a16aafe5cb3f084ea4c851bf assets/ad_astra/blockstates/ostrum_sliding_door.json
 acd682882f85dd4709413d2b57fafd619b28d934 assets/ad_astra/blockstates/oxygen.json
-fafd4785b338ce5eb0cdcae0fa0be18a05926dc1 assets/ad_astra/blockstates/oxygen_distributor.json
+8a367493b12dcfafb532626f3992578e33e70001 assets/ad_astra/blockstates/oxygen_distributor.json
 118098f91249bd575fb1b247b776f6eeea06e598 assets/ad_astra/blockstates/oxygen_loader.json
 7204eb3ebfd539ea61682ef737c2e3cffbdcb0d5 assets/ad_astra/blockstates/oxygen_sensor.json
 cd4c044d98056a25db543b1346be823df85fcb4b assets/ad_astra/blockstates/permafrost.json
@@ -688,8 +688,6 @@ a5518a4d0ce7b1cac84dd98993c1bcadd5b6413b assets/ad_astra/models/block/ostrum_pla
 71b277414d0e616e312f3eab76d46fcf5172d54f assets/ad_astra/models/block/ostrum_plating_stairs_outer.json
 257537f69e6fc95247a3a57877c3c0a559a53de0 assets/ad_astra/models/block/ostrum_sliding_door.json
 50812bd51e14ec5ea223afe239c89730a63e43b1 assets/ad_astra/models/block/oxygen.json
-2264cc5bae3bfc8a50c964e8d621539621e7e81d assets/ad_astra/models/block/oxygen_distributor.json
-bf86c103d97f3d1c1c813a496918fd1ce24fb035 assets/ad_astra/models/block/oxygen_distributor_on.json
 60f8697c746e4820460b14bcc61ba92fa4f4fd84 assets/ad_astra/models/block/oxygen_loader.json
 1ea1df36b9568b1c21ce9e53447e85addf96a2a8 assets/ad_astra/models/block/oxygen_loader_on.json
 27581618b4183a8175127752482495b9a63a261b assets/ad_astra/models/block/oxygen_sensor.json
@@ -1074,7 +1072,7 @@ c238ff0bfdf976658b27abbe40f916201954c086 assets/ad_astra/models/item/ostrum_plat
 d8b717a8c62277ccf365d67d09b7e322bcf70a42 assets/ad_astra/models/item/ostrum_plating_pressure_plate.json
 26afaa06c26600907b8fb5017b6bf77ce37c3b6d assets/ad_astra/models/item/ostrum_plating_slab.json
 1515607ae267a6a3d0a25ba9dee09243cb68dbb0 assets/ad_astra/models/item/ostrum_plating_stairs.json
-cae9ec2e743db7c2151f6f400effeddf4f5a0ef4 assets/ad_astra/models/item/oxygen_distributor.json
+05c9b16eefd4edb5c2da31e4772f775318264f00 assets/ad_astra/models/item/oxygen_distributor.json
 6564e75cb1c2c49c232308828ced2e3a582daedd assets/ad_astra/models/item/oxygen_loader.json
 52348cb45038b7076b37ba3651ff07c31dbbc38a assets/ad_astra/models/item/oxygen_sensor.json
 71e50d0f451055a7c979046ffcccf4ee99cc869d assets/ad_astra/models/item/permafrost.json

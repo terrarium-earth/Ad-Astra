@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:iron_plates"
+    },
+    "B": {
+      "item": "minecraft:blast_furnace"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "###",
+    "RBR",
+    "###"
+  ],
+  "result": {
+    "item": "ad_astra:etrionic_blast_furnace"
+  },
+  "show_notification": true
+}

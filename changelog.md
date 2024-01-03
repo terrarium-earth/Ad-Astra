@@ -121,6 +121,8 @@ if you're using these recipes in modpacks, you'll need to change them. This incl
   - "ad_astra:oxygen_conversion" -> "ad_astra:oxygen_loading"
 - Removed the sky renderer JSON API. Sky renderers should now be done in code.
 - Removed the JSON APIs for adding planets, galaxies and info in the planets screen.
+- Copper no longer oxidizes in environments with no oxygen.
+- Updated the oxygen distributor model. It now spins and can be placed on any block face.
 
 ## TODO: Not sure if this'll be in this release
 
@@ -128,12 +130,10 @@ if you're using these recipes in modpacks, you'll need to change them. This incl
 and prevent players from spawning a new space station at any claimed chunks. 
 - Added Argonauts compat to space stations. Players on the same guild will be
 able to share space stations.
-- Copper no longer oxidizes in environments with no oxygen.
 - Added the Ti-69. It's a device that displays the local oxygen, temperature, and gravity.
 - The warning to hold space when landing is now displayed boldly on screen instead of a chat message.
 Hopefully this will prevent people from missing it and crashing.
 - Fixed players dismounting landers with some mods like Transit Railway.
 - Sliding doors can now be redstone powered from any of its blocks, instead of just the bottom middle one.
-- Updated the oxygen distributor model. It now spins and can be placed on any block face.
 - Added the gravity normalizer. This allows you to control the gravity of a local area, similar
 to the oxygen distributor. It's especially important in orbit due to the zero gravity environment.

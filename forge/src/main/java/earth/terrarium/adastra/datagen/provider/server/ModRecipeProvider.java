@@ -101,6 +101,13 @@ public class ModRecipeProvider extends RecipeProvider {
             .pattern("# #")
             .pattern("#P#"));
 
+        shaped(ModItems.ETRIONIC_BLAST_FURNACE, 1, ModItemTags.IRON_PLATES, r -> r
+            .define('B', Items.BLAST_FURNACE)
+            .define('R', Items.REDSTONE)
+            .pattern("###")
+            .pattern("RBR")
+            .pattern("###"));
+
         shaped(ModItems.NASA_WORKBENCH, 1, ModItemTags.STEEL_PLATES, r -> r
             .define('C', Items.CRAFTING_TABLE)
             .define('B', ModItemTags.STEEL_BLOCKS)

@@ -11,10 +11,7 @@ import earth.terrarium.adastra.client.models.entities.vehicles.RoverModel;
 import earth.terrarium.adastra.client.particle.LargeFlameParticle;
 import earth.terrarium.adastra.client.particle.OxygenBubbleParticle;
 import earth.terrarium.adastra.client.radio.audio.RadioHandler;
-import earth.terrarium.adastra.client.renderers.blocks.EnergizerBlockEntityRenderer;
-import earth.terrarium.adastra.client.renderers.blocks.FlagBlockEntityRenderer;
-import earth.terrarium.adastra.client.renderers.blocks.GlobeBlockEntityRenderer;
-import earth.terrarium.adastra.client.renderers.blocks.SlidingDoorBlockEntityRenderer;
+import earth.terrarium.adastra.client.renderers.blocks.*;
 import earth.terrarium.adastra.client.renderers.entities.mobs.*;
 import earth.terrarium.adastra.client.renderers.entities.vehicles.LanderRenderer;
 import earth.terrarium.adastra.client.renderers.entities.vehicles.RocketRenderer;
@@ -101,6 +98,7 @@ public class AdAstraClient {
     private static void registerBlockEntityRenderers() {
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ENERGIZER.get(), c -> new EnergizerBlockEntityRenderer());
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.GLOBE.get(), c -> new GlobeBlockEntityRenderer());
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.OXYGEN_DISTRIBUTOR.get(), c -> new OxygenDistributorBlockEntityRenderer());
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.FLAG.get(), c -> new FlagBlockEntityRenderer());
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SLIDING_DOOR.get(), c -> new SlidingDoorBlockEntityRenderer());
     }
@@ -183,10 +181,12 @@ public class AdAstraClient {
         ModBlocks.GLOBES.stream().forEach(b -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/%s_cube".formatted(b.getId().getPath()))));
         register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/%s_flipped".formatted(ModBlocks.AIRLOCK.getId().getPath())));
         register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/%s_flipped".formatted(ModBlocks.REINFORCED_DOOR.getId().getPath())));
+        register.accept(OxygenDistributorBlockEntityRenderer.TOP);
     }
 
     public static void onRegisterItemRenderers(BiConsumer<Item, BlockEntityWithoutLevelRenderer> consumer) {
         ModItems.GLOBES.stream().forEach(item -> consumer.accept(item.get(), new GlobeBlockEntityRenderer.ItemRenderer()));
+        consumer.accept(ModItems.OXYGEN_DISTRIBUTOR.get(), new OxygenDistributorBlockEntityRenderer.ItemRenderer());
         consumer.accept(ModItems.ROVER.get(), new RoverRenderer.ItemRenderer());
         consumer.accept(ModItems.TIER_1_ROCKET.get(), new RocketRenderer.ItemRenderer(RocketModel.TIER_1_LAYER, RocketRenderer.TIER_1_TEXTURE));
         consumer.accept(ModItems.TIER_2_ROCKET.get(), new RocketRenderer.ItemRenderer(RocketModel.TIER_2_LAYER, RocketRenderer.TIER_2_TEXTURE));
