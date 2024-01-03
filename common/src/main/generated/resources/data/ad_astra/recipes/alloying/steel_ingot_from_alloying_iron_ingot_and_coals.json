@@ -7,7 +7,7 @@
       "item": "minecraft:iron_ingot"
     },
     {
-      "item": "minecraft:coal"
+      "tag": "minecraft:coals"
     }
   ],
   "result": {

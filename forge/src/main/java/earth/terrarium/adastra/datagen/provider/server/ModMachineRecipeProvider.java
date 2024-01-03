@@ -13,6 +13,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,6 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 public abstract class ModMachineRecipeProvider extends RecipeProvider {
 
@@ -45,12 +47,7 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
         createCompressing(writer, 800, 20, ModItemTags.CALORITE_BLOCKS, new ItemStack(ModItems.CALORITE_PLATE.get(), 9));
 
         createAlloying(writer, 100, 20,
-            List.of(Ingredient.of(Items.IRON_INGOT), Ingredient.of(Items.COAL)),
-            ModItems.STEEL_INGOT.get().getDefaultInstance()
-        );
-
-        createAlloying(writer, 100, 20,
-            List.of(Ingredient.of(Items.IRON_INGOT), Ingredient.of(Items.CHARCOAL)),
+            List.of(Ingredient.of(Items.IRON_INGOT), new TagIngredient(ItemTags.COALS)),
             ModItems.STEEL_INGOT.get().getDefaultInstance()
         );
 
@@ -240,9 +237,19 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
             .unlockedBy("has_item", has(ModItems.ETRIONIC_BLAST_FURNACE.get()))
             .cookingTime(cookingtime)
             .energy(energy);
-        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "alloying/%s_from_alloying_%s_and_%s".formatted(resultId.getPath(),
-            Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingredients.get(0).getItems()[0].getItem())).getPath(),
-            Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingredients.get(1).getItems()[0].getItem())).getPath())));
+        List<String> ingredientNames = ingredients.stream()
+                .map(ingredient -> {
+                    if (ingredient instanceof TagIngredient recipeIngredient) {
+                        return recipeIngredient.name;
+                    }
+                    return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingredient.getItems()[0].getItem())).getPath();
+                })
+                .toList();
+
+        builder.save(writer, new ResourceLocation(
+            AdAstra.MOD_ID,
+            "alloying/%s_from_alloying_%s".formatted(resultId.getPath(), String.join("_and_", ingredientNames))
+        ));
     }
 
     public static void createOxygenLoading(Consumer<FinishedRecipe> writer, int cookingtime, int energy, FluidHolder ingredient, FluidHolder resultFluid) {
@@ -286,5 +293,15 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
     public static void createSpaceStation(Consumer<FinishedRecipe> writer, List<IngredientHolder> ingredients, ResourceLocation dimension) {
         var builder = new SpaceStationRecipeBuilder(ingredients, dimension);
         builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "space_station/%s_space_station".formatted(dimension.getPath())));
+    }
+
+    private static class TagIngredient extends Ingredient {
+
+        private final String name;
+
+        protected TagIngredient(TagKey<Item> tag) {
+            super(Stream.of(new TagValue(tag)));
+            this.name = tag.location().getPath();
+        }
     }
 }

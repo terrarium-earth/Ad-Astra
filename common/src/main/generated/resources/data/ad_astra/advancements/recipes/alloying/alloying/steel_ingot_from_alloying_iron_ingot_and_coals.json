@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ad_astra:alloying/steel_ingot_from_alloying_iron_ingot_and_charcoal"
+        "recipe": "ad_astra:alloying/steel_ingot_from_alloying_iron_ingot_and_coals"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "ad_astra:alloying/steel_ingot_from_alloying_iron_ingot_and_charcoal"
+      "ad_astra:alloying/steel_ingot_from_alloying_iron_ingot_and_coals"
     ]
   },
   "sends_telemetry_event": true
