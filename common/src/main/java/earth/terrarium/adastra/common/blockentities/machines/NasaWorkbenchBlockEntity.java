@@ -142,7 +142,7 @@ public class NasaWorkbenchBlockEntity extends ContainerMachineBlockEntity {
 
     @Override
     public List<ConfigurationEntry> getDefaultConfig() {
-        return List.of(new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS));
+        return SIDE_CONFIG;
     }
 
     @Override

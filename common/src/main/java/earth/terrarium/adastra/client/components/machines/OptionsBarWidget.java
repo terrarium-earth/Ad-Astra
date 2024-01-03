@@ -28,13 +28,13 @@ public class OptionsBarWidget extends ContainerWidget {
     public static final int PADDING = 6;
     public static final int SPACING = 3;
 
-    private final GridLayout layout = Util.make(new GridLayout(0, 0), layout -> {
+    protected final GridLayout layout = Util.make(new GridLayout(0, 0), layout -> {
         layout.columnSpacing(SPACING);
         layout.defaultCellSetting().alignVerticallyMiddle();
     });
 
     private final @Nullable Runnable onSettingsPressed;
-    private final @Nullable ContainerMachineBlockEntity entity;
+    protected final @Nullable ContainerMachineBlockEntity entity;
     private final boolean hasBattery;
 
     public OptionsBarWidget(int right, int top, @Nullable Runnable onSettingsPressed, @Nullable ContainerMachineBlockEntity entity, boolean hasBattery) {
@@ -56,13 +56,23 @@ public class OptionsBarWidget extends ContainerWidget {
     }
 
     protected void init() {
+        addSettingsButton(0);
+        addRedstoneButton(1);
+        addBattery(2);
+        layout.arrangeElements();
+        layout.visitWidgets(this::addRenderableWidget);
+    }
+
+    public void addSettingsButton(int column) {
         if (this.onSettingsPressed != null) {
             layout.addChild(new PressableImageButton(0, 0, 18, 18, 0, 0, 18, GuiUtils.SETTINGS_BUTTON, 18, 54,
                 button -> this.onSettingsPressed.run(),
                 ConstantComponents.SIDE_CONFIG
-            ), 0, 0);
+            ), 0, column);
         }
+    }
 
+    public void addRedstoneButton(int column) {
         if (this.entity != null) {
             layout.addChild(new PressableImageButton(0, 0, 18, 18, 0, 0, 18, entity.getRedstoneControl().icon(), 18, 54,
                 button -> {
@@ -73,15 +83,14 @@ public class OptionsBarWidget extends ContainerWidget {
                     ((PressableImageButton) button).setTexture(next.icon());
                 },
                 getRedstoneControlTooltip(entity.getRedstoneControl())
-            ), 0, 1);
+            ), 0, column);
         }
+    }
 
+    public void addBattery(int column) {
         if (this.hasBattery) {
-            layout.addChild(new SpacerElement(18, 18), 0, 2);
+            layout.addChild(new SpacerElement(18, 18), 0, column);
         }
-
-        layout.arrangeElements();
-        layout.visitWidgets(this::addRenderableWidget);
     }
 
     @Override

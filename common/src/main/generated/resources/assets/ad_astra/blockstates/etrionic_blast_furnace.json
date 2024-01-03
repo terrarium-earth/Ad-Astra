@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,lit=false,powered=false": {
+      "model": "ad_astra:block/etrionic_blast_furnace",
+      "y": 270
+    },
+    "facing=east,lit=false,powered=true": {
+      "model": "ad_astra:block/etrionic_blast_furnace",
+      "y": 270
+    },
+    "facing=east,lit=true,powered=false": {
+      "model": "ad_astra:block/etrionic_blast_furnace_on",
+      "y": 270
+    },
+    "facing=east,lit=true,powered=true": {
+      "model": "ad_astra:block/etrionic_blast_furnace_on",
+      "y": 270
+    },
+    "facing=north,lit=false,powered=false": {
+      "model": "ad_astra:block/etrionic_blast_furnace",
+      "y": 180
+    },
+    "facing=north,lit=false,powered=true": {
+      "model": "ad_astra:block/etrionic_blast_furnace",
+      "y": 180
+    },
+    "facing=north,lit=true,powered=false": {
+      "model": "ad_astra:block/etrionic_blast_furnace_on",
+      "y": 180
+    },
+    "facing=north,lit=true,powered=true": {
+      "model": "ad_astra:block/etrionic_blast_furnace_on",
+      "y": 180
+    },
+    "facing=south,lit=false,powered=false": {
+      "model": "ad_astra:block/etrionic_blast_furnace"
+    },
+    "facing=south,lit=false,powered=true": {
+      "model": "ad_astra:block/etrionic_blast_furnace"
+    },
+    "facing=south,lit=true,powered=false": {
+      "model": "ad_astra:block/etrionic_blast_furnace_on"
+    },
+    "facing=south,lit=true,powered=true": {
+      "model": "ad_astra:block/etrionic_blast_furnace_on"
+    },
+    "facing=west,lit=false,powered=false": {
+      "model": "ad_astra:block/etrionic_blast_furnace",
+      "y": 90
+    },
+    "facing=west,lit=false,powered=true": {
+      "model": "ad_astra:block/etrionic_blast_furnace",
+      "y": 90
+    },
+    "facing=west,lit=true,powered=false": {
+      "model": "ad_astra:block/etrionic_blast_furnace_on",
+      "y": 90
+    },
+    "facing=west,lit=true,powered=true": {
+      "model": "ad_astra:block/etrionic_blast_furnace_on",
+      "y": 90
+    }
+  }
+}

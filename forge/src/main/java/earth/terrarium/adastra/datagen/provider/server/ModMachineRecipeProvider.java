@@ -44,6 +44,16 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
         createCompressing(writer, 100, 20, ModItemTags.CALORITE_INGOTS, ModItems.CALORITE_PLATE.get().getDefaultInstance());
         createCompressing(writer, 800, 20, ModItemTags.CALORITE_BLOCKS, new ItemStack(ModItems.CALORITE_PLATE.get(), 9));
 
+        createAlloying(writer, 100, 20,
+            List.of(Ingredient.of(Items.IRON_INGOT), Ingredient.of(Items.COAL)),
+            ModItems.STEEL_INGOT.get().getDefaultInstance()
+        );
+
+        createAlloying(writer, 100, 20,
+            List.of(Ingredient.of(Items.IRON_INGOT), Ingredient.of(Items.CHARCOAL)),
+            ModItems.STEEL_INGOT.get().getDefaultInstance()
+        );
+
         createOxygenLoading(writer, 1, 30,
             FluidHooks.newFluidHolder(Fluids.WATER, 100, null),
             FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), 4, null)
@@ -221,6 +231,18 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
             .cookingTime(cookingtime)
             .energy(energy);
         builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "compressing/%s_from_compressing_%s".formatted(resultId.getPath(), ingredientId.getPath())));
+    }
+
+    public static void createAlloying(Consumer<FinishedRecipe> writer, int cookingtime, int energy, List<Ingredient> ingredients, ItemStack result) {
+        ResourceLocation resultId = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(result.getItem()));
+
+        var builder = new AlloyingRecipeBuilder(ingredients, result)
+            .unlockedBy("has_item", has(ModItems.ETRIONIC_BLAST_FURNACE.get()))
+            .cookingTime(cookingtime)
+            .energy(energy);
+        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "alloying/%s_from_alloying_%s_and_%s".formatted(resultId.getPath(),
+            Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingredients.get(0).getItems()[0].getItem())).getPath(),
+            Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingredients.get(1).getItems()[0].getItem())).getPath())));
     }
 
     public static void createOxygenLoading(Consumer<FinishedRecipe> writer, int cookingtime, int energy, FluidHolder ingredient, FluidHolder resultFluid) {

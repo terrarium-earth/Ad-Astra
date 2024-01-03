@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-31T02:18:03.284826	Block States: ad_astra
+// 1.20.1	2024-01-02T02:18:44.737698	Block States: ad_astra
 3b0e47b473b6710ddeb7f46108de3f3ad99e83e3 assets/ad_astra/blockstates/aeronos_cap.json
 97fb99c686b024024655b4d9507104dc77161f29 assets/ad_astra/blockstates/aeronos_door.json
 0f6adcffc18bba1418df5c168e72a767e1075feb assets/ad_astra/blockstates/aeronos_fence.json
@@ -82,6 +82,7 @@ dd2819fabe9bae8625d85c8614a2b0df6e0cac70 assets/ad_astra/blockstates/encased_iro
 c891719da97a148c61c7ea7c28174e35ad8ffe21 assets/ad_astra/blockstates/encased_ostrum_block.json
 8b892be1786dcb63546597c2ed24a719acd94684 assets/ad_astra/blockstates/encased_steel_block.json
 19cd828d5e5ec010fceab96b75e2fafa5a1eb752 assets/ad_astra/blockstates/energizer.json
+4af98d6ed9fa45b3f8378db5c84afe97c07e849e assets/ad_astra/blockstates/etrionic_blast_furnace.json
 4af2937e90fb12d3fd391dc8d2886b77d5bfac8b assets/ad_astra/blockstates/etrium_block.json
 f824bb8c1ce30fedfe03e85d64506671a38c3f4f assets/ad_astra/blockstates/etrium_panel.json
 e1e36ffb4e4b649ef21ac4c5e16b41a2f50eac4e assets/ad_astra/blockstates/etrium_plateblock.json
@@ -461,6 +462,8 @@ e15524a95df64dc19de9cab589ad5fe5eccaaf64 assets/ad_astra/models/block/energizer_
 444fc5e88ae987012fd34cb766bf41e99310bd70 assets/ad_astra/models/block/energizer_orange.json
 34411ffedbd74f6b49f93bebbdfe9282e8233821 assets/ad_astra/models/block/energizer_red.json
 e4de3cdacabc50c922ecf34514a768df5f72fa52 assets/ad_astra/models/block/energizer_yellow.json
+2580b609472c70337d62ce8ca5db8090a6156adf assets/ad_astra/models/block/etrionic_blast_furnace.json
+3f82ceafaf3ab4ab23ae3bc295d15a6facb856a1 assets/ad_astra/models/block/etrionic_blast_furnace_on.json
 1ac519b1ff01aa4618c9c2b410a08b67b81702eb assets/ad_astra/models/block/etrium_block.json
 faac2dc6bb37da7e738176eeed0e5c38fb570fc3 assets/ad_astra/models/block/etrium_factory_block.json
 82e9d8afcfd99236ae850dc05b0f236a1e6ffead assets/ad_astra/models/block/etrium_panel.json
@@ -947,6 +950,7 @@ ac44d09448ad290c90f9b29486c0b930ac0c8d6f assets/ad_astra/models/item/encased_des
 2af5254248268e4aeb4ec5835f882229b570af9f assets/ad_astra/models/item/encased_ostrum_block.json
 561b333d5d25824a0b2cce535550976692da116d assets/ad_astra/models/item/encased_steel_block.json
 241155e609a84ff5401eae15aa84f3ee57bd9673 assets/ad_astra/models/item/energizer.json
+7efbe009138f1653ba5a41b19bc323f901d5e1c0 assets/ad_astra/models/item/etrionic_blast_furnace.json
 938be92ca62ccd16029815b0a5de21a08febf0d1 assets/ad_astra/models/item/etrium_block.json
 25f760aad4b492f049520706aa137b6b76b9c983 assets/ad_astra/models/item/etrium_factory_block.json
 22584e10fc067fee138f972d635a3b3777d0d49b assets/ad_astra/models/item/etrium_panel.json

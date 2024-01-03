@@ -82,6 +82,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         machine(ModBlocks.COMPRESSOR.get());
         machine(ModBlocks.COAL_GENERATOR.get());
+        etrionicBlastFurnaceBlock(ModBlocks.ETRIONIC_BLAST_FURNACE.get());
         steelMachine(ModBlocks.OXYGEN_LOADER.get());
         steelMachine(ModBlocks.FUEL_REFINERY.get());
         complexMachine(ModBlocks.WATER_PUMP.get());
@@ -467,6 +468,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
             .addModel()
             .condition(PipeBlock.CONNECTED_DOWN, PipeProperty.EXTRACT)
             .end();
+    }
+
+    public void etrionicBlastFurnaceBlock(Block block) {
+        simpleBlockItem(block, models().getBuilder("block/etrionic_blast_furnace_on"));
+        getVariantBuilder(block).forAllStates(state -> {
+            Direction facing = state.getValue(MachineBlock.FACING);
+            boolean lit = state.getValue(MachineBlock.LIT);
+            ResourceLocation texture = lit ? modLoc("block/etrionic_blast_furnace/etrionic_blast_furnace_on") : modLoc("block/etrionic_blast_furnace/etrionic_blast_furnace");
+
+            return ConfiguredModel.builder()
+                .modelFile(models().getBuilder("etrionic_blast_furnace" + (lit ? "_on" : ""))
+                    .texture("0", texture)
+                    .texture("particle", texture)
+                    .parent(models().getExistingFile(modLoc("block/etrionic_blast_furnace_base"))))
+                .rotationY((int) facing.toYRot())
+                .build();
+        });
     }
 
     public void industrialLamp(Block block, String parent) {

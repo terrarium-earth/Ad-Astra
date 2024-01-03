@@ -14,6 +14,7 @@ public class ModRecipeTypes {
     public static final ResourcefulRegistry<RecipeType<?>> RECIPE_TYPES = ResourcefulRegistries.create(BuiltInRegistries.RECIPE_TYPE, AdAstra.MOD_ID);
 
     public static final RegistryEntry<RecipeType<CompressingRecipe>> COMPRESSING = register("compressing");
+    public static final RegistryEntry<RecipeType<AlloyingRecipe>> ALLOYING = register("alloying");
     public static final RegistryEntry<RecipeType<OxygenLoadingRecipe>> OXYGEN_LOADING = register("oxygen_loading");
     public static final RegistryEntry<RecipeType<RefiningRecipe>> REFINING = register("refining");
     public static final RegistryEntry<RecipeType<CryoFreezingRecipe>> CRYO_FREEZING = register("cryo_freezing");

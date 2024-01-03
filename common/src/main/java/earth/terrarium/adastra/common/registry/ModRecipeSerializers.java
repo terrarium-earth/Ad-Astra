@@ -16,6 +16,9 @@ public class ModRecipeSerializers {
     public static final RegistryEntry<CodecRecipeSerializer<CompressingRecipe>> COMPRESSING = RECIPE_SERIALIZERS.register("compressing", () ->
         new CodecRecipeSerializer<>(ModRecipeTypes.COMPRESSING.get(), CompressingRecipe::codec));
 
+    public static final RegistryEntry<CodecRecipeSerializer<AlloyingRecipe>> ALLOYING = RECIPE_SERIALIZERS.register("alloying", () ->
+        new CodecRecipeSerializer<>(ModRecipeTypes.ALLOYING.get(), AlloyingRecipe::codec));
+
     public static final RegistryEntry<CodecRecipeSerializer<OxygenLoadingRecipe>> OXYGEN_LOADING = RECIPE_SERIALIZERS.register("oxygen_loading", () ->
         new CodecRecipeSerializer<>(ModRecipeTypes.OXYGEN_LOADING.get(), OxygenLoadingRecipe::codec));
 

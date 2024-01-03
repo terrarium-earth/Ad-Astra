@@ -44,7 +44,7 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
 
     @Override
     public void internalServerTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
-        if (time % 30 == 0 && shouldUpdate()) {
+        if (time % 50 == 0 && shouldUpdate()) {
             update();
         }
     }

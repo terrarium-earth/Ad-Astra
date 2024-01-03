@@ -10,11 +10,12 @@ import earth.terrarium.adastra.common.blocks.fluids.CryoFuelLiquidBlock;
 import earth.terrarium.adastra.common.blocks.lamps.IndustrialLampBlock;
 import earth.terrarium.adastra.common.blocks.lamps.SmallIndustrialLampBlock;
 import earth.terrarium.adastra.common.blocks.machines.EnergizerBlock;
+import earth.terrarium.adastra.common.blocks.machines.EtrionicBlastFurnaceBlock;
 import earth.terrarium.adastra.common.blocks.machines.OxygenSensorBlock;
 import earth.terrarium.adastra.common.blocks.machines.WaterPumpBlock;
-import earth.terrarium.adastra.common.blocks.pipes.TransferablePipe;
 import earth.terrarium.adastra.common.blocks.pipes.PipeBlock;
 import earth.terrarium.adastra.common.blocks.pipes.PipeDuctBlock;
+import earth.terrarium.adastra.common.blocks.pipes.TransferablePipe;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.registry.fluid.BotariumLiquidBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -100,6 +101,7 @@ public class ModBlocks {
 
     public static final RegistryEntry<Block> COAL_GENERATOR = MACHINES.register("coal_generator", () -> new MachineBlock(IRON_PROPERTIES));
     public static final RegistryEntry<Block> COMPRESSOR = MACHINES.register("compressor", () -> new MachineBlock(IRON_PROPERTIES));
+    public static final RegistryEntry<Block> ETRIONIC_BLAST_FURNACE = MACHINES.register("etrionic_blast_furnace", () -> new EtrionicBlastFurnaceBlock(IRON_PROPERTIES));
     public static final RegistryEntry<Block> NASA_WORKBENCH = MACHINES.register("nasa_workbench", () -> new MachineBlock(STEEL_PROPERTIES.noOcclusion()));
     public static final RegistryEntry<Block> FUEL_REFINERY = MACHINES.register("fuel_refinery", () -> new MachineBlock(STEEL_PROPERTIES));
     public static final RegistryEntry<Block> OXYGEN_LOADER = MACHINES.register("oxygen_loader", () -> new MachineBlock(STEEL_PROPERTIES));

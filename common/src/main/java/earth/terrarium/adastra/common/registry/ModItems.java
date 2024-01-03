@@ -56,6 +56,7 @@ public class ModItems {
 
     public static final RegistryEntry<Item> COAL_GENERATOR = ITEMS.register("coal_generator", () -> new TooltipBlockItem(ModBlocks.COAL_GENERATOR.get(), ConstantComponents.COAL_GENERATOR_INFO, new Item.Properties()));
     public static final RegistryEntry<Item> COMPRESSOR = ITEMS.register("compressor", () -> new TooltipBlockItem(ModBlocks.COMPRESSOR.get(), ConstantComponents.COMPRESSOR_INFO, new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIONIC_BLAST_FURNACE = ITEMS.register("etrionic_blast_furnace", () -> new TooltipBlockItem(ModBlocks.ETRIONIC_BLAST_FURNACE.get(), ConstantComponents.ETRIONIC_BLAST_FURNACE_INFO, new Item.Properties()));
     public static final RegistryEntry<Item> NASA_WORKBENCH = ITEMS.register("nasa_workbench", () -> new TooltipBlockItem(ModBlocks.NASA_WORKBENCH.get(), ConstantComponents.NASA_WORKBENCH_INFO, new Item.Properties()));
     public static final RegistryEntry<Item> FUEL_REFINERY = ITEMS.register("fuel_refinery", () -> new TooltipBlockItem(ModBlocks.FUEL_REFINERY.get(), ConstantComponents.FUEL_REFINERY_INFO, new Item.Properties()));
     public static final RegistryEntry<Item> OXYGEN_LOADER = ITEMS.register("oxygen_loader", () -> new TooltipBlockItem(ModBlocks.OXYGEN_LOADER.get(), ConstantComponents.OXYGEN_LOADER_INFO, new Item.Properties()));

@@ -29,6 +29,7 @@ public class AdAstraJeiPlugin implements IModPlugin {
         IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
 
         registration.addRecipeCategories(new CompressingCategory(guiHelper));
+        registration.addRecipeCategories(new AlloyingCategory(guiHelper));
         registration.addRecipeCategories(new OxygenLoadingCategory(guiHelper));
         registration.addRecipeCategories(new RefiningCategory(guiHelper));
         registration.addRecipeCategories(new CryoFreezingCategory(guiHelper));
@@ -40,6 +41,7 @@ public class AdAstraJeiPlugin implements IModPlugin {
         ClientLevel level = Objects.requireNonNull(Minecraft.getInstance().level);
 
         registration.addRecipes(CompressingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.COMPRESSING.get()));
+        registration.addRecipes(AlloyingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.ALLOYING.get()));
         registration.addRecipes(OxygenLoadingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get()));
         registration.addRecipes(RefiningCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get()));
         registration.addRecipes(CryoFreezingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYO_FREEZING.get()));
@@ -49,6 +51,7 @@ public class AdAstraJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(ModItems.COMPRESSOR.get().getDefaultInstance(), CompressingCategory.RECIPE);
+        registration.addRecipeCatalyst(ModItems.ETRIONIC_BLAST_FURNACE.get().getDefaultInstance(), AlloyingCategory.RECIPE);
         registration.addRecipeCatalyst(ModItems.OXYGEN_LOADER.get().getDefaultInstance(), OxygenLoadingCategory.RECIPE);
         registration.addRecipeCatalyst(ModItems.FUEL_REFINERY.get().getDefaultInstance(), RefiningCategory.RECIPE);
         registration.addRecipeCatalyst(ModItems.CRYO_FREEZER.get().getDefaultInstance(), CryoFreezingCategory.RECIPE);
@@ -58,6 +61,7 @@ public class AdAstraJeiPlugin implements IModPlugin {
     @Override
     public void registerGuiHandlers(@NotNull IGuiHandlerRegistration registration) {
         registration.addRecipeClickArea(CompressorScreen.class, CompressorScreen.CLICK_AREA.getX(), CompressorScreen.CLICK_AREA.getY(), CompressorScreen.CLICK_AREA.getWidth(), CompressorScreen.CLICK_AREA.getHeight(), CompressingCategory.RECIPE);
+        registration.addRecipeClickArea(EtrionicBlastFurnaceScreen.class, EtrionicBlastFurnaceScreen.CLICK_AREA.getX(), EtrionicBlastFurnaceScreen.CLICK_AREA.getY(), EtrionicBlastFurnaceScreen.CLICK_AREA.getWidth(), EtrionicBlastFurnaceScreen.CLICK_AREA.getHeight(), AlloyingCategory.RECIPE);
         registration.addRecipeClickArea(OxygenLoaderScreen.class, OxygenLoaderScreen.CLICK_AREA.getX(), OxygenLoaderScreen.CLICK_AREA.getY(), OxygenLoaderScreen.CLICK_AREA.getWidth(), OxygenLoaderScreen.CLICK_AREA.getHeight(), OxygenLoadingCategory.RECIPE);
         registration.addRecipeClickArea(OxygenDistributorScreen.class, OxygenDistributorScreen.CLICK_AREA.getX(), OxygenDistributorScreen.CLICK_AREA.getY(), OxygenDistributorScreen.CLICK_AREA.getWidth(), OxygenDistributorScreen.CLICK_AREA.getHeight(), OxygenLoadingCategory.RECIPE);
         registration.addRecipeClickArea(FuelRefineryScreen.class, FuelRefineryScreen.CLICK_AREA.getX(), FuelRefineryScreen.CLICK_AREA.getY(), FuelRefineryScreen.CLICK_AREA.getWidth(), FuelRefineryScreen.CLICK_AREA.getHeight(), RefiningCategory.RECIPE);

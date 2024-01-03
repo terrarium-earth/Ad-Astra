@@ -21,6 +21,7 @@ public final class NetworkHandler {
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundSetSideConfigPacket.ID, ServerboundSetSideConfigPacket.HANDLER, ServerboundSetSideConfigPacket.class);
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundResetSideConfigPacket.ID, ServerboundResetSideConfigPacket.HANDLER, ServerboundResetSideConfigPacket.class);
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundSetRedstoneControlPacket.ID, ServerboundSetRedstoneControlPacket.HANDLER, ServerboundSetRedstoneControlPacket.class);
+        CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundSetFurnaceModePacket.ID, ServerboundSetFurnaceModePacket.HANDLER, ServerboundSetFurnaceModePacket.class);
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundSetFlagUrlPacket.ID, ServerboundSetFlagUrlPacket.HANDLER, ServerboundSetFlagUrlPacket.class);
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundVehicleControlPacket.ID, ServerboundVehicleControlPacket.HANDLER, ServerboundVehicleControlPacket.class);
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ServerboundLandPacket.ID, ServerboundLandPacket.HANDLER, ServerboundLandPacket.class);

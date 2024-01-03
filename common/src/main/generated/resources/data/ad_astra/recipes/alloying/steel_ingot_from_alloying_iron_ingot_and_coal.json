@@ -1,0 +1,17 @@
+{
+  "type": "ad_astra:alloying",
+  "cookingtime": 100,
+  "energy": 20,
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "ad_astra:steel_ingot"
+  }
+}

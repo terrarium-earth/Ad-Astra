@@ -80,8 +80,9 @@ public class AdAstraClient {
     }
 
     private static void registerScreens() {
-        MenuScreens.register(ModMenus.COMPRESSOR.get(), CompressorScreen::new);
         MenuScreens.register(ModMenus.COAL_GENERATOR.get(), CoalGeneratorScreen::new);
+        MenuScreens.register(ModMenus.COMPRESSOR.get(), CompressorScreen::new);
+        MenuScreens.register(ModMenus.ETRIONIC_BLAST_FURNACE.get(), EtrionicBlastFurnaceScreen::new);
         MenuScreens.register(ModMenus.OXYGEN_LOADER.get(), OxygenLoaderScreen::new);
         MenuScreens.register(ModMenus.FUEL_REFINERY.get(), FuelRefineryScreen::new);
         MenuScreens.register(ModMenus.WATER_PUMP.get(), WaterPumpScreen::new);

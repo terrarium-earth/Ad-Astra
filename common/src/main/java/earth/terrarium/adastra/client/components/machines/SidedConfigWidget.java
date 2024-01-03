@@ -112,6 +112,4 @@ public class SidedConfigWidget extends ContainerWidget {
             );
         }
     }
-
-
 }

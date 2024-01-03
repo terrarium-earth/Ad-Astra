@@ -106,6 +106,8 @@ These are available for all metals.
 simply freeze or evaporate over time.
 - Plants now break over time when placed in non-oxygenated planets.
 - Fixed sleeping on planets not advancing the night.
+- Added the Etrionic Blast furnace. This is a better version of the blast furnace that uses energy, has 4 slots, and is now used
+to smelt steel. The blast furnace steel recipe have been removed.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.

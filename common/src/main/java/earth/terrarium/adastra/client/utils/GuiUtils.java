@@ -32,6 +32,9 @@ public class GuiUtils {
     public static final ResourceLocation SQUARE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/square_button.png");
     public static final ResourceLocation SETTINGS_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/settings_button.png");
 
+    public static final ResourceLocation CRAFTING_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/crafting_button.png");
+    public static final ResourceLocation FURNACE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/furnace_button.png");
+
     public static final ResourceLocation NONE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/side_config/none.png");
     public static final ResourceLocation PUSH_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/side_config/push.png");
     public static final ResourceLocation PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/side_config/pull.png");
@@ -46,6 +49,7 @@ public class GuiUtils {
     public static final ResourceLocation SNOWFLAKE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/snowflake.png");
     public static final ResourceLocation SUN = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/sun.png");
     public static final ResourceLocation FIRE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/fire.png");
+    public static final ResourceLocation ARROW = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/arrow.png");
 
     public static void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, int x, int y, long energy, long capacity, Component... tooltips) {
         float ratio = energy / (float) capacity;

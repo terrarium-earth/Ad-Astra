@@ -79,7 +79,8 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
                 LayoutElement element = switch (configuration.type()) {
                     case SLOT -> addRenderableWidget(new SlotWidget(((SlotConfiguration) configuration)));
                     case ENERGY -> addRenderableWidget(new EnergyBarWidget(((EnergyConfiguration) configuration)));
-                    case FLUID -> addRenderableWidget(new FluidBarWidget(entity.getBlockPos(), (FluidConfiguration) configuration));
+                    case FLUID ->
+                        addRenderableWidget(new FluidBarWidget(entity.getBlockPos(), (FluidConfiguration) configuration));
                 };
 
                 element.setPosition(this.leftPos + configuration.x(), this.topPos + configuration.y());
@@ -92,13 +93,17 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
             this.menu
         ));
 
+        createOptionsBarWidget();
+        moveBatterySlot();
+    }
+
+    public void createOptionsBarWidget() {
         this.optionsBarWidget = this.addRenderableWidget(new OptionsBarWidget(
             this.leftPos + this.imageWidth, this.topPos - 2,
             this.sideConfigWidget::toggle,
             this.entity,
             this.menu instanceof MachineMenu<?> machineMenu && machineMenu.getBatterySlot() != null
         ));
-        moveBatterySlot();
     }
 
     protected void moveBatterySlot() {
@@ -189,6 +194,14 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
 
     public int topPos() {
         return this.topPos;
+    }
+
+    /**
+     * Used for testing click areas for JEI/REI. Renders a yellow box where the clickable area is.
+     */
+    @SuppressWarnings("unused")
+    public void testClickArea(GuiGraphics graphics, Rect2i clickArea) {
+        graphics.fill(leftPos + clickArea.getX(), topPos + clickArea.getY(), leftPos + clickArea.getX() + clickArea.getWidth(), topPos + clickArea.getY() + clickArea.getHeight(), 0x40ffff00);
     }
 
     @Override

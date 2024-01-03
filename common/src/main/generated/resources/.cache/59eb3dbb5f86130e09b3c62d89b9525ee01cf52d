@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-31T02:18:03.289429	Loot Tables
+// 1.20.1	2024-01-02T02:18:44.742556	Loot Tables
 4efe4f28604ed0c37ff7f8af4947a23faab3382d data/ad_astra/loot_tables/blocks/aeronos_cap.json
 20680115dd11f036d8d02873251e6d46a9536722 data/ad_astra/loot_tables/blocks/aeronos_door.json
 02ee1849c554327df21d9c76f6fee2ae6d79b550 data/ad_astra/loot_tables/blocks/aeronos_fence.json
@@ -86,6 +86,7 @@ aa142e58ad434eb8ef729aef7b71a6bd994f3bca data/ad_astra/loot_tables/blocks/encase
 ca3efaf2b490300c420ad40730200661642beedd data/ad_astra/loot_tables/blocks/encased_ostrum_block.json
 cecab5ffc5530aadc88dc2c0fbf884eda52c0b9b data/ad_astra/loot_tables/blocks/encased_steel_block.json
 0960041cdf132eff5fd6ae6e084edf9a6749316c data/ad_astra/loot_tables/blocks/energizer.json
+1a578f84d698c0f8d6146cc326a61eb32aa0f28e data/ad_astra/loot_tables/blocks/etrionic_blast_furnace.json
 16547ca6de57860fa095112643989fe7f1255d72 data/ad_astra/loot_tables/blocks/etrium_block.json
 44cd6a956ad4e423c2256ed955c32f6b2008a70b data/ad_astra/loot_tables/blocks/etrium_factory_block.json
 efdf1990bbd1129c711f5575682db17f3e22d31b data/ad_astra/loot_tables/blocks/etrium_panel.json

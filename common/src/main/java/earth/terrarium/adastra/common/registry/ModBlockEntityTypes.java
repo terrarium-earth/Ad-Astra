@@ -21,17 +21,23 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 public class ModBlockEntityTypes {
     public static final ResourcefulRegistry<BlockEntityType<?>> BLOCK_ENTITY_TYPES = ResourcefulRegistries.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, AdAstra.MOD_ID);
 
+    public static final RegistryEntry<BlockEntityType<CoalGeneratorBlockEntity>> COAL_GENERATOR = BLOCK_ENTITY_TYPES.register(
+        "coal_generator",
+        () -> RegistryHelpers.createBlockEntityType(
+            CoalGeneratorBlockEntity::new,
+            ModBlocks.COAL_GENERATOR.get()));
+
     public static final RegistryEntry<BlockEntityType<CompressorBlockEntity>> COMPRESSOR = BLOCK_ENTITY_TYPES.register(
         "compressor",
         () -> RegistryHelpers.createBlockEntityType(
             CompressorBlockEntity::new,
             ModBlocks.COMPRESSOR.get()));
 
-    public static final RegistryEntry<BlockEntityType<CoalGeneratorBlockEntity>> COAL_GENERATOR = BLOCK_ENTITY_TYPES.register(
-        "coal_generator",
+    public static final RegistryEntry<BlockEntityType<EtrionicBlastFurnaceBlockEntity>> ETRIONIC_BLAST_FURNACE = BLOCK_ENTITY_TYPES.register(
+        "etreonic_blast_furnace",
         () -> RegistryHelpers.createBlockEntityType(
-            CoalGeneratorBlockEntity::new,
-            ModBlocks.COAL_GENERATOR.get()));
+            EtrionicBlastFurnaceBlockEntity::new,
+            ModBlocks.ETRIONIC_BLAST_FURNACE.get()));
 
     public static final RegistryEntry<BlockEntityType<OxygenLoaderBlockEntity>> OXYGEN_LOADER = BLOCK_ENTITY_TYPES.register(
         "oxygen_loader",

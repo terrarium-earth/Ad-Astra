@@ -72,6 +72,14 @@ public class ItemUtils {
         return input.isEmpty() || (ItemStack.isSameItemSameTags(input, output) && output.getCount() + input.getCount() <= input.getMaxStackSize());
     }
 
+    public static boolean canAddItem(Container container, ItemStack output, int... slots) {
+        for (int slot : slots) {
+            ItemStack input = container.getItem(slot);
+            if (canAddItem(input, output)) return true;
+        }
+        return false;
+    }
+
     public static void addItem(Container container, ItemStack output, int... slots) {
         for (int slot : slots) {
             ItemStack input = container.getItem(slot);

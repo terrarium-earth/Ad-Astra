@@ -138,6 +138,11 @@ public class ModLangProvider extends LanguageProvider {
         add("tooltip.ad_astra.redstone_control.never_on", "Never on");
         add("tooltip.ad_astra.redstone_control.mode", "Mode: %s");
 
+        add(ConstantComponents.ETRIONIC_BLAST_FURNACE_MODE, "Mode");
+        add("tooltip.ad_astra.etrionic_blast_furnace.mode.alloying", "Alloying");
+        add("tooltip.ad_astra.etrionic_blast_furnace.mode.blasting", "Blasting");
+        add("tooltip.ad_astra.etrionic_blast_furnace.mode", "Mode: %s");
+
         add(ConstantComponents.ACTIVE, "Active");
         add(ConstantComponents.INACTIVE, "Inactive");
 
@@ -173,6 +178,7 @@ public class ModLangProvider extends LanguageProvider {
 
         add(ConstantComponents.COAL_GENERATOR_INFO, "The simplest of generators. Generates energy from burnable materials.");
         add(ConstantComponents.COMPRESSOR_INFO, "Compresses materials into plates.");
+        add(ConstantComponents.ETRIONIC_BLAST_FURNACE_INFO, "Smelts ores into ingots like a blast furnace, but uses energy and has 4 slots. Has two modes: blasting and alloying.");
         add(ConstantComponents.NASA_WORKBENCH_INFO, "Used to craft rockets.");
         add(ConstantComponents.FUEL_REFINERY_INFO, "Refines fuel from oil.");
         add(ConstantComponents.OXYGEN_LOADER_INFO, "Converts water into oxygen. Use it to fill up space suits and gas tanks.");

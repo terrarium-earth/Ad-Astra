@@ -17,6 +17,7 @@ public class ConstantComponents {
 
     public static final Component SIDE_CONFIG = Component.translatable("tooltip.ad_astra.side_config").withStyle(ChatFormatting.GRAY);
     public static final Component REDSTONE_CONTROL = Component.translatable("tooltip.ad_astra.redstone_control").withStyle(ChatFormatting.RED);
+    public static final Component ETRIONIC_BLAST_FURNACE_MODE = Component.translatable("tooltip.ad_astra.etrionic_blast_furnace.furnace_mode").withStyle(ChatFormatting.AQUA);
 
     public static final Component ACTIVE = Component.translatable("tooltip.ad_astra.active");
     public static final Component INACTIVE = Component.translatable("tooltip.ad_astra.inactive");
@@ -54,6 +55,7 @@ public class ConstantComponents {
 
     public static final Component COAL_GENERATOR_INFO = Component.translatable("info.ad_astra.coal_generator").withStyle(ChatFormatting.GRAY);
     public static final Component COMPRESSOR_INFO = Component.translatable("info.ad_astra.compressor").withStyle(ChatFormatting.GRAY);
+    public static final Component ETRIONIC_BLAST_FURNACE_INFO = Component.translatable("info.ad_astra.etrionic_blast_furnace").withStyle(ChatFormatting.GRAY);
     public static final Component NASA_WORKBENCH_INFO = Component.translatable("info.ad_astra.nasa_workbench").withStyle(ChatFormatting.GRAY);
     public static final Component FUEL_REFINERY_INFO = Component.translatable("info.ad_astra.fuel_refinery").withStyle(ChatFormatting.GRAY);
     public static final Component OXYGEN_LOADER_INFO = Component.translatable("info.ad_astra.oxygen_loader").withStyle(ChatFormatting.GRAY);

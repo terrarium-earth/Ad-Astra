@@ -22,12 +22,14 @@ public class AdAstraReiPlugin implements REIClientPlugin {
     @Override
     public void registerCategories(CategoryRegistry registry) {
         registry.add(new CompressingCategory());
+        registry.add(new AlloyingCategory());
         registry.add(new OxygenLoadingCategory());
         registry.add(new RefiningCategory());
         registry.add(new CryoFreezingCategory());
         registry.add(new NasaWorkbenchCategory());
 
         registry.addWorkstations(CompressingCategory.ID, EntryStacks.of(ModBlocks.COMPRESSOR.get()));
+        registry.addWorkstations(AlloyingCategory.ID, EntryStacks.of(ModBlocks.ETRIONIC_BLAST_FURNACE.get()));
         registry.addWorkstations(OxygenLoadingCategory.ID, EntryStacks.of(ModBlocks.OXYGEN_LOADER.get()));
         registry.addWorkstations(OxygenLoadingCategory.ID, EntryStacks.of(ModBlocks.OXYGEN_DISTRIBUTOR.get()));
         registry.addWorkstations(RefiningCategory.ID, EntryStacks.of(ModBlocks.FUEL_REFINERY.get()));
@@ -38,6 +40,7 @@ public class AdAstraReiPlugin implements REIClientPlugin {
     @Override
     public void registerDisplays(DisplayRegistry registry) {
         registry.registerRecipeFiller(CompressingRecipe.class, ModRecipeTypes.COMPRESSING.get(), CompressingDisplay::new);
+        registry.registerRecipeFiller(AlloyingRecipe.class, ModRecipeTypes.ALLOYING.get(), AlloyingDisplay::new);
         registry.registerRecipeFiller(OxygenLoadingRecipe.class, ModRecipeTypes.OXYGEN_LOADING.get(), OxygenLoadingDisplay::new);
         registry.registerRecipeFiller(RefiningRecipe.class, ModRecipeTypes.REFINING.get(), RefiningDisplay::new);
         registry.registerRecipeFiller(CryoFreezingRecipe.class, ModRecipeTypes.CRYO_FREEZING.get(), CryoFreezingDisplay::new);
@@ -47,6 +50,7 @@ public class AdAstraReiPlugin implements REIClientPlugin {
     @Override
     public void registerScreens(ScreenRegistry registry) {
         registry.registerClickArea(s -> new Rectangle(s.leftPos() + CompressorScreen.CLICK_AREA.getX(), s.topPos() + CompressorScreen.CLICK_AREA.getY(), CompressorScreen.CLICK_AREA.getWidth(), CompressorScreen.CLICK_AREA.getHeight()), CompressorScreen.class, CompressingCategory.ID);
+        registry.registerClickArea(s -> new Rectangle(s.leftPos() + EtrionicBlastFurnaceScreen.CLICK_AREA.getX(), s.topPos() + EtrionicBlastFurnaceScreen.CLICK_AREA.getY(), EtrionicBlastFurnaceScreen.CLICK_AREA.getWidth(), EtrionicBlastFurnaceScreen.CLICK_AREA.getHeight()), EtrionicBlastFurnaceScreen.class, AlloyingCategory.ID);
         registry.registerClickArea(s -> new Rectangle(s.leftPos() + OxygenLoaderScreen.CLICK_AREA.getX(), s.topPos() + OxygenLoaderScreen.CLICK_AREA.getY(), OxygenLoaderScreen.CLICK_AREA.getWidth(), OxygenLoaderScreen.CLICK_AREA.getHeight()), OxygenLoaderScreen.class, OxygenLoadingCategory.ID);
         registry.registerClickArea(s -> new Rectangle(s.leftPos() + OxygenDistributorScreen.CLICK_AREA.getX(), s.topPos() + OxygenDistributorScreen.CLICK_AREA.getY(), OxygenDistributorScreen.CLICK_AREA.getWidth(), OxygenDistributorScreen.CLICK_AREA.getHeight()), OxygenDistributorScreen.class, OxygenLoadingCategory.ID);
         registry.registerClickArea(s -> new Rectangle(s.leftPos() + FuelRefineryScreen.CLICK_AREA.getX(), s.topPos() + FuelRefineryScreen.CLICK_AREA.getY(), FuelRefineryScreen.CLICK_AREA.getWidth(), FuelRefineryScreen.CLICK_AREA.getHeight()), FuelRefineryScreen.class, RefiningCategory.ID);

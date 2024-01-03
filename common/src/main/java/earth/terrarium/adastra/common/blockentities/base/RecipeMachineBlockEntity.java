@@ -25,6 +25,9 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<?>> extends Ener
         if (recipe != null && canFunction()) {
             recipeTick(level, getEnergyStorage());
         }
+        if (time % 5 == 0) {
+            setLit(cookTimeTotal > 0 && recipe != null && canFunction());
+        }
     }
 
     @Override

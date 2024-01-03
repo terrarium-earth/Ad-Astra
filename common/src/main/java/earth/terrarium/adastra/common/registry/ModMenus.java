@@ -22,8 +22,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 public class ModMenus {
     public static final ResourcefulRegistry<MenuType<?>> MENUS = ResourcefulRegistries.create(BuiltInRegistries.MENU, AdAstra.MOD_ID);
 
-    public static final RegistryEntry<MenuType<CompressorMenu>> COMPRESSOR = MENUS.register("compressor_menu", () -> createMenuType(CompressorMenu::new, CompressorBlockEntity.class));
     public static final RegistryEntry<MenuType<CoalGeneratorMenu>> COAL_GENERATOR = MENUS.register("coal_generator_menu", () -> createMenuType(CoalGeneratorMenu::new,  CoalGeneratorBlockEntity.class));
+    public static final RegistryEntry<MenuType<CompressorMenu>> COMPRESSOR = MENUS.register("compressor_menu", () -> createMenuType(CompressorMenu::new, CompressorBlockEntity.class));
+    public static final RegistryEntry<MenuType<EtrionicBlastFurnaceMenu>> ETRIONIC_BLAST_FURNACE = MENUS.register("etrionic_blast_furnace_menu", () -> createMenuType(EtrionicBlastFurnaceMenu::new, EtrionicBlastFurnaceBlockEntity.class));
     public static final RegistryEntry<MenuType<OxygenLoaderMenu>> OXYGEN_LOADER = MENUS.register("oxygen_loader_menu", () -> createMenuType(OxygenLoaderMenu::new, OxygenLoaderBlockEntity.class));
     public static final RegistryEntry<MenuType<FuelRefineryMenu>> FUEL_REFINERY = MENUS.register("fuel_refinery_menu", () -> createMenuType(FuelRefineryMenu::new, FuelRefineryBlockEntity.class));
     public static final RegistryEntry<MenuType<WaterPumpMenu>> WATER_PUMP = MENUS.register("water_pump_menu", () -> createMenuType(WaterPumpMenu::new, WaterPumpBlockEntity.class));
