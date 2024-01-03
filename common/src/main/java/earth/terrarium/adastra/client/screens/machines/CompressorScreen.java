@@ -14,15 +14,16 @@ import org.jetbrains.annotations.NotNull;
 
 public class CompressorScreen extends MachineScreen<CompressorMenu, CompressorBlockEntity> {
     public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/compressor.png");
-    public static final Rect2i CLICK_AREA = new Rect2i(48, 25, 26, 25);
+    public static final Rect2i CLICK_AREA = new Rect2i(44, 25, 26, 25);
 
     public CompressorScreen(CompressorMenu menu, Inventory inventory, Component component) {
-        super(menu, inventory, component, TEXTURE, IRON_SLOT, 177, 196);
+        super(menu, inventory, component, TEXTURE, STEEL_SLOT, 184, 201);
+        this.titleLabelY += 3;
     }
 
     @Override
     protected void renderBg(@NotNull GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         super.renderBg(graphics, partialTick, mouseX, mouseY);
-        this.drawHorizontalProgressBar(graphics, GuiUtils.HAMMER, mouseX, mouseY, 78, 57, 13, 13, entity.cookTime(), entity.cookTimeTotal(), false);
+        this.drawHorizontalProgressBar(graphics, GuiUtils.HAMMER, mouseX, mouseY, 72, 59, 15, 16, entity.cookTime(), entity.cookTimeTotal(), false);
     }
 }

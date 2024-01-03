@@ -54,16 +54,16 @@ public class CompressingCategory implements IRecipeCategory<CompressingRecipe> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, CompressingRecipe recipe, IFocusGroup focuses) {
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredients(Ingredient.of(ModItems.COMPRESSOR.get()));
-        builder.addSlot(RecipeIngredientRole.INPUT, 55, 52).addIngredients(recipe.ingredient());
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 102, 52).addItemStack(recipe.result());
+        builder.addSlot(RecipeIngredientRole.INPUT, 46, 54).addIngredients(recipe.ingredient());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 94, 54).addItemStack(recipe.result());
     }
 
     @Override
     public void draw(CompressingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-        graphics.blit(CompressorScreen.TEXTURE, 2, -4, 0, 0, 177, 110, 177, 196);
-        graphics.blit(CompressorScreen.TEXTURE, 2, 100, 0, 189, 177, 7, 177, 196);
+        graphics.blit(CompressorScreen.TEXTURE, -1, -4, 0, 0, 184, 110, 184, 201);
+        graphics.blit(CompressorScreen.TEXTURE, -1, 100, 0, 194, 184, 7, 184, 201);
 
-        new EtaDrawable(mouseX, mouseY, recipe.cookingTime(), GuiUtils.HAMMER, 13, 13).draw(graphics, 80, 53);
-        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), 10_000, 250, 0).draw(graphics, 143, 57);
+        new EtaDrawable(mouseX, mouseY, recipe.cookingTime(), GuiUtils.HAMMER, 15, 16).draw(graphics, 71, 55);
+        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), 10_000, 250, 0).draw(graphics, 143, 70);
     }
 }

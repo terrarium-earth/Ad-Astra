@@ -110,6 +110,7 @@ simply freeze or evaporate over time.
 to smelt steel. The blast furnace steel recipe have been removed.
 - Added the gravity normalizer. This allows you to control the gravity of a local area, similar
 to the oxygen distributor. It's especially important in orbit due to the zero gravity environment.
+- Added the Ti-69. It's a device that displays the local oxygen, temperature, and gravity.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.
@@ -132,7 +133,6 @@ if you're using these recipes in modpacks, you'll need to change them. This incl
 and prevent players from spawning a new space station at any claimed chunks. 
 - Added Argonauts compat to space stations. Players on the same guild will be
 able to share space stations.
-- Added the Ti-69. It's a device that displays the local oxygen, temperature, and gravity.
 - The warning to hold space when landing is now displayed boldly on screen instead of a chat message.
 Hopefully this will prevent people from missing it and crashing.
 - Fixed players dismounting landers with some mods like Transit Railway.

@@ -31,6 +31,11 @@ public class CompressorMenu extends MachineMenu<CompressorBlockEntity> {
     }
 
     @Override
+    public int getPlayerInvXOffset() {
+        return 12;
+    }
+
+    @Override
     public int getPlayerInvYOffset() {
         return 114;
     }
@@ -38,15 +43,15 @@ public class CompressorMenu extends MachineMenu<CompressorBlockEntity> {
     @Override
     protected void addMenuSlots() {
         super.addMenuSlots();
-        addSlot(new Slot(entity, 1, 53, 56));
-        addSlot(CustomSlot.noPlace(entity, 2, 100, 56));
+        addSlot(new Slot(entity, 1, 47, 58));
+        addSlot(CustomSlot.noPlace(entity, 2, 95, 58));
     }
 
     @Override
     protected void addConfigSlots() {
-        addConfigSlot(new SlotConfiguration(0, 53, 56));
-        addConfigSlot(new SlotConfiguration(1, 100, 56));
+        addConfigSlot(new SlotConfiguration(0, 47, 58));
+        addConfigSlot(new SlotConfiguration(1, 95, 58));
 
-        addConfigSlot(new EnergyConfiguration(2, 147, 30, entity.getEnergyStorage()));
+        addConfigSlot(new EnergyConfiguration(2, 150, 42, entity.getEnergyStorage()));
     }
 }
