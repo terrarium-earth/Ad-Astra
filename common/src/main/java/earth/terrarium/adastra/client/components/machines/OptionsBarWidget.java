@@ -1,26 +1,18 @@
 package earth.terrarium.adastra.client.components.machines;
 
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.client.components.PressableImageButton;
 import earth.terrarium.adastra.client.components.base.ContainerWidget;
-import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
-import earth.terrarium.adastra.common.blockentities.base.RedstoneControl;
-import earth.terrarium.adastra.common.constants.ConstantComponents;
-import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ServerboundSetRedstoneControlPacket;
-import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.layouts.GridLayout;
+import net.minecraft.client.gui.layouts.LayoutElement;
 import net.minecraft.client.gui.layouts.SpacerElement;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.CommonComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OptionsBarWidget extends ContainerWidget {
 
@@ -33,18 +25,15 @@ public class OptionsBarWidget extends ContainerWidget {
         layout.defaultCellSetting().alignVerticallyMiddle();
     });
 
-    private final @Nullable Runnable onSettingsPressed;
-    protected final @Nullable ContainerMachineBlockEntity entity;
-    private final boolean hasBattery;
-
-    public OptionsBarWidget(int right, int top, @Nullable Runnable onSettingsPressed, @Nullable ContainerMachineBlockEntity entity, boolean hasBattery) {
+    public OptionsBarWidget(int right, int top, List<LayoutElement> elements) {
         super(0, 0, 0, 0);
 
-        this.onSettingsPressed = onSettingsPressed;
-        this.entity = entity;
-        this.hasBattery = hasBattery;
+        for (int i = 0; i < elements.size(); i++) {
+            layout.addChild(elements.get(i), 0, i);
+        }
 
-        init();
+        layout.arrangeElements();
+        layout.visitWidgets(this::addRenderableWidget);
 
         this.width = layout.getWidth() + PADDING * 2;
         this.height = layout.getHeight() + PADDING * 2;
@@ -55,42 +44,8 @@ public class OptionsBarWidget extends ContainerWidget {
         layout.setY(this.getY() + PADDING);
     }
 
-    protected void init() {
-        addSettingsButton(0);
-        addRedstoneButton(1);
-        addBattery(2);
-        layout.arrangeElements();
-        layout.visitWidgets(this::addRenderableWidget);
-    }
-
-    public void addSettingsButton(int column) {
-        if (this.onSettingsPressed != null) {
-            layout.addChild(new PressableImageButton(0, 0, 18, 18, 0, 0, 18, GuiUtils.SETTINGS_BUTTON, 18, 54,
-                button -> this.onSettingsPressed.run(),
-                ConstantComponents.SIDE_CONFIG
-            ), 0, column);
-        }
-    }
-
-    public void addRedstoneButton(int column) {
-        if (this.entity != null) {
-            layout.addChild(new PressableImageButton(0, 0, 18, 18, 0, 0, 18, entity.getRedstoneControl().icon(), 18, 54,
-                button -> {
-                    RedstoneControl next = Screen.hasShiftDown() ? entity.getRedstoneControl().previous() : entity.getRedstoneControl().next();
-                    entity.setRedstoneControl(next);
-                    NetworkHandler.CHANNEL.sendToServer(new ServerboundSetRedstoneControlPacket(entity.getBlockPos(), next));
-                    button.setTooltip(Tooltip.create(getRedstoneControlTooltip(next)));
-                    ((PressableImageButton) button).setTexture(next.icon());
-                },
-                getRedstoneControlTooltip(entity.getRedstoneControl())
-            ), 0, column);
-        }
-    }
-
-    public void addBattery(int column) {
-        if (this.hasBattery) {
-            layout.addChild(new SpacerElement(18, 18), 0, column);
-        }
+    public static Builder builder() {
+        return new Builder();
     }
 
     @Override
@@ -105,16 +60,42 @@ public class OptionsBarWidget extends ContainerWidget {
         super.render(graphics, mouseX, mouseY, partialTicks);
     }
 
-    public static Component getRedstoneControlTooltip(RedstoneControl redstoneControl) {
-        return CommonComponents.joinLines(
-            ConstantComponents.REDSTONE_CONTROL,
-            Component.translatable("tooltip.ad_astra.redstone_control.mode", redstoneControl.translation().getString()).withStyle(ChatFormatting.GOLD)
-        );
-    }
-
     @Override
     public void onDimensionsChanged() {
         layout.setX(this.getX() + PADDING);
         layout.setY(this.getY() + PADDING);
+    }
+
+    public static class Builder {
+        private final List<LayoutElement> elements = new ArrayList<>();
+
+        private Builder() {
+        }
+
+        public Builder addElement(int index, LayoutElement element) {
+            this.elements.add(index, element);
+            return this;
+        }
+
+        public Builder addElement(LayoutElement element) {
+            this.elements.add(element);
+            return this;
+        }
+
+        public Builder addSettingsButton(Runnable runnable) {
+            return addElement(OptionBarOptions.createSettings(runnable));
+        }
+
+        public Builder addRedstoneButton(ContainerMachineBlockEntity entity) {
+            return addElement(OptionBarOptions.createRedstone(entity));
+        }
+
+        public Builder addBattery() {
+            return addElement(new SpacerElement(18, 18));
+        }
+
+        public OptionsBarWidget build(int right, int top) {
+            return new OptionsBarWidget(right, top, this.elements);
+        }
     }
 }

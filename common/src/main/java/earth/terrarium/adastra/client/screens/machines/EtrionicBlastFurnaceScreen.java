@@ -1,7 +1,8 @@
 package earth.terrarium.adastra.client.screens.machines;
 
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.client.components.machines.EtrionicBlastFurnaceOptionsBarWidget;
+import earth.terrarium.adastra.client.components.machines.OptionBarOptions;
+import earth.terrarium.adastra.client.components.machines.OptionsBarWidget;
 import earth.terrarium.adastra.client.screens.base.MachineScreen;
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.blockentities.machines.EtrionicBlastFurnaceBlockEntity;
@@ -33,11 +34,8 @@ public class EtrionicBlastFurnaceScreen extends MachineScreen<EtrionicBlastFurna
     }
 
     @Override
-    public void createOptionsBarWidget() {
-        this.optionsBarWidget = this.addRenderableWidget(new EtrionicBlastFurnaceOptionsBarWidget(
-            this.leftPos + this.imageWidth, this.topPos - 2,
-            this.sideConfigWidget::toggle,
-            this.entity
-        ));
+    public OptionsBarWidget.Builder createOptionsBar() {
+        return super.createOptionsBar()
+            .addElement(0, OptionBarOptions.createBlastFurnaceMode(entity));
     }
 }

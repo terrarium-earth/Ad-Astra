@@ -93,17 +93,19 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
             this.menu
         ));
 
-        createOptionsBarWidget();
+        this.optionsBarWidget = this.addRenderableWidget(createOptionsBar()
+            .build(this.leftPos + this.imageWidth, this.topPos - 2));
         moveBatterySlot();
     }
 
-    public void createOptionsBarWidget() {
-        this.optionsBarWidget = this.addRenderableWidget(new OptionsBarWidget(
-            this.leftPos + this.imageWidth, this.topPos - 2,
-            this.sideConfigWidget::toggle,
-            this.entity,
-            this.menu instanceof MachineMenu<?> machineMenu && machineMenu.getBatterySlot() != null
-        ));
+    public OptionsBarWidget.Builder createOptionsBar() {
+        OptionsBarWidget.Builder builder = OptionsBarWidget.builder()
+            .addSettingsButton(this.sideConfigWidget::toggle)
+            .addRedstoneButton(this.entity);
+        if (this.menu instanceof MachineMenu<?> machineMenu && machineMenu.getBatterySlot() != null) {
+            builder.addBattery();
+        }
+        return builder;
     }
 
     protected void moveBatterySlot() {
