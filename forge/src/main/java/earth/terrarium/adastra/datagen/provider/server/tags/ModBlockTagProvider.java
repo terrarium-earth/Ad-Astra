@@ -67,7 +67,11 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
     private static final List<Supplier<Block>> NOT_MINED_WITH_PICKAXE = List.of(
         ModBlocks.CHEESE_BLOCK,
         ModBlocks.GLACIAN_FUR,
-        ModBlocks.GLACIAN_LEAVES
+        ModBlocks.GLACIAN_LEAVES,
+        ModBlocks.OIL,
+        ModBlocks.FUEL,
+        ModBlocks.CRYO_FUEL,
+        ModBlocks.HYDROGEN
     );
 
     public ModBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, ExistingFileHelper existingFileHelper) {
@@ -91,7 +95,7 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         add(ModBlockTags.PASSES_FLOOD_FILL, Blocks.TNT);
         add(ModBlockTags.PASSES_FLOOD_FILL, ModBlocks.VENT.get());
         add(ModBlockTags.PASSES_FLOOD_FILL, ModBlocks.OXYGEN_DISTRIBUTOR.get());
-//        add(ModBlockTags.PASSES_FLOOD_FILL, ModBlocks.GRAVITY_NORMALIZER.get()); // TODO add gravity normalizer
+        add(ModBlockTags.PASSES_FLOOD_FILL, ModBlocks.GRAVITY_NORMALIZER.get());
 
         add(ModBlockTags.MOON_STONE_REPLACEABLES, ModBlocks.MOON_STONE.get());
         add(ModBlockTags.MOON_STONE_REPLACEABLES, ModBlocks.MOON_DEEPSLATE.get());

@@ -69,6 +69,12 @@ public class ModBlockEntityTypes {
             OxygenDistributorBlockEntity::new,
             ModBlocks.OXYGEN_DISTRIBUTOR.get()));
 
+    public static final RegistryEntry<BlockEntityType<GravityNormalizerBlockEntity>> GRAVITY_NORMALIZER = BLOCK_ENTITY_TYPES.register(
+        "gravity_normalizer",
+        () -> RegistryHelpers.createBlockEntityType(
+            GravityNormalizerBlockEntity::new,
+            ModBlocks.GRAVITY_NORMALIZER.get()));
+
     public static final RegistryEntry<BlockEntityType<EnergizerBlockEntity>> ENERGIZER = BLOCK_ENTITY_TYPES.register(
         "energizer",
         () -> RegistryHelpers.createBlockEntityType(

@@ -105,6 +105,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> SOLAR_PANEL = MACHINES.register("solar_panel", () -> new MachineBlock(DESH_PROPERTIES));
     public static final RegistryEntry<Block> WATER_PUMP = MACHINES.register("water_pump", () -> new WaterPumpBlock(DESH_PROPERTIES.noOcclusion()));
     public static final RegistryEntry<Block> OXYGEN_DISTRIBUTOR = MACHINES.register("oxygen_distributor", () -> new OxygenDistributorBlock(DESH_PROPERTIES));
+    public static final RegistryEntry<Block> GRAVITY_NORMALIZER = MACHINES.register("gravity_normalizer", () -> new GravityNormalizerBlock(DESH_PROPERTIES));
     public static final RegistryEntry<Block> ENERGIZER = MACHINES.register("energizer", () -> new EnergizerBlock(OSTRUM_PROPERTIES.noOcclusion()));
     public static final RegistryEntry<Block> CRYO_FREEZER = MACHINES.register("cryo_freezer", () -> new MachineBlock(OSTRUM_PROPERTIES));
     public static final RegistryEntry<Block> OXYGEN_SENSOR = MACHINES.register("oxygen_sensor", () -> new OxygenSensorBlock(OSTRUM_PROPERTIES));

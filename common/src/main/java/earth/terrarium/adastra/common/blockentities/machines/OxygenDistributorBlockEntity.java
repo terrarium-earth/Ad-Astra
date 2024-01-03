@@ -279,9 +279,4 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
         return new int[]{1, 2};
     }
-
-    @Override
-    public @NotNull CompoundTag getUpdateTag() {
-        return super.getUpdateTag();
-    }
 }

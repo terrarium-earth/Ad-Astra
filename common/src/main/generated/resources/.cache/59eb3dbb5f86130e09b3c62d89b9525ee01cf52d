@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-02T02:18:44.742556	Loot Tables
+// 1.20.1	2024-01-03T00:06:35.051979	Loot Tables
 4efe4f28604ed0c37ff7f8af4947a23faab3382d data/ad_astra/loot_tables/blocks/aeronos_cap.json
 20680115dd11f036d8d02873251e6d46a9536722 data/ad_astra/loot_tables/blocks/aeronos_door.json
 02ee1849c554327df21d9c76f6fee2ae6d79b550 data/ad_astra/loot_tables/blocks/aeronos_fence.json
@@ -127,6 +127,7 @@ b869f9bed1a179cf3c8db5aabbf9625ba95e1f91 data/ad_astra/loot_tables/blocks/glacio
 5db19ab84c8b7e121b410f3d18bf80fdbbc05373 data/ad_astra/loot_tables/blocks/glowing_iron_pillar.json
 b41c4af37a0fcde8ef7bc5f2831379dc3b51be77 data/ad_astra/loot_tables/blocks/glowing_ostrum_pillar.json
 1dc5ddfe7c3413159576688c851c5d5447c5c96c data/ad_astra/loot_tables/blocks/glowing_steel_pillar.json
+611cecc51ddb33e9fb6a6d6800a7203c9ad4902c data/ad_astra/loot_tables/blocks/gravity_normalizer.json
 7e1ee0904e716c1aa2db0b58df2e1ee60686fa32 data/ad_astra/loot_tables/blocks/gray_flag.json
 6015efd3371a8a938fc5e12286c03a8ffb2aa557 data/ad_astra/loot_tables/blocks/gray_industrial_lamp.json
 0d0295fab65e6280ba9474c17b13e922f8ce12ad data/ad_astra/loot_tables/blocks/green_flag.json

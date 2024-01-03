@@ -9,7 +9,7 @@
       "item": "ad_astra:fan"
     },
     "G": {
-      "item": "ad_astra:gas_tank"
+      "item": "ad_astra:large_gas_tank"
     },
     "L": {
       "item": "ad_astra:oxygen_loader"
@@ -19,8 +19,8 @@
     }
   },
   "pattern": [
-    "FFF",
-    "GLG",
+    "FGF",
+    "FLF",
     "#O#"
   ],
   "result": {

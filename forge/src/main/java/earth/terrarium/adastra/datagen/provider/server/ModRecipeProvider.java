@@ -150,12 +150,18 @@ public class ModRecipeProvider extends RecipeProvider {
 
         shaped(ModItems.OXYGEN_DISTRIBUTOR, 1, ModItemTags.DESH_PLATES, r -> r
             .define('L', ModItems.OXYGEN_LOADER.get())
-            .define('G', ModItems.GAS_TANK.get())
+            .define('G', ModItems.LARGE_GAS_TANK.get())
             .define('O', ModItems.OXYGEN_GEAR.get())
             .define('F', ModItems.FAN.get())
-            .pattern("FFF")
-            .pattern("GLG")
+            .pattern("FGF")
+            .pattern("FLF")
             .pattern("#O#"));
+
+        shaped(ModItems.GRAVITY_NORMALIZER, 1, ModItemTags.DESH_PLATES, r -> r
+            .define('D', Items.DIAMOND_BLOCK)
+            .define('E', ModItems.ETRIONIC_CAPACITOR.get())
+            .pattern("EDE")
+            .pattern("###"));
 
         shaped(ModItems.ENERGIZER, 1, ModItemTags.OSTRUM_PLATES, r -> r
             .define('D', Items.DIAMOND_BLOCK)

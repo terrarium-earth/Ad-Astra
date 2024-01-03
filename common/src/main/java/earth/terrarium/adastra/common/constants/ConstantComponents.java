@@ -62,6 +62,7 @@ public class ConstantComponents {
     public static final Component SOLAR_PANEL_INFO = Component.translatable("info.ad_astra.solar_panel").withStyle(ChatFormatting.GRAY);
     public static final Component WATER_PUMP_INFO = Component.translatable("info.ad_astra.water_pump").withStyle(ChatFormatting.GRAY);
     public static final Component OXYGEN_DISTRIBUTOR_INFO = Component.translatable("info.ad_astra.oxygen_distributor").withStyle(ChatFormatting.GRAY);
+    public static final Component GRAVITY_NORMALIZER_INFO = Component.translatable("info.ad_astra.gravity_normalizer").withStyle(ChatFormatting.GRAY);
     public static final Component ENERGIZER_INFO = Component.translatable("info.ad_astra.energizer").withStyle(ChatFormatting.GRAY);
     public static final Component CRYO_FREEZER_INFO = Component.translatable("info.ad_astra.cryo_freezer").withStyle(ChatFormatting.GRAY);
     public static final Component OXYGEN_SENSOR_INFO = Component.translatable("info.ad_astra.oxygen_sensor").withStyle(ChatFormatting.GRAY);

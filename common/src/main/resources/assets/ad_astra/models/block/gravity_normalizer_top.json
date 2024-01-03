@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "ad_astra:block/gravity_normalizer",
+		"particle": "ad_astra:block/gravity_normalizer"
+	},
+	"elements": [
+		{
+			"from": [5, 9, 5],
+			"to": [11, 15, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 16, 8]},
+			"faces": {
+				"north": {"uv": [7, 0, 10, 3], "texture": "#0"},
+				"east": {"uv": [7, 0, 10, 3], "texture": "#0"},
+				"south": {"uv": [7, 0, 10, 3], "texture": "#0"},
+				"west": {"uv": [7, 0, 10, 3], "texture": "#0"},
+				"up": {"uv": [10, 9, 7, 6], "texture": "#0"},
+				"down": {"uv": [10, 9, 7, 12], "texture": "#0"}
+			}
+		}
+	]
+}

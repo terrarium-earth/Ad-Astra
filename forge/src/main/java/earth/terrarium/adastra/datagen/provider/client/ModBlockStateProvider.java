@@ -88,6 +88,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         complexMachine(ModBlocks.WATER_PUMP.get());
         complexMachine(ModBlocks.SOLAR_PANEL.get());
         sidedRenderedBlock(ModBlocks.OXYGEN_DISTRIBUTOR.get());
+        sidedRenderedBlock(ModBlocks.GRAVITY_NORMALIZER.get());
         energizer(ModBlocks.ENERGIZER.get());
         cryoFreezer(ModBlocks.CRYO_FREEZER.get());
         oxygenSensor(ModBlocks.OXYGEN_SENSOR.get());

@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-02T23:10:08.570588	Block States: ad_astra
+// 1.20.1	2024-01-03T00:06:35.045878	Block States: ad_astra
 3b0e47b473b6710ddeb7f46108de3f3ad99e83e3 assets/ad_astra/blockstates/aeronos_cap.json
 97fb99c686b024024655b4d9507104dc77161f29 assets/ad_astra/blockstates/aeronos_door.json
 0f6adcffc18bba1418df5c168e72a767e1075feb assets/ad_astra/blockstates/aeronos_fence.json
@@ -123,6 +123,7 @@ bb6d0fc06a88a3c2e55e900b854bfc67de90c714 assets/ad_astra/blockstates/glowing_cal
 47930df48a022b346acd67b76925266c3788e0cd assets/ad_astra/blockstates/glowing_iron_pillar.json
 bcb48d49580f469dd34e694d71d94d2d963ec208 assets/ad_astra/blockstates/glowing_ostrum_pillar.json
 f35c00dc75cf23742b3d5d00c8b83bf0315c6e15 assets/ad_astra/blockstates/glowing_steel_pillar.json
+df0aee40afb6a7e57d0f5ec4a5ea7e2012887e84 assets/ad_astra/blockstates/gravity_normalizer.json
 0d095271c674119d160d09cc7f4ded7eddc54534 assets/ad_astra/blockstates/gray_flag.json
 bea52caaf3a36ffe6ae17c4117ebb51b614f2c67 assets/ad_astra/blockstates/gray_industrial_lamp.json
 f567be72a1c8b8133c30fb7bf1409150709f3f47 assets/ad_astra/blockstates/green_flag.json
@@ -988,6 +989,7 @@ fafe215eae4aac49876bedb82993ac7ceaf05d6d assets/ad_astra/models/item/glacio_ston
 8bf791242021c18c2ea2ca9a446eb243dc366c48 assets/ad_astra/models/item/glowing_iron_pillar.json
 8d5c6bd6cc8257b05afacb42479a5530e996fc06 assets/ad_astra/models/item/glowing_ostrum_pillar.json
 f8e51f0d2b3109c9e2ac459ef8cbad79f6d032ab assets/ad_astra/models/item/glowing_steel_pillar.json
+05c9b16eefd4edb5c2da31e4772f775318264f00 assets/ad_astra/models/item/gravity_normalizer.json
 f300115a277b036091d9fdbb78a497c8f7649329 assets/ad_astra/models/item/gray_flag.json
 875f2a408984b693bad88b0e4a86e5d1db48b80c assets/ad_astra/models/item/gray_industrial_lamp.json
 93c93e489b712e748af4bca9ca6c09fe286ea966 assets/ad_astra/models/item/green_flag.json
