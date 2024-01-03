@@ -1,16 +1,12 @@
 package earth.terrarium.adastra.client.screens.machines;
 
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.client.config.AdAstraConfigClient;
+import earth.terrarium.adastra.client.components.machines.OptionBarOptions;
+import earth.terrarium.adastra.client.components.machines.OptionsBarWidget;
 import earth.terrarium.adastra.client.screens.base.MachineScreen;
-import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.blockentities.machines.OxygenDistributorBlockEntity;
-import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.OxygenDistributorMenu;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -29,27 +25,15 @@ public class OxygenDistributorScreen extends MachineScreen<OxygenDistributorMenu
     @Override
     protected void init() {
         super.init();
-        addRenderableWidget(new ImageButton(
-            leftPos + 98,
-            topPos + 39,
-            71,
-            20,
-            0,
-            0,
-            20,
-            GuiUtils.BUTTON,
-            71,
-            40,
-            button -> {
-                AdAstraConfigClient.showOxygenDistributorArea = !AdAstraConfigClient.showOxygenDistributorArea;
-                Minecraft.getInstance().tell(() -> AdAstra.CONFIGURATOR.saveConfig(AdAstraConfigClient.class));
-            },
-            AdAstraConfigClient.showOxygenDistributorArea ? ConstantComponents.HIDE : ConstantComponents.SHOW
-        )).setTooltip(Tooltip.create(ConstantComponents.OXYGEN_DISTRIBUTION_AREA));
-
         this.optionsBarWidget.setY(topPos);
         this.optionsBarWidget.setX(leftPos + 98);
         moveBatterySlot();
+    }
+
+    @Override
+    public OptionsBarWidget.Builder createOptionsBar() {
+        return super.createOptionsBar()
+            .addElement(0, OptionBarOptions.createOxygenDistributorShowMode());
     }
 
     @Override
@@ -74,14 +58,6 @@ public class OxygenDistributorScreen extends MachineScreen<OxygenDistributorMenu
             Component.translatable("tooltip.ad_astra.blocks_distributed", entity.distributedBlocksCount(), entity.distributedBlocksLimit()),
             leftPos + 11,
             topPos + 31,
-            0x68d975
-        );
-
-        graphics.drawCenteredString(
-            font,
-            AdAstraConfigClient.showOxygenDistributorArea ? ConstantComponents.HIDE : ConstantComponents.SHOW,
-            leftPos + 131,
-            topPos + 45,
             0x68d975
         );
     }

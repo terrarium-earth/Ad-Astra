@@ -1,8 +1,8 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
 import earth.terrarium.adastra.api.systems.GravityApi;
+import earth.terrarium.adastra.client.AdAstraClient;
 import earth.terrarium.adastra.client.config.AdAstraConfigClient;
-import earth.terrarium.adastra.client.renderers.world.OxygenDistributorOverlayRenderer;
 import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
@@ -109,9 +109,10 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
             clearGravityBlocks();
             shutDownTicks = 60;
             setLit(false);
-        }
+        } else if (time % 10 == 0) setLit(false);
 
         energyPerTick = canDistribute ? calculateEnergyPerTick() : 0;
+        distributedBlocksCount = canDistribute ? lastDistributedBlocks.size() : 0;
     }
 
     @Override
@@ -152,14 +153,13 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
         if (time % 40 == 0) {
             if (AdAstraConfigClient.showGravityNormalizerArea) {
-                // TODO: Use gravity normalizer overlay
-                OxygenDistributorOverlayRenderer.removePositions(pos);
-                if (OxygenDistributorOverlayRenderer.canAdd(pos)
+                AdAstraClient.GRAVITY_OVERLAY_RENDERER.removePositions(pos);
+                if (AdAstraClient.GRAVITY_OVERLAY_RENDERER.canAdd(pos)
                     && canFunction()
                     && canCraftDistribution()) {
-                    OxygenDistributorOverlayRenderer.addPositions(pos, lastDistributedBlocks);
+                    AdAstraClient.GRAVITY_OVERLAY_RENDERER.addPositions(pos, lastDistributedBlocks);
                 }
-            } else OxygenDistributorOverlayRenderer.clearPositions();
+            } else AdAstraClient.GRAVITY_OVERLAY_RENDERER.clearPositions();
         }
 
         lastAnimation = animation;

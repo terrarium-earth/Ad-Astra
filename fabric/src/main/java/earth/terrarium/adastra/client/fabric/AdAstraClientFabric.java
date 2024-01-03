@@ -2,7 +2,6 @@ package earth.terrarium.adastra.client.fabric;
 
 import earth.terrarium.adastra.client.AdAstraClient;
 import earth.terrarium.adastra.client.dimension.ModDimensionRenderers;
-import earth.terrarium.adastra.client.renderers.world.OxygenDistributorOverlayRenderer;
 import earth.terrarium.adastra.client.utils.DimensionUtils;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -24,7 +23,7 @@ public class AdAstraClientFabric {
         AdAstraClient.onRegisterEntityLayers((location, definition) -> EntityModelLayerRegistry.registerModelLayer(location, definition::get));
         AdAstraClient.onRegisterHud(hud -> HudRenderCallback.EVENT.register(hud::renderHud));
         ModelLoadingPlugin.register(ctx -> AdAstraClient.onRegisterModels(ctx::addModels));
-        WorldRenderEvents.AFTER_TRANSLUCENT.register(ctx -> OxygenDistributorOverlayRenderer.render(ctx.matrixStack(), ctx.camera()));
+        WorldRenderEvents.AFTER_TRANSLUCENT.register(ctx -> AdAstraClient.renderOverlays(ctx.matrixStack(), ctx.camera()));
         AdAstraClient.onAddItemColors(ColorProviderRegistry.ITEM::register);
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SOLAR_PANEL.get(), RenderType.cutout());

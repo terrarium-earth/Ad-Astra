@@ -2,7 +2,6 @@ package earth.terrarium.adastra.client.forge;
 
 import earth.terrarium.adastra.client.AdAstraClient;
 import earth.terrarium.adastra.client.dimension.ModDimensionRenderers;
-import earth.terrarium.adastra.client.renderers.world.OxygenDistributorOverlayRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
@@ -69,7 +68,7 @@ public class AdAstraClientForge {
 
     private static void onRenderLevelStage(RenderLevelStageEvent event) {
         if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES) {
-            OxygenDistributorOverlayRenderer.render(event.getPoseStack(), event.getCamera());
+            AdAstraClient.renderOverlays(event.getPoseStack(), event.getCamera());
         }
     }
 

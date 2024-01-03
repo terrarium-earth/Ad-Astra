@@ -8,11 +8,13 @@ import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
+import net.minecraft.util.FormattedCharSequence;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,6 +33,9 @@ public class GuiUtils {
     public static final ResourceLocation BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/button.png");
     public static final ResourceLocation SQUARE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/square_button.png");
     public static final ResourceLocation SETTINGS_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/settings_button.png");
+    public static final ResourceLocation RESET_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/reset_button.png");
+    public static final ResourceLocation SHOW_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/show_button.png");
+    public static final ResourceLocation HIDE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/hide_button.png");
 
     public static final ResourceLocation CRAFTING_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/crafting_button.png");
     public static final ResourceLocation FURNACE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/furnace_button.png");
@@ -120,5 +125,16 @@ public class GuiUtils {
             lines.removeIf(c -> c.getString().isEmpty());
             ScreenUtils.setTooltip(lines);
         }
+    }
+
+    public static void drawColoredShadowCenteredString(GuiGraphics graphics, Font font, Component text, int x, int y, int color, int shadowColor) {
+        FormattedCharSequence formattedCharSequence = text.getVisualOrderText();
+        graphics.drawString(font, formattedCharSequence, x - font.width(formattedCharSequence) / 2 - 1, y + 1, shadowColor, false);
+        graphics.drawString(font, formattedCharSequence, x - font.width(formattedCharSequence) / 2, y, color, false);
+    }
+
+    public static void drawColoredShadowString(GuiGraphics graphics, Font font, Component text, int x, int y, int color, int shadowColor) {
+        graphics.drawString(font, text, x - 1, y + 1, shadowColor, false);
+        graphics.drawString(font, text, x, y, color, false);
     }
 }

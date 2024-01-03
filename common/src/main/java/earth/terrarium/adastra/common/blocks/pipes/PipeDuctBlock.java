@@ -3,6 +3,7 @@ package earth.terrarium.adastra.common.blocks.pipes;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -28,10 +29,10 @@ public class PipeDuctBlock extends PipeBlock {
     @Override
     public void appendHoverText(ItemStack stack, BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
         if (type() == Type.ENERGY) {
-            tooltip.add(Component.translatable("tooltip.ad_astra.energy_transfer_tick", transferRate()));
+            tooltip.add(Component.translatable("tooltip.ad_astra.energy_transfer_tick", transferRate()).withStyle(ChatFormatting.GOLD));
             TooltipUtils.addDescriptionComponent(tooltip, ConstantComponents.CABLE_DUCT);
         } else {
-            tooltip.add(Component.translatable("tooltip.ad_astra.fluid_transfer_tick", FluidHooks.toMillibuckets(transferRate())));
+            tooltip.add(Component.translatable("tooltip.ad_astra.fluid_transfer_tick", FluidHooks.toMillibuckets(transferRate())).withStyle(ChatFormatting.GOLD));
             TooltipUtils.addDescriptionComponent(tooltip, ConstantComponents.FLUID_DUCT_INFO);
         }
     }

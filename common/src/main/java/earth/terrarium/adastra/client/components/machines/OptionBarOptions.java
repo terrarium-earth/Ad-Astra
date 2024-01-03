@@ -1,6 +1,8 @@
 package earth.terrarium.adastra.client.components.machines;
 
+import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.components.PressableImageButton;
+import earth.terrarium.adastra.client.config.AdAstraConfigClient;
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.RedstoneControl;
@@ -10,6 +12,7 @@ import earth.terrarium.adastra.common.network.NetworkHandler;
 import earth.terrarium.adastra.common.network.messages.ServerboundSetFurnaceModePacket;
 import earth.terrarium.adastra.common.network.messages.ServerboundSetRedstoneControlPacket;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
@@ -37,16 +40,38 @@ public class OptionBarOptions {
         );
     }
 
-    public static PressableImageButton createBlastFurnaceMode(EtrionicBlastFurnaceBlockEntity furnace) {
-        return new PressableImageButton(-10, 0, 18, 18, 0, 0, 18, furnace.mode().icon(), 18, 54,
+    public static PressableImageButton createBlastFurnaceMode(EtrionicBlastFurnaceBlockEntity entity) {
+        return new PressableImageButton(0, 0, 18, 18, 0, 0, 18, entity.mode().icon(), 18, 54,
             button -> {
-                EtrionicBlastFurnaceBlockEntity.Mode next = Screen.hasShiftDown() ? furnace.mode().previous() : furnace.mode().next();
-                furnace.setMode(next);
-                NetworkHandler.CHANNEL.sendToServer(new ServerboundSetFurnaceModePacket(furnace.getBlockPos(), next));
+                EtrionicBlastFurnaceBlockEntity.Mode next = Screen.hasShiftDown() ? entity.mode().previous() : entity.mode().next();
+                entity.setMode(next);
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundSetFurnaceModePacket(entity.getBlockPos(), next));
                 button.setTooltip(Tooltip.create(getModeTooltip(next)));
                 ((PressableImageButton) button).setTexture(next.icon());
             },
-            getModeTooltip(furnace.mode())
+            getModeTooltip(entity.mode())
+        );
+    }
+
+    public static PressableImageButton createOxygenDistributorShowMode() {
+        return new PressableImageButton(0, 0, 18, 18, 0, 0, 18, (AdAstraConfigClient.showOxygenDistributorArea ? GuiUtils.SHOW_BUTTON : GuiUtils.HIDE_BUTTON), 18, 54,
+            button -> {
+                AdAstraConfigClient.showOxygenDistributorArea = !AdAstraConfigClient.showOxygenDistributorArea;
+                Minecraft.getInstance().tell(() -> AdAstra.CONFIGURATOR.saveConfig(AdAstraConfigClient.class));
+                ((PressableImageButton) button).setTexture(AdAstraConfigClient.showOxygenDistributorArea ? GuiUtils.SHOW_BUTTON : GuiUtils.HIDE_BUTTON);
+            },
+            ConstantComponents.OXYGEN_DISTRIBUTION_AREA
+        );
+    }
+
+    public static PressableImageButton createGravityNormalizerShowMode() {
+        return new PressableImageButton(0, 0, 18, 18, 0, 0, 18, (AdAstraConfigClient.showGravityNormalizerArea ? GuiUtils.SHOW_BUTTON : GuiUtils.HIDE_BUTTON), 18, 54,
+            button -> {
+                AdAstraConfigClient.showGravityNormalizerArea = !AdAstraConfigClient.showGravityNormalizerArea;
+                Minecraft.getInstance().tell(() -> AdAstra.CONFIGURATOR.saveConfig(AdAstraConfigClient.class));
+                ((PressableImageButton) button).setTexture(AdAstraConfigClient.showGravityNormalizerArea ? GuiUtils.SHOW_BUTTON : GuiUtils.HIDE_BUTTON);
+            },
+            ConstantComponents.GRAVITY_DISTRIBUTION_AREA
         );
     }
 

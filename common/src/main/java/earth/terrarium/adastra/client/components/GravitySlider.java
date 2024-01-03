@@ -17,7 +17,7 @@ public class GravitySlider extends DoubleSlider {
     protected void updateMessage() {}
 
     @Override
-    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        guiGraphics.blit(GuiUtils.SLIDER, getX() + (int) (value * (double) (width - 8)), getY(), 0, 0, 5, 21, 5, 21);
+    public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        graphics.blit(GuiUtils.SLIDER, getX() + (int) (value * (double) (width - 8)), getY(), 0, 0, 5, 21, 5, 21);
     }
 }

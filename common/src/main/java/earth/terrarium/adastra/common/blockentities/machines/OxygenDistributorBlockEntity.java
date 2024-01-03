@@ -2,8 +2,8 @@ package earth.terrarium.adastra.common.blockentities.machines;
 
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
+import earth.terrarium.adastra.client.AdAstraClient;
 import earth.terrarium.adastra.client.config.AdAstraConfigClient;
-import earth.terrarium.adastra.client.renderers.world.OxygenDistributorOverlayRenderer;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
@@ -138,7 +138,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
             clearOxygenBlocks();
             shutDownTicks = 60;
             setLit(false);
-        }
+        } else if (time % 10 == 0) setLit(false);
 
         energyPerTick = (recipe != null && canCraft(getEnergyStorage()) ? recipe.energy() : 0) + (canDistribute ? calculateEnergyPerTick() : 0);
         this.fluidPerTick = canDistribute ? fluidPerTick : 0;
@@ -218,13 +218,13 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
         if (time % 40 == 0) {
             if (AdAstraConfigClient.showOxygenDistributorArea) {
-                OxygenDistributorOverlayRenderer.removePositions(pos);
-                if (OxygenDistributorOverlayRenderer.canAdd(pos)
+                AdAstraClient.OXYGEN_OVERLAY_RENDERER.removePositions(pos);
+                if (AdAstraClient.OXYGEN_OVERLAY_RENDERER.canAdd(pos)
                     && canFunction()
                     && canCraftDistribution(FluidHooks.buckets(Math.max(0.001, calculateFluidPerTick() / 1000)))) {
-                    OxygenDistributorOverlayRenderer.addPositions(pos, lastDistributedBlocks);
+                    AdAstraClient.OXYGEN_OVERLAY_RENDERER.addPositions(pos, lastDistributedBlocks);
                 }
-            } else OxygenDistributorOverlayRenderer.clearPositions();
+            } else AdAstraClient.OXYGEN_OVERLAY_RENDERER.clearPositions();
         }
 
         lastYRot = yRot;

@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.config.AdAstraConfigClient;
 import earth.terrarium.adastra.client.models.armor.SpaceSuitModel;
@@ -16,6 +17,7 @@ import earth.terrarium.adastra.client.renderers.entities.mobs.*;
 import earth.terrarium.adastra.client.renderers.entities.vehicles.LanderRenderer;
 import earth.terrarium.adastra.client.renderers.entities.vehicles.RocketRenderer;
 import earth.terrarium.adastra.client.renderers.entities.vehicles.RoverRenderer;
+import earth.terrarium.adastra.client.renderers.world.OverlayRenderer;
 import earth.terrarium.adastra.client.screens.PlanetsScreen;
 import earth.terrarium.adastra.client.screens.machines.*;
 import earth.terrarium.adastra.client.screens.player.OverlayScreen;
@@ -31,6 +33,7 @@ import earth.terrarium.adastra.common.tags.ModItemTags;
 import earth.terrarium.adastra.common.utils.KeybindManager;
 import earth.terrarium.adastra.common.utils.radio.RadioHolder;
 import earth.terrarium.botarium.client.ClientHooks;
+import net.minecraft.client.Camera;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
@@ -54,6 +57,8 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class AdAstraClient {
+    public static final OverlayRenderer OXYGEN_OVERLAY_RENDERER = new OverlayRenderer(0x4099ccff, () -> AdAstraConfigClient.showOxygenDistributorArea);
+    public static final OverlayRenderer GRAVITY_OVERLAY_RENDERER = new OverlayRenderer(0x40DE2F14, () -> AdAstraConfigClient.showGravityNormalizerArea);
 
     public static final KeyMapping KEY_TOGGLE_SUIT_FLIGHT = new KeyMapping(
         ConstantComponents.TOGGLE_SUIT_FLIGHT_KEY.getString(),
@@ -207,6 +212,11 @@ public class AdAstraClient {
         register.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.SPACE_HELMET.get(), ModItems.SPACE_SUIT.get(), ModItems.SPACE_PANTS.get(), ModItems.SPACE_BOOTS.get()});
         register.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.NETHERITE_SPACE_HELMET.get(), ModItems.NETHERITE_SPACE_SUIT.get(), ModItems.NETHERITE_SPACE_PANTS.get(), ModItems.NETHERITE_SPACE_BOOTS.get()});
         register.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.JET_SUIT_HELMET.get(), ModItems.JET_SUIT.get(), ModItems.JET_SUIT_PANTS.get(), ModItems.JET_SUIT_BOOTS.get()});
+    }
+
+    public static void renderOverlays(PoseStack stack, Camera camera) {
+        OXYGEN_OVERLAY_RENDERER.render(stack, camera);
+        GRAVITY_OVERLAY_RENDERER.render(stack, camera);
     }
 
     public static void clientTick(Minecraft minecraft) {

@@ -128,9 +128,8 @@ public class ModLangProvider extends LanguageProvider {
 
         add("tooltip.ad_astra.gravity_amount", "%.1f/%.1f m/s²");
 
-        add(ConstantComponents.SHOW, "Show");
-        add(ConstantComponents.HIDE, "Hide");
         add(ConstantComponents.OXYGEN_DISTRIBUTION_AREA, "Show where the oxygen is being distributed");
+        add(ConstantComponents.GRAVITY_DISTRIBUTION_AREA, "Show where the gravity is being distributed");
 
         add(ConstantComponents.CLEAR_FLUID_TANK, "Shift-right-click to clear");
 

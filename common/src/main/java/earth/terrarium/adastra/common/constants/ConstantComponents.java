@@ -89,9 +89,8 @@ public class ConstantComponents {
     public static final Component DETECTOR_GRAVITY_MODE = Component.translatable("text.ad_astra.detector.gravity_mode");
     public static final Component DETECTOR_TEMPERATURE_MODE = Component.translatable("text.ad_astra.detector.temperature_mode");
 
-    public static final Component SHOW = Component.translatable("tooltip.ad_astra.show");
-    public static final Component HIDE = Component.translatable("tooltip.ad_astra.hide");
-    public static final Component OXYGEN_DISTRIBUTION_AREA = Component.translatable("tooltip.ad_astra.distribution_area").withStyle(ChatFormatting.AQUA);
+    public static final Component OXYGEN_DISTRIBUTION_AREA = Component.translatable("tooltip.ad_astra.oxygen_distribution_area").withStyle(ChatFormatting.AQUA);
+    public static final Component GRAVITY_DISTRIBUTION_AREA = Component.translatable("tooltip.ad_astra.gravity_distribution_area").withStyle(ChatFormatting.AQUA);
 
     public static final Component FLAG_URL = Component.translatable("text.ad_astra.text.flag_url");
     public static final Component CONFIRM = Component.translatable("gui.ad_astra.text.confirm");

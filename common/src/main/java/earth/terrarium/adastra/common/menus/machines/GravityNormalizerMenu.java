@@ -34,11 +34,11 @@ public class GravityNormalizerMenu extends MachineMenu<GravityNormalizerBlockEnt
 
     @Override
     public int getPlayerInvYOffset() {
-        return 114;
+        return 130;
     }
 
     @Override
     protected void addConfigSlots() {
-        addConfigSlot(new EnergyConfiguration(2, 149, 35, entity.getEnergyStorage()));
+        addConfigSlot(new EnergyConfiguration(2, 151, 39, entity.getEnergyStorage()));
     }
 }

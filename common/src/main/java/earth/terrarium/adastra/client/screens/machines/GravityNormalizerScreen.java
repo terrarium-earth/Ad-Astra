@@ -2,7 +2,10 @@ package earth.terrarium.adastra.client.screens.machines;
 
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.components.GravitySlider;
+import earth.terrarium.adastra.client.components.machines.OptionBarOptions;
+import earth.terrarium.adastra.client.components.machines.OptionsBarWidget;
 import earth.terrarium.adastra.client.screens.base.MachineScreen;
+import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.blockentities.machines.GravityNormalizerBlockEntity;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.menus.machines.GravityNormalizerMenu;
@@ -23,7 +26,7 @@ public class GravityNormalizerScreen extends MachineScreen<GravityNormalizerMenu
     private AbstractSliderButton slider;
 
     public GravityNormalizerScreen(GravityNormalizerMenu menu, Inventory inventory, Component component) {
-        super(menu, inventory, component, TEXTURE, STEEL_SLOT, 184, 201);
+        super(menu, inventory, component, TEXTURE, STEEL_SLOT, 184, 215);
         this.titleLabelY += 3;
     }
 
@@ -32,7 +35,7 @@ public class GravityNormalizerScreen extends MachineScreen<GravityNormalizerMenu
         super.init();
         slider = addRenderableWidget(new GravitySlider(
             leftPos + 25,
-            topPos + 42,
+            topPos + 52,
             108,
             11,
             CommonComponents.EMPTY,
@@ -47,26 +50,44 @@ public class GravityNormalizerScreen extends MachineScreen<GravityNormalizerMenu
     }
 
     @Override
+    public OptionsBarWidget.Builder createOptionsBar() {
+        return super.createOptionsBar()
+            .addElement(0, OptionBarOptions.createGravityNormalizerShowMode());
+    }
+
+    @Override
     protected void renderBg(@NotNull GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         super.renderBg(graphics, partialTick, mouseX, mouseY);
         Component text = Component.translatable("tooltip.ad_astra.gravity_amount", (int) ((sliderValue * PlanetConstants.EARTH_GRAVITY) * 100) / 100.0, 20.00);
 
-        // colored shadow
-        graphics.drawCenteredString(
-            font,
-            text,
-            leftPos + 77,
-            topPos + 70,
-            0x32506e
-        );
-
-        // actual text
-        graphics.drawCenteredString(
+        GuiUtils.drawColoredShadowCenteredString(
+            graphics,
             font,
             text,
             leftPos + 78,
-            topPos + 69,
-            0x8cf5f5
+            topPos + 32,
+            0x8cf5f5,
+            0x32506e
+        );
+
+        GuiUtils.drawColoredShadowString(
+            graphics,
+            font,
+            Component.translatable("tooltip.ad_astra.energy_per_tick", entity.energyPerTick()),
+            leftPos + 45,
+            topPos + 82,
+            0x8cf5f5,
+            0x32506e
+        );
+
+        GuiUtils.drawColoredShadowString(
+            graphics,
+            font,
+            Component.translatable("tooltip.ad_astra.blocks_distributed", entity.distributedBlocksCount(), entity.distributedBlocksLimit()),
+            leftPos + 45,
+            topPos + 93,
+            0x8cf5f5,
+            0x32506e
         );
     }
 

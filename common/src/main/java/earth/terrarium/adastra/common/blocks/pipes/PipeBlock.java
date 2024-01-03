@@ -10,6 +10,7 @@ import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.fluid.FluidApi;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -92,10 +93,10 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     @Override
     public void appendHoverText(ItemStack stack, BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
         if (type == Type.ENERGY) {
-            tooltip.add(Component.translatable("tooltip.ad_astra.energy_transfer_tick", transferRate));
+            tooltip.add(Component.translatable("tooltip.ad_astra.energy_transfer_tick", transferRate).withStyle(ChatFormatting.GOLD));
             TooltipUtils.addDescriptionComponent(tooltip, ConstantComponents.CABLE_INFO);
         } else {
-            tooltip.add(Component.translatable("tooltip.ad_astra.fluid_transfer_tick", FluidHooks.toMillibuckets(transferRate)));
+            tooltip.add(Component.translatable("tooltip.ad_astra.fluid_transfer_tick", FluidHooks.toMillibuckets(transferRate)).withStyle(ChatFormatting.GOLD));
             TooltipUtils.addDescriptionComponent(tooltip, ConstantComponents.FLUID_PIPE_INFO);
         }
     }
