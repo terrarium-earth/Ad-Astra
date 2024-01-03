@@ -42,6 +42,7 @@ public class EtrionicBlastFurnaceMenu extends MachineMenu<EtrionicBlastFurnaceBl
 
     @Override
     protected void addMenuSlots() {
+        super.addMenuSlots();
         addSlot(new Slot(entity, 1, 29, 38));
         addSlot(new Slot(entity, 2, 47, 38));
         addSlot(new Slot(entity, 3, 29, 58));
