@@ -52,7 +52,7 @@ public class SidedConfigWidget extends ContainerWidget {
                 init();
             }
         ))
-        .setTooltip(Tooltip.create(ConstantComponents.RESET_TO_DEFAULT));
+            .setTooltip(Tooltip.create(ConstantComponents.RESET_TO_DEFAULT));
 
         buttons.center(this.getX(), this.getY(), this.getWidth(), this.getHeight());
     }

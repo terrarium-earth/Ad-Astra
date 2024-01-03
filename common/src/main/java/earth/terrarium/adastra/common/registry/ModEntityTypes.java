@@ -10,7 +10,6 @@ import earth.terrarium.adastra.common.entities.mob.projectiles.IceSpit;
 import earth.terrarium.adastra.common.entities.vehicles.Lander;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.entities.vehicles.Rover;
-import earth.terrarium.adastra.common.utils.PlatformUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;

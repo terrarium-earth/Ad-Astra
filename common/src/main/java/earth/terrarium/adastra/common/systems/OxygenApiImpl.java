@@ -16,7 +16,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
 import java.util.Collection;
-import java.util.Set;
 
 public class OxygenApiImpl implements OxygenApi {
     @Override

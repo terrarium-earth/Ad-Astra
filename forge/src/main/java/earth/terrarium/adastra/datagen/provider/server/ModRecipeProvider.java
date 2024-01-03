@@ -358,7 +358,7 @@ public class ModRecipeProvider extends RecipeProvider {
             .pattern("###")
             .pattern("###"));
 
-         shapeless(ModItems.DESH_INGOT, 9, ModItems.DESH_BLOCK, "desh_ingot_from_desh_block", r -> r);
+        shapeless(ModItems.DESH_INGOT, 9, ModItems.DESH_BLOCK, "desh_ingot_from_desh_block", r -> r);
 
         shaped(ModItems.OSTRUM_INGOT, 1, ModItemTags.OSTRUM_NUGGETS, r -> r
             .pattern("###")
@@ -372,7 +372,7 @@ public class ModRecipeProvider extends RecipeProvider {
             .pattern("###")
             .pattern("###"));
 
-         shapeless(ModItems.OSTRUM_INGOT, 9, ModItems.OSTRUM_BLOCK, "ostrum_ingot_from_ostrum_block", r -> r);
+        shapeless(ModItems.OSTRUM_INGOT, 9, ModItems.OSTRUM_BLOCK, "ostrum_ingot_from_ostrum_block", r -> r);
 
         shaped(ModItems.CALORITE_INGOT, 1, ModItemTags.CALORITE_NUGGETS, r -> r
             .pattern("###")
@@ -694,11 +694,11 @@ public class ModRecipeProvider extends RecipeProvider {
             .pattern("#")
             .pattern("#"));
 
-        shaped(ModItems.DESH_PILLAR, 2,ModItems.DESH_PLATING, r -> r
+        shaped(ModItems.DESH_PILLAR, 2, ModItems.DESH_PLATING, r -> r
             .pattern("#")
             .pattern("#"));
 
-        shaped(ModItems.OSTRUM_PILLAR, 2,ModItems.OSTRUM_PLATING, r -> r
+        shaped(ModItems.OSTRUM_PILLAR, 2, ModItems.OSTRUM_PLATING, r -> r
             .pattern("#")
             .pattern("#"));
 
@@ -1165,7 +1165,7 @@ public class ModRecipeProvider extends RecipeProvider {
             .save(output);
     }
 
-     private void shapeless(RegistryEntry<Item> result, int count, Supplier<Item> mainItem, String file, Function<ShapelessRecipeBuilder, ShapelessRecipeBuilder> builder) {
+    private void shapeless(RegistryEntry<Item> result, int count, Supplier<Item> mainItem, String file, Function<ShapelessRecipeBuilder, ShapelessRecipeBuilder> builder) {
         builder.apply(ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result.get(), count)
                 .requires(mainItem.get())
                 .unlockedBy("has_" + result.getId().getPath(), has(mainItem.get())))

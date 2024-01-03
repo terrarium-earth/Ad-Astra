@@ -238,13 +238,13 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
             .cookingTime(cookingtime)
             .energy(energy);
         List<String> ingredientNames = ingredients.stream()
-                .map(ingredient -> {
-                    if (ingredient instanceof TagIngredient recipeIngredient) {
-                        return recipeIngredient.name;
-                    }
-                    return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingredient.getItems()[0].getItem())).getPath();
-                })
-                .toList();
+            .map(ingredient -> {
+                if (ingredient instanceof TagIngredient recipeIngredient) {
+                    return recipeIngredient.name;
+                }
+                return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingredient.getItems()[0].getItem())).getPath();
+            })
+            .toList();
 
         builder.save(writer, new ResourceLocation(
             AdAstra.MOD_ID,
