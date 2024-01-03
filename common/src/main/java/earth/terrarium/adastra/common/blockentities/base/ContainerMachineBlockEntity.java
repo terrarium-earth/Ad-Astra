@@ -47,6 +47,9 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
         if (time % 50 == 0 && shouldUpdate()) {
             update();
         }
+        if (canFunction()) {
+            tickSideInteractions(pos, f -> true, getSideConfig());
+        }
     }
 
     public boolean shouldUpdate() {
@@ -101,12 +104,12 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
     @Override
     public List<ConfigurationEntry> getSideConfig() {
         if (this.sideConfig.isEmpty()) {
-            this.sideConfig.addAll(this.getDefaultConfig());
+            this.sideConfig.addAll(createDefaultConfig());
         }
         return sideConfig;
     }
 
-    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {}
+    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {}
 
     public RedstoneControl getRedstoneControl() {
         return redstoneControl;

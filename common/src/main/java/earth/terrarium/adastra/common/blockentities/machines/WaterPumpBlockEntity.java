@@ -73,7 +73,6 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         if (!canFunction()) return;
-        tickSideInteractions(pos, f -> true);
         if (canPump(pos, energyContainer)) pump(level, energyContainer);
     }
 
@@ -97,9 +96,9 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
     }
 
     @Override
-    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
-        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), getSideConfig().get(0), filter);
-        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.05f), 0, getSideConfig().get(1), filter);
+    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
+        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(0), filter);
+        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.05f), 0, sideConfig.get(1), filter);
     }
 
     @Override

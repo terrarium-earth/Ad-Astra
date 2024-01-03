@@ -60,15 +60,14 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         if (canFunction()) {
-            tickSideInteractions(pos, d -> true);
             distributeToChargeSlots();
             if (isDay()) generateEnergy(PlanetApi.API.getSolarPower(level));
         }
     }
 
     @Override
-    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
-        TransferUtils.pushEnergyNearby(this, pos, getEnergyStorage().maxExtract(), getSideConfig().get(0), filter);
+    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
+        TransferUtils.pushEnergyNearby(this, pos, getEnergyStorage().maxExtract(), sideConfig.get(0), filter);
     }
 
     @Override

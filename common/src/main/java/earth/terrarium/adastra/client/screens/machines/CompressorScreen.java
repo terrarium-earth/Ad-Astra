@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class CompressorScreen extends MachineScreen<CompressorMenu, CompressorBlockEntity> {
     public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/compressor.png");
-    public static final Rect2i CLICK_AREA = new Rect2i(44, 25, 26, 25);
+    public static final Rect2i CLICK_AREA = new Rect2i(41, 25, 26, 25);
 
     public CompressorScreen(CompressorMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component, TEXTURE, STEEL_SLOT, 184, 201);

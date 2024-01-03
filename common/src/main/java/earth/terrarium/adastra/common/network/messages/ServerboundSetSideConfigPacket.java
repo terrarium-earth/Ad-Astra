@@ -48,6 +48,7 @@ public record ServerboundSetSideConfigPacket(
             return (player, level) -> ModUtils.getMachineFromMenuPacket(packet.machine(), player, level).ifPresent(
                 machine -> {
                     var sideConfig = machine.getSideConfig();
+                    if (sideConfig.size() <= packet.configIndex()) return;
                     sideConfig.get(packet.configIndex()).set(packet.direction(), packet.configuration());
                     machine.setChanged();
                 }

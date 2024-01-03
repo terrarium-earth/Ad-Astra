@@ -57,7 +57,6 @@ public class NasaWorkbenchBlockEntity extends ContainerMachineBlockEntity {
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         if (!canFunction()) return;
-        tickSideInteractions(pos, d -> true);
 
         for (int i = 0; i < 14; i++) {
             if (!getItem(i).isEmpty()) {
@@ -78,9 +77,9 @@ public class NasaWorkbenchBlockEntity extends ContainerMachineBlockEntity {
     }
 
     @Override
-    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
-        TransferUtils.pushItemsNearby(this, pos, INPUT_SLOTS, getSideConfig().get(0), filter);
-        TransferUtils.pullItemsNearby(this, pos, INPUT_SLOTS, getSideConfig().get(0), filter);
+    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
+        TransferUtils.pushItemsNearby(this, pos, INPUT_SLOTS, sideConfig.get(0), filter);
+        TransferUtils.pullItemsNearby(this, pos, INPUT_SLOTS, sideConfig.get(0), filter);
     }
 
     @Override

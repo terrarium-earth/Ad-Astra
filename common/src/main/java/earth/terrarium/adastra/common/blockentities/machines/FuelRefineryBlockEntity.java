@@ -80,18 +80,13 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
     }
 
     @Override
-    public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
-        if (canFunction()) tickSideInteractions(pos, f -> true);
-    }
-
-    @Override
-    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
-        TransferUtils.pullItemsNearby(this, pos, new int[]{1}, getSideConfig().get(0), filter);
-        TransferUtils.pullItemsNearby(this, pos, new int[]{3}, getSideConfig().get(1), filter);
-        TransferUtils.pushItemsNearby(this, pos, new int[]{2, 4}, getSideConfig().get(2), filter);
-        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), getSideConfig().get(3), filter);
-        TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.2f), 0, getSideConfig().get(4), filter);
-        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.2f), 1, getSideConfig().get(5), filter);
+    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
+        TransferUtils.pullItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
+        TransferUtils.pullItemsNearby(this, pos, new int[]{3}, sideConfig.get(1), filter);
+        TransferUtils.pushItemsNearby(this, pos, new int[]{2, 4}, sideConfig.get(2), filter);
+        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(3), filter);
+        TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.2f), 0, sideConfig.get(4), filter);
+        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.2f), 1, sideConfig.get(5), filter);
     }
 
     @Override

@@ -54,15 +54,10 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
     }
 
     @Override
-    public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
-        if (canFunction()) tickSideInteractions(pos, d -> true);
-    }
-
-    @Override
-    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
-        TransferUtils.pullItemsNearby(this, pos, new int[]{1}, getSideConfig().get(0), filter);
-        TransferUtils.pushItemsNearby(this, pos, new int[]{2}, getSideConfig().get(1), filter);
-        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), getSideConfig().get(2), filter);
+    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
+        TransferUtils.pullItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
+        TransferUtils.pushItemsNearby(this, pos, new int[]{2}, sideConfig.get(1), filter);
+        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(2), filter);
     }
 
     @Override

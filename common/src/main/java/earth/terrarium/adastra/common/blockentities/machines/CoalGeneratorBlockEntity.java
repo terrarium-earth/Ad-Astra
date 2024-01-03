@@ -80,7 +80,6 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
             if (time % 10 == 0) setLit(false);
             return;
         }
-        tickSideInteractions(pos, d -> true);
         var input = getItem(1);
         if (getEnergyStorage().internalInsert(20, true) == 0) {
             if (time % 10 == 0) setLit(false);
@@ -105,10 +104,10 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
     }
 
     @Override
-    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
-        TransferUtils.pushItemsNearby(this, pos, new int[]{1}, getSideConfig().get(0), filter);
-        TransferUtils.pullItemsNearby(this, pos, new int[]{1}, getSideConfig().get(0), filter);
-        TransferUtils.pushEnergyNearby(this, pos, getEnergyStorage().maxExtract(), getSideConfig().get(1), filter);
+    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
+        TransferUtils.pushItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
+        TransferUtils.pullItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
+        TransferUtils.pushEnergyNearby(this, pos, getEnergyStorage().maxExtract(), sideConfig.get(1), filter);
     }
 
     @Override

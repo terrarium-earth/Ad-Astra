@@ -68,15 +68,14 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         if (!canFunction()) return;
-        tickSideInteractions(pos, d -> true);
         distributeToChargeSlot(level, pos);
         if (time % 10 == 0) setLit(!getItem(0).isEmpty());
     }
 
     @Override
-    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter) {
-        TransferUtils.pushEnergyNearby(this, pos, getEnergyStorage().maxExtract(), getSideConfig().get(0), filter);
-        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), getSideConfig().get(0), filter);
+    public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
+        TransferUtils.pushEnergyNearby(this, pos, getEnergyStorage().maxExtract(), sideConfig.get(0), filter);
+        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(0), filter);
     }
 
     @Override

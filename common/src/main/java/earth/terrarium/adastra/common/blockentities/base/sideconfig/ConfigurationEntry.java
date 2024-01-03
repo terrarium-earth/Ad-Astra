@@ -26,6 +26,10 @@ public record ConfigurationEntry(
         this.sides.replace(direction, value);
     }
 
+    public ConfigurationEntry copy() {
+        return new ConfigurationEntry(type, new EnumMap<>(sides), title);
+    }
+
 
     public static void save(CompoundTag tag, List<ConfigurationEntry> sideConfig) {
         ListTag list = new ListTag();
@@ -57,10 +61,6 @@ public record ConfigurationEntry(
             }
 
             sideConfig.add(new ConfigurationEntry(type, sides, defaultConfig.get(i).title()));
-        }
-
-        if (sideConfig.isEmpty()) {
-            sideConfig.addAll(defaultConfig);
         }
 
         return sideConfig;

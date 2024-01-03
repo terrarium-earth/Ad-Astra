@@ -14,7 +14,7 @@ may be unstable.
   oxygen when you first open a world because it hasn't been calculated yet.
 - Added public APIs for planets, oxygen, gravity, and temperature. Please use those instead of the internal ones
   when creating addons.
-- Added events for oxygen, gravity, and temperature entity ticking. Please use those instead of mixing into the internal
+- Added events for oxygen, gravity, zero-g, and temperature, acid rain, and environment ticking. Please use those instead of mixing into the internal
 tick methods.
 - Improved many tooltips. They now have more info and colored elements.
 - Machines now display energy/fluid in/out per tick.
@@ -111,6 +111,8 @@ to smelt steel. The blast furnace steel recipe have been removed.
 - Added the gravity normalizer. This allows you to control the gravity of a local area, similar
 to the oxygen distributor. It's especially important in orbit due to the zero gravity environment.
 - Added the Ti-69. It's a device that displays the local oxygen, temperature, and gravity.
+- Copper no longer oxidizes in environments with no oxygen.
+- Updated the oxygen distributor model. It now spins and can be placed on any block face.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.
@@ -124,8 +126,6 @@ if you're using these recipes in modpacks, you'll need to change them. This incl
   - "ad_astra:oxygen_conversion" -> "ad_astra:oxygen_loading"
 - Removed the sky renderer JSON API. Sky renderers should now be done in code.
 - Removed the JSON APIs for adding planets, galaxies and info in the planets screen.
-- Copper no longer oxidizes in environments with no oxygen.
-- Updated the oxygen distributor model. It now spins and can be placed on any block face.
 
 ## TODO: Not sure if this'll be in this release
 
