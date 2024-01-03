@@ -636,6 +636,7 @@
   "tooltip.ad_astra.fluid_per_tick": "%s 🪣/t",
   "tooltip.ad_astra.fluid_transfer_tick": "Transfer: %s 🪣/t",
   "tooltip.ad_astra.fluid_use_per_iteration": "Uses %s 🪣 per iteration",
+  "tooltip.ad_astra.gravity_amount": "%.1f/%.1f m/s²",
   "tooltip.ad_astra.hide": "Hide",
   "tooltip.ad_astra.inactive": "Inactive",
   "tooltip.ad_astra.land": "Land on %s at [%s, %s]",

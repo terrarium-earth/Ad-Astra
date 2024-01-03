@@ -85,6 +85,7 @@ public class AdAstraClient {
         MenuScreens.register(ModMenus.WATER_PUMP.get(), WaterPumpScreen::new);
         MenuScreens.register(ModMenus.SOLAR_PANEL.get(), SolarPanelScreen::new);
         MenuScreens.register(ModMenus.OXYGEN_DISTRIBUTOR.get(), OxygenDistributorScreen::new);
+        MenuScreens.register(ModMenus.GRAVITY_NORMALIZER.get(), GravityNormalizerScreen::new);
         MenuScreens.register(ModMenus.CRYO_FREEZER.get(), CryoFreezerScreen::new);
         MenuScreens.register(ModMenus.NASA_WORKBENCH.get(), NasaWorkbenchScreen::new);
 

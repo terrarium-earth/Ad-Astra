@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import earth.terrarium.adastra.client.config.AdAstraConfigClient;
-import earth.terrarium.adastra.common.blockentities.machines.OxygenDistributorBlockEntity;
+import earth.terrarium.adastra.common.blockentities.base.MachineBlockEntity;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
@@ -46,7 +46,7 @@ public class OxygenDistributorOverlayRenderer {
         if (level.getGameTime() % 40 == 0) {
             POSITIONS.keySet().removeIf(pos -> !level.isLoaded(pos)
                 || !canAdd(pos)
-                || !(level.getBlockEntity(pos) instanceof OxygenDistributorBlockEntity)
+                || !(level.getBlockEntity(pos) instanceof MachineBlockEntity)
             );
         }
 

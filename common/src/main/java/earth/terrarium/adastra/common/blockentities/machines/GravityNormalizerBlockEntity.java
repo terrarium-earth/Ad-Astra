@@ -9,6 +9,7 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.adastra.common.menus.machines.GravityNormalizerMenu;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.adastra.common.utils.floodfill.FloodFill3D;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
@@ -39,6 +40,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     private int distributedBlocksCount;
     private int shutDownTicks;
     private int limit;
+    private float targetGravity = 1;
 
     private float animation;
     private float lastAnimation;
@@ -58,6 +60,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
         energyPerTick = tag.getLong("EnergyPerTick");
         distributedBlocksCount = tag.getInt("DistributedBlocksCount");
         limit = tag.getInt("Limit");
+        targetGravity = tag.getFloat("TargetGravity");
     }
 
     @Override
@@ -67,11 +70,12 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
         tag.putLong("EnergyPerTick", energyPerTick);
         tag.putInt("DistributedBlocksCount", distributedBlocksCount);
         tag.putInt("Limit", limit);
+        tag.putFloat("TargetGravity", targetGravity);
     }
 
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        return null;
+        return new GravityNormalizerMenu(id, inventory, this);
     }
 
     @Override
@@ -129,7 +133,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
         limit = AdAstraConfig.maxDistributionBlocks;
         Set<BlockPos> positions = FloodFill3D.run(level, pos.above(), limit, FloodFill3D.TEST_FULL_SEAL, false);
 
-        GravityApi.API.setGravity(level, positions, 1); // TODO
+        GravityApi.API.setGravity(level, positions, targetGravity);
         this.resetLastDistributedBlocks(positions);
     }
 
@@ -147,7 +151,8 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     @Override
     public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
         if (time % 40 == 0) {
-            if (AdAstraConfigClient.showOxygenDistributorArea) {
+            if (AdAstraConfigClient.showGravityNormalizerArea) {
+                // TODO: Use gravity normalizer overlay
                 OxygenDistributorOverlayRenderer.removePositions(pos);
                 if (OxygenDistributorOverlayRenderer.canAdd(pos)
                     && canFunction()
@@ -173,6 +178,14 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
 
     public long energyPerTick() {
         return canFunction() ? energyPerTick : 0;
+    }
+
+    public float targetGravity() {
+        return targetGravity;
+    }
+
+    public void setTargetGravity(float targetGravity) {
+        this.targetGravity = targetGravity;
     }
 
     public float animation() {

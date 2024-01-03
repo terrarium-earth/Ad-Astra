@@ -123,6 +123,9 @@ public class ModLangProvider extends LanguageProvider {
         add("tooltip.ad_astra.fluid_per_tick", "%s 🪣/t");
 
         add("tooltip.ad_astra.blocks_distributed", "%s/%s");
+
+        add("tooltip.ad_astra.gravity_amount", "%.1f/%.1f m/s²");
+
         add(ConstantComponents.SHOW, "Show");
         add(ConstantComponents.HIDE, "Hide");
         add(ConstantComponents.OXYGEN_DISTRIBUTION_AREA, "Show where the oxygen is being distributed");

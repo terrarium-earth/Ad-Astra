@@ -20,6 +20,13 @@ public final class AdAstraConfigClient {
 
     @ConfigEntry(
         type = EntryType.BOOLEAN,
+        id = "showGravityNormalizerArea",
+        translation = "Show Gravity Normalizer Area"
+    )
+    public static boolean showGravityNormalizerArea;
+
+    @ConfigEntry(
+        type = EntryType.BOOLEAN,
         id = "jetSuitEnabled",
         translation = "Jet Suit Enabled"
     )
