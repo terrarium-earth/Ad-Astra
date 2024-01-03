@@ -37,6 +37,7 @@ public class CompressorMenu extends MachineMenu<CompressorBlockEntity> {
 
     @Override
     protected void addMenuSlots() {
+        super.addMenuSlots();
         addSlot(new Slot(entity, 1, 53, 56));
         addSlot(CustomSlot.noPlace(entity, 2, 100, 56));
     }

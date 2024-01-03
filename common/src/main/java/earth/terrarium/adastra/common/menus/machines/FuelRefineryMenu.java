@@ -38,6 +38,7 @@ public class FuelRefineryMenu extends MachineMenu<FuelRefineryBlockEntity> {
 
     @Override
     protected void addMenuSlots() {
+        super.addMenuSlots();
         addSlot(new Slot(entity, 1, 12, 22));
         addSlot(CustomSlot.noPlace(entity, 2, 12, 52));
 

@@ -11,11 +11,10 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class MachineMenu<T extends BlockEntity & SideConfigurable & Container> extends BaseConfigurableContainerMenu<T> {
 
-    private final Slot batterySlot;
+    private Slot batterySlot;
 
     public MachineMenu(@Nullable MenuType<?> type, int id, Inventory inventory, T entity) {
         super(type, id, inventory, entity);
-        this.batterySlot = addSlot(new BatterySlot(entity, 0));
     }
 
     public Slot getBatterySlot() {
@@ -29,6 +28,6 @@ public abstract class MachineMenu<T extends BlockEntity & SideConfigurable & Con
 
     @Override
     protected void addMenuSlots() {
-
+        this.batterySlot = addSlot(new BatterySlot(entity, 0));
     }
 }

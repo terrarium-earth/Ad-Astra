@@ -6,7 +6,9 @@ import earth.terrarium.adastra.common.menus.configuration.EnergyConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.FluidConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.SlotConfiguration;
 import earth.terrarium.adastra.common.menus.slots.CustomSlot;
+import earth.terrarium.adastra.common.menus.slots.PredicateSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
+import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 
@@ -38,7 +40,8 @@ public class CryoFreezerMenu extends MachineMenu<CryoFreezerBlockEntity> {
 
     @Override
     protected void addMenuSlots() {
-        addSlot(new Slot(entity, 1, 26, 70));
+        super.addMenuSlots();
+        addSlot(PredicateSlot.ofRecipeInput(entity, 1, 26, 70, this.level, ModRecipeTypes.CRYO_FREEZING.get()));
 
         addSlot(new Slot(entity, 2, 113, 42));
         addSlot(CustomSlot.noPlace(entity, 3, 113, 70));

@@ -34,7 +34,7 @@ public record CryoFreezingRecipe(
 
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
-        return false;
+        return ingredient.test(container.getItem(1));
     }
 
     @Override

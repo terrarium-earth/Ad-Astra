@@ -36,6 +36,7 @@ public class CoalGeneratorMenu extends MachineMenu<CoalGeneratorBlockEntity> {
 
     @Override
     protected void addMenuSlots() {
+        super.addMenuSlots();
         addSlot(new Slot(entity, 1, 77, 71));
     }
 

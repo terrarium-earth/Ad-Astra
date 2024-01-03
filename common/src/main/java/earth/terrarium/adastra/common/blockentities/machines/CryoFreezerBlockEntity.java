@@ -112,7 +112,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
         if (recipe == null) return false;
         if (energyStorage.internalExtract(recipe.energy(), true) < recipe.energy()) return false;
         if (fluidContainer.getFluids().get(0).getFluidAmount() >= fluidContainer.getTankCapacity(0)) return false;
-        return recipe.ingredient().test(getItem(1));
+        return recipe.matches(this, level());
     }
 
     @Override
@@ -131,10 +131,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
     @Override
     public void update() {
         if (level().isClientSide()) return;
-        level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYO_FREEZING.get())
-            .stream()
-            .filter(r -> r.ingredient().test(getItem(1)))
-            .findFirst()
+        level().getRecipeManager().getRecipeFor(ModRecipeTypes.CRYO_FREEZING.get(), this, level())
             .ifPresent(r -> {
                 recipe = r;
                 cookTimeTotal = r.cookingTime();

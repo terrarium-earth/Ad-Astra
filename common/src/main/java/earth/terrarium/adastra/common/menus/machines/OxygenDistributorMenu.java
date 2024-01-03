@@ -38,6 +38,7 @@ public class OxygenDistributorMenu extends MachineMenu<OxygenDistributorBlockEnt
 
     @Override
     protected void addMenuSlots() {
+        super.addMenuSlots();
         addSlot(new Slot(entity, 1, 17, 82));
         addSlot(CustomSlot.noPlace(entity, 2, 17, 112));
     }
