@@ -340,6 +340,7 @@ public class ModLangProvider extends LanguageProvider {
         add("subtitles.ad_astra.block.sliding_door_close", "Sliding door closes");
         add("subtitles.ad_astra.entity.oxygen_intake", "Oxygen intake");
         add("subtitles.ad_astra.entity.oxygen_outtake", "Oxygen outtake");
+        add("subtitles.ad_astra.entity.gravity_normalizer_idle", "Gravity normalizer idle");
     }
 
     public void add(Component component, String name) {

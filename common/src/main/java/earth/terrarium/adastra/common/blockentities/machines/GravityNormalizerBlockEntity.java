@@ -10,6 +10,7 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.GravityNormalizerMenu;
+import earth.terrarium.adastra.common.registry.ModSoundEvents;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.adastra.common.utils.floodfill.FloodFill3D;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
@@ -19,6 +20,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -105,6 +107,10 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
             setLit(true);
 
             if (time % 100 == 0) tickGravity(level, pos);
+
+            if (time % 200 == 0) {
+                level.playSound(null, pos, ModSoundEvents.GRAVITY_NORMALIZER_IDLE.get(), SoundSource.BLOCKS, 0.3f, 1);
+            }
         } else if (!lastDistributedBlocks.isEmpty()) {
             clearGravityBlocks();
             shutDownTicks = 60;

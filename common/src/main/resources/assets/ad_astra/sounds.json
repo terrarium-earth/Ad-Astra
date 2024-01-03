@@ -44,5 +44,13 @@
       "ad_astra:oxygen/outtake_3"
       ],
       "subtitle": "subtitles.ad_astra.entity.oxygen_outtake"
+  },
+  "gravity_normalizer_idle": {
+      "sounds": [
+      "ad_astra:gravity/idle_1",
+      "ad_astra:gravity/idle_2",
+      "ad_astra:gravity/idle_3"
+      ],
+      "subtitle": "subtitles.ad_astra.entity.gravity_normalizer_idle"
   }
 }

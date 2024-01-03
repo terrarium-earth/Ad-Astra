@@ -31,4 +31,7 @@ public class ModSoundEvents {
 
     public static final RegistryEntry<SoundEvent> OXYGEN_OUTTAKE = SOUND_EVENTS.register("oxygen_outtake", () ->
         SoundEvent.createVariableRangeEvent(new ResourceLocation(AdAstra.MOD_ID, "oxygen_outtake")));
+
+    public static final RegistryEntry<SoundEvent> GRAVITY_NORMALIZER_IDLE = SOUND_EVENTS.register("gravity_normalizer_idle", () ->
+        SoundEvent.createVariableRangeEvent(new ResourceLocation(AdAstra.MOD_ID, "gravity_normalizer_idle")));
 }
