@@ -111,7 +111,7 @@ public class ModItems {
     public static final RegistryEntry<Item> JET_SUIT_BOOTS = BASIC_ITEMS.register("jet_suit_boots", () -> new CustomDyeableArmorItem(JetSuitMaterial.MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().fireResistant()));
 
     public static final RegistryEntry<Item> TI_69 = ITEMS.register("ti_69", () -> new Ti69Item(new Item.Properties().stacksTo(1)));
-    public static final RegistryEntry<Item> WRENCH = BASIC_ITEMS.register("wrench", () -> new WrenchItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> WRENCH = ITEMS.register("wrench", () -> new WrenchItem(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> ZIP_GUN = ITEMS.register("zip_gun", () -> new ZipGunItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryEntry<Item> SPACE_PAINTING = BASIC_ITEMS.register("space_painting", () -> new SpacePaintingItem(new Item.Properties(), ModPaintingVariants.EARTH, ModPaintingVariantTags.SPACE_PAINTINGS));

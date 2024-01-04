@@ -21,6 +21,7 @@ dependencies {
     }
 
     val minecraftVersion: String by project
+    val mixinExtrasVersion: String by project
     val fabricLoaderVersion: String by project
     val fabricApiVersion: String by project
     val modMenuVersion: String by project
@@ -39,4 +40,8 @@ dependencies {
 
     modLocalRuntime(group = "maven.modrinth", name = "jade", version = "11.5.1")
     modLocalRuntime(group = "maven.modrinth", name = "dcwa", version = "4.1") // Disable custom world advice
+
+    "annotationProcessor"(group = "io.github.llamalad7", name = "mixinextras-fabric", version = mixinExtrasVersion).apply {
+        implementation(this)
+    }
 }

@@ -5,6 +5,7 @@
     "compatibilityLevel": "JAVA_17",
     "mixins": [
         "common.JetSuitItemMixin",
+        "common.ServerPlayerMixin",
         "common.multipart.LevelMixin"
     ],
     "client": [
