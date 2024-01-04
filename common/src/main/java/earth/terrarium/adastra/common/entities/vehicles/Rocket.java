@@ -17,6 +17,7 @@ import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -143,8 +144,14 @@ public class Rocket extends Vehicle {
 
     @Override
     public Vec3 getDismountLocationForPassenger(LivingEntity passenger) {
-        return super.getDismountLocationForPassenger(passenger)
-            .add(passenger.getLookAngle().normalize().scale(2));
+        Vec3 location = super.getDismountLocationForPassenger(passenger)
+            .add(passenger.getLookAngle().multiply(2, 0, 2).normalize());
+        for (int i = 0; i < 6; i++) {
+            if (level().getBlockState(BlockPos.containing(location)).isAir()) {
+                location = location.subtract(0, 1, 0);
+            } else break;
+        }
+        return location;
     }
 
     @Override
@@ -342,6 +349,7 @@ public class Rocket extends Vehicle {
         for (var entity : level().getEntitiesOfClass(LivingEntity.class, getBoundingBox()
             .inflate(2, 30, 2)
             .move(0, -37, 0), e -> true)) {
+            if (entity.equals(getControllingPassenger())) continue;
             entity.setSecondsOnFire(10);
             entity.hurt(ModDamageSources.create(level(), ModDamageSources.ROCKET_FLAMES), 10);
         }

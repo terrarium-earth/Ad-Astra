@@ -127,7 +127,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
                 accumulatedFluid -= wholeBuckets;
             }
 
-            if (time % 100 == 0) tickOxygen(level, pos);
+            if (time % 60 == 0) tickOxygen(level, pos);
 
             if (time % 200 == 0) {
                 level.playSound(null, pos, ModSoundEvents.OXYGEN_OUTTAKE.get(), SoundSource.BLOCKS, 0.2f, 1);

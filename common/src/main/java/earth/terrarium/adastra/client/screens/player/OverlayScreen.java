@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.client.screens.player;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.config.AdAstraConfigClient;
@@ -12,9 +13,12 @@ import earth.terrarium.adastra.common.items.armor.JetSuitItem;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.levelgen.Heightmap;
+
+import java.util.Locale;
 
 public class OverlayScreen {
 
@@ -109,10 +113,34 @@ public class OverlayScreen {
             poseStack.popPose();
         }
 
-        // Lander overlay TODO
-        if (player.getVehicle() instanceof Lander lander) {
+        if (player.getVehicle() instanceof Lander lander && level.getBlockState(lander.getOnPos().below(2)).isAir()) {
             int ground = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, lander.blockPosition()).getY();
-            int distance = lander.blockPosition().getY() - ground;
+            int distance = Math.max(0, lander.blockPosition().getY() - ground);
+
+            poseStack.pushPose();
+            poseStack.translate(width / 2f, height / 2f, 0);
+            poseStack.scale(1.4f, 1.4f, 1.4f);
+
+            float alpha = Mth.clamp(0.5f - (float) (lander.getDeltaMovement().y() + 0.5), 0, 1);
+            RenderSystem.enableBlend();
+            RenderSystem.setShaderColor(1, 1, 1, alpha);
+            graphics.drawCenteredString(font,
+                Component.translatable("message.ad_astra.lander.onboard", minecraft.options.keyJump.getTranslatedKeyMessage().getString().toUpperCase(Locale.ROOT)),
+                0, 60, 0xe53253);
+            RenderSystem.disableBlend();
+            RenderSystem.setShaderColor(1, 1, 1, 1);
+
+            int distanceColor = 0x55ff55;
+            if (distance < 100) {
+                distanceColor = 0xff5555;
+            } else if (distance < 300) {
+                distanceColor = 0xffff55;
+            }
+            graphics.drawCenteredString(font,
+                String.valueOf(distance),
+                0, 30, distanceColor);
+
+            poseStack.popPose();
         }
     }
 }

@@ -70,9 +70,9 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
         int particleChance = 4;
 
         if (GravityApi.API.getGravity(player) <= PlanetConstants.ZERO_GRAVITY_THRESHOLD) {
-            propelForce *= 1.5;
-            propelYForce *= 1.5;
-            maxSpeed *= 2.0;
+            propelForce *= 0.1;
+            propelYForce *= 0.1;
+            maxSpeed *= 20.0;
         } else {
             propelYForce *= 0.2;
             propelYForce *= 1.0 - Math.min(1.0, entity.getY() / 90.0);

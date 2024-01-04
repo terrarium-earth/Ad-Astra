@@ -5,6 +5,7 @@ import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.planets.Planet;
+import earth.terrarium.adastra.mixins.common.LivingEntityAccessor;
 import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.FlyingAnimal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -70,14 +72,23 @@ public class GravityApiImpl implements GravityApi {
         boolean touchingSomething = false;
         for (Direction direction : Direction.values()) {
             BlockPos pos = movementAffectingPos.relative(direction);
-            if (level.getBlockState(pos).isCollisionShapeFullBlock(level, pos)) {
+            if (!level.getBlockState(pos).isAir()) {
                 touchingSomething = true;
                 break;
             }
         }
 
+        float ySpeed = 0;
+        if ((touchingSomething || level.getGameTime() % 10 == 0) && entity instanceof Player player) {
+            if (player.isShiftKeyDown()) {
+                ySpeed = -0.01f;
+            } else if (((LivingEntityAccessor) player).isJumping()) {
+                ySpeed = 0.01f;
+            }
+        }
+
         if (!touchingSomething) {
-            travelVector = travelVector.scale(0.1f);
+            travelVector = travelVector.scale(0.12f);
         }
 
         float friction = level.getBlockState(movementAffectingPos).getBlock().getFriction();
@@ -92,6 +103,7 @@ public class GravityApiImpl implements GravityApi {
                 downSpeed = 0.0;
             }
         }
+        downSpeed += ySpeed;
 
         if (entity.shouldDiscardFriction()) {
             entity.setDeltaMovement(movementVector.x, downSpeed, movementVector.z);

@@ -58,7 +58,9 @@ public class Lander extends Vehicle {
     @Override
     public Vec3 getDismountLocationForPassenger(LivingEntity passenger) {
         return super.getDismountLocationForPassenger(passenger)
-            .add(passenger.getLookAngle().normalize().scale(2));
+            .add(passenger.getLookAngle().multiply(1, 0, 1)
+                .normalize()
+                .subtract(0, 2, 0));
     }
 
     @Override
@@ -165,6 +167,10 @@ public class Lander extends Vehicle {
                 Mth.nextDouble(level().random, -0.05, 0.05),
                 Mth.nextDouble(level().random, -0.05, 0.05));
         }
+    }
+
+    public float speed() {
+        return speed;
     }
 
     @Override

@@ -117,6 +117,8 @@ to the oxygen distributor. It's especially important in orbit due to the zero gr
 - Fixed players dismounting landers with some mods like Transit Railway.
 - Only allow mobs that can survive in space to spawn in ad astra dimensions. This should fix
 the issue where mods like Alex's Mobs would spawn flies that kept dying.
+- The warning to hold space when landing is now displayed boldly on screen instead of a chat message.
+Hopefully this will prevent people from missing it and crashing.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.
@@ -137,6 +139,4 @@ if you're using these recipes in modpacks, you'll need to change them. This incl
 and prevent players from spawning a new space station at any claimed chunks. 
 - Added Argonauts compat to space stations. Players on the same guild will be
 able to share space stations.
-- The warning to hold space when landing is now displayed boldly on screen instead of a chat message.
-Hopefully this will prevent people from missing it and crashing.
 - Sliding doors can now be redstone powered from any of its blocks, instead of just the bottom middle one.

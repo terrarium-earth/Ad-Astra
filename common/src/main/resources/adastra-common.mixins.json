@@ -12,6 +12,7 @@
         "common.ServerLevelMixin",
         "common.SlotAccessor",
         "common.environment.FlowingFluidMixin",
+        "common.environment.IceBlockMixin",
         "common.environment.WeatheringCopperFullBlockMixin",
         "common.gravity.AbstractArrowMixin",
         "common.gravity.BoatMixin",

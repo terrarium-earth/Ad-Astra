@@ -26,8 +26,8 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
@@ -143,31 +143,28 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
 
     public Tooltip getSpaceStationRecipeTooltip(Planet planet, ChunkPos chunkPos, BlockPos pos) {
 
-        MutableComponent tooltip = Component.empty()
-            .append(Component.translatable("tooltip.ad_astra.construct_space_station_at", getOrbitName(planet), pos.getX(), pos.getZ()).withStyle(ChatFormatting.AQUA))
-            .append("\n")
-            .append("\n");
+        List<Component> tooltip = new ArrayList<>();
+        tooltip.add(Component.translatable("tooltip.ad_astra.construct_space_station_at", getOrbitName(planet), pos.getX(), pos.getZ()).withStyle(ChatFormatting.AQUA));
 
         if (isSpaceStationAt(planet, chunkPos)) {
-            tooltip.append(ConstantComponents.SPACE_STATION_ALREADY_EXISTS);
-            return Tooltip.create(tooltip);
+            tooltip.add(ConstantComponents.SPACE_STATION_ALREADY_EXISTS);
+            return Tooltip.create(CommonComponents.joinLines(tooltip));
         } else {
-            tooltip.append(ConstantComponents.CONSTRUCTION_COST.copy().withStyle(ChatFormatting.AQUA))
-                .append("\n");
+            tooltip.add(ConstantComponents.CONSTRUCTION_COST.copy().withStyle(ChatFormatting.AQUA));
         }
 
         List<Pair<ItemStack, Integer>> ingredients = ingredientsForSpaceStations.get(planet.orbitIfPresent().location());
-        if (ingredients == null) return Tooltip.create(tooltip);
+        if (ingredients == null) return Tooltip.create(CommonComponents.joinLines(tooltip));
         for (var ingredient : ingredients) {
             var stack = ingredient.getFirst();
             int amountOwned = ingredient.getSecond();
-            tooltip.append(Component.translatable("tooltip.ad_astra.requirement", amountOwned, stack.getCount(), stack.getHoverName()
+            boolean hasEnough = menu.player().isCreative() || menu.player().isSpectator() || amountOwned >= stack.getCount();
+            tooltip.add(Component.translatable("tooltip.ad_astra.requirement", amountOwned, stack.getCount(), stack.getHoverName()
                     .copy().withStyle(ChatFormatting.DARK_AQUA))
-                .copy().withStyle(amountOwned >= stack.getCount() ? ChatFormatting.GREEN : ChatFormatting.RED));
-            tooltip.append("\n");
+                .copy().withStyle(hasEnough ? ChatFormatting.GREEN : ChatFormatting.RED));
         }
 
-        return Tooltip.create(tooltip);
+        return Tooltip.create(CommonComponents.joinLines(tooltip));
     }
 
     public Component getPlanetName(Planet planet) {
@@ -285,6 +282,7 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     }
 
     public boolean canConstructSpaceStation(Planet planet) {
+        if (menu.player().isCreative() || menu.player().isSpectator()) return true;
         List<Pair<ItemStack, Integer>> ingredients = ingredientsForSpaceStations.get(planet.orbitIfPresent().location());
         if (ingredients == null) return false;
         for (var ingredient : ingredients) {

@@ -8,7 +8,6 @@ import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.botarium.common.registry.fluid.BotariumFlowingFluid;
-import net.minecraft.ChatFormatting;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -135,6 +134,8 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.GRAVITY_DISTRIBUTION_AREA, "Show where the gravity is being distributed");
 
         add(ConstantComponents.CLEAR_FLUID_TANK, "Shift-right-click to clear");
+
+        add("message.ad_astra.lander.onboard", "Hold %1$s to Apply Boosters");
 
         add(ConstantComponents.SIDE_CONFIG, "Side Config");
         add(ConstantComponents.REDSTONE_CONTROL, "Redstone Control");
