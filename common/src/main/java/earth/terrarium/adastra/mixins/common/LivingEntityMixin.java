@@ -5,7 +5,9 @@ import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
 import earth.terrarium.adastra.client.utils.ClientData;
+import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
+import earth.terrarium.adastra.common.entities.vehicles.Lander;
 import earth.terrarium.adastra.common.handlers.base.PlanetData;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
@@ -123,6 +125,16 @@ public abstract class LivingEntityMixin extends Entity {
     private void adastra$causeFallDamage(float fallDistance, float multiplier, DamageSource source, CallbackInfoReturnable<Boolean> cir) {
         if (!(fallDistance <= 3 / GravityApi.API.getGravity(this))) return;
         cir.setReturnValue(false);
+    }
+
+    // Fix dumb mods dismounting landers
+    @Inject(method = "stopRiding", at = @At("HEAD"), cancellable = true)
+    private void adastra$stopRiding(CallbackInfo ci) {
+        if ((Object) this instanceof Player player) {
+            if (player.getVehicle() instanceof Lander lander && lander.getY() > (AdAstraConfig.atmosphereLeave - 10)) {
+                ci.cancel();
+            }
+        }
     }
 
     @Unique
