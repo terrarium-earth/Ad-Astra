@@ -44,6 +44,7 @@ import java.util.*;
 public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     public static final ResourceLocation BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/planets/button.png");
     public static final ResourceLocation BACK_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/planets/back_button.png");
+    public static final ResourceLocation PLUS_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/planets/plus_button.png");
     public static final ResourceLocation SELECTION_MENU = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/planets/selection_menu.png");
     public static final ResourceLocation SMALL_SELECTION_MENU = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/planets/small_selection_menu.png");
 
@@ -151,7 +152,6 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     }
 
     public Tooltip getSpaceStationRecipeTooltip(Planet planet, ChunkPos chunkPos, BlockPos pos) {
-
         List<Component> tooltip = new ArrayList<>();
         tooltip.add(Component.translatable("tooltip.ad_astra.construct_space_station_at", getOrbitName(planet), pos.getX(), pos.getZ()).withStyle(ChatFormatting.AQUA));
 
@@ -365,11 +365,13 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     public void visitSpaceStation(Planet planet, ChunkPos pos) {
         var orbit = planet.orbitIfPresent();
         NetworkHandler.CHANNEL.sendToServer(new ServerboundLandPacket(orbit.location(), pos.getMiddleBlockPosition(100), false));
+        pageIndex = 0;
         onClose();
     }
 
     public void land(Planet planet) {
         NetworkHandler.CHANNEL.sendToServer(new ServerboundLandPacket(planet.dimensionLocation(), menu.player().blockPosition(), true));
+        pageIndex = 0;
         onClose();
     }
 

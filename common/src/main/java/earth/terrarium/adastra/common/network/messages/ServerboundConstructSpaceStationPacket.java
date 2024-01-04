@@ -7,6 +7,7 @@ import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.common.compat.cadmus.CadmusIntegration;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
 import earth.terrarium.adastra.common.planets.AdAstraData;
@@ -16,6 +17,7 @@ import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.TicketType;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
@@ -86,6 +88,15 @@ public record ServerboundConstructSpaceStationPacket(ResourceLocation dimensionL
                 structure.placeInWorld(targetLevel, pos, pos, new StructurePlaceSettings(), targetLevel.random, 2);
 
                 SpaceStationHandler.addSpaceStation(targetLevel, packet.targetPos(), player.getUUID());
+
+                // Cadmus claiming 3x3 chunks
+                if (CadmusIntegration.cadmusLoaded()) {
+                    for (int i = -1; i < 2; i++) {
+                        for (int j = -1; j < 2; j++) {
+                            CadmusIntegration.claim((ServerPlayer) player, new ChunkPos(packet.targetPos().x + i, packet.targetPos().z + j));
+                        }
+                    }
+                }
             };
         }
     }

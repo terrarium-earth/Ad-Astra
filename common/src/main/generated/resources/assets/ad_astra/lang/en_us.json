@@ -389,7 +389,7 @@
   "gui.ad_astra.text.confirm": "Confirm",
   "gui.ad_astra.text.construct_space_station": "Construct",
   "gui.ad_astra.text.land": "Land",
-  "gui.ad_astra.text.space_station": "Space Station",
+  "gui.ad_astra.text.space_station": "Space Stations",
   "info.ad_astra.cable": "Transfers energy. Right-click with a wrench to change the distribution mode.",
   "info.ad_astra.cable_duct": "Works like cables, but fully-conceals oxygen, preventing leaks.",
   "info.ad_astra.coal_generator": "The simplest of generators. Generates energy from burnable materials.",

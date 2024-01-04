@@ -262,7 +262,7 @@ public class ModLangProvider extends LanguageProvider {
 
         add(ConstantComponents.CATALOG, "Catalog");
         add(ConstantComponents.LAND, "Land");
-        add(ConstantComponents.SPACE_STATION, "Space Station");
+        add(ConstantComponents.SPACE_STATION, "Space Stations");
         add(ConstantComponents.CONSTRUCT, "Construct");
         add("tooltip.ad_astra.land", "Land on %s at [%s, %s]");
         add("tooltip.ad_astra.space_station_land", "Land on space station in %s at [%s, %s]");
