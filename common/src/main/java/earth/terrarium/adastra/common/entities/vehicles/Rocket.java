@@ -148,6 +148,11 @@ public class Rocket extends Vehicle {
     }
 
     @Override
+    public boolean isSafeToDismount(Player player) {
+        return !isLaunching() && !hasLaunched();
+    }
+
+    @Override
     public boolean shouldSit() {
         return false;
     }
@@ -184,7 +189,7 @@ public class Rocket extends Vehicle {
         if (canLaunch()) {
             initiateLaunchSequence();
             showFuelMessage = false;
-        } else if (showFuelMessage && !level().isClientSide() && yya() > 0 && getControllingPassenger() instanceof Player player) {
+        } else if (showFuelMessage && !level().isClientSide() && passengerHasSpaceDown() && getControllingPassenger() instanceof Player player) {
             player.displayClientMessage(ConstantComponents.NOT_ENOUGH_FUEL, true);
         }
 
@@ -274,7 +279,7 @@ public class Rocket extends Vehicle {
             return false;
         }
         if (!hasEnoughFuel()) return false;
-        return yya() > 0;
+        return passengerHasSpaceDown();
     }
 
     public void initiateLaunchSequence() {

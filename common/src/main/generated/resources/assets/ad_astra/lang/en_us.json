@@ -509,6 +509,7 @@
   "key.ad_astra.toggle_suit_flight": "Toggle suit flight",
   "key.categories.adastra": "Ad Astra",
   "message.ad_astra.flag.not_owner": "You do not own this flag!",
+  "message.ad_astra.hold_to_dismount": "Hold SHIFT for %.1f seconds to dismount",
   "message.ad_astra.invalid_launching_dimension": "You cannot launch from this dimension!",
   "message.ad_astra.not_enough_fuel": "Not enough fuel!",
   "message.ad_astra.suit_flight_disabled": "Suit flight disabled",

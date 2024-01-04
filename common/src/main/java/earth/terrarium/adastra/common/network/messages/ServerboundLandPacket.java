@@ -91,7 +91,7 @@ public record ServerboundLandPacket(ResourceLocation dimensionLocation,
                 if (!(vehicle instanceof Rocket rocket)) return;
                 Lander lander = ModEntityTypes.LANDER.get().create(targetLevel);
                 if (lander == null) return;
-                lander.setPos(teleportedPlayer.getX(), teleportedPlayer.getY(), teleportedPlayer.getZ());
+                lander.setPos(vehicle.getX(), vehicle.getY(), vehicle.getZ());
                 targetLevel.addFreshEntity(lander);
                 teleportedPlayer.startRiding(lander);
 

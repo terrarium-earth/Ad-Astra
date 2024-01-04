@@ -227,23 +227,35 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
         return false;
     }
 
+    /**
+     * Checks if it's safe to dismount the vehicle. If not, the passenger has to hold shift for 2 seconds to dismount.
+     */
+    public boolean isSafeToDismount(Player player) {
+        return true;
+    }
+
+    /**
+     * Gets the left/right passenger input.
+     */
     public float xxa() {
         var controllingPassenger = getControllingPassenger();
         if (controllingPassenger == null) return 0;
         return level().isClientSide() ? controllingPassenger.xxa : xxa;
     }
 
-    // yya is not updated even on the client, so it's instead obtained by checking if the entity is jumping
-    public float yya() {
-        var controllingPassenger = getControllingPassenger();
-        if (!(controllingPassenger instanceof LivingEntityAccessor entity)) return 0.0f;
-        return entity.isJumping() ? 1.0f : 0.0f;
-    }
-
+    /**
+     * Gets the forward/backward passenger input.
+     */
     public float zza() {
         var controllingPassenger = getControllingPassenger();
         if (controllingPassenger == null) return 0;
         return level().isClientSide() ? controllingPassenger.zza : zza;
+    }
+
+    public boolean passengerHasSpaceDown() {
+        var controllingPassenger = getControllingPassenger();
+        if (!(controllingPassenger instanceof LivingEntityAccessor entity)) return false;
+        return entity.isJumping();
     }
 
     public VehicleContainer inventory() {

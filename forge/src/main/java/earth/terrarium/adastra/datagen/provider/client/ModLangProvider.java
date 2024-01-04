@@ -8,6 +8,7 @@ import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.botarium.common.registry.fluid.BotariumFlowingFluid;
+import net.minecraft.ChatFormatting;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -88,6 +89,8 @@ public class ModLangProvider extends LanguageProvider {
 
         add(ConstantComponents.SUIT_FLIGHT_ENABLED, "Suit flight enabled");
         add(ConstantComponents.SUIT_FLIGHT_DISABLED, "Suit flight disabled");
+
+        add("message.ad_astra.hold_to_dismount", "Hold SHIFT for %.1f seconds to dismount");
 
         add(ConstantComponents.TRUE, "✔");
         add(ConstantComponents.FALSE, "✘");

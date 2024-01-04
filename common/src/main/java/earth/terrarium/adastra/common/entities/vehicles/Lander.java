@@ -62,6 +62,11 @@ public class Lander extends Vehicle {
     }
 
     @Override
+    public boolean isSafeToDismount(Player player) {
+        return onGround();
+    }
+
+    @Override
     protected void addPassenger(Entity passenger) {
         super.addPassenger(passenger);
         passenger.setYRot(getYRot());
@@ -79,13 +84,12 @@ public class Lander extends Vehicle {
     public void tick() {
         super.tick();
         if (!onGround()) flightTick();
+        else angle = 0;
     }
 
     private void flightTick() {
         var delta = getDeltaMovement();
-
         float xxa = -xxa(); // right/left
-        float yya = yya(); // up/down
 
         if (xxa != 0) {
             angle += xxa * 1;
@@ -93,7 +97,7 @@ public class Lander extends Vehicle {
             angle *= 0.9f;
         }
 
-        if (yya > 0 && delta.y < -0.05) {
+        if (passengerHasSpaceDown() && delta.y < -0.05) {
             speed += 0.01f;
             fallDistance *= 0.9f;
             spawnLanderParticles();

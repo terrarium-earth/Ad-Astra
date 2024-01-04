@@ -143,6 +143,11 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     }
 
     @Override
+    public boolean isSafeToDismount(Player player) {
+        return speed() < 0.1f;
+    }
+
+    @Override
     protected void positionRider(Entity passenger, MoveFunction callback) {
         if (!hasPassenger(passenger)) return;
 

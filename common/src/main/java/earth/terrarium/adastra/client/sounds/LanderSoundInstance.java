@@ -9,7 +9,7 @@ public class LanderSoundInstance extends RocketSoundInstance {
 
     @Override
     public void tick() {
-        this.canPlay = vehicle.yya() > 0;
+        this.canPlay = vehicle.passengerHasSpaceDown();
         if (!vehicle.isRemoved() && !vehicle.onGround()) {
             x = vehicle.getX();
             y = vehicle.getY();

@@ -113,6 +113,8 @@ to the oxygen distributor. It's especially important in orbit due to the zero gr
 - Added the Ti-69. It's a device that displays the local oxygen, temperature, and gravity.
 - Copper no longer oxidizes in environments with no oxygen.
 - Updated the oxygen distributor model. It now spins and can be placed on any block face.
+- You now need to hold shift for two seconds before you can dismount moving vehicles.
+- Fixed players dismounting landers with some mods like Transit Railway.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.
@@ -135,5 +137,4 @@ and prevent players from spawning a new space station at any claimed chunks.
 able to share space stations.
 - The warning to hold space when landing is now displayed boldly on screen instead of a chat message.
 Hopefully this will prevent people from missing it and crashing.
-- Fixed players dismounting landers with some mods like Transit Railway.
 - Sliding doors can now be redstone powered from any of its blocks, instead of just the bottom middle one.
