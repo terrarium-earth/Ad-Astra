@@ -73,4 +73,11 @@ public final class AdAstraConfigClient {
         translation = "Energy Bar Scale"
     )
     public static float energyBarScale = 1;
+
+    @ConfigEntry(
+        type = EntryType.BOOLEAN,
+        id = "spaceMuffler",
+        translation = "Reduce volume and increase pitch in space"
+    )
+    public static boolean spaceMuffler = true;
 }

@@ -38,6 +38,7 @@
         "client.PlayerRendererMixin",
         "client.SoundEngineAccessor",
         "client.SoundManagerAccessor",
+        "client.SoundManagerMixin",
         "client.multipart.ClientLevelEntityCallbacksMixin",
         "client.multipart.EntityRenderDispatcherMixin"
     ],
