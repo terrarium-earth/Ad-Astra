@@ -44,6 +44,9 @@ dependencies {
     modLocalRuntime(group = "maven.modrinth", name = "jade", version = "2iRQrBk4")
     modLocalRuntime(group = "maven.modrinth", name = "mekanism", version = "10.4.2.16")
 
+    modLocalRuntime(group = "maven.modrinth", name = "alexs-mobs", version = "1.22.7")
+    modLocalRuntime(group = "maven.modrinth", name = "citadel", version = "2.4.9")
+
     forgeRuntimeLibrary("com.teamresourceful:yabn:1.0.3")
     forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2")
 

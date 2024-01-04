@@ -115,6 +115,8 @@ to the oxygen distributor. It's especially important in orbit due to the zero gr
 - Updated the oxygen distributor model. It now spins and can be placed on any block face.
 - You now need to hold shift for two seconds before you can dismount moving vehicles.
 - Fixed players dismounting landers with some mods like Transit Railway.
+- Only allow mobs that can survive in space to spawn in ad astra dimensions. This should fix
+the issue where mods like Alex's Mobs would spawn flies that kept dying.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.
