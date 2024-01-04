@@ -6,9 +6,11 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.datafixers.util.Pair;
+import com.mojang.math.Axis;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.components.LabeledImageButton;
+import earth.terrarium.adastra.client.utils.DimensionUtils;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
@@ -19,6 +21,7 @@ import earth.terrarium.adastra.common.network.messages.ServerboundLandPacket;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.planets.Planet;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -58,6 +61,12 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     @Nullable
     private Planet selectedPlanet;
 
+    private static final List<ResourceLocation> SOLAR_SYSTEM_TEXTURES = List.of(
+        DimensionUtils.MERCURY,
+        DimensionUtils.VENUS,
+        DimensionUtils.EARTH,
+        DimensionUtils.MARS
+    );
 
     public PlanetsScreen(PlanetsMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -181,6 +190,11 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(graphics);
+        if (selectedSolarSystem.equals(PlanetConstants.PROXIMA_CENTAURI)) {
+            renderProximaCentauri(graphics);
+        } else {
+            renderSolarSystem(graphics);
+        }
         super.render(graphics, mouseX, mouseY, partialTick);
 
         renderButtons(graphics, mouseX, mouseY, partialTick);
@@ -243,6 +257,55 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
         }
 
         tessellator.end();
+    }
+
+    public void renderSolarSystem(GuiGraphics graphics) {
+        graphics.blit(DimensionUtils.SUN, width / 2 - 8, height / 2 - 8, 0, 0, 16, 16, 16, 16);
+        float yRot = Util.getMillis() / 100f;
+        for (int i = 1; i < 5; i++) {
+            drawCircle(width / 2f, height / 2f, 30 * i, 75, 0xff24327b);
+
+            graphics.pose().pushPose();
+            graphics.pose().translate(width / 2f, height / 2f, 0);
+            graphics.pose().mulPose(Axis.ZP.rotationDegrees(yRot * (5 - i) / 2));
+            graphics.pose().translate(29 * i - 10, 0, 0);
+            graphics.blit(SOLAR_SYSTEM_TEXTURES.get(i - 1), 0, 0, 0, 0, 12, 12, 12, 12);
+            graphics.pose().popPose();
+        }
+    }
+
+    public void renderProximaCentauri(GuiGraphics graphics) {
+        graphics.blit(DimensionUtils.BLUE_SUN, width / 2 - 8, height / 2 - 8, 0, 0, 16, 16, 16, 16);
+        float yRot = Util.getMillis() / 100f % 360f;
+        drawCircle(width / 2f, height / 2f, 60, 75, 0xff008080);
+
+        graphics.pose().pushPose();
+        graphics.pose().translate(width / 2f, height / 2f, 0);
+        graphics.pose().mulPose(Axis.ZP.rotationDegrees(yRot));
+        graphics.pose().translate(50, 0, 0);
+        graphics.blit(DimensionUtils.GLACIO, 0, 0, 0, 0, 12, 12, 12, 12);
+        graphics.pose().popPose();
+    }
+
+    public static void drawCircle(double x, double y, double radius, int sides, int color) {
+        Tesselator tessellator = Tesselator.getInstance();
+        BufferBuilder bufferBuilder = tessellator.getBuilder();
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+
+        double scale = Minecraft.getInstance().getWindow().getGuiScaledHeight() / 400.0;
+        radius *= scale;
+
+        double width = radius - 0.6;
+        for (double i = width; i < radius - 0.5 + 1; i += 0.1) {
+            bufferBuilder.begin(VertexFormat.Mode.DEBUG_LINE_STRIP, DefaultVertexFormat.POSITION_COLOR);
+            for (int j = 0; j <= sides; j++) {
+                double angle = (Math.PI * 2 * j / sides) + Math.toRadians(180);
+                bufferBuilder.vertex(x + Math.sin(angle) * i, y + Math.cos(angle) * i, 0)
+                    .color(color)
+                    .endVertex();
+            }
+            tessellator.end();
+        }
     }
 
     @Override
@@ -312,6 +375,11 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
 
     @Override
     public void onClose() {
+        if (pageIndex > 0) {
+            pageIndex--;
+            rebuildWidgets();
+            return;
+        }
         var player = menu.player();
         if (player.isCreative() || player.isSpectator()) super.onClose();
         if (!(player.getVehicle() instanceof Rocket)) super.onClose();
