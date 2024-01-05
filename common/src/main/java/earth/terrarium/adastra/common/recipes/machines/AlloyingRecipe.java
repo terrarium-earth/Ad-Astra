@@ -7,6 +7,8 @@ import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
+import earth.terrarium.adastra.common.utils.ItemUtils;
+import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -47,7 +49,10 @@ public record AlloyingRecipe(
             }
             if (!found) return false;
         }
-        return true;
+
+        if (!(container instanceof BotariumEnergyBlock<?> entity)) return true;
+        if (entity.getEnergyStorage().internalExtract(energy, true) < energy) return false;
+        return ItemUtils.canAddItem(container, result, 5, 6, 7, 8);
     }
 
     @Override

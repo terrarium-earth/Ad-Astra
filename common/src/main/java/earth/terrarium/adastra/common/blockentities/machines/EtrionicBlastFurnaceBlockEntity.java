@@ -1,7 +1,5 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
-import com.mojang.datafixers.util.Pair;
-import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
@@ -15,17 +13,18 @@ import earth.terrarium.adastra.common.utils.ItemUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.crafting.BlastingRecipe;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -44,8 +43,10 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
 
     @Nullable
     private AlloyingRecipe alloyingRecipe;
+    protected final RecipeManager.CachedCheck<Container, AlloyingRecipe> alloyingQuickCheck = RecipeManager.createCheck(ModRecipeTypes.ALLOYING.get());
 
     private final BlastingRecipe[] recipes = new BlastingRecipe[4];
+
     private Mode mode = Mode.BLASTING;
     protected int cookTime;
     protected int cookTimeTotal;
@@ -143,7 +144,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
 
     public void alloyingRecipeTick(WrappedBlockEnergyContainer energyStorage) {
         if (alloyingRecipe == null) return;
-        if (!canCraftAlloying(energyStorage)) {
+        if (!canCraftAlloying()) {
             clearAlloyingRecipe();
             return;
         }
@@ -155,11 +156,9 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
         craftAlloying();
     }
 
-    public boolean canCraftAlloying(WrappedBlockEnergyContainer energyStorage) {
-        if (alloyingRecipe == null) return false;
-        if (energyStorage.internalExtract(alloyingRecipe.energy(), true) < alloyingRecipe.energy()) return false;
-        if (!alloyingRecipe.matches(this, level())) return false;
-        return ItemUtils.canAddItem(this, alloyingRecipe.result(), 5, 6, 7, 8);
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public boolean canCraftAlloying() {
+        return alloyingRecipe != null && alloyingRecipe.matches(this, level());
     }
 
     public void craftAlloying() {
@@ -177,7 +176,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
         ItemUtils.addItem(this, alloyingRecipe.result(), 5, 6, 7, 8);
 
         cookTime = 0;
-        if (!canCraftAlloying(getEnergyStorage())) clearAlloyingRecipe();
+        if (!canCraftAlloying()) clearAlloyingRecipe();
     }
 
     @Override
@@ -189,15 +188,10 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
                 createRecipe(i, i + 1);
             }
         } else {
-            level().getRecipeManager().getRecipeFor(
-                    ModRecipeTypes.ALLOYING.get(), this,
-                    level(), Optionull.map(alloyingRecipe, CodecRecipe::id)
-                )
-                .map(Pair::getSecond)
-                .ifPresent(r -> {
-                    alloyingRecipe = r;
-                    cookTimeTotal = r.cookingTime();
-                });
+            alloyingQuickCheck.getRecipeFor(this, level()).ifPresent(r -> {
+                alloyingRecipe = r;
+                cookTimeTotal = r.cookingTime();
+            });
         }
     }
 

@@ -32,7 +32,7 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
     );
 
     public CompressorBlockEntity(BlockPos pos, BlockState state) {
-        super(pos, state, 3);
+        super(pos, state, 3, ModRecipeTypes.COMPRESSING);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
     @Override
     public void recipeTick(ServerLevel level, WrappedBlockEnergyContainer energyStorage) {
         if (recipe == null) return;
-        if (!canCraft(energyStorage)) {
+        if (!canCraft()) {
             clearRecipe();
             return;
         }
@@ -73,14 +73,6 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
         cookTime++;
         if (cookTime < cookTimeTotal) return;
         craft();
-    }
-
-    @Override
-    public boolean canCraft(WrappedBlockEnergyContainer energyStorage) {
-        if (recipe == null) return false;
-        if (energyStorage.internalExtract(recipe.energy(), true) < recipe.energy()) return false;
-        if (!recipe.ingredient().test(getItem(1))) return false;
-        return ItemUtils.canAddItem(getItem(2), recipe.result());
     }
 
     @Override
@@ -97,14 +89,10 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
     @Override
     public void update() {
         if (level().isClientSide()) return;
-        level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.COMPRESSING.get())
-            .stream()
-            .filter(r -> r.ingredient().test(getItem(1)))
-            .findFirst()
-            .ifPresent(r -> {
-                recipe = r;
-                cookTimeTotal = r.cookingTime();
-            });
+        quickCheck.getRecipeFor(this, level()).ifPresent(r -> {
+            recipe = r;
+            cookTimeTotal = r.cookingTime();
+        });
     }
 
     @Override

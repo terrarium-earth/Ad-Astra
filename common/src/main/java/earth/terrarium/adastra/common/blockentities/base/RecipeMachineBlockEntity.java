@@ -4,19 +4,26 @@ import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class RecipeMachineBlockEntity<T extends Recipe<?>> extends EnergyContainerMachineBlockEntity {
+import java.util.function.Supplier;
+
+public abstract class RecipeMachineBlockEntity<T extends Recipe<Container>> extends EnergyContainerMachineBlockEntity {
     @Nullable
     protected T recipe;
     protected int cookTime;
     protected int cookTimeTotal;
+    protected final RecipeManager.CachedCheck<Container, T> quickCheck;
 
-    public RecipeMachineBlockEntity(BlockPos pos, BlockState state, int containerSize) {
+    public RecipeMachineBlockEntity(BlockPos pos, BlockState state, int containerSize, Supplier<RecipeType<T>> recipeType) {
         super(pos, state, containerSize);
+        this.quickCheck = RecipeManager.createCheck(recipeType.get());
     }
 
     @Override
@@ -41,7 +48,9 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<?>> extends Ener
 
     public abstract void recipeTick(ServerLevel level, WrappedBlockEnergyContainer energyStorage);
 
-    public abstract boolean canCraft(WrappedBlockEnergyContainer energyStorage);
+    public boolean canCraft() {
+        return recipe != null && recipe.matches(this, level());
+    }
 
     public abstract void craft();
 

@@ -40,7 +40,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
     private WrappedBlockFluidContainer fluidContainer;
 
     public CryoFreezerBlockEntity(BlockPos pos, BlockState state) {
-        super(pos, state, 4);
+        super(pos, state, 4, ModRecipeTypes.CRYO_FREEZING);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
     public void recipeTick(ServerLevel level, WrappedBlockEnergyContainer energyStorage) {
         if (recipe == null) return;
         if (fluidContainer == null) getFluidContainer();
-        if (!canCraft(energyStorage)) {
+        if (!canCraft()) {
             clearRecipe();
             return;
         }
@@ -100,14 +100,6 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
         cookTime++;
         if (cookTime < cookTimeTotal) return;
         craft();
-    }
-
-    @Override
-    public boolean canCraft(WrappedBlockEnergyContainer energyStorage) {
-        if (recipe == null) return false;
-        if (energyStorage.internalExtract(recipe.energy(), true) < recipe.energy()) return false;
-        if (fluidContainer.getFluids().get(0).getFluidAmount() >= fluidContainer.getTankCapacity(0)) return false;
-        return recipe.matches(this, level());
     }
 
     @Override
@@ -126,11 +118,10 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
     @Override
     public void update() {
         if (level().isClientSide()) return;
-        level().getRecipeManager().getRecipeFor(ModRecipeTypes.CRYO_FREEZING.get(), this, level())
-            .ifPresent(r -> {
-                recipe = r;
-                cookTimeTotal = r.cookingTime();
-            });
+        quickCheck.getRecipeFor(this, level()).ifPresent(r -> {
+            recipe = r;
+            cookTimeTotal = r.cookingTime();
+        });
         updateSlots();
     }
 

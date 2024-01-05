@@ -119,6 +119,7 @@ to the oxygen distributor. It's especially important in orbit due to the zero gr
 the issue where mods like Alex's Mobs would spawn flies that kept dying.
 - The warning to hold space when landing is now displayed boldly on screen instead of a chat message.
 Hopefully this will prevent people from missing it and crashing.
+- The NASA workbench can now automatically craft rockets when powered with redstone.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.

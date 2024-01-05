@@ -7,6 +7,8 @@ import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
+import earth.terrarium.adastra.common.utils.ItemUtils;
+import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -34,7 +36,10 @@ public record CompressingRecipe(
 
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
-        return false;
+        if (!ingredient.test(container.getItem(1))) return false;
+        if (!(container instanceof BotariumEnergyBlock<?> entity)) return true;
+        if (entity.getEnergyStorage().internalExtract(energy, true) < energy) return false;
+        return ItemUtils.canAddItem(container.getItem(2), result);
     }
 
     @Override

@@ -140,7 +140,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
             setLit(false);
         } else if (time % 10 == 0) setLit(false);
 
-        energyPerTick = (recipe != null && canCraft(getEnergyStorage()) ? recipe.energy() : 0) + (canDistribute ? calculateEnergyPerTick() : 0);
+        energyPerTick = (recipe != null && canCraft() ? recipe.energy() : 0) + (canDistribute ? calculateEnergyPerTick() : 0);
         this.fluidPerTick = canDistribute ? fluidPerTick : 0;
         distributedBlocksCount = canDistribute ? lastDistributedBlocks.size() : 0;
     }

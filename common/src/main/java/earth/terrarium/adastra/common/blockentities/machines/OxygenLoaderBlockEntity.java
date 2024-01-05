@@ -41,11 +41,11 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
     private WrappedBlockFluidContainer fluidContainer;
 
     public OxygenLoaderBlockEntity(BlockPos pos, BlockState state) {
-        super(pos, state, 5);
+        this(pos, state, 5);
     }
 
     public OxygenLoaderBlockEntity(BlockPos pos, BlockState state, int containerSize) {
-        super(pos, state, containerSize);
+        super(pos, state, containerSize, ModRecipeTypes.OXYGEN_LOADING);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
     public void recipeTick(ServerLevel level, WrappedBlockEnergyContainer energyStorage) {
         if (recipe == null) return;
         if (fluidContainer == null) getFluidContainer();
-        if (!canCraft(energyStorage)) {
+        if (!canCraft()) {
             clearRecipe();
             return;
         }
@@ -107,14 +107,6 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
         cookTime++;
         if (cookTime < cookTimeTotal) return;
         craft();
-    }
-
-    @Override
-    public boolean canCraft(WrappedBlockEnergyContainer energyStorage) {
-        if (recipe == null) return false;
-        if (energyStorage.internalExtract(recipe.energy(), true) < recipe.energy()) return false;
-        if (fluidContainer.getFluids().get(1).getFluidAmount() >= fluidContainer.getTankCapacity(1)) return false;
-        return fluidContainer.internalExtract(recipe.ingredient(), true).getFluidAmount() >= recipe.ingredient().getFluidAmount();
     }
 
     @Override
@@ -132,15 +124,10 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
 
     @Override
     public void update() {
-        if (level().isClientSide()) return;
-        level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get())
-            .stream()
-            .filter(r -> r.ingredient().matches(getFluidContainer().getFluids().get(0)))
-            .findFirst()
-            .ifPresent(r -> {
-                recipe = r;
-                cookTimeTotal = r.cookingTime();
-            });
+        quickCheck.getRecipeFor(this, level()).ifPresent(r -> {
+            recipe = r;
+            cookTimeTotal = r.cookingTime();
+        });
         updateSlots();
     }
 

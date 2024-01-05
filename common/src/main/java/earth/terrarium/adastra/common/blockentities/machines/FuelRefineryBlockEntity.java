@@ -41,7 +41,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
     private WrappedBlockFluidContainer fluidContainer;
 
     public FuelRefineryBlockEntity(BlockPos pos, BlockState state) {
-        super(pos, state, 5);
+        super(pos, state, 5, ModRecipeTypes.REFINING);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
     public void recipeTick(ServerLevel level, WrappedBlockEnergyContainer energyStorage) {
         if (recipe == null) return;
         if (fluidContainer == null) getFluidContainer();
-        if (!canCraft(energyStorage)) {
+        if (!canCraft()) {
             clearRecipe();
             return;
         }
@@ -103,14 +103,6 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
         cookTime++;
         if (cookTime < cookTimeTotal) return;
         craft();
-    }
-
-    @Override
-    public boolean canCraft(WrappedBlockEnergyContainer energyStorage) {
-        if (recipe == null) return false;
-        if (energyStorage.internalExtract(recipe.energy(), true) < recipe.energy()) return false;
-        if (fluidContainer.getFluids().get(1).getFluidAmount() >= fluidContainer.getTankCapacity(1)) return false;
-        return fluidContainer.internalExtract(recipe.ingredient(), true).getFluidAmount() >= recipe.ingredient().getFluidAmount();
     }
 
     @Override
@@ -128,15 +120,10 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
 
     @Override
     public void update() {
-        if (level().isClientSide()) return;
-        level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())
-            .stream()
-            .filter(r -> r.ingredient().matches(getFluidContainer().getFluids().get(0)))
-            .findFirst()
-            .ifPresent(r -> {
-                recipe = r;
-                cookTimeTotal = r.cookingTime();
-            });
+        quickCheck.getRecipeFor(this, level()).ifPresent(r -> {
+            recipe = r;
+            cookTimeTotal = r.cookingTime();
+        });
         updateSlots();
     }
 

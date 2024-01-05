@@ -3,6 +3,7 @@ package earth.terrarium.adastra.common.recipes.machines;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
+import earth.terrarium.adastra.common.blockentities.machines.FuelRefineryBlockEntity;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
@@ -44,7 +45,13 @@ public record RefiningRecipe(
 
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
-        return false;
+        if (!(container instanceof FuelRefineryBlockEntity entity)) return false;
+        if (!ingredient.matches(entity.getFluidContainer().getFluids().get(0))) return false;
+        if (entity.getEnergyStorage().internalExtract(energy, true) < energy) return false;
+        if (entity.getFluidContainer().getFluids().get(1).getFluidAmount() >= entity.getFluidContainer().getTankCapacity(1)) {
+            return false;
+        }
+        return entity.getFluidContainer().internalExtract(ingredient, true).getFluidAmount() >= ingredient.getFluidAmount();
     }
 
     @Override
