@@ -4,9 +4,27 @@ import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import net.minecraft.Optionull;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 public class PlanetApiImpl implements PlanetApi {
+
+    @Override
+    public @Nullable Planet getPlanet(Level level) {
+        return getPlanet(level.dimension());
+    }
+
+    @Override
+    public @Nullable Planet getPlanet(ResourceKey<Level> level) {
+        return getPlanet(level.location());
+    }
+
+    @Override
+    public @Nullable Planet getPlanet(ResourceLocation level) {
+        return AdAstraData.getPlanet(level);
+    }
+
     @Override
     public boolean isPlanet(Level level) {
         return isPlanet(level.dimension());
@@ -44,6 +62,6 @@ public class PlanetApiImpl implements PlanetApi {
 
     @Override
     public long getSolarPower(ResourceKey<Level> level) {
-        return Optionull.mapOrDefault(AdAstraData.getPlanet(level), Planet::solarPower, PlanetConstants.EARTH_SOLAR_POWER);
+        return Optionull.mapOrDefault(getPlanet(level), Planet::solarPower, PlanetConstants.EARTH_SOLAR_POWER);
     }
 }

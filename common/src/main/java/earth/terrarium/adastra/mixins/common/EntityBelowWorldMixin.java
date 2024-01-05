@@ -2,7 +2,6 @@ package earth.terrarium.adastra.mixins.common;
 
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
-import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -24,7 +23,7 @@ public abstract class EntityBelowWorldMixin {
         if (!(entity.level() instanceof ServerLevel serverLevel)) return;
         if (!PlanetApi.API.isSpace(serverLevel)) return;
 
-        var planet = AdAstraData.getPlanet(serverLevel.dimension());
+        var planet = PlanetApi.API.getPlanet(serverLevel.dimension());
         if (planet == null) return;
 
         planet.getOrbitPlanet().ifPresent(targetLevelKey -> {

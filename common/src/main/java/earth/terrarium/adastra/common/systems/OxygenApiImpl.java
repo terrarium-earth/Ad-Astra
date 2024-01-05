@@ -1,9 +1,9 @@
 package earth.terrarium.adastra.common.systems;
 
+import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
-import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
 import earth.terrarium.adastra.common.tags.ModEntityTypeTags;
@@ -25,7 +25,7 @@ public class OxygenApiImpl implements OxygenApi {
 
     @Override
     public boolean hasOxygen(ResourceKey<Level> level) {
-        return Optionull.mapOrDefault(AdAstraData.getPlanet(level), Planet::oxygen, true);
+        return Optionull.mapOrDefault(PlanetApi.API.getPlanet(level), Planet::oxygen, true);
     }
 
     @Override

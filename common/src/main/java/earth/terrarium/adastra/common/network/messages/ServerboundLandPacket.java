@@ -8,11 +8,11 @@ import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.entities.vehicles.Lander;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
-import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.utils.ModUtils;
@@ -54,7 +54,7 @@ public record ServerboundLandPacket(ResourceLocation dimensionLocation,
             return (player, level) -> {
                 if (!(level instanceof ServerLevel serverLevel)) return;
                 if (!(player.containerMenu instanceof PlanetsMenu)) return;
-                Planet planet = AdAstraData.getPlanet(packet.dimensionLocation);
+                Planet planet = PlanetApi.API.getPlanet(packet.dimensionLocation);
                 if (planet == null) return;
                 var server = serverLevel.getServer();
                 boolean landingNormally = packet.tryPreviousLocation() && player.getVehicle() instanceof Rocket;

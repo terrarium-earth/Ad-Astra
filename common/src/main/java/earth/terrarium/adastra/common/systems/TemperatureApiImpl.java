@@ -1,10 +1,10 @@
 package earth.terrarium.adastra.common.systems;
 
+import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
-import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.tags.ModEntityTypeTags;
 import earth.terrarium.adastra.common.tags.ModItemTags;
@@ -30,7 +30,7 @@ public class TemperatureApiImpl implements TemperatureApi {
 
     @Override
     public short getTemperature(ResourceKey<Level> level) {
-        return Optionull.mapOrDefault(AdAstraData.getPlanet(level), Planet::temperature, PlanetConstants.EARTH_TEMPERATURE);
+        return Optionull.mapOrDefault(PlanetApi.API.getPlanet(level), Planet::temperature, PlanetConstants.EARTH_TEMPERATURE);
     }
 
     @Override

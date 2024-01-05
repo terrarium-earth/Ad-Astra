@@ -63,11 +63,6 @@ public class AdAstraData extends SimpleJsonResourceReloadListener {
     }
 
     @Nullable
-    public static Planet getPlanet(ResourceKey<Level> level) {
-        return getPlanet(level.location());
-    }
-
-    @Nullable
     public static Planet getPlanet(ResourceLocation location) {
         return PLANETS.get(location);
     }
