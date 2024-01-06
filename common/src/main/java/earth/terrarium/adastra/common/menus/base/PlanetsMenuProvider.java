@@ -1,12 +1,16 @@
 package earth.terrarium.adastra.common.menus.base;
 
 import com.google.common.collect.ImmutableSet;
+import earth.terrarium.adastra.common.compat.cadmus.CadmusIntegration;
 import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
+import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
+import it.unimi.dsi.fastutil.objects.Object2BooleanMaps;
+import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -29,7 +33,7 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
 
     @Override
     public AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
-        return new PlanetsMenu(containerId, inventory, Map.of(), Set.of());
+        return new PlanetsMenu(containerId, inventory, Map.of(), Object2BooleanMaps.emptyMap(), Set.of());
     }
 
     @Override
@@ -47,6 +51,11 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
                 buffer.writeUUID(id);
             });
         });
+
+        if (CadmusIntegration.cadmusLoaded()) {
+            AdAstraData.planets().keySet().forEach(dimension ->
+                buffer.writeBoolean(CadmusIntegration.isClaimed(player.server.getLevel(dimension), player.chunkPosition())));
+        }
 
         AdAstraData.planets().keySet().forEach(dimension -> {
             Collection<GlobalPos> locations = LaunchingDimensionHandler.getAllSpawnLocations(player, player.server);
@@ -73,6 +82,13 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
             }
         });
         return Collections.unmodifiableMap(spaceStations);
+    }
+
+    public static Object2BooleanMap<ResourceKey<Level>> createClaimedChunksFromBuf(FriendlyByteBuf buf) {
+        if (!CadmusIntegration.cadmusLoaded()) return Object2BooleanMaps.emptyMap();
+        Object2BooleanMap<ResourceKey<Level>> claimedChunks = new Object2BooleanOpenHashMap<>();
+        AdAstraData.planets().keySet().forEach(dimension -> claimedChunks.put(dimension, buf.readBoolean()));
+        return Object2BooleanMaps.unmodifiable(claimedChunks);
     }
 
     public static Set<GlobalPos> createSpawnLocationsFromBuf(FriendlyByteBuf buf) {

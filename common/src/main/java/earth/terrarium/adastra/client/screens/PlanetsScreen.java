@@ -106,12 +106,12 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
         }));
         if (selectedPlanet != null) {
             addSpaceStatonButton.setTooltip(getSpaceStationRecipeTooltip(selectedPlanet.orbitIfPresent()));
+            addSpaceStatonButton.active = selectedPlanet != null && menu.canConstruct(selectedPlanet.orbitIfPresent()) && !menu.isInSpaceStation(selectedPlanet.orbitIfPresent());
         }
 
 
         backButton.visible = pageIndex > (hasMultipleSolarSystems ? 0 : 1);
         addSpaceStatonButton.visible = pageIndex == 2 && selectedPlanet != null;
-        addSpaceStatonButton.active = selectedPlanet != null && menu.canConstruct() && !menu.isInSpaceStation(selectedPlanet.orbitIfPresent());
     }
 
     private void createSolarSystemButtons() {
@@ -168,7 +168,7 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
         var pos = menu.getLandingPos(planet, false);
         tooltip.add(Component.translatable("tooltip.ad_astra.construct_space_station_at", menu.getPlanetName(planet), pos.getX(), pos.getZ()).withStyle(ChatFormatting.AQUA));
 
-        if (menu.isInSpaceStation(planet)) {
+        if (menu.isInSpaceStation(planet) || menu.isClaimed(planet)) {
             tooltip.add(ConstantComponents.SPACE_STATION_ALREADY_EXISTS);
             return Tooltip.create(CommonComponents.joinLines(tooltip));
         } else {

@@ -8,6 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -82,11 +83,11 @@ public class SpaceStationHandler extends SaveHandler {
         return read(level).spaceStationData.getOrDefault(player.getUUID(), Set.of());
     }
 
-    public static boolean hasIngredients(Player player, Level level) {
+    public static boolean hasIngredients(Player player, Level level, ResourceKey<Level> dimension) {
         if (player.isCreative() || player.isSpectator()) return true;
 
         var recipe = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.SPACE_STATION_RECIPE.get()).stream()
-            .filter(r -> level.dimension().equals(r.dimension())).findFirst().orElse(null);
+            .filter(r -> dimension.equals(r.dimension())).findFirst().orElse(null);
         if (recipe == null) return false;
         return recipe.matches(player.getInventory(), level);
     }

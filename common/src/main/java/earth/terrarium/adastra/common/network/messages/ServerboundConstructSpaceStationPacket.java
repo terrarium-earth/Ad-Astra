@@ -67,8 +67,12 @@ public record ServerboundConstructSpaceStationPacket(
                 ServerLevel targetLevel = serverLevel.getServer().getLevel(planet.orbitIfPresent());
                 if (targetLevel == null) return;
 
+                if (CadmusIntegration.cadmusLoaded() && CadmusIntegration.isClaimed(targetLevel, player.chunkPosition())) {
+                    return;
+                }
+
                 if (SpaceStationHandler.isInSpaceStation(serverPlayer, targetLevel)) return;
-                if (!SpaceStationHandler.hasIngredients(serverPlayer, targetLevel)) return;
+                if (!SpaceStationHandler.hasIngredients(serverPlayer, targetLevel, targetLevel.dimension())) return;
                 SpaceStationHandler.consumeIngredients(serverPlayer, targetLevel);
 
                 var pos = player.chunkPosition();

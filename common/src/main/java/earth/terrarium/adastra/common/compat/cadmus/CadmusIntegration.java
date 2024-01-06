@@ -2,9 +2,11 @@ package earth.terrarium.adastra.common.compat.cadmus;
 
 import com.mojang.datafixers.util.Pair;
 import com.teamresourceful.resourcefullib.common.utils.modinfo.ModInfoUtils;
+import earth.terrarium.cadmus.api.claims.ClaimApi;
 import earth.terrarium.cadmus.common.claims.ClaimHandler;
 import earth.terrarium.cadmus.common.claims.ClaimType;
 import earth.terrarium.cadmus.common.util.ModUtils;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
 
@@ -21,5 +23,9 @@ public class CadmusIntegration {
         if (claimData != null) return;
         var claim = Map.of(pos, ClaimType.CLAIMED);
         ModUtils.tryClaim(player.serverLevel(), player, claim, Map.of());
+    }
+
+    public static boolean isClaimed(ServerLevel level, ChunkPos pos) {
+        return ClaimApi.API.isClaimed(level, pos);
     }
 }

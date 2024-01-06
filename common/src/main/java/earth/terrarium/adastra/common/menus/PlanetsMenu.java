@@ -13,6 +13,8 @@ import earth.terrarium.adastra.common.recipes.SpaceStationRecipe;
 import earth.terrarium.adastra.common.recipes.base.IngredientHolder;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
+import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
+import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -34,14 +36,22 @@ public class PlanetsMenu extends AbstractContainerMenu {
     protected final Level level;
     protected final Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> spaceStations;
     protected final Map<ResourceKey<Level>, List<Pair<ItemStack, Integer>>> ingredients;
+    protected final Object2BooleanMap<ResourceKey<Level>> claimedChunks = new Object2BooleanOpenHashMap<>();
     protected final Set<GlobalPos> spawnLocations;
-    protected final boolean canConstruct;
 
     public PlanetsMenu(int containerId, Inventory inventory, FriendlyByteBuf buf) {
-        this(containerId, inventory, PlanetsMenuProvider.createSpaceStationsFromBuf(buf), PlanetsMenuProvider.createSpawnLocationsFromBuf(buf));
+        this(containerId,
+            inventory,
+            PlanetsMenuProvider.createSpaceStationsFromBuf(buf),
+            PlanetsMenuProvider.createClaimedChunksFromBuf(buf),
+            PlanetsMenuProvider.createSpawnLocationsFromBuf(buf));
     }
 
-    public PlanetsMenu(int containerId, Inventory inventory, Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> spaceStations, Set<GlobalPos> spawnLocations) {
+    public PlanetsMenu(int containerId,
+                       Inventory inventory,
+                       Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> spaceStations,
+                       Object2BooleanMap<ResourceKey<Level>> claimedChunks,
+                       Set<GlobalPos> spawnLocations) {
         super(ModMenus.PLANETS.get(), containerId);
         this.inventory = inventory;
         player = inventory.player;
@@ -52,8 +62,8 @@ public class PlanetsMenu extends AbstractContainerMenu {
 
         this.spaceStations = spaceStations;
         this.ingredients = getSpaceStationRecipes();
-        this.canConstruct = SpaceStationHandler.hasIngredients(player, level);
         this.spawnLocations = spawnLocations;
+        this.claimedChunks.putAll(claimedChunks);
     }
 
     @Override
@@ -78,8 +88,13 @@ public class PlanetsMenu extends AbstractContainerMenu {
         return ingredients;
     }
 
-    public boolean canConstruct() {
-        return canConstruct;
+    public boolean isClaimed(ResourceKey<Level> dimension) {
+        return claimedChunks.getBoolean(dimension);
+    }
+
+    public boolean canConstruct(ResourceKey<Level> dimension) {
+        if (isClaimed(dimension)) return false;
+        return SpaceStationHandler.hasIngredients(player, level, dimension);
     }
 
     private Map<ResourceKey<Level>, List<Pair<ItemStack, Integer>>> getSpaceStationRecipes() {
@@ -133,7 +148,6 @@ public class PlanetsMenu extends AbstractContainerMenu {
     }
 
     public void constructSpaceStation(ResourceKey<Level> dimension, Component name) {
-        if (!canConstruct) return;
         NetworkHandler.CHANNEL.sendToServer(new ServerboundConstructSpaceStationPacket(dimension, name));
     }
 
