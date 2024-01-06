@@ -1,6 +1,6 @@
 package earth.terrarium.adastra.client.dimension;
 
-import earth.terrarium.adastra.client.utils.DimensionUtils;
+import earth.terrarium.adastra.client.utils.DimensionRenderingUtils;
 import earth.terrarium.adastra.common.planets.Planet;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -38,22 +38,22 @@ public class ModDimensionRenderers {
         .build();
 
     public static void onRegisterDimensionSpecialEffects(BiConsumer<ResourceKey<Level>, ModDimensionSpecialEffects> consumer) {
-        consumer.accept(Planet.EARTH_ORBIT, orbit(DimensionUtils.EARTH, 0xff3c7cda, 10)
-            .addSkyRenderables(SkyRenderable.create(DimensionUtils.MOON, 8, new Vec3(80, 0, 30), new Vec3(0, -5, 0), MovementType.STATIC, 0xffafb8cc))
+        consumer.accept(Planet.EARTH_ORBIT, orbit(DimensionRenderingUtils.EARTH, 0xff3c7cda, 10)
+            .addSkyRenderables(SkyRenderable.create(DimensionRenderingUtils.MOON, 8, new Vec3(80, 0, 30), new Vec3(0, -5, 0), MovementType.STATIC, 0xffafb8cc))
             .build());
 
-        consumer.accept(Planet.MOON_ORBIT, orbit(DimensionUtils.MOON, 0xffafb8cc, 9)
-            .addSkyRenderables(SkyRenderable.create(DimensionUtils.EARTH, 14, new Vec3(80, 0, 30), new Vec3(0, -5, 0), MovementType.STATIC, 0xff3c7cda))
+        consumer.accept(Planet.MOON_ORBIT, orbit(DimensionRenderingUtils.MOON, 0xffafb8cc, 9)
+            .addSkyRenderables(SkyRenderable.create(DimensionRenderingUtils.EARTH, 14, new Vec3(80, 0, 30), new Vec3(0, -5, 0), MovementType.STATIC, 0xff3c7cda))
             .build());
 
-        consumer.accept(Planet.MARS_ORBIT, orbit(DimensionUtils.MARS, 0xffb6552b, 7).build());
+        consumer.accept(Planet.MARS_ORBIT, orbit(DimensionRenderingUtils.MARS, 0xffb6552b, 7).build());
 
-        consumer.accept(Planet.VENUS_ORBIT, orbit(DimensionUtils.VENUS, 0xfff3c476, 14).build());
+        consumer.accept(Planet.VENUS_ORBIT, orbit(DimensionRenderingUtils.VENUS, 0xfff3c476, 14).build());
 
-        consumer.accept(Planet.MERCURY_ORBIT, orbit(DimensionUtils.MERCURY, 0xffab6989, 22).build());
+        consumer.accept(Planet.MERCURY_ORBIT, orbit(DimensionRenderingUtils.MERCURY, 0xffab6989, 22).build());
 
-        consumer.accept(Planet.GLACIO_ORBIT, orbit(DimensionUtils.GLACIO, 0xffced7ec, 9)
-            .addSkyRenderables(SkyRenderable.create(DimensionUtils.VICINUS, 50, new Vec3(60, 0, 5), new Vec3(0, 0, -5), MovementType.STATIC, false, 0xff974cb8))
+        consumer.accept(Planet.GLACIO_ORBIT, orbit(DimensionRenderingUtils.GLACIO, 0xffced7ec, 9)
+            .addSkyRenderables(SkyRenderable.create(DimensionRenderingUtils.VICINUS, 50, new Vec3(60, 0, 5), new Vec3(0, 0, -5), MovementType.STATIC, false, 0xff974cb8))
             .build());
 
         consumer.accept(Planet.MOON, moon().build());
@@ -75,7 +75,7 @@ public class ModDimensionRenderers {
             .renderInRain()
             .starColors(SPACE_STAR_COLORS)
             .addSkyRenderables(
-                SkyRenderable.create(DimensionUtils.SUN, sunScale, Vec3.ZERO, Vec3.ZERO, MovementType.TIME_OF_DAY, 0xffffffd9),
+                SkyRenderable.create(DimensionRenderingUtils.SUN, sunScale, Vec3.ZERO, Vec3.ZERO, MovementType.TIME_OF_DAY, 0xffffffd9),
                 SkyRenderable.create(planet, 80, new Vec3(180, 0, 0), Vec3.ZERO, MovementType.STATIC, backlightColor)
             );
     }
@@ -91,8 +91,8 @@ public class ModDimensionRenderers {
             .renderInRain()
             .starColors(SPACE_STAR_COLORS)
             .addSkyRenderables(
-                SkyRenderable.create(DimensionUtils.SUN, 9, Vec3.ZERO, Vec3.ZERO, MovementType.TIME_OF_DAY, 0xffffffd9),
-                SkyRenderable.create(DimensionUtils.EARTH, 14, new Vec3(80, 0, 30), new Vec3(0, -5, 0), MovementType.STATIC, 0xff3c7cda)
+                SkyRenderable.create(DimensionRenderingUtils.SUN, 9, Vec3.ZERO, Vec3.ZERO, MovementType.TIME_OF_DAY, 0xffffffd9),
+                SkyRenderable.create(DimensionRenderingUtils.EARTH, 14, new Vec3(80, 0, 30), new Vec3(0, -5, 0), MovementType.STATIC, 0xff3c7cda)
             );
     }
 
@@ -103,10 +103,10 @@ public class ModDimensionRenderers {
             .cloudLevel(Float.NaN)
             .sunriseColor(0x1fbbff)
             .addSkyRenderables(
-                SkyRenderable.create(DimensionUtils.BLUE_SUN, 7, Vec3.ZERO, Vec3.ZERO, MovementType.TIME_OF_DAY, true, 0xffd0faf7),
-                SkyRenderable.create(DimensionUtils.PHOBOS, 2, new Vec3(20, 20, 180), new Vec3(0, 0, 0), MovementType.TIME_OF_DAY_REVERSED, true, 0xffb4908d),
-                SkyRenderable.create(DimensionUtils.DEIMOS, 1.5f, new Vec3(0, 0, 180), new Vec3(0, 20, 0), MovementType.TIME_OF_DAY, true, 0xffe5d5ad),
-                SkyRenderable.create(DimensionUtils.EARTH, 0.4f, new Vec3(-40, 0, 160), new Vec3(0, 100, 0), MovementType.TIME_OF_DAY, true, 0xff3c7cda)
+                SkyRenderable.create(DimensionRenderingUtils.BLUE_SUN, 7, Vec3.ZERO, Vec3.ZERO, MovementType.TIME_OF_DAY, true, 0xffd0faf7),
+                SkyRenderable.create(DimensionRenderingUtils.PHOBOS, 2, new Vec3(20, 20, 180), new Vec3(0, 0, 0), MovementType.TIME_OF_DAY_REVERSED, true, 0xffb4908d),
+                SkyRenderable.create(DimensionRenderingUtils.DEIMOS, 1.5f, new Vec3(0, 0, 180), new Vec3(0, 20, 0), MovementType.TIME_OF_DAY, true, 0xffe5d5ad),
+                SkyRenderable.create(DimensionRenderingUtils.EARTH, 0.4f, new Vec3(-40, 0, 160), new Vec3(0, 100, 0), MovementType.TIME_OF_DAY, true, 0xff3c7cda)
             );
     }
 
@@ -117,9 +117,9 @@ public class ModDimensionRenderers {
             .sunriseColor(0xf9c21a)
             .sunriseAngle(180)
             .addSkyRenderables(
-                SkyRenderable.create(DimensionUtils.RED_SUN, 14, Vec3.ZERO, Vec3.ZERO, MovementType.TIME_OF_DAY_REVERSED, true, 0xfff48c61),
-                SkyRenderable.create(DimensionUtils.EARTH, 0.5f, new Vec3(-20, 0, 160), new Vec3(0, 100, 0), MovementType.TIME_OF_DAY_REVERSED, true, 0xff3c7cda),
-                SkyRenderable.create(DimensionUtils.MERCURY, 0.3f, new Vec3(10, 0, -10), new Vec3(0, 100, 0), MovementType.TIME_OF_DAY_REVERSED, true, 0xffab6989)
+                SkyRenderable.create(DimensionRenderingUtils.RED_SUN, 14, Vec3.ZERO, Vec3.ZERO, MovementType.TIME_OF_DAY_REVERSED, true, 0xfff48c61),
+                SkyRenderable.create(DimensionRenderingUtils.EARTH, 0.5f, new Vec3(-20, 0, 160), new Vec3(0, 100, 0), MovementType.TIME_OF_DAY_REVERSED, true, 0xff3c7cda),
+                SkyRenderable.create(DimensionRenderingUtils.MERCURY, 0.3f, new Vec3(10, 0, -10), new Vec3(0, 100, 0), MovementType.TIME_OF_DAY_REVERSED, true, 0xffab6989)
             );
     }
 
@@ -134,8 +134,8 @@ public class ModDimensionRenderers {
             .renderInRain()
             .starColors(SPACE_STAR_COLORS)
             .addSkyRenderables(
-                SkyRenderable.create(DimensionUtils.RED_SUN, 22, Vec3.ZERO, Vec3.ZERO, MovementType.TIME_OF_DAY, true, 0xfff48c61),
-                SkyRenderable.create(DimensionUtils.VENUS, 0.4f, new Vec3(-15, 0, 140), new Vec3(0, 100, 0), MovementType.TIME_OF_DAY, true, 0xfff3c476)
+                SkyRenderable.create(DimensionRenderingUtils.RED_SUN, 22, Vec3.ZERO, Vec3.ZERO, MovementType.TIME_OF_DAY, true, 0xfff48c61),
+                SkyRenderable.create(DimensionRenderingUtils.VENUS, 0.4f, new Vec3(-15, 0, 140), new Vec3(0, 100, 0), MovementType.TIME_OF_DAY, true, 0xfff3c476)
             );
     }
 
@@ -143,8 +143,8 @@ public class ModDimensionRenderers {
         return new ModDimensionSpecialEffects.Builder()
             .customSky()
             .addSkyRenderables(
-                SkyRenderable.create(DimensionUtils.SUN, 9, Vec3.ZERO, Vec3.ZERO, MovementType.TIME_OF_DAY, true, 0xffffffd9),
-                SkyRenderable.create(DimensionUtils.VICINUS, 50, new Vec3(60, 0, 5), new Vec3(0, 0, -5), MovementType.STATIC, false, 0xff974cb8)
+                SkyRenderable.create(DimensionRenderingUtils.SUN, 9, Vec3.ZERO, Vec3.ZERO, MovementType.TIME_OF_DAY, true, 0xffffffd9),
+                SkyRenderable.create(DimensionRenderingUtils.VICINUS, 50, new Vec3(60, 0, 5), new Vec3(0, 0, -5), MovementType.STATIC, false, 0xff974cb8)
             );
     }
 }

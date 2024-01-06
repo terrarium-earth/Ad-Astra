@@ -45,7 +45,6 @@ public class OverlayRenderer {
     }
 
     public void render(PoseStack poseStack, Camera camera) {
-//        if (!AdAstraConfigClient.showOxygenDistributorArea) return;
         if (!config.getAsBoolean()) return;
 
         var level = Minecraft.getInstance().level;

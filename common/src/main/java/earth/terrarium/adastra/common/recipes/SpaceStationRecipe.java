@@ -6,6 +6,8 @@ import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import earth.terrarium.adastra.common.recipes.base.IngredientHolder;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -16,13 +18,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public record SpaceStationRecipe(ResourceLocation id, List<IngredientHolder> ingredients,
-                                 ResourceLocation dimension) implements CodecRecipe<Container> {
+                                 ResourceKey<Level> dimension) implements CodecRecipe<Container> {
 
     public static Codec<SpaceStationRecipe> codec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
             RecordCodecBuilder.point(id),
             IngredientHolder.CODEC.listOf().fieldOf("ingredients").forGetter(SpaceStationRecipe::ingredients),
-            ResourceLocation.CODEC.fieldOf("dimension").forGetter(SpaceStationRecipe::dimension)
+            ResourceKey.codec(Registries.DIMENSION).fieldOf("dimension").forGetter(SpaceStationRecipe::dimension)
         ).apply(instance, SpaceStationRecipe::new));
     }
 

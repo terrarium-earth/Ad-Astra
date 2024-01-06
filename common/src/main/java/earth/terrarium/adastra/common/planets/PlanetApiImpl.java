@@ -4,7 +4,6 @@ import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import net.minecraft.Optionull;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,11 +16,6 @@ public class PlanetApiImpl implements PlanetApi {
 
     @Override
     public @Nullable Planet getPlanet(ResourceKey<Level> level) {
-        return getPlanet(level.location());
-    }
-
-    @Override
-    public @Nullable Planet getPlanet(ResourceLocation level) {
         return AdAstraData.getPlanet(level);
     }
 
@@ -32,7 +26,7 @@ public class PlanetApiImpl implements PlanetApi {
 
     @Override
     public boolean isPlanet(ResourceKey<Level> level) {
-        return AdAstraData.isPlanet(level.location());
+        return AdAstraData.isPlanet(level);
     }
 
     @Override
@@ -42,7 +36,7 @@ public class PlanetApiImpl implements PlanetApi {
 
     @Override
     public boolean isSpace(ResourceKey<Level> level) {
-        return AdAstraData.isSpace(level.location());
+        return AdAstraData.isSpace(level);
     }
 
     @Override

@@ -93,16 +93,16 @@ public class ConstantComponents {
     public static final Component GRAVITY_DISTRIBUTION_AREA = Component.translatable("tooltip.ad_astra.gravity_distribution_area").withStyle(ChatFormatting.AQUA);
 
     public static final Component FLAG_URL = Component.translatable("text.ad_astra.text.flag_url");
-    public static final Component CONFIRM = Component.translatable("gui.ad_astra.text.confirm");
+    public static final Component CONFIRM = Component.translatable("text.ad_astra.text.confirm");
     public static final Component NOT_THE_OWNER = Component.translatable("message.ad_astra.flag.not_owner").withStyle(ChatFormatting.RED);
 
     public static final Component NOT_ENOUGH_FUEL = Component.translatable("message.ad_astra.not_enough_fuel").withStyle(ChatFormatting.RED);
     public static final Component INVALID_LAUNCHING_DIMENSION = Component.translatable("message.ad_astra.invalid_launching_dimension").withStyle(ChatFormatting.RED);
 
-    public static final Component CATALOG = Component.translatable("gui.ad_astra.text.catalog");
-    public static final Component LAND = Component.translatable("gui.ad_astra.text.land");
-    public static final Component SPACE_STATION = Component.translatable("gui.ad_astra.text.space_station");
-    public static final Component CONSTRUCT = Component.translatable("gui.ad_astra.text.construct_space_station");
-    public static final Component SPACE_STATION_ALREADY_EXISTS = Component.translatable("gui.ad_astra.space_station.already_exists").withStyle(ChatFormatting.RED);
+    public static final Component CATALOG = Component.translatable("text.ad_astra.text.catalog");
+    public static final Component LAND = Component.translatable("text.ad_astra.text.land");
+    public static final Component SPACE_STATION = Component.translatable("text.ad_astra.text.space_station");
+    public static final Component CONSTRUCT = Component.translatable("text.ad_astra.text.construct_space_station");
+    public static final Component SPACE_STATION_ALREADY_EXISTS = Component.translatable("text.ad_astra.space_station.already_exists").withStyle(ChatFormatting.RED);
     public static final Component CONSTRUCTION_COST = Component.translatable("tooltip.ad_astra.construction_cost");
 }

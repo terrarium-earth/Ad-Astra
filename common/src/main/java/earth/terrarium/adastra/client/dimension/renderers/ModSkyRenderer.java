@@ -6,7 +6,7 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import earth.terrarium.adastra.client.dimension.ModDimensionSpecialEffects;
 import earth.terrarium.adastra.client.dimension.SkyRenderable;
-import earth.terrarium.adastra.client.utils.DimensionUtils;
+import earth.terrarium.adastra.client.utils.DimensionRenderingUtils;
 import earth.terrarium.adastra.mixins.client.LevelRendererAccessor;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -91,7 +91,7 @@ public class ModSkyRenderer {
             renderSkyRenderable(bufferBuilder, poseStack, renderable.localRotation(), globalRotation, renderable.scale(), renderable.texture(), renderable.blend());
             if (renderable.backLightScale() > 0) {
                 setSkyRenderableColor(level, partialTick, renderable.backLightColor());
-                renderSkyRenderable(bufferBuilder, poseStack, renderable.localRotation(), globalRotation, renderable.backLightScale(), DimensionUtils.BACKLIGHT, true);
+                renderSkyRenderable(bufferBuilder, poseStack, renderable.localRotation(), globalRotation, renderable.backLightScale(), DimensionRenderingUtils.BACKLIGHT, true);
                 RenderSystem.setShaderColor(1, 1, 1, 1);
             }
         });

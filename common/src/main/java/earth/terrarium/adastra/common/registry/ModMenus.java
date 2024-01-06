@@ -14,7 +14,6 @@ import earth.terrarium.adastra.common.menus.vehicles.RoverMenu;
 import earth.terrarium.botarium.common.registry.RegistryHelpers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
@@ -37,7 +36,7 @@ public class ModMenus {
     public static final RegistryEntry<MenuType<RocketMenu>> ROCKET = MENUS.register("rocket_menu", () -> RegistryHelpers.createMenuType(RocketMenu::new));
     public static final RegistryEntry<MenuType<LanderMenu>> LANDER = MENUS.register("lander_menu", () -> RegistryHelpers.createMenuType(LanderMenu::new));
 
-    public static final RegistryEntry<MenuType<PlanetsMenu>> PLANETS = MENUS.register("planets_menu", () -> new MenuType<>(PlanetsMenu::new, FeatureFlags.VANILLA_SET));
+    public static final RegistryEntry<MenuType<PlanetsMenu>> PLANETS = MENUS.register("planets_menu", () -> RegistryHelpers.createMenuType(PlanetsMenu::new));
 
     private static <T extends BaseContainerMenu<E>, E extends BlockEntity> MenuType<T> createMenuType(Factory<T, E> factory, Class<E> clazz) {
         return RegistryHelpers.createMenuType((id, inventory, buf) -> factory.create(

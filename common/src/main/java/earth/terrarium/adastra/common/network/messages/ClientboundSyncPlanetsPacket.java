@@ -7,14 +7,16 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.planets.Planet;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public record ClientboundSyncPlanetsPacket(
-    Map<ResourceLocation, Planet> planets
+    Map<ResourceKey<Level>, Planet> planets
 ) implements Packet<ClientboundSyncPlanetsPacket> {
 
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "sync_planets");
@@ -39,7 +41,7 @@ public record ClientboundSyncPlanetsPacket(
         @Override
         public ClientboundSyncPlanetsPacket decode(FriendlyByteBuf buf) {
             return new ClientboundSyncPlanetsPacket(AdAstraData.decodePlanets(buf).stream()
-                .collect(Collectors.toMap(Planet::dimensionLocation, Function.identity())));
+                .collect(Collectors.toMap(Planet::dimension, Function.identity())));
         }
 
         @Override

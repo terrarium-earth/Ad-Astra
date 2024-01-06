@@ -20,9 +20,18 @@ public class LabeledImageButton extends ImageButton {
 
     @Override
     public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+         if (!isActive()) {
+            RenderSystem.setShaderColor(0.5f, 0.5f, 0.5f, 1);
+        }
+
         RenderSystem.enableBlend();
         renderTexture(graphics, resourceLocation, getX(), getY(), xTexStart, yTexStart, yDiffTex, width, height, textureWidth, textureHeight);
         RenderSystem.disableBlend();
+
+        if (!isActive()) {
+            RenderSystem.setShaderColor(1, 1, 1, 1);
+        }
+
         int color = active ? 0xffffff : 0xa0a0a0;
         graphics.drawCenteredString(Minecraft.getInstance().font, getMessage(), getX() + width / 2, getY() + (height - 8) / 2, color | Mth.ceil(alpha * 255.0F) << 24);
     }

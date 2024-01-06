@@ -5,7 +5,7 @@ import earth.terrarium.adastra.client.utils.SoundUtils;
 import earth.terrarium.adastra.common.blocks.LaunchPadBlock;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
-import earth.terrarium.adastra.common.menus.PlanetsMenu;
+import earth.terrarium.adastra.common.menus.base.PlanetsMenuProvider;
 import earth.terrarium.adastra.common.menus.vehicles.RocketMenu;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.registry.*;
@@ -17,6 +17,7 @@ import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.botarium.common.menu.MenuHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -401,7 +402,7 @@ public class Rocket extends Vehicle {
     }
 
     public void openPlanetsScreen(ServerPlayer player) {
-        player.openMenu(new PlanetsMenu.Provider());
+        MenuHooks.openMenu(player, new PlanetsMenuProvider());
         var packet = new ClientboundStopSoundPacket(BuiltInRegistries.SOUND_EVENT
             .getKey(ModSoundEvents.ROCKET.get()), SoundSource.AMBIENT);
         player.connection.send(packet);

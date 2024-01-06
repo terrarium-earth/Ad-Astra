@@ -121,7 +121,7 @@ public class OverlayScreen {
             poseStack.translate(width / 2f, height / 2f, 0);
             poseStack.scale(1.4f, 1.4f, 1.4f);
 
-            float alpha = Mth.clamp(0.5f - (float) (lander.getDeltaMovement().y() + 0.5), 0, 1);
+            float alpha = Mth.clamp(0.1f - (float) (lander.getDeltaMovement().y() + 0.5), 0, 1);
             RenderSystem.enableBlend();
             RenderSystem.setShaderColor(1, 1, 1, alpha);
             graphics.drawCenteredString(font,

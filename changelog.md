@@ -91,6 +91,8 @@ you to land at your space station from anywhere and also prevents accidentally s
 a new space station on an existing one.
 - Updated the planets screen with a cleaner UI. You should be able to navigate the menu easier. And it 
 should now be clear when you want to land on the planet, land on the space station or build a new space station.
+- Add support for multiple owned space stations. There is now a list of owned space stations in the planets screen,
+and you can choose which one to land on.
 - You can no longer teleport to orbit directly in the planets menu.
 You must build a space station and land on that space station first.
 - Added industrial lamps and small industrial lamps. These are available in all 16 colors.
@@ -114,10 +116,12 @@ to the oxygen distributor. It's especially important in orbit due to the zero gr
 - Copper no longer oxidizes in environments with no oxygen.
 - Updated the oxygen distributor model. It now spins and can be placed on any block face.
 - You now need to hold shift for two seconds before you can dismount moving vehicles.
-- Fixed players dismounting landers with some mods like Transit Railway.
+- Landers now prevent the player from dismounting when falling without explicitly dismounting. This should fix
+incompatibilities with mods like Transit Railway.
 - Only allow mobs that can survive in space to spawn in ad astra dimensions. This should fix
 the issue where mods like Alex's Mobs would spawn flies that kept dying.
 - The warning to hold space when landing is now displayed boldly on screen instead of a chat message.
+- The lander will now display the distance to the ground when landing.
 Hopefully this will prevent people from missing it and crashing.
 - The NASA workbench can now automatically craft rockets when powered with redstone.
 

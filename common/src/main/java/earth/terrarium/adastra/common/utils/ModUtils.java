@@ -2,7 +2,10 @@ package earth.terrarium.adastra.common.utils;
 
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
+import earth.terrarium.adastra.common.entities.vehicles.Lander;
+import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
+import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -14,6 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.portal.PortalInfo;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Optional;
 
@@ -52,5 +56,27 @@ public final class ModUtils {
     public static Entity teleportToDimension(Entity entity, ServerLevel level) {
         PortalInfo target = new PortalInfo(entity.position(), entity.getDeltaMovement(), entity.getYRot(), entity.getXRot());
         return PlatformUtils.teleportToDimension(entity, level, target);
+    }
+
+    public static void land(ServerPlayer player, ServerLevel targetLevel, Vec3 pos) {
+        Entity vehicle = player.getVehicle();
+        player.stopRiding();
+        player.moveTo(pos);
+        var teleportedPlayer = teleportToDimension(player, targetLevel);
+
+        if (!(vehicle instanceof Rocket rocket)) return;
+        Lander lander = ModEntityTypes.LANDER.get().create(targetLevel);
+        if (lander == null) return;
+        lander.setPos(pos);
+        targetLevel.addFreshEntity(lander);
+        teleportedPlayer.startRiding(lander);
+
+        var rocketInventory = rocket.inventory();
+        var landerInventory = lander.inventory();
+        for (int i = 0; i < rocketInventory.getContainerSize(); i++) {
+            landerInventory.setItem(i + 1, rocketInventory.getItem(i));
+        }
+        landerInventory.setItem(0, rocket.getDropStack());
+        rocket.discard();
     }
 }

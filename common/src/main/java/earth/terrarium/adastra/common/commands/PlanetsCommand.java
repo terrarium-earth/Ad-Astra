@@ -1,7 +1,8 @@
 package earth.terrarium.adastra.common.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
-import earth.terrarium.adastra.common.menus.PlanetsMenu;
+import earth.terrarium.adastra.common.menus.base.PlanetsMenuProvider;
+import earth.terrarium.botarium.common.menu.MenuHooks;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,7 +13,7 @@ public class PlanetsCommand {
             .then(Commands.literal("planets")
                 .executes(context -> {
                     ServerPlayer player = context.getSource().getPlayerOrException();
-                    player.openMenu(new PlanetsMenu.Provider());
+                    MenuHooks.openMenu(player, new PlanetsMenuProvider());
                     return 1;
                 })
             )

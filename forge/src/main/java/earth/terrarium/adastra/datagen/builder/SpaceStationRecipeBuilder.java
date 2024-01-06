@@ -12,10 +12,12 @@ import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,9 +28,9 @@ public class SpaceStationRecipeBuilder implements RecipeBuilder {
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
     private final List<IngredientHolder> ingredients;
-    private final ResourceLocation dimension;
+    private final ResourceKey<Level> dimension;
 
-    public SpaceStationRecipeBuilder(List<IngredientHolder> ingredients, ResourceLocation dimension) {
+    public SpaceStationRecipeBuilder(List<IngredientHolder> ingredients, ResourceKey<Level> dimension) {
         this.ingredients = ingredients;
         this.dimension = dimension;
     }
@@ -66,7 +68,7 @@ public class SpaceStationRecipeBuilder implements RecipeBuilder {
     public record Result(
         ResourceLocation id,
         List<IngredientHolder> ingredients,
-        ResourceLocation dimension,
+        ResourceKey<Level> dimension,
         Advancement.Builder advancement, ResourceLocation advancementId
     ) implements FinishedRecipe {
 

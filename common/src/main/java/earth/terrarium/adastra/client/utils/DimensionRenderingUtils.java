@@ -5,7 +5,9 @@ import earth.terrarium.adastra.mixins.client.LevelRendererAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 
-public class DimensionUtils {
+import java.util.List;
+
+public class DimensionRenderingUtils {
     public static final ResourceLocation BACKLIGHT = new ResourceLocation(AdAstra.MOD_ID, "textures/environment/backlight.png");
 
     public static final ResourceLocation SUN = new ResourceLocation(AdAstra.MOD_ID, "textures/environment/sun.png");
@@ -25,6 +27,13 @@ public class DimensionUtils {
 
     public static final ResourceLocation ACID_RAIN = new ResourceLocation(AdAstra.MOD_ID, "textures/environment/acid_rain.png");
     public static final ResourceLocation VENUS_CLOUDS = new ResourceLocation(AdAstra.MOD_ID, "textures/environment/venus_clouds.png");
+
+    public static final List<ResourceLocation> SOLAR_SYSTEM_TEXTURES = List.of(
+        DimensionRenderingUtils.MERCURY,
+        DimensionRenderingUtils.VENUS,
+        DimensionRenderingUtils.EARTH,
+        DimensionRenderingUtils.MARS
+    );
 
     public static int getTicks() {
         return ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).getTicks();

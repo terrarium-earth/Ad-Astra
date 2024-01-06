@@ -2,7 +2,7 @@ package earth.terrarium.adastra.client.fabric;
 
 import earth.terrarium.adastra.client.AdAstraClient;
 import earth.terrarium.adastra.client.dimension.ModDimensionRenderers;
-import earth.terrarium.adastra.client.utils.DimensionUtils;
+import earth.terrarium.adastra.client.utils.DimensionRenderingUtils;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -41,7 +41,7 @@ public class AdAstraClientFabric {
                     var camera = context.camera().getPosition();
                     effects.renderClouds(
                         context.world(),
-                        DimensionUtils.getTicks(),
+                        DimensionRenderingUtils.getTicks(),
                         context.tickDelta(),
                         context.matrixStack(),
                         camera.x, camera.y, camera.z,
@@ -52,7 +52,7 @@ public class AdAstraClientFabric {
             if (effects.hasCustomSky()) {
                 DimensionRenderingRegistry.registerSkyRenderer(dimension, context -> effects.renderSky(
                     context.world(),
-                    DimensionUtils.getTicks(),
+                    DimensionRenderingUtils.getTicks(),
                     context.tickDelta(),
                     context.matrixStack(),
                     context.camera(),
@@ -67,7 +67,7 @@ public class AdAstraClientFabric {
                     var camera = context.camera().getPosition();
                     effects.renderSnowAndRain(
                         context.world(),
-                        DimensionUtils.getTicks(),
+                        DimensionRenderingUtils.getTicks(),
                         context.tickDelta(),
                         context.lightmapTextureManager(),
                         camera.x, camera.y, camera.z

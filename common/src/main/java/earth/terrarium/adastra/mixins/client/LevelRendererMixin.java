@@ -1,6 +1,6 @@
 package earth.terrarium.adastra.mixins.client;
 
-import earth.terrarium.adastra.client.utils.DimensionUtils;
+import earth.terrarium.adastra.client.utils.DimensionRenderingUtils;
 import earth.terrarium.adastra.common.registry.ModParticleTypes;
 import earth.terrarium.adastra.common.tags.ModBiomeTags;
 import net.minecraft.client.Minecraft;
@@ -35,7 +35,7 @@ public abstract class LevelRendererMixin {
         target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/resources/ResourceLocation;)V",
         ordinal = 0), index = 1)
     private ResourceLocation adastra$renderSnowAndRain(ResourceLocation original) {
-        return adastra$hasAcidRain() ? DimensionUtils.ACID_RAIN : original;
+        return adastra$hasAcidRain() ? DimensionRenderingUtils.ACID_RAIN : original;
     }
 
     @ModifyArg(method = "renderClouds", at = @At(
@@ -43,7 +43,7 @@ public abstract class LevelRendererMixin {
         target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/resources/ResourceLocation;)V",
         ordinal = 0), index = 1)
     private ResourceLocation adastra$renderClouds(ResourceLocation original) {
-        return adastra$hasAcidRain() ? DimensionUtils.VENUS_CLOUDS : original;
+        return adastra$hasAcidRain() ? DimensionRenderingUtils.VENUS_CLOUDS : original;
     }
 
     @Unique

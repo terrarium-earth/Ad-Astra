@@ -20,8 +20,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class AdAstraData extends SimpleJsonResourceReloadListener {
-    private static final Map<ResourceLocation, Planet> PLANETS = new HashMap<>();
-    private static final Map<ResourceLocation, ResourceLocation> DIMENSIONS_TO_PLANETS = new HashMap<>();
+    private static final Map<ResourceKey<Level>, Planet> PLANETS = new HashMap<>();
+    private static final Map<ResourceKey<Level>, ResourceKey<Level>> DIMENSIONS_TO_PLANETS = new HashMap<>();
 
     public AdAstraData() {
         super(Constants.GSON, "planets");
@@ -34,10 +34,10 @@ public class AdAstraData extends SimpleJsonResourceReloadListener {
         for (Map.Entry<ResourceLocation, JsonElement> entry : object.entrySet()) {
             JsonObject json = GsonHelper.convertToJsonObject(entry.getValue(), "planets");
             Planet planet = Planet.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow(false, Constants.LOGGER::error);
-            PLANETS.put(planet.dimensionLocation(), planet);
-            DIMENSIONS_TO_PLANETS.put(planet.dimensionLocation(), planet.dimensionLocation());
+            PLANETS.put(planet.dimension(), planet);
+            DIMENSIONS_TO_PLANETS.put(planet.dimension(), planet.dimension());
             for (ResourceKey<Level> dimension : planet.additionalLaunchDimensions()) {
-                DIMENSIONS_TO_PLANETS.put(dimension.location(), planet.dimensionLocation());
+                DIMENSIONS_TO_PLANETS.put(dimension, planet.dimension());
             }
         }
     }
@@ -58,28 +58,28 @@ public class AdAstraData extends SimpleJsonResourceReloadListener {
             .orElse(Collections.emptyList());
     }
 
-    public static ResourceLocation getPlanetLocation(ResourceKey<Level> dimension) {
-        return DIMENSIONS_TO_PLANETS.get(dimension.location());
+    public static ResourceKey<Level> getPlanetLocation(ResourceKey<Level> dimension) {
+        return DIMENSIONS_TO_PLANETS.get(dimension);
     }
 
     @Nullable
-    public static Planet getPlanet(ResourceLocation location) {
+    public static Planet getPlanet(ResourceKey<Level> location) {
         return PLANETS.get(location);
     }
 
-    public static boolean isPlanet(ResourceLocation location) {
+    public static boolean isPlanet(ResourceKey<Level> location) {
         return PLANETS.containsKey(location);
     }
 
-    public static boolean isSpace(ResourceLocation location) {
+    public static boolean isSpace(ResourceKey<Level> location) {
         return isPlanet(location) && PLANETS.get(location).isSpace();
     }
 
     public static boolean canLaunchFrom(ResourceKey<Level> dimension) {
-        return DIMENSIONS_TO_PLANETS.containsKey(dimension.location());
+        return DIMENSIONS_TO_PLANETS.containsKey(dimension);
     }
 
-    public static Map<ResourceLocation, Planet> planets() {
+    public static Map<ResourceKey<Level>, Planet> planets() {
         return PLANETS;
     }
 
@@ -87,7 +87,7 @@ public class AdAstraData extends SimpleJsonResourceReloadListener {
         return PLANETS.values().stream().map(Planet::solarSystem).collect(Collectors.toUnmodifiableSet());
     }
 
-    public static void setPlanets(Map<ResourceLocation, Planet> planets) {
+    public static void setPlanets(Map<ResourceKey<Level>, Planet> planets) {
         PLANETS.clear();
         PLANETS.putAll(planets);
     }

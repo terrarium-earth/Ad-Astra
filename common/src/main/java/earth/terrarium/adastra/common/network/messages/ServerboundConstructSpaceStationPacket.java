@@ -9,22 +9,26 @@ import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.compat.cadmus.CadmusIntegration;
+import earth.terrarium.adastra.common.config.AdAstraConfig;
+import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
-import earth.terrarium.adastra.common.planets.Planet;
-import earth.terrarium.adastra.common.recipes.base.IngredientHolder;
-import earth.terrarium.adastra.common.registry.ModRecipeTypes;
+import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.TicketType;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.phys.Vec3;
 
-public record ServerboundConstructSpaceStationPacket(ResourceLocation dimensionLocation,
-                                                     ChunkPos targetPos) implements Packet<ServerboundConstructSpaceStationPacket> {
+public record ServerboundConstructSpaceStationPacket(
+    ResourceKey<Level> dimension, Component name) implements Packet<ServerboundConstructSpaceStationPacket> {
 
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "construct_space_station");
     public static final Handler HANDLER = new Handler();
@@ -44,8 +48,8 @@ public record ServerboundConstructSpaceStationPacket(ResourceLocation dimensionL
     private static class Handler extends CodecPacketHandler<ServerboundConstructSpaceStationPacket> {
         public Handler() {
             super(ObjectByteCodec.create(
-                ExtraByteCodecs.RESOURCE_LOCATION.fieldOf(ServerboundConstructSpaceStationPacket::dimensionLocation),
-                ExtraByteCodecs.CHUNK_POS.fieldOf(ServerboundConstructSpaceStationPacket::targetPos),
+                ExtraByteCodecs.DIMENSION.fieldOf(ServerboundConstructSpaceStationPacket::dimension),
+                ExtraByteCodecs.COMPONENT.fieldOf(ServerboundConstructSpaceStationPacket::name),
                 ServerboundConstructSpaceStationPacket::new
             ));
         }
@@ -54,46 +58,38 @@ public record ServerboundConstructSpaceStationPacket(ResourceLocation dimensionL
         public PacketContext handle(ServerboundConstructSpaceStationPacket packet) {
             return (player, level) -> {
                 if (!(level instanceof ServerLevel serverLevel)) return;
+                if (!(player instanceof ServerPlayer serverPlayer)) return;
                 if (!(player.containerMenu instanceof PlanetsMenu)) return;
-                Planet planet = PlanetApi.API.getPlanet(packet.dimensionLocation);
+
+                var planet = PlanetApi.API.getPlanet(packet.dimension);
                 if (planet == null) return;
-                var server = serverLevel.getServer();
-                ServerLevel targetLevel = server.getLevel(planet.orbitIfPresent());
+
+                ServerLevel targetLevel = serverLevel.getServer().getLevel(planet.orbitIfPresent());
                 if (targetLevel == null) return;
-                if (SpaceStationHandler.isSpaceStationAt(targetLevel, packet.targetPos())) return;
 
-                if (!player.isCreative() && !player.isSpectator()) {
-                    var recipe = targetLevel.getRecipeManager().getAllRecipesFor(ModRecipeTypes.SPACE_STATION_RECIPE.get()).stream()
-                        .filter(r -> targetLevel.dimension().location().equals(r.dimension())).findFirst().orElse(null);
-                    if (recipe == null) return;
-                    if (!recipe.matches(player.getInventory(), targetLevel)) return;
+                if (SpaceStationHandler.isInSpaceStation(serverPlayer, targetLevel)) return;
+                if (!SpaceStationHandler.hasIngredients(serverPlayer, targetLevel)) return;
+                SpaceStationHandler.consumeIngredients(serverPlayer, targetLevel);
 
-                    var inventory = player.getInventory();
-                    for (IngredientHolder holder : recipe.ingredients()) {
-                        int count = holder.count();
-                        if (count <= 0) continue;
-                        for (int i = 0; i < inventory.getContainerSize(); i++) {
-                            var stack = inventory.getItem(i);
-                            if (holder.ingredient().test(stack)) {
-                                stack.shrink(Math.min(count, stack.getCount()));
-                                count -= stack.getCount();
-                            }
-                        }
-                    }
-                }
+                var pos = player.chunkPosition();
 
+                // Construct space station structure from structure nbt file
                 StructureTemplate structure = targetLevel.getStructureManager().getOrCreate(SPACE_STATION_STRUCTURE);
-                BlockPos pos = BlockPos.containing((player.getX() - (structure.getSize().getX() / 2.0f)), 100, (player.getZ() - (structure.getSize().getZ() / 2.0f)));
-                targetLevel.getChunkSource().addRegionTicket(TicketType.PORTAL, new ChunkPos(pos), 1, pos);
-                structure.placeInWorld(targetLevel, pos, pos, new StructurePlaceSettings(), targetLevel.random, 2);
+                BlockPos stationPos = BlockPos.containing((pos.getMiddleBlockX() - (structure.getSize().getX() / 2.0f)), 100, (pos.getMiddleBlockZ() - (structure.getSize().getZ() / 2.0f)));
+                targetLevel.getChunkSource().addRegionTicket(TicketType.PORTAL, new ChunkPos(stationPos), 1, stationPos);
+                structure.placeInWorld(targetLevel, stationPos, stationPos, new StructurePlaceSettings(), targetLevel.random, 2);
 
-                SpaceStationHandler.addSpaceStation(targetLevel, packet.targetPos(), player.getUUID());
+                SpaceStationHandler.constructSpaceStation(serverPlayer, targetLevel, packet.name);
+
+                LaunchingDimensionHandler.addSpawnLocation(player, serverLevel);
+                BlockPos middleBlockPosition = pos.getMiddleBlockPosition(AdAstraConfig.atmosphereLeave);
+                ModUtils.land((ServerPlayer) player, targetLevel, new Vec3(middleBlockPosition.getX() - 0.5f, middleBlockPosition.getY(), middleBlockPosition.getZ() - 0.5f));
 
                 // Cadmus claiming 3x3 chunks
                 if (CadmusIntegration.cadmusLoaded()) {
                     for (int i = -1; i < 2; i++) {
                         for (int j = -1; j < 2; j++) {
-                            CadmusIntegration.claim((ServerPlayer) player, new ChunkPos(packet.targetPos().x + i, packet.targetPos().z + j));
+                            CadmusIntegration.claim(serverPlayer, new ChunkPos(pos.x + i, pos.z + j));
                         }
                     }
                 }
