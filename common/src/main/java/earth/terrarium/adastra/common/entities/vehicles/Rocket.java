@@ -5,6 +5,7 @@ import earth.terrarium.adastra.client.utils.SoundUtils;
 import earth.terrarium.adastra.common.blocks.LaunchPadBlock;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.adastra.common.menus.PlanetsMenu;
 import earth.terrarium.adastra.common.menus.base.PlanetsMenuProvider;
 import earth.terrarium.adastra.common.menus.vehicles.RocketMenu;
 import earth.terrarium.adastra.common.planets.AdAstraData;
@@ -237,7 +238,9 @@ public class Rocket extends Vehicle {
     private void flightTick() {
         if (!level().isClientSide() && getY() >= AdAstraConfig.atmosphereLeave) {
             if (getControllingPassenger() instanceof ServerPlayer player) {
-                openPlanetsScreen(player);
+                if (!(player.containerMenu instanceof PlanetsMenu)) {
+                    openPlanetsScreen(player);
+                }
             } else explode();
             return;
         }

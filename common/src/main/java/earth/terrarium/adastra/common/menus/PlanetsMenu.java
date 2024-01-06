@@ -1,6 +1,8 @@
 package earth.terrarium.adastra.common.menus;
 
+import com.mojang.authlib.GameProfile;
 import com.mojang.datafixers.util.Pair;
+import earth.terrarium.adastra.common.compat.argonauts.ArgonautsIntegration;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;
@@ -30,7 +32,7 @@ import java.util.*;
 
 public class PlanetsMenu extends AbstractContainerMenu {
 
-    protected int tier = 255;
+    protected final int tier;
     protected final Inventory inventory;
     protected final Player player;
     protected final Level level;
@@ -56,10 +58,7 @@ public class PlanetsMenu extends AbstractContainerMenu {
         this.inventory = inventory;
         player = inventory.player;
         level = player.level();
-        if (player.getVehicle() instanceof Rocket vehicle) {
-            tier = vehicle.tier();
-        }
-
+        tier = player.getVehicle() instanceof Rocket vehicle ? vehicle.tier() : 100;
         this.spaceStations = spaceStations;
         this.ingredients = getSpaceStationRecipes();
         this.spawnLocations = spawnLocations;
@@ -135,16 +134,35 @@ public class PlanetsMenu extends AbstractContainerMenu {
         return false;
     }
 
-    public List<SpaceStation> getOwnedSpaceStations(ResourceKey<Level> dimension) {
+    public List<Pair<String, SpaceStation>> getOwnedSpaceStations(ResourceKey<Level> dimension) {
+        return getOwnedSpaceStations(dimension, player.getGameProfile());
+    }
+
+    public List<Pair<String, SpaceStation>> getOwnedSpaceStations(ResourceKey<Level> dimension, GameProfile player) {
         var allStations = spaceStations.get(dimension);
         if (allStations == null) return List.of();
-        Set<SpaceStation> stations = allStations.get(player.getUUID());
+        Set<SpaceStation> stations = allStations.get(player.getId());
         if (stations == null) return List.of();
+
         return stations.stream()
-            .sorted(Comparator.comparingInt(station -> {
-                var pos = station.position();
-                return pos.getChessboardDistance(player.chunkPosition());
-            })).toList();
+            .sorted(Comparator.comparing(station -> station.name().getString()))
+            .map(station -> new Pair<>(player.getName(), station)).toList();
+    }
+
+    public List<Pair<String, SpaceStation>> getOwnedAndTeamSpaceStations(ResourceKey<Level> dimension) {
+        List<Pair<String, SpaceStation>> stations = new ArrayList<>(getOwnedSpaceStations(dimension, player.getGameProfile()));
+
+        if (!ArgonautsIntegration.argonautsLoaded()) return stations;
+
+        for (var member : ArgonautsIntegration.getClientPartyMembers(player.getUUID())) {
+            if (member.equals(player.getGameProfile())) continue;
+            stations.addAll(getOwnedSpaceStations(dimension, member));
+        }
+        for (var member : ArgonautsIntegration.getClientGuildMembers(player.getUUID())) {
+            if (member.equals(player.getGameProfile())) continue;
+            stations.addAll(getOwnedSpaceStations(dimension, member));
+        }
+        return stations;
     }
 
     public void constructSpaceStation(ResourceKey<Level> dimension, Component name) {

@@ -12,6 +12,7 @@ import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMaps;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.core.GlobalPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -38,7 +39,11 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
 
     @Override
     public void writeExtraData(ServerPlayer player, FriendlyByteBuf buffer) {
+
+        buffer.writeVarInt(AdAstraData.planets().size());
         AdAstraData.planets().keySet().forEach(dimension -> {
+            buffer.writeResourceKey(dimension);
+
             var spaceStations = SpaceStationHandler.getAllSpaceStations(player.server.getLevel(dimension));
             buffer.writeVarInt(spaceStations.size());
 
@@ -53,8 +58,11 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
         });
 
         if (CadmusIntegration.cadmusLoaded()) {
-            AdAstraData.planets().keySet().forEach(dimension ->
-                buffer.writeBoolean(CadmusIntegration.isClaimed(player.server.getLevel(dimension), player.chunkPosition())));
+            buffer.writeVarInt(AdAstraData.planets().size());
+            AdAstraData.planets().keySet().forEach(dimension -> {
+                buffer.writeResourceKey(dimension);
+                buffer.writeBoolean(CadmusIntegration.isClaimed(player.server.getLevel(dimension), player.chunkPosition()));
+            });
         }
 
         AdAstraData.planets().keySet().forEach(dimension -> {
@@ -65,29 +73,44 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
     }
 
     public static Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> createSpaceStationsFromBuf(FriendlyByteBuf buf) {
-        Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> spaceStations = new HashMap<>();
-        AdAstraData.planets().keySet().forEach(dimension -> {
-            int spaceStationCount = buf.readVarInt();
-            for (int i = 0; i < spaceStationCount; i++) {
-                ImmutableSet.Builder<SpaceStation> stations = new ImmutableSet.Builder<>();
-                int stationCount = buf.readVarInt();
-                for (int j = 0; j < stationCount; j++) {
-                    Component name = buf.readComponent();
-                    ChunkPos position = buf.readChunkPos();
-                    stations.add(new SpaceStation(position, name));
+        Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> spaceStationsMap = new HashMap<>();
+
+        int planetsSize = buf.readVarInt();
+        for (int i = 0; i < planetsSize; i++) {
+            ResourceKey<Level> planetKey = buf.readResourceKey(Registries.DIMENSION);
+            int spaceStationsSize = buf.readVarInt();
+
+            Map<UUID, Set<SpaceStation>> spaceStationGroupMap = new HashMap<>();
+            for (int j = 0; j < spaceStationsSize; j++) {
+                int stationGroupSize = buf.readVarInt();
+                Set<SpaceStation> spaceStations = new HashSet<>();
+
+                for (int k = 0; k < stationGroupSize; k++) {
+                    Component stationName = buf.readComponent();
+                    ChunkPos stationPos = buf.readChunkPos();
+                    spaceStations.add(new SpaceStation(stationPos, stationName));
                 }
 
-                var id = buf.readUUID();
-                spaceStations.put(dimension, Map.of(id, stations.build()));
+                UUID id = buf.readUUID();
+                spaceStationGroupMap.put(id, spaceStations);
             }
-        });
-        return Collections.unmodifiableMap(spaceStations);
+
+            spaceStationsMap.put(planetKey, spaceStationGroupMap);
+        }
+
+        return Collections.unmodifiableMap(spaceStationsMap);
     }
 
+
     public static Object2BooleanMap<ResourceKey<Level>> createClaimedChunksFromBuf(FriendlyByteBuf buf) {
-        if (!CadmusIntegration.cadmusLoaded()) return Object2BooleanMaps.emptyMap();
+        int dimensionCount = buf.readVarInt();
         Object2BooleanMap<ResourceKey<Level>> claimedChunks = new Object2BooleanOpenHashMap<>();
-        AdAstraData.planets().keySet().forEach(dimension -> claimedChunks.put(dimension, buf.readBoolean()));
+
+        for (int i = 0; i < dimensionCount; i++) {
+            ResourceKey<Level> dimension = buf.readResourceKey(Registries.DIMENSION);
+            claimedChunks.put(dimension, buf.readBoolean());
+        }
+
         return Object2BooleanMaps.unmodifiable(claimedChunks);
     }
 

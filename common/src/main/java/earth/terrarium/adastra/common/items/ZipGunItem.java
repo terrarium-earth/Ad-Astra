@@ -73,6 +73,7 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
             propelForce *= 0.1;
             propelYForce *= 0.1;
             maxSpeed *= 20.0;
+            entity.fallDistance *= 0.9f;
         } else {
             propelYForce *= 0.2;
             propelYForce *= 1.0 - Math.min(1.0, entity.getY() / 90.0);

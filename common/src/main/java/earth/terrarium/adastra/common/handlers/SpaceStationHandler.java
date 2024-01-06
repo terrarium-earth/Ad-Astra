@@ -80,7 +80,11 @@ public class SpaceStationHandler extends SaveHandler {
     }
 
     public static Set<SpaceStation> getOwnedSpaceStations(ServerPlayer player, ServerLevel level) {
-        return read(level).spaceStationData.getOrDefault(player.getUUID(), Set.of());
+        return getOwnedSpaceStations(player.getUUID(), level);
+    }
+
+    public static Set<SpaceStation> getOwnedSpaceStations(UUID id, ServerLevel level) {
+        return read(level).spaceStationData.getOrDefault(id, Set.of());
     }
 
     public static boolean hasIngredients(Player player, Level level, ResourceKey<Level> dimension) {

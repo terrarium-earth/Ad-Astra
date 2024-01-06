@@ -124,6 +124,10 @@ the issue where mods like Alex's Mobs would spawn flies that kept dying.
 - The lander will now display the distance to the ground when landing.
 Hopefully this will prevent people from missing it and crashing.
 - The NASA workbench can now automatically craft rockets when powered with redstone.
+- Added Cadmus compat to space stations. It'll automatically claim the chunks around your space station
+and prevent players from spawning a new space station at any claimed chunks. 
+- Added Argonauts compat to space stations. Players on the same guild will be
+able to share space stations.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.
@@ -138,10 +142,5 @@ if you're using these recipes in modpacks, you'll need to change them. This incl
 - Removed the sky renderer JSON API. Sky renderers should now be done in code.
 - Removed the JSON APIs for adding planets, galaxies and info in the planets screen.
 
-## TODO: Not sure if this'll be in this release
-
-- Added Cadmus compat to space stations. It'll automatically claim the chunks around your space station
-and prevent players from spawning a new space station at any claimed chunks. 
-- Added Argonauts compat to space stations. Players on the same guild will be
-able to share space stations.
+## TODO:
 - Sliding doors can now be redstone powered from any of its blocks, instead of just the bottom middle one.

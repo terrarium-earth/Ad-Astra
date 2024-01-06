@@ -8,9 +8,11 @@ import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.PlanetApi;
+import earth.terrarium.adastra.common.compat.argonauts.ArgonautsIntegration;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
+import earth.terrarium.adastra.common.handlers.base.SpaceStation;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.core.BlockPos;
@@ -21,6 +23,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public record ServerboundLandOnSpaceStationPacket(ResourceKey<Level> dimension,
                                                   ChunkPos spaceStationPos) implements Packet<ServerboundLandOnSpaceStationPacket> {
@@ -61,14 +66,31 @@ public record ServerboundLandOnSpaceStationPacket(ResourceKey<Level> dimension,
                 if (targetLevel == null) return;
 
                 var targetPos = packet.spaceStationPos();
-                if (SpaceStationHandler.getOwnedSpaceStations((ServerPlayer) player, targetLevel)
-                    .stream()
-                    .noneMatch(station -> station.position().equals(targetPos))) return;
+                if (!isAllowed((ServerPlayer) player, targetLevel, targetPos)) return;
 
                 LaunchingDimensionHandler.addSpawnLocation(player, serverLevel);
                 BlockPos middleBlockPosition = targetPos.getMiddleBlockPosition(AdAstraConfig.atmosphereLeave);
                 ModUtils.land((ServerPlayer) player, targetLevel, new Vec3(middleBlockPosition.getX() - 0.5f, middleBlockPosition.getY(), middleBlockPosition.getZ() - 0.5f));
             };
         }
+    }
+
+    private static boolean isAllowed(ServerPlayer player, ServerLevel level, ChunkPos targetPos) {
+        Set<SpaceStation> stations = new HashSet<>(SpaceStationHandler.getOwnedSpaceStations(player, level));
+
+        if (!ArgonautsIntegration.argonautsLoaded()) return stations
+            .stream()
+            .anyMatch(station -> station.position().equals(targetPos));
+
+        for (var member : ArgonautsIntegration.getClientPartyMembers(player.getUUID())) {
+            stations.addAll(SpaceStationHandler.getOwnedSpaceStations(member.getId(), level));
+        }
+        for (var member : ArgonautsIntegration.getClientGuildMembers(player.getUUID())) {
+            stations.addAll(SpaceStationHandler.getOwnedSpaceStations(member.getId(), level));
+        }
+
+        return stations
+            .stream()
+            .anyMatch(station -> station.position().equals(targetPos));
     }
 }

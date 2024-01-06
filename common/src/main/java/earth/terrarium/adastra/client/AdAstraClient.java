@@ -175,6 +175,8 @@ public class AdAstraClient {
         ClientHooks.setRenderLayer(ModBlocks.VENT.get(), RenderType.cutout());
         ClientHooks.setRenderLayer(ModBlocks.STEEL_DOOR.get(), RenderType.cutout());
         ClientHooks.setRenderLayer(ModBlocks.STEEL_TRAPDOOR.get(), RenderType.cutout());
+        ClientHooks.setRenderLayer(ModBlocks.AERONOS_LADDER.get(), RenderType.cutout());
+        ClientHooks.setRenderLayer(ModBlocks.STROPHAR_LADDER.get(), RenderType.cutout());
     }
 
     public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientPlatformUtils.SpriteParticleRegistration<SimpleParticleType>> consumer) {

@@ -265,6 +265,7 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.SPACE_STATION, "Space Stations");
         add(ConstantComponents.CONSTRUCT, "Construct");
         add("text.ad_astra.text.space_station_name", "Space Station %s");
+        add("tooltip.ad_astra.space_station_owner", "Owner: %s");
         add("tooltip.ad_astra.land", "Land on %s at [%s, %s]");
         add("tooltip.ad_astra.space_station_land", "Land on space station in %s at [%s, %s]");
         add("tooltip.ad_astra.construct_space_station_at", "Construct space station in %s at [%s, %s]");
