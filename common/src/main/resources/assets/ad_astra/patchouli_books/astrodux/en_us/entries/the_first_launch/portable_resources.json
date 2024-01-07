@@ -1,0 +1,29 @@
+{
+  "name": "Portable Resources",
+  "icon": "ad_astra:gas_tank",
+  "sortnum": 6,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Gas Tanks",
+      "item": "ad_astra:gas_tank",
+      "text": "Oxygen tanks allow you to store oxygen in a convenient portable form. Despite the name, they can store any fluid. Holding down right-click will distribute the oxygen into items in your inventory, with a bias towards armor."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:gas_tank",
+      "recipe2": "ad_astra:large_gas_tank"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Etrionic Capacitor",
+      "item": "ad_astra:etrionic_capacitor",
+      "text": "The Etrionic Capacitor is a battery-like item for storing energy in a portable form. It can be placed in the energy slot of machines to power them, and like the gas tanks, can be distributed into your inventory by holding down right-click. It features two modes: Sequential and Round Robin. Sequential will distribute energy one by one while Round Robin will distribute energy evenly. The mode can be changed by right-clicking while sneaking."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:etrionic_capacitor"
+    }
+  ]
+}

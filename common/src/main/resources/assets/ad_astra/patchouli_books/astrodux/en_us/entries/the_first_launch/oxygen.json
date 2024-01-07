@@ -1,7 +1,7 @@
 {
   "name": "Oxygen",
-  "icon": "ad_astra:gas_tank",
-  "sortnum": 3,
+  "icon": "ad_astra:oxygen_loader",
+  "sortnum": 5,
   "category": "ad_astra:the_first_launch",
   "pages": [
     {
@@ -28,7 +28,7 @@
       "type": "patchouli:crafting",
       "title": "Oxygen Loader",
       "recipe": "ad_astra:oxygen_loader",
-      "text": "Oxygen can then be extracted by collecting it in a bucket, spacesuit, or an oxygen tank. After you have enough oxygen, you are moments away from launching your first rocket!"
+      "text": "Oxygen can then be extracted by collecting it in a bucket, spacesuit, or a gas tank. After you have enough oxygen, you are moments away from launching your first rocket!"
     }
   ]
 }

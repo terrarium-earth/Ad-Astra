@@ -1,0 +1,19 @@
+{
+  "name": "Ti-69",
+  "icon": "ad_astra:ti_69",
+  "sortnum": 4,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Ti-69",
+      "item": "ad_astra:ti_69",
+      "text": "The Ti-69 is a mobile device that'll display the local oxygen, temperature, and gravity. Use it to check if the area is safe."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Ti-69 Recipe",
+      "recipe": "ad_astra:ti_69"
+    }
+  ]
+}

@@ -406,6 +406,7 @@
   "info.ad_astra.oxygen_distributor": "Distributes oxygen and regulates the temperature. Use it to create livable environments. Should be used in a completely sealed structure.",
   "info.ad_astra.oxygen_loader": "Converts water into oxygen. Use it to fill up space suits and gas tanks.",
   "info.ad_astra.oxygen_sensor": "Emits a redstone signal when oxygen is detected. shift-right-click to invert the signal. Right-click to change what it detects.",
+  "info.ad_astra.radio": "Plays real internet-streamed radio stations.",
   "info.ad_astra.rocket": "A rocket used for interplanetary travel. Must be placed on a launch pad. Shift-right-click to access its fuel and inventory.",
   "info.ad_astra.rover": "An all-terrain vehicle. Shift-right-click to access its inventory. Click on the screen to access the rover's radio. This radio can play real radio stations.",
   "info.ad_astra.sliding_door": "A large 3x3 door. Shift-right-click with a wrench to lock it. Locked doors can only be opened with redstone.",

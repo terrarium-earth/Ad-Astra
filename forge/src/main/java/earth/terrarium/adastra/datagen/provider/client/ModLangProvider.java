@@ -182,6 +182,7 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.LAUNCH_PAD_INFO, "Launches rockets. Power with redstone to automatically launch placed rockets.");
         add(ConstantComponents.GLOBE_INFO, "Right-click to spin the globe. Power it with redstone to make it constantly spin.");
         add(ConstantComponents.VENT_INFO, "Allows oxygen to flow through.");
+        add(ConstantComponents.RADIO_INFO, "Plays real internet-streamed radio stations.");
 
         add(ConstantComponents.ROCKET_INFO, "A rocket used for interplanetary travel. Must be placed on a launch pad. Shift-right-click to access its fuel and inventory.");
         add(ConstantComponents.ROVER_INFO, "An all-terrain vehicle. Shift-right-click to access its inventory. Click on the screen to access the rover's radio. This radio can play real radio stations.");

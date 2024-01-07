@@ -1,7 +1,7 @@
 {
   "name": "Your First Rocket",
   "icon": "ad_astra:nasa_workbench",
-  "sortnum": 1,
+  "sortnum": 3,
   "category": "ad_astra:the_first_launch",
   "pages": [
     {
@@ -36,7 +36,7 @@
       "type": "patchouli:crafting",
       "title": "Launchpad",
       "recipe": "ad_astra:launch_pad",
-      "text": "After the launch pad has been built, place the rocket in the center."
+      "text": "After the launch pad has been built, place the rocket in the center. If you want, you can power any part of the launch pad to automatically launch the rocket once fueled."
     }
   ]
 }

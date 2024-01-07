@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "title": "Globes",
       "item": "ad_astra:earth_globe",
-      "text": "Globes are trophy blocks found as a reward at the end of a dungeon. Globes offer no practical function and are instead a decoration block. They can be spun around by right-clicking or can spin forever when powered by redstone."
+      "text": "Globes are trophy blocks found as a reward at the end of a dungeon. Globes offer no practical function and are instead a decoration block. They can be spun around by right-clicking or can spin forever when powered by redstone. Only the Moon globe is obtainable in survival at the moment."
     },
     {
       "type": "patchouli:spotlight",

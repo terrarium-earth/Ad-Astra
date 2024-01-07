@@ -13,7 +13,7 @@
     {
       "type": "patchouli:crafting",
       "title": "Solar Panel",
-      "text": "Check the solar panel's tooltip or GUI to see how much energy is being produced in the current world.",
+      "text": "Check the GUI to see how much energy is being produced in the current world.",
       "recipe": "ad_astra:solar_panel"
     }
   ]

@@ -1,0 +1,18 @@
+{
+  "name": "Radio",
+  "icon": "ad_astra:radio",
+  "sortnum": 7,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Radio",
+      "item": "ad_astra:radio",
+      "text": "Before launching, why not listen to some tunes? The radio is a block that'll play real internet-streamed radio stations! There are a few stations that you can listen to, in multiple genres. In addition, anyone in the vicinity will hear the same station. Eventually, you'll be able to use the radio to craft the rover, which features a built-in radio for driving around and listening to music."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:radio"
+    }
+  ]
+}

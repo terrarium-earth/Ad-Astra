@@ -1,19 +1,29 @@
 {
   "name": "Rover",
   "icon": "ad_astra:tier_1_rover",
-  "sortnum": 3,
+  "sortnum": 5,
   "category": "ad_astra:the_moon",
   "pages": [
     {
       "type": "patchouli:spotlight",
       "title": "Rover",
       "item": "ad_astra:tier_1_rover",
-      "text": "The rover is a land vehicle capable of driving on the rough terrain of moons and planets. It's exceptionally fast, has an inventory capable of storing eight items and has two seats for multiple riders. To use it, fill the rover with fuel (shift-click and place fuel buckets in the left input slot)."
+      "text": "The rover is a land vehicle capable of driving on the rough terrain of moons and planets. It's exceptionally fast, has an inventory capable of storing 16 items and has two seats for multiple riders. You can also run over mobs and deal some serious damage. To use it, fill the rover with fuel (shift-click and place fuel buckets in the left input slot)."
     },
     {
       "type": "patchouli:entity",
       "entity": "ad_astra:tier_1_rover",
       "scale": 0.36
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Rover Recipe",
+      "recipe": "ad_astra:tier_1_rover"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Radio",
+      "text": "The rover has a built-in radio for playing real internet streamed radio stations. Use it by interacting with the radio on the rover or by pressing ($(k:ad_astra.open_radio)). If multiple players are in the rover, they'll hear the same radio as well."
     }
   ]
 }

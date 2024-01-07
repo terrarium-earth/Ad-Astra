@@ -12,7 +12,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "It's got two modes of flight: ascending ($(k:jump)) and boosted ($(k:jump) + $(k:sprint)). Ascending makes the wearer fly upwards, while boosted is similar to an elytra that's constantly being propelled by fireworks. The Jet Suit is powered by energy and must be charged to fly. It can be charged with an energizer by right-clicking it with the jet suit."
+      "text": "It's got two modes of flight: ascending ($(k:jump)) and boosted ($(k:jump) + $(k:sprint)). Ascending makes the wearer fly upwards, while boosted is similar to an elytra that's constantly being propelled by fireworks. The Jet Suit is powered by energy and must be charged to fly. It can be charged with an energizer by right-clicking it with the jet suit. Enable/disable the suit by pressing ($(k:ad_astra.toggle_suit_flight))."
     },
     {
       "type": "patchouli:crafting",

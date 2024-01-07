@@ -1,0 +1,18 @@
+{
+  "name": "Flags",
+  "icon": "ad_astra:blue_flag",
+  "sortnum": 1,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Flags",
+      "item": "ad_astra:lime_flag",
+      "text": "Flags are decorative blocks available in 16 colors. By default, when placed, they will display the face of the flag owner. They can be configured to display a custom image from a URL by right-clicking and entering the URL in the GUI. This will display the internet image onto the flag."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:black_flag"
+    }
+  ]
+}

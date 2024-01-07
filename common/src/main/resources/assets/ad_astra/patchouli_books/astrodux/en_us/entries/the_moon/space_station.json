@@ -1,18 +1,38 @@
 {
-  "name": "Space Station",
-  "icon": "ad_astra:/textures/gui/sprites/space_station.png",
-  "sortnum": 0,
-  "category": "ad_astra:the_moon",
-  "pages": [
-    {
-      "type": "patchouli:text",
-      "title": "Space Station",
-      "text": "A space station is a pre-built structure that is created in the planet selection screen, provided you have the necessary materials. Space stations are always located in a moon or planet's orbit and provide the ability to place blocks in that orbit dimension."
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Space Station",
-      "text": "Space stations are designed to be expanded upon, allowing you to build the base of your dreams over a moon/planet. They always spawn in whatever position you launched your rocket at, so remember the coordinates to avoid losing the structure."
-    }
-  ]
+    "name": "Space Station",
+    "icon": "ad_astra:/textures/gui/sprites/space_station.png",
+    "sortnum": 0,
+    "category": "ad_astra:the_moon",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "title": "Space Station",
+            "text": "A space station is a pre-built structure that is created in the planet screen, provided you have the necessary materials. Space stations are always located in a moon or planet's orbit and provide the ability to place blocks in that orbit dimension."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Space Station",
+            "text": "Space stations are designed to be expanded upon, allowing you to build the base of your dreams over a moon/planet. All of your space stations are present in the planet screen. Other players are not able to spawn new space stations in the same area as yours, so your structure is safe."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Moving in Space",
+            "text": "Physics in space are very different from earth. In this zero-gravity environment, you'll float around and not be affected by gravity or friction. This can make it difficult to move around. One tool that can help you is the zip gun. This takes oxygen and will rapidly consume it to propel you forward. This allows you to move around in space. Careful to control your speed. As there's no friction, you can go flying out and get lost."
+        },
+        {
+            "type": "patchouli:crafting",
+            "title": "Zip Gun",
+            "recipe": "ad_astra:zip_gun"
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Cadmus",
+            "text": "If $(l:https://modrinth.com/mod/cadmus)Cadmus$(/l) is installed, the 3x3 chunks in your space station will be claimed. In addition, players will not be able to create new space stations in any of your claimed chunks."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Argonauts",
+            "text": "If $(l:https://modrinth.com/mod/argonauts)Argonauts$(/l) is installed is installed, other players in your party or guild will be able to land at your space station, and you'll be able to land at theirs."
+        }
+    ]
 }

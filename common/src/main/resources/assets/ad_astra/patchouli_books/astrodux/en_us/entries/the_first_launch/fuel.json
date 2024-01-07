@@ -1,7 +1,7 @@
 {
   "name": "Fuel",
   "icon": "ad_astra:fuel_bucket",
-  "sortnum": 2,
+  "sortnum": 4,
   "category": "ad_astra:the_first_launch",
   "pages": [
     {

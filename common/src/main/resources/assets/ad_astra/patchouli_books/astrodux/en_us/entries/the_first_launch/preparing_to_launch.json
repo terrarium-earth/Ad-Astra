@@ -1,7 +1,7 @@
 {
   "name": "Preparing to Launch",
   "icon": "ad_astra:tier_1_rocket",
-  "sortnum": 4,
+  "sortnum": 8,
   "category": "ad_astra:the_first_launch",
   "pages": [
     {
@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Place these items in the inventory of your rocket, and ensure that you always have them every time you launch a rocket. Finally, you should bring multiple full oxygen tanks, plentiful food, soul torches or glowstone, weapons and tools. Once you have this, you are ready to launch! Enter the rocket and press $(k:jump)!"
+      "text": "Place these items in the inventory of your rocket, and ensure that you always have them every time you launch a rocket. Finally, you should bring multiple full gas tanks, plentiful food, soul torches or glowstone (normal torches will burn out), weapons and tools. Once you have this, you are ready to launch! Enter the rocket and press $(k:jump)!"
     }
   ]
 }

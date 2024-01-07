@@ -1,7 +1,7 @@
 {
   "name": "Cables",
   "icon": "ad_astra:desh_cable",
-  "sortnum": 4,
+  "sortnum": 6,
   "category": "ad_astra:the_moon",
   "pages": [
     {
@@ -18,6 +18,15 @@
     {
       "type": "patchouli:crafting",
       "recipe": "ad_astra:wrench"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cable ducts",
+      "text": "Cables are not solid blocks. As such, they will not seal a structure which prevents oxygen distributors and gravity normalizers from functioning. The cable duct is a full block that works exactly like cables while preventing leaks."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:cable_duct"
     }
   ]
 }

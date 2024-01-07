@@ -1,7 +1,7 @@
 {
   "name": "The Moon",
   "icon": "ad_astra:/textures/environment/moon.png",
-  "sortnum": 5,
+  "sortnum": 9,
   "category": "ad_astra:the_first_launch",
   "pages": [
     {
@@ -9,6 +9,11 @@
       "title": "The Moon",
       "item": "ad_astra:desh_ingot",
       "text": "Congratulations on reaching the moon! The moon is a barren wasteland, grey and dead, as far as the eye can see; however, underground is where you will find the next major resource in Ad Astra - Desh! Desh is used to craft advanced machines, space stations, and the tier two rocket."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "The environment",
+      "text": "The environment of the moon is very different from earth. As the moon has no oxygen and is freezing, attempting to place water will freeze it and lit blocks like torches will break. Any plant life and crops will also die very quickly. To combat these effects, you can build an oxygen distributor, which will we cover later."
     },
     {
       "type": "patchouli:text",

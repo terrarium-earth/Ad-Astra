@@ -45,7 +45,8 @@ public class LaunchPadBlock extends Block implements SimpleWaterloggedBlock {
         super(properties);
         registerDefaultState(stateDefinition.any()
             .setValue(POWERED, false)
-            .setValue(PART, LaunchPadPartProperty.CENTER));
+            .setValue(PART, LaunchPadPartProperty.CENTER)
+            .setValue(WATERLOGGED, false));
     }
 
     @Override

@@ -1,0 +1,29 @@
+{
+  "name": "Sliding Doors",
+  "icon": "ad_astra:ostrum_sliding_door",
+  "sortnum": 3,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Sliding Doors",
+      "item": "ad_astra:airlock",
+      "text": "Sliding doors are large 3x3 doors. They seal oxygen when closed, making them great candidates for airlocks. They can be locked by shift-right-clicking them with a wrench. Locked doors can only be opened with redstone."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:iron_sliding_door",
+      "recipe2": "ad_astra:steel_sliding_door"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:desh_sliding_door",
+      "recipe2": "ad_astra:ostrum_sliding_door"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:airlock",
+      "recipe2": "ad_astra:reinforced_door"
+    }
+  ]
+}

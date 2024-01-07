@@ -1,0 +1,24 @@
+{
+  "name": "Making Steel",
+  "icon": "ad_astra:etrionic_blast_furnace",
+  "sortnum": 2,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Etrionic Blast Furnace",
+      "item": "ad_astra:etrionic_blast_furnace",
+      "text": "The Etrionic Blast Furnace is an upgraded version of the blast furnace. It has two modes: blasting and alloying. Blasting works like a blast furnace, but with 4 slots for 4x efficiency. Alloying combines materials to make an alloy."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:etrionic_blast_furnace"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Steel",
+      "item": "ad_astra:steel_ingot",
+      "text": "Steel is made in an etrionic blast furnace by combining iron and coal. This will make 1 steel ingot per iron and coal. Steel is essential for most recipes and is the main material of your first rocket."
+    }
+  ]
+}

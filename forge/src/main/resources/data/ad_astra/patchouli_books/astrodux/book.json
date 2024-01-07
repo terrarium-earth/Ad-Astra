@@ -4,5 +4,6 @@
   "creative_tab": "ad_astra:main",
   "version": 2,
   "model": "ad_astra:astrodux",
-  "use_resource_pack": true
+  "use_resource_pack": true,
+  "show_progress": false
 }

@@ -1,0 +1,19 @@
+{
+  "name": "Industrial Lamps",
+  "icon": "ad_astra:lime_industrial_lamp",
+  "sortnum": 2,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Industrial Lamps",
+      "item": "ad_astra:small_blue_industrial_lamp",
+      "text": "Industrial lamps are available in all 16 colors, and in small and large sizes. By default, these will all emit normal white light; however, if you have $(l:https://modrinth.com/mod/shimmer)Shimmer$(/l), each light will emit its respective color."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:magenta_industrial_lamp",
+      "recipe2": "ad_astra:small_red_industrial_lamp"
+    }
+  ]
+}

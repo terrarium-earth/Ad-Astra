@@ -25,7 +25,7 @@
     {
       "type": "patchouli:text",
       "title": "Using the Distributor",
-      "text": "Once you have supplied the oxygen distributor with an infinite water source, sufficient energy and a completely sealed room, it will distribute oxygen in that room. To check that oxygen is being distributed, click \"show\" in the distributor GUI. If you see bubbles floating around, that means that the room is being supplied with oxygen."
+      "text": "Once you have supplied the oxygen distributor with an infinite water source, sufficient energy and a completely sealed room, it will distribute oxygen in that room. To check that oxygen is being distributed, click \"show\" in the distributor GUI. If the room is highlighted, that means that the oxygen has been successfully distributed."
     },
     {
       "type": "patchouli:text",
@@ -35,6 +35,11 @@
       "type": "patchouli:text",
       "title": "Ventilation",
       "text": "Inside your oxygenated structure, you should provide proper ventilation to ensure that oxygen does not get blocked when a door is closed. To do this, you can create a one-block gap in between walls or use a vent block to allow oxygen flow."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Rapid depressurization",
+      "text": "When your structure is fully sealed, and a hole is created, your structure will rapidly depressurize. This can be a catastrophic event. All entities inside will be violently sucked out of the hole and die without a space suit. The oxygen distributor will also rapidly drain oxygen and power. Avoid this by patching holes as soon as possible and by preventing accidental holes from being created."
     }
   ]
 }
