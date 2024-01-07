@@ -108,7 +108,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> GRAVITY_NORMALIZER = MACHINES.register("gravity_normalizer", () -> new GravityNormalizerBlock(DESH_PROPERTIES));
     public static final RegistryEntry<Block> ENERGIZER = MACHINES.register("energizer", () -> new EnergizerBlock(OSTRUM_PROPERTIES.noOcclusion()));
     public static final RegistryEntry<Block> CRYO_FREEZER = MACHINES.register("cryo_freezer", () -> new MachineBlock(OSTRUM_PROPERTIES));
-    public static final RegistryEntry<Block> OXYGEN_SENSOR = MACHINES.register("oxygen_sensor", () -> new OxygenSensorBlock(OSTRUM_PROPERTIES));
+    public static final RegistryEntry<Block> OXYGEN_SENSOR = MACHINES.register("oxygen_sensor", () -> new DetectorBlock(OSTRUM_PROPERTIES));
 
     public static final RegistryEntry<Block> OXYGEN = FLUIDS.register("oxygen", () -> new BotariumLiquidBlock(ModFluidProperties.OXYGEN, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryEntry<Block> HYDROGEN = FLUIDS.register("hydrogen", () -> new BotariumLiquidBlock(ModFluidProperties.HYDROGEN, BlockBehaviour.Properties.copy(Blocks.WATER)));

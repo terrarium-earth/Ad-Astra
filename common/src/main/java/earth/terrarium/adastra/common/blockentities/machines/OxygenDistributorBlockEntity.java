@@ -19,7 +19,6 @@ import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.adastra.common.utils.floodfill.FloodFill3D;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -162,13 +161,12 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     private boolean canCraftDistribution(long fluidAmount) {
         long energy = calculateEnergyPerTick();
         if (getEnergyStorage().internalExtract(energy, true) < energy) return false;
-        FluidHolder toExtract = FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(1).getFluid(), fluidAmount, null);
-        return ((BiFluidContainer) getFluidContainer().container()).output().internalExtract(toExtract, true).getFluidAmount() >= fluidAmount;
+        return ((BiFluidContainer) getFluidContainer().container()).output()
+            .internalExtract(getFluidContainer().getFluids().get(1).copyWithAmount(fluidAmount), true).getFluidAmount() >= fluidAmount;
     }
 
     protected void consumeDistribution(long fluidAmount) {
-        FluidHolder toExtract = FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(1).getFluid(), fluidAmount, null);
-        ((BiFluidContainer) getFluidContainer().container()).output().internalExtract(toExtract, false);
+        ((BiFluidContainer) getFluidContainer().container()).output().internalExtract(getFluidContainer().getFluids().get(1).copyWithAmount(fluidAmount), false);
     }
 
     protected void tickOxygen(ServerLevel level, BlockPos pos) {

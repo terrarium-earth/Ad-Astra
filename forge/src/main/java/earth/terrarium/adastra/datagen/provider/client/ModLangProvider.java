@@ -177,7 +177,7 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.JET_SUIT_INFO, "Works like the Netherite Space Suit, with jets installed to propel the wearer forward with extreme force.");
         add(ConstantComponents.SLIDING_DOOR_INFO, "A large 3x3 door. Shift-right-click with a wrench to lock it. Locked doors can only be opened with redstone.");
         add(ConstantComponents.FLAG_INFO, "A flag with your face on it. Right-click to add an image from a URL.");
-        add(ConstantComponents.LAUNCH_PAD_INFO, "Launches rockets. Power the center part with redstone to automatically launch placed rockets.");
+        add(ConstantComponents.LAUNCH_PAD_INFO, "Launches rockets. Power with redstone to automatically launch placed rockets.");
         add(ConstantComponents.GLOBE_INFO, "Right-click to spin the globe. Power it with redstone to make it constantly spin.");
         add(ConstantComponents.VENT_INFO, "Allows oxygen to flow through.");
 
@@ -196,7 +196,15 @@ public class ModLangProvider extends LanguageProvider {
         add(ConstantComponents.GRAVITY_NORMALIZER_INFO, "Allows you to control gravity in the local area. Should be used in a completely sealed structure.");
         add(ConstantComponents.ENERGIZER_INFO, "Stores a large amount of energy. Right-click with an item to charge it. Retains its charge when broken.");
         add(ConstantComponents.CRYO_FREEZER_INFO, "Converts ice materials into cryo fuel.");
-        add(ConstantComponents.OXYGEN_SENSOR_INFO, "Emits a redstone signal when oxygen is detected. Shift-right-click to invert the signal.");
+        add(ConstantComponents.OXYGEN_SENSOR_INFO, "Emits a redstone signal when oxygen is detected. shift-right-click to invert the signal. Right-click to change what it detects.");
+
+        add(ConstantComponents.PIPE_NORMAL, "Set pipe to Normal");
+        add(ConstantComponents.PIPE_INSERT, "Set pipe to Insert");
+        add(ConstantComponents.PIPE_EXTRACT, "Set pipe to Extract");
+        add(ConstantComponents.PIPE_NONE, "Set pipe to None");
+
+        add(ConstantComponents.DOOR_LOCKED, "Locked Door");
+        add(ConstantComponents.DOOR_UNLOCKED, "Unlocked Door");
 
         add("tooltip.ad_astra.energy_transfer_tick", "Transfer: %s ⚡/t");
         add("tooltip.ad_astra.fluid_transfer_tick", "Transfer: %s 🪣/t");

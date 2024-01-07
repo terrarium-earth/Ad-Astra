@@ -1,5 +1,9 @@
 {
   "values": [
-    "ad_astra:oil"
+    "ad_astra:oil",
+    {
+      "id": "techreborn:oil",
+      "required": false
+    }
   ]
 }

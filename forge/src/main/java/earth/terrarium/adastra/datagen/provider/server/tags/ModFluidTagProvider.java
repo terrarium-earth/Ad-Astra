@@ -7,6 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagEntry;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -41,5 +42,19 @@ public class ModFluidTagProvider extends TagsProvider<Fluid> {
 
         tag(ModFluidTags.FREEZES_IN_SPACE).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(Fluids.WATER)));
         tag(ModFluidTags.EVAPORATES_IN_SPACE).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(Fluids.WATER)));
+
+        tag(ModFluidTags.OXYGEN).add(TagEntry.optionalTag(new ResourceLocation("c:oxygen")));
+        tag(ModFluidTags.OXYGEN).add(TagEntry.optionalTag(new ResourceLocation("forge:oxygen")));
+
+        tag(ModFluidTags.HYDROGEN).add(TagEntry.optionalTag(new ResourceLocation("c:hydrogen")));
+        tag(ModFluidTags.HYDROGEN).add(TagEntry.optionalTag(new ResourceLocation("forge:hydrogen")));
+
+        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("c:diesel")));
+        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("forge:diesel")));
+        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("c:biodiesel")));
+        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("forge:biodiesel")));
+        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("forge:biodiesel")));
+
+        tag(ModFluidTags.OIL).add(TagEntry.optionalElement(new ResourceLocation("techreborn:oil")));
     }
 }

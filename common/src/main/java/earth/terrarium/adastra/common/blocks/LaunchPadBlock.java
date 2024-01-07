@@ -83,9 +83,11 @@ public class LaunchPadBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
-        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
         if (!level.isClientSide()) {
-            level.setBlock(pos, state.setValue(POWERED, level.hasNeighborSignal(pos)), Block.UPDATE_CLIENTS);
+            var controllerPos = getController(state, pos);
+            var controllerState = level.getBlockState(controllerPos);
+            if (controllerState.isAir()) return;
+            level.setBlock(controllerPos, controllerState.setValue(POWERED, level.hasNeighborSignal(pos)), Block.UPDATE_CLIENTS);
         }
     }
 

@@ -1,5 +1,13 @@
 {
   "values": [
-    "ad_astra:hydrogen"
+    "ad_astra:hydrogen",
+    {
+      "id": "#c:hydrogen",
+      "required": false
+    },
+    {
+      "id": "#forge:hydrogen",
+      "required": false
+    }
   ]
 }

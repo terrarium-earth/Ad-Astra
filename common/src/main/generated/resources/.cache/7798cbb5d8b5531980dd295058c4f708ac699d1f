@@ -1,11 +1,11 @@
-// 1.20.1	2024-01-01T16:23:05.810687	Tags for minecraft:fluid mod id ad_astra
+// 1.20.1	2024-01-06T17:52:32.399687	Tags for minecraft:fluid mod id ad_astra
 177c9e2ff17d4101adeb82bf787abd6ab892330a data/ad_astra/tags/fluids/efficient_fuel.json
 cf3608bd187922aeb48c566c19e8482b0dca34c7 data/ad_astra/tags/fluids/evaporates_in_space.json
 cf3608bd187922aeb48c566c19e8482b0dca34c7 data/ad_astra/tags/fluids/freezes_in_space.json
-2884eec9b71568644af84f99387d17c93fe5e90d data/ad_astra/tags/fluids/fuel.json
-df46d35b0d02d95b18853e362cb8e5474c3db8e9 data/ad_astra/tags/fluids/hydrogen.json
-f4f33d274a7f054e18b707dd7731c9172b04d876 data/ad_astra/tags/fluids/oil.json
-2724168a46f990627b9ccc009c46a4da699788f2 data/ad_astra/tags/fluids/oxygen.json
+b11e379dddd685cf39ec4c89bccbf2dda3dc8b4d data/ad_astra/tags/fluids/fuel.json
+f6ca4e8c6beb4dcc0ab209d2fca1dfa5009bad47 data/ad_astra/tags/fluids/hydrogen.json
+6dc1de2668ed26d86a92ccd022be7b6c86ad2b6e data/ad_astra/tags/fluids/oil.json
+ae5df289b9e00ac9d1b053aed01c8f2b3e94057c data/ad_astra/tags/fluids/oxygen.json
 169053d1b00c68b76bb66a96b544352e1953b4e5 data/ad_astra/tags/fluids/tier_1_rocket_fuel.json
 169053d1b00c68b76bb66a96b544352e1953b4e5 data/ad_astra/tags/fluids/tier_1_rover_fuel.json
 169053d1b00c68b76bb66a96b544352e1953b4e5 data/ad_astra/tags/fluids/tier_2_rocket_fuel.json

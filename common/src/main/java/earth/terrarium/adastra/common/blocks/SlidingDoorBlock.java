@@ -157,9 +157,11 @@ public class SlidingDoorBlock extends BasicEntityBlock implements Wrenchable {
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
-        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
         if (!level.isClientSide()) {
-            level.setBlock(pos, state.setValue(POWERED, level.hasNeighborSignal(pos)), Block.UPDATE_CLIENTS);
+            var controllerPos = getController(state, pos);
+            var controllerState = level.getBlockState(controllerPos);
+            if (controllerState.isAir()) return;
+            level.setBlock(controllerPos, controllerState.setValue(POWERED, level.hasNeighborSignal(pos)), Block.UPDATE_CLIENTS);
         }
     }
 
@@ -218,7 +220,14 @@ public class SlidingDoorBlock extends BasicEntityBlock implements Wrenchable {
             var partPos = controllerPos.relative(direction, part.xOffset()).above(part.yOffset());
             var partState = level.getBlockState(partPos);
             level.setBlockAndUpdate(partPos, partState.cycle(LOCKED));
+
+            if (partState.getValue(LOCKED)) {
+                user.displayClientMessage(ConstantComponents.DOOR_UNLOCKED, true);
+            } else {
+                user.displayClientMessage(ConstantComponents.DOOR_LOCKED, true);
+            }
         }
         level.playSound(null, pos, ModSoundEvents.WRENCH.get(), SoundSource.BLOCKS, 1, level.random.nextFloat() * 0.2f + 0.9f);
+
     }
 }

@@ -9,7 +9,8 @@ may be unstable.
 - Machines no longer light up when active. This is to improve lighting performance.
 - Large performance improvement to all machines
 - Removed extinguished torches and lanterns. Torches and lanterns will simply break in space.
-- Oxygen sensor block can now be inverted by shift-right clicking
+- Oxygen sensor block can now be inverted with a wrench.
+- Oxygen sensor block can now detect normal gravity and safe temperature by shift-right clicking with a wrench.
 - Oxygen, gravity and temperature are now saved in the world nbt. This should fix any issues where you don't have
   oxygen when you first open a world because it hasn't been calculated yet.
 - Added public APIs for planets, oxygen, gravity, and temperature. Please use those instead of the internal ones
@@ -128,6 +129,7 @@ Hopefully this will prevent people from missing it and crashing.
 and prevent players from spawning a new space station at any claimed chunks. 
 - Added Argonauts compat to space stations. Players on the same guild will be
 able to share space stations.
+- Sliding doors can now be redstone powered from any of its blocks, instead of just the bottom middle one.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.
@@ -143,4 +145,4 @@ if you're using these recipes in modpacks, you'll need to change them. This incl
 - Removed the JSON APIs for adding planets, galaxies and info in the planets screen.
 
 ## TODO:
-- Sliding doors can now be redstone powered from any of its blocks, instead of just the bottom middle one.
+- Machines now work with comparators.

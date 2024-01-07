@@ -67,6 +67,14 @@ public class ConstantComponents {
     public static final Component CRYO_FREEZER_INFO = Component.translatable("info.ad_astra.cryo_freezer").withStyle(ChatFormatting.GRAY);
     public static final Component OXYGEN_SENSOR_INFO = Component.translatable("info.ad_astra.oxygen_sensor").withStyle(ChatFormatting.GRAY);
 
+    public static final Component PIPE_NORMAL = Component.translatable("tooltip.ad_astra.pipe.normal");
+    public static final Component PIPE_INSERT = Component.translatable("tooltip.ad_astra.pipe.insert");
+    public static final Component PIPE_EXTRACT = Component.translatable("tooltip.ad_astra.pipe.extract");
+    public static final Component PIPE_NONE = Component.translatable("tooltip.ad_astra.pipe.none");
+
+    public static final Component DOOR_LOCKED = Component.translatable("tooltip.ad_astra.door.locked");
+    public static final Component DOOR_UNLOCKED = Component.translatable("tooltip.ad_astra.door.unlocked");
+
     public static final Component UPGRADES = Component.translatable("tooltip.ad_astra.upgrades").withStyle(ChatFormatting.LIGHT_PURPLE);
     public static final Component CLEAR_FLUID_TANK = Component.translatable("tooltip.ad_astra.clear_fluid_tank").withStyle(ChatFormatting.RED);
 

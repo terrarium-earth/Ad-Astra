@@ -43,7 +43,7 @@ public class RocketItem extends VehicleItem {
         level.playSound(null, pos, SoundEvents.NETHERITE_BLOCK_PLACE, SoundSource.BLOCKS, 1, 1);
         var vehicle = type().create(level);
         if (vehicle == null) return InteractionResult.PASS;
-        vehicle.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+        vehicle.setPos(pos.getX() + 0.5, pos.getY() + 0.125f, pos.getZ() + 0.5);
         vehicle.setYRot(context.getHorizontalDirection().getOpposite().toYRot());
         level.addFreshEntity(vehicle);
 

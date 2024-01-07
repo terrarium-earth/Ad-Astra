@@ -35,6 +35,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -126,6 +127,14 @@ public class Rocket extends Vehicle {
 
     public FluidContainer fluidContainer() {
         return fluidContainer;
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        if (!isLaunching() && !hasLaunched()) {
+            super.hurt(source, amount);
+        }
+        return false;
     }
 
     @Override
@@ -376,11 +385,7 @@ public class Rocket extends Vehicle {
     public boolean consumeFuel(boolean simulate) {
         if (level().isClientSide()) return false;
         int buckets = fluidContainer.getFluids().get(0).is(ModFluidTags.EFFICIENT_FUEL) ? 1 : 3;
-        FluidHolder toExtract = FluidHooks.newFluidHolder(
-            fluidContainer.getFluids().get(0).getFluid(),
-            FluidHooks.buckets(buckets),
-            null);
-        return fluidContainer.extractFluid(toExtract, simulate).getFluidAmount() > 0;
+        return fluidContainer.extractFluid(fluidContainer.getFluids().get(0).copyWithAmount(FluidHooks.buckets(buckets)), simulate).getFluidAmount() > 0;
     }
 
     public boolean hasEnoughFuel() {

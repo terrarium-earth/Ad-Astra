@@ -1,5 +1,13 @@
 {
   "values": [
-    "ad_astra:oxygen"
+    "ad_astra:oxygen",
+    {
+      "id": "#c:oxygen",
+      "required": false
+    },
+    {
+      "id": "#forge:oxygen",
+      "required": false
+    }
   ]
 }

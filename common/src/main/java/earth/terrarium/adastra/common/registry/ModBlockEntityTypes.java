@@ -87,10 +87,10 @@ public class ModBlockEntityTypes {
             CryoFreezerBlockEntity::new,
             ModBlocks.CRYO_FREEZER.get()));
 
-    public static final RegistryEntry<BlockEntityType<OxygenSensorBlockEntity>> OXYGEN_SENSOR = BLOCK_ENTITY_TYPES.register(
-        "oxygen_sensor",
+    public static final RegistryEntry<BlockEntityType<DetectorBlockEntity>> Detector = BLOCK_ENTITY_TYPES.register(
+        "detector",
         () -> RegistryHelpers.createBlockEntityType(
-            OxygenSensorBlockEntity::new,
+            DetectorBlockEntity::new,
             ModBlocks.OXYGEN_SENSOR.get()));
 
     public static final RegistryEntry<BlockEntityType<NasaWorkbenchBlockEntity>> NASA_WORKBENCH = BLOCK_ENTITY_TYPES.register(

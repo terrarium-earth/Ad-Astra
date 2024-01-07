@@ -146,6 +146,13 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
             var property = DIRECTION_TO_CONNECTION.get(getDirectionByVec(hitPos, pos).orElse(user.isShiftKeyDown() ? side.getOpposite() : side));
             level.setBlockAndUpdate(pos, state.cycle(property));
             level.playSound(null, pos, ModSoundEvents.WRENCH.get(), SoundSource.BLOCKS, 1, level.random.nextFloat() * 0.2f + 0.9f);
+
+            user.displayClientMessage(switch (level.getBlockState(pos).getValue(property)) {
+                case NONE -> ConstantComponents.PIPE_NONE;
+                case NORMAL -> ConstantComponents.PIPE_NORMAL;
+                case INSERT -> ConstantComponents.PIPE_INSERT;
+                case EXTRACT -> ConstantComponents.PIPE_EXTRACT;
+            }, true);
         }
     }
 
