@@ -1,0 +1,24 @@
+{
+  "name": "Незеритовый Скафандр",
+  "icon": "ad_astra:netherite_space_helmet",
+  "sortnum": 4,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Незеритовый Скафандр",
+      "item": "ad_astra:netherite_space_helmet",
+      "text": "Незеритовый Скафандр - это модернизированная версия стандартного скафандра, отличающаяся постоянной огнестойкостью, большей защитой и способностью выживать на Венере и Меркурии. Прежде чем отправиться на эти планеты, вы должны изготовить незеритовую броню скафандра, иначе вы сгорите заживо."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:netherite_space_helmet",
+      "recipe2": "ad_astra:netherite_space_suit"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:netherite_space_pants",
+      "recipe2": "ad_astra:netherite_space_boots"
+    }
+  ]
+}

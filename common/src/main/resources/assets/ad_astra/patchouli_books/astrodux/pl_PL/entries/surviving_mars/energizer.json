@@ -1,0 +1,18 @@
+{
+  "name": "Energizer",
+  "icon": "ad_astra:energizer",
+  "sortnum": 2,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Energizer",
+      "item": "ad_astra:energizer",
+      "text": "Energizer to maszyna zdolna do zasilania urządzeń oraz przechowywania dużej ilości energii. Aby naładować przedmiot, wystarczy podłączyć energizer do źródła zasilania, a następnie kliknąć prawym przyciskiem myszy na energizerze trzymając ten przedmiot. Energizer przechowuje 2 miliony jednostek energii, co pozwala na długotrwałe zasilanie maszyn. Dodatkowo, zachowuje swoją energię nawet po zniszczeniu."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:energizer"
+    }
+  ]
+}

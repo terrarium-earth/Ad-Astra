@@ -1,0 +1,42 @@
+{
+  "name": "당신의 첫 번째 로켓",
+  "icon": "ad_astra:nasa_workbench",
+  "sortnum": 1,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "NASA 제작대",
+      "item": "ad_astra:nasa_workbench",
+      "text": "로켓을 만들기 위해서는 먼저 노즈콘, 날개, 탱크, 금속판, 엔진 등을 모아야 합니다. 재료를 모은 다음 로켓 전용으로 특별 설계된 NASA 제작대에서 로켓을 만들 수 있습니다."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "나사 제작대",
+      "recipe": "ad_astra:nasa_workbench"
+    },
+    {
+      "type": "multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "   ",
+            " 0 ",
+            "   "
+          ]
+        ],
+        "mapping": {
+          "0": "ad_astra:launch_pad"
+        },
+        "symmetrical": true
+      },
+      "text": "당신의 새 로켓을 배치하려면 발사대를 만들어야 합니다."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "발사대",
+      "recipe": "ad_astra:launch_pad",
+      "text": "발사대를 만든 후에는 발사대 중앙에 로켓을 놓습니다."
+    }
+  ]
+}

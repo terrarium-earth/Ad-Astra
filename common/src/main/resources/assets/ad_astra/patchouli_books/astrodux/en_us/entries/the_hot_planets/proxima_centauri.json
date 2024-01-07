@@ -1,0 +1,17 @@
+{
+  "name": "Proxima Centauri",
+  "icon": "ad_astra:/textures/painting/alpha_centauri.png",
+  "sortnum": 1,
+  "category": "ad_astra:the_hot_planets",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Proxima Centauri",
+      "text": "Once you have found enough Calorite to craft a tier four rocket, you will be able to leave this solar system and enter a new one. The first planet that you will head to in Proxima Centauri is Glacio. Glacio is brutally cold; however, it has oxygen, allowing you to survive there without a spacesuit."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This is the end of the Ad Astra progression for now. This guidebook will be expanded as more content is added. Thanks for playing Ad Astra!"
+    }
+  ]
+}

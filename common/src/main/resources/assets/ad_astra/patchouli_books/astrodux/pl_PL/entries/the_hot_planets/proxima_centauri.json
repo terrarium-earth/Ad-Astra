@@ -1,0 +1,17 @@
+{
+  "name": "Proxima Centauri",
+  "icon": "ad_astra:/textures/painting/alpha_centauri.png",
+  "sortnum": 1,
+  "category": "ad_astra:the_hot_planets",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Proxima Centauri",
+      "text": "Gdy zdobędziesz wystarczającą ilość Kalorytu, aby wytworzyć rakietę czwartego poziomu, będziesz mógł opuścić ten układ słoneczny i wejść do nowego. Pierwszą planetą, do której udasz się w Proxima Centauri, będzie Glacio. Glacio jest brutalnie zimnym miejscem, ale posiada tlen, co pozwala na przetrwanie tam bez kombinezonu kosmicznego."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "To kończy progresję Ad Astra, na ten moment. Ten podręcznik zostanie rozszerzony wraz z dodaniem nowej zawartości. Dziękujemy za grę w Ad Astra!"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "Rurociągi płynów",
+  "icon": "ad_astra:ostrum_fluid_pipe",
+  "sortnum": 1,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Fluid Pipes",
+      "item": "ad_astra:ostrum_fluid_pipe",
+      "text": "Rurociągi płynów są podobne do kabli, ale służą do przesyłania płynów zamiast energii. Aby z nich skorzystać, wytwórz kilka rurociągów płynów oraz klucz do rurociągów. Następnie, kliknij prawym przyciskiem myszy na jednym z rurociągów kluczem, aby przełączyć tryby rurociągu: 'brak', 'normalny', 'wstawianie' i 'wyjmowanie'."
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "Rurociągi ustawione na tryb 'wstawianie' będą odbierać płyn z sieci, podczas gdy rurociągi ustawione na tryb 'wyjmowanie' będą pompować płyn do sieci.",
+      "recipe": "ad_astra:desh_fluid_pipe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:ostrum_fluid_pipe",
+      "recipe2": "ad_astra:wrench"
+    }
+  ]
+}

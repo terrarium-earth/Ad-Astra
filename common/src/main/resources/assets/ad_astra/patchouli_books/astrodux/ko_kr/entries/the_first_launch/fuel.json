@@ -1,0 +1,30 @@
+{
+  "name": "연료",
+  "icon": "ad_astra:fuel_bucket",
+  "sortnum": 2,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "로켓을 배치한 후에도 로켓은 아직 발사할 수 업습니다. 로켓을 발사하기 위해서는 로켓에 연료를 채워넣어야 합니다."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "연료 얻기",
+      "item": "ad_astra:oil_bucket",
+      "text": "기름은 바다 표면에서 다량으로 발견할 수 있습니다. 기름은 재생 불가능 자원이므로 가능한 한 많은 기름을 모으세요. 로켓을 발사할 때마다 기름이 많이 필요합니다."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "연료 얻기",
+      "item": "ad_astra:fuel_bucket",
+      "text": "충분한 기름을 모은 후(출발 및 귀한을 위해서는 최소 양동이 6개가 필요합니다), 기름을 연료로 정제해야 합니다. 정제하려면, 연료 정제소를 만들어야 합니다. 전원을 키고 왼쪽 슬롯에 기름을 넣으면 연료로 정제됩니다."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "연료 정제소",
+      "recipe": "ad_astra:fuel_refinery",
+      "text": "로켓에 쉬프트-클릭을 해 인벤토리르 열고, 연료 양동이 3개를 연료 슬롯에 넣습니다. 왕복을 위해 다른 3개의 연료 양동이를 로켓에 넣습니다."
+    }
+  ]
+}

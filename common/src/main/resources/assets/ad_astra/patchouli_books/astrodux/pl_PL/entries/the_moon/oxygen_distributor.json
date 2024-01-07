@@ -1,0 +1,40 @@
+{
+  "name": "Dystrybutor tlenu",
+  "icon": "ad_astra:oxygen_distributor",
+  "sortnum": 2,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Dystrybutor tlenu",
+      "item": "ad_astra:oxygen_distributor",
+      "text": "Dystrybutor tlenu to potężna maszyna, która rozprowadza tlen w szczelnym pomieszczeniu, umożliwiając przeżycie. Działa dokładnie jak ładowarka tlenu, gdzie wlewasz wodę do zbiornika, ale zamiast otrzymywać tlen, tlen jest rozprowadzany do powietrza."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Pompa wodna",
+      "item": "ad_astra:water_pump",
+      "text": "Pompa wodna jest niezbędna do utrzymania ciągłej pracy dystrybutora tlenu. Aby z niej skorzystać, umieść nieskończone źródełko wody poniżej, następnie umieść pompę wodną powyżej jednego z bloków wody, a następnie umieść dystrybutor tlenu obok niej. Upewnij się, że zarówno pompa, jak i dystrybutor tlenu są odpowiednio zasilone."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Dystrybutor i Pompa",
+      "recipe": "ad_astra:oxygen_distributor",
+      "recipe2": "ad_astra:water_pump"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Używanie dystrybutora",
+      "text": "Po dostarczeniu dystrybutorowi tlenu nieskończonego źródła wody, wystarczającej energii i całkowicie szczelnego pomieszczenia, będzie on rozprowadzał tlen w tym pomieszczeniu. Aby sprawdzić, czy tlen jest rozprowadzany, kliknij 'pokaż' w interfejsie dystrybutora. Jeśli zobaczysz unoszące się bąbelki, oznacza to, że pomieszczenie jest zasilane tlenem."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Jeśli w twojej konstrukcji jest dziura, przez którą tlen ucieka, w interfejsie dystrybutora zostanie wyświetlone ostrzeżenie. Załataj dziurę, aby uniknąć niepotrzebnego zużycia energii i tlenu. Po tym powinieneś móc zdjąć swój kombinezon i przeżyć. Każdy dystrybutor tlenu może obsługiwać do 6000 bloków, co pozwala na zbudowanie umiarkowanie dużego stanowiska kosmicznego lub bazy. Jeśli potrzebujesz więcej, możesz umieścić więcej dystrybutorów tlenu."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Wentylacja",
+      "text": "Wewnątrz twojej przestrzeni z tlenem powinieneś zapewnić odpowiednią wentylację, aby zapewnić swobodny przepływ tlenu, gdy drzwi są zamknięte. Możesz to zrobić, tworząc jednoblokową szczelinę między ścianami lub używając bloków wentylacyjnych, aby umożliwić przepływ tlenu."
+    }
+  ]
+}

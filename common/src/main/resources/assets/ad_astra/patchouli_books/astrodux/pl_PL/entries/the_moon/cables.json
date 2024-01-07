@@ -1,0 +1,23 @@
+{
+  "name": "Przewody",
+  "icon": "ad_astra:desh_cable",
+  "sortnum": 4,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Przewody",
+      "item": "ad_astra:desh_cable",
+      "text": "Przewody umożliwiają przesyłanie energii na długie dystanse. Istnieją dwie wersje: stalowy i desh – desh ma wyższą szybkość transferu. Przy użyciu klucza nasadowego, przewody można skonfigurować tak, aby się rozciągały w określonym kierunku lub by rozłączały się z węzłów w sieci."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:steel_cable",
+      "recipe2": "ad_astra:desh_cable"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:wrench"
+    }
+  ]
+}

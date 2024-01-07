@@ -1,0 +1,23 @@
+{
+  "name": "Кабелі",
+  "icon": "ad_astra:desh_cable",
+  "sortnum": 4,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Кабелі",
+      "item": "ad_astra:desh_cable",
+      "text": "Кабелі дозволяють передавати енергію на великі відстані. Є два варіанти: сталь і деш – дешові мають більшу швидкість передачі. За допомогою гайкового ключа кабелі можна налаштувати так, щоб вони простягалися в різних напрямках або від’єднувалися від вузлів у мережі."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:steel_cable",
+      "recipe2": "ad_astra:desh_cable"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:wrench"
+    }
+  ]
+}

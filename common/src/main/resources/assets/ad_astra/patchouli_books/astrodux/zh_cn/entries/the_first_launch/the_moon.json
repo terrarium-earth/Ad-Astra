@@ -1,0 +1,19 @@
+{
+  "name": "月球",
+  "icon": "ad_astra:/textures/environment/moon.png",
+  "sortnum": 5,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "月球",
+      "item": "ad_astra:desh_ingot",
+      "text": "欢迎来到月球！月球表面尽是荒芜，黯淡地沉寂着，与死者们不再鲜活的心脏有几分相像。这层无聊的灰色一直延伸到了视场之外。拨开灰色的土壤和岩石，你却可以找到丰富的矿藏，它们是你在Ad Astra中见到的第一种外星材料——戴斯！戴斯可以用于更多机器、空间站和二级火箭的建造。"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "返航",
+      "text": "想家了吗？潜行时右击载着你降落的着陆舱，收集你的火箭、燃油和发射基座，然后左键击打着陆舱以移除它。剩下的操作大差不差：放下火箭发射基座，摆放好火箭，加满燃油，然后按下$(k:jump)。回家咯！"
+    }
+  ]
+}

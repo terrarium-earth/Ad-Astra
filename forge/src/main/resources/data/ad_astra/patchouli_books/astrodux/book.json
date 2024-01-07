@@ -1,0 +1,8 @@
+{
+  "name": "item.ad_astra.astrodux",
+  "landing_text": "item.ad_astra.astrodux.landing",
+  "creative_tab": "ad_astra:main",
+  "version": 2,
+  "model": "ad_astra:astrodux",
+  "use_resource_pack": true
+}

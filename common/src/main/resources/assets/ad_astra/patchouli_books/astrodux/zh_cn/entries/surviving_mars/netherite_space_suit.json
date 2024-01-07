@@ -1,0 +1,24 @@
+{
+  "name": "合金宇航服",
+  "icon": "ad_astra:netherite_space_helmet",
+  "sortnum": 4,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "合金宇航服",
+      "item": "ad_astra:netherite_space_helmet",
+      "text": "合金宇航服是一套耐热、防火、高抗性的，能够让你在金星和水星的恶劣环境中生存的宇航服。在这两颗星球的死亡高温下，唯有合金宇航服能保你一命。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:netherite_space_helmet",
+      "recipe2": "ad_astra:netherite_space_suit"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:netherite_space_pants",
+      "recipe2": "ad_astra:netherite_space_boots"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "Netherytowy kombinezon kosmiczny",
+  "icon": "ad_astra:netherite_space_helmet",
+  "sortnum": 4,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Netherytowy kombinezon kosmiczny",
+      "item": "ad_astra:netherite_space_helmet",
+      "text": "Netherytowy kombinezon kosmiczny to ulepszona wersja standardowego kombinezonu kosmicznego, cechująca się trwałą odpornością na ogień, większą ochroną oraz zdolnością do przetrwania na Wenus i Merkurym. Przed podróżą na te planety musisz wytworzyć tę zbroję, w przeciwnym razie spłoniesz."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:netherite_space_helmet",
+      "recipe2": "ad_astra:netherite_space_suit"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:netherite_space_pants",
+      "recipe2": "ad_astra:netherite_space_boots"
+    }
+  ]
+}

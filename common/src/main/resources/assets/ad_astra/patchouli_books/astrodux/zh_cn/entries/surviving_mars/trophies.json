@@ -1,0 +1,20 @@
+{
+  "name": "纪念品",
+  "icon": "ad_astra:mars_globe",
+  "sortnum": 0,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "星球仪",
+      "item": "ad_astra:earth_globe",
+      "text": "你在探索完不同星球的地牢后，会获得一种装饰性方块——星球仪作为纪念。右击它们，转动一下试试看。给星球仪通入红石信号可以让它们不停旋转。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "太空艺术画",
+      "item": "ad_astra:space_painting",
+      "text": "在地牢中的宝箱里，你还能找到一些来自太空的画作。太空艺术画总共有14张，将它贴在墙上就会随机选择一张展示，跟普通的画一样。"
+    }
+  ]
+}

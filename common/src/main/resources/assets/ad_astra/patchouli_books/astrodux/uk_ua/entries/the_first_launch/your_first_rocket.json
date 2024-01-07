@@ -1,0 +1,42 @@
+{
+  "name": "Ваша перша ракета",
+  "icon": "ad_astra:nasa_workbench",
+  "sortnum": 1,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Верстак НАСА",
+      "item": "ad_astra:nasa_workbench",
+      "text": "Щоб побудувати ракету, ви повинні спочатку зібрати всі частини: конус, пластини, плавники, баки та двигун. Потім ви можете зробити ракету на верстаку НАСА, спеціально розробленому верстаку лише для ракет."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Верстак НАСА",
+      "recipe": "ad_astra:nasa_workbench"
+    },
+    {
+      "type": "multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "   ",
+            " 0 ",
+            "   "
+          ]
+        ],
+        "mapping": {
+          "0": "ad_astra:launch_pad"
+        },
+        "symmetrical": true
+      },
+      "text": "Щоб розмістити свою щойно створену ракету, ви повинні виготовити майданчик для запуску."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Майданчик для запуску",
+      "recipe": "ad_astra:launch_pad",
+      "text": "Після того, як майданчик для запуску буде розміщено, розмістіть ракету в його центрі."
+    }
+  ]
+}

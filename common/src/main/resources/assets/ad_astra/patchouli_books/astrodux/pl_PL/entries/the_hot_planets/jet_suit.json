@@ -1,0 +1,28 @@
+{
+  "name": "Kombinezon odrzutowy",
+  "icon": "ad_astra:jet_suit_helmet",
+  "sortnum": 0,
+  "category": "ad_astra:the_hot_planets",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Kombinezon odrzutowy",
+      "item": "ad_astra:jet_suit_helmet",
+      "text": "Kombinezon odrzutowy to ulepszona wersja netherytowego kombinezonu kosmicznego, zapewniająca większą ochronę, dodatkowe magazynowanie tlenu oraz umożliwiająca lot. Jego wytworzenie jest kosztowne, ale oferuje szybki lot, co ułatwia podróżowanie."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Kombinezon odrzutowy posiada dwa tryby lotu: podnoszenie się ($(k:jump)) i wzmocnienie ($(k:jump) + $(k:sprint)). Tryb podnoszenia powoduje unoszenie się w górę, podczas gdy tryb wzmocnienia jest podobny do lotu z wykorzystaniem elytry, które są ciągle napędzane fajerwerkami. Kombinezon odrzutowy zasilany jest energią i musi być naładowany, aby móc latać. Można go naładować za pomocą energizera, klikając prawym przyciskiem myszy na kombinezonie odrzutowym przy użyciu energizera."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:jet_suit_helmet",
+      "recipe2": "ad_astra:jet_suit"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:jet_suit_pants",
+      "recipe2": "ad_astra:jet_suit_boots"
+    }
+  ]
+}

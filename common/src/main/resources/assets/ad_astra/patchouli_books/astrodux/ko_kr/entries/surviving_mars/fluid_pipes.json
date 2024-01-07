@@ -1,0 +1,24 @@
+{
+  "name": "액체 파이프",
+  "icon": "ad_astra:ostrum_fluid_pipe",
+  "sortnum": 1,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "액체 파이프",
+      "item": "ad_astra:ostrum_fluid_pipe",
+      "text": "액체 파이프는 케이블과 유사하지만 에너지 전달 대신 액체를 전달합니다. 파이프를 사용하려면, 약간의 액체 파이프와 렌치를 만드세요. 그런 다음, 렌치로 파이프 중 하나를 우클릭하여 파이프 모드들을 순환합니다. ( '없음' '일반' '삽입' '추출' )"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "'삽입' 모드의 파이프는 회로에서 액체를 가져오고, '추출' 모드의 파이프는 액체를 회로로 펌핑합니다.",
+      "recipe": "ad_astra:desh_fluid_pipe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:ostrum_fluid_pipe",
+      "recipe2": "ad_astra:wrench"
+    }
+  ]
+}

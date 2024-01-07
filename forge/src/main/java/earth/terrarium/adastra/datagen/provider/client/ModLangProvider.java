@@ -66,6 +66,8 @@ public class ModLangProvider extends LanguageProvider {
         add("itemGroup.ad_astra.main", "Ad Astra");
 
         addItem(ModItems.TI_69, "TI-69");
+        add("item.ad_astra.astrodux", "Astrodux");
+        add("item.ad_astra.astrodux.landing", "Welcome to your guide to the depths of Space.$(br2)Ad Astra is in development. Some features in the guide may be missing or incomplete.");
 
         add("death.attack.oxygen", "%1$s couldn't breathe anymore");
         add("death.attack.oxygen.player", "%1$s lost their breath whilst trying to escape %2$s");

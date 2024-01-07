@@ -1,0 +1,32 @@
+{
+  "name": "基础材料",
+  "icon": "ad_astra:steel_plate",
+  "sortnum": 0,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "铁板",
+      "item": "ad_astra:iron_plate",
+      "text": "在Ad Astra中，铁板绝对是最基础的材料。你可以用工程锤捶打铁锭来制造铁板。有了铁板，你就有了制造大部分机器、拼凑一枚初级火箭的基础了。着手准备准备你的星际旅行吧！"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "锤与铁",
+      "recipe": "ad_astra:hammer",
+      "recipe2": "ad_astra:hammering/iron_plate"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "钢板",
+      "item": "ad_astra:steel_plate",
+      "text": "无论是对于初级火箭，还是许多核心机器，钢板都是必不可缺的材料之一。放置一台火力发电机为压缩机供电，压缩钢锭即可制造钢板。记得保证充足的钢板库存，今后的日子里，你会经常用到它们。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "发电，压缩",
+      "recipe": "ad_astra:coal_generator",
+      "recipe2": "ad_astra:compressor"
+    }
+  ]
+}

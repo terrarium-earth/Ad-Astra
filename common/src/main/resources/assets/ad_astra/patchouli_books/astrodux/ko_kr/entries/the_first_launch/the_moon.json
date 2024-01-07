@@ -1,0 +1,19 @@
+{
+  "name": "달",
+  "icon": "ad_astra:/textures/environment/moon.png",
+  "sortnum": 5,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "달",
+      "item": "ad_astra:desh_ingot",
+      "text": "달에 도달한 것을 축하합니다! 달은 잿빛이고, 죽어있는 황무지입니다. 하지만 달 지하에서는 다음 주요 자원인 대쉬를 찾을 수 있습니다! 대쉬는 고급 기계, 우주 정거장 및 티어 2 로켓을 만드는 데 사용됩니다."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "집으로 돌아가기",
+      "text": "지구로 돌아가기 위해서는 착륙선을 열고(쉬프트 + 우클릭) 로켓에서 로켓 발사대와 연료를 챙기세요. 챡륙선을 제거하려면, 착륙선을 때리면 됩니다. 발사대를 설치하고 로켓을 내려 놓고 연료를 채우십시오. $(k:jump) 키를 눌러 지구로 돌아가세요."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "더 나은 연료",
+  "icon": "ad_astra:cryo_freezer",
+  "sortnum": 3,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "크라이오 냉동고",
+      "item": "ad_astra:cryo_freezer",
+      "text": "연료는 찾기 어렵습니다. 기름을 얻기 위해 바다에 가야 합니다. 이 크라이오 냉동고는 더 나은 연료인 크라이오 연료를 얻을 수 있게 합니다. 정제한 연료보다 훨씬 효율적이라서, 양동이 하나만으로 로켓을 발사할 수 있습니다."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "크라이오 연료는 차가운 행성의 지하에서 발견되는 얼음 조각을 모아서 만듭니다. 그런 다음 얼음 조각을 크라이오 냉동고에 넣어야 하며 25mb의 크라이오 연료로 변환됩니다. 또는 얼음, 꽁꽁 언 얼음, 푸른 얼음을 연료로 변환할 수 있습니다. 양동이 2개 분량 이상을 만든 후 (하나는 발사용, 하나는 귀환용), 로켓 연료 슬롯에 양동이를 놓습니다."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:cryo_freezer"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "크라이오 연료",
+      "item": "ad_astra:cryo_fuel_bucket",
+      "text": "우수한 연료인 것 말고도, 크라이오 연료에는 몇 가지 다른 기능이 있습니다. 배치하면 용암과 유사하게 닿으면 피해를 줍니다. 증발하지 않고 우주와 네더에 배치 가능합니다. 마지막으로, 물을 얼려 무한한 얼음 공급원을 제공합니다."
+    }
+  ]
+}

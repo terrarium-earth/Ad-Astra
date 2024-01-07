@@ -1,0 +1,30 @@
+{
+  "name": "燃油",
+  "icon": "ad_astra:fuel_bucket",
+  "sortnum": 2,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "先别急着发射。要成功上天，你需要给火箭加满燃料。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "获取燃料",
+      "item": "ad_astra:oil_bucket",
+      "text": "海面上有许多原油涌泉。原油是不可再生资源，在游戏里，你需要尽可能多地收集它们。火箭可是吃油大户。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "获取燃料",
+      "item": "ad_astra:fuel_bucket",
+      "text": "采集到至少6桶原油（可供火箭往返一次）之后，你还需要将它们精炼成燃油。精炼工艺需要在燃油精炼厂中进行。通上电，把原油从左侧放入，开始精炼。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "燃油精炼厂",
+      "recipe": "ad_astra:fuel_refinery",
+      "text": "潜行时左击火箭以打开它的物品栏，然后在输入栏放入三桶燃油。如果你不想来一趟有去无回的旅行，那你最好把另外三桶燃油也带在身上。"
+    }
+  ]
+}

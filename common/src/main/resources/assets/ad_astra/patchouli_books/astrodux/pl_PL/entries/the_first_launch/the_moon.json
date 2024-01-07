@@ -1,0 +1,19 @@
+{
+  "name": "Księżyc",
+  "icon": "ad_astra:/textures/environment/moon.png",
+  "sortnum": 5,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Księżyc",
+      "item": "ad_astra:desh_ingot",
+      "text": "Gratulacje, dotarłeś na Księżyc! Księżyc to jałowa pustynia, szara i martwa, jak daleko okiem sięgnąć. Jednak to pod ziemią znajdziesz kolejne zasoby w Ad Astra - Desh! Desh jest używany do wytworzenia zaawansowanych maszyn, stacji kosmicznych i rakiety drugiego poziomu."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Powrót do domu",
+      "text": "Aby powrócić na Ziemię, otwórz swój lądownik (shift + prawy przycisk myszy) i zabierz rakietę, paliwo oraz platformę startową. Aby usunąć lądownik, uderz go. Rozstaw platformę startową, umieść na niej rakietę i zatankuj ją paliwem. Naciśnij $(k:jump) i poleć z powrotem na Ziemię."
+    }
+  ]
+}

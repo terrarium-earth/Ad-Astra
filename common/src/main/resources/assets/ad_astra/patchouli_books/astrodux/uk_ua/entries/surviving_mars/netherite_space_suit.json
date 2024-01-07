@@ -1,0 +1,24 @@
+{
+  "name": "Незеритовий скафандр",
+  "icon": "ad_astra:netherite_space_helmet",
+  "sortnum": 4,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Незеритовий скафандр",
+      "item": "ad_astra:netherite_space_helmet",
+      "text": "Незеритовий скафандр — це оновлена версія стандартного скафандра, що має постійну вогнестійкість, більше захисту та здатність виживати на Венері та Меркурії. Перш ніж подорожувати на ці планети, ви повинні створити незеритовий скафандр, інакше ви підсмажитесь до смерті."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:netherite_space_helmet",
+      "recipe2": "ad_astra:netherite_space_suit"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:netherite_space_pants",
+      "recipe2": "ad_astra:netherite_space_boots"
+    }
+  ]
+}

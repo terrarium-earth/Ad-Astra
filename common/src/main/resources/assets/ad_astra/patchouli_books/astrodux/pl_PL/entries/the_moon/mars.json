@@ -1,0 +1,19 @@
+{
+  "name": "Mars",
+  "icon": "ad_astra:/textures/environment/mars.png",
+  "sortnum": 6,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Mars",
+      "text": "Teraz, gdy zbadałeś Księżyc i pracowałeś z deshem, chcesz posunąć się dalej i udać się na Czerwoną Planetę. Budowa rakiety drugiego poziomu, zdolnej do podróży na Marsa, jest podobna do budowy rakiety pierwszego poziomu, ale z użyciem materiałów z deshu zamiast stali. Wytwórz części, zbuduj rakietę w warsztacie NASA, zatankuj ją paliwem i w drogę na Marsa!"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Ostrum",
+      "item": "ad_astra:ostrum_ingot",
+      "text": "Ostrum to kolejny materiał, którego szukasz na Czerwonej Planecie. Służy do tworzenia bardziej zaawansowanych zbroi kosmicznych, budowania wyjątkowych maszyn oraz konstrukcji rakiety zdolnej do wytrzymania ekstremalnego ciepła, co umożliwia podróżowanie na gorące planety."
+    }
+  ]
+}

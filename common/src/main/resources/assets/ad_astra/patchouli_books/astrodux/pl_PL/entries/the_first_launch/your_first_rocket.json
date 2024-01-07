@@ -1,0 +1,42 @@
+{
+  "name": "Twoja pierwsza Rakieta",
+  "icon": "ad_astra:nasa_workbench",
+  "sortnum": 1,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Warsztat NASA",
+      "item": "ad_astra:nasa_workbench",
+      "text": "Aby zbudować rakietę, najpierw musisz zebrać wszystkie jej części: stożek, płyty, skrzydła, zbiorniki i silnik. Następnie możesz złożyć rakietę w warsztacie NASA, specjalnie zaprojektowanym warsztacie do budowy rakiet."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Warsztat NASA",
+      "recipe": "ad_astra:nasa_workbench"
+    },
+    {
+      "type": "multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "   ",
+            " 0 ",
+            "   "
+          ]
+        ],
+        "mapping": {
+          "0": "ad_astra:launch_pad"
+        },
+        "symmetrical": true
+      },
+      "text": "Aby umieścić nowo stworzoną rakietę, musisz zbudować platformę startową."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Platforma startowa",
+      "recipe": "ad_astra:launch_pad",
+      "text": "Po zbudowaniu platformy startowej, umieść rakietę na środku."
+    }
+  ]
+}

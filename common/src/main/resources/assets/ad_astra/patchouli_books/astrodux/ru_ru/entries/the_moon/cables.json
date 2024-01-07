@@ -1,0 +1,23 @@
+{
+  "name": "Кабели",
+  "icon": "ad_astra:desh_cable",
+  "sortnum": 4,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Кабели",
+      "item": "ad_astra:desh_cable",
+      "text": "Кабели обеспечивают передачу энергии на большие расстояния. Существует два варианта: стальные и дешевые – дешевые, имеющие более высокую скорость передачи. При использовании с Гаечным Ключом кабели можно сконфигурировать так, чтобы они протягивались в разных направлениях или отсоединялись от узлов сети."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:steel_cable",
+      "recipe2": "ad_astra:desh_cable"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:wrench"
+    }
+  ]
+}

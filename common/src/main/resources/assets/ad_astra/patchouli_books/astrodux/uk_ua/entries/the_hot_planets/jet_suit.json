@@ -1,0 +1,28 @@
+{
+  "name": "Реактивний скафандр",
+  "icon": "ad_astra:jet_suit_helmet",
+  "sortnum": 0,
+  "category": "ad_astra:the_hot_planets",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Реактивний скафандр",
+      "item": "ad_astra:jet_suit_helmet",
+      "text": "Реактивний скафандр є оновленою версією незеритового з більшим захистом, додатковим запасом кисню та польотом. Його дорого створювати, проте він пропонує високошвидкісний політ, що полегшує подорожі."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Він має два режими польоту: підйом ($(k:jump)) і прискорення ($(k:jump) + $(k:sprint)). Підйом змушує власника злітати вгору, тоді як прискорення схоже більше на політ з елітрами за допомогою феєрверків. Реактивний скафандр живиться енергією і його потрібно зарядити, щоб літати. Його можна зарядити наснажником, клацнувши Пкм по ньому зі скафандром у руці."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:jet_suit_helmet",
+      "recipe2": "ad_astra:jet_suit"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:jet_suit_pants",
+      "recipe2": "ad_astra:jet_suit_boots"
+    }
+  ]
+}

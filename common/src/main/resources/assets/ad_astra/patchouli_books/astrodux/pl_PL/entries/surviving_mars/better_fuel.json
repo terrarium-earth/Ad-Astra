@@ -1,0 +1,28 @@
+{
+  "name": "Lepsze paliwo",
+  "icon": "ad_astra:cryo_freezer",
+  "sortnum": 3,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Zamrażarka kriogeniczna",
+      "item": "ad_astra:cryo_freezer",
+      "text": "Paliwo jest trudne do zdobycia; wymaga wyruszenia na ocean, w poszukiwaniu wycieków ropy. Zamrażarka kriogeniczna wprowadza nowy sposób uzyskiwania lepszego paliwa - paliwa kriogenicznego. Paliwo kriogeniczne jest znacznie bardziej wydajne niż rafinowane, umożliwiając wystrzelenie rakiety używając jednego wiadra."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Poza tym, że jest doskonałym paliwem, paliwo kriogeniczne ma kilka innych właściwości. Zbierane jest poprzez zebranie odłamków lodu, które występują jako ruda pod ziemią na zimnych planetach. Odłamek lodu musi zostać włożony do zamrażarki kriogenicznej, gdzie zostanie przekształcony w 25 mB paliwa kriogenicznego. Alternatywnie, można przekształcić lód, schłodzony lód i niebieski lód w paliwo. Gdy zdobędziesz co najmniej dwa wiadra (jeden na start i drugi na powrót), umieść je w slocie paliwa rakietowego."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:cryo_freezer"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Paliwo kriogeniczne",
+      "item": "ad_astra:cryo_fuel_bucket",
+      "text": "Paliwo kriogeniczne ma jeszcze kilka innych cech. Po umieszczeniu go, zadaje obrażenia wszystkiemu wewnątrz, podobnie jak lawa. Ponadto, zamraża wodę, umożliwiając tworzenie nieskończonego źródła lodu."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "금성과 수성",
+  "icon": "ad_astra:/textures/environment/venus.png",
+  "sortnum": 5,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "칼코라이트",
+      "item": "ad_astra:calorite_ingot",
+      "text": "네더라이트 우주복 세트와 티어 3 로켓의 모든 부품을 제작하기에 충분한 오스트럼이 있으면 금성과 수성으로 떠날 수 있습니다. 참고하세요. 네더라이트 우주복이나 화염 저항 없이 이 행성들에 들어가면 굉장히 빨리 죽습니다. 다음으로 당신이 찾아봐야 할 광물은 칼코라이트 입니다."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "칼코라이트는 새로운 항성계로 이동할 수 있는 궁극의 로켓을 만드는 데 사용됩니다."
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-03T00:06:35.045878	Block States: ad_astra
+// 1.20.1	2024-01-06T22:48:38.706359	Block States: ad_astra
 3b0e47b473b6710ddeb7f46108de3f3ad99e83e3 assets/ad_astra/blockstates/aeronos_cap.json
 97fb99c686b024024655b4d9507104dc77161f29 assets/ad_astra/blockstates/aeronos_door.json
 0f6adcffc18bba1418df5c168e72a767e1075feb assets/ad_astra/blockstates/aeronos_fence.json
@@ -215,7 +215,7 @@ d0833115d3cae9b0a16aafe5cb3f084ea4c851bf assets/ad_astra/blockstates/ostrum_slid
 acd682882f85dd4709413d2b57fafd619b28d934 assets/ad_astra/blockstates/oxygen.json
 8a367493b12dcfafb532626f3992578e33e70001 assets/ad_astra/blockstates/oxygen_distributor.json
 118098f91249bd575fb1b247b776f6eeea06e598 assets/ad_astra/blockstates/oxygen_loader.json
-7204eb3ebfd539ea61682ef737c2e3cffbdcb0d5 assets/ad_astra/blockstates/oxygen_sensor.json
+0f02f869cca2a10ccead9fe0420a4ae4e0824edf assets/ad_astra/blockstates/oxygen_sensor.json
 cd4c044d98056a25db543b1346be823df85fcb4b assets/ad_astra/blockstates/permafrost.json
 63110a6e524b0ed16e6efc158c4252c86fe0bba4 assets/ad_astra/blockstates/permafrost_brick_slab.json
 a269c6cf1ac73e09d47066b9776d88e2f604df65 assets/ad_astra/blockstates/permafrost_brick_stairs.json

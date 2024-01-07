@@ -1,0 +1,18 @@
+{
+  "name": "Stacja kosmiczna",
+  "icon": "ad_astra:/textures/gui/sprites/space_station.png",
+  "sortnum": 0,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Stacja kosmiczna",
+      "text": "Stacja kosmiczna to struktura, która jest tworzona w ekranie wyboru planety, pod warunkiem posiadania odpowiednich materiałów. Stacje kosmiczne zawsze znajdują się na orbicie księżyca lub planety i umożliwiają umieszczanie bloków w tym wymiarze orbity."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Stacja kosmiczna",
+      "text": "Stacje kosmiczne są zaprojektowane tak, aby można było je rozbudowywać, umożliwiając budowanie wymarzonej bazy na księżycu/planecie. Zawsze pojawiają się w miejscu, z którego wystrzeliłeś rakietę, dlatego pamiętaj współrzędne, aby jej nie zgubić."
+    }
+  ]
+}

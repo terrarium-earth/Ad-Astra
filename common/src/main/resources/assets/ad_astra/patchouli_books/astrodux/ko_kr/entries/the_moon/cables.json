@@ -1,0 +1,23 @@
+{
+  "name": "케이블",
+  "icon": "ad_astra:desh_cable",
+  "sortnum": 4,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "케이블",
+      "item": "ad_astra:desh_cable",
+      "text": "케이블은 장거리 에너지 전송을 가능하게 해 줍니다. 강철과 대쉬 두 종류가 있습니다. – 대쉬는 에너지 전송 속도가 더 빠릅니다. 렌치와 함께 사용할 경우, 케이블을 다른 방향으로 향하도록 만들거나 케이블을 끊을 수 있습니다."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:steel_cable",
+      "recipe2": "ad_astra:desh_cable"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:wrench"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Paliwo",
+  "icon": "ad_astra:fuel_bucket",
+  "sortnum": 2,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Aby móc latać po umieszczeniu rakiety, będziesz musiał ją zatankować paliwem."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Uzyskiwanie paliwa",
+      "item": "ad_astra:oil_bucket",
+      "text": "Olej można znaleźć w dużej ilości na powierzchni oceanu. Zebranie jak największej ilości oleju jest ważne, ponieważ jest on niemożliwy do odnawiania, a do każdego startu rakiety potrzebujesz go sporo."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Uzyskiwanie paliwa",
+      "item": "ad_astra:fuel_bucket",
+      "text": "Po zebraniu wystarczającej ilości oleju (przynajmniej sześć wiader na start i powrót), będziesz musiał przetworzyć olej na paliwo. Aby to zrobić, musisz wytworzyć rafinerię paliwa. Podłącz ją do zasilania, a następnie umieść olej w lewym slocie, gdzie zostanie przetworzony na paliwo."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Rafineria paliwa",
+      "recipe": "ad_astra:fuel_refinery",
+      "text": "Naciśnij Shift i kliknij prawym przyciskiem myszy na rakiecie, aby otworzyć jej ekwipunek, a następnie umieść trzy wiadra paliwa w slocie wejściowym. Umieść pozostałe trzy wiadra paliwa w ekwipunku rakiety na potrzeby powrotu."
+    }
+  ]
+}

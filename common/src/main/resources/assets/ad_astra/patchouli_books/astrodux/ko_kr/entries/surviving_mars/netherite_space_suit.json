@@ -1,0 +1,24 @@
+{
+  "name": "네더라이트 우주복",
+  "icon": "ad_astra:netherite_space_helmet",
+  "sortnum": 4,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "네더라이트 우주복",
+      "item": "ad_astra:netherite_space_helmet",
+      "text": "네더라이트 우주복은 기존 우주복의 업그레이드 버전으로 영구적인 내화성, 더 강한 방어도, 금성과 수성에서 생존할 수 있는 능력을 갖추고 있습니다. 이 행성들으로 떠나기 전에 네더라이트 우주복을 만들어야 합니다. 그렇지 않으면 화상을 입을 수 있습니다."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:netherite_space_helmet",
+      "recipe2": "ad_astra:netherite_space_suit"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:netherite_space_pants",
+      "recipe2": "ad_astra:netherite_space_boots"
+    }
+  ]
+}

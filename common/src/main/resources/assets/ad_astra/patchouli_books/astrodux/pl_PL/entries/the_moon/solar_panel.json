@@ -1,0 +1,20 @@
+{
+  "name": "Panel słoneczny",
+  "icon": "ad_astra:solar_panel",
+  "sortnum": 1,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Panel słoneczny",
+      "item": "ad_astra:solar_panel",
+      "text": "Panel słoneczny to ulepszona wersja generatora węglowego, produkująca więcej energii na jednostkę czasu i działająca niezależnie. Wydajność panelu słonecznego zależy od odległości planety od Słońca oraz od mgły. Dlatego bardziej efektywne jest umieszczanie paneli słonecznych blisko Słońca. Panele słoneczne również generują więcej energii na orbicie, ponieważ brak atmosfery nie blokuje światła słonecznego."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Panel słoneczny",
+      "text": "Sprawdź podpowiedź lub interfejs panelu słonecznego, aby zobaczyć, ile energii jest obecnie produkowane w danym świecie.",
+      "recipe": "ad_astra:solar_panel"
+    }
+  ]
+}

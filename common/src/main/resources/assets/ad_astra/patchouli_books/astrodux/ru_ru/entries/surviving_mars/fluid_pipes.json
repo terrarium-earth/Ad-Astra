@@ -1,0 +1,24 @@
+{
+  "name": "Жидкостные Трубы",
+  "icon": "ad_astra:ostrum_fluid_pipe",
+  "sortnum": 1,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Жидкостные Трубы",
+      "item": "ad_astra:ostrum_fluid_pipe",
+      "text": "Жидкостные трубы похожи на кабели, но с передачей жидкости вместо передачи энергии. Чтобы использовать их, изготовьте несколько труб для подачи жидкости и гаечный ключ. Затем щелкните правой кнопкой мыши на одной из труб с помощью гаечного ключа, чтобы переключить режимы работы трубы: \"нет\", \"обычный\", \"вставить\" и \"извлечь\"."
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "Pipes with 'insert' set will receive fluid from the network, while pipes with 'extract' set will pump fluid into the network.",
+      "recipe": "ad_astra:desh_fluid_pipe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:ostrum_fluid_pipe",
+      "recipe2": "ad_astra:wrench"
+    }
+  ]
+}

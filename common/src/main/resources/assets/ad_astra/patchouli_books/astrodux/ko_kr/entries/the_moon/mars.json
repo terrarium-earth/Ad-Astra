@@ -1,0 +1,19 @@
+{
+  "name": "화성",
+  "icon": "ad_astra:/textures/environment/mars.png",
+  "sortnum": 6,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "화성",
+      "text": "이제 달을 탐험하고 대쉬를 활용해 작업까지 했으니, 당신은 더 멀리 떠나서 붉은 행성으로 떠나고 싶을 것 입니다. 화성으로 가기 위해 필요한 티어 2 로켓은 티어 1 로켓 제작과 비슷하지만 강철 대신 대쉬를 사용합니다. 부품을 만들고, NASA 제작대에서 로켓을 만들고, 연료를 채우고, 화성으로 가세요!"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "오스트럼",
+      "item": "ad_astra:ostrum_ingot",
+      "text": "오스트럼은 당신이 붉은 행성에서 찾아봐야 할 다음 광물입니다. 그것은 더 강력한 우주복을 제작하고, 특별한 기계를 만들고, 당신이 뜨거운 행성으로 여행할 수 있도록 극한의 열을 견딜 수 있는 로켓을 만드는 데 사용됩니다."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "에너자이저",
+  "icon": "ad_astra:energizer",
+  "sortnum": 2,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "에너자이저",
+      "item": "ad_astra:energizer",
+      "text": "에너자이저는 기계에 전원을 공급하고 많은 양의 에너지를 저장할 수 있는 기계입니다. 아이템을 충전하려면, 에너자이저의 전원을 켠 다음 충전할 아이템으로 에너자이저에 우클릭하세요. 200만의 에너지를 저장 가능하므로 매우 오랜 시간 동안 동력을 공급할 수 있습니다. 또한 부서져도 에너지를 유지합니다."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:energizer"
+    }
+  ]
+}

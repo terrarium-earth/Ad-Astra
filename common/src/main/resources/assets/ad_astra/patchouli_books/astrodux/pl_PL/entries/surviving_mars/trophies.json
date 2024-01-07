@@ -1,0 +1,20 @@
+{
+  "name": "Trofea",
+  "icon": "ad_astra:mars_globe",
+  "sortnum": 0,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Globusy",
+      "item": "ad_astra:earth_globe",
+      "text": "Globusy są blokami, które można znaleźć jako nagrodę na końcu lochu. Globusy nie mają praktycznego zastosowania i służą jedynie jako bloki dekoracyjne. Można je obracać klikając prawym przyciskiem myszy lub obracać w nieskończoność przy użyciu czerwonego proszku."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Kosmiczne obrazy",
+      "item": "ad_astra:space_painting",
+      "text": "Obrazy kosmiczne można znaleźć w skrzyniach rozsianych po lochach. Działają one dokładnie tak samo jak zwykłe obrazy, ale umieszczają tylko obrazy z tego moda. Jest 14 różnych wzorów."
+    }
+  ]
+}

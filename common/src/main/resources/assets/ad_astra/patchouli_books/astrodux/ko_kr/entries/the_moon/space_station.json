@@ -1,0 +1,18 @@
+{
+  "name": "우주 정거장",
+  "icon": "ad_astra:/textures/gui/sprites/space_station.png",
+  "sortnum": 0,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "우주 정거장",
+      "text": "우주 정거장은 필요한 재료가 있을 경우 행성 선택 화면에서 미리 만들어지는 구조물입니다. 우주 정거장은 항상 달이나 다른 행성의 궤도에 있으며 해당 궤도에 블록을 배치할 수 있게 합니다."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "우주 정거장",
+      "text": "우주 정거장은 확장할 수 있으며 달/행성 위에 꿈의 기지를 건설할 수 있습니다. 로켓을 발사한 위치에 관계없이 항상 생성되므로 구조물을 잃지 않도록 좌표를 기억하세요."
+    }
+  ]
+}

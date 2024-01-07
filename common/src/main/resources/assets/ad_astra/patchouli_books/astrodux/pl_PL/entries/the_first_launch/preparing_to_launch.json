@@ -1,0 +1,16 @@
+{
+  "name": "Przygotowanie do startu",
+  "icon": "ad_astra:tier_1_rocket",
+  "sortnum": 4,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(#ff0000)Postępuj bardzo ostrożnie podczas wykonywania tych kroków! $()Niewłaściwe wykonanie choćby jednego z nich może utrudnić Twoje życie, a nawet spowodować, że utkniesz na Księżycu!$(br2)Aby powrócić na Ziemię z Księżyca, potrzebujesz dwóch podstawowych rzeczy: platformy startowej i trzech wiader paliwa."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Umieść te przedmioty w ekwipunku Twojej rakiety i upewnij się, że zawsze je masz przy sobie podczas startu. Na koniec, weź ze sobą kilka pełnych butli z tlenem, dużo jedzenia, eteryczne pochodnie lub jasnogłaz, broń i narzędzia. Gdy już to masz, jesteś gotowy do startu! Wejdź do rakiety i naciśnij $(k:jump)!"
+    }
+  ]
+}

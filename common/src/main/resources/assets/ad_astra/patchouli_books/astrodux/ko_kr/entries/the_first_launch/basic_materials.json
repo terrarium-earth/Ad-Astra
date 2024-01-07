@@ -1,0 +1,32 @@
+{
+  "name": "기초 재료",
+  "icon": "ad_astra:steel_plate",
+  "sortnum": 0,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "철판",
+      "item": "ad_astra:iron_plate",
+      "text": "철판은 Ad astra 에서 가장 기본적인 재료입니다. 제작대에서 철괴와 망치로 제작 가능합니다. 로켓을 만들고 우주를 나가는 데 필요한 간단한 장치를 만드는 데 사용됩니다."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "망치와 철판",
+      "recipe": "ad_astra:hammer",
+      "recipe2": "ad_astra:hammering/iron_plate"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "압축 강철",
+      "item": "ad_astra:steel_plate",
+      "text": "압축 강철은 티어 1 로켓과 많은 중요한 기계의 주요 재료입니다. 석탄 발전기로 작동시킬 수 있는 압축기에서 강철 주괴를 넣어 만들 수 있습니다. 우주 여행을 하는 동안 필요하므로 압축 강철을 많이 모아두세요."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Generator, Compressor",
+      "recipe": "ad_astra:coal_generator",
+      "recipe2": "ad_astra:compressor"
+    }
+  ]
+}

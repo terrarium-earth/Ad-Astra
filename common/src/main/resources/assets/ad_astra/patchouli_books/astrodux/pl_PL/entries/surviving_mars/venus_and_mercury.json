@@ -1,0 +1,18 @@
+{
+  "name": "Wenus i Merkury",
+  "icon": "ad_astra:/textures/environment/venus.png",
+  "sortnum": 5,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Kaloryt",
+      "item": "ad_astra:calorite_ingot",
+      "text": "Gdy zdobędziesz wystarczającą ilość Ostrytu, aby wytworzyć komplet netherytowego kombinezonu kosmicznego i wszystkie komponenty rakiety trzeciego poziomu, możesz podróżować na Wenus i Merkurego. Należy jednak pamiętać, że jeśli wejdziesz na te planety bez netherytowego kombinezonu kosmicznego lub bez odporności na ogień, będziesz umierać bardzo szybko. Kolejnym materiałem, który poszukujesz, jest Kaloryt."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Kaloryt jest wykorzystywany do wytworzenia ostatecznej rakiety zdolnej do podróży do nowego układu słonecznego."
+    }
+  ]
+}

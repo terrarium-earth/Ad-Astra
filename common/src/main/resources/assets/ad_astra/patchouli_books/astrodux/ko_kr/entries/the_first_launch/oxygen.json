@@ -1,0 +1,34 @@
+{
+  "name": "산소",
+  "icon": "ad_astra:gas_tank",
+  "sortnum": 3,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "이 시점에서, 당신은 로켓을 발사할 수 있습니다. 그러나 달에는 산소가 없기 때문에 아마도 매우 빨리 죽을 것입니다. 달에서 살아남으려면 산소를 넣은 우주복과 충분한 산소 공급이 필요합니다."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:space_helmet",
+      "recipe2": "ad_astra:space_suit"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:space_pants",
+      "recipe2": "ad_astra:space_boots"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "산소",
+      "item": "ad_astra:oxygen_bucket",
+      "text": "산소를 얻기 위해서는 물에서 산소를 추출해야 합니다. 이를 위해서는 산소 생성기가 필요합니다. 산소 생성기를 만들고, 왼쪽 물탱크에 물을 넣으면 산소로 변환됩니다. 산소가 충분해질 때까지 이 과정을 여러번 반복해야 합니다."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "산소 생성기",
+      "recipe": "ad_astra:oxygen_loader",
+      "text": "산소는 우주복, 산소 양동이를 산소 생성기의 산소 탱크에 넣어 추출할 수 있습니다. 산소를 충분히 모았으면, 첫 번째 로켓 발사가 얼마 남지 않았습니다!"
+    }
+  ]
+}

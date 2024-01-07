@@ -1,0 +1,20 @@
+{
+  "type": "patchouli:shaped_book_recipe",
+  "pattern": [
+    "#/#",
+    "/B/",
+    "#/#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:blue_dye"
+    },
+    "/": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "minecraft:book"
+    }
+  },
+  "book": "ad_astra:astrodux"
+}

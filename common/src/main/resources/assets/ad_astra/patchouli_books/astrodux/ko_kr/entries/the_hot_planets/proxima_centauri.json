@@ -1,0 +1,17 @@
+{
+  "name": "프록시마 센타우리",
+  "icon": "ad_astra:/textures/painting/alpha_centauri.png",
+  "sortnum": 1,
+  "category": "ad_astra:the_hot_planets",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "프록시마 센타우리",
+      "text": "티어 4 로켓을 만들기에 충분한 칼코라이트를 찾으면 이 태양계를 떠나 새로운 항성계로 들어갈 수 있습니다. 프록시마 센타우리에서 첫 번째를 향하게 될 행성은 글라시오입니다. 글라시오는 잔인할 정도로 춥습니다. 그러나 산소가 있어 우주복 없이 생존 가능합니다."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "이것이 Ad Astra 진행의 끝입니다. 이 가이드북은 더 많은 콘텐츠가 추가되면 늘어날 것입니다. Ad Astra 를 플레이해주셔서 감사합니다!"
+    }
+  ]
+}

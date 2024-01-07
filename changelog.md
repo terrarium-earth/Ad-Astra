@@ -131,6 +131,9 @@ and prevent players from spawning a new space station at any claimed chunks.
 able to share space stations.
 - Sliding doors can now be redstone powered from any of its blocks, instead of just the bottom middle one.
 - Machines now work with comparators.
+- Updated astrodux guide book.
+- The astrodux is now a patchouli book that's only available when patchouli is installed, instead
+of a standalone item.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.
