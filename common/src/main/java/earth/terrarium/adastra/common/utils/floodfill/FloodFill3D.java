@@ -22,57 +22,58 @@ public final class FloodFill3D {
 
     private static final Direction[] DIRECTIONS = Direction.values();
 
-    public static final SolidBlockPredicate TEST_FULL_SEAL = (level, pos, direction) -> {
-        BlockState state = level.getBlockState(pos);
-        if (state.isAir()) return FillResult.AIR;
-        if (state.is(ModBlockTags.PASSES_FLOOD_FILL)) return FillResult.AIR;
-        if (state.is(ModBlockTags.BLOCKS_FLOOD_FILL)) return FillResult.CUBE;
+    public static final SolidBlockPredicate TEST_FULL_SEAL = (level, pos, state, positions, queue, direction) -> {
+        if (state.isAir()) return true;
+        if (state.is(ModBlockTags.PASSES_FLOOD_FILL)) return true;
+        if (state.is(ModBlockTags.BLOCKS_FLOOD_FILL)) return false;
+        if (state.isCollisionShapeFullBlock(level, pos)) return false;
 
-        if (state.isCollisionShapeFullBlock(level, pos)) return FillResult.CUBE;
         VoxelShape collisionShape = state.getCollisionShape(level, pos);
+
         if (state.getBlock() instanceof SlidingDoorBlock block) {
             collisionShape = block.getCollisionShape(state, level, pos, CollisionContext.empty());
         }
 
-        if (collisionShape.isEmpty()) return FillResult.AIR;
-        if (!isSideSolid(collisionShape, direction)) return FillResult.AIR;
-        return isFaceSturdy(collisionShape, direction) ? FillResult.PARTIAL : FillResult.AIR;
+        if (collisionShape.isEmpty()) return true;
+        if (!isSideSolid(collisionShape, direction)) return true;
+        if (!isFaceSturdy(collisionShape, direction) && !isFaceSturdy(collisionShape, direction.getOpposite())) {
+            return true;
+        }
+
+        // Check the other directions to find a potential path for the partial block.
+        for (Direction dir : DIRECTIONS) {
+            if (dir.getAxis() == direction.getAxis()) continue;
+            var adjacentPos = pos.relative(dir);
+            var adjacentCollisionShape = level.getBlockState(adjacentPos).getCollisionShape(level, adjacentPos);
+            if (!isFaceSturdy(adjacentCollisionShape, dir.getOpposite())) {
+                queue.enqueue(adjacentPos.asLong());
+                break;
+            }
+        }
+
+        positions.add(pos.asLong());
+        return false;
     };
 
-    /**
-     * Flood fills a 3D space.
-     *
-     * @param level       The level
-     * @param start       The starting position.
-     * @param limit       The maximum number of blocks to fill.
-     * @param predicate   A predicate to test if the block can provide a seal.
-     * @param retainOrder Whether to retain the order of the blocks. The order is retained by using a {@link LinkedHashSet}, which will have a higher memory footprint.
-     * @return The set of positions that were filled.
-     */
     public static Set<BlockPos> run(Level level, BlockPos start, int limit, SolidBlockPredicate predicate, boolean retainOrder) {
-        level.getProfiler().push("adastra$floodfill");
+        level.getProfiler().push("adastra-floodfill");
 
         LongSet positions = retainOrder ? new LongLinkedOpenHashSet(limit) : new LongOpenHashSet(limit);
         LongArrayFIFOQueue queue = new LongArrayFIFOQueue(limit);
         queue.enqueue(start.asLong());
 
         while (!queue.isEmpty() && positions.size() < limit) {
-            long pos = queue.dequeueLong();
-            if (positions.contains(pos)) continue;
-            positions.add(pos);
+            long packedPos = queue.dequeueLong();
+            if (positions.contains(packedPos)) continue;
+            positions.add(packedPos);
 
-            BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos(BlockPos.getX(pos), BlockPos.getY(pos), BlockPos.getZ(pos));
+            BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(BlockPos.getX(packedPos), BlockPos.getY(packedPos), BlockPos.getZ(packedPos));
             for (Direction direction : DIRECTIONS) {
-                mutable.set(pos);
-                mutable.move(direction);
-
-                FillResult result = predicate.test(level, mutable, direction);
-                switch (result) {
-                    case CUBE -> {continue;}
-                    case PARTIAL -> positions.add(mutable.asLong());
-                }
-
-                queue.enqueue(mutable.asLong());
+                pos.set(packedPos);
+                pos.move(direction);
+                BlockState state = level.getBlockState(pos);
+                if (!predicate.test(level, pos, state, positions, queue, direction)) continue;
+                queue.enqueue(pos.asLong());
             }
         }
 
@@ -87,29 +88,16 @@ public final class FloodFill3D {
 
     private static boolean isSideSolid(VoxelShape collisionShape, Direction dir) {
         return switch (dir.getAxis()) {
-            case X -> {
-                double minY = collisionShape.min(Direction.Axis.Y);
-                double maxY = collisionShape.max(Direction.Axis.Y);
-                double minZ = collisionShape.min(Direction.Axis.Z);
-                double maxZ = collisionShape.max(Direction.Axis.Z);
-                yield minY <= 0 && maxY >= 1 && minZ <= 0 && maxZ >= 1;
-            }
-            case Y -> {
-                double minX = collisionShape.min(Direction.Axis.X);
-                double maxX = collisionShape.max(Direction.Axis.X);
-                double minZ = collisionShape.min(Direction.Axis.Z);
-                double maxZ = collisionShape.max(Direction.Axis.Z);
-                yield minX <= 0 && maxX >= 1 && minZ <= 0 && maxZ >= 1;
-            }
-            case Z -> {
-                double minX = collisionShape.min(Direction.Axis.X);
-                double maxX = collisionShape.max(Direction.Axis.X);
-                double minY = collisionShape.min(Direction.Axis.Y);
-                double maxY = collisionShape.max(Direction.Axis.Y);
-                yield minX <= 0 && maxX >= 1 && minY <= 0 && maxY >= 1;
-            }
+            case X -> isAxisCovered(collisionShape, Direction.Axis.Y, Direction.Axis.Z);
+            case Y -> isAxisCovered(collisionShape, Direction.Axis.X, Direction.Axis.Z);
+            case Z -> isAxisCovered(collisionShape, Direction.Axis.X, Direction.Axis.Y);
         };
     }
+
+    private static boolean isAxisCovered(VoxelShape shape, Direction.Axis axis1, Direction.Axis axis2) {
+        return shape.min(axis1) <= 0 && shape.max(axis1) >= 1 && shape.min(axis2) <= 0 && shape.max(axis2) >= 1;
+    }
+
 
     private static boolean isFaceSturdy(VoxelShape collisionShape, Direction dir) {
         VoxelShape faceShape = collisionShape.getFaceShape(dir);
@@ -129,12 +117,6 @@ public final class FloodFill3D {
 
     @FunctionalInterface
     public interface SolidBlockPredicate {
-        FillResult test(Level level, BlockPos pos, Direction direction);
-    }
-
-    public enum FillResult {
-        CUBE,
-        PARTIAL,
-        AIR
+        boolean test(Level level, BlockPos pos, BlockState state, LongSet positions, LongArrayFIFOQueue queue, Direction direction);
     }
 }
