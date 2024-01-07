@@ -53,7 +53,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     private int distributedBlocksCount;
     private double accumulatedFluid;
     private int shutDownTicks;
-    private int limit;
+    private int limit = AdAstraConfig.maxDistributionBlocks;
 
     private float yRot;
     private float lastYRot;

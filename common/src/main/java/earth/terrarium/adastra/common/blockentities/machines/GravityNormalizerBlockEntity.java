@@ -41,7 +41,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     private long energyPerTick;
     private int distributedBlocksCount;
     private int shutDownTicks;
-    private int limit;
+    private int limit = AdAstraConfig.maxDistributionBlocks;
     private float targetGravity = 1;
 
     private float animation;

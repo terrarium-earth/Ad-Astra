@@ -1,8 +1,10 @@
 package earth.terrarium.adastra.common.blocks.machines;
 
+import earth.terrarium.adastra.common.blockentities.machines.OxygenDistributorBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.SidedMachineBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -59,5 +61,13 @@ public class OxygenDistributorBlock extends SidedMachineBlock {
                 default -> Shapes.block();
             };
         };
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        if (level.getBlockEntity(pos) instanceof OxygenDistributorBlockEntity entity) {
+            return entity.distributedBlocksCount() / Math.max(1, entity.distributedBlocksLimit()) * 15;
+        }
+        return 0;
     }
 }

@@ -65,6 +65,14 @@ public class EnergizerBlock extends MachineBlock {
     }
 
     @Override
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        if (level.getBlockEntity(pos) instanceof EnergizerBlockEntity entity) {
+            return (int) (entity.getEnergyStorage().getStoredEnergy() / (float) entity.getEnergyStorage().getMaxCapacity() * 15);
+        }
+        return 0;
+    }
+
+    @Override
     public List<ItemStack> getDrops(BlockState blockState, LootParams.Builder builder) {
         BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if (!(blockEntity instanceof EnergizerBlockEntity entity)) return super.getDrops(blockState, builder);

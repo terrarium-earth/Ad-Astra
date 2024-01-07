@@ -63,6 +63,6 @@ public final class AdAstraConfig {
         type = EntryType.INTEGER,
         translation = "config.ad_astra.maxDistributionBlocks"
     )
-    @Comment("The maximum number of blocks that an oxygen distributor can distribute to.")
+    @Comment("The maximum number of blocks that an oxygen distributor and gravity normalizer can distribute to.")
     public static int maxDistributionBlocks = 6_000;
 }
