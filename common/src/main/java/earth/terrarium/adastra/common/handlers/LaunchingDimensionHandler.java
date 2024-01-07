@@ -9,8 +9,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -79,14 +79,12 @@ public class LaunchingDimensionHandler extends SaveHandler {
         return Optional.empty();
     }
 
-    public static Collection<GlobalPos> getAllSpawnLocations(Player player, MinecraftServer server) {
-        List<GlobalPos> positions = new ArrayList<>();
-        for (var level : server.getAllLevels()) {
-            LaunchedDimensions dimensions = get(player, level, false);
-            if (dimensions == null) continue;
-            for (var entry : dimensions.dimensions.entrySet()) {
-                positions.add(entry.getValue());
-            }
+    public static Collection<GlobalPos> getAllSpawnLocations(ServerPlayer player) {
+        Set<GlobalPos> positions = new HashSet<>();
+        LaunchedDimensions dimensions = get(player, player.serverLevel(), false);
+        if (dimensions == null) return positions;
+        for (var entry : dimensions.dimensions.entrySet()) {
+            positions.add(entry.getValue());
         }
         return positions;
     }

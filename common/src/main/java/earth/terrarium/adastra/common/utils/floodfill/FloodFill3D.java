@@ -44,11 +44,8 @@ public final class FloodFill3D {
         for (Direction dir : DIRECTIONS) {
             if (dir.getAxis() == direction.getAxis()) continue;
             var adjacentPos = pos.relative(dir);
-            var adjacentCollisionShape = level.getBlockState(adjacentPos).getCollisionShape(level, adjacentPos);
-            if (!isFaceSturdy(adjacentCollisionShape, dir.getOpposite())) {
-                queue.enqueue(adjacentPos.asLong());
-                break;
-            }
+            var adjacentState = level.getBlockState(adjacentPos);
+            if (adjacentState.isAir()) return true;
         }
 
         positions.add(pos.asLong());

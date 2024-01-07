@@ -106,7 +106,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
             getEnergyStorage().internalExtract(calculateEnergyPerTick(), false);
             setLit(true);
 
-            if (time % 100 == 0) tickGravity(level, pos);
+            if (time % 20 == 0) tickGravity(level, pos);
 
             if (time % 200 == 0) {
                 level.playSound(null, pos, ModSoundEvents.GRAVITY_NORMALIZER_IDLE.get(), SoundSource.BLOCKS, 0.3f, 1);

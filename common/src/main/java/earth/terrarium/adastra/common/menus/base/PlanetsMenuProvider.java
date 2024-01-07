@@ -65,11 +65,9 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
             });
         }
 
-        AdAstraData.planets().keySet().forEach(dimension -> {
-            Collection<GlobalPos> locations = LaunchingDimensionHandler.getAllSpawnLocations(player, player.server);
-            buffer.writeVarInt(locations.size());
-            locations.forEach(buffer::writeGlobalPos);
-        });
+        Collection<GlobalPos> locations = LaunchingDimensionHandler.getAllSpawnLocations(player);
+        buffer.writeVarInt(locations.size());
+        locations.forEach(buffer::writeGlobalPos);
     }
 
     public static Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> createSpaceStationsFromBuf(FriendlyByteBuf buf) {

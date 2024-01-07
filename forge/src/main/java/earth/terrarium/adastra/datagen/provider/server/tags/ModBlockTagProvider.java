@@ -85,6 +85,7 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         ModBlocks.SLIDING_DOORS.stream().map(RegistryEntry::get).forEach(b -> tag(ModBlockTags.SLIDING_DOORS).add(element(b)));
         tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.tag(BlockTags.FENCES.location()));
         tag(ModBlockTags.PASSES_FLOOD_FILL).add(TagEntry.tag(BlockTags.LEAVES.location()));
+        tag(ModBlockTags.PASSES_FLOOD_FILL).add(element(Blocks.LADDER));
 
         add(ModBlockTags.CABLE_DUCTS, ModBlocks.CABLE_DUCT.get());
         add(ModBlockTags.FLUID_PIPE_DUCTS, ModBlocks.FLUID_PIPE_DUCT.get());

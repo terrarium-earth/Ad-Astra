@@ -2,6 +2,7 @@
   "values": [
     "#minecraft:fences",
     "#minecraft:leaves",
+    "minecraft:ladder",
     "minecraft:iron_bars",
     "minecraft:tnt",
     "ad_astra:vent",
