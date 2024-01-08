@@ -5,6 +5,7 @@ import earth.terrarium.adastra.client.screens.machines.OxygenLoaderScreen;
 import earth.terrarium.adastra.common.compat.rei.displays.OxygenLoadingDisplay;
 import earth.terrarium.adastra.common.compat.rei.widgets.EnergyBarWidget;
 import earth.terrarium.adastra.common.compat.rei.widgets.FluidBarWidget;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import me.shedaniel.math.Point;
@@ -60,7 +61,7 @@ public class OxygenLoadingCategory implements DisplayCategory<OxygenLoadingDispl
         widgets.add(Widgets.createSlot(new Point(bounds.x + 127, bounds.y + 22)).backgroundEnabled(false));
         widgets.add(Widgets.createSlot(new Point(bounds.x + 127, bounds.y + 52)).backgroundEnabled(false));
 
-        widgets.add(new EnergyBarWidget(new Point(bounds.x + 144, bounds.y + 54), -display.recipe().energy(), 20_000, 500, 0));
+        widgets.add(new EnergyBarWidget(new Point(bounds.x + 144, bounds.y + 54), -display.recipe().energy(), MachineConfig.steelTierEnergyCapacity, MachineConfig.steelTierMaxEnergyInOut, 0));
 
         int cookTime = display.recipe().cookingTime();
         long capacity = FluidHooks.buckets(6);

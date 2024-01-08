@@ -4,6 +4,7 @@ import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineB
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.WaterPumpMenu;
 import earth.terrarium.adastra.common.registry.ModParticleTypes;
@@ -51,10 +52,10 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(20_000) {
+            new InsertOnlyEnergyContainer(MachineConfig.deshTierEnergyCapacity) {
                 @Override
                 public long maxInsert() {
-                    return 2_000;
+                    return MachineConfig.deshTierMaxEnergyInOut;
                 }
             });
     }
@@ -65,7 +66,7 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
         return fluidContainer = new WrappedBlockFluidContainer(
             this,
             new ExtractOnlyFluidContainer(
-                i -> FluidHooks.buckets(10),
+                i -> FluidHooks.buckets(MachineConfig.deshTierFluidCapacity),
                 1,
                 (tank, holder) -> holder.is(FluidTags.WATER)));
     }
@@ -78,13 +79,13 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
 
     private boolean canPump(BlockPos pos, WrappedBlockEnergyContainer energyStorage) {
         if (!level().getFluidState(pos.below()).is(Fluids.WATER)) return false;
-        if (energyStorage.internalExtract(20, true) < 20) return false;
+        if (energyStorage.internalExtract(MachineConfig.waterPumpEnergyPerTick, true) < MachineConfig.waterPumpEnergyPerTick) return false;
         return fluidContainer.getFluids().get(0).getFluidAmount() < fluidContainer.getTankCapacity(0);
     }
 
     private void pump(ServerLevel level, WrappedBlockEnergyContainer energyStorage) {
-        energyStorage.internalExtract(20, false);
-        fluidContainer.internalInsert(FluidHooks.newFluidHolder(Fluids.WATER, FluidHooks.buckets(0.05f), null), false);
+        energyStorage.internalExtract(MachineConfig.waterPumpEnergyPerTick, false);
+        fluidContainer.internalInsert(FluidHooks.newFluidHolder(Fluids.WATER, FluidHooks.buckets(MachineConfig.waterPumpFluidGenerationPerTick), null), false);
         ModUtils.sendParticles(level,
             ModParticleTypes.OXYGEN_BUBBLE.get(),
             getBlockPos().getX() + 0.5,
@@ -98,7 +99,7 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
     @Override
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
         TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(0), filter);
-        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.05f), 0, sideConfig.get(1), filter);
+        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(MachineConfig.waterPumpFluidGenerationPerTick), 0, sideConfig.get(1), filter);
     }
 
     @Override

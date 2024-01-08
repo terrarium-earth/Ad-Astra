@@ -5,6 +5,7 @@ import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineB
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.SolarPanelMenu;
 import earth.terrarium.adastra.common.utils.TransferUtils;
@@ -44,10 +45,10 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new ExtractOnlyEnergyContainer(20_000) {
+            new ExtractOnlyEnergyContainer(MachineConfig.deshTierEnergyCapacity) {
                 @Override
                 public long maxExtract() {
-                    return 2_000;
+                    return MachineConfig.deshTierMaxEnergyInOut;
                 }
             });
     }

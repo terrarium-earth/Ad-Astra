@@ -3,6 +3,7 @@ package earth.terrarium.adastra.common.config;
 import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
 import com.teamresourceful.resourcefulconfig.common.annotations.Config;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
+import com.teamresourceful.resourcefulconfig.common.annotations.InlineCategory;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
 import com.teamresourceful.resourcefulconfig.web.annotations.Gradient;
 import com.teamresourceful.resourcefulconfig.web.annotations.Link;
@@ -47,8 +48,16 @@ public final class AdAstraConfig {
         type = EntryType.INTEGER,
         translation = "config.ad_astra.planetRandomTickSpeed"
     )
-    @Comment("The random tick for breaking plants, torches, freezing water, etc. on planets.")
+    @Comment("The random tick speed for breaking plants, torches, freezing water, etc. on planets.")
     public static int planetRandomTickSpeed = 20;
+
+    @ConfigEntry(
+        id = "forcePlanetTick",
+        type = EntryType.BOOLEAN,
+        translation = "config.ad_astra.forcePlanetTick"
+    )
+    @Comment("Always tick every planet chunk for things like freezing water, breaking plants, etc., regardless of whether the chunk can tick randomly or not. This has a small performance impact.")
+    public static boolean forcePlanetTick;
 
     @ConfigEntry(
         id = "atmosphereLeave",
@@ -58,11 +67,6 @@ public final class AdAstraConfig {
     @Comment("The y level where rockets should leave the dimension and enter space.")
     public static int atmosphereLeave = 600;
 
-    @ConfigEntry(
-        id = "maxDistributionBlocks",
-        type = EntryType.INTEGER,
-        translation = "config.ad_astra.maxDistributionBlocks"
-    )
-    @Comment("The maximum number of blocks that an oxygen distributor and gravity normalizer can distribute to.")
-    public static int maxDistributionBlocks = 6_000;
+    @InlineCategory
+    public static MachineConfig machineConfig;
 }

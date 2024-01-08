@@ -7,7 +7,7 @@ import earth.terrarium.adastra.client.config.AdAstraConfigClient;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
-import earth.terrarium.adastra.common.config.AdAstraConfig;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.container.BiFluidContainer;
@@ -53,7 +53,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     private int distributedBlocksCount;
     private double accumulatedFluid;
     private int shutDownTicks;
-    private int limit = AdAstraConfig.maxDistributionBlocks;
+    private int limit = MachineConfig.maxDistributionBlocks;
 
     private float yRot;
     private float lastYRot;
@@ -98,10 +98,10 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         if (this.energyContainer != null) return this.energyContainer;
         return this.energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(50_000) {
+            new InsertOnlyEnergyContainer(MachineConfig.deshTierEnergyCapacity) {
                 @Override
                 public long maxInsert() {
-                    return 1_000;
+                    return MachineConfig.deshTierMaxEnergyInOut;
                 }
             });
     }
@@ -126,7 +126,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
                 accumulatedFluid -= wholeBuckets;
             }
 
-            if (time % 60 == 0) tickOxygen(level, pos);
+            if (time % MachineConfig.distributionRefreshRate == 0) tickOxygen(level, pos);
 
             if (time % 200 == 0) {
                 level.playSound(null, pos, ModSoundEvents.OXYGEN_OUTTAKE.get(), SoundSource.BLOCKS, 0.2f, 1);
@@ -170,7 +170,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     }
 
     protected void tickOxygen(ServerLevel level, BlockPos pos) {
-        limit = AdAstraConfig.maxDistributionBlocks;
+        limit = MachineConfig.maxDistributionBlocks;
         Set<BlockPos> positions = FloodFill3D.run(level, pos.above(), limit, FloodFill3D.TEST_FULL_SEAL, true);
 
         OxygenApi.API.setOxygen(level, positions, true);

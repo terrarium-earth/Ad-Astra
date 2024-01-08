@@ -7,6 +7,7 @@ import earth.terrarium.adastra.common.compat.rei.displays.CryoFreezingDisplay;
 import earth.terrarium.adastra.common.compat.rei.widgets.EnergyBarWidget;
 import earth.terrarium.adastra.common.compat.rei.widgets.EtaWidget;
 import earth.terrarium.adastra.common.compat.rei.widgets.FluidBarWidget;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import me.shedaniel.math.Point;
@@ -61,7 +62,7 @@ public class CryoFreezingCategory implements DisplayCategory<CryoFreezingDisplay
         widgets.add(Widgets.createSlot(new Point(bounds.x + 113, bounds.y + 42)).backgroundEnabled(false));
         widgets.add(Widgets.createSlot(new Point(bounds.x + 113, bounds.y + 70)).backgroundEnabled(false));
 
-        widgets.add(new EnergyBarWidget(new Point(bounds.x + 143, bounds.y + 58), -display.recipe().energy(), 100_000, 2_000, 0));
+        widgets.add(new EnergyBarWidget(new Point(bounds.x + 143, bounds.y + 58), -display.recipe().energy(), MachineConfig.ostrumTierEnergyCapacity, MachineConfig.ostrumTierMaxEnergyInOut, 0));
 
         widgets.add(new EtaWidget(new Point(bounds.x + 54, bounds.y + 71), display.recipe().cookingTime(), GuiUtils.SNOWFLAKE, 13, 13));
         int cookTime = display.recipe().cookingTime();

@@ -6,6 +6,7 @@ import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.compat.rei.displays.CompressingDisplay;
 import earth.terrarium.adastra.common.compat.rei.widgets.EnergyBarWidget;
 import earth.terrarium.adastra.common.compat.rei.widgets.EtaWidget;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
@@ -59,7 +60,7 @@ public class CompressingCategory implements DisplayCategory<CompressingDisplay> 
         widgets.add(Widgets.createSlot(new Point(bounds.x + 95, bounds.y + 58)).backgroundEnabled(false).entries(display.getOutputEntries().get(0)).markOutput());
 
         widgets.add(new EtaWidget(new Point(bounds.x + 72, bounds.y + 59), display.recipe().cookingTime(), GuiUtils.HAMMER, 15, 16));
-        widgets.add(new EnergyBarWidget(new Point(bounds.x + 144, bounds.y + 73), -display.recipe().energy(), 10_000, 250, 0));
+        widgets.add(new EnergyBarWidget(new Point(bounds.x + 144, bounds.y + 73), -display.recipe().energy(), MachineConfig.ironTierEnergyCapacity, MachineConfig.ironTierMaxEnergyInOut, 0));
 
         return widgets;
     }

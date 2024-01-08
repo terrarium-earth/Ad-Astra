@@ -76,7 +76,6 @@ public class ConstantComponents {
     public static final Component DOOR_LOCKED = Component.translatable("tooltip.ad_astra.door.locked");
     public static final Component DOOR_UNLOCKED = Component.translatable("tooltip.ad_astra.door.unlocked");
 
-    public static final Component UPGRADES = Component.translatable("tooltip.ad_astra.upgrades").withStyle(ChatFormatting.LIGHT_PURPLE);
     public static final Component CLEAR_FLUID_TANK = Component.translatable("tooltip.ad_astra.clear_fluid_tank").withStyle(ChatFormatting.RED);
 
     public static final Component NEXT = Component.translatable("tooltip.ad_astra.next").withStyle(ChatFormatting.GRAY);

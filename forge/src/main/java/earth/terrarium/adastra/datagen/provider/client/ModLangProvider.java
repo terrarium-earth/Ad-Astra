@@ -212,11 +212,6 @@ public class ModLangProvider extends LanguageProvider {
         add("tooltip.ad_astra.energy_transfer_tick", "Transfer: %s ⚡/t");
         add("tooltip.ad_astra.fluid_transfer_tick", "Transfer: %s 🪣/t");
 
-        add(ConstantComponents.UPGRADES, "Upgrades");
-        add("tooltip.ad_astra.upgrades.entry", "- %sx %s");
-        add("upgrade.ad_astra.speed", "Speed Upgrade");
-        add("upgrade.ad_astra.capacity", "Capacity Upgrade");
-
         add(ConstantComponents.SIDE_CONFIG_SLOTS, "Slots");
         add(ConstantComponents.SIDE_CONFIG_ENERGY, "Energy");
         add(ConstantComponents.SIDE_CONFIG_FLUID, "Fluid");
@@ -347,8 +342,31 @@ public class ModLangProvider extends LanguageProvider {
         add("config.ad_astra.allowFlagImages", "Allow flag images");
         add("config.ad_astra.launchFromAnywhere", "Launch from anywhere");
         add("config.ad_astra.planetRandomTickSpeed", "Planet random tick speed");
+        add("config.ad_astra.forcePlanetTick", "Force planet tick");
         add("config.ad_astra.atmosphereLeave", "Atmosphere leave");
+
+        add("config.ad_astra.machines", "Machines");
+        add("config.ad_astra.ironTierMaxEnergyInOut", "Iron tier max energy in/out");
+        add("config.ad_astra.steelTierMaxEnergyInOut", "Steel tier max energy in/out");
+        add("config.ad_astra.deshTierMaxEnergyInOut", "Desh tier max energy in/out");
+        add("config.ad_astra.ostrumTierMaxEnergyInOut", "Ostrum tier max energy in/out");
+        add("config.ad_astra.ironTierEnergyCapacity", "Iron tier energy capacity");
+        add("config.ad_astra.steelTierEnergyCapacity", "Steel tier energy capacity");
+        add("config.ad_astra.deshTierEnergyCapacity", "Desh tier energy capacity");
+        add("config.ad_astra.ostrumTierEnergyCapacity", "Ostrum tier energy capacity");
+
+        add("config.ad_astra.steelTierFluidCapacity", "Steel tier max fluid capacity");
+        add("config.ad_astra.deshTierFluidCapacity", "Desh tier max fluid capacity");
+        add("config.ad_astra.ostrumTierFluidCapacity", "Ostrum tier max fluid capacity");
+
+        add("config.ad_astra.coalGeneratorEnergyGenerationPerTick", "Coal generator energy generation per tick");
+        add("config.ad_astra.etrionicBlastFurnaceBlastingEnergyPerItem", "Etrionic blast furnace blasting energy per item");
+        add("config.ad_astra.waterPumpEnergyPerTick", "Water pump energy per tick");
+        add("config.ad_astra.waterPumpFluidGenerationPerTick", "Water pump fluid generation per tick");
+        add("config.ad_astra.energizerEnergyCapacity", "Energizer energy capacity");
         add("config.ad_astra.maxDistributionBlocks", "Max distribution blocks");
+        add("config.ad_astra.distributionRefreshRate", "Distribution refresh rate");
+        add("config.ad_astra.pipeRefreshRate", "Pipe refresh rate");
 
         add("subtitles.ad_astra.block.rocket_launch", "Rocket launches");
         add("subtitles.ad_astra.block.rocket", "Rocket flies");

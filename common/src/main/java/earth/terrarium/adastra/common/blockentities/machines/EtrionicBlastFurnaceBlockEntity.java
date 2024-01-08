@@ -5,6 +5,7 @@ import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineB
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.EtrionicBlastFurnaceMenu;
 import earth.terrarium.adastra.common.recipes.machines.AlloyingRecipe;
@@ -65,10 +66,10 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(20_000) {
+            new InsertOnlyEnergyContainer(MachineConfig.steelTierEnergyCapacity) {
                 @Override
                 public long maxInsert() {
-                    return 500;
+                    return MachineConfig.steelTierMaxEnergyInOut;
                 }
             });
     }
@@ -112,7 +113,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
                 recipes[i] = null;
                 return;
             }
-            energyStorage.internalExtract(10, false);
+            energyStorage.internalExtract(MachineConfig.etrionicBlastFurnaceBlastingEnergyPerItem, false);
             isCooking = true;
             if (cookTime < cookTimeTotal) continue;
             for (int j = 0; j < 4; j++) {
@@ -127,7 +128,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
 
     protected boolean canCraft(WrappedBlockEnergyContainer energyStorage, BlastingRecipe recipe, int slot) {
         if (recipe == null) return false;
-        if (energyStorage.internalExtract(10, true) < 10) return false;
+        if (energyStorage.internalExtract(MachineConfig.etrionicBlastFurnaceBlastingEnergyPerItem, true) < MachineConfig.etrionicBlastFurnaceBlastingEnergyPerItem) return false;
         if (!recipe.getIngredients().get(0).test(getItem(slot))) return false;
         return ItemUtils.canAddItem(this, recipe.getResultItem(level().registryAccess()), 5, 6, 7, 8);
     }

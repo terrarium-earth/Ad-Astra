@@ -5,6 +5,7 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
 import earth.terrarium.adastra.common.blocks.machines.EnergizerBlock;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
@@ -45,15 +46,15 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new SimpleEnergyContainer(2_000_000) {
+            new SimpleEnergyContainer(MachineConfig.energizerEnergyCapacity) {
                 @Override
                 public long maxInsert() {
-                    return 1_000;
+                    return MachineConfig.ostrumTierMaxEnergyInOut;
                 }
 
                 @Override
                 public long maxExtract() {
-                    return 1_000;
+                    return MachineConfig.ostrumTierMaxEnergyInOut;
                 }
 
                 @Override

@@ -7,7 +7,7 @@ import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineB
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
-import earth.terrarium.adastra.common.config.AdAstraConfig;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.GravityNormalizerMenu;
 import earth.terrarium.adastra.common.registry.ModSoundEvents;
@@ -41,7 +41,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     private long energyPerTick;
     private int distributedBlocksCount;
     private int shutDownTicks;
-    private int limit = AdAstraConfig.maxDistributionBlocks;
+    private int limit = MachineConfig.maxDistributionBlocks;
     private float targetGravity = 1;
 
     private float animation;
@@ -85,10 +85,10 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
         if (this.energyContainer != null) return this.energyContainer;
         return this.energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(100_000) {
+            new InsertOnlyEnergyContainer(MachineConfig.deshTierEnergyCapacity) {
                 @Override
                 public long maxInsert() {
-                    return 1_000;
+                    return MachineConfig.deshTierMaxEnergyInOut;
                 }
             });
     }
@@ -106,7 +106,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
             getEnergyStorage().internalExtract(calculateEnergyPerTick(), false);
             setLit(true);
 
-            if (time % 20 == 0) tickGravity(level, pos);
+            if (time % MachineConfig.distributionRefreshRate == 0) tickGravity(level, pos);
 
             if (time % 200 == 0) {
                 level.playSound(null, pos, ModSoundEvents.GRAVITY_NORMALIZER_IDLE.get(), SoundSource.BLOCKS, 0.3f, 1);
@@ -137,7 +137,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     }
 
     protected void tickGravity(ServerLevel level, BlockPos pos) {
-        limit = AdAstraConfig.maxDistributionBlocks;
+        limit = MachineConfig.maxDistributionBlocks;
         Set<BlockPos> positions = FloodFill3D.run(level, pos.above(), limit, FloodFill3D.TEST_FULL_SEAL, false);
 
         GravityApi.API.setGravity(level, positions, targetGravity);

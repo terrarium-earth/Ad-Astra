@@ -4,6 +4,7 @@ import earth.terrarium.adastra.common.blockentities.base.RecipeMachineBlockEntit
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.CryoFreezerMenu;
 import earth.terrarium.adastra.common.recipes.machines.CryoFreezingRecipe;
@@ -50,13 +51,13 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage() {
-        if (energyContainer != null) return energyContainer;
-        return energyContainer = new WrappedBlockEnergyContainer(
+        if (this.energyContainer != null) return this.energyContainer;
+        return this.energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(100_000) {
+            new InsertOnlyEnergyContainer(MachineConfig.ostrumTierEnergyCapacity) {
                 @Override
                 public long maxInsert() {
-                    return 2_000;
+                    return MachineConfig.ostrumTierMaxEnergyInOut;
                 }
             });
     }
@@ -67,7 +68,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
         return fluidContainer = new WrappedBlockFluidContainer(
             this,
             new ExtractOnlyFluidContainer(
-                i -> FluidHooks.buckets(6),
+                i -> FluidHooks.buckets(MachineConfig.ostrumTierFluidCapacity),
                 1,
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYO_FREEZING.get())
                     .stream()

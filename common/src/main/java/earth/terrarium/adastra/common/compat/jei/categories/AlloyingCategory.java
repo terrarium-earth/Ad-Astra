@@ -5,6 +5,7 @@ import earth.terrarium.adastra.client.screens.machines.EtrionicBlastFurnaceScree
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.compat.jei.drawables.EnergyBarDrawable;
 import earth.terrarium.adastra.common.compat.jei.drawables.EtaDrawable;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.recipes.machines.AlloyingRecipe;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
@@ -80,6 +81,6 @@ public class AlloyingCategory implements IRecipeCategory<AlloyingRecipe> {
         graphics.blit(EtrionicBlastFurnaceScreen.FURNACE_OVERLAY, 28, 47, 0, 0, 32, 43, 32, 43);
 
         new EtaDrawable(mouseX, mouseY, recipe.cookingTime(), GuiUtils.ARROW, 20, 12).draw(graphics, 73, 46);
-        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), 20_000, 500, 0).draw(graphics, 144, 63);
+        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), MachineConfig.steelTierEnergyCapacity, MachineConfig.steelTierMaxEnergyInOut, 0).draw(graphics, 144, 63);
     }
 }

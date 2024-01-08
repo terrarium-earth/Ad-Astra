@@ -134,6 +134,7 @@ able to share space stations.
 - Updated astrodux guide book.
 - The astrodux is now a patchouli book that's only available when patchouli is installed, instead
 of a standalone item.
+- Cleaned up the config. Moved all machine-related options to one category.
 
 ## Breaking Changes
 - Removed Glacian signs, and aeronos and strophar chests.

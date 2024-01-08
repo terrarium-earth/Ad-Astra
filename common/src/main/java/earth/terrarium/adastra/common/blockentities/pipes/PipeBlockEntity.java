@@ -3,6 +3,7 @@ package earth.terrarium.adastra.common.blockentities.pipes;
 import earth.terrarium.adastra.common.blockentities.base.TickableBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.blocks.pipes.PipeBlock;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -32,7 +33,7 @@ public abstract class PipeBlockEntity extends BlockEntity implements TickableBlo
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         // Only run if it's a controller i.e. at least one side is connected to something
         if (isController) {
-            if (time % 50 == 0) {
+            if (time % MachineConfig.pipeRefreshRate == 0) {
                 sources.clear();
                 consumers.clear();
                 findNodes(level, pos);

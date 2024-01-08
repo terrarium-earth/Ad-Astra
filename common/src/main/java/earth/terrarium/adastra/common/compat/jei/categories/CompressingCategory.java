@@ -5,6 +5,7 @@ import earth.terrarium.adastra.client.screens.machines.CompressorScreen;
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.compat.jei.drawables.EnergyBarDrawable;
 import earth.terrarium.adastra.common.compat.jei.drawables.EtaDrawable;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.recipes.machines.CompressingRecipe;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
@@ -64,6 +65,6 @@ public class CompressingCategory implements IRecipeCategory<CompressingRecipe> {
         graphics.blit(CompressorScreen.TEXTURE, -1, 100, 0, 194, 184, 7, 184, 201);
 
         new EtaDrawable(mouseX, mouseY, recipe.cookingTime(), GuiUtils.HAMMER, 15, 16).draw(graphics, 71, 55);
-        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), 10_000, 250, 0).draw(graphics, 143, 70);
+        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), MachineConfig.ironTierEnergyCapacity, MachineConfig.ironTierMaxEnergyInOut, 0).draw(graphics, 143, 70);
     }
 }

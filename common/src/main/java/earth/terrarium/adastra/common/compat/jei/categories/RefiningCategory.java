@@ -4,6 +4,7 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.screens.machines.FuelRefineryScreen;
 import earth.terrarium.adastra.common.compat.jei.drawables.EnergyBarDrawable;
 import earth.terrarium.adastra.common.compat.jei.drawables.FluidBarDrawable;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.recipes.machines.RefiningRecipe;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
@@ -65,7 +66,7 @@ public class RefiningCategory implements IRecipeCategory<RefiningRecipe> {
         graphics.blit(FuelRefineryScreen.TEXTURE, 2, -4, 0, 0, 177, 100, 177, 184);
         graphics.blit(FuelRefineryScreen.TEXTURE, 2, 96, 0, 177, 177, 7, 177, 184);
 
-        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), 20_000, 500, 0).draw(graphics, 146, 50);
+        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), MachineConfig.steelTierEnergyCapacity, MachineConfig.steelTierMaxEnergyInOut, 0).draw(graphics, 146, 50);
 
         int cookTime = recipe.cookingTime();
         long capacity = FluidHooks.buckets(6);

@@ -31,7 +31,7 @@ public class EnvironmentEffects {
 
         for (int i = 0; i < chunkSections.length; i++) {
             var section = chunkSections[i];
-            if (!section.isRandomlyTicking()) continue;
+            if (!section.isRandomlyTicking() && !AdAstraConfig.forcePlanetTick) continue;
             int yCord = SectionPos.sectionToBlockCoord(chunk.getSectionYFromSectionIndex(i));
 
             for (int j = 0; j < AdAstraConfig.planetRandomTickSpeed; j++) {

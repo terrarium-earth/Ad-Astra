@@ -6,6 +6,7 @@ import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.compat.jei.drawables.EnergyBarDrawable;
 import earth.terrarium.adastra.common.compat.jei.drawables.EtaDrawable;
 import earth.terrarium.adastra.common.compat.jei.drawables.FluidBarDrawable;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.recipes.machines.CryoFreezingRecipe;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
@@ -66,7 +67,7 @@ public class CryoFreezingCategory implements IRecipeCategory<CryoFreezingRecipe>
         graphics.blit(CryoFreezerScreen.TEXTURE, 1, -4, 0, 0, 177, 96, 177, 181);
         graphics.blit(CryoFreezerScreen.TEXTURE, 1, 92, 0, 174, 177, 7, 177, 181);
 
-        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), 100_000, 2_500, 0).draw(graphics, 144, 55);
+        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), MachineConfig.ostrumTierEnergyCapacity, MachineConfig.ostrumTierMaxEnergyInOut, 0).draw(graphics, 144, 55);
 
         new EtaDrawable(mouseX, mouseY, recipe.cookingTime(), GuiUtils.SNOWFLAKE, 13, 13).draw(graphics, 55, 67);
         int cookTime = recipe.cookingTime();

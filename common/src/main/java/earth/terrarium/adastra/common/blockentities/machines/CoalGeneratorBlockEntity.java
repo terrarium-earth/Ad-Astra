@@ -4,6 +4,7 @@ import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineB
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.CoalGeneratorMenu;
 import earth.terrarium.adastra.common.utils.TransferUtils;
@@ -47,10 +48,10 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new ExtractOnlyEnergyContainer(10_000) {
+            new ExtractOnlyEnergyContainer(MachineConfig.ironTierEnergyCapacity) {
                 @Override
                 public long maxExtract() {
-                    return 250;
+                    return MachineConfig.ironTierMaxEnergyInOut;
                 }
             });
     }
@@ -81,14 +82,14 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
             return;
         }
         var input = getItem(1);
-        if (getEnergyStorage().internalInsert(20, true) == 0) {
+        if (getEnergyStorage().internalInsert(MachineConfig.coalGeneratorEnergyGenerationPerTick, true) == 0) {
             if (time % 10 == 0) setLit(false);
             return;
         }
 
         if (cookTime > 0) {
             cookTime--;
-            getEnergyStorage().internalInsert(20, false);
+            getEnergyStorage().internalInsert(MachineConfig.coalGeneratorEnergyGenerationPerTick, false);
             if (time % 10 == 0) setLit(true);
         } else if (!input.isEmpty()
             && !(input.getItem() instanceof BucketItem)) {

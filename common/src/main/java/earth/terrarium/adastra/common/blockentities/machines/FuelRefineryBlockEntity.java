@@ -4,6 +4,7 @@ import earth.terrarium.adastra.common.blockentities.base.RecipeMachineBlockEntit
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.container.BiFluidContainer;
 import earth.terrarium.adastra.common.menus.machines.FuelRefineryMenu;
@@ -54,21 +55,20 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(20_000) {
+            new InsertOnlyEnergyContainer(MachineConfig.steelTierEnergyCapacity) {
                 @Override
                 public long maxInsert() {
-                    return 500;
+                    return MachineConfig.steelTierMaxEnergyInOut;
                 }
             });
     }
-
     @Override
     public WrappedBlockFluidContainer getFluidContainer() {
         if (fluidContainer != null) return fluidContainer;
         return fluidContainer = new WrappedBlockFluidContainer(
             this,
             new BiFluidContainer(
-                FluidHooks.buckets(6),
+                FluidHooks.buckets(MachineConfig.steelTierFluidCapacity),
                 1,
                 1,
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())

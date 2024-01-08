@@ -4,6 +4,7 @@ import earth.terrarium.adastra.common.blockentities.base.RecipeMachineBlockEntit
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
+import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.CompressorMenu;
 import earth.terrarium.adastra.common.recipes.machines.CompressingRecipe;
@@ -45,10 +46,10 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(10_000) {
+            new InsertOnlyEnergyContainer(MachineConfig.ironTierEnergyCapacity) {
                 @Override
                 public long maxInsert() {
-                    return 250;
+                    return MachineConfig.ironTierMaxEnergyInOut;
                 }
             });
     }
