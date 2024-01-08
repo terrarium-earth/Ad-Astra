@@ -62,6 +62,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
                 }
             });
     }
+
     @Override
     public WrappedBlockFluidContainer getFluidContainer() {
         if (fluidContainer != null) return fluidContainer;

@@ -20,7 +20,7 @@ public class LabeledImageButton extends ImageButton {
 
     @Override
     public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-         if (!isActive()) {
+        if (!isActive()) {
             RenderSystem.setShaderColor(0.5f, 0.5f, 0.5f, 1);
         }
 

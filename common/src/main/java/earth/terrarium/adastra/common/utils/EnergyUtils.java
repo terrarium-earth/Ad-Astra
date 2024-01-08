@@ -17,10 +17,9 @@ public class EnergyUtils {
         var container = EnergyApi.getItemEnergyContainer(holder);
         if (container != null) {
             container.setEnergy(container.getMaxCapacity());
-            stack.getOrCreateTag()
-                .getCompound(Botarium.BOTARIUM_DATA)
+            stack.getOrCreateTagElement(Botarium.BOTARIUM_DATA)
                 .putLong("Energy", container.getMaxCapacity());
         }
-        return holder.getStack();
+        return stack;
     }
 }

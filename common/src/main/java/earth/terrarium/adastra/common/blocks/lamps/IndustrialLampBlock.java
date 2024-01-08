@@ -60,7 +60,6 @@ public class IndustrialLampBlock extends FaceAttachedHorizontalDirectionalBlock 
         return switch (state.getValue(FACE)) {
             case FLOOR -> state.getValue(FACING).getAxis() == Direction.Axis.X ? DOWN_SHAPE_X : DOWN_SHAPE_Z;
             case WALL -> switch (state.getValue(FACING)) {
-                case NORTH -> NORTH_SHAPE;
                 case EAST -> EAST_SHAPE;
                 case SOUTH -> SOUTH_SHAPE;
                 case WEST -> WEST_SHAPE;

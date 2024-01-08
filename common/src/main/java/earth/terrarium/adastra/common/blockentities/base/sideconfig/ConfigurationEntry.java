@@ -47,7 +47,7 @@ public record ConfigurationEntry(
         tag.put("SideConfig", list);
     }
 
-    public static List<ConfigurationEntry> load(CompoundTag tag, List<ConfigurationEntry> sideConfig, List<ConfigurationEntry> defaultConfig) {
+    public static void load(CompoundTag tag, List<ConfigurationEntry> sideConfig, List<ConfigurationEntry> defaultConfig) {
         ListTag list = tag.getList("SideConfig", Tag.TAG_COMPOUND);
 
         sideConfig.clear();
@@ -62,8 +62,6 @@ public record ConfigurationEntry(
 
             sideConfig.add(new ConfigurationEntry(type, sides, defaultConfig.get(i).title()));
         }
-
-        return sideConfig;
     }
 
     private static EnumMap<Direction, Configuration> createConfiguration(Configuration value) {

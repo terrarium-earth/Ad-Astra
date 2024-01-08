@@ -75,7 +75,6 @@ public class AdAstraClient {
         registerScreens();
         registerBlockEntityRenderers();
         registerEntityRenderers();
-        registerItemRenderers();
         registerItemProperties();
         registerRenderLayers();
         registerArmor();
@@ -162,9 +161,6 @@ public class AdAstraClient {
         consumer.register(MoglerModel.LAYER_LOCATION, MoglerModel::createBodyLayer);
         consumer.register(SulfurCreeperModel.LAYER_LOCATION, SulfurCreeperModel::createBodyLayer);
         consumer.register(GlacianRamModel.LAYER_LOCATION, GlacianRamModel::createBodyLayer);
-    }
-
-    private static void registerItemRenderers() {
     }
 
     private static void registerItemProperties() {

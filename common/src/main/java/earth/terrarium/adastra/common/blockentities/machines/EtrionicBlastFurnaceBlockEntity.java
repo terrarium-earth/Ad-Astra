@@ -128,7 +128,8 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
 
     protected boolean canCraft(WrappedBlockEnergyContainer energyStorage, BlastingRecipe recipe, int slot) {
         if (recipe == null) return false;
-        if (energyStorage.internalExtract(MachineConfig.etrionicBlastFurnaceBlastingEnergyPerItem, true) < MachineConfig.etrionicBlastFurnaceBlastingEnergyPerItem) return false;
+        if (energyStorage.internalExtract(MachineConfig.etrionicBlastFurnaceBlastingEnergyPerItem, true) < MachineConfig.etrionicBlastFurnaceBlastingEnergyPerItem)
+            return false;
         if (!recipe.getIngredients().get(0).test(getItem(slot))) return false;
         return ItemUtils.canAddItem(this, recipe.getResultItem(level().registryAccess()), 5, 6, 7, 8);
     }

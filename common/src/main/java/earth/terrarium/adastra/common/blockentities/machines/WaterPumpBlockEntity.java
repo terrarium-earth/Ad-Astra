@@ -79,7 +79,8 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
 
     private boolean canPump(BlockPos pos, WrappedBlockEnergyContainer energyStorage) {
         if (!level().getFluidState(pos.below()).is(Fluids.WATER)) return false;
-        if (energyStorage.internalExtract(MachineConfig.waterPumpEnergyPerTick, true) < MachineConfig.waterPumpEnergyPerTick) return false;
+        if (energyStorage.internalExtract(MachineConfig.waterPumpEnergyPerTick, true) < MachineConfig.waterPumpEnergyPerTick)
+            return false;
         return fluidContainer.getFluids().get(0).getFluidAmount() < fluidContainer.getTankCapacity(0);
     }
 

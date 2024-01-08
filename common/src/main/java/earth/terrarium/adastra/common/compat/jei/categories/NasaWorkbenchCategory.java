@@ -70,7 +70,7 @@ public class NasaWorkbenchCategory implements IRecipeCategory<NasaWorkbenchRecip
 
     @Override
     public void draw(NasaWorkbenchRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-        graphics.blit(NasaWorkbenchScreen.TEXTURE, 1, -4, 00, 0, 177, 140, 177, 224);
+        graphics.blit(NasaWorkbenchScreen.TEXTURE, 1, -4, 0, 0, 177, 140, 177, 224);
         graphics.blit(NasaWorkbenchScreen.TEXTURE, 1, 136, 0, 217, 177, 7, 177, 224);
     }
 }

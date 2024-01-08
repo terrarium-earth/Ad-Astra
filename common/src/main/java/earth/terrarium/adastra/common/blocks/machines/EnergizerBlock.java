@@ -80,8 +80,7 @@ public class EnergizerBlock extends MachineBlock {
         EnergyContainer itemEnergyContainer = EnergyApi.getItemEnergyContainer(stack);
         if (itemEnergyContainer == null) return super.getDrops(blockState, builder);
         itemEnergyContainer.setEnergy(entity.getEnergyStorage().getStoredEnergy());
-        stack.getStack().getOrCreateTag()
-            .getCompound(Botarium.BOTARIUM_DATA)
+        stack.getStack().getOrCreateTagElement(Botarium.BOTARIUM_DATA)
             .putLong("Energy", entity.getEnergyStorage().getStoredEnergy());
         return List.of(stack.getStack());
     }

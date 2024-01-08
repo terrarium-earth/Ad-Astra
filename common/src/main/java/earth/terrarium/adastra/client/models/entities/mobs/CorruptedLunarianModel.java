@@ -94,8 +94,6 @@ public class CorruptedLunarianModel extends EntityModel<CorruptedLunarian> {
         this.arm1.yRot = 0.0f;
         this.arm2.zRot = 0.0f;
         this.arm1.zRot = 0.0f;
-        this.arm2.xRot = 0.0f;
-        this.arm1.xRot = 0.0f;
 
         this.arm2.zRot -= Mth.cos(animationProgress * 0.04f) * 0.04f + 0.04f;
         this.arm1.zRot += Mth.cos(animationProgress * 0.04f) * 0.04f + 0.04f;
