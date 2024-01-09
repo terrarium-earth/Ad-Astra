@@ -1,0 +1,35 @@
+{
+  "parent": "ad_astra:tier_2_rocket",
+  "criteria": {
+    "entered_mars": {
+      "conditions": {
+        "to": "ad_astra:mars"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.mars.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:mars_globe"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.mars.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered_mars"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

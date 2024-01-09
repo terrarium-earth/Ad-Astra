@@ -1,0 +1,38 @@
+{
+  "parent": "ad_astra:astronaut",
+  "criteria": {
+    "has_radio": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:radio"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.dj.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:radio"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.dj.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_radio"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

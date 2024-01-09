@@ -1,0 +1,41 @@
+{
+  "parent": "ad_astra:moon",
+  "criteria": {
+    "has_solar_panel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:solar_panel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.solar_panel.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:solar_panel"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.solar_panel.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_solar_panel"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

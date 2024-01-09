@@ -1,0 +1,35 @@
+{
+  "parent": "ad_astra:tier_1_rocket",
+  "criteria": {
+    "entered_moon": {
+      "conditions": {
+        "to": "ad_astra:moon"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.moon.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:moon_globe"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.moon.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered_moon"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,41 @@
+{
+  "parent": "ad_astra:moon",
+  "criteria": {
+    "has_tier_2_rocket": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:tier_2_rocket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.tier_2_rocket.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:tier_2_rocket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.tier_2_rocket.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_tier_2_rocket"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,38 @@
+{
+  "parent": "ad_astra:carbon_footprint",
+  "criteria": {
+    "has_compressor": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:compressor"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.under_pressure.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:compressor"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.under_pressure.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_compressor"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

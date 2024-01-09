@@ -1,0 +1,35 @@
+{
+  "parent": "ad_astra:tier_3_rocket",
+  "criteria": {
+    "entered_mercury": {
+      "conditions": {
+        "to": "ad_astra:mercury"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.mercury.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:mercury_globe"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.mercury.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered_mercury"
+    ]
+  ],
+  "rewards": {
+    "experience": 200
+  },
+  "sends_telemetry_event": true
+}

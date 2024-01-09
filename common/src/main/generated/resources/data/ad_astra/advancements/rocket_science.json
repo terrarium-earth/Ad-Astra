@@ -1,0 +1,41 @@
+{
+  "parent": "ad_astra:smart_blasting",
+  "criteria": {
+    "has_nasa_workbench": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:nasa_workbench"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.rocket_science.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:nasa_workbench"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.rocket_science.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_nasa_workbench"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

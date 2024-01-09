@@ -1,0 +1,57 @@
+{
+  "parent": "ad_astra:venus",
+  "criteria": {
+    "has_jet_suit": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:jet_suit_helmet"
+            ]
+          },
+          {
+            "items": [
+              "ad_astra:jet_suit"
+            ]
+          },
+          {
+            "items": [
+              "ad_astra:jet_suit_pants"
+            ]
+          },
+          {
+            "items": [
+              "ad_astra:jet_suit_boots"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.rocket_man.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:jet_suit_helmet",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.rocket_man.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_jet_suit"
+    ]
+  ],
+  "rewards": {
+    "experience": 300
+  },
+  "sends_telemetry_event": true
+}

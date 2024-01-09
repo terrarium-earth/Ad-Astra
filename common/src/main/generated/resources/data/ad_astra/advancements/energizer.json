@@ -1,0 +1,41 @@
+{
+  "parent": "ad_astra:mars",
+  "criteria": {
+    "has_energizer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:energizer"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.energizer.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:energizer"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.energizer.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_energizer"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

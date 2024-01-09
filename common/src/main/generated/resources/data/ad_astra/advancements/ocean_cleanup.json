@@ -1,0 +1,36 @@
+{
+  "parent": "ad_astra:rocket_science",
+  "criteria": {
+    "oil_bucket": {
+      "conditions": {
+        "item": {
+          "items": [
+            "ad_astra:oil_bucket"
+          ]
+        }
+      },
+      "trigger": "minecraft:filled_bucket"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.ocean_cleanup.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:oil_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.ocean_cleanup.title"
+    }
+  },
+  "requirements": [
+    [
+      "oil_bucket"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

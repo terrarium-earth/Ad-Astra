@@ -1,0 +1,41 @@
+{
+  "parent": "ad_astra:mars",
+  "criteria": {
+    "has_cryo_freezer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:cryo_freezer"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.cryo_freezer.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:cryo_freezer"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.cryo_freezer.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_cryo_freezer"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

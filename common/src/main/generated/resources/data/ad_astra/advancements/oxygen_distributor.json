@@ -1,0 +1,41 @@
+{
+  "parent": "ad_astra:solar_panel",
+  "criteria": {
+    "has_oxygen_distributor": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:oxygen_distributor"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.oxygen_distributor.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:oxygen_distributor"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.oxygen_distributor.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_oxygen_distributor"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

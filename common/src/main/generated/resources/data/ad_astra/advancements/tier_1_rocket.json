@@ -1,0 +1,41 @@
+{
+  "parent": "ad_astra:astronaut",
+  "criteria": {
+    "has_tier_1_rocket": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:tier_1_rocket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.tier_1_rocket.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:tier_1_rocket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.tier_1_rocket.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_tier_1_rocket"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

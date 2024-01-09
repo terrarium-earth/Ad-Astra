@@ -1,0 +1,38 @@
+{
+  "criteria": {
+    "has_coal_generator": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:coal_generator"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "ad_astra:textures/block/steel_panel.png",
+    "description": {
+      "translate": "advancements.ad_astra.ad_astra.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:earth_globe"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.ad_astra.ad_astra.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_coal_generator"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

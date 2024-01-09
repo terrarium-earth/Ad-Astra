@@ -1,0 +1,41 @@
+{
+  "parent": "ad_astra:dj",
+  "criteria": {
+    "has_rover": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:tier_1_rover"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.rover.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:tier_1_rover"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.rover.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_rover"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

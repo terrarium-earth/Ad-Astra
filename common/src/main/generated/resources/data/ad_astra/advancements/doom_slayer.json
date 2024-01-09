@@ -1,0 +1,57 @@
+{
+  "parent": "ad_astra:mars",
+  "criteria": {
+    "has_netherite_space_suit": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:netherite_space_helmet"
+            ]
+          },
+          {
+            "items": [
+              "ad_astra:netherite_space_suit"
+            ]
+          },
+          {
+            "items": [
+              "ad_astra:netherite_space_pants"
+            ]
+          },
+          {
+            "items": [
+              "ad_astra:netherite_space_boots"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.doom_slayer.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:netherite_space_helmet",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.doom_slayer.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_netherite_space_suit"
+    ]
+  ],
+  "rewards": {
+    "experience": 200
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,41 @@
+{
+  "parent": "ad_astra:doom_slayer",
+  "criteria": {
+    "has_tier_3_rocket": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:tier_3_rocket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.tier_3_rocket.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:tier_3_rocket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.tier_3_rocket.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_tier_3_rocket"
+    ]
+  ],
+  "rewards": {
+    "experience": 200
+  },
+  "sends_telemetry_event": true
+}

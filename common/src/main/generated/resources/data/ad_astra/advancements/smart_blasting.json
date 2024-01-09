@@ -1,0 +1,38 @@
+{
+  "parent": "ad_astra:under_pressure",
+  "criteria": {
+    "has_etrionic_blast_furnace": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:etrionic_blast_furnace"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.smart_blasting.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:etrionic_blast_furnace"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.smart_blasting.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_etrionic_blast_furnace"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

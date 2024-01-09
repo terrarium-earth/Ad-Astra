@@ -1,0 +1,57 @@
+{
+  "parent": "ad_astra:ocean_cleanup",
+  "criteria": {
+    "has_astronaut": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:space_helmet"
+            ]
+          },
+          {
+            "items": [
+              "ad_astra:space_suit"
+            ]
+          },
+          {
+            "items": [
+              "ad_astra:space_pants"
+            ]
+          },
+          {
+            "items": [
+              "ad_astra:space_boots"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.astronaut.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:space_helmet",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.astronaut.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_astronaut"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

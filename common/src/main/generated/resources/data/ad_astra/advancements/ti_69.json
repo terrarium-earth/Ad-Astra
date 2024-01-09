@@ -1,0 +1,38 @@
+{
+  "parent": "ad_astra:zip_gun",
+  "criteria": {
+    "has_ti_69": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:ti_69"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.ti_69.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:ti_69"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.ti_69.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_ti_69"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

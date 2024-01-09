@@ -1,0 +1,41 @@
+{
+  "parent": "ad_astra:cryo_freezer",
+  "criteria": {
+    "has_cryo_fuel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:cryo_fuel_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.ad_astra.cryo_fuel.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ad_astra:cryo_fuel_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.ad_astra.cryo_fuel.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_cryo_fuel"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}
