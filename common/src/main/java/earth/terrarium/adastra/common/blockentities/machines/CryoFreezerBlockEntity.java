@@ -13,10 +13,10 @@ import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
 import earth.terrarium.botarium.common.fluid.impl.ExtractOnlyFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -54,12 +54,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
         if (this.energyContainer != null) return this.energyContainer;
         return this.energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(MachineConfig.ostrumTierEnergyCapacity) {
-                @Override
-                public long maxInsert() {
-                    return MachineConfig.ostrumTierMaxEnergyInOut;
-                }
-            });
+            new InsertOnlyEnergyContainer(MachineConfig.ostrumTierEnergyCapacity, MachineConfig.ostrumTierMaxEnergyInOut));
     }
 
     @Override
@@ -68,11 +63,11 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
         return fluidContainer = new WrappedBlockFluidContainer(
             this,
             new ExtractOnlyFluidContainer(
-                i -> FluidHooks.buckets(MachineConfig.ostrumTierFluidCapacity),
+                i -> FluidConstants.fromMillibuckets(MachineConfig.ostrumTierFluidCapacity),
                 1,
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYO_FREEZING.get())
                     .stream()
-                    .anyMatch(r -> r.resultFluid().matches(holder))));
+                    .anyMatch(r -> r.result().matches(holder))));
     }
 
     @Override
@@ -84,7 +79,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
         TransferUtils.pushItemsNearby(this, pos, new int[]{3}, sideConfig.get(2), filter);
         TransferUtils.pullItemsNearby(this, pos, new int[]{3}, sideConfig.get(2), filter);
         TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(3), filter);
-        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.2f), 1, sideConfig.get(4), filter);
+        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidConstants.fromMillibuckets(200), 1, sideConfig.get(4), filter);
     }
 
     @Override
@@ -108,12 +103,12 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
         if (recipe == null) return;
 
         getItem(1).shrink(1);
-        fluidContainer.internalInsert(recipe.resultFluid(), false);
+        fluidContainer.internalInsert(recipe.result(), false);
 
         updateSlots();
 
         cookTime = 0;
-        if (fluidContainer.getFluids().get(0).isEmpty()) clearRecipe();
+        if (fluidContainer.getFirstFluid().isEmpty()) clearRecipe();
     }
 
     @Override

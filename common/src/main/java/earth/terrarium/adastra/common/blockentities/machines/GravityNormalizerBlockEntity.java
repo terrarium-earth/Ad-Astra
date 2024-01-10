@@ -85,12 +85,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
         if (this.energyContainer != null) return this.energyContainer;
         return this.energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(MachineConfig.deshTierEnergyCapacity) {
-                @Override
-                public long maxInsert() {
-                    return MachineConfig.deshTierMaxEnergyInOut;
-                }
-            });
+            new InsertOnlyEnergyContainer(MachineConfig.deshTierEnergyCapacity, MachineConfig.deshTierMaxEnergyInOut));
     }
 
     @Override

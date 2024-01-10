@@ -66,12 +66,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(MachineConfig.steelTierEnergyCapacity) {
-                @Override
-                public long maxInsert() {
-                    return MachineConfig.steelTierMaxEnergyInOut;
-                }
-            });
+            new InsertOnlyEnergyContainer(MachineConfig.steelTierEnergyCapacity, MachineConfig.steelTierMaxEnergyInOut));
     }
 
     @Override

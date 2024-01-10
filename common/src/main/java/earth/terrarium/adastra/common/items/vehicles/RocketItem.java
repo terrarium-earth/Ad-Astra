@@ -50,7 +50,7 @@ public class RocketItem extends VehicleItem {
         if (vehicle instanceof Rocket rocket) {
             ItemStackHolder holder = new ItemStackHolder(stack);
             var fluidContainer = getFluidContainer(stack).container();
-            FluidApi.moveFluid(FluidApi.getItemFluidContainer(holder), rocket.fluidContainer(), fluidContainer.getFluids().get(0), false);
+            FluidApi.moveFluid(FluidApi.getItemFluidContainer(holder), rocket.fluidContainer(), fluidContainer.getFirstFluid(), false);
         }
 
         stack.shrink(1);

@@ -1,15 +1,21 @@
 package earth.terrarium.adastra.client.forge;
 
+import com.teamresourceful.resourcefulconfig.client.ConfigScreen;
+import com.teamresourceful.resourcefulconfig.common.config.ResourcefulConfig;
+import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.AdAstraClient;
 import earth.terrarium.adastra.client.dimension.ModDimensionRenderers;
+import earth.terrarium.adastra.common.config.AdAstraConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -26,33 +32,41 @@ public class AdAstraClientForge {
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onRegisterClientHud);
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onClientTick);
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onRenderLevelStage);
+
+        ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
+            () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> {
+                ResourcefulConfig config = AdAstra.CONFIGURATOR.getConfig(AdAstraConfig.class);
+                if (config == null) return null;
+                return new ConfigScreen(null, config);
+            })
+        );
     }
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(AdAstraClient::init);
-        AdAstraClient.onRegisterItemRenderers(ITEM_RENDERERS::put); //
+        AdAstraClient.onRegisterItemRenderers(ITEM_RENDERERS::put);
     }
 
     @SubscribeEvent
     public static void onRegisterKeyBindings(RegisterKeyMappingsEvent event) {
-        event.register(AdAstraClient.KEY_TOGGLE_SUIT_FLIGHT); //
+        event.register(AdAstraClient.KEY_TOGGLE_SUIT_FLIGHT);
         event.register(AdAstraClient.KEY_OPEN_RADIO);
     }
 
     @SubscribeEvent
     public static void onRegisterParticles(RegisterParticleProvidersEvent event) {
-        AdAstraClient.onRegisterParticles((type, provider) -> event.registerSpriteSet(type, provider::create)); //
+        AdAstraClient.onRegisterParticles((type, provider) -> event.registerSpriteSet(type, provider::create));
     }
 
     @SubscribeEvent
     public static void modelLoading(ModelEvent.RegisterAdditional event) {
-        AdAstraClient.onRegisterModels(event::register); //
+        AdAstraClient.onRegisterModels(event::register);
     }
 
     @SubscribeEvent
     public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        AdAstraClient.onRegisterEntityLayers(event::registerLayerDefinition); //
+        AdAstraClient.onRegisterEntityLayers(event::registerLayerDefinition);
     }
 
     @SubscribeEvent

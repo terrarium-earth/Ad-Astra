@@ -52,6 +52,7 @@ subprojects {
 
     repositories {
         mavenCentral()
+        mavenLocal()
         maven(url = "https://maven.architectury.dev/")
         maven(url = "https://maven.teamresourceful.com/repository/maven-public/")
         maven(url = "https://maven.firstdarkdev.xyz/snapshots")

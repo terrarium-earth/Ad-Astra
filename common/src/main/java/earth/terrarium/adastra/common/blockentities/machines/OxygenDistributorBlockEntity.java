@@ -19,7 +19,7 @@ import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.adastra.common.utils.floodfill.FloodFill3D;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -98,12 +98,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         if (this.energyContainer != null) return this.energyContainer;
         return this.energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(MachineConfig.deshTierEnergyCapacity) {
-                @Override
-                public long maxInsert() {
-                    return MachineConfig.deshTierMaxEnergyInOut;
-                }
-            });
+            new InsertOnlyEnergyContainer(MachineConfig.deshTierEnergyCapacity, MachineConfig.deshTierMaxEnergyInOut));
     }
 
     @Override
@@ -114,15 +109,15 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
             return;
         }
 
-        float fluidPerTick = calculateFluidPerTick();
-        boolean canDistribute = canCraftDistribution(FluidHooks.buckets(Math.max(0.001, fluidPerTick / 1000)));
-        if (canFunction() && canDistribute) {
+        long fluidPerTick = calculateFluidPerTick();
+        boolean canDistribute = canCraftDistribution(Math.max(FluidConstants.fromMillibuckets(1), fluidPerTick));
+        if (canFunction() && canDistribute) { // TODO TEST
             getEnergyStorage().internalExtract(calculateEnergyPerTick(), false);
             setLit(true);
             accumulatedFluid += fluidPerTick;
-            int wholeBuckets = (int) accumulatedFluid;
+            int wholeBuckets = (int) (accumulatedFluid / 1000f);
             if (wholeBuckets > 0) {
-                consumeDistribution(FluidHooks.buckets(Math.max(0.001, wholeBuckets / 1000f)));
+                consumeDistribution(FluidConstants.fromMillibuckets(Math.max(1, wholeBuckets / 1000)));
                 accumulatedFluid -= wholeBuckets;
             }
 
@@ -149,8 +144,8 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         TransferUtils.pullItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
         TransferUtils.pushItemsNearby(this, pos, new int[]{2}, sideConfig.get(1), filter);
         TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(2), filter);
-        TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.2f), 0, sideConfig.get(3), filter);
-        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.2f), 1, sideConfig.get(4), filter);
+        TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidConstants.fromMillibuckets(200), 0, sideConfig.get(3), filter);
+        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidConstants.fromMillibuckets(200), 1, sideConfig.get(4), filter);
     }
 
     @Override
@@ -219,7 +214,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
                 AdAstraClient.OXYGEN_OVERLAY_RENDERER.removePositions(pos);
                 if (AdAstraClient.OXYGEN_OVERLAY_RENDERER.canAdd(pos)
                     && canFunction()
-                    && canCraftDistribution(FluidHooks.buckets(Math.max(0.001, calculateFluidPerTick() / 1000)))) {
+                    && canCraftDistribution(FluidConstants.fromMillibuckets(Math.max(1, calculateFluidPerTick() / 1000)))) {
                     AdAstraClient.OXYGEN_OVERLAY_RENDERER.addPositions(pos, lastDistributedBlocks);
                 }
             } else AdAstraClient.OXYGEN_OVERLAY_RENDERER.clearPositions();
@@ -264,8 +259,8 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         return Math.max(1, lastDistributedBlocks.size() / 50);
     }
 
-    private float calculateFluidPerTick() {
-        return Math.max(1, lastDistributedBlocks.size() / 1500f);
+    private long calculateFluidPerTick() {
+        return FluidConstants.fromMillibuckets(Math.max(1, lastDistributedBlocks.size() / 1500));
     }
 
     @Override

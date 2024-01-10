@@ -4,12 +4,12 @@ import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.fluid.FluidApi;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidItem;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedItemFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -28,9 +28,9 @@ import java.util.List;
 
 public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFluidContainer> {
     private final long tankSize;
-    private final double distributionAmount;
+    private final long distributionAmount;
 
-    public GasTankItem(Properties properties, long tankSize, double distributionAmount) {
+    public GasTankItem(Properties properties, long tankSize, long distributionAmount) {
         super(properties);
         this.tankSize = tankSize;
         this.distributionAmount = distributionAmount;
@@ -78,7 +78,7 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
         for (var item : items) {
             if (item.isEmpty() || item.getItem() instanceof GasTankItem) continue;
             ItemStackHolder to = new ItemStackHolder(item);
-            long moved = FluidApi.moveFluid(from, to, FluidHooks.newFluidHolder(container.getFluid(), FluidHooks.buckets(distributionAmount), null), false);
+            long moved = FluidApi.moveFluid(from, to, FluidHolder.ofMillibuckets(container.getFluid(), FluidConstants.fromMillibuckets(distributionAmount)), false);
             if (moved == 0) continue;
             if (to.isDirty()) {
                 item.setTag(to.getStack().getTag());
@@ -93,7 +93,7 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
         return new WrappedItemFluidContainer(
             holder,
             new SimpleFluidContainer(
-                FluidHooks.buckets(tankSize),
+                FluidConstants.fromMillibuckets(tankSize),
                 1,
                 (t, f) -> true));
     }
@@ -101,7 +101,7 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         tooltipComponents.add(TooltipUtils.getFluidComponent(FluidUtils.getTank(stack), FluidUtils.getTankCapacity(stack)));
-        tooltipComponents.add(TooltipUtils.getMaxFluidOutComponent(FluidHooks.buckets(distributionAmount)));
+        tooltipComponents.add(TooltipUtils.getMaxFluidOutComponent(FluidConstants.fromMillibuckets(distributionAmount)));
         TooltipUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.GAS_TANK_INFO);
     }
 
@@ -117,7 +117,7 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
     @Override
     public int getBarWidth(@NotNull ItemStack stack) {
         var fluidContainer = getFluidContainer(stack);
-        return (int) (((double) fluidContainer.getFluids().get(0).getFluidAmount() / fluidContainer.getTankCapacity(0)) * 13);
+        return (int) (((double) fluidContainer.getFirstFluid().getFluidAmount() / fluidContainer.getTankCapacity(0)) * 13);
     }
 
     @Override

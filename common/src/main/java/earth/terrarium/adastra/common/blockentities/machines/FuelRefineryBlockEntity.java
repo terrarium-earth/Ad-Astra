@@ -14,9 +14,9 @@ import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -55,12 +55,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(MachineConfig.steelTierEnergyCapacity) {
-                @Override
-                public long maxInsert() {
-                    return MachineConfig.steelTierMaxEnergyInOut;
-                }
-            });
+            new InsertOnlyEnergyContainer(MachineConfig.steelTierEnergyCapacity, MachineConfig.steelTierMaxEnergyInOut));
     }
 
     @Override
@@ -69,15 +64,15 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
         return fluidContainer = new WrappedBlockFluidContainer(
             this,
             new BiFluidContainer(
-                FluidHooks.buckets(MachineConfig.steelTierFluidCapacity),
+                FluidConstants.fromMillibuckets(MachineConfig.steelTierFluidCapacity),
                 1,
                 1,
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())
                     .stream()
-                    .anyMatch(r -> r.ingredient().matches(holder)),
+                    .anyMatch(r -> r.input().test(holder)),
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())
                     .stream()
-                    .anyMatch(r -> r.resultFluid().matches(holder))));
+                    .anyMatch(r -> r.result().matches(holder))));
     }
 
     @Override
@@ -86,8 +81,8 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
         TransferUtils.pullItemsNearby(this, pos, new int[]{3}, sideConfig.get(1), filter);
         TransferUtils.pushItemsNearby(this, pos, new int[]{2, 4}, sideConfig.get(2), filter);
         TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(3), filter);
-        TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.2f), 0, sideConfig.get(4), filter);
-        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidHooks.buckets(0.2f), 1, sideConfig.get(5), filter);
+        TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidConstants.fromMillibuckets(200), 0, sideConfig.get(4), filter);
+        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidConstants.fromMillibuckets(200), 1, sideConfig.get(5), filter);
     }
 
     @Override
@@ -110,13 +105,13 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
     public void craft() {
         if (recipe == null) return;
 
-        fluidContainer.internalExtract(recipe.ingredient(), false);
-        fluidContainer.internalInsert(recipe.resultFluid(), false);
+        fluidContainer.internalExtract(getFluidContainer().getFirstFluid().copyWithAmount(recipe.input().getFluidAmount()), false);
+        fluidContainer.internalInsert(recipe.result(), false);
 
         updateSlots();
 
         cookTime = 0;
-        if (fluidContainer.getFluids().get(0).isEmpty()) clearRecipe();
+        if (fluidContainer.getFirstFluid().isEmpty()) clearRecipe();
     }
 
     @Override

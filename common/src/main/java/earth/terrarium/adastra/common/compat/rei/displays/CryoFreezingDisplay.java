@@ -12,12 +12,12 @@ import java.util.List;
 public record CryoFreezingDisplay(CryoFreezingRecipe recipe) implements Display {
     @Override
     public List<EntryIngredient> getInputEntries() {
-        return List.of(EntryIngredients.ofIngredient(recipe.ingredient()));
+        return List.of(EntryIngredients.ofIngredient(recipe.input()));
     }
 
     @Override
     public List<EntryIngredient> getOutputEntries() {
-        return List.of(EntryIngredients.of(recipe.resultFluid().getFluid()));
+        return List.of(EntryIngredients.of(recipe.result().getFluid()));
     }
 
     @Override

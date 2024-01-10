@@ -13,10 +13,10 @@ import earth.terrarium.adastra.common.registry.*;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.botarium.common.fluid.FluidApi;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import earth.terrarium.botarium.common.menu.MenuHooks;
 import net.minecraft.core.BlockPos;
@@ -89,7 +89,7 @@ public class Rocket extends Vehicle {
     public Rocket(EntityType<?> type, Level level, RocketProperties properties) {
         super(type, level);
         this.properties = properties;
-        fluidContainer = new SimpleFluidContainer(FluidHooks.buckets(3), 1, (amount, fluid) -> fluid.is(properties.fuel));
+        fluidContainer = new SimpleFluidContainer(FluidConstants.fromMillibuckets(3000), 1, (amount, fluid) -> fluid.is(properties.fuel));
     }
 
     @Override
@@ -140,7 +140,7 @@ public class Rocket extends Vehicle {
     @Override
     public ItemStack getDropStack() {
         ItemStackHolder stack = new ItemStackHolder(properties.item.getDefaultInstance());
-        FluidApi.moveFluid(fluidContainer, FluidApi.getItemFluidContainer(stack), fluidContainer.getFluids().get(0), false);
+        FluidApi.moveFluid(fluidContainer, FluidApi.getItemFluidContainer(stack), fluidContainer.getFirstFluid(), false);
         return stack.getStack();
     }
 
@@ -220,7 +220,7 @@ public class Rocket extends Vehicle {
             FluidUtils.moveItemToContainer(inventory, fluidContainer, 0, 1, 0);
             FluidUtils.moveContainerToItem(inventory, fluidContainer, 0, 1, 0);
 
-            var fluidHolder = fluidContainer.getFluids().get(0);
+            var fluidHolder = fluidContainer.getFirstFluid();
             entityData.set(FUEL, fluidHolder.getFluidAmount());
             entityData.set(FUEL_TYPE, BuiltInRegistries.FLUID.getKey(fluidHolder.getFluid()).toString());
         }
@@ -384,8 +384,8 @@ public class Rocket extends Vehicle {
 
     public boolean consumeFuel(boolean simulate) {
         if (level().isClientSide()) return false;
-        int buckets = fluidContainer.getFluids().get(0).is(ModFluidTags.EFFICIENT_FUEL) ? 1 : 3;
-        return fluidContainer.extractFluid(fluidContainer.getFluids().get(0).copyWithAmount(FluidHooks.buckets(buckets)), simulate).getFluidAmount() > 0;
+        long buckets = fluidContainer.getFirstFluid().is(ModFluidTags.EFFICIENT_FUEL) ? 1000 : 3000;
+        return fluidContainer.extractFluid(fluidContainer.getFirstFluid().copyWithAmount(FluidConstants.fromMillibuckets(buckets)), simulate).getFluidAmount() > 0;
     }
 
     public boolean hasEnoughFuel() {
@@ -403,10 +403,9 @@ public class Rocket extends Vehicle {
     }
 
     public FluidHolder fluid() {
-        return FluidHooks.newFluidHolder(
+        return FluidHolder.ofMillibuckets(
             BuiltInRegistries.FLUID.get(new ResourceLocation(entityData.get(FUEL_TYPE))),
-            entityData.get(FUEL),
-            null);
+            entityData.get(FUEL));
     }
 
     public void openPlanetsScreen(ServerPlayer player) {

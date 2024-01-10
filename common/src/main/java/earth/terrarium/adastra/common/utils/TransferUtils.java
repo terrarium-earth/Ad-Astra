@@ -9,7 +9,6 @@ import earth.terrarium.botarium.common.fluid.FluidApi;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
@@ -70,7 +69,7 @@ public class TransferUtils {
             if (nearbyContainer == null) continue;
             FluidHolder holder = container.getFluids().get(tank);
             if (holder.isEmpty()) continue;
-            if (FluidApi.moveFluid(container, nearbyContainer, FluidHooks.newFluidHolder(holder.getFluid(), amount, null), false) > 0) {
+            if (FluidApi.moveFluid(container, nearbyContainer, FluidHolder.ofMillibuckets(holder.getFluid(), amount), false) > 0) {
                 machine.sync();
             }
         }
@@ -89,7 +88,7 @@ public class TransferUtils {
             if (nearbyContainer == null) continue;
             FluidHolder holder = nearbyContainer.getFluids().get(tank);
             if (holder.isEmpty()) continue;
-            if (FluidApi.moveFluid(nearbyContainer, container, FluidHooks.newFluidHolder(holder.getFluid(), amount, null), false) > 0) {
+            if (FluidApi.moveFluid(nearbyContainer, container, FluidHolder.ofMillibuckets(holder.getFluid(), amount), false) > 0) {
                 machine.sync();
             }
         }

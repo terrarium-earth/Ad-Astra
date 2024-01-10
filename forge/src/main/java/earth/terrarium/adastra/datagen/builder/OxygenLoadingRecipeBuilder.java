@@ -6,6 +6,7 @@ import com.teamresourceful.resourcefullib.common.lib.Constants;
 import earth.terrarium.adastra.common.recipes.machines.OxygenLoadingRecipe;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.utils.QuantifiedFluidIngredient;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
@@ -24,14 +25,14 @@ import java.util.function.Consumer;
 public class OxygenLoadingRecipeBuilder implements RecipeBuilder {
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
-    private final FluidHolder ingredient;
-    private final FluidHolder resultFluid;
+    private final QuantifiedFluidIngredient input;
+    private final FluidHolder result;
     private int cookingtime = 2;
     private int energy = 30;
 
-    public OxygenLoadingRecipeBuilder(FluidHolder ingredient, FluidHolder resultFluid) {
-        this.ingredient = ingredient;
-        this.resultFluid = resultFluid;
+    public OxygenLoadingRecipeBuilder(QuantifiedFluidIngredient input, FluidHolder result) {
+        this.input = input;
+        this.result = result;
     }
 
     public OxygenLoadingRecipeBuilder cookingTime(int cookingtime) {
@@ -68,8 +69,8 @@ public class OxygenLoadingRecipeBuilder implements RecipeBuilder {
             .requirements(RequirementsStrategy.OR);
 
         finishedRecipeConsumer.accept(new Result(
-            recipeId, this.ingredient,
-            this.resultFluid,
+            recipeId, this.input,
+            this.result,
             this.cookingtime, this.energy,
             this.advancement, new ResourceLocation(recipeId.getNamespace(), "recipes/oxygen_loading/" + recipeId.getPath()))
         );
@@ -77,8 +78,8 @@ public class OxygenLoadingRecipeBuilder implements RecipeBuilder {
 
     public record Result(
         ResourceLocation id,
-        FluidHolder ingredient,
-        FluidHolder resultFluid,
+        QuantifiedFluidIngredient input,
+        FluidHolder result,
         int cookingtime, int energy,
         Advancement.Builder advancement, ResourceLocation advancementId
     ) implements FinishedRecipe {
@@ -86,7 +87,7 @@ public class OxygenLoadingRecipeBuilder implements RecipeBuilder {
         @Override
         public void serializeRecipeData(@NotNull JsonObject json) {
             OxygenLoadingRecipe.codec(id)
-                .encodeStart(JsonOps.INSTANCE, new OxygenLoadingRecipe(id, cookingtime, energy, ingredient, resultFluid))
+                .encodeStart(JsonOps.INSTANCE, new OxygenLoadingRecipe(id, cookingtime, energy, input, result))
                 .resultOrPartial(Constants.LOGGER::error)
                 .ifPresent(out ->
                     out.getAsJsonObject().entrySet().forEach(entry -> json.add(entry.getKey(), entry.getValue()))

@@ -2,7 +2,7 @@ package earth.terrarium.adastra.common.blockentities.pipes;
 
 import earth.terrarium.adastra.common.blocks.properties.PipeProperty;
 import earth.terrarium.botarium.common.fluid.FluidApi;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -20,7 +20,7 @@ public class FluidPipeBlockEntity extends PipeBlockEntity {
         if (pipeProperty.isNone()) return;
         var container = FluidApi.getBlockFluidContainer(entity, direction);
         if (container == null) return;
-        var toTransfer = container.getFluids().get(0);
+        var toTransfer = container.getFirstFluid();
         if (!pipeProperty.isInsert() && !toTransfer.isEmpty() && (pipeProperty.isExtract() || container.extractFluid(toTransfer, true).getFluidAmount() > 0)) {
             sources.put(pos, direction);
         } else if (pipeProperty.isNormal() || pipeProperty.isInsert()) {
@@ -36,7 +36,7 @@ public class FluidPipeBlockEntity extends PipeBlockEntity {
         var consumerContainer = FluidApi.getBlockFluidContainer(consumer, direction);
         for (var fluid : sourceContainer.getFluids()) {
             if (fluid.isEmpty()) continue;
-            var toTransfer = FluidHooks.newFluidHolder(fluid.getFluid(), Math.min(transferRate, fluid.getFluidAmount()), null);
+            var toTransfer = FluidHolder.ofMillibuckets(fluid.getFluid(), Math.min(transferRate, fluid.getFluidAmount()));
             if (toTransfer.isEmpty()) continue;
             try {
                 FluidApi.moveFluid(sourceContainer, consumerContainer, toTransfer, true);

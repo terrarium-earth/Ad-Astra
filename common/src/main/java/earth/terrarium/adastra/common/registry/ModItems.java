@@ -96,17 +96,17 @@ public class ModItems {
     public static final RegistryEntry<Item> RADIO = ITEMS.register("radio", () -> new TooltipBlockItem(ModBlocks.RADIO.get(), ConstantComponents.RADIO_INFO, new Item.Properties()));
 
     public static final RegistryEntry<Item> SPACE_HELMET = BASIC_ITEMS.register("space_helmet", () -> new CustomDyeableArmorItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final RegistryEntry<Item> SPACE_SUIT = BASIC_ITEMS.register("space_suit", () -> new SpaceSuitItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, 1, new Item.Properties()));
+    public static final RegistryEntry<Item> SPACE_SUIT = BASIC_ITEMS.register("space_suit", () -> new SpaceSuitItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, 1000, new Item.Properties()));
     public static final RegistryEntry<Item> SPACE_PANTS = BASIC_ITEMS.register("space_pants", () -> new CustomDyeableArmorItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryEntry<Item> SPACE_BOOTS = BASIC_ITEMS.register("space_boots", () -> new CustomDyeableArmorItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     public static final RegistryEntry<Item> NETHERITE_SPACE_HELMET = ITEMS.register("netherite_space_helmet", () -> new CustomDyeableArmorItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> NETHERITE_SPACE_SUIT = BASIC_ITEMS.register("netherite_space_suit", () -> new NetheriteSpaceSuitItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, 2, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> NETHERITE_SPACE_SUIT = BASIC_ITEMS.register("netherite_space_suit", () -> new NetheriteSpaceSuitItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, 2000, new Item.Properties().fireResistant()));
     public static final RegistryEntry<Item> NETHERITE_SPACE_PANTS = BASIC_ITEMS.register("netherite_space_pants", () -> new CustomDyeableArmorItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().fireResistant()));
     public static final RegistryEntry<Item> NETHERITE_SPACE_BOOTS = BASIC_ITEMS.register("netherite_space_boots", () -> new CustomDyeableArmorItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().fireResistant()));
 
     public static final RegistryEntry<Item> JET_SUIT_HELMET = ITEMS.register("jet_suit_helmet", () -> new CustomDyeableArmorItem(JetSuitMaterial.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> JET_SUIT = BASIC_ITEMS.register("jet_suit", () -> new JetSuitItem(JetSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, 4, 1_000_000, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> JET_SUIT = BASIC_ITEMS.register("jet_suit", () -> new JetSuitItem(JetSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, 4000, 1_000_000, new Item.Properties().fireResistant()));
     public static final RegistryEntry<Item> JET_SUIT_PANTS = BASIC_ITEMS.register("jet_suit_pants", () -> new CustomDyeableArmorItem(JetSuitMaterial.MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().fireResistant()));
     public static final RegistryEntry<Item> JET_SUIT_BOOTS = BASIC_ITEMS.register("jet_suit_boots", () -> new CustomDyeableArmorItem(JetSuitMaterial.MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().fireResistant()));
 
@@ -119,8 +119,8 @@ public class ModItems {
     public static final RegistryEntry<Item> CHEESE = BASIC_ITEMS.register("cheese", () -> new Item(new Item.Properties()));
 
     public static final RegistryEntry<Item> ETRIONIC_CAPACITOR = ITEMS.register("etrionic_capacitor", () -> new EtrionicCapacitorItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryEntry<Item> GAS_TANK = BASIC_ITEMS.register("gas_tank", () -> new GasTankItem(new Item.Properties().stacksTo(1), 1, 0.01));
-    public static final RegistryEntry<Item> LARGE_GAS_TANK = BASIC_ITEMS.register("large_gas_tank", () -> new GasTankItem(new Item.Properties().stacksTo(1), 3, 0.05));
+    public static final RegistryEntry<Item> GAS_TANK = BASIC_ITEMS.register("gas_tank", () -> new GasTankItem(new Item.Properties().stacksTo(1), 1, 10));
+    public static final RegistryEntry<Item> LARGE_GAS_TANK = BASIC_ITEMS.register("large_gas_tank", () -> new GasTankItem(new Item.Properties().stacksTo(1), 3, 50));
 
     public static final RegistryEntry<Item> IRON_PLATE = BASIC_ITEMS.register("iron_plate", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> IRON_ROD = BASIC_ITEMS.register("iron_rod", () -> new Item(new Item.Properties()));

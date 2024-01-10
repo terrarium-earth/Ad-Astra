@@ -10,10 +10,10 @@ import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.radio.RadioHolder;
 import earth.terrarium.botarium.common.fluid.FluidApi;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -47,7 +47,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     public static final EntityDataAccessor<Long> FUEL = SynchedEntityData.defineId(Rover.class, EntityDataSerializers.LONG);
     public static final EntityDataAccessor<String> FUEL_TYPE = SynchedEntityData.defineId(Rover.class, EntityDataSerializers.STRING);
 
-    private final SimpleFluidContainer fluidContainer = new SimpleFluidContainer(FluidHooks.buckets(3), 1, (amount, fluid) -> fluid.is(ModFluidTags.TIER_1_ROVER_FUEL));
+    private final SimpleFluidContainer fluidContainer = new SimpleFluidContainer(FluidConstants.fromMillibuckets(3), 1, (amount, fluid) -> fluid.is(ModFluidTags.TIER_1_ROVER_FUEL));
 
     private float speed;
     private float angle;
@@ -109,7 +109,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     @Override
     public ItemStack getDropStack() {
         ItemStackHolder stack = new ItemStackHolder(ModItems.ROVER.get().getDefaultInstance());
-        FluidApi.moveFluid(fluidContainer, FluidApi.getItemFluidContainer(stack), fluidContainer.getFluids().get(0), false);
+        FluidApi.moveFluid(fluidContainer, FluidApi.getItemFluidContainer(stack), fluidContainer.getFirstFluid(), false);
         return stack.getStack();
     }
 
@@ -170,7 +170,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
             FluidUtils.moveItemToContainer(inventory, fluidContainer, 0, 1, 0);
             FluidUtils.moveContainerToItem(inventory, fluidContainer, 0, 1, 0);
 
-            var fluidHolder = fluidContainer.getFluids().get(0);
+            var fluidHolder = fluidContainer.getFirstFluid();
             entityData.set(FUEL, fluidHolder.getFluidAmount());
             entityData.set(FUEL_TYPE, BuiltInRegistries.FLUID.getKey(fluidHolder.getFluid()).toString());
         }
@@ -274,18 +274,18 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
 
     public void consumeFuel() {
         if (level().isClientSide() || tickCount % 5 != 0) return;
-        fluidContainer.extractFluid(fluidContainer.getFluids().get(0).copyWithAmount(FluidHooks.buckets(0.001)), false);
+        fluidContainer.extractFluid(fluidContainer.getFirstFluid().copyWithAmount(FluidConstants.fromMillibuckets(1)), false);
     }
 
     public boolean hasEnoughFuel() {
         if (level().isClientSide()) {
             return entityData.get(FUEL) > 0;
         }
-        return fluidContainer.getFluids().get(0).getFluidAmount() > 0;
+        return fluidContainer.getFirstFluid().getFluidAmount() > 0;
     }
 
     public FluidHolder fluid() {
-        return FluidHooks.newFluidHolder(
+        return FluidHolder.ofMillibuckets(
             BuiltInRegistries.FLUID.get(new ResourceLocation(entityData.get(FUEL_TYPE))),
             entityData.get(FUEL),
             null);

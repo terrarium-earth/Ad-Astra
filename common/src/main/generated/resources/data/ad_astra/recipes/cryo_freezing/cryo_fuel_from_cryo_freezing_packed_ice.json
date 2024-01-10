@@ -5,8 +5,8 @@
   "ingredient": {
     "item": "minecraft:packed_ice"
   },
-  "result_fluid": {
-    "buckets": 0.002,
-    "fluid": "ad_astra:cryo_fuel"
+  "result": {
+    "fluid": "ad_astra:cryo_fuel",
+    "millibuckets": 2
   }
 }

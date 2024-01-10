@@ -7,6 +7,7 @@ import earth.terrarium.adastra.common.blockentities.machines.OxygenLoaderBlockEn
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.utils.QuantifiedFluidIngredient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -17,8 +18,8 @@ import org.jetbrains.annotations.NotNull;
 public record OxygenLoadingRecipe(
     ResourceLocation id,
     int cookingTime, int energy,
-    FluidHolder ingredient,
-    FluidHolder resultFluid
+    QuantifiedFluidIngredient input,
+    FluidHolder result
 ) implements CodecRecipe<Container> {
 
     public static Codec<OxygenLoadingRecipe> codec(ResourceLocation id) {
@@ -26,20 +27,22 @@ public record OxygenLoadingRecipe(
             RecordCodecBuilder.point(id),
             Codec.INT.fieldOf("cookingtime").forGetter(OxygenLoadingRecipe::cookingTime),
             Codec.INT.fieldOf("energy").forGetter(OxygenLoadingRecipe::energy),
-            FluidHolder.CODEC.fieldOf("ingredient").forGetter(OxygenLoadingRecipe::ingredient),
-            FluidHolder.CODEC.fieldOf("result_fluid").forGetter(OxygenLoadingRecipe::resultFluid)
+            QuantifiedFluidIngredient.CODEC.fieldOf("input").forGetter(OxygenLoadingRecipe::input),
+            FluidHolder.NEW_CODEC.fieldOf("result").forGetter(OxygenLoadingRecipe::result)
         ).apply(instance, OxygenLoadingRecipe::new));
     }
 
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
         if (!(container instanceof OxygenLoaderBlockEntity entity)) return false;
-        if (!ingredient.matches(entity.getFluidContainer().getFluids().get(0))) return false;
+        if (!input.test(entity.getFluidContainer().getFirstFluid())) return false;
         if (entity.getEnergyStorage().internalExtract(energy, true) < energy) return false;
         if (entity.getFluidContainer().getFluids().get(1).getFluidAmount() >= entity.getFluidContainer().getTankCapacity(1)) {
             return false;
         }
-        return entity.getFluidContainer().internalExtract(ingredient, true).getFluidAmount() >= ingredient.getFluidAmount();
+        return entity.getFluidContainer().internalExtract(entity.getFluidContainer().getFirstFluid()
+                .copyWithAmount(input.getFluidAmount()), true)
+            .getFluidAmount() >= input.getFluidAmount();
     }
 
     @Override

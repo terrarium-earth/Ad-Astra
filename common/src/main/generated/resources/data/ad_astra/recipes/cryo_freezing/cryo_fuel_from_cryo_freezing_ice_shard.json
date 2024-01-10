@@ -5,8 +5,8 @@
   "ingredient": {
     "item": "ad_astra:ice_shard"
   },
-  "result_fluid": {
-    "buckets": 0.025,
-    "fluid": "ad_astra:cryo_fuel"
+  "result": {
+    "fluid": "ad_astra:cryo_fuel",
+    "millibuckets": 25
   }
 }

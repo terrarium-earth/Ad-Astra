@@ -8,7 +8,7 @@ import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.recipes.machines.RefiningRecipe;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -69,8 +69,8 @@ public class RefiningCategory implements IRecipeCategory<RefiningRecipe> {
         new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), MachineConfig.steelTierEnergyCapacity, MachineConfig.steelTierMaxEnergyInOut, 0).draw(graphics, 146, 50);
 
         int cookTime = recipe.cookingTime();
-        long capacity = FluidHooks.buckets(6);
-        new FluidBarDrawable(mouseX, mouseY, false, capacity, cookTime, recipe.ingredient()).draw(graphics, 39, 49);
-        new FluidBarDrawable(mouseX, mouseY, true, capacity, cookTime, recipe.resultFluid()).draw(graphics, 96, 49);
+        long capacity = FluidConstants.fromMillibuckets(MachineConfig.steelTierFluidCapacity);
+        new FluidBarDrawable(mouseX, mouseY, false, capacity, cookTime, recipe.input().getFluids().get(0)).draw(graphics, 39, 49);
+        new FluidBarDrawable(mouseX, mouseY, true, capacity, cookTime, recipe.result()).draw(graphics, 96, 49);
     }
 }

@@ -12,12 +12,12 @@ import java.util.List;
 public record RefiningDisplay(RefiningRecipe recipe) implements Display {
     @Override
     public List<EntryIngredient> getInputEntries() {
-        return List.of(EntryIngredients.of(recipe.ingredient().getFluid()));
+        return List.of(EntryIngredients.of(recipe.input().getFluids().get(0).getFluid()));
     }
 
     @Override
     public List<EntryIngredient> getOutputEntries() {
-        return List.of(EntryIngredients.of(recipe.resultFluid().getFluid()));
+        return List.of(EntryIngredients.of(recipe.result().getFluid()));
     }
 
     @Override

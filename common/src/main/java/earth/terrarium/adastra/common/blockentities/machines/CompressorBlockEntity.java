@@ -46,12 +46,7 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(MachineConfig.ironTierEnergyCapacity) {
-                @Override
-                public long maxInsert() {
-                    return MachineConfig.ironTierMaxEnergyInOut;
-                }
-            });
+            new InsertOnlyEnergyContainer(MachineConfig.ironTierEnergyCapacity, MachineConfig.ironTierMaxEnergyInOut));
     }
 
     @Override

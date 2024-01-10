@@ -9,12 +9,12 @@ import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.fluid.FluidApi;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidItem;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedItemFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -55,7 +55,7 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
         ItemStack mainHandItem = entity.getMainHandItem();
         ItemStack offhandItem = entity.getOffhandItem();
 
-        float fuelUsage = 0.001f;
+        long fuelUsage = 1;
         boolean mainHandBoost = consumeFuel(player, mainHandItem, fuelUsage);
         boolean offHandBoost = consumeFuel(player, offhandItem, fuelUsage);
         if (!mainHandBoost && !offHandBoost && !player.isCreative()) {
@@ -107,12 +107,12 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
         }
     }
 
-    public boolean consumeFuel(Player player, ItemStack stack, float amount) {
+    public boolean consumeFuel(Player player, ItemStack stack, long amount) {
         if (player.isCreative()) return true;
         if (!(stack.getItem() instanceof ZipGunItem)) return false;
         ItemStackHolder holder = new ItemStackHolder(stack);
         var container = FluidApi.getItemFluidContainer(holder);
-        FluidHolder extracted = container.extractFluid(FluidHooks.newFluidHolder(container.getFluids().get(0).getFluid(), FluidHooks.buckets(amount), null), false);
+        FluidHolder extracted = container.extractFluid(FluidHolder.ofMillibuckets(container.getFirstFluid().getFluid(), FluidConstants.fromMillibuckets(amount)), false);
         stack.setTag(holder.getStack().getTag());
         return extracted.getFluidAmount() > 0;
     }
@@ -138,7 +138,7 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
     }
 
     public long getCapacity(ItemStack stack) {
-        return FluidHooks.buckets(5);
+        return FluidConstants.fromMillibuckets(3000);
     }
 
     @Override
@@ -158,7 +158,7 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
     @Override
     public int getBarWidth(@NotNull ItemStack stack) {
         var fluidContainer = getFluidContainer(stack);
-        return (int) (((double) fluidContainer.getFluids().get(0).getFluidAmount() / fluidContainer.getTankCapacity(0)) * 13);
+        return (int) (((double) fluidContainer.getFirstFluid().getFluidAmount() / fluidContainer.getTankCapacity(0)) * 13);
     }
 
     @Override

@@ -8,7 +8,7 @@ import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyItem;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -30,8 +30,8 @@ import java.util.List;
 public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<WrappedItemEnergyContainer> {
     private final long energyCapacity;
 
-    public JetSuitItem(ArmorMaterial material, Type type, int buckets, int energy, Properties properties) {
-        super(material, type, buckets, properties);
+    public JetSuitItem(ArmorMaterial material, Type type, int tankSize, int energy, Properties properties) {
+        super(material, type, tankSize, properties);
         this.energyCapacity = energy;
     }
 
@@ -39,7 +39,7 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
         tooltipComponents.add(TooltipUtils.getFluidComponent(
             FluidUtils.getTank(stack),
-            FluidHooks.buckets(tankSize),
+            FluidConstants.fromMillibuckets(tankSize),
             ModFluids.OXYGEN.get()));
         var energy = getEnergyStorage(stack);
         tooltipComponents.add(TooltipUtils.getEnergyComponent(energy.getStoredEnergy(), energyCapacity));

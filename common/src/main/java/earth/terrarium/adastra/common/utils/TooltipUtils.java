@@ -1,9 +1,9 @@
 package earth.terrarium.adastra.common.utils;
 
 import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -74,8 +74,8 @@ public class TooltipUtils {
         if (fluid.isEmpty()) {
             return Component.translatable("tooltip.ad_astra.fluid",
                 getFormattedAmount(0),
-                getFormattedAmount(FluidHooks.toMillibuckets(capacity)),
-                ClientFluidHooks.getDisplayName(FluidHooks.newFluidHolder(fallback, capacity, null))
+                getFormattedAmount(FluidConstants.toMillibuckets(capacity)),
+                ClientFluidHooks.getDisplayName(FluidHolder.ofMillibuckets(fallback, capacity))
             ).withStyle(ChatFormatting.GOLD);
         }
 
@@ -84,35 +84,35 @@ public class TooltipUtils {
 
     public static Component getFluidComponent(FluidHolder fluid, long capacity) {
         return Component.translatable("tooltip.ad_astra.fluid",
-            getFormattedAmount(FluidHooks.toMillibuckets(fluid.getFluidAmount())),
-            getFormattedAmount(FluidHooks.toMillibuckets(capacity)),
+            getFormattedAmount(FluidConstants.toMillibuckets(fluid.getFluidAmount())),
+            getFormattedAmount(FluidConstants.toMillibuckets(capacity)),
             ClientFluidHooks.getDisplayName(fluid)
         ).withStyle(ChatFormatting.GOLD);
     }
 
     public static Component getFluidDifferenceComponent(long fluid) {
         return Component.translatable("tooltip.ad_astra.fluid_%s".formatted(fluid < 0 ? "out" : "in"),
-            getFormattedAmount(FluidHooks.toMillibuckets(Math.abs(fluid)))).withStyle(ChatFormatting.GOLD);
+            getFormattedAmount(FluidConstants.toMillibuckets(Math.abs(fluid)))).withStyle(ChatFormatting.GOLD);
     }
 
     public static Component getMaxFluidInComponent(long maxIn) {
         return Component.translatable("tooltip.ad_astra.max_fluid_in",
-            getFormattedAmount(FluidHooks.toMillibuckets(maxIn))).withStyle(ChatFormatting.GREEN);
+            getFormattedAmount(FluidConstants.toMillibuckets(maxIn))).withStyle(ChatFormatting.GREEN);
     }
 
     public static Component getMaxFluidOutComponent(long maxOut) {
         return Component.translatable("tooltip.ad_astra.max_fluid_out",
-            getFormattedAmount(FluidHooks.toMillibuckets(maxOut))).withStyle(ChatFormatting.GREEN);
+            getFormattedAmount(FluidConstants.toMillibuckets(maxOut))).withStyle(ChatFormatting.GREEN);
     }
 
     public static Component getFluidUsePerIterationComponent(long usePerTick) {
         return Component.translatable("tooltip.ad_astra.fluid_use_per_iteration",
-            getFormattedAmount(FluidHooks.toMillibuckets(Math.abs(usePerTick)))).withStyle(ChatFormatting.AQUA);
+            getFormattedAmount(FluidConstants.toMillibuckets(Math.abs(usePerTick)))).withStyle(ChatFormatting.AQUA);
     }
 
     public static Component getFluidGenerationPerIterationComponent(long gainPerTick) {
         return Component.translatable("tooltip.ad_astra.fluid_generation_per_iteration",
-            getFormattedAmount(FluidHooks.toMillibuckets(Math.abs(gainPerTick)))).withStyle(ChatFormatting.AQUA);
+            getFormattedAmount(FluidConstants.toMillibuckets(Math.abs(gainPerTick)))).withStyle(ChatFormatting.AQUA);
     }
 
     public static Component getTicksPerIterationComponent(int time) {

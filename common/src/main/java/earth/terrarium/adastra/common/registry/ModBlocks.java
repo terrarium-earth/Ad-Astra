@@ -13,7 +13,7 @@ import earth.terrarium.adastra.common.blocks.machines.*;
 import earth.terrarium.adastra.common.blocks.pipes.PipeBlock;
 import earth.terrarium.adastra.common.blocks.pipes.PipeDuctBlock;
 import earth.terrarium.adastra.common.blocks.pipes.TransferablePipe;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.registry.fluid.BotariumLiquidBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.worldgen.features.TreeFeatures;
@@ -90,11 +90,11 @@ public class ModBlocks {
 
     public static final RegistryEntry<Block> STEEL_CABLE = CABLES.register("steel_cable", () -> new PipeBlock(150, PipeBlock.Type.ENERGY, 0.344, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 12).noOcclusion()));
     public static final RegistryEntry<Block> DESH_CABLE = CABLES.register("desh_cable", () -> new PipeBlock(500, PipeBlock.Type.ENERGY, 0.344, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 9).noOcclusion()));
-    public static final RegistryEntry<Block> DESH_FLUID_PIPE = FLUID_PIPES.register("desh_fluid_pipe", () -> new PipeBlock(FluidHooks.buckets(0.15f), PipeBlock.Type.FLUID, 0.185, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 9).noOcclusion()));
-    public static final RegistryEntry<Block> OSTRUM_FLUID_PIPE = FLUID_PIPES.register("ostrum_fluid_pipe", () -> new PipeBlock(FluidHooks.buckets(0.5f), PipeBlock.Type.FLUID, 0.185, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 16).noOcclusion()));
+    public static final RegistryEntry<Block> DESH_FLUID_PIPE = FLUID_PIPES.register("desh_fluid_pipe", () -> new PipeBlock(FluidConstants.fromMillibuckets(150), PipeBlock.Type.FLUID, 0.185, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 9).noOcclusion()));
+    public static final RegistryEntry<Block> OSTRUM_FLUID_PIPE = FLUID_PIPES.register("ostrum_fluid_pipe", () -> new PipeBlock(FluidConstants.fromMillibuckets(500), PipeBlock.Type.FLUID, 0.185, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 16).noOcclusion()));
 
     public static final RegistryEntry<Block> CABLE_DUCT = CABLES.register("cable_duct", () -> new PipeDuctBlock(250, TransferablePipe.Type.ENERGY, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 12f)));
-    public static final RegistryEntry<Block> FLUID_PIPE_DUCT = FLUID_PIPES.register("fluid_pipe_duct", () -> new PipeDuctBlock(FluidHooks.buckets(0.25f), TransferablePipe.Type.FLUID, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 9)));
+    public static final RegistryEntry<Block> FLUID_PIPE_DUCT = FLUID_PIPES.register("fluid_pipe_duct", () -> new PipeDuctBlock(FluidConstants.fromMillibuckets(250), TransferablePipe.Type.FLUID, BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 9)));
 
     public static final RegistryEntry<Block> COAL_GENERATOR = MACHINES.register("coal_generator", () -> new MachineBlock(IRON_PROPERTIES));
     public static final RegistryEntry<Block> COMPRESSOR = MACHINES.register("compressor", () -> new MachineBlock(IRON_PROPERTIES));

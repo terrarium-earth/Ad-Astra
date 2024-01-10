@@ -19,8 +19,8 @@ import org.jetbrains.annotations.NotNull;
 public record CryoFreezingRecipe(
     ResourceLocation id,
     int cookingTime, int energy,
-    Ingredient ingredient,
-    FluidHolder resultFluid
+    Ingredient input,
+    FluidHolder result
 ) implements CodecRecipe<Container> {
 
     public static Codec<CryoFreezingRecipe> codec(ResourceLocation id) {
@@ -28,17 +28,17 @@ public record CryoFreezingRecipe(
             RecordCodecBuilder.point(id),
             Codec.INT.fieldOf("cookingtime").forGetter(CryoFreezingRecipe::cookingTime),
             Codec.INT.fieldOf("energy").forGetter(CryoFreezingRecipe::energy),
-            IngredientCodec.CODEC.fieldOf("ingredient").forGetter(CryoFreezingRecipe::ingredient),
-            FluidHolder.CODEC.fieldOf("result_fluid").forGetter(CryoFreezingRecipe::resultFluid)
+            IngredientCodec.CODEC.fieldOf("ingredient").forGetter(CryoFreezingRecipe::input),
+            FluidHolder.NEW_CODEC.fieldOf("result").forGetter(CryoFreezingRecipe::result)
         ).apply(instance, CryoFreezingRecipe::new));
     }
 
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
-        if (!ingredient.test(container.getItem(1))) return false;
+        if (!input.test(container.getItem(1))) return false;
         if (!(container instanceof CryoFreezerBlockEntity entity)) return true;
         if (entity.getEnergyStorage().internalExtract(energy, true) < energy) return false;
-        return entity.getFluidContainer().getFluids().get(0).getFluidAmount() < entity.getFluidContainer().getTankCapacity(0);
+        return entity.getFluidContainer().getFirstFluid().getFluidAmount() < entity.getFluidContainer().getTankCapacity(0);
     }
 
     @Override

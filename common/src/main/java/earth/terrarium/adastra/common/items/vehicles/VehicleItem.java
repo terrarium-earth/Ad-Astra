@@ -5,11 +5,11 @@ import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidItem;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedItemFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
@@ -37,7 +37,7 @@ public abstract class VehicleItem extends RenderedItem implements BotariumFluidI
         return new WrappedItemFluidContainer(
             holder,
             new SimpleFluidContainer(
-                FluidHooks.buckets(3),
+                FluidConstants.fromMillibuckets(3000),
                 1,
                 (t, f) -> f.is(ModFluidTags.FUEL)));
     }
@@ -50,7 +50,7 @@ public abstract class VehicleItem extends RenderedItem implements BotariumFluidI
     @Override
     public int getBarWidth(@NotNull ItemStack stack) {
         var fluidContainer = getFluidContainer(stack);
-        return (int) (((double) fluidContainer.getFluids().get(0).getFluidAmount() / fluidContainer.getTankCapacity(0)) * 13);
+        return (int) (((double) fluidContainer.getFirstFluid().getFluidAmount() / fluidContainer.getTankCapacity(0)) * 13);
     }
 
     @Override

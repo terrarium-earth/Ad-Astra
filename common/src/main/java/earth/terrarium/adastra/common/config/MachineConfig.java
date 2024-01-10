@@ -73,21 +73,21 @@ public final class MachineConfig {
         type = EntryType.LONG,
         translation = "config.ad_astra.steelTierFluidCapacity"
     )
-    public static long steelTierFluidCapacity = 3;
+    public static long steelTierFluidCapacity = 3000;
 
     @ConfigEntry(
         id = "deshTierFluidCapacity",
         type = EntryType.LONG,
         translation = "config.ad_astra.deshTierFluidCapacity"
     )
-    public static long deshTierFluidCapacity = 5;
+    public static long deshTierFluidCapacity = 5000;
 
     @ConfigEntry(
         id = "ostrumTierFluidCapacity",
         type = EntryType.LONG,
         translation = "config.ad_astra.ostrumTierFluidCapacity"
     )
-    public static long ostrumTierFluidCapacity = 10;
+    public static long ostrumTierFluidCapacity = 10_000;
 
 
     @ConfigEntry(
@@ -113,10 +113,10 @@ public final class MachineConfig {
 
     @ConfigEntry(
         id = "waterPumpFluidGenerationPerTick",
-        type = EntryType.DOUBLE,
+        type = EntryType.LONG,
         translation = "config.ad_astra.waterPumpFluidGenerationPerTick"
     )
-    public static double waterPumpFluidGenerationPerTick = 0.05;
+    public static long waterPumpFluidGenerationPerTick = 50;
 
     @ConfigEntry(
         id = "energizerEnergyCapacity",

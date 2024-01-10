@@ -41,7 +41,7 @@ public class RoverItem extends VehicleItem {
         if (vehicle instanceof Rover rover) {
             ItemStackHolder holder = new ItemStackHolder(stack);
             var fluidContainer = getFluidContainer(stack).container();
-            FluidApi.moveFluid(FluidApi.getItemFluidContainer(holder), rover.fluidContainer(), fluidContainer.getFluids().get(0), false);
+            FluidApi.moveFluid(FluidApi.getItemFluidContainer(holder), rover.fluidContainer(), fluidContainer.getFirstFluid(), false);
         }
 
         stack.shrink(1);

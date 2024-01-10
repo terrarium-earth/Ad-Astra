@@ -7,7 +7,6 @@ import earth.terrarium.botarium.common.fluid.impl.ExtractOnlyFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.InsertOnlyFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.nbt.CompoundTag;
 
 import java.util.List;
@@ -42,13 +41,13 @@ public record BiFluidContainer(SimpleFluidContainer input, SimpleFluidContainer 
 
     @Override
     public FluidHolder extractFluid(FluidHolder fluid, boolean simulate) {
-        if (fluid.isEmpty()) return FluidHooks.emptyFluid();
+        if (fluid.isEmpty()) return FluidHolder.empty();
         return output.extractFluid(fluid, simulate);
     }
 
     @Override
     public FluidHolder internalExtract(FluidHolder fluid, boolean simulate) {
-        if (fluid.isEmpty()) return FluidHooks.emptyFluid();
+        if (fluid.isEmpty()) return FluidHolder.empty();
         return input.internalExtract(fluid, simulate);
     }
 

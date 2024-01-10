@@ -5,8 +5,8 @@
   "ingredient": {
     "item": "minecraft:blue_ice"
   },
-  "result_fluid": {
-    "buckets": 0.01,
-    "fluid": "ad_astra:cryo_fuel"
+  "result": {
+    "fluid": "ad_astra:cryo_fuel",
+    "millibuckets": 10
   }
 }

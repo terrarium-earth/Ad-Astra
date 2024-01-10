@@ -2,12 +2,14 @@
   "type": "ad_astra:oxygen_loading",
   "cookingtime": 1,
   "energy": 30,
-  "ingredient": {
-    "buckets": 0.025,
-    "fluid": "ad_astra:oxygen"
+  "input": {
+    "ingredient": {
+      "tag": "ad_astra:oxygen"
+    },
+    "millibuckets": 25
   },
-  "result_fluid": {
-    "buckets": 0.025,
-    "fluid": "ad_astra:oxygen"
+  "result": {
+    "fluid": "ad_astra:oxygen",
+    "millibuckets": 25
   }
 }

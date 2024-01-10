@@ -26,13 +26,13 @@ public class CryoFreezingRecipeBuilder implements RecipeBuilder {
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
     private final Ingredient ingredient;
-    private final FluidHolder resultFluid;
+    private final FluidHolder result;
     private int cookingtime = 2;
     private int energy = 30;
 
-    public CryoFreezingRecipeBuilder(Ingredient ingredient, FluidHolder resultFluid) {
+    public CryoFreezingRecipeBuilder(Ingredient ingredient, FluidHolder result) {
         this.ingredient = ingredient;
-        this.resultFluid = resultFluid;
+        this.result = result;
     }
 
     public CryoFreezingRecipeBuilder cookingTime(int cookingtime) {
@@ -70,7 +70,7 @@ public class CryoFreezingRecipeBuilder implements RecipeBuilder {
 
         finishedRecipeConsumer.accept(new Result(
             recipeId, this.ingredient,
-            this.resultFluid,
+            this.result,
             this.cookingtime, this.energy,
             this.advancement, new ResourceLocation(recipeId.getNamespace(), "recipes/cryo_freezing/" + recipeId.getPath()))
         );
@@ -79,7 +79,7 @@ public class CryoFreezingRecipeBuilder implements RecipeBuilder {
     public record Result(
         ResourceLocation id,
         Ingredient ingredient,
-        FluidHolder resultFluid,
+        FluidHolder result,
         int cookingtime, int energy,
         Advancement.Builder advancement, ResourceLocation advancementId
     ) implements FinishedRecipe {
@@ -87,7 +87,7 @@ public class CryoFreezingRecipeBuilder implements RecipeBuilder {
         @Override
         public void serializeRecipeData(@NotNull JsonObject json) {
             CryoFreezingRecipe.codec(id)
-                .encodeStart(JsonOps.INSTANCE, new CryoFreezingRecipe(id, cookingtime, energy, ingredient, resultFluid))
+                .encodeStart(JsonOps.INSTANCE, new CryoFreezingRecipe(id, cookingtime, energy, ingredient, result))
                 .resultOrPartial(Constants.LOGGER::error)
                 .ifPresent(out ->
                     out.getAsJsonObject().entrySet().forEach(entry -> json.add(entry.getKey(), entry.getValue()))

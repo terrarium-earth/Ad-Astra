@@ -45,12 +45,7 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new ExtractOnlyEnergyContainer(MachineConfig.deshTierEnergyCapacity) {
-                @Override
-                public long maxExtract() {
-                    return MachineConfig.deshTierMaxEnergyInOut;
-                }
-            });
+            new ExtractOnlyEnergyContainer(MachineConfig.deshTierEnergyCapacity, MachineConfig.deshTierMaxEnergyInOut));
     }
 
     @Override

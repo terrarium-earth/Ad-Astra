@@ -2,8 +2,8 @@ package earth.terrarium.adastra.common.entities.mob;
 
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
 import earth.terrarium.botarium.common.fluid.FluidApi;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.AreaEffectCloud;
@@ -46,8 +46,8 @@ public class SulfurCreeper extends Creeper {
                 ItemStackHolder holder = new ItemStackHolder(stack);
                 if (!FluidApi.isFluidContainingItem(stack)) continue;
                 FluidContainer fluidContainer = FluidApi.getItemFluidContainer(holder);
-                long amount = Math.max(0, (long) ((7 - player.getPosition(0).distanceTo(player.getPosition(0))) * (FluidHooks.buckets(1f) / 8)));
-                fluidContainer.extractFluid(fluidContainer.getFluids().get(0).copyWithAmount(amount), false);
+                long amount = Math.max(0, (long) ((7 - player.getPosition(0).distanceTo(player.getPosition(0))) * (FluidConstants.fromMillibuckets(125))));
+                fluidContainer.extractFluid(fluidContainer.getFirstFluid().copyWithAmount(amount), false);
                 player.setItemSlot(EquipmentSlot.CHEST, holder.getStack());
             }
         }

@@ -3,7 +3,6 @@ package earth.terrarium.adastra.common.compat.jei.drawables;
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import mezz.jei.api.gui.drawable.IDrawable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -53,7 +52,7 @@ public class FluidBarDrawable implements IDrawable {
             mouseY,
             xOffset,
             yOffset,
-            FluidHooks.newFluidHolder(fluid, fluidAmount, null),
+            FluidHolder.ofMillibuckets(fluid, fluidAmount),
             capacity,
             TooltipUtils.getTicksPerIterationComponent(cookTime),
             gain ? TooltipUtils.getFluidGenerationPerIterationComponent(perTick) : TooltipUtils.getFluidUsePerIterationComponent(perTick)

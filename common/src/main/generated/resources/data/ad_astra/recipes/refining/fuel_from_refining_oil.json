@@ -2,12 +2,14 @@
   "type": "ad_astra:refining",
   "cookingtime": 1,
   "energy": 30,
-  "ingredient": {
-    "buckets": 0.005,
-    "fluid": "ad_astra:oil"
+  "input": {
+    "ingredient": {
+      "tag": "ad_astra:oil"
+    },
+    "millibuckets": 5
   },
-  "result_fluid": {
-    "buckets": 0.005,
-    "fluid": "ad_astra:fuel"
+  "result": {
+    "fluid": "ad_astra:fuel",
+    "millibuckets": 5
   }
 }

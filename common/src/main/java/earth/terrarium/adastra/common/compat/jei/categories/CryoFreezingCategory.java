@@ -10,7 +10,7 @@ import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.recipes.machines.CryoFreezingRecipe;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -57,7 +57,7 @@ public class CryoFreezingCategory implements IRecipeCategory<CryoFreezingRecipe>
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, CryoFreezingRecipe recipe, IFocusGroup focuses) {
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredients(Ingredient.of(ModItems.CRYO_FREEZER.get()));
-        builder.addSlot(RecipeIngredientRole.INPUT, 27, 66).addIngredients(recipe.ingredient());
+        builder.addSlot(RecipeIngredientRole.INPUT, 27, 66).addIngredients(recipe.input());
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 114, 38);
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 114, 66);
     }
@@ -71,7 +71,7 @@ public class CryoFreezingCategory implements IRecipeCategory<CryoFreezingRecipe>
 
         new EtaDrawable(mouseX, mouseY, recipe.cookingTime(), GuiUtils.SNOWFLAKE, 13, 13).draw(graphics, 55, 67);
         int cookTime = recipe.cookingTime();
-        long capacity = FluidHooks.buckets(6);
-        new FluidBarDrawable(mouseX, mouseY, true, capacity, cookTime, recipe.resultFluid()).draw(graphics, 81, 65);
+        long capacity = FluidConstants.fromMillibuckets(MachineConfig.ostrumTierFluidCapacity);
+        new FluidBarDrawable(mouseX, mouseY, true, capacity, cookTime, recipe.result()).draw(graphics, 81, 65);
     }
 }

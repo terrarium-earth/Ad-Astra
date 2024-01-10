@@ -9,7 +9,7 @@ import earth.terrarium.adastra.common.compat.rei.widgets.EtaWidget;
 import earth.terrarium.adastra.common.compat.rei.widgets.FluidBarWidget;
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.registry.ModBlocks;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -66,8 +66,8 @@ public class CryoFreezingCategory implements DisplayCategory<CryoFreezingDisplay
 
         widgets.add(new EtaWidget(new Point(bounds.x + 54, bounds.y + 71), display.recipe().cookingTime(), GuiUtils.SNOWFLAKE, 13, 13));
         int cookTime = display.recipe().cookingTime();
-        long capacity = FluidHooks.buckets(6);
-        widgets.add(new FluidBarWidget(new Point(bounds.x + 80, bounds.y + 69), true, capacity, cookTime, display.recipe().resultFluid()));
+        long capacity = FluidConstants.fromMillibuckets(MachineConfig.ostrumTierFluidCapacity);
+        widgets.add(new FluidBarWidget(new Point(bounds.x + 80, bounds.y + 69), true, capacity, cookTime, display.recipe().result()));
 
         return widgets;
     }

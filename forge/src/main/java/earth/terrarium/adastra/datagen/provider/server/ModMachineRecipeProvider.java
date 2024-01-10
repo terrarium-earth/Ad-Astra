@@ -5,15 +5,18 @@ import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.recipes.base.IngredientHolder;
 import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.registry.ModItems;
+import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.tags.ModItemTags;
 import earth.terrarium.adastra.datagen.builder.*;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import earth.terrarium.botarium.common.fluid.utils.FluidIngredient;
+import earth.terrarium.botarium.common.fluid.utils.QuantifiedFluidIngredient;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -21,7 +24,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
@@ -54,38 +56,35 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
         );
 
         createOxygenLoading(writer, 1, 30,
-            FluidHooks.newFluidHolder(Fluids.WATER, 100, null),
-            FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), 4, null)
-        );
+            new QuantifiedFluidIngredient(FluidIngredient.of(FluidTags.WATER), 100),
+            FluidHolder.ofMillibuckets(ModFluids.OXYGEN.get(), 4), "water");
 
         createOxygenLoading(writer, 1, 30,
-            FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), 25, null),
-            FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), 25, null)
-        );
+            new QuantifiedFluidIngredient(FluidIngredient.of(ModFluidTags.OXYGEN), 25),
+            FluidHolder.ofMillibuckets(ModFluids.OXYGEN.get(), 25), "oxygen");
 
         createRefining(writer, 1, 30,
-            FluidHooks.newFluidHolder(ModFluids.OIL.get(), 5, null),
-            FluidHooks.newFluidHolder(ModFluids.FUEL.get(), 5, null)
-        );
+            new QuantifiedFluidIngredient(FluidIngredient.of(ModFluidTags.OIL), 5),
+            FluidHolder.ofMillibuckets(ModFluids.FUEL.get(), 5), "oil");
 
         createCryoFreezing(writer, 60, 40,
             ModItems.ICE_SHARD.get().getDefaultInstance(),
-            FluidHooks.newFluidHolder(ModFluids.CRYO_FUEL.get(), 25, null)
+            FluidHolder.ofMillibuckets(ModFluids.CRYO_FUEL.get(), 25)
         );
 
         createCryoFreezing(writer, 120, 40,
             Items.ICE.getDefaultInstance(),
-            FluidHooks.newFluidHolder(ModFluids.CRYO_FUEL.get(), 1, null)
+            FluidHolder.ofMillibuckets(ModFluids.CRYO_FUEL.get(), 1)
         );
 
         createCryoFreezing(writer, 120, 40,
             Items.PACKED_ICE.getDefaultInstance(),
-            FluidHooks.newFluidHolder(ModFluids.CRYO_FUEL.get(), 2, null)
+            FluidHolder.ofMillibuckets(ModFluids.CRYO_FUEL.get(), 2)
         );
 
         createCryoFreezing(writer, 120, 40,
             Items.BLUE_ICE.getDefaultInstance(),
-            FluidHooks.newFluidHolder(ModFluids.CRYO_FUEL.get(), 10, null)
+            FluidHolder.ofMillibuckets(ModFluids.CRYO_FUEL.get(), 10)
         );
 
         createNasaWorkbench(writer, List.of(
@@ -254,24 +253,22 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
         ));
     }
 
-    public static void createOxygenLoading(Consumer<FinishedRecipe> writer, int cookingtime, int energy, FluidHolder ingredient, FluidHolder resultFluid) {
-        ResourceLocation ingredientId = Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(ingredient.getFluid()));
+    public static void createOxygenLoading(Consumer<FinishedRecipe> writer, int cookingtime, int energy, QuantifiedFluidIngredient ingredient, FluidHolder resultFluid, String name) {
         ResourceLocation resultFluidId = Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(resultFluid.getFluid()));
 
         var builder = new OxygenLoadingRecipeBuilder(ingredient, resultFluid)
             .cookingTime(cookingtime)
             .energy(energy);
-        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "oxygen_loading/%s_from_oxygen_loading_%s".formatted(resultFluidId.getPath(), ingredientId.getPath())));
+        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "oxygen_loading/%s_from_oxygen_loading_%s".formatted(resultFluidId.getPath(), name)));
     }
 
-    public static void createRefining(Consumer<FinishedRecipe> writer, int cookingtime, int energy, FluidHolder ingredient, FluidHolder resultFluid) {
-        ResourceLocation ingredientId = Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(ingredient.getFluid()));
+    public static void createRefining(Consumer<FinishedRecipe> writer, int cookingtime, int energy, QuantifiedFluidIngredient ingredient, FluidHolder resultFluid, String name) {
         ResourceLocation resultFluidId = Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(resultFluid.getFluid()));
 
         var builder = new RefiningRecipeBuilder(ingredient, resultFluid)
             .cookingTime(cookingtime)
             .energy(energy);
-        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "refining/%s_from_refining_%s".formatted(resultFluidId.getPath(), ingredientId.getPath())));
+        builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "refining/%s_from_refining_%s".formatted(resultFluidId.getPath(), name)));
     }
 
     public static void createCryoFreezing(Consumer<FinishedRecipe> writer, int cookingtime, int energy, ItemStack ingredient, FluidHolder resultFluid) {
