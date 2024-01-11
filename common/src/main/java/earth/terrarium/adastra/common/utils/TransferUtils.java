@@ -20,7 +20,7 @@ import java.util.function.Predicate;
 public class TransferUtils {
 
     public static void pushEnergyNearby(ContainerMachineBlockEntity machine, BlockPos pos, long amount, ConfigurationEntry sideConfig, Predicate<Direction> filter) {
-        EnergyContainer container = EnergyApi.getBlockEnergyContainer(machine, null);
+        EnergyContainer container = EnergyContainer.of(machine, null);
         if (container == null) return;
         if (container.getStoredEnergy() == 0) return;
 
@@ -31,14 +31,14 @@ public class TransferUtils {
             if (!filter.test(direction)) continue;
             BlockEntity nearbyEntity = machine.level().getBlockEntity(pos.relative(direction));
             if (nearbyEntity == null) continue;
-            EnergyContainer nearbyContainer = EnergyApi.getBlockEnergyContainer(nearbyEntity, direction);
+            EnergyContainer nearbyContainer = EnergyContainer.of(nearbyEntity, direction);
             if (nearbyContainer == null) continue;
             EnergyApi.moveEnergy(container, nearbyContainer, amount, false);
         }
     }
 
     public static void pullEnergyNearby(ContainerMachineBlockEntity machine, BlockPos pos, long amount, ConfigurationEntry sideConfig, Predicate<Direction> filter) {
-        EnergyContainer container = EnergyApi.getBlockEnergyContainer(machine, null);
+        EnergyContainer container = EnergyContainer.of(machine, null);
         if (container == null) return;
 
         for (var entry : sideConfig.sides().entrySet()) {
@@ -48,7 +48,7 @@ public class TransferUtils {
             if (!filter.test(direction)) continue;
             BlockEntity nearbyEntity = machine.level().getBlockEntity(pos.relative(direction));
             if (nearbyEntity == null) continue;
-            EnergyContainer nearbyContainer = EnergyApi.getBlockEnergyContainer(nearbyEntity, direction);
+            EnergyContainer nearbyContainer = EnergyContainer.of(nearbyEntity, direction);
             if (nearbyContainer == null) continue;
             EnergyApi.moveEnergy(nearbyContainer, container, amount, false);
         }
@@ -64,8 +64,8 @@ public class TransferUtils {
             if (!filter.test(direction)) continue;
             BlockEntity nearbyEntity = machine.level().getBlockEntity(pos.relative(direction));
             if (nearbyEntity == null) continue;
-            if (!FluidApi.isFluidContainingBlock(nearbyEntity, direction)) continue;
-            FluidContainer nearbyContainer = FluidApi.getBlockFluidContainer(nearbyEntity, direction);
+            if (!FluidContainer.holdsFluid(nearbyEntity, direction)) continue;
+            FluidContainer nearbyContainer = FluidContainer.of(nearbyEntity, direction);
             if (nearbyContainer == null) continue;
             FluidHolder holder = container.getFluids().get(tank);
             if (holder.isEmpty()) continue;
@@ -83,8 +83,8 @@ public class TransferUtils {
             if (!filter.test(direction)) continue;
             BlockEntity nearbyEntity = machine.level().getBlockEntity(pos.relative(direction));
             if (nearbyEntity == null) continue;
-            if (!FluidApi.isFluidContainingBlock(nearbyEntity, direction)) continue;
-            FluidContainer nearbyContainer = FluidApi.getBlockFluidContainer(nearbyEntity, direction);
+            if (!FluidContainer.holdsFluid(nearbyEntity, direction)) continue;
+            FluidContainer nearbyContainer = FluidContainer.of(nearbyEntity, direction);
             if (nearbyContainer == null) continue;
             FluidHolder holder = nearbyContainer.getFluids().get(tank);
             if (holder.isEmpty()) continue;

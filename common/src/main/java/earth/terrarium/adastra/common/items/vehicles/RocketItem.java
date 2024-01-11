@@ -7,6 +7,7 @@ import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.tags.ModBlockTags;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.fluid.FluidApi;
+import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -49,8 +50,10 @@ public class RocketItem extends VehicleItem {
 
         if (vehicle instanceof Rocket rocket) {
             ItemStackHolder holder = new ItemStackHolder(stack);
-            var fluidContainer = getFluidContainer(stack).container();
-            FluidApi.moveFluid(FluidApi.getItemFluidContainer(holder), rocket.fluidContainer(), fluidContainer.getFirstFluid(), false);
+            var container = getFluidContainer(stack).container();
+            var fromContainer = FluidContainer.of(holder);
+            if (fromContainer == null) return InteractionResult.PASS;
+            FluidApi.moveFluid(fromContainer, rocket.fluidContainer(), container.getFirstFluid(), false);
         }
 
         stack.shrink(1);

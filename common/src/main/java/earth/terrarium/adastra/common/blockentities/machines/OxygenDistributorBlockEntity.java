@@ -111,7 +111,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
 
         long fluidPerTick = calculateFluidPerTick();
         boolean canDistribute = canCraftDistribution(Math.max(FluidConstants.fromMillibuckets(1), fluidPerTick));
-        if (canFunction() && canDistribute) { // TODO TEST
+        if (canFunction() && canDistribute) {
             getEnergyStorage().internalExtract(calculateEnergyPerTick(), false);
             setLit(true);
             accumulatedFluid += fluidPerTick;

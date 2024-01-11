@@ -3,7 +3,6 @@ package earth.terrarium.adastra.common.items.machines;
 import earth.terrarium.adastra.common.blockentities.machines.EnergizerBlockEntity;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyItem;
 import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
@@ -37,7 +36,7 @@ public class EnergizerBlockItem extends BlockItem implements BotariumEnergyItem<
         }
 
         ItemStackHolder holder = new ItemStackHolder(stack);
-        EnergyContainer itemEnergyContainer = EnergyApi.getItemEnergyContainer(holder);
+        EnergyContainer itemEnergyContainer = EnergyContainer.of(holder);
         if (itemEnergyContainer == null) return super.updateCustomBlockEntityTag(pos, level, player, stack, state);
         entity.getEnergyStorage().setEnergy(itemEnergyContainer.getStoredEnergy());
         entity.onEnergyChange();

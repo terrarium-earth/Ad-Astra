@@ -134,10 +134,6 @@ public class PlanetsMenu extends AbstractContainerMenu {
         return false;
     }
 
-    public List<Pair<String, SpaceStation>> getOwnedSpaceStations(ResourceKey<Level> dimension) {
-        return getOwnedSpaceStations(dimension, player.getGameProfile());
-    }
-
     public List<Pair<String, SpaceStation>> getOwnedSpaceStations(ResourceKey<Level> dimension, GameProfile player) {
         var allStations = spaceStations.get(dimension);
         if (allStations == null) return List.of();

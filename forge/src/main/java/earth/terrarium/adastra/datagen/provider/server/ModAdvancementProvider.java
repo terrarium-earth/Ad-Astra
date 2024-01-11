@@ -7,10 +7,7 @@ import earth.terrarium.adastra.common.registry.ModItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.FrameType;
-import net.minecraft.advancements.critereon.ChangeDimensionTrigger;
-import net.minecraft.advancements.critereon.FilledBucketTrigger;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
@@ -174,7 +171,7 @@ public class ModAdvancementProvider extends ForgeAdvancementProvider {
                     true,
                     false
                 )
-                .addCriterion("has_zip_gun", hasItem(ModItems.ZIP_GUN.get()))
+                .addCriterion("has_zip_gun", new UsingItemTrigger.TriggerInstance(ContextAwarePredicate.ANY, ItemPredicate.Builder.item().of(ModItems.ZIP_GUN.get()).build()))
                 .save(consumer, path("zip_gun"));
 
             Advancement ti69 = Advancement.Builder.advancement()

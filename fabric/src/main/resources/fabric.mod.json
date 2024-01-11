@@ -50,6 +50,6 @@
         "java": ">=17",
         "resourcefullib": ">=2.1.20",
         "resourcefulconfig": ">=2.1.0",
-        "botarium": ">=2.2.0"
+        "botarium": ">=2.3.0"
     }
 }

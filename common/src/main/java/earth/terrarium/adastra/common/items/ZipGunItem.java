@@ -8,9 +8,9 @@ import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.fluid.FluidApi;
 import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidItem;
+import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedItemFluidContainer;
@@ -111,7 +111,8 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
         if (player.isCreative()) return true;
         if (!(stack.getItem() instanceof ZipGunItem)) return false;
         ItemStackHolder holder = new ItemStackHolder(stack);
-        var container = FluidApi.getItemFluidContainer(holder);
+        var container = FluidContainer.of(holder);
+        if (container == null) return false;
         FluidHolder extracted = container.extractFluid(FluidHolder.ofMillibuckets(container.getFirstFluid().getFluid(), FluidConstants.fromMillibuckets(amount)), false);
         stack.setTag(holder.getStack().getTag());
         return extracted.getFluidAmount() > 0;
@@ -131,13 +132,13 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
         return new WrappedItemFluidContainer(
             holder,
             new SimpleFluidContainer(
-                getCapacity(holder),
+                getCapacity(),
                 1,
                 (t, f) -> f.is(ModFluidTags.ZIP_GUN_PROPELLANTS)) {
             });
     }
 
-    public long getCapacity(ItemStack stack) {
+    public long getCapacity() {
         return FluidConstants.fromMillibuckets(3000);
     }
 

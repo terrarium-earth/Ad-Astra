@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-09T01:00:03.440378	Advancements
+// 1.20.1	2024-01-11T11:19:23.046168	Advancements
 350895c5d0b25543274bb9eb9d8692b22c2f2018 data/ad_astra/advancements/ad_astra.json
 02892004e6c0e50d27eb7b24aeeb7b06327224b0 data/ad_astra/advancements/astronaut.json
 affd8def4960d2e2d7ff0be3bb1a0e31240a6802 data/ad_astra/advancements/carbon_footprint.json
@@ -27,4 +27,4 @@ a1aac37e6c9a04d599dc3e849c898f72be608f62 data/ad_astra/advancements/tier_3_rocke
 8a00892dd606b1601f8908aef06afd0979598d60 data/ad_astra/advancements/tier_4_rocket.json
 517ce129862000eed204e83373eca53b7792ae61 data/ad_astra/advancements/under_pressure.json
 69eb1b37c8c63a771a97c7c2dc1ee47cd44ea2c1 data/ad_astra/advancements/venus.json
-9912e5d9a367cecf27696e2b9760f3636734010b data/ad_astra/advancements/zip_gun.json
+dd87da1f264cd0be1e858466ca70406c114d146c data/ad_astra/advancements/zip_gun.json

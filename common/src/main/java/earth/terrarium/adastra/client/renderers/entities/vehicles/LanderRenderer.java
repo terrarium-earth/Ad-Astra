@@ -21,7 +21,7 @@ public class LanderRenderer extends EntityRenderer<Lander> {
 
     protected final EntityModel<Lander> model;
 
-    public LanderRenderer(EntityRendererProvider.Context context, ModelLayerLocation layer, ResourceLocation texture) {
+    public LanderRenderer(EntityRendererProvider.Context context, ModelLayerLocation layer) {
         super(context);
         this.shadowRadius = 0.5f;
         this.model = new LanderModel(context.bakeLayer(layer));

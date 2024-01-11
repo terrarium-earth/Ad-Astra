@@ -3,15 +3,13 @@
   "criteria": {
     "has_zip_gun": {
       "conditions": {
-        "items": [
-          {
-            "items": [
-              "ad_astra:zip_gun"
-            ]
-          }
-        ]
+        "item": {
+          "items": [
+            "ad_astra:zip_gun"
+          ]
+        }
       },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "minecraft:using_item"
     }
   },
   "display": {

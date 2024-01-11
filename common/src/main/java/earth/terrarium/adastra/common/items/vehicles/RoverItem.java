@@ -4,6 +4,7 @@ import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.entities.vehicles.Rover;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.fluid.FluidApi;
+import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -40,8 +41,10 @@ public class RoverItem extends VehicleItem {
 
         if (vehicle instanceof Rover rover) {
             ItemStackHolder holder = new ItemStackHolder(stack);
-            var fluidContainer = getFluidContainer(stack).container();
-            FluidApi.moveFluid(FluidApi.getItemFluidContainer(holder), rover.fluidContainer(), fluidContainer.getFirstFluid(), false);
+            var container = getFluidContainer(stack).container();
+            var fromContainer = FluidContainer.of(holder);
+            if (fromContainer == null) return InteractionResult.PASS;
+            FluidApi.moveFluid(fromContainer, rover.fluidContainer(), container.getFirstFluid(), false);
         }
 
         stack.shrink(1);

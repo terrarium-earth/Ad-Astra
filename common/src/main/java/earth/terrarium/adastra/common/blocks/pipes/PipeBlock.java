@@ -7,9 +7,9 @@ import earth.terrarium.adastra.common.blocks.properties.PipeProperty;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.registry.ModSoundEvents;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.energy.EnergyApi;
-import earth.terrarium.botarium.common.fluid.FluidApi;
+import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.fluid.FluidConstants;
+import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -206,9 +206,9 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
         if (entity == null) return false;
 
         if (type == Type.ENERGY) {
-            return EnergyApi.isEnergyBlock(entity, direction.getOpposite());
+            return EnergyContainer.holdsEnergy(entity, direction.getOpposite());
         } else if (type == Type.FLUID) {
-            return FluidApi.isFluidContainingBlock(entity, direction.getOpposite());
+            return FluidContainer.holdsFluid(entity, direction.getOpposite());
         }
         return false;
     }

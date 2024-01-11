@@ -18,7 +18,9 @@ public class FluidUtils {
     }
 
     public static FluidHolder getTank(ItemStack stack, int tank) {
-        return FluidApi.getItemFluidContainer(new ItemStackHolder(stack)).getFluids().get(tank);
+        var container = FluidContainer.of(new ItemStackHolder(stack));
+        if (container == null) return FluidHolder.empty();
+        return container.getFluids().get(tank);
     }
 
     public static boolean hasFluid(ItemStack stack) {
@@ -29,41 +31,20 @@ public class FluidUtils {
         return !getTank(stack, tank).isEmpty();
     }
 
-    public static Fluid getFluid(ItemStack stack) {
-        return getFluid(stack, 0);
-    }
-
-    public static Fluid getFluid(ItemStack stack, int tank) {
-        return getTank(stack, tank).getFluid();
-    }
-
-    public static long getFluidAmount(ItemStack stack) {
-        return getFluidAmount(stack, 0);
-    }
-
-    public static long getFluidAmount(ItemStack stack, int tank) {
-        return getTank(stack, tank).getFluidAmount();
-    }
-
     public static long getTankCapacity(ItemStack stack) {
         return getTankCapacity(stack, 0);
     }
 
     public static long getTankCapacity(ItemStack stack, int tank) {
-        return FluidApi.getItemFluidContainer(new ItemStackHolder(stack)).getTankCapacity(tank);
-    }
-
-    public static long insert(ItemStackHolder stack, FluidHolder fluid) {
-        return FluidApi.getItemFluidContainer(stack).insertFluid(fluid, false);
-    }
-
-    public static FluidHolder extract(ItemStackHolder stack, FluidHolder fluid) {
-        return FluidApi.getItemFluidContainer(stack).extractFluid(fluid, false);
+        var container = FluidContainer.of(new ItemStackHolder(stack));
+        if (container == null) return 0;
+        return container.getTankCapacity(tank);
     }
 
     public static ItemStack fluidFilledItem(RegistryEntry<Item> item, RegistryEntry<Fluid> fluid) {
         var stack = new ItemStackHolder(item.get().getDefaultInstance());
-        var container = FluidApi.getItemFluidContainer(stack);
+        var container = FluidContainer.of(stack);
+        if (container == null) return ItemStack.EMPTY;
         var holder = FluidHolder.ofMillibuckets(fluid.get(), container.getTankCapacity(0));
         container.insertFluid(holder, false);
         return stack.getStack();
@@ -81,12 +62,13 @@ public class FluidUtils {
     public static void moveItemToContainer(Container container, FluidContainer fluidContainer, int slot, int resultSlot, int tank) {
         var stack = container.getItem(slot);
         // Don't do anything if the stack is empty or doesn't contain a fluid container.
-        if (stack.isEmpty() || !FluidApi.isFluidContainingItem(stack)) return;
+        if (stack.isEmpty() || !FluidContainer.holdsFluid(stack)) return;
         var resultStack = container.getItem(resultSlot);
 
         // Get the fluid container from the item
         ItemStackHolder stackHolder = new ItemStackHolder(stack.copyWithCount(1));
-        FluidContainer itemFluidContainer = FluidApi.getItemFluidContainer(stackHolder);
+        FluidContainer itemFluidContainer = FluidContainer.of(stackHolder);
+        if (itemFluidContainer == null) return;
         FluidHolder amount = itemFluidContainer.getFluids().get(tank).copyHolder();
         if (amount.isEmpty()) return;
 
@@ -125,12 +107,13 @@ public class FluidUtils {
     public static void moveContainerToItem(Container container, FluidContainer fluidContainer, int slot, int resultSlot, int tank) {
         var stack = container.getItem(slot);
         // Don't do anything if the stack is empty or doesn't contain a fluid container.
-        if (stack.isEmpty() || !FluidApi.isFluidContainingItem(stack)) return;
+        if (stack.isEmpty() || !FluidContainer.holdsFluid(stack)) return;
         var resultStack = container.getItem(resultSlot);
 
         // Get the fluid container from the item
         ItemStackHolder stackHolder = new ItemStackHolder(stack.copyWithCount(1));
-        ItemFluidContainer itemFluidContainer = FluidApi.getItemFluidContainer(stackHolder);
+        ItemFluidContainer itemFluidContainer = FluidContainer.of(stackHolder);
+        if (itemFluidContainer == null) return;
         FluidHolder amount = fluidContainer.getFluids().get(tank).copyHolder();
         if (amount.isEmpty()) return;
 
@@ -165,7 +148,8 @@ public class FluidUtils {
      */
     public static ItemStack getFilledStack(ItemStackHolder emptyStack, FluidHolder amount) {
         var copy = emptyStack.copy();
-        var container = FluidApi.getItemFluidContainer(copy);
+        var container = FluidContainer.of(copy);
+        if (container == null) return ItemStack.EMPTY;
         container.insertFluid(amount, false);
         return copy.getStack();
     }
@@ -179,7 +163,8 @@ public class FluidUtils {
      */
     public static ItemStack getEmptyStack(ItemStackHolder filledStack, FluidHolder amount) {
         var copy = filledStack.copy();
-        var container = FluidApi.getItemFluidContainer(copy);
+        var container = FluidContainer.of(copy);
+        if (container == null) return ItemStack.EMPTY;
         container.extractFluid(amount, false);
         return copy.getStack();
     }

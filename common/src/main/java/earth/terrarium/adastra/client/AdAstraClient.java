@@ -116,7 +116,7 @@ public class AdAstraClient {
         ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_2_ROCKET, c -> new RocketRenderer(c, RocketModel.TIER_2_LAYER, RocketRenderer.TIER_2_TEXTURE));
         ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_3_ROCKET, c -> new RocketRenderer(c, RocketModel.TIER_3_LAYER, RocketRenderer.TIER_3_TEXTURE));
         ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_4_ROCKET, c -> new RocketRenderer(c, RocketModel.TIER_4_LAYER, RocketRenderer.TIER_4_TEXTURE));
-        ClientHooks.registerEntityRenderer(ModEntityTypes.LANDER, c -> new LanderRenderer(c, LanderModel.LAYER, LanderRenderer.TEXTURE));
+        ClientHooks.registerEntityRenderer(ModEntityTypes.LANDER, c -> new LanderRenderer(c, LanderModel.LAYER));
 
         ClientHooks.registerEntityRenderer(ModEntityTypes.LUNARIAN, LunarianRenderer::new);
         ClientHooks.registerEntityRenderer(ModEntityTypes.CORRUPTED_LUNARIAN, CorruptedLunarianRenderer::new);

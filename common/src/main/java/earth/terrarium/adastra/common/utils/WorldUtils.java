@@ -31,12 +31,8 @@ import com.teamresourceful.resourcefullib.common.lib.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 public final class WorldUtils {
 
@@ -76,17 +72,5 @@ public final class WorldUtils {
     @Contract("_, null, _ -> null")
     public static <T extends BlockEntity> T getTileEntity(Class<T> clazz, @Nullable Level world, BlockPos pos) {
         return getTileEntity(clazz, world, pos, false);
-    }
-
-    @Nullable
-    @Contract("_, _, _ -> null")
-    public static <T extends BlockEntity> T getTileEntity(Class<T> clazz, Supplier<@Nullable Level> input, BlockPos pos) {
-        return getTileEntity(clazz, input.get(), pos, false);
-    }
-
-    // This method was added by Team Resourceful and is under the MIT license
-    @Contract("null, _, _ -> false")
-    public static boolean checkBlock(@Nullable Level level, BlockPos pos, Predicate<BlockState> statePredicate) {
-        return isBlockLoaded(level, pos) && statePredicate.test(level.getBlockState(pos));
     }
 }

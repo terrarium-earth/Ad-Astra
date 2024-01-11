@@ -2,6 +2,7 @@ package earth.terrarium.adastra.common.blockentities.base;
 
 import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
+import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
@@ -32,7 +33,7 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
     public void extractBatterySlot() {
         ItemStack stack = this.getItem(0);
         if (stack.isEmpty()) return;
-        if (!EnergyApi.isEnergyItem(stack)) return;
+        if (!EnergyContainer.holdsEnergy(stack)) return;
         ItemStackHolder holder = new ItemStackHolder(stack);
         EnergyApi.moveEnergy(holder, this, null, energyContainer.maxInsert(), false);
         if (holder.isDirty()) {
@@ -43,7 +44,7 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
     public void insertBatterySlot() {
         ItemStack stack = this.getItem(0);
         if (stack.isEmpty()) return;
-        if (!EnergyApi.isEnergyItem(stack)) return;
+        if (!EnergyContainer.holdsEnergy(stack)) return;
         ItemStackHolder holder = new ItemStackHolder(stack);
         EnergyApi.moveEnergy(this, null, holder, energyContainer.maxExtract(), false);
         if (holder.isDirty()) {

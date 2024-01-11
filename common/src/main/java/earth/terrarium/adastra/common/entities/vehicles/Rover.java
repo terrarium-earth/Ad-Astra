@@ -109,7 +109,9 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     @Override
     public ItemStack getDropStack() {
         ItemStackHolder stack = new ItemStackHolder(ModItems.ROVER.get().getDefaultInstance());
-        FluidApi.moveFluid(fluidContainer, FluidApi.getItemFluidContainer(stack), fluidContainer.getFirstFluid(), false);
+        var container = FluidContainer.of(stack);
+        if (container == null) return stack.getStack();
+        FluidApi.moveFluid(fluidContainer, container, fluidContainer.getFirstFluid(), false);
         return stack.getStack();
     }
 

@@ -12,7 +12,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LevelEvent;
@@ -21,6 +20,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 
+@SuppressWarnings("deprecation")
 public class CryoFuelLiquidBlock extends BotariumLiquidBlock {
 
     public CryoFuelLiquidBlock(FluidData data, Properties properties) {
@@ -74,10 +74,4 @@ public class CryoFuelLiquidBlock extends BotariumLiquidBlock {
         }
         return true;
     }
-
-    private void fizz(LevelAccessor level, BlockPos pos) {
-        level.levelEvent(LevelEvent.LAVA_FIZZ, pos, 0);
-    }
-
-
 }

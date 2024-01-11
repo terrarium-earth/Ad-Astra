@@ -13,14 +13,6 @@ public class PressableImageButton extends ImageButton {
     @Nullable
     private ResourceLocation texture;
 
-    public PressableImageButton(int x, int y, int width, int height, int xTexStart, int yTexStart, ResourceLocation resourceLocation, OnPress onPress) {
-        super(x, y, width, height, xTexStart, yTexStart, resourceLocation, onPress);
-    }
-
-    public PressableImageButton(int x, int y, int width, int height, int xTexStart, int yTexStart, int yDiffTex, ResourceLocation resourceLocation, OnPress onPress) {
-        super(x, y, width, height, xTexStart, yTexStart, yDiffTex, resourceLocation, onPress);
-    }
-
     public PressableImageButton(int x, int y, int width, int height, int xTexStart, int yTexStart, int yDiffTex, ResourceLocation resourceLocation, int textureWidth, int textureHeight, OnPress onPress) {
         super(x, y, width, height, xTexStart, yTexStart, yDiffTex, resourceLocation, textureWidth, textureHeight, onPress);
     }

@@ -2,6 +2,7 @@ package earth.terrarium.adastra.common.blockentities.pipes;
 
 import earth.terrarium.adastra.common.blocks.properties.PipeProperty;
 import earth.terrarium.botarium.common.energy.EnergyApi;
+import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -17,7 +18,7 @@ public class CableBlockEntity extends PipeBlockEntity {
     @Override
     public void addNode(@NotNull BlockEntity entity, PipeProperty pipeProperty, Direction direction, BlockPos pos) {
         if (pipeProperty.isNone()) return;
-        var container = EnergyApi.getBlockEnergyContainer(entity, direction);
+        var container = EnergyContainer.of(entity, direction);
         if (container == null) return;
 
         if (!pipeProperty.isInsert() && (pipeProperty.isExtract() || container.extractEnergy(container.getStoredEnergy(), true) > 0)) {
@@ -29,15 +30,15 @@ public class CableBlockEntity extends PipeBlockEntity {
 
     @Override
     public void moveContents(long transferRate, @NotNull BlockEntity source, @NotNull BlockEntity consumer, Direction direction) {
-        var sourceContainer = EnergyApi.getBlockEnergyContainer(source, direction);
+        var sourceContainer = EnergyContainer.of(source, direction);
         if (sourceContainer == null) return;
-        var consumerContainer = EnergyApi.getBlockEnergyContainer(consumer, direction);
+        var consumerContainer = EnergyContainer.of(consumer, direction);
         if (consumerContainer == null) return;
         EnergyApi.moveEnergy(sourceContainer, consumerContainer, Math.min(transferRate, sourceContainer.getStoredEnergy()), false);
     }
 
     @Override
     public boolean isValid(@NotNull BlockEntity entity, Direction direction) {
-        return EnergyApi.isEnergyBlock(entity, direction.getOpposite());
+        return EnergyContainer.holdsEnergy(entity, direction.getOpposite());
     }
 }

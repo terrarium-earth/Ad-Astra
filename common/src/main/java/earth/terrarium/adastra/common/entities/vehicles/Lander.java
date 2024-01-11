@@ -169,10 +169,6 @@ public class Lander extends Vehicle {
         }
     }
 
-    public float speed() {
-        return speed;
-    }
-
     @Override
     public ItemStack getDropStack() {
         return ItemStack.EMPTY;

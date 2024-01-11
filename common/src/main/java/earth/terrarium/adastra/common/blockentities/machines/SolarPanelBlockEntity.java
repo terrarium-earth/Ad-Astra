@@ -10,6 +10,7 @@ import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.SolarPanelMenu;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.botarium.common.energy.EnergyApi;
+import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.ExtractOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
@@ -88,7 +89,7 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
     public void distributeToChargeSlots() {
         ItemStack stack = getItem(0);
         if (stack.isEmpty()) return;
-        if (!EnergyApi.isEnergyItem(stack)) return;
+        if (!EnergyContainer.holdsEnergy(stack)) return;
         ItemStackHolder holder = new ItemStackHolder(stack);
         EnergyApi.moveEnergy(this, null, holder, getEnergyStorage().maxExtract(), false);
         if (holder.isDirty()) {

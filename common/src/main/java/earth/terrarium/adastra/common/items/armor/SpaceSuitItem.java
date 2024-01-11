@@ -10,6 +10,7 @@ import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidItem;
+import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedItemFluidContainer;
@@ -100,7 +101,9 @@ public class SpaceSuitItem extends CustomDyeableArmorItem implements BotariumFlu
 
     public void consumeOxygen(ItemStack stack, long amount) {
         ItemStackHolder holder = new ItemStackHolder(stack);
-        FluidHolder extracted = FluidUtils.extract(holder, FluidHolder.ofMillibuckets(FluidUtils.getFluid(stack), FluidConstants.fromMillibuckets(amount)));
+        var container = FluidContainer.of(holder);
+        if (container == null) return;
+        FluidHolder extracted = container.extractFluid(container.getFirstFluid().copyWithAmount(FluidConstants.fromMillibuckets(amount)), false);
         if (holder.isDirty() || extracted.getFluidAmount() > 0) {
             stack.setTag(holder.getStack().getTag());
         }

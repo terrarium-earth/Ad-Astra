@@ -6,6 +6,7 @@ import earth.terrarium.adastra.common.utils.DistributionMode;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyItem;
+import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
@@ -158,7 +159,7 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
     public void distributeRoundRobin(ItemStackHolder stack, long maxExtract, List<ItemStack> items) {
         int energyItems = items
             .stream().
-            filter(EnergyApi::isEnergyItem)
+            filter(EnergyContainer::holdsEnergy)
             .filter(item -> !item.is(this))
             .mapToInt(ItemStack::getCount).sum();
         if (energyItems == 0) return;

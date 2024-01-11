@@ -44,6 +44,6 @@ side = "BOTH"
 [[dependencies.ad_astra]]
 modId = "botarium"
 mandatory = true
-versionRange = "[2.2.0,)"
+versionRange = "[2.3.0,)"
 ordering = "NONE"
 side = "BOTH"

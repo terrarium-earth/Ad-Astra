@@ -4,7 +4,6 @@ import earth.terrarium.adastra.common.blockentities.machines.EnergizerBlockEntit
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.botarium.Botarium;
-import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
@@ -77,7 +76,7 @@ public class EnergizerBlock extends MachineBlock {
         BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if (!(blockEntity instanceof EnergizerBlockEntity entity)) return super.getDrops(blockState, builder);
         ItemStackHolder stack = new ItemStackHolder(ModItems.ENERGIZER.get().getDefaultInstance());
-        EnergyContainer itemEnergyContainer = EnergyApi.getItemEnergyContainer(stack);
+        EnergyContainer itemEnergyContainer = EnergyContainer.of(stack);
         if (itemEnergyContainer == null) return super.getDrops(blockState, builder);
         itemEnergyContainer.setEnergy(entity.getEnergyStorage().getStoredEnergy());
         stack.getStack().getOrCreateTagElement(Botarium.BOTARIUM_DATA)

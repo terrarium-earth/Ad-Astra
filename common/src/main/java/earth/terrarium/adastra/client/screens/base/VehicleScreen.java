@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class VehicleScreen<T extends BaseEntityContainerMenu<U>, U extends Entity> extends AbstractContainerCursorScreen<T> {
     private final ResourceLocation texture;
 
-    protected U entity;
+    protected final U entity;
 
     public VehicleScreen(T menu, Inventory inventory, Component component, ResourceLocation texture, int width, int height) {
         super(menu, inventory, component);

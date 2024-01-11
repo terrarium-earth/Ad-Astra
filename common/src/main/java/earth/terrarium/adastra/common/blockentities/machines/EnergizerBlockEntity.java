@@ -10,6 +10,7 @@ import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.botarium.common.energy.EnergyApi;
+import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
@@ -29,7 +30,7 @@ import java.util.function.Predicate;
 
 public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
     public static final List<ConfigurationEntry> SIDE_CONFIG = List.of(
-        new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.NONE, ConstantComponents.SIDE_CONFIG_ENERGY)
+        new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.PUSH_PULL, ConstantComponents.SIDE_CONFIG_ENERGY)
     );
 
     public EnergizerBlockEntity(BlockPos pos, BlockState state) {
@@ -92,7 +93,7 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
     public void distributeToChargeSlot(ServerLevel level, BlockPos pos) {
         var stack = getItem(0);
         if (stack.isEmpty()) return;
-        if (!EnergyApi.isEnergyItem(stack)) return;
+        if (!EnergyContainer.holdsEnergy(stack)) return;
         ItemStackHolder holder = new ItemStackHolder(stack);
         if (EnergyApi.moveEnergy(this, null, holder, getEnergyStorage().maxExtract(), false) == 0) return;
         setItem(0, holder.getStack());

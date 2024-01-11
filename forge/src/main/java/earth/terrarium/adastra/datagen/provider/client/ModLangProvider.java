@@ -393,8 +393,8 @@ public class ModLangProvider extends LanguageProvider {
         add("advancements.ad_astra.astronaut.description", "Create a space suit");
         add("advancements.ad_astra.dj.title", "DJ");
         add("advancements.ad_astra.dj.description", "Craft a radio");
-        add("advancements.ad_astra.zip_gun.title", "Watch Where You Point That!");
-        add("advancements.ad_astra.zip_gun.description", "Craft a zip gun, alloying you to propel yourself forward. Use it to move around in space!");
+        add("advancements.ad_astra.zip_gun.title", "Unconventional Flight");
+        add("advancements.ad_astra.zip_gun.description", "Craft and use a zip gun, alloying you to propel yourself forward. Use it to move around in space!");
         add("advancements.ad_astra.ti_69.title", "New Phone, Who Dis?");
         add("advancements.ad_astra.ti_69.description", "Craft a TI-69, allowing you to view local oxygen, temperature, and gravity information");
         add("advancements.ad_astra.rover.title", "New Whip");
