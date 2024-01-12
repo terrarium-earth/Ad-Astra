@@ -31,7 +31,7 @@ public class LevelMixin implements MultipartPartsHolder {
     }
 
     @Inject(
-        method = {"method_31593"},
+        method = {"method_31593", "lambda$getEntities$1", "m_151518_"},
         at = @At("TAIL")
     )
     private static void adastra$getEntities(Entity entity, Predicate<? super Entity> predicate, List<Entity> list, Entity entity2, CallbackInfo ci) {
@@ -46,7 +46,7 @@ public class LevelMixin implements MultipartPartsHolder {
     }
 
     @Inject(
-        method = {"method_47576"},
+        method = {"method_47576", "lambda$getEntities$2", "m_260792_"},
         at = @At(value = "RETURN", ordinal = 1),
         cancellable = true
     )
