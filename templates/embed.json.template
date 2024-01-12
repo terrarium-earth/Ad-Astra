@@ -1,0 +1,49 @@
+{
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "label": "Fabric",
+                    "style": 5,
+                    "url": "https://modrinth.com/mod/ad_astra/version/${fabric_link}"
+                },
+                {
+                    "type": 2,
+                    "label": "Forge",
+                    "style": 5,
+                    "url": "https://modrinth.com/mod/ad_astra/version/${forge_link}"
+                }
+            ]
+        }
+    ],
+    "embeds": [
+        {
+            "title": "Ad Astra",
+            "description": "**Changelog:**\\n${changelog}",
+            "color": 13997660,
+            "fields": [
+                {
+                    "name": "Minecraft Version",
+                    "value": "${minecraft}",
+                    "inline": true
+                },
+                {
+                    "name": "Mod Version",
+                    "value": "${version}",
+                    "inline": true
+                }
+            ],
+            "footer": {
+                "text": "Follow the project on Modrinth at mods.gay/ad-astra",
+                "icon_url": "https://i.imgur.com/3hVj8nM.png"
+            },
+            "thumbnail": {
+                "url": "https://cdn.modrinth.com/data/3ufwT9JF/2a15f23b7ffa2d50fc6ae1c42029a728ce3e2847.jpeg"
+            }
+        }
+    ],
+    "username": "Terrarium Releases",
+    "avatar_url": "https://cdn.discordapp.com/avatars/955572264823300096/3c226580b871a57b6da095fea1cccf1e.webp"
+}
