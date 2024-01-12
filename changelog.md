@@ -1,5 +1,5 @@
 This update brings a lot of internal changes from the rework into the release version of Ad Astra.
-It is initially marked as a beta as there are a lot of internal changes, so it may break addons and
+It is initially marked as a alpha as there are a lot of internal changes, so it may break addons and
 may be unstable.
 
 ## Changes

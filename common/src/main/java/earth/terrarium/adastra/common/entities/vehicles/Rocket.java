@@ -405,7 +405,7 @@ public class Rocket extends Vehicle {
     }
 
     public FluidHolder fluid() {
-        return FluidHolder.ofMillibuckets(
+        return FluidHolder.of(
             BuiltInRegistries.FLUID.get(new ResourceLocation(entityData.get(FUEL_TYPE))),
             entityData.get(FUEL));
     }

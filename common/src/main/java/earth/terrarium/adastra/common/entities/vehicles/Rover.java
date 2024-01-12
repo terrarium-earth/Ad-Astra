@@ -47,7 +47,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     public static final EntityDataAccessor<Long> FUEL = SynchedEntityData.defineId(Rover.class, EntityDataSerializers.LONG);
     public static final EntityDataAccessor<String> FUEL_TYPE = SynchedEntityData.defineId(Rover.class, EntityDataSerializers.STRING);
 
-    private final SimpleFluidContainer fluidContainer = new SimpleFluidContainer(FluidConstants.fromMillibuckets(3), 1, (amount, fluid) -> fluid.is(ModFluidTags.TIER_1_ROVER_FUEL));
+    private final SimpleFluidContainer fluidContainer = new SimpleFluidContainer(FluidConstants.fromMillibuckets(3000), 1, (amount, fluid) -> fluid.is(ModFluidTags.TIER_1_ROVER_FUEL));
 
     private float speed;
     private float angle;
@@ -287,7 +287,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     }
 
     public FluidHolder fluid() {
-        return FluidHolder.ofMillibuckets(
+        return FluidHolder.of(
             BuiltInRegistries.FLUID.get(new ResourceLocation(entityData.get(FUEL_TYPE))),
             entityData.get(FUEL),
             null);
