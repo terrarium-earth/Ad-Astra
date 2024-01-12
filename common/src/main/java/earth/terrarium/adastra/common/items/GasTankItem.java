@@ -47,45 +47,29 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
 
     @Override
     public void onUseTick(@NotNull Level level, @NotNull LivingEntity entity, @NotNull ItemStack stack, int remainingUseDuration) {
-        super.onUseTick(level, entity, stack, remainingUseDuration);
-
         if (level.isClientSide()) return;
         if (!(entity instanceof Player player)) return;
         Inventory inventory = player.getInventory();
         var container = FluidUtils.getTank(stack);
         if (container.getFluidAmount() == 0) return;
         ItemStackHolder from = new ItemStackHolder(stack);
-        if (distribute(from, container, inventory) == 0) return;
-        if (from.isDirty()) {
-            stack.setTag(from.getStack().getTag());
-        }
+        if (!distributeSequential(from, container, inventory)) return;
+        inventory.setItem(inventory.selected, from.getStack());
         if (entity.tickCount % 4 == 0) {
             level.playSound(null, player.blockPosition(), SoundEvents.GENERIC_DRINK, player.getSoundSource(), 1.0F, 1.0F);
         }
     }
 
-    public long distribute(ItemStackHolder from, FluidHolder container, Inventory inventory) {
-        long moved = 0;
-        moved += distribute(from, container, inventory.armor);
-        if (moved > 0) return moved;
-        moved += distribute(from, container, inventory.offhand);
-        if (moved > 0) return moved;
-        moved += distribute(from, container, inventory.items);
-        return moved;
-    }
-
-    public long distribute(ItemStackHolder from, FluidHolder container, List<ItemStack> items) {
-        for (var item : items) {
-            if (item.isEmpty() || item.getItem() instanceof GasTankItem) continue;
-            ItemStackHolder to = new ItemStackHolder(item);
-            long moved = FluidApi.moveFluid(from, to, FluidHolder.ofMillibuckets(container.getFluid(), FluidConstants.fromMillibuckets(distributionAmount)), false);
-            if (moved == 0) continue;
-            if (to.isDirty()) {
-                item.setTag(to.getStack().getTag());
-            }
-            return moved;
+    public boolean distributeSequential(ItemStackHolder from, FluidHolder container, Inventory inventory) {
+        for (int i = inventory.getContainerSize() - 1; i >= 0; i--) {
+            var stack = inventory.getItem(i);
+            if (stack.isEmpty() || stack.is(this)) continue;
+            ItemStackHolder to = new ItemStackHolder(stack);
+            long moved = FluidApi.moveFluid(from, to, container.copyWithAmount(FluidConstants.fromMillibuckets(distributionAmount)), false);
+            inventory.setItem(i, to.getStack());
+            if (moved > 0) return true;
         }
-        return 0;
+        return false;
     }
 
     @Override

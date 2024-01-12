@@ -112,8 +112,8 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
 
     @Override
     public void inventoryTick(@NotNull ItemStack stack, @NotNull Level level, @NotNull Entity entity, int slotId, boolean isSelected) {
-        super.inventoryTick(stack, level, entity, slotId, isSelected);
         if (level.isClientSide()) return;
+        if (entity.tickCount % 5 == 0) return;
         if (!active(stack)) return;
         if (!(entity instanceof Player player)) return;
         Inventory inventory = player.getInventory();
@@ -121,57 +121,38 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
         if (container.getStoredEnergy() == 0) return;
         ItemStackHolder from = new ItemStackHolder(stack);
         switch (mode(stack)) {
-            case SEQUENTIAL -> distributeSequential(from, container.maxExtract(), inventory);
-            case ROUND_ROBIN -> distributeRoundRobin(from, container.maxExtract(), inventory);
+            case SEQUENTIAL -> distributeSequential(from, container.maxExtract() * 5, inventory);
+            case ROUND_ROBIN -> distributeRoundRobin(from, container.maxExtract() * 5, inventory);
         }
-        if (from.isDirty()) {
-            stack.setTag(from.getStack().getTag());
-        }
+        inventory.setItem(slotId, from.getStack());
     }
 
     public void distributeSequential(ItemStackHolder from, long maxExtract, Inventory inventory) {
-        if (distributeSequential(from, maxExtract, inventory.items) > 0) return;
-        if (distributeSequential(from, maxExtract, inventory.armor) > 0) return;
-        distributeSequential(from, maxExtract, inventory.offhand);
-    }
-
-    public long distributeSequential(ItemStackHolder from, long maxExtract, List<ItemStack> items) {
-        for (var item : items) {
-            if (item.is(this)) continue;
-            if (item.isEmpty() || item == from.getStack()) continue;
-            ItemStackHolder to = new ItemStackHolder(item);
+        for (int i = inventory.getContainerSize() - 1; i >= 0; i--) {
+            var stack = inventory.getItem(i);
+            if (stack.isEmpty() || stack.is(this)) continue;
+            ItemStackHolder to = new ItemStackHolder(stack);
             long moved = EnergyApi.moveEnergy(from, to, maxExtract, false);
-            if (moved == 0) continue;
-            if (to.isDirty()) {
-                item.setTag(to.getStack().getTag());
-            }
-            return moved;
+            inventory.setItem(i, to.getStack());
+            if (moved > 0) return;
         }
-        return 0;
     }
 
-    public void distributeRoundRobin(ItemStackHolder stack, long maxExtract, Inventory inventory) {
-        distributeRoundRobin(stack, maxExtract, inventory.items);
-        distributeRoundRobin(stack, maxExtract, inventory.armor);
-        distributeRoundRobin(stack, maxExtract, inventory.offhand);
-    }
+    public void distributeRoundRobin(ItemStackHolder from, long maxExtract, Inventory inventory) {
+        int energyItems = 0;
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            if (!EnergyContainer.holdsEnergy(inventory.getItem(i))) continue;
+            if (inventory.getItem(i).is(this)) continue;
+            energyItems++;
+        }
 
-    public void distributeRoundRobin(ItemStackHolder stack, long maxExtract, List<ItemStack> items) {
-        int energyItems = items
-            .stream().
-            filter(EnergyContainer::holdsEnergy)
-            .filter(item -> !item.is(this))
-            .mapToInt(ItemStack::getCount).sum();
-        if (energyItems == 0) return;
-
-        for (var item : items) {
-            if (item.is(this)) continue;
-            if (item.isEmpty() || item.is(this)) continue;
-            ItemStackHolder to = new ItemStackHolder(item);
-            EnergyApi.moveEnergy(stack, to, maxExtract / energyItems, false);
-            if (to.isDirty()) {
-                item.setTag(to.getStack().getTag());
-            }
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            var stack = inventory.getItem(i);
+            if (stack.is(this)) continue;
+            if (stack.isEmpty() || stack.is(this)) continue;
+            ItemStackHolder to = new ItemStackHolder(stack);
+            EnergyApi.moveEnergy(from, to, maxExtract / energyItems, false);
+            inventory.setItem(i, to.getStack());
         }
     }
 

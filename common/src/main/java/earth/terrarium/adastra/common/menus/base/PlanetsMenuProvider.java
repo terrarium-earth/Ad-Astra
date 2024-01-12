@@ -1,6 +1,5 @@
 package earth.terrarium.adastra.common.menus.base;
 
-import com.google.common.collect.ImmutableSet;
 import earth.terrarium.adastra.common.compat.cadmus.CadmusIntegration;
 import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
@@ -65,7 +64,10 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
             });
         }
 
-        Collection<GlobalPos> locations = LaunchingDimensionHandler.getAllSpawnLocations(player);
+        List<GlobalPos> locations = new ArrayList<>();
+        AdAstraData.planets().forEach((dimension, planet) ->
+            LaunchingDimensionHandler.getSpawningLocation(player, player.serverLevel(), planet).ifPresent(locations::add));
+
         buffer.writeVarInt(locations.size());
         locations.forEach(buffer::writeGlobalPos);
     }
@@ -101,23 +103,26 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
 
 
     public static Object2BooleanMap<ResourceKey<Level>> createClaimedChunksFromBuf(FriendlyByteBuf buf) {
-        int dimensionCount = buf.readVarInt();
-        Object2BooleanMap<ResourceKey<Level>> claimedChunks = new Object2BooleanOpenHashMap<>();
+        if (CadmusIntegration.cadmusLoaded()) {
+            int dimensionCount = buf.readVarInt();
+            Object2BooleanMap<ResourceKey<Level>> claimedChunks = new Object2BooleanOpenHashMap<>();
 
-        for (int i = 0; i < dimensionCount; i++) {
-            ResourceKey<Level> dimension = buf.readResourceKey(Registries.DIMENSION);
-            claimedChunks.put(dimension, buf.readBoolean());
+            for (int i = 0; i < dimensionCount; i++) {
+                ResourceKey<Level> dimension = buf.readResourceKey(Registries.DIMENSION);
+                claimedChunks.put(dimension, buf.readBoolean());
+            }
+
+            return Object2BooleanMaps.unmodifiable(claimedChunks);
         }
-
-        return Object2BooleanMaps.unmodifiable(claimedChunks);
+        return Object2BooleanMaps.emptyMap();
     }
 
     public static Set<GlobalPos> createSpawnLocationsFromBuf(FriendlyByteBuf buf) {
-        ImmutableSet.Builder<GlobalPos> locations = new ImmutableSet.Builder<>();
+        Set<GlobalPos> locations = new HashSet<>();
         int locationCount = buf.readVarInt();
         for (int i = 0; i < locationCount; i++) {
             locations.add(buf.readGlobalPos());
         }
-        return locations.build();
+        return Collections.unmodifiableSet(locations);
     }
 }

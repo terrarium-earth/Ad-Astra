@@ -52,7 +52,6 @@ subprojects {
 
     repositories {
         mavenCentral()
-        mavenLocal()
         maven(url = "https://maven.architectury.dev/")
         maven(url = "https://maven.teamresourceful.com/repository/maven-public/")
         maven(url = "https://maven.firstdarkdev.xyz/snapshots")
@@ -99,14 +98,11 @@ subprojects {
             parchment(create(group = "org.parchmentmc.data", name = "parchment-$minecraftVersion", version = parchmentVersion))
         })
 
-        "include"(implementation(group = "javazoom", name = "jlayer", version = "1.0.1"))
-
-        compileOnly(group = "com.teamresourceful", name = "yabn", version = "1.0.3")
         "modApi"(group = "com.teamresourceful.resourcefullib", name = "resourcefullib-$modLoader-$minecraftVersion", version = resourcefulLibVersion)
         "modApi"(group = "com.teamresourceful.resourcefulconfig", name = "resourcefulconfig-$modLoader-$minecraftVersion", version = resourcefulConfigVersion)
         "modApi"(group = "earth.terrarium.botarium", name = "botarium-$modLoader-$minecraftVersion", version = botariumVersion)
         if (isCommon) {
-            "modCompileOnly"(group = "vazkii.patchouli", name = "Patchouli-xplat", version = "$minecraftVersion-$patchouliVersion")
+            implementation(group = "javazoom", name = "jlayer", version = "1.0.1")
             "modApi"(group = "mezz.jei", name = "jei-$minecraftVersion-common-api", version = jeiVersion)
             "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-api", version = reiVersion)
             implementation("annotationProcessor"(group = "io.github.llamalad7", name = "mixinextras-common", version = mixinExtrasVersion))
@@ -118,6 +114,7 @@ subprojects {
                 isTransitive = false
             }
         } else {
+            "include"(implementation(group = "javazoom", name = "jlayer", version = "1.0.1"))
             "modLocalRuntime"(group = "earth.terrarium.cadmus", name = "cadmus-$modLoader-$minecraftVersion", version = cadmusVersion) {
                 isTransitive = false
             }

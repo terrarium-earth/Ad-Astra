@@ -200,7 +200,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     public void complexMachine(Block block) {
-        simpleBlockItem(block, models().getBuilder("block/%s".formatted(name(block))));
+        itemModels().withExistingParent(name(block), modLoc("block/%s".formatted(name(block))));
         getVariantBuilder(block).forAllStates(state -> {
             Direction facing = state.getValue(MachineBlock.FACING);
             return ConfiguredModel.builder()
@@ -242,7 +242,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     public void cryoFreezer(Block block) {
-        simpleBlockItem(block, models().getBuilder("block/%s".formatted(name(block))));
+        itemModels().withExistingParent(name(block), modLoc("block/%s".formatted(name(block))));
         getVariantBuilder(block).forAllStates(state -> {
             Direction facing = state.getValue(MachineBlock.FACING);
             boolean lit = state.getValue(MachineBlock.LIT);
