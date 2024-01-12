@@ -1,5 +1,10 @@
 {
   "values": [
-    "#minecraft:is_ocean"
+    "#minecraft:has_structure/ocean_monument",
+    "#minecraft:is_ocean",
+    {
+      "id": "#c:ocean",
+      "required": false
+    }
   ]
 }

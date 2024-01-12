@@ -7,6 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -24,7 +25,10 @@ public class ModBiomeTagProvider extends TagsProvider<Biome> {
         tag(ModBiomeTags.HAS_ACID_RAIN).addOptional(ModBiomeDataProvider.VENUS_WASTELANDS.location());
         tag(ModBiomeTags.HAS_ACID_RAIN).addOptional(ModBiomeDataProvider.INFERNAL_VENUS_BARRENS.location());
 
+        tag(ModBiomeTags.OIL_WELL).addTag(BiomeTags.HAS_OCEAN_MONUMENT);
         tag(ModBiomeTags.OIL_WELL).addTag(BiomeTags.IS_OCEAN);
+        tag(ModBiomeTags.OIL_WELL).addOptionalTag(new ResourceLocation("c:ocean"));
+
         tag(ModBiomeTags.LUNARIAN_VILLAGE).addOptional(ModBiomeDataProvider.LUNAR_WASTELANDS.location());
         tag(ModBiomeTags.MOON_DUNGEON).addOptional(ModBiomeDataProvider.LUNAR_WASTELANDS.location());
         tag(ModBiomeTags.MARS_TEMPLE).addOptional(ModBiomeDataProvider.MARTIAN_WASTELANDS.location());
