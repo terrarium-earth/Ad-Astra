@@ -5,90 +5,50 @@ import com.teamresourceful.resourcefulconfig.api.annotations.Comment;
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo;
 import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
+import earth.terrarium.adastra.common.config.machines.MachineTypeConfigObject;
 
 @Category("config.ad_astra.machines")
-@ConfigInfo(icon = "zap")
+@ConfigInfo(
+    icon = "zap",
+    title = "Machine Config"
+)
 public final class MachineConfig {
 
     @ConfigEntry(
-        id = "ironTierMaxEnergyInOut",
-        type = EntryType.LONG,
-        translation = "config.ad_astra.ironTierMaxEnergyInOut"
+        id = "ironTier",
+        type = EntryType.OBJECT,
+        translation = "config.ad_astra.ironTier"
     )
-    public static long ironTierMaxEnergyInOut = 100;
+    public static final MachineTypeConfigObject IRON = new MachineTypeConfigObject(
+        100, 10000, 0
+    );
 
     @ConfigEntry(
-        id = "steelTierMaxEnergyInOut",
-        type = EntryType.LONG,
-        translation = "config.ad_astra.steelTierMaxEnergyInOut"
+        id = "steelTier",
+        type = EntryType.OBJECT,
+        translation = "config.ad_astra.steelTier"
     )
-    public static long steelTierMaxEnergyInOut = 150;
+    public static final MachineTypeConfigObject STEEL = new MachineTypeConfigObject(
+        150, 20000, 3000
+    );
 
     @ConfigEntry(
-        id = "deshTierMaxEnergyInOut",
-        type = EntryType.LONG,
-        translation = "config.ad_astra.deshTierMaxEnergyInOut"
+        id = "deshTier",
+        type = EntryType.OBJECT,
+        translation = "config.ad_astra.deshTier"
     )
-    public static long deshTierMaxEnergyInOut = 250;
+    public static final MachineTypeConfigObject DESH = new MachineTypeConfigObject(
+        250, 50000, 5000
+    );
 
     @ConfigEntry(
-        id = "ostrumTierMaxEnergyInOut",
-        type = EntryType.LONG,
-        translation = "config.ad_astra.ostrumTierMaxEnergyInOut"
+        id = "ostrumTier",
+        type = EntryType.OBJECT,
+        translation = "config.ad_astra.ostrumTier"
     )
-    public static long ostrumTierMaxEnergyInOut = 500;
-
-
-    @ConfigEntry(
-        id = "ironTierEnergyCapacity",
-        type = EntryType.LONG,
-        translation = "config.ad_astra.ironTierEnergyCapacity"
-    )
-    public static long ironTierEnergyCapacity = 10_000;
-
-    @ConfigEntry(
-        id = "steelTierEnergyCapacity",
-        type = EntryType.LONG,
-        translation = "config.ad_astra.steelTierEnergyCapacity"
-    )
-    public static long steelTierEnergyCapacity = 20_000;
-
-    @ConfigEntry(
-        id = "deshTierEnergyCapacity",
-        type = EntryType.LONG,
-        translation = "config.ad_astra.deshTierEnergyCapacity"
-    )
-    public static long deshTierEnergyCapacity = 50_000;
-
-    @ConfigEntry(
-        id = "ostrumTierEnergyCapacity",
-        type = EntryType.LONG,
-        translation = "config.ad_astra.ostrumTierEnergyCapacity"
-    )
-    public static long ostrumTierEnergyCapacity = 100_000;
-
-
-    @ConfigEntry(
-        id = "steelTierFluidCapacity",
-        type = EntryType.LONG,
-        translation = "config.ad_astra.steelTierFluidCapacity"
-    )
-    public static long steelTierFluidCapacity = 3000;
-
-    @ConfigEntry(
-        id = "deshTierFluidCapacity",
-        type = EntryType.LONG,
-        translation = "config.ad_astra.deshTierFluidCapacity"
-    )
-    public static long deshTierFluidCapacity = 5000;
-
-    @ConfigEntry(
-        id = "ostrumTierFluidCapacity",
-        type = EntryType.LONG,
-        translation = "config.ad_astra.ostrumTierFluidCapacity"
-    )
-    public static long ostrumTierFluidCapacity = 10_000;
-
+    public static final MachineTypeConfigObject OSTRUM = new MachineTypeConfigObject(
+        500, 100000, 10000
+    );
 
     @ConfigEntry(
         id = "coalGeneratorEnergyGenerationPerTick",

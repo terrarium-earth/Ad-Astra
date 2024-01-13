@@ -18,8 +18,8 @@ public final class RadioConfig {
 
     @ConfigEntry(
         type = EntryType.STRING,
-        id = "favorites",
-        translation = "Favorites"
+        id = "favorites"
     )
+    @ConfigOption.Hidden
     public static String[] favorites = new String[0];
 }

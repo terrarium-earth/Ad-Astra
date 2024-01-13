@@ -9,9 +9,9 @@ import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.CompressorMenu;
 import earth.terrarium.adastra.common.recipes.machines.CompressingRecipe;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
+import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.ItemUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
-import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -49,7 +49,8 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(MachineConfig.ironTierEnergyCapacity, MachineConfig.ironTierMaxEnergyInOut));
+            EnergyUtils.machineInsertOnlyEnergy(MachineConfig.IRON)
+        );
     }
 
     @Override

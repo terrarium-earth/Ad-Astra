@@ -10,9 +10,9 @@ import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.EtrionicBlastFurnaceMenu;
 import earth.terrarium.adastra.common.recipes.machines.AlloyingRecipe;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
+import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.ItemUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
-import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -68,7 +68,8 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(MachineConfig.steelTierEnergyCapacity, MachineConfig.steelTierMaxEnergyInOut));
+            EnergyUtils.machineInsertOnlyEnergy(MachineConfig.STEEL)
+        );
     }
 
     @Override
@@ -194,7 +195,6 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
         }
     }
 
-    @Nullable
     protected void createRecipe(int recipe, int slot) {
         if (getItem(slot).isEmpty()) return;
         level().getRecipeManager().getAllRecipesFor(RecipeType.BLASTING)

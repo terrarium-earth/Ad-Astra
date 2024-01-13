@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefulconfig.api.annotations.Config;
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo;
 import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
+import earth.terrarium.adastra.common.config.info.AdAstraConfigInfo;
 
 @Config(
     value = "ad_astra",
@@ -12,21 +13,7 @@ import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
         MachineConfig.class
     }
 )
-@ConfigInfo(
-    title = "Ad Astra",
-    description = "Live long and prosper, and may the force be with you.",
-
-    icon = "planet",
-    gradient = @Gradient(value = "45deg", first = "#7F4DEE", second = "#E7797A"),
-
-    links = {
-        @ConfigInfo.Link(value = "https://discord.gg/terrarium", icon = "gamepad-2", text = "Discord"),
-        @ConfigInfo.Link(value = "https://github.com/terrarium-earth/Ad-Astra", icon = "github", text = "GitHub"),
-
-        @ConfigInfo.Link(value = "https://www.curseforge.com/minecraft/mc-mods/ad-astra", icon = "curseforge", text = "CurseForge"),
-        @ConfigInfo.Link(value = "https://modrinth.com/mod/ad-astra", icon = "modrinth", text = "Modrinth"),
-    }
-)
+@ConfigInfo.Provider(AdAstraConfigInfo.class)
 public final class AdAstraConfig {
 
     @ConfigEntry(

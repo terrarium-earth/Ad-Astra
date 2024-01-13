@@ -2,7 +2,9 @@ package earth.terrarium.adastra.client.config;
 
 import com.teamresourceful.resourcefulconfig.api.annotations.Config;
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo;
 import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
+import earth.terrarium.adastra.common.config.info.AdAstraConfigInfo;
 
 @Config(
     value = "ad_astra-client",
@@ -10,7 +12,9 @@ import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
         RadioConfig.class
     }
 )
+@ConfigInfo.Provider(AdAstraConfigInfo.class)
 public final class AdAstraConfigClient {
+
     @ConfigEntry(
         type = EntryType.BOOLEAN,
         id = "showOxygenDistributorArea",

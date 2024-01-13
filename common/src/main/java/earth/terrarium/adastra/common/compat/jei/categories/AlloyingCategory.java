@@ -81,6 +81,6 @@ public class AlloyingCategory implements IRecipeCategory<AlloyingRecipe> {
         graphics.blit(EtrionicBlastFurnaceScreen.FURNACE_OVERLAY, 28, 47, 0, 0, 32, 43, 32, 43);
 
         new EtaDrawable(mouseX, mouseY, recipe.cookingTime(), GuiUtils.ARROW, 20, 12).draw(graphics, 73, 46);
-        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), MachineConfig.steelTierEnergyCapacity, MachineConfig.steelTierMaxEnergyInOut, 0).draw(graphics, 144, 63);
+        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), MachineConfig.STEEL.energyCapacity, MachineConfig.STEEL.maxEnergyInOut, 0).draw(graphics, 144, 63);
     }
 }

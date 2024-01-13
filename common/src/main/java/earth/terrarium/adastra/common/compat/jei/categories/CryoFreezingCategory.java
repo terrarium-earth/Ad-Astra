@@ -67,11 +67,11 @@ public class CryoFreezingCategory implements IRecipeCategory<CryoFreezingRecipe>
         graphics.blit(CryoFreezerScreen.TEXTURE, 1, -4, 0, 0, 177, 96, 177, 181);
         graphics.blit(CryoFreezerScreen.TEXTURE, 1, 92, 0, 174, 177, 7, 177, 181);
 
-        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), MachineConfig.ostrumTierEnergyCapacity, MachineConfig.ostrumTierMaxEnergyInOut, 0).draw(graphics, 144, 55);
+        new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), MachineConfig.OSTRUM.energyCapacity, MachineConfig.OSTRUM.maxEnergyInOut, 0).draw(graphics, 144, 55);
 
         new EtaDrawable(mouseX, mouseY, recipe.cookingTime(), GuiUtils.SNOWFLAKE, 13, 13).draw(graphics, 55, 67);
         int cookTime = recipe.cookingTime();
-        long capacity = FluidConstants.fromMillibuckets(MachineConfig.ostrumTierFluidCapacity);
+        long capacity = FluidConstants.fromMillibuckets(MachineConfig.OSTRUM.fluidCapacity);
         new FluidBarDrawable(mouseX, mouseY, true, capacity, cookTime, recipe.result()).draw(graphics, 81, 65);
     }
 }

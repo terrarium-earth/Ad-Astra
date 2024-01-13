@@ -76,7 +76,7 @@ public class AlloyingCategory implements DisplayCategory<AlloyingDisplay> {
         widgets.add(Widgets.createSlot(new Point(bounds.x + 119, bounds.y + 57)).backgroundEnabled(false));
 
         widgets.add(new EtaWidget(new Point(bounds.x + 75, bounds.y + 50), display.recipe().cookingTime(), GuiUtils.ARROW, 20, 12));
-        widgets.add(new EnergyBarWidget(new Point(bounds.x + 146, bounds.y + 67), -display.recipe().energy(), MachineConfig.steelTierEnergyCapacity, MachineConfig.steelTierMaxEnergyInOut, 0));
+        widgets.add(new EnergyBarWidget(new Point(bounds.x + 146, bounds.y + 67), -display.recipe().energy(), MachineConfig.STEEL.energyCapacity, MachineConfig.STEEL.maxEnergyInOut, 0));
 
         return widgets;
     }
