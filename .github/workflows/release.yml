@@ -40,7 +40,7 @@ jobs:
       - name: Upload Forge Releases (Curse/Modrinth/Github)
         id: forge_release
         if: contains(steps.properties.outputs.enabledPlatforms, 'forge')
-        uses: Kir-Antipov/mc-publish@v3.2
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           curseforge-id: ${{ vars.CURSE_ID }}
           curseforge-token: ${{ secrets.CURSE_TOKEN }}
@@ -61,11 +61,12 @@ jobs:
             resourceful-lib | depends | *
             resourceful-config | depends | *
             botarium | depends | *
+            shimmer | recommends | *
 
       - name: Upload Fabric Releases (Curse/Modrinth/Github)
         id: fabric_release
         if: contains(steps.properties.outputs.enabledPlatforms, 'fabric')
-        uses: Kir-Antipov/mc-publish@v3.2
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           curseforge-id: ${{ vars.CURSE_ID }}
           curseforge-token: ${{ secrets.CURSE_TOKEN }}
@@ -87,6 +88,7 @@ jobs:
             resourceful-lib | depends | *
             resourceful-config | depends | *
             botarium | depends | *
+            shimmer | recommends | *
 
       - name: Generate Discord Embed
         run: ./gradlew injectEmbed

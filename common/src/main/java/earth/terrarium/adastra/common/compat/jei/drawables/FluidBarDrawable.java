@@ -52,7 +52,7 @@ public class FluidBarDrawable implements IDrawable {
             mouseY,
             xOffset,
             yOffset,
-            FluidHolder.ofMillibuckets(fluid, fluidAmount),
+            FluidHolder.of(fluid, fluidAmount),
             capacity,
             TooltipUtils.getTicksPerIterationComponent(cookTime),
             gain ? TooltipUtils.getFluidGenerationPerIterationComponent(perTick) : TooltipUtils.getFluidUsePerIterationComponent(perTick)

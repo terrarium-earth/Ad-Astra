@@ -1,1 +1,2 @@
-- Fix sodium/embeddium crash
+- Fixed etrionic capacitor crashing in round-robin mode with when it's not charging anything.
+- Fixed REI fluid bars displaying incorrectly.

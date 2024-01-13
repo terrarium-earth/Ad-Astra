@@ -70,7 +70,9 @@ public class OxygenLoadingCategory implements IRecipeCategory<OxygenLoadingRecip
 
         int cookTime = recipe.cookingTime();
         long capacity = FluidConstants.fromMillibuckets(MachineConfig.steelTierFluidCapacity);
-        new FluidBarDrawable(mouseX, mouseY, false, capacity, cookTime, recipe.input().getFluids().get(0)).draw(graphics, 39, 49);
+        new FluidBarDrawable(mouseX, mouseY, false, capacity, cookTime, recipe.input()
+            .getFluids().get(0).copyWithAmount(recipe.input().getFluidAmount()))
+            .draw(graphics, 39, 49);
         new FluidBarDrawable(mouseX, mouseY, true, capacity, cookTime, recipe.result()).draw(graphics, 96, 49);
     }
 }

@@ -4,8 +4,8 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.screens.machines.EtrionicBlastFurnaceScreen;
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.compat.rei.displays.AlloyingDisplay;
-import earth.terrarium.adastra.common.compat.rei.widgets.EnergyBarWidget;
-import earth.terrarium.adastra.common.compat.rei.widgets.EtaWidget;
+import earth.terrarium.adastra.common.compat.rei.widgets.ReiEnergyBarWidget;
+import earth.terrarium.adastra.common.compat.rei.widgets.ReiEtaWidget;
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import me.shedaniel.math.Point;
@@ -75,8 +75,8 @@ public class AlloyingCategory implements DisplayCategory<AlloyingDisplay> {
         widgets.add(Widgets.createSlot(new Point(bounds.x + 101, bounds.y + 57)).backgroundEnabled(false));
         widgets.add(Widgets.createSlot(new Point(bounds.x + 119, bounds.y + 57)).backgroundEnabled(false));
 
-        widgets.add(new EtaWidget(new Point(bounds.x + 75, bounds.y + 50), display.recipe().cookingTime(), GuiUtils.ARROW, 20, 12));
-        widgets.add(new EnergyBarWidget(new Point(bounds.x + 146, bounds.y + 67), -display.recipe().energy(), MachineConfig.steelTierEnergyCapacity, MachineConfig.steelTierMaxEnergyInOut, 0));
+        widgets.add(new ReiEtaWidget(new Point(bounds.x + 75, bounds.y + 50), display.recipe().cookingTime(), GuiUtils.ARROW, 20, 12));
+        widgets.add(new ReiEnergyBarWidget(new Point(bounds.x + 146, bounds.y + 67), -display.recipe().energy(), MachineConfig.steelTierEnergyCapacity, MachineConfig.steelTierMaxEnergyInOut, 0));
 
         return widgets;
     }
