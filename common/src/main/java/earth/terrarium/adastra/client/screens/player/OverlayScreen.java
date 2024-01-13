@@ -35,7 +35,7 @@ public class OverlayScreen {
         var level = player.level();
 
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.options.renderDebug) return;
+        if (minecraft.getDebugOverlay().showDebugScreen()) return;
         var font = minecraft.font;
         int width = minecraft.getWindow().getGuiScaledWidth();
         int height = minecraft.getWindow().getGuiScaledHeight();

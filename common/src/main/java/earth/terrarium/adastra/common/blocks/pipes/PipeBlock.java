@@ -1,5 +1,8 @@
 package earth.terrarium.adastra.common.blocks.pipes;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.adastra.common.blockentities.pipes.PipeBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.blocks.base.Wrenchable;
@@ -24,6 +27,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -42,6 +46,16 @@ import java.util.*;
 
 @SuppressWarnings("deprecation")
 public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBlock, Wrenchable, TransferablePipe {
+    public static final MapCodec<PipeBlock> CODEC = RecordCodecBuilder.mapCodec(
+        instance -> instance.group(
+                Codec.LONG.fieldOf("transfer_rate").forGetter(PipeBlock::transferRate),
+                Type.CODEC.fieldOf("type").forGetter(PipeBlock::type),
+                Codec.DOUBLE.fieldOf("size").forGetter(PipeBlock::size),
+                propertiesCodec()
+            )
+            .apply(instance, PipeBlock::new)
+    );
+
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public static final EnumProperty<PipeProperty> CONNECTED_UP = EnumProperty.create("connected_up", PipeProperty.class);
@@ -64,11 +78,13 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
 
     private final long transferRate;
     private final Type type;
+    private final double size;
 
     public PipeBlock(long transferRate, Type type, double size, Properties properties) {
         super(properties, true);
         this.transferRate = transferRate;
         this.type = type;
+        this.size = size;
         registerDefaultState(stateDefinition.any()
             .setValue(WATERLOGGED, false)
             .setValue(CONNECTED_UP, PipeProperty.NONE)
@@ -77,8 +93,8 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
             .setValue(CONNECTED_EAST, PipeProperty.NONE)
             .setValue(CONNECTED_SOUTH, PipeProperty.NONE)
             .setValue(CONNECTED_WEST, PipeProperty.NONE));
-        if (size > 0) {
-            stateDefinition.getPossibleStates().forEach(state -> shapes.put(state, makeShape(state, size)));
+        if (this.size > 0) {
+            stateDefinition.getPossibleStates().forEach(state -> shapes.put(state, makeShape(state, this.size)));
         }
     }
 
@@ -109,6 +125,10 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     @Override
     public Type type() {
         return type;
+    }
+
+    public double size() {
+        return size;
     }
 
     @Override
@@ -244,5 +264,10 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
         }
 
         return shape;
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 }

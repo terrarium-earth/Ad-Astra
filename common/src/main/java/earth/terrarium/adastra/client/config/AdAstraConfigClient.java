@@ -1,16 +1,16 @@
 package earth.terrarium.adastra.client.config;
 
-import com.teamresourceful.resourcefulconfig.common.annotations.Config;
-import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
-import com.teamresourceful.resourcefulconfig.common.annotations.InlineCategory;
-import com.teamresourceful.resourcefulconfig.common.config.EntryType;
+import com.teamresourceful.resourcefulconfig.api.annotations.Config;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
+import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
 
-@Config("ad_astra-client")
+@Config(
+    value = "ad_astra-client",
+    categories = {
+        RadioConfig.class
+    }
+)
 public final class AdAstraConfigClient {
-
-    @InlineCategory
-    public static RadioConfig radio;
-
     @ConfigEntry(
         type = EntryType.BOOLEAN,
         id = "showOxygenDistributorArea",

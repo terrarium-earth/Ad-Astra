@@ -35,11 +35,11 @@ dependencies {
 //        isTransitive = false
 //    }
 
-    modLocalRuntime(group = "RebornCore", name = "RebornCore-1.20", version = "5.8.3") { isTransitive = false }
-    modLocalRuntime(group = "TechReborn", name = "TechReborn-1.20", version = "5.8.3") { isTransitive = false }
+    modLocalRuntime(group = "RebornCore", name = "RebornCore-1.20", version = "5.10.2") { isTransitive = false }
+    modLocalRuntime(group = "TechReborn", name = "TechReborn-1.20", version = "5.10.2") { isTransitive = false }
 
-    modLocalRuntime(group = "maven.modrinth", name = "jade", version = "11.5.1")
-    modLocalRuntime(group = "maven.modrinth", name = "dcwa", version = "4.1") // Disable custom world advice
+    modLocalRuntime(group = "maven.modrinth", name = "jade", version = "dxGKPrkW")
+    modLocalRuntime(group = "maven.modrinth", name = "dcwa", version = "5.0") // Disable custom world advice
 
     "annotationProcessor"(group = "io.github.llamalad7", name = "mixinextras-fabric", version = mixinExtrasVersion).apply {
         implementation(this)

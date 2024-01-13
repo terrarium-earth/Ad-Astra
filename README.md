@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    "modImplementation"(group = "earth.terrarium.adastra", name = "adastra-$modLoader-$minecraftVersion", version = adAstraVersion)
+    "modImplementation"(group = "earth.terrarium.adastra", name = "ad_astra-$modLoader-$minecraftVersion", version = adAstraVersion)
 }
 ```
 
@@ -22,6 +22,6 @@ repositories {
 }
 
 dependencies {
-    "modImplementation" group: "earth.terrarium.adastra", name: "adastra-$modLoader-$minecraftVersion", version: adAstraVersion
+    "modImplementation" group: "earth.terrarium.adastra", name: "ad_astra-$modLoader-$minecraftVersion", version: adAstraVersion
 }
 ```

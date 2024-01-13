@@ -19,8 +19,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -42,7 +45,7 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage() {
+    public WrappedBlockEnergyContainer getEnergyStorage(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
@@ -86,8 +89,8 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
     public void update() {
         if (level().isClientSide()) return;
         quickCheck.getRecipeFor(this, level()).ifPresent(r -> {
-            recipe = r;
-            cookTimeTotal = r.cookingTime();
+            recipe = r.value();
+            cookTimeTotal = r.value().cookingTime();
         });
     }
 

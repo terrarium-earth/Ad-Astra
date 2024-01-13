@@ -37,9 +37,10 @@ jobs:
           MAVEN_USER: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASS: ${{ secrets.MAVEN_PASSWORD }}
 
-      - name: Upload Forge Releases (Curse/Modrinth/Github)
-        if: contains(steps.properties.outputs.enabledPlatforms, 'forge')
-        uses: Kir-Antipov/mc-publish@v3.2
+      - name: Upload NeoForge Releases (Curse/Modrinth/Github)
+        id: neoforge_release
+        if: contains(steps.properties.outputs.enabledPlatforms, 'neoforge')
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           curseforge-id: ${{ vars.CURSE_ID }}
           curseforge-token: ${{ secrets.CURSE_TOKEN }}
@@ -47,8 +48,8 @@ jobs:
           modrinth-id: ${{ vars.MODRINTH_ID }}
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
-          files: ./forge/build/libs/!(*-@(dev|sources|dev-shadow)).jar
-          name: "[Forge] Ad Astra ${{ steps.properties.outputs.version }}"
+          files: ./neoforge/build/libs/!(*-@(dev|sources|dev-shadow)).jar
+          name: "[NeoForge] Ad Astra ${{ steps.properties.outputs.version }}"
           version: ${{ steps.properties.outputs.version }}
           version-type: release
           changelog-file: changelog.md
@@ -56,7 +57,14 @@ jobs:
           game-versions: ${{ steps.properties.outputs.minecraftVersion }}
           version-resolver: exact
 
+          dependencies: |
+            resourceful-lib | depends | *
+            resourceful-config | depends | *
+            botarium | depends | *
+            shimmer | recommends | *
+
       - name: Upload Fabric Releases (Curse/Modrinth/Github)
+        id: fabric_release
         if: contains(steps.properties.outputs.enabledPlatforms, 'fabric')
         uses: Kir-Antipov/mc-publish@v3.2
         with:
@@ -75,8 +83,18 @@ jobs:
           game-versions: ${{ steps.properties.outputs.minecraftVersion }}
           version-resolver: exact
 
+          dependencies: |
+            fabric-api | depends | *
+            resourceful-lib | depends | *
+            resourceful-config | depends | *
+            botarium | depends | *
+            shimmer | recommends | *
+
       - name: Generate Discord Embed
         run: ./gradlew injectEmbed
+        env:
+          FORGE_RELEASE_URL: ${{ steps.forge_release.outputs.modrinth-version }}
+          FABRIC_RELEASE_URL: ${{ steps.fabric_release.outputs.modrinth-version }}
 
       - name: Upload Discord Embed
         uses: tsickert/discord-webhook@v5.3.0

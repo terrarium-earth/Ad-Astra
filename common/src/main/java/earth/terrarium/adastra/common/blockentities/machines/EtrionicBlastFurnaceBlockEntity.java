@@ -27,6 +27,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.crafting.BlastingRecipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -62,7 +64,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage() {
+    public WrappedBlockEnergyContainer getEnergyStorage(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
@@ -186,8 +188,8 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
             }
         } else {
             alloyingQuickCheck.getRecipeFor(this, level()).ifPresent(r -> {
-                alloyingRecipe = r;
-                cookTimeTotal = r.cookingTime();
+                alloyingRecipe = r.value();
+                cookTimeTotal = r.value().cookingTime();
             });
         }
     }
@@ -197,11 +199,11 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
         if (getItem(slot).isEmpty()) return;
         level().getRecipeManager().getAllRecipesFor(RecipeType.BLASTING)
             .stream()
-            .filter(r -> r.getIngredients().get(0).test(getItem(slot)))
+            .filter(r -> r.value().getIngredients().get(0).test(getItem(slot)))
             .findFirst()
             .ifPresent(r -> {
-                recipes[recipe] = r;
-                cookTimeTotal = r.getCookingTime();
+                recipes[recipe] = r.value();
+                cookTimeTotal = r.value().getCookingTime();
             });
     }
 

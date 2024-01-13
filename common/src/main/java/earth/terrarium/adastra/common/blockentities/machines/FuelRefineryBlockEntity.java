@@ -23,8 +23,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -51,7 +54,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage() {
+    public WrappedBlockEnergyContainer getEnergyStorage(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
@@ -59,6 +62,10 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
     }
 
     @Override
+    public @Nullable WrappedBlockFluidContainer getFluidContainer(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
+        return getFluidContainer();
+    }
+
     public WrappedBlockFluidContainer getFluidContainer() {
         if (fluidContainer != null) return fluidContainer;
         return fluidContainer = new WrappedBlockFluidContainer(
@@ -69,10 +76,10 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
                 1,
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())
                     .stream()
-                    .anyMatch(r -> r.input().test(holder)),
+                    .anyMatch(r -> r.value().input().test(holder)),
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())
                     .stream()
-                    .anyMatch(r -> r.result().matches(holder))));
+                    .anyMatch(r -> r.value().result().matches(holder))));
     }
 
     @Override
@@ -117,8 +124,8 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
     @Override
     public void update() {
         quickCheck.getRecipeFor(this, level()).ifPresent(r -> {
-            recipe = r;
-            cookTimeTotal = r.cookingTime();
+            recipe = r.value();
+            cookTimeTotal = r.value().cookingTime();
         });
         updateSlots();
     }

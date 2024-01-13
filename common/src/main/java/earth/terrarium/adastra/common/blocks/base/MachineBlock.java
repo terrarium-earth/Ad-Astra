@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blocks.base;
 
+import com.mojang.serialization.MapCodec;
 import earth.terrarium.adastra.common.blockentities.base.BasicContainer;
 import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
 import earth.terrarium.botarium.common.menu.MenuHooks;
@@ -13,10 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -26,6 +24,8 @@ import net.minecraft.world.phys.BlockHitResult;
 
 @SuppressWarnings("deprecation")
 public class MachineBlock extends BasicEntityBlock {
+    public static final MapCodec<MachineBlock> CODEC = simpleCodec(MachineBlock::new);
+
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
@@ -36,6 +36,11 @@ public class MachineBlock extends BasicEntityBlock {
             .setValue(FACING, Direction.NORTH)
             .setValue(POWERED, false)
             .setValue(LIT, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Override

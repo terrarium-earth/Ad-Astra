@@ -60,7 +60,7 @@ public class PlanetHandler extends SaveHandler {
     }
 
     public static PlanetHandler read(ServerLevel level) {
-        return read(level.getDataStorage(), () -> new PlanetHandler(level), "adastra_planet_data");
+        return read(level.getDataStorage(), HandlerType.create(() -> new PlanetHandler(level)), "adastra_planet_data");
     }
 
     public static boolean hasOxygen(ServerLevel level, BlockPos pos) {

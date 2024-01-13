@@ -85,7 +85,7 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ExtraDat
     }
 
     @Override
-    public void lerpTo(double x, double y, double z, float yRot, float xRot, int lerpSteps, boolean teleport) {
+    public void lerpTo(double x, double y, double z, float yRot, float xRot, int lerpSteps) {
         lerpX = x;
         lerpY = y;
         lerpZ = z;

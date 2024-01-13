@@ -1,6 +1,6 @@
 package earth.terrarium.adastra.common.entities.mob;
 
-import earth.terrarium.adastra.common.entities.mob.lunarians.LunarianMerchantOffer;
+import earth.terrarium.adastra.common.entities.mob.lunarians.LunarianMerchantOffers;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.server.level.ServerLevel;
@@ -47,7 +47,7 @@ public class Lunarian extends Villager {
     @Override
     protected void updateTrades() {
         VillagerData villagerData = this.getVillagerData();
-        Int2ObjectMap<VillagerTrades.ItemListing[]> int2ObjectMap = LunarianMerchantOffer.PROFESSION_TO_LEVELED_TRADE.get(villagerData.getProfession());
+        Int2ObjectMap<VillagerTrades.ItemListing[]> int2ObjectMap = LunarianMerchantOffers.PROFESSION_TO_LEVELED_TRADE.get(villagerData.getProfession());
         if (int2ObjectMap == null || int2ObjectMap.isEmpty()) {
             return;
         }

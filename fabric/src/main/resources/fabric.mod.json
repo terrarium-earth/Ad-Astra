@@ -46,10 +46,10 @@
     ],
     "depends": {
         "fabric-api": "*",
-        "minecraft": ">=1.20.1",
+        "minecraft": ">=1.20.4",
         "java": ">=17",
-        "resourcefullib": ">=2.1.20",
-        "resourcefulconfig": ">=2.1.0",
-        "botarium": ">=2.3.0"
+        "resourcefullib": ">=2.4.3",
+        "resourcefulconfig": ">=2.4.3",
+        "botarium": ">=3.0.5"
     }
 }

@@ -1,6 +1,6 @@
 package earth.terrarium.adastra.common.entities.mob;
 
-import earth.terrarium.adastra.common.entities.mob.lunarians.LunarianMerchantOffer;
+import earth.terrarium.adastra.common.entities.mob.lunarians.LunarianMerchantOffers;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.npc.WanderingTrader;
@@ -17,8 +17,8 @@ public class LunarianWanderingTrader extends WanderingTrader {
 
     @Override
     protected void updateTrades() {
-        VillagerTrades.ItemListing[] factorys = LunarianMerchantOffer.WANDERING_TRADER_TRADES.get(1);
-        VillagerTrades.ItemListing[] factorys2 = LunarianMerchantOffer.WANDERING_TRADER_TRADES.get(2);
+        VillagerTrades.ItemListing[] factorys = LunarianMerchantOffers.WANDERING_TRADER_TRADES.get(1);
+        VillagerTrades.ItemListing[] factorys2 = LunarianMerchantOffers.WANDERING_TRADER_TRADES.get(2);
         if (factorys == null || factorys2 == null) return;
         MerchantOffers tradeOfferList = this.getOffers();
         this.addOffersFromItemListings(tradeOfferList, factorys, 5);

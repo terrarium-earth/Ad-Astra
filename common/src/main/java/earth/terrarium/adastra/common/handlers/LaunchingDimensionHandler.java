@@ -51,7 +51,7 @@ public class LaunchingDimensionHandler extends SaveHandler {
     }
 
     public static LaunchingDimensionHandler read(ServerLevel level) {
-        return read(level, null, LaunchingDimensionHandler::new, "adastra_launching_dimensions");
+        return read(level, HandlerType.create(LaunchingDimensionHandler::new), "adastra_launching_dimensions");
     }
 
     private static LaunchedDimensions get(Player player, ServerLevel level, boolean create) {

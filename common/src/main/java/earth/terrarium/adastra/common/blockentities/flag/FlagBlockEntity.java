@@ -5,6 +5,7 @@ import dev.architectury.injectables.annotations.PlatformOnly;
 import earth.terrarium.adastra.common.blockentities.flag.content.FlagContent;
 import earth.terrarium.adastra.common.blockentities.flag.content.UrlContent;
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
+import earth.terrarium.adastra.mixins.common.SkullBlockEntityInvoker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -13,7 +14,6 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
@@ -71,9 +71,12 @@ public class FlagBlockEntity extends BlockEntity {
     }
 
     private void loadOwnerProperties() {
-        SkullBlockEntity.updateGameprofile(this.owner, (owner) -> {
-            this.owner = owner;
-            this.setChanged();
+        if (owner == null) return;
+        SkullBlockEntityInvoker.invokeFetchGameProfile(this.owner.getName()).thenAccept(owner -> {
+            if (owner.isPresent()) {
+                this.owner = owner.get();
+                this.setChanged();
+            }
         });
     }
 

@@ -1,5 +1,5 @@
 {
-  "type": "ad_astra:large_jigsaw_structure",
+  "type": "minecraft:jigsaw",
   "start_pool": "ad_astra:crimson_village/crimson_start",
   "size": 25,
   "max_distance_from_center": 80,

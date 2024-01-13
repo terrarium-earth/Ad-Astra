@@ -1,13 +1,13 @@
 package earth.terrarium.adastra.common.config;
 
-import com.teamresourceful.resourcefulconfig.common.annotations.Category;
-import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
-import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
-import com.teamresourceful.resourcefulconfig.common.config.EntryType;
-import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
+import com.teamresourceful.resourcefulconfig.api.annotations.Category;
+import com.teamresourceful.resourcefulconfig.api.annotations.Comment;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo;
+import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
 
-@Category(id = "cryoFreezer", translation = "config.ad_astra.machines")
-@WebInfo(icon = "zap")
+@Category("config.ad_astra.machines")
+@ConfigInfo(icon = "zap")
 public final class MachineConfig {
 
     @ConfigEntry(

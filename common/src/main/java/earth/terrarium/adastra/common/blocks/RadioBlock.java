@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blocks;
 
+import com.mojang.serialization.MapCodec;
 import earth.terrarium.adastra.client.radio.audio.RadioHandler;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.blocks.properties.EightDirectionProperty;
@@ -11,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -21,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class RadioBlock extends BasicEntityBlock {
+    public static final MapCodec<RadioBlock> CODEC = simpleCodec(RadioBlock::new);
 
     public static final EightDirectionProperty FACING = EightDirectionProperty.FACING;
 
@@ -31,6 +34,11 @@ public class RadioBlock extends BasicEntityBlock {
 
         registerDefaultState(defaultBlockState()
             .setValue(FACING, EightDirectionProperty.Direction.NORTH));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Override

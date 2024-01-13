@@ -24,9 +24,12 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -49,7 +52,7 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage() {
+    public WrappedBlockEnergyContainer getEnergyStorage(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
@@ -57,6 +60,10 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
     }
 
     @Override
+    public @Nullable WrappedBlockFluidContainer getFluidContainer(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
+        return getFluidContainer();
+    }
+
     public WrappedBlockFluidContainer getFluidContainer() {
         if (fluidContainer != null) return fluidContainer;
         return fluidContainer = new WrappedBlockFluidContainer(

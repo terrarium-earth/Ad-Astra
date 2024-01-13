@@ -45,7 +45,7 @@ public record ServerboundClearFluidTankPacket(
             return (player, level) -> ModUtils.getMachineFromMenuPacket(packet.machine(), player, level).ifPresent(
                 machine -> {
                     if (!(machine instanceof BotariumFluidBlock<?> fluidBlock)) return;
-                    FluidContainer container = fluidBlock.getFluidContainer();
+                    FluidContainer container = fluidBlock.getFluidContainer(level, machine.getBlockPos(), machine.getBlockState(), machine, null);
                     if (packet.tank() > container.getSize()) return;
                     container.internalExtract(container.getFluids().get(packet.tank()), false);
                     container.extractFluid(container.getFluids().get(packet.tank()), false);

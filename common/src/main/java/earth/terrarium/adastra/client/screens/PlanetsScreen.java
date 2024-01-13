@@ -197,7 +197,6 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        renderBackground(graphics);
         super.render(graphics, mouseX, mouseY, partialTick);
 
         renderButtons(graphics, mouseX, mouseY, partialTick);
@@ -256,7 +255,7 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     }
 
     @Override
-    public void renderBackground(GuiGraphics graphics) {
+    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         graphics.fill(0, 0, width, height, 0xff000419);
 
         // Render diamond pattern lines
@@ -346,11 +345,11 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {}
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
         if (mouseX < 112 && mouseX > 6 && mouseY > height / 2f - 43 && mouseY < height / 2f + 88) {
-            setScrollAmount(scrollAmount - delta * 16 / 2f);
+            setScrollAmount(scrollAmount - scrollY * 16 / 2f);
         } else if (mouseX > 112 && mouseX < 224 && mouseY > height / 2f - 2 && mouseY < height / 2f + 88) {
-            setSpaceStationScrollAmount(spaceStationScrollAmount - delta * 16 / 2f);
+            setSpaceStationScrollAmount(spaceStationScrollAmount - scrollY * 16 / 2f);
         }
         return true;
     }

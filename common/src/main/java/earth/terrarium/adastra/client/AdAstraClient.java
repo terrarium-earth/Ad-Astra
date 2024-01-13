@@ -71,7 +71,7 @@ public class AdAstraClient {
         ConstantComponents.AD_ASTRA_CATEGORY.getString());
 
     public static void init() {
-        AdAstra.CONFIGURATOR.registerConfig(AdAstraConfigClient.class);
+        AdAstra.CONFIGURATOR.register(AdAstraConfigClient.class);
         registerScreens();
         registerBlockEntityRenderers();
         registerEntityRenderers();

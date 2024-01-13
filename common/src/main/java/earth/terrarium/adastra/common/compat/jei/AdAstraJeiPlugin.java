@@ -5,7 +5,6 @@ import earth.terrarium.adastra.client.screens.machines.*;
 import earth.terrarium.adastra.common.compat.jei.categories.*;
 import earth.terrarium.adastra.common.registry.ModCreativeTab;
 import earth.terrarium.adastra.common.registry.ModItems;
-import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -40,12 +39,13 @@ public class AdAstraJeiPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         ClientLevel level = Objects.requireNonNull(Minecraft.getInstance().level);
 
-        registration.addRecipes(CompressingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.COMPRESSING.get()));
-        registration.addRecipes(AlloyingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.ALLOYING.get()));
-        registration.addRecipes(OxygenLoadingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get()));
-        registration.addRecipes(RefiningCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get()));
-        registration.addRecipes(CryoFreezingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYO_FREEZING.get()));
-        registration.addRecipes(NasaWorkbenchCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.NASA_WORKBENCH.get()));
+        // TODO re-add when JEI is updated
+//        registration.addRecipes(CompressingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.COMPRESSING.get()));
+//        registration.addRecipes(AlloyingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.ALLOYING.get()));
+//        registration.addRecipes(OxygenLoadingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get()));
+//        registration.addRecipes(ReiningCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get()));
+//        registration.addRecipes(CryoFreezingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYO_FREEZING.get()));
+//        registration.addRecipes(NasaWorkbenchCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.NASA_WORKBENCH.get()));
     }
 
     @Override

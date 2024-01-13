@@ -1,11 +1,11 @@
 package earth.terrarium.adastra.client.config;
 
-import com.teamresourceful.resourcefulconfig.common.annotations.Category;
-import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
-import com.teamresourceful.resourcefulconfig.common.annotations.IntRange;
-import com.teamresourceful.resourcefulconfig.common.config.EntryType;
+import com.teamresourceful.resourcefulconfig.api.annotations.Category;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigOption;
+import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
 
-@Category(id = "radio", translation = "Radio")
+@Category("Radio")
 public final class RadioConfig {
 
     @ConfigEntry(
@@ -13,7 +13,7 @@ public final class RadioConfig {
         id = "volume",
         translation = "Volume"
     )
-    @IntRange(min = 0, max = 100)
+    @ConfigOption.Range(min = 0, max = 100)
     public static int volume = 50;
 
     @ConfigEntry(

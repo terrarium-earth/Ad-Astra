@@ -1,16 +1,18 @@
 package earth.terrarium.adastra.common.config;
 
-import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
-import com.teamresourceful.resourcefulconfig.common.annotations.Config;
-import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
-import com.teamresourceful.resourcefulconfig.common.annotations.InlineCategory;
-import com.teamresourceful.resourcefulconfig.common.config.EntryType;
-import com.teamresourceful.resourcefulconfig.web.annotations.Gradient;
-import com.teamresourceful.resourcefulconfig.web.annotations.Link;
-import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
+import com.teamresourceful.resourcefulconfig.api.annotations.Comment;
+import com.teamresourceful.resourcefulconfig.api.annotations.Config;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo;
+import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
 
-@Config("ad_astra")
-@WebInfo(
+@Config(
+    value = "ad_astra",
+    categories = {
+        MachineConfig.class
+    }
+)
+@ConfigInfo(
     title = "Ad Astra",
     description = "Live long and prosper, and may the force be with you.",
 
@@ -18,11 +20,11 @@ import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
     gradient = @Gradient(value = "45deg", first = "#7F4DEE", second = "#E7797A"),
 
     links = {
-        @Link(value = "https://discord.gg/terrarium", icon = "gamepad-2", title = "Discord"),
-        @Link(value = "https://github.com/terrarium-earth/Ad-Astra", icon = "github", title = "GitHub"),
+        @ConfigInfo.Link(value = "https://discord.gg/terrarium", icon = "gamepad-2", text = "Discord"),
+        @ConfigInfo.Link(value = "https://github.com/terrarium-earth/Ad-Astra", icon = "github", text = "GitHub"),
 
-        @Link(value = "https://www.curseforge.com/minecraft/mc-mods/ad-astra", icon = "curseforge", title = "CurseForge"),
-        @Link(value = "https://modrinth.com/mod/ad-astra", icon = "modrinth", title = "Modrinth"),
+        @ConfigInfo.Link(value = "https://www.curseforge.com/minecraft/mc-mods/ad-astra", icon = "curseforge", text = "CurseForge"),
+        @ConfigInfo.Link(value = "https://modrinth.com/mod/ad-astra", icon = "modrinth", text = "Modrinth"),
     }
 )
 public final class AdAstraConfig {
@@ -66,7 +68,4 @@ public final class AdAstraConfig {
     )
     @Comment("The y level where rockets should leave the dimension and enter space.")
     public static int atmosphereLeave = 600;
-
-    @InlineCategory
-    public static MachineConfig machineConfig;
 }

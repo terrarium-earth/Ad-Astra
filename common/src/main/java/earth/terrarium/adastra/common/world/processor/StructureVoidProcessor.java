@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.common.world.processor;
 
 import com.mojang.serialization.Codec;
-import earth.terrarium.adastra.common.registry.ModStructures;
+import earth.terrarium.adastra.common.registry.ModStructureProcessors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
@@ -33,6 +33,6 @@ public class StructureVoidProcessor extends StructureProcessor {
 
     @Override
     protected StructureProcessorType<?> getType() {
-        return ModStructures.STRUCTURE_VOID_PROCESSOR.get();
+        return ModStructureProcessors.STRUCTURE_VOID_PROCESSOR.get();
     }
 }

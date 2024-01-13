@@ -2,18 +2,16 @@ package earth.terrarium.adastra.common.recipes.machines;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.teamresourceful.resourcefullib.common.codecs.recipes.IngredientCodec;
 import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
+import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.ItemUtils;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -21,20 +19,17 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public record AlloyingRecipe(
-    ResourceLocation id,
     int cookingTime, int energy,
     List<Ingredient> ingredients, ItemStack result
 ) implements CodecRecipe<Container> {
 
-    public static Codec<AlloyingRecipe> codec(ResourceLocation id) {
-        return RecordCodecBuilder.create(instance -> instance.group(
-            RecordCodecBuilder.point(id),
+    public static final Codec<AlloyingRecipe> CODEC = RecordCodecBuilder.create(
+        instance -> instance.group(
             Codec.INT.fieldOf("cookingtime").forGetter(AlloyingRecipe::cookingTime),
             Codec.INT.fieldOf("energy").forGetter(AlloyingRecipe::energy),
-            IngredientCodec.CODEC.listOf().fieldOf("ingredients").forGetter(AlloyingRecipe::ingredients),
+            Ingredient.CODEC.listOf().fieldOf("ingredients").forGetter(AlloyingRecipe::ingredients),
             ItemStackCodec.CODEC.fieldOf("result").forGetter(AlloyingRecipe::result)
         ).apply(instance, AlloyingRecipe::new));
-    }
 
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
@@ -56,7 +51,7 @@ public record AlloyingRecipe(
     }
 
     @Override
-    public @NotNull RecipeSerializer<?> getSerializer() {
+    public <T extends CodecRecipe<Container>> CodecRecipeSerializer<T> serializer() {
         return ModRecipeSerializers.ALLOYING.get();
     }
 

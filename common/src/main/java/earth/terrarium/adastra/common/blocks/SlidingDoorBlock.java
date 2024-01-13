@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blocks;
 
+import com.mojang.serialization.MapCodec;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.blocks.base.Wrenchable;
 import earth.terrarium.adastra.common.blocks.properties.SlidingDoorPartProperty;
@@ -42,6 +43,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class SlidingDoorBlock extends BasicEntityBlock implements Wrenchable {
+    public static final MapCodec<SlidingDoorBlock> CODEC = simpleCodec(SlidingDoorBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final BooleanProperty LOCKED = BlockStateProperties.LOCKED;
@@ -61,6 +63,11 @@ public class SlidingDoorBlock extends BasicEntityBlock implements Wrenchable {
             .setValue(LOCKED, false)
             .setValue(POWERED, false)
             .setValue(PART, SlidingDoorPartProperty.BOTTOM));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -177,9 +184,9 @@ public class SlidingDoorBlock extends BasicEntityBlock implements Wrenchable {
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         destroy(level, pos, state);
-        super.playerWillDestroy(level, pos, state, player);
+        return super.playerWillDestroy(level, pos, state, player);
     }
 
     @Override

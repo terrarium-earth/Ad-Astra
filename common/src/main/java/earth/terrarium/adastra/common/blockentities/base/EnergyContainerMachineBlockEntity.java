@@ -21,6 +21,10 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
         return ChargeSlotType.POWER_MACHINE;
     }
 
+    public WrappedBlockEnergyContainer getEnergyStorage() {
+        return getEnergyStorage(level(), getBlockPos(), getBlockState(), this, null);
+    }
+
     @Override
     public void internalServerTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         super.internalServerTick(level, time, state, pos);

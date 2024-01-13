@@ -1,6 +1,6 @@
 package earth.terrarium.adastra;
 
-import com.teamresourceful.resourcefulconfig.common.config.Configurator;
+import com.teamresourceful.resourcefulconfig.api.loader.Configurator;
 import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
@@ -17,16 +17,18 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
+import net.minecraft.world.item.Item;
 
+import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class AdAstra {
 
     public static final String MOD_ID = "ad_astra";
-    public static final Configurator CONFIGURATOR = new Configurator();
+    public static final Configurator CONFIGURATOR = new Configurator(MOD_ID);
 
     public static void init() {
-        CONFIGURATOR.registerConfig(AdAstraConfig.class);
+        CONFIGURATOR.register(AdAstraConfig.class);
 
         NetworkHandler.init();
         StationLoader.init();
@@ -44,8 +46,7 @@ public class AdAstra {
         ModParticleTypes.PARTICLE_TYPES.init();
         ModPaintingVariants.PAINTING_VARIANTS.init();
         ModSoundEvents.SOUND_EVENTS.init();
-        ModStructures.STRUCTURE_TYPES.init();
-        ModStructures.STRUCTURE_PROCESSORS.init();
+        ModStructureProcessors.STRUCTURE_PROCESSORS.init();
         ModFeatures.FEATURES.init();
         ModWorldCarvers.WORLD_CARVERS.init();
         ModBiomeSources.BIOME_SOURCES.init();
@@ -53,10 +54,11 @@ public class AdAstra {
     }
 
     public static void postInit() {
-        CauldronInteraction.WATER.put(ModItems.SPACE_HELMET.get(), CauldronInteraction.DYED_ITEM);
-        CauldronInteraction.WATER.put(ModItems.SPACE_SUIT.get(), CauldronInteraction.DYED_ITEM);
-        CauldronInteraction.WATER.put(ModItems.SPACE_PANTS.get(), CauldronInteraction.DYED_ITEM);
-        CauldronInteraction.WATER.put(ModItems.SPACE_BOOTS.get(), CauldronInteraction.DYED_ITEM);
+        Map<Item, CauldronInteraction> map = CauldronInteraction.WATER.map();
+        map.put(ModItems.SPACE_HELMET.get(), CauldronInteraction.DYED_ITEM);
+        map.put(ModItems.SPACE_SUIT.get(), CauldronInteraction.DYED_ITEM);
+        map.put(ModItems.SPACE_PANTS.get(), CauldronInteraction.DYED_ITEM);
+        map.put(ModItems.SPACE_BOOTS.get(), CauldronInteraction.DYED_ITEM);
         ModEntityTypes.registerSpawnPlacements();
     }
 

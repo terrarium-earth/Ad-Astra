@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[47,)"
+loaderVersion = "[1,)"
 license = "Terrarium License"
 issueTrackerURL = "https://github.com/terrarium-earth/ad-astra/issues"
 
@@ -13,37 +13,42 @@ authors = "Alex Nijjar"
 credits = "CodexAdrian, Facu, Fizz, MsRandom, ThatGravyBoat"
 description = "Live long and prosper, Ad Astra!"
 
+[[mixins]]
+config = "adastra.mixins.json"
+[[mixins]]
+config = "adastra-common.mixins.json"
+
 [[dependencies.ad_astra]]
-modId = "forge"
-mandatory = true
-versionRange = "[47,)"
+modId = "neoforge"
+type="required"
+versionRange = "[20.4,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.ad_astra]]
 modId = "minecraft"
-mandatory = true
-versionRange = "[1.20.1,)"
+type="required"
+versionRange = "[1.20.4,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.ad_astra]]
 modId = "resourcefullib"
-mandatory = true
-versionRange = "[2.1.19,)"
+type="required"
+versionRange = "[2.4.3,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.ad_astra]]
 modId = "resourcefulconfig"
 mandatory = true
-versionRange = "[2.1.0,)"
+versionRange = "[2.4.3,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.ad_astra]]
 modId = "botarium"
 mandatory = true
-versionRange = "[2.3.0,)"
+versionRange = "[3.0.5,)"
 ordering = "NONE"
 side = "BOTH"
