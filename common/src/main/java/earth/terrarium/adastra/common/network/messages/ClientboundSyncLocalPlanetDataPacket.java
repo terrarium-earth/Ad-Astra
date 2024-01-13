@@ -2,43 +2,42 @@ package earth.terrarium.adastra.common.network.messages;
 
 import com.teamresourceful.bytecodecs.base.ByteCodec;
 import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
-import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
-import com.teamresourceful.resourcefullib.common.networking.base.Packet;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
+import com.teamresourceful.resourcefullib.common.network.Packet;
+import com.teamresourceful.resourcefullib.common.network.base.ClientboundPacketType;
+import com.teamresourceful.resourcefullib.common.network.base.PacketType;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.handlers.base.PlanetData;
+import earth.terrarium.adastra.common.network.CodecPacketType;
 import net.minecraft.resources.ResourceLocation;
 
 public record ClientboundSyncLocalPlanetDataPacket(
     PlanetData localData
 ) implements Packet<ClientboundSyncLocalPlanetDataPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "sync_local_planet_data");
-    public static final Handler HANDLER = new Handler();
+    public static final ClientboundPacketType<ClientboundSyncLocalPlanetDataPacket> TYPE = new Type();
 
     @Override
-    public ResourceLocation getID() {
-        return ID;
+    public PacketType<ClientboundSyncLocalPlanetDataPacket> type() {
+        return TYPE;
     }
 
-    @Override
-    public PacketHandler<ClientboundSyncLocalPlanetDataPacket> getHandler() {
-        return HANDLER;
-    }
+    private static class Type extends CodecPacketType<ClientboundSyncLocalPlanetDataPacket> implements ClientboundPacketType<ClientboundSyncLocalPlanetDataPacket> {
 
-    private static class Handler extends CodecPacketHandler<ClientboundSyncLocalPlanetDataPacket> {
-        public Handler() {
-            super(ObjectByteCodec.create(
-                ByteCodec.INT.map(PlanetData::unpack, PlanetData::pack).fieldOf(ClientboundSyncLocalPlanetDataPacket::localData),
-                ClientboundSyncLocalPlanetDataPacket::new
-            ));
+        public Type() {
+            super(
+                ClientboundSyncLocalPlanetDataPacket.class,
+                new ResourceLocation(AdAstra.MOD_ID, "sync_local_planet_data"),
+                ObjectByteCodec.create(
+                    ByteCodec.INT.map(PlanetData::unpack, PlanetData::pack).fieldOf(ClientboundSyncLocalPlanetDataPacket::localData),
+                    ClientboundSyncLocalPlanetDataPacket::new
+                )
+            );
         }
 
         @Override
-        public PacketContext handle(ClientboundSyncLocalPlanetDataPacket packet) {
-            return (player, level) -> ClientData.updateLocalData(packet.localData());
+        public Runnable handle(ClientboundSyncLocalPlanetDataPacket packet) {
+            return () -> ClientData.updateLocalData(packet.localData());
         }
     }
 }

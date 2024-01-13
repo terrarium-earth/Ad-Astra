@@ -1,2 +1,5 @@
 - Fixed etrionic capacitor crashing in round-robin mode with when it's not charging anything.
 - Fixed REI fluid bars displaying incorrectly.
+- Updated to new Resourcefullib packet format.
+- Fixed the invalid launch text displaying to players even in correct dimensions on servers.
+- Fixed Planet Data not being send to players when joining forge servers.

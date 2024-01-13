@@ -294,7 +294,7 @@ public class Rocket extends Vehicle {
     public boolean canLaunch() {
         if (isLaunching() || hasLaunched()) return false;
         if (!AdAstraConfig.launchFromAnywhere && !entityData.get(IS_IN_VALID_DIMENSION)) {
-            if (getControllingPassenger() instanceof Player player) {
+            if (getControllingPassenger() instanceof ServerPlayer player) {
                 player.displayClientMessage(ConstantComponents.INVALID_LAUNCHING_DIMENSION, true);
             }
             this.showFuelMessage = false;

@@ -2,10 +2,9 @@ package earth.terrarium.adastra.common.network.messages;
 
 import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
-import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
-import com.teamresourceful.resourcefullib.common.networking.base.Packet;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
+import com.teamresourceful.resourcefullib.common.network.Packet;
+import com.teamresourceful.resourcefullib.common.network.base.PacketType;
+import com.teamresourceful.resourcefullib.common.network.base.ServerboundPacketType;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.compat.cadmus.CadmusIntegration;
@@ -13,6 +12,7 @@ import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
+import earth.terrarium.adastra.common.network.CodecPacketType;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -21,43 +21,45 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.TicketType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.function.Consumer;
+
 public record ServerboundConstructSpaceStationPacket(
     ResourceKey<Level> dimension, Component name) implements Packet<ServerboundConstructSpaceStationPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "construct_space_station");
-    public static final Handler HANDLER = new Handler();
+    public static final ServerboundPacketType<ServerboundConstructSpaceStationPacket> TYPE = new Type();
 
     public static final ResourceLocation SPACE_STATION_STRUCTURE = new ResourceLocation(AdAstra.MOD_ID, "space_station");
 
     @Override
-    public ResourceLocation getID() {
-        return ID;
+    public PacketType<ServerboundConstructSpaceStationPacket> type() {
+        return TYPE;
     }
 
-    @Override
-    public PacketHandler<ServerboundConstructSpaceStationPacket> getHandler() {
-        return HANDLER;
-    }
+    private static class Type extends CodecPacketType<ServerboundConstructSpaceStationPacket> implements ServerboundPacketType<ServerboundConstructSpaceStationPacket> {
 
-    private static class Handler extends CodecPacketHandler<ServerboundConstructSpaceStationPacket> {
-        public Handler() {
-            super(ObjectByteCodec.create(
-                ExtraByteCodecs.DIMENSION.fieldOf(ServerboundConstructSpaceStationPacket::dimension),
-                ExtraByteCodecs.COMPONENT.fieldOf(ServerboundConstructSpaceStationPacket::name),
-                ServerboundConstructSpaceStationPacket::new
-            ));
+        public Type() {
+            super(
+                ServerboundConstructSpaceStationPacket.class,
+                new ResourceLocation(AdAstra.MOD_ID, "construct_space_station"),
+                ObjectByteCodec.create(
+                    ExtraByteCodecs.DIMENSION.fieldOf(ServerboundConstructSpaceStationPacket::dimension),
+                    ExtraByteCodecs.COMPONENT.fieldOf(ServerboundConstructSpaceStationPacket::name),
+                    ServerboundConstructSpaceStationPacket::new
+                )
+            );
         }
 
         @Override
-        public PacketContext handle(ServerboundConstructSpaceStationPacket packet) {
-            return (player, level) -> {
-                if (!(level instanceof ServerLevel serverLevel)) return;
+        public Consumer<Player> handle(ServerboundConstructSpaceStationPacket packet) {
+            return player -> {
+                if (!(player.level() instanceof ServerLevel serverLevel)) return;
                 if (!(player instanceof ServerPlayer serverPlayer)) return;
                 if (!(player.containerMenu instanceof PlanetsMenu)) return;
 

@@ -3,16 +3,16 @@ package earth.terrarium.adastra.common.network.messages;
 import com.teamresourceful.bytecodecs.base.ByteCodec;
 import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
-import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
-import com.teamresourceful.resourcefullib.common.networking.base.Packet;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
+import com.teamresourceful.resourcefullib.common.network.Packet;
+import com.teamresourceful.resourcefullib.common.network.base.PacketType;
+import com.teamresourceful.resourcefullib.common.network.base.ServerboundPacketType;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
+import earth.terrarium.adastra.common.network.CodecPacketType;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
@@ -20,38 +20,40 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.function.Consumer;
 
 public record ServerboundLandPacket(ResourceKey<Level> dimension,
                                     boolean tryPreviousLocation) implements Packet<ServerboundLandPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "land");
-    public static final Handler HANDLER = new Handler();
+    public static final ServerboundPacketType<ServerboundLandPacket> TYPE = new Type();
 
     @Override
-    public ResourceLocation getID() {
-        return ID;
+    public PacketType<ServerboundLandPacket> type() {
+        return TYPE;
     }
 
-    @Override
-    public PacketHandler<ServerboundLandPacket> getHandler() {
-        return HANDLER;
-    }
+    private static class Type extends CodecPacketType<ServerboundLandPacket> implements ServerboundPacketType<ServerboundLandPacket> {
 
-    private static class Handler extends CodecPacketHandler<ServerboundLandPacket> {
-        public Handler() {
-            super(ObjectByteCodec.create(
-                ExtraByteCodecs.DIMENSION.fieldOf(ServerboundLandPacket::dimension),
-                ByteCodec.BOOLEAN.fieldOf(ServerboundLandPacket::tryPreviousLocation),
-                ServerboundLandPacket::new
-            ));
+        public Type() {
+            super(
+                ServerboundLandPacket.class,
+                new ResourceLocation(AdAstra.MOD_ID, "land"),
+                ObjectByteCodec.create(
+                    ExtraByteCodecs.DIMENSION.fieldOf(ServerboundLandPacket::dimension),
+                    ByteCodec.BOOLEAN.fieldOf(ServerboundLandPacket::tryPreviousLocation),
+                    ServerboundLandPacket::new
+                )
+            );
         }
 
         @Override
-        public PacketContext handle(ServerboundLandPacket packet) {
-            return (player, level) -> {
-                if (!(level instanceof ServerLevel serverLevel)) return;
+        public Consumer<Player> handle(ServerboundLandPacket packet) {
+            return player -> {
+                if (!(player.level() instanceof ServerLevel serverLevel)) return;
                 if (!(player.containerMenu instanceof PlanetsMenu)) return;
 
                 var planet = PlanetApi.API.getPlanet(packet.dimension);

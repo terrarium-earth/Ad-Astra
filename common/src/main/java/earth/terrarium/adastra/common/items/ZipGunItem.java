@@ -108,8 +108,8 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
     }
 
     public boolean consumeFuel(Player player, ItemStack stack, long amount) {
-        if (player.isCreative()) return true;
         if (!(stack.getItem() instanceof ZipGunItem)) return false;
+        if (player.isCreative()) return true;
         ItemStackHolder holder = new ItemStackHolder(stack);
         var container = FluidContainer.of(holder);
         if (container == null) return false;

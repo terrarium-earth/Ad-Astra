@@ -3,45 +3,47 @@ package earth.terrarium.adastra.common.network.messages;
 import com.teamresourceful.bytecodecs.base.ByteCodec;
 import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
-import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
-import com.teamresourceful.resourcefullib.common.networking.base.Packet;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
+import com.teamresourceful.resourcefullib.common.network.Packet;
+import com.teamresourceful.resourcefullib.common.network.base.PacketType;
+import com.teamresourceful.resourcefullib.common.network.base.ServerboundPacketType;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.base.RedstoneControl;
+import earth.terrarium.adastra.common.network.CodecPacketType;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+
+import java.util.function.Consumer;
 
 public record ServerboundSetRedstoneControlPacket(
     BlockPos machine, RedstoneControl redstoneControl
 ) implements Packet<ServerboundSetRedstoneControlPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "set_redstone_control");
-    public static final Handler HANDLER = new Handler();
+    public static final ServerboundPacketType<ServerboundSetRedstoneControlPacket> TYPE = new Type();
 
     @Override
-    public ResourceLocation getID() {
-        return ID;
+    public PacketType<ServerboundSetRedstoneControlPacket> type() {
+        return TYPE;
     }
 
-    @Override
-    public PacketHandler<ServerboundSetRedstoneControlPacket> getHandler() {
-        return HANDLER;
-    }
+    private static class Type extends CodecPacketType<ServerboundSetRedstoneControlPacket> implements ServerboundPacketType<ServerboundSetRedstoneControlPacket> {
 
-    private static class Handler extends CodecPacketHandler<ServerboundSetRedstoneControlPacket> {
-        public Handler() {
-            super(ObjectByteCodec.create(
-                ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundSetRedstoneControlPacket::machine),
-                ByteCodec.ofEnum(RedstoneControl.class).fieldOf(ServerboundSetRedstoneControlPacket::redstoneControl),
-                ServerboundSetRedstoneControlPacket::new
-            ));
+        public Type() {
+            super(
+                ServerboundSetRedstoneControlPacket.class,
+                new ResourceLocation(AdAstra.MOD_ID, "set_redstone_control"),
+                ObjectByteCodec.create(
+                    ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundSetRedstoneControlPacket::machine),
+                    ByteCodec.ofEnum(RedstoneControl.class).fieldOf(ServerboundSetRedstoneControlPacket::redstoneControl),
+                    ServerboundSetRedstoneControlPacket::new
+                )
+            );
         }
 
         @Override
-        public PacketContext handle(ServerboundSetRedstoneControlPacket packet) {
-            return (player, level) -> ModUtils.getMachineFromMenuPacket(packet.machine(), player, level).ifPresent(
+        public Consumer<Player> handle(ServerboundSetRedstoneControlPacket packet) {
+            return player -> ModUtils.getMachineFromMenuPacket(packet.machine(), player, player.level()).ifPresent(
                 machine -> machine.setRedstoneControl(packet.redstoneControl())
             );
         }

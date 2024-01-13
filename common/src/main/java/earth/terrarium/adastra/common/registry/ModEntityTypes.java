@@ -144,7 +144,7 @@ public class ModEntityTypes {
     public static final RegistryEntry<EntityType<IceSpit>> ICE_SPIT = ENTITY_TYPES.register("ice_spit", () ->
         EntityType.Builder.<IceSpit>of(IceSpit::new, MobCategory.MISC)
             .sized(0.5f, 0.5f)
-            .build(AdAstra.MOD_ID));
+            .build("ice_spit"));
 
     public static void registerSpawnPlacements() {
         SpawnPlacements.register(ModEntityTypes.LUNARIAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Lunarian::checkMobSpawnRules);
