@@ -42,7 +42,7 @@ public record RefiningRecipe(
     }
 
     @Override
-    public <T extends CodecRecipe<Container>> CodecRecipeSerializer<T> serializer() {
+    public CodecRecipeSerializer<? extends CodecRecipe<Container>> serializer() {
         return ModRecipeSerializers.REFINING.get();
     }
 

@@ -37,7 +37,7 @@ public record CryoFreezingRecipe(
     }
 
     @Override
-    public <T extends CodecRecipe<Container>> CodecRecipeSerializer<T> serializer() {
+    public CodecRecipeSerializer<? extends CodecRecipe<Container>> serializer() {
         return ModRecipeSerializers.CRYO_FREEZING.get();
     }
 

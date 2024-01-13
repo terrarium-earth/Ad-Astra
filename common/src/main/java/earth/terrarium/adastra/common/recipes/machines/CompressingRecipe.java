@@ -2,13 +2,17 @@ package earth.terrarium.adastra.common.recipes.machines;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
+import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
 import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
+import earth.terrarium.adastra.common.blockentities.machines.CompressorBlockEntity;
+import earth.terrarium.adastra.common.recipes.base.IngredientByteCodec;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.ItemUtils;
-import earth.terrarium.botarium.common.energy.base.BotariumEnergyBlock;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -29,16 +33,24 @@ public record CompressingRecipe(
             ItemStackCodec.CODEC.fieldOf("result").forGetter(CompressingRecipe::result)
         ).apply(instance, CompressingRecipe::new));
 
+    public static final ByteCodec<CompressingRecipe> NETWORK_CODEC = ObjectByteCodec.create(
+        ByteCodec.INT.fieldOf(CompressingRecipe::cookingTime),
+        ByteCodec.INT.fieldOf(CompressingRecipe::energy),
+        IngredientByteCodec.CODEC.fieldOf(CompressingRecipe::ingredient),
+        ExtraByteCodecs.ITEM_STACK.fieldOf(CompressingRecipe::result),
+        CompressingRecipe::new
+    );
+
     @Override
     public boolean matches(Container container, Level level) {
         if (!ingredient.test(container.getItem(1))) return false;
-        if (!(container instanceof BotariumEnergyBlock<?> entity)) return true;
+        if (!(container instanceof CompressorBlockEntity entity)) return true;
         if (entity.getEnergyStorage().internalExtract(energy, true) < energy) return false;
         return ItemUtils.canAddItem(container.getItem(2), result);
     }
 
     @Override
-    public <T extends CodecRecipe<Container>> CodecRecipeSerializer<T> serializer() {
+    public CodecRecipeSerializer<? extends CodecRecipe<Container>> serializer() {
         return ModRecipeSerializers.COMPRESSING.get();
     }
 

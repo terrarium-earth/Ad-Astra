@@ -2,6 +2,9 @@ package earth.terrarium.adastra.common.recipes;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
+import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
 import earth.terrarium.adastra.common.recipes.base.IngredientHolder;
@@ -25,6 +28,12 @@ public record SpaceStationRecipe(List<IngredientHolder> ingredients,
             ResourceKey.codec(Registries.DIMENSION).fieldOf("dimension").forGetter(SpaceStationRecipe::dimension)
         ).apply(instance, SpaceStationRecipe::new));
 
+    public static final ByteCodec<SpaceStationRecipe> NETWORK_CODEC = ObjectByteCodec.create(
+        IngredientHolder.NETWORK_CODEC.listOf().fieldOf(SpaceStationRecipe::ingredients),
+        ExtraByteCodecs.resourceKey(Registries.DIMENSION).fieldOf(SpaceStationRecipe::dimension),
+        SpaceStationRecipe::new
+    );
+
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
         for (IngredientHolder holder : ingredients) {
@@ -41,7 +50,7 @@ public record SpaceStationRecipe(List<IngredientHolder> ingredients,
     }
 
     @Override
-    public <T extends CodecRecipe<Container>> CodecRecipeSerializer<T> serializer() {
+    public CodecRecipeSerializer<? extends CodecRecipe<Container>> serializer() {
         return ModRecipeSerializers.SPACE_STATION_SERIALIZER.get();
     }
 
