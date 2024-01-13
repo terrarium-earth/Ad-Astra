@@ -48,7 +48,7 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new ExtractOnlyEnergyContainer(MachineConfig.ironTierEnergyCapacity, MachineConfig.ironTierMaxEnergyInOut));
+            new ExtractOnlyEnergyContainer(MachineConfig.IRON.energyCapacity, MachineConfig.IRON.maxEnergyInOut));
     }
 
     @Override

@@ -10,9 +10,9 @@ import earth.terrarium.adastra.common.container.BiFluidContainer;
 import earth.terrarium.adastra.common.menus.machines.FuelRefineryMenu;
 import earth.terrarium.adastra.common.recipes.machines.RefiningRecipe;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
+import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
-import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
@@ -55,7 +55,8 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(MachineConfig.steelTierEnergyCapacity, MachineConfig.steelTierMaxEnergyInOut));
+            EnergyUtils.machineInsertOnlyEnergy(MachineConfig.STEEL)
+        );
     }
 
     @Override
@@ -64,7 +65,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
         return fluidContainer = new WrappedBlockFluidContainer(
             this,
             new BiFluidContainer(
-                FluidConstants.fromMillibuckets(MachineConfig.steelTierFluidCapacity),
+                FluidConstants.fromMillibuckets(MachineConfig.STEEL.fluidCapacity),
                 1,
                 1,
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())

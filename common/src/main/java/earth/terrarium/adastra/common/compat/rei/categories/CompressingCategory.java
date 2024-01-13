@@ -60,7 +60,7 @@ public class CompressingCategory implements DisplayCategory<CompressingDisplay> 
         widgets.add(Widgets.createSlot(new Point(bounds.x + 95, bounds.y + 58)).backgroundEnabled(false).entries(display.getOutputEntries().get(0)).markOutput());
 
         widgets.add(new ReiEtaWidget(new Point(bounds.x + 72, bounds.y + 59), display.recipe().cookingTime(), GuiUtils.HAMMER, 15, 16));
-        widgets.add(new ReiEnergyBarWidget(new Point(bounds.x + 144, bounds.y + 73), -display.recipe().energy(), MachineConfig.ironTierEnergyCapacity, MachineConfig.ironTierMaxEnergyInOut, 0));
+        widgets.add(new ReiEnergyBarWidget(new Point(bounds.x + 144, bounds.y + 73), -display.recipe().energy(), MachineConfig.IRON.energyCapacity, MachineConfig.IRON.maxEnergyInOut, 0));
 
         return widgets;
     }

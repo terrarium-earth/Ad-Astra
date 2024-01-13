@@ -8,9 +8,9 @@ import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.WaterPumpMenu;
 import earth.terrarium.adastra.common.registry.ModParticleTypes;
+import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
-import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
@@ -53,7 +53,8 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new InsertOnlyEnergyContainer(MachineConfig.deshTierEnergyCapacity, MachineConfig.deshTierMaxEnergyInOut));
+            EnergyUtils.machineInsertOnlyEnergy(MachineConfig.DESH)
+        );
     }
 
     @Override
@@ -62,7 +63,7 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
         return fluidContainer = new WrappedBlockFluidContainer(
             this,
             new ExtractOnlyFluidContainer(
-                i -> FluidConstants.fromMillibuckets(MachineConfig.deshTierFluidCapacity),
+                i -> FluidConstants.fromMillibuckets(MachineConfig.DESH.fluidCapacity),
                 1,
                 (tank, holder) -> holder.is(FluidTags.WATER)));
     }

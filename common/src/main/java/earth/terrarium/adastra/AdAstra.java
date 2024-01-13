@@ -1,6 +1,6 @@
 package earth.terrarium.adastra;
 
-import com.teamresourceful.resourcefulconfig.common.config.Configurator;
+import com.teamresourceful.resourcefulconfig.api.loader.Configurator;
 import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.api.systems.PlanetData;
@@ -23,10 +23,10 @@ import java.util.function.BiConsumer;
 public class AdAstra {
 
     public static final String MOD_ID = "ad_astra";
-    public static final Configurator CONFIGURATOR = new Configurator();
+    public static final Configurator CONFIGURATOR = new Configurator(MOD_ID);
 
     public static void init() {
-        CONFIGURATOR.registerConfig(AdAstraConfig.class);
+        CONFIGURATOR.register(AdAstraConfig.class);
 
         NetworkHandler.init();
         StationLoader.init();

@@ -47,7 +47,7 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
         if (energyContainer != null) return energyContainer;
         return energyContainer = new WrappedBlockEnergyContainer(
             this,
-            new SimpleEnergyContainer(MachineConfig.energizerEnergyCapacity, MachineConfig.ostrumTierMaxEnergyInOut, MachineConfig.ostrumTierMaxEnergyInOut) {
+            new SimpleEnergyContainer(MachineConfig.energizerEnergyCapacity, MachineConfig.OSTRUM.maxEnergyInOut, MachineConfig.OSTRUM.maxEnergyInOut) {
                 @Override
                 public void setEnergy(long energy) {
                     super.setEnergy(energy);

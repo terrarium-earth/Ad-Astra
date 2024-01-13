@@ -1,19 +1,23 @@
 package earth.terrarium.adastra.client.config;
 
+import com.teamresourceful.resourcefulconfig.api.annotations.Config;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo;
+import com.teamresourceful.resourcefulconfig.api.types.ResourcefulConfig;
+import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
 import com.teamresourceful.resourcefulconfig.client.ConfigScreen;
-import com.teamresourceful.resourcefulconfig.common.annotations.Config;
-import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
-import com.teamresourceful.resourcefulconfig.common.annotations.InlineCategory;
-import com.teamresourceful.resourcefulconfig.common.config.EntryType;
-import com.teamresourceful.resourcefulconfig.common.config.ResourcefulConfig;
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.common.config.info.AdAstraConfigInfo;
 import net.minecraft.client.Minecraft;
 
-@Config("ad_astra-client")
+@Config(
+    value = "ad_astra-client",
+    categories = {
+        RadioConfig.class
+    }
+)
+@ConfigInfo.Provider(AdAstraConfigInfo.class)
 public final class AdAstraConfigClient {
-
-    @InlineCategory
-    public static RadioConfig radio;
 
     @ConfigEntry(
         type = EntryType.BOOLEAN,
@@ -88,6 +92,6 @@ public final class AdAstraConfigClient {
     public static void open() {
         ResourcefulConfig config = AdAstra.CONFIGURATOR.getConfig(AdAstraConfigClient.class);
         if (config == null) return;
-        Minecraft.getInstance().setScreen(new ConfigScreen(Minecraft.getInstance().screen, null, config));
+        Minecraft.getInstance().setScreen(new ConfigScreen(Minecraft.getInstance().screen, config));
     }
 }
