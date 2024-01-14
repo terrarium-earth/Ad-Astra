@@ -2,10 +2,8 @@ package earth.terrarium.adastra.client.radio.screen;
 
 import com.teamresourceful.resourcefullib.client.screens.BaseCursorScreen;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.client.config.AdAstraConfigClient;
 import earth.terrarium.adastra.client.config.RadioConfig;
 import earth.terrarium.adastra.client.radio.audio.RadioHandler;
-import earth.terrarium.adastra.client.utils.Debouncer;
 import earth.terrarium.adastra.common.network.NetworkHandler;
 import earth.terrarium.adastra.common.network.messages.ServerboundRequestStationsPacket;
 import earth.terrarium.adastra.common.utils.radio.StationInfo;
@@ -13,8 +11,6 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -27,7 +23,6 @@ import java.util.*;
 
 public class RadioScreen extends BaseCursorScreen {
 
-    private static final Debouncer VOLUME_DEBOUNCER = new Debouncer();
     private static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/radio/ui.png");
     private static final ResourceLocation CLOCK = new ResourceLocation(AdAstra.MOD_ID, "textures/radio/clock.png");
     private static final int WIDTH = 253;
@@ -51,17 +46,8 @@ public class RadioScreen extends BaseCursorScreen {
     protected void init() {
         int left = (this.width - WIDTH) / 2;
         int top = (this.height - HEIGHT) / 2;
-        addRenderableWidget(new ImageButton(left + 116, top + 83, 21, 21, 253, 0, 21, TEXTURE, 512, 256, button -> {
-            if (RadioConfig.volume >= 100) return;
-            RadioConfig.volume = Math.min(100, RadioConfig.volume + (Screen.hasShiftDown() ? 10 : 1));
-            VOLUME_DEBOUNCER.debounce(RadioScreen::saveConfigOnThread, 5000);
-        }));
-        addRenderableWidget(new ImageButton(left + 116, top + 105, 21, 21, 274, 0, 21, TEXTURE, 512, 256, button -> {
-            if (RadioConfig.volume <= 0) return;
-            RadioConfig.volume = Math.max(0, RadioConfig.volume - (Screen.hasShiftDown() ? 10 : 1));
-            VOLUME_DEBOUNCER.debounce(RadioScreen::saveConfigOnThread, 5000);
-        }));
-
+        addRenderableWidget(new VolumeButton(left + 116, top + 83, 21, 21, 1));
+        addRenderableWidget(new VolumeButton(left + 116, top + 105, 21, 21, -1));
         this.list = addRenderableWidget(new RadioList(left + 149, top + 84, this.pos));
         if (!this.stations.isEmpty()) {
             this.list.update(this.stations, RadioHandler.getPlaying());
@@ -70,7 +56,7 @@ public class RadioScreen extends BaseCursorScreen {
 
     @Override
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        super.renderBackground(graphics);
+        super.renderBackground(graphics, mouseX, mouseY, partialTick);
         int left = (this.width - WIDTH) / 2;
         int top = (this.height - HEIGHT) / 2;
 
@@ -130,10 +116,6 @@ public class RadioScreen extends BaseCursorScreen {
     private static long getDayTime() {
         if (Minecraft.getInstance().level == null) return 0;
         return Minecraft.getInstance().level.getDayTime();
-    }
-
-    private static void saveConfigOnThread() {
-        Minecraft.getInstance().tell(() -> AdAstra.CONFIGURATOR.saveConfig(AdAstraConfigClient.class));
     }
 
     @Override

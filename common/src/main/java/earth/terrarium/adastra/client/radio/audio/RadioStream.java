@@ -2,7 +2,6 @@ package earth.terrarium.adastra.client.radio.audio;
 
 import earth.terrarium.adastra.common.utils.BufferUtils;
 import net.minecraft.server.packs.resources.IoSupplier;
-import net.minecraft.util.HttpUtil;
 import org.apache.commons.io.IOUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -60,7 +59,7 @@ public class RadioStream extends InputStream {
                 throw new CompletionException(e);
             }
             setup.set(false);
-        }, HttpUtil.DOWNLOAD_EXECUTOR);
+        }, RadioHandler.DOWNLOAD_EXECUTOR);
 
         try {
             wait(setup);

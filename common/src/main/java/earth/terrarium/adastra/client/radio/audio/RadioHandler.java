@@ -1,17 +1,22 @@
 package earth.terrarium.adastra.client.radio.audio;
 
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.mojang.logging.LogUtils;
 import com.teamresourceful.resourcefullib.common.utils.WebUtils;
 import earth.terrarium.adastra.client.radio.screen.RadioScreen;
 import earth.terrarium.adastra.mixins.client.SoundEngineAccessor;
 import earth.terrarium.adastra.mixins.client.SoundManagerAccessor;
+import net.minecraft.DefaultUncaughtExceptionHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundEngine;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.HttpUtil;
 import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,9 +27,18 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
 
 public final class RadioHandler {
 
+    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final ListeningExecutorService DOWNLOAD_EXECUTOR = MoreExecutors.listeningDecorator(
+        Executors.newCachedThreadPool((new ThreadFactoryBuilder())
+            .setDaemon(true)
+            .setUncaughtExceptionHandler(new DefaultUncaughtExceptionHandler(LOGGER))
+            .setNameFormat("Downloader %d")
+            .build())
+    );
     private static final Map<String, CompletableFuture<InputStream>> IN_PROGRESS = new ConcurrentHashMap<>();
     private static RadioSoundInstance lastStation = null;
 
@@ -69,7 +83,7 @@ public final class RadioHandler {
             } catch (Throwable e) {
                 throw new CompletionException(e);
             }
-        }, HttpUtil.DOWNLOAD_EXECUTOR);
+        }, DOWNLOAD_EXECUTOR);
     }
 
     public static void play(String url, RandomSource random, BlockPos pos) {
