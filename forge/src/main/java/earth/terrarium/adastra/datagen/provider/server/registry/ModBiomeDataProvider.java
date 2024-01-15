@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 
 @SuppressWarnings("SameParameterValue")
 public class ModBiomeDataProvider {
-    public static final ResourceKey<Biome> SPACE = register("space");
+    public static final ResourceKey<Biome> SPACE = register("orbit");
     public static final ResourceKey<Biome> LUNAR_WASTELANDS = register("lunar_wastelands");
     public static final ResourceKey<Biome> MARTIAN_CANYON_CREEK = register("martian_canyon_creek");
     public static final ResourceKey<Biome> MARTIAN_POLAR_CAPS = register("martian_polar_caps");

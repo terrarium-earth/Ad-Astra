@@ -14,7 +14,7 @@ import net.minecraft.world.level.levelgen.*;
 import java.util.List;
 
 public class ModNoiseGeneratorSettingsProvider {
-    public static final ResourceKey<NoiseGeneratorSettings> SPACE = register("space");
+    public static final ResourceKey<NoiseGeneratorSettings> SPACE = register("orbit");
     public static final ResourceKey<NoiseGeneratorSettings> MOON = register("moon");
     public static final ResourceKey<NoiseGeneratorSettings> MARS = register("mars");
     public static final ResourceKey<NoiseGeneratorSettings> VENUS = register("venus");
