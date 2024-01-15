@@ -5,3 +5,4 @@
 - Fixed Planet Data not being send to players when joining forge servers.
 - Added ServerboundLandPacket validation. (#427)
 - Fixed old worlds not being compatible after updating. If you've created a new world in 1.15.7 or 1.15.8, it will break. But old worlds should work fine.
+- Fixed crash when loading chunk with ticking pipes. (#428)

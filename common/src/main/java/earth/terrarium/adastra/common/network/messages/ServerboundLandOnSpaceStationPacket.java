@@ -9,7 +9,6 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.compat.argonauts.ArgonautsIntegration;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
-import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;
 import earth.terrarium.adastra.common.network.CodecPacketType;
@@ -70,7 +69,6 @@ public record ServerboundLandOnSpaceStationPacket(ResourceKey<Level> dimension,
                 var targetPos = packet.spaceStationPos();
                 if (!isAllowed(serverPlayer, targetLevel, targetPos)) return;
 
-                LaunchingDimensionHandler.addSpawnLocation(player, serverLevel);
                 BlockPos middleBlockPosition = targetPos.getMiddleBlockPosition(AdAstraConfig.atmosphereLeave);
                 ModUtils.land(serverPlayer, targetLevel, new Vec3(middleBlockPosition.getX() - 0.5f, middleBlockPosition.getY(), middleBlockPosition.getZ() - 0.5f));
             };
