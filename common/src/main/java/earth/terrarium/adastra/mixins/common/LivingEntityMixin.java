@@ -49,11 +49,11 @@ public abstract class LivingEntityMixin extends Entity {
         if (entity instanceof Player p && (p.isCreative() || p.isSpectator())) return;
 
         if (entity.tickCount % 20 == 0) {
-            if (AdAstraEvents.entityOxygenTick(level, entity)) {
+            if (AdAstraEvents.OxygenTickEvent.post(level, entity)) {
                 OxygenApi.API.entityTick(level, entity);
             }
 
-            if (AdAstraEvents.entityTemperatureTick(level, entity)) {
+            if (AdAstraEvents.TemperatureTickEvent.post(level, entity)) {
                 TemperatureApi.API.entityTick(level, entity);
             }
         }
@@ -65,7 +65,7 @@ public abstract class LivingEntityMixin extends Entity {
             && adastra$isInRain()
         ) {
             if (getVehicle() != null && getVehicle().getType().is(ModEntityTypeTags.ACID_RAIN_IMMUNE)) return;
-            if (AdAstraEvents.entityAcidRainTick(level, entity)) {
+            if (AdAstraEvents.AcidRainTickEvent.post(level, entity)) {
                 entity.hurt(ModDamageSources.create(level(), ModDamageSources.ACID_RAIN), 3);
                 playSound(SoundEvents.GENERIC_BURN, 0.4f, 2 + random.nextFloat() * 0.4f);
             }
@@ -85,11 +85,11 @@ public abstract class LivingEntityMixin extends Entity {
 
         var movementAffectingPos = getBlockPosBelowThatAffectsMyMovement();
         if (gravity <= PlanetConstants.ZERO_GRAVITY_THRESHOLD) {
-            if (AdAstraEvents.entityZeroGravityTick(level(), entity, travelVector, movementAffectingPos)) {
+            if (AdAstraEvents.ZeroGravityTickEvent.post(level(), entity, travelVector, movementAffectingPos)) {
                 GravityApi.API.entityTick(level(), entity, travelVector, movementAffectingPos);
                 ci.cancel();
             }
-        } else if (AdAstraEvents.entityGravityTick(level(), entity, travelVector, movementAffectingPos)) {
+        } else if (AdAstraEvents.GravityTickEvent.post(level(), entity, travelVector, movementAffectingPos)) {
             if (this.isInWater()
                 || this.isInLava()
                 || entity.isFallFlying()

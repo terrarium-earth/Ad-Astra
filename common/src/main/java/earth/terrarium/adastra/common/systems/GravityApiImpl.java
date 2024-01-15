@@ -64,7 +64,6 @@ public class GravityApiImpl implements GravityApi {
         setGravity(level, positions, getGravity(level));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void entityTick(Level level, LivingEntity entity, Vec3 travelVector, BlockPos movementAffectingPos) {
         if (!entity.isControlledByLocalInstance()) return;
@@ -96,6 +95,7 @@ public class GravityApiImpl implements GravityApi {
         Vec3 movementVector = entity.handleRelativeFrictionAndCalculateMovement(travelVector, friction);
 
         double downSpeed = movementVector.y;
+        //noinspection deprecation
         if (entity.level().isClientSide() && !entity.level().hasChunkAt(movementAffectingPos)) {
             if (entity.getY() > entity.level().getMinBuildHeight()) {
                 downSpeed = -0.1;
