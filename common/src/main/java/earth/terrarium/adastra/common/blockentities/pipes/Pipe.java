@@ -34,7 +34,9 @@ public interface Pipe {
             if (!(level.getBlockEntity(pipePos) instanceof PipeBlockEntity pipeEntity)) continue;
             BlockState pipeState = pipeEntity.getBlockState();
 
-            for (var direction : pipeEntity.connectedDirections()) {
+            Direction[] directions = pipeEntity.connectedDirections();
+            if (directions == null) continue;
+            for (var direction : directions) {
                 BlockPos pos = pipePos.relative(direction);
                 long longPos = pos.asLong();
                 if (!visitedNodes.add(longPos)) continue;

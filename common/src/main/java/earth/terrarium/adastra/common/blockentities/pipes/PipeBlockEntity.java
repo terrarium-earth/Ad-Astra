@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -19,6 +20,7 @@ public abstract class PipeBlockEntity extends BlockEntity implements TickableBlo
     protected final Map<BlockPos, Direction> consumers = new IdentityHashMap<>();
     private final long transferRate;
 
+    @Nullable
     private Direction[] connectedDirections;
     private boolean initialized;
     private boolean isController;
@@ -67,6 +69,7 @@ public abstract class PipeBlockEntity extends BlockEntity implements TickableBlo
         return initialized;
     }
 
+    @Nullable
     public Direction[] connectedDirections() {
         return connectedDirections;
     }
