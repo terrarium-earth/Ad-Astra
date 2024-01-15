@@ -20,7 +20,7 @@ public final class NetworkHandler {
         CHANNEL.register(ServerboundResetSideConfigPacket.TYPE);
         CHANNEL.register(ServerboundSetRedstoneControlPacket.TYPE);
         CHANNEL.register(ServerboundSetFurnaceModePacket.TYPE);
-        CHANNEL.register(ServerboundSetGravityNormalizerTargetParget.TYPE);
+        CHANNEL.register(ServerboundSetGravityNormalizerTargetPacket.TYPE);
         CHANNEL.register(ServerboundSetFlagUrlPacket.TYPE);
         CHANNEL.register(ServerboundVehicleControlPacket.TYPE);
         CHANNEL.register(ServerboundLandPacket.TYPE);

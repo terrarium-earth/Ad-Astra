@@ -17,33 +17,33 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.function.Consumer;
 
-public record ServerboundSetGravityNormalizerTargetParget(
+public record ServerboundSetGravityNormalizerTargetPacket(
     BlockPos machine, float target
-) implements Packet<ServerboundSetGravityNormalizerTargetParget> {
+) implements Packet<ServerboundSetGravityNormalizerTargetPacket> {
 
-    public static final ServerboundPacketType<ServerboundSetGravityNormalizerTargetParget> TYPE = new Type();
+    public static final ServerboundPacketType<ServerboundSetGravityNormalizerTargetPacket> TYPE = new Type();
 
     @Override
-    public PacketType<ServerboundSetGravityNormalizerTargetParget> type() {
+    public PacketType<ServerboundSetGravityNormalizerTargetPacket> type() {
         return TYPE;
     }
 
-    private static class Type extends CodecPacketType<ServerboundSetGravityNormalizerTargetParget> implements ServerboundPacketType<ServerboundSetGravityNormalizerTargetParget> {
+    private static class Type extends CodecPacketType<ServerboundSetGravityNormalizerTargetPacket> implements ServerboundPacketType<ServerboundSetGravityNormalizerTargetPacket> {
 
         public Type() {
             super(
-                ServerboundSetGravityNormalizerTargetParget.class,
+                ServerboundSetGravityNormalizerTargetPacket.class,
                 new ResourceLocation(AdAstra.MOD_ID, "set_gravity_normalizer_target"),
                 ObjectByteCodec.create(
-                    ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundSetGravityNormalizerTargetParget::machine),
-                    ByteCodec.FLOAT.fieldOf(ServerboundSetGravityNormalizerTargetParget::target),
-                    ServerboundSetGravityNormalizerTargetParget::new
+                    ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundSetGravityNormalizerTargetPacket::machine),
+                    ByteCodec.FLOAT.fieldOf(ServerboundSetGravityNormalizerTargetPacket::target),
+                    ServerboundSetGravityNormalizerTargetPacket::new
                 )
             );
         }
 
         @Override
-        public Consumer<Player> handle(ServerboundSetGravityNormalizerTargetParget packet) {
+        public Consumer<Player> handle(ServerboundSetGravityNormalizerTargetPacket packet) {
             return player -> ModUtils.getMachineFromMenuPacket(packet.machine(), player, player.level()).ifPresent(
                 machine -> {
                     if (machine instanceof GravityNormalizerBlockEntity entity) {

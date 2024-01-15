@@ -10,7 +10,7 @@ import earth.terrarium.adastra.common.blockentities.machines.GravityNormalizerBl
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.menus.machines.GravityNormalizerMenu;
 import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ServerboundSetGravityNormalizerTargetParget;
+import earth.terrarium.adastra.common.network.messages.ServerboundSetGravityNormalizerTargetPacket;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.network.chat.CommonComponents;
@@ -44,7 +44,7 @@ public class GravityNormalizerScreen extends MachineScreen<GravityNormalizerMenu
             2.04,
             value -> {
                 sliderValue = value;
-                NetworkHandler.CHANNEL.sendToServer(new ServerboundSetGravityNormalizerTargetParget(entity.getBlockPos(), (float) value));
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundSetGravityNormalizerTargetPacket(entity.getBlockPos(), (float) value));
             }));
         sliderValue = entity.targetGravity();
     }

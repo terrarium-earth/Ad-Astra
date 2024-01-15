@@ -3,3 +3,4 @@
 - Updated to new Resourcefullib packet format.
 - Fixed the invalid launch text displaying to players even in correct dimensions on servers.
 - Fixed Planet Data not being send to players when joining forge servers.
+- Added ServerboundLandPacket validation. (#427)

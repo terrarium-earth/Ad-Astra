@@ -11,7 +11,6 @@ import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
-import earth.terrarium.adastra.common.menus.PlanetsMenu;
 import earth.terrarium.adastra.common.network.CodecPacketType;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.core.BlockPos;
@@ -54,10 +53,11 @@ public record ServerboundLandPacket(ResourceKey<Level> dimension,
         public Consumer<Player> handle(ServerboundLandPacket packet) {
             return player -> {
                 if (!(player.level() instanceof ServerLevel serverLevel)) return;
-                if (!(player.containerMenu instanceof PlanetsMenu)) return;
-
                 var planet = PlanetApi.API.getPlanet(packet.dimension);
-                if (planet == null) return;
+                if (planet == null) return; // Only allow teleporting to registered planets.
+
+                if (planet.isSpace()) return; // Shouldn't be able to land in any orbit.
+                if (!ModUtils.canTeleportToPlanet(player, planet)) return;
 
                 boolean landingNormally = packet.tryPreviousLocation() && player.getVehicle() instanceof Rocket;
                 GlobalPos newPos = landingNormally ? LaunchingDimensionHandler.getSpawningLocation(player, serverLevel, planet)

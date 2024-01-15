@@ -61,13 +61,15 @@ public record ServerboundConstructSpaceStationPacket(
             return player -> {
                 if (!(player.level() instanceof ServerLevel serverLevel)) return;
                 if (!(player instanceof ServerPlayer serverPlayer)) return;
-                if (!(player.containerMenu instanceof PlanetsMenu)) return;
-
                 var planet = PlanetApi.API.getPlanet(packet.dimension);
                 if (planet == null) return;
 
                 ServerLevel targetLevel = serverLevel.getServer().getLevel(planet.orbitIfPresent());
                 if (targetLevel == null) return;
+
+                // Shouldn't be able to construct space stations outside of orbit.
+                if (!PlanetApi.API.isSpace(targetLevel)) return;
+                if (!ModUtils.canTeleportToPlanet(player, planet)) return;
 
                 if (CadmusIntegration.cadmusLoaded() && CadmusIntegration.isClaimed(targetLevel, player.chunkPosition())) {
                     return;
@@ -89,7 +91,7 @@ public record ServerboundConstructSpaceStationPacket(
 
                 LaunchingDimensionHandler.addSpawnLocation(player, serverLevel);
                 BlockPos middleBlockPosition = pos.getMiddleBlockPosition(AdAstraConfig.atmosphereLeave);
-                ModUtils.land((ServerPlayer) player, targetLevel, new Vec3(middleBlockPosition.getX() - 0.5f, middleBlockPosition.getY(), middleBlockPosition.getZ() - 0.5f));
+                ModUtils.land(serverPlayer, targetLevel, new Vec3(middleBlockPosition.getX() - 0.5f, middleBlockPosition.getY(), middleBlockPosition.getZ() - 0.5f));
 
                 // Cadmus claiming 3x3 chunks
                 if (CadmusIntegration.cadmusLoaded()) {

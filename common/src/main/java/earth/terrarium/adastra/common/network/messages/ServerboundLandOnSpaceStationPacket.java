@@ -12,7 +12,6 @@ import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;
-import earth.terrarium.adastra.common.menus.PlanetsMenu;
 import earth.terrarium.adastra.common.network.CodecPacketType;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.core.BlockPos;
@@ -57,21 +56,23 @@ public record ServerboundLandOnSpaceStationPacket(ResourceKey<Level> dimension,
         public Consumer<Player> handle(ServerboundLandOnSpaceStationPacket packet) {
             return player -> {
                 if (!(player.level() instanceof ServerLevel serverLevel)) return;
-                if (!(player.containerMenu instanceof PlanetsMenu)) return;
-
+                if (!(player instanceof ServerPlayer serverPlayer)) return;
                 var planet = PlanetApi.API.getPlanet(packet.dimension);
                 if (planet == null) return;
 
-                var server = serverLevel.getServer();
-                ServerLevel targetLevel = server.getLevel(planet.dimension());
+                ServerLevel targetLevel = serverLevel.getServer().getLevel(planet.dimension());
                 if (targetLevel == null) return;
 
+                // Shouldn't be able to land on space stations outside of orbit.
+                if (!PlanetApi.API.isSpace(targetLevel)) return;
+                if (!ModUtils.canTeleportToPlanet(player, planet)) return;
+
                 var targetPos = packet.spaceStationPos();
-                if (!isAllowed((ServerPlayer) player, targetLevel, targetPos)) return;
+                if (!isAllowed(serverPlayer, targetLevel, targetPos)) return;
 
                 LaunchingDimensionHandler.addSpawnLocation(player, serverLevel);
                 BlockPos middleBlockPosition = targetPos.getMiddleBlockPosition(AdAstraConfig.atmosphereLeave);
-                ModUtils.land((ServerPlayer) player, targetLevel, new Vec3(middleBlockPosition.getX() - 0.5f, middleBlockPosition.getY(), middleBlockPosition.getZ() - 0.5f));
+                ModUtils.land(serverPlayer, targetLevel, new Vec3(middleBlockPosition.getX() - 0.5f, middleBlockPosition.getY(), middleBlockPosition.getZ() - 0.5f));
             };
         }
     }
