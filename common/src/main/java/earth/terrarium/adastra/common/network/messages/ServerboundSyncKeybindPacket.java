@@ -2,43 +2,45 @@ package earth.terrarium.adastra.common.network.messages;
 
 import com.teamresourceful.bytecodecs.base.ByteCodec;
 import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
-import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
-import com.teamresourceful.resourcefullib.common.networking.base.Packet;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
+import com.teamresourceful.resourcefullib.common.network.Packet;
+import com.teamresourceful.resourcefullib.common.network.base.PacketType;
+import com.teamresourceful.resourcefullib.common.network.base.ServerboundPacketType;
+import com.teamresourceful.resourcefullib.common.network.defaults.CodecPacketType;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.utils.KeybindManager;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+
+import java.util.function.Consumer;
 
 public record ServerboundSyncKeybindPacket(boolean jumping, boolean sprinting,
                                            boolean suitFlightEnabled) implements Packet<ServerboundSyncKeybindPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "sync_keybinds");
-    public static final Handler HANDLER = new Handler();
+    public static final ServerboundPacketType<ServerboundSyncKeybindPacket> TYPE = new Type();
 
     @Override
-    public ResourceLocation getID() {
-        return ID;
+    public PacketType<ServerboundSyncKeybindPacket> type() {
+        return TYPE;
     }
 
-    @Override
-    public PacketHandler<ServerboundSyncKeybindPacket> getHandler() {
-        return HANDLER;
-    }
+    private static class Type extends CodecPacketType<ServerboundSyncKeybindPacket> implements ServerboundPacketType<ServerboundSyncKeybindPacket> {
 
-    private static class Handler extends CodecPacketHandler<ServerboundSyncKeybindPacket> {
-        public Handler() {
-            super(ObjectByteCodec.create(
-                ByteCodec.BOOLEAN.fieldOf(ServerboundSyncKeybindPacket::jumping),
-                ByteCodec.BOOLEAN.fieldOf(ServerboundSyncKeybindPacket::sprinting),
-                ByteCodec.BOOLEAN.fieldOf(ServerboundSyncKeybindPacket::suitFlightEnabled),
-                ServerboundSyncKeybindPacket::new
-            ));
+        public Type() {
+            super(
+                ServerboundSyncKeybindPacket.class,
+                new ResourceLocation(AdAstra.MOD_ID, "sync_keybinds"),
+                ObjectByteCodec.create(
+                    ByteCodec.BOOLEAN.fieldOf(ServerboundSyncKeybindPacket::jumping),
+                    ByteCodec.BOOLEAN.fieldOf(ServerboundSyncKeybindPacket::sprinting),
+                    ByteCodec.BOOLEAN.fieldOf(ServerboundSyncKeybindPacket::suitFlightEnabled),
+                    ServerboundSyncKeybindPacket::new
+                )
+            );
         }
 
         @Override
-        public PacketContext handle(ServerboundSyncKeybindPacket packet) {
-            return (player, level) -> KeybindManager.set(player, packet.jumping(), packet.sprinting(), packet.suitFlightEnabled());
+        public Consumer<Player> handle(ServerboundSyncKeybindPacket packet) {
+            return player -> KeybindManager.set(player, packet.jumping(), packet.sprinting(), packet.suitFlightEnabled());
         }
     }
 }

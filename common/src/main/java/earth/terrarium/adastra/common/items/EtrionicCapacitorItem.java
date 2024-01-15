@@ -145,6 +145,7 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
             if (inventory.getItem(i).is(this)) continue;
             energyItems++;
         }
+        if (energyItems == 0) return;
 
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             var stack = inventory.getItem(i);

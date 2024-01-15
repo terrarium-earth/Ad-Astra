@@ -2,42 +2,44 @@ package earth.terrarium.adastra.common.network.messages;
 
 import com.teamresourceful.bytecodecs.base.ByteCodec;
 import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
-import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
-import com.teamresourceful.resourcefullib.common.networking.base.Packet;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
+import com.teamresourceful.resourcefullib.common.network.Packet;
+import com.teamresourceful.resourcefullib.common.network.base.PacketType;
+import com.teamresourceful.resourcefullib.common.network.base.ServerboundPacketType;
+import com.teamresourceful.resourcefullib.common.network.defaults.CodecPacketType;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.entities.vehicles.Vehicle;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
+
+import java.util.function.Consumer;
 
 public record ServerboundVehicleControlPacket(float xxa, float zza) implements Packet<ServerboundVehicleControlPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "vehicle_control");
-    public static final Handler HANDLER = new Handler();
+    public static final ServerboundPacketType<ServerboundVehicleControlPacket> TYPE = new Type();
 
     @Override
-    public ResourceLocation getID() {
-        return ID;
+    public PacketType<ServerboundVehicleControlPacket> type() {
+        return TYPE;
     }
 
-    @Override
-    public PacketHandler<ServerboundVehicleControlPacket> getHandler() {
-        return HANDLER;
-    }
+    private static class Type extends CodecPacketType<ServerboundVehicleControlPacket> implements ServerboundPacketType<ServerboundVehicleControlPacket> {
 
-    private static class Handler extends CodecPacketHandler<ServerboundVehicleControlPacket> {
-        public Handler() {
-            super(ObjectByteCodec.create(
-                ByteCodec.FLOAT.fieldOf(ServerboundVehicleControlPacket::xxa),
-                ByteCodec.FLOAT.fieldOf(ServerboundVehicleControlPacket::zza),
-                ServerboundVehicleControlPacket::new
-            ));
+        public Type() {
+            super(
+                ServerboundVehicleControlPacket.class,
+                new ResourceLocation(AdAstra.MOD_ID, "vehicle_control"),
+                ObjectByteCodec.create(
+                    ByteCodec.FLOAT.fieldOf(ServerboundVehicleControlPacket::xxa),
+                    ByteCodec.FLOAT.fieldOf(ServerboundVehicleControlPacket::zza),
+                    ServerboundVehicleControlPacket::new
+                )
+            );
         }
 
         @Override
-        public PacketContext handle(ServerboundVehicleControlPacket packet) {
-            return (player, level) -> {
+        public Consumer<Player> handle(ServerboundVehicleControlPacket packet) {
+            return player -> {
                 if (player.getVehicle() instanceof Vehicle vehicle) {
                     vehicle.updateInput(
                         Mth.clamp(packet.xxa(), -1.0f, 1.0f),

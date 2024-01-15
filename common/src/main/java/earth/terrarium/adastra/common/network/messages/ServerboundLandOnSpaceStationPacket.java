@@ -2,75 +2,75 @@ package earth.terrarium.adastra.common.network.messages;
 
 import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
-import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
-import com.teamresourceful.resourcefullib.common.networking.base.Packet;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
+import com.teamresourceful.resourcefullib.common.network.Packet;
+import com.teamresourceful.resourcefullib.common.network.base.PacketType;
+import com.teamresourceful.resourcefullib.common.network.base.ServerboundPacketType;
+import com.teamresourceful.resourcefullib.common.network.defaults.CodecPacketType;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.compat.argonauts.ArgonautsIntegration;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
-import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;
-import earth.terrarium.adastra.common.menus.PlanetsMenu;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public record ServerboundLandOnSpaceStationPacket(ResourceKey<Level> dimension,
                                                   ChunkPos spaceStationPos) implements Packet<ServerboundLandOnSpaceStationPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "land_on_space_station");
-    public static final Handler HANDLER = new Handler();
+    public static final ServerboundPacketType<ServerboundLandOnSpaceStationPacket> TYPE = new Type();
 
     @Override
-    public ResourceLocation getID() {
-        return ID;
+    public PacketType<ServerboundLandOnSpaceStationPacket> type() {
+        return TYPE;
     }
 
-    @Override
-    public PacketHandler<ServerboundLandOnSpaceStationPacket> getHandler() {
-        return HANDLER;
-    }
+    private static class Type extends CodecPacketType<ServerboundLandOnSpaceStationPacket> implements ServerboundPacketType<ServerboundLandOnSpaceStationPacket> {
 
-    private static class Handler extends CodecPacketHandler<ServerboundLandOnSpaceStationPacket> {
-        public Handler() {
-            super(ObjectByteCodec.create(
-                ExtraByteCodecs.DIMENSION.fieldOf(ServerboundLandOnSpaceStationPacket::dimension),
-                ExtraByteCodecs.CHUNK_POS.fieldOf(ServerboundLandOnSpaceStationPacket::spaceStationPos),
-                ServerboundLandOnSpaceStationPacket::new
-            ));
+        public Type() {
+            super(
+                ServerboundLandOnSpaceStationPacket.class,
+                new ResourceLocation(AdAstra.MOD_ID, "land_on_space_station"),
+                ObjectByteCodec.create(
+                    ExtraByteCodecs.DIMENSION.fieldOf(ServerboundLandOnSpaceStationPacket::dimension),
+                    ExtraByteCodecs.CHUNK_POS.fieldOf(ServerboundLandOnSpaceStationPacket::spaceStationPos),
+                    ServerboundLandOnSpaceStationPacket::new
+                )
+            );
         }
 
         @Override
-        public PacketContext handle(ServerboundLandOnSpaceStationPacket packet) {
-            return (player, level) -> {
-                if (!(level instanceof ServerLevel serverLevel)) return;
-                if (!(player.containerMenu instanceof PlanetsMenu)) return;
-
+        public Consumer<Player> handle(ServerboundLandOnSpaceStationPacket packet) {
+            return player -> {
+                if (!(player.level() instanceof ServerLevel serverLevel)) return;
+                if (!(player instanceof ServerPlayer serverPlayer)) return;
                 var planet = PlanetApi.API.getPlanet(packet.dimension);
                 if (planet == null) return;
 
-                var server = serverLevel.getServer();
-                ServerLevel targetLevel = server.getLevel(planet.dimension());
+                ServerLevel targetLevel = serverLevel.getServer().getLevel(planet.dimension());
                 if (targetLevel == null) return;
 
-                var targetPos = packet.spaceStationPos();
-                if (!isAllowed((ServerPlayer) player, targetLevel, targetPos)) return;
+                // Shouldn't be able to land on space stations outside of orbit.
+                if (!PlanetApi.API.isSpace(targetLevel)) return;
+                if (!ModUtils.canTeleportToPlanet(player, planet)) return;
 
-                LaunchingDimensionHandler.addSpawnLocation(player, serverLevel);
+                var targetPos = packet.spaceStationPos();
+                if (!isAllowed(serverPlayer, targetLevel, targetPos)) return;
+
                 BlockPos middleBlockPosition = targetPos.getMiddleBlockPosition(AdAstraConfig.atmosphereLeave);
-                ModUtils.land((ServerPlayer) player, targetLevel, new Vec3(middleBlockPosition.getX() - 0.5f, middleBlockPosition.getY(), middleBlockPosition.getZ() - 0.5f));
+                ModUtils.land(serverPlayer, targetLevel, new Vec3(middleBlockPosition.getX() - 0.5f, middleBlockPosition.getY(), middleBlockPosition.getZ() - 0.5f));
             };
         }
     }

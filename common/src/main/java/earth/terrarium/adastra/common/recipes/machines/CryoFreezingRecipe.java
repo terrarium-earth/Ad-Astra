@@ -2,9 +2,12 @@ package earth.terrarium.adastra.common.recipes.machines;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
 import earth.terrarium.adastra.common.blockentities.machines.CryoFreezerBlockEntity;
+import earth.terrarium.adastra.common.recipes.base.IngredientByteCodec;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
@@ -27,6 +30,14 @@ public record CryoFreezingRecipe(
             Ingredient.CODEC.fieldOf("ingredient").forGetter(CryoFreezingRecipe::input),
             FluidHolder.CODEC.fieldOf("result").forGetter(CryoFreezingRecipe::result)
         ).apply(instance, CryoFreezingRecipe::new));
+
+    public static final ByteCodec<CryoFreezingRecipe> NETWORK_CODEC = ObjectByteCodec.create(
+        ByteCodec.INT.fieldOf(CryoFreezingRecipe::cookingTime),
+        ByteCodec.INT.fieldOf(CryoFreezingRecipe::energy),
+        IngredientByteCodec.CODEC.fieldOf(CryoFreezingRecipe::input),
+        IngredientByteCodec.FLUID_HOLDER_CODEC.fieldOf(CryoFreezingRecipe::result),
+        CryoFreezingRecipe::new
+    );
 
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {

@@ -3,49 +3,52 @@ package earth.terrarium.adastra.common.network.messages;
 import com.teamresourceful.bytecodecs.base.ByteCodec;
 import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
-import com.teamresourceful.resourcefullib.common.networking.base.CodecPacketHandler;
-import com.teamresourceful.resourcefullib.common.networking.base.Packet;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
+import com.teamresourceful.resourcefullib.common.network.Packet;
+import com.teamresourceful.resourcefullib.common.network.base.PacketType;
+import com.teamresourceful.resourcefullib.common.network.base.ServerboundPacketType;
+import com.teamresourceful.resourcefullib.common.network.defaults.CodecPacketType;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+
+import java.util.function.Consumer;
 
 public record ServerboundClearFluidTankPacket(
     BlockPos machine, int tank
 ) implements Packet<ServerboundClearFluidTankPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "clear_fluid_tank");
-    public static final Handler HANDLER = new Handler();
+    public static final ServerboundPacketType<ServerboundClearFluidTankPacket> TYPE = new Type();
 
     @Override
-    public ResourceLocation getID() {
-        return ID;
+    public PacketType<ServerboundClearFluidTankPacket> type() {
+        return TYPE;
     }
 
-    @Override
-    public PacketHandler<ServerboundClearFluidTankPacket> getHandler() {
-        return HANDLER;
-    }
+    private static class Type extends CodecPacketType<ServerboundClearFluidTankPacket> implements ServerboundPacketType<ServerboundClearFluidTankPacket> {
 
-    private static class Handler extends CodecPacketHandler<ServerboundClearFluidTankPacket> {
-        public Handler() {
-            super(ObjectByteCodec.create(
-                ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundClearFluidTankPacket::machine),
-                ByteCodec.INT.fieldOf(ServerboundClearFluidTankPacket::tank),
-                ServerboundClearFluidTankPacket::new
-            ));
+        public Type() {
+            super(
+                ServerboundClearFluidTankPacket.class,
+                new ResourceLocation(AdAstra.MOD_ID, "clear_fluid_tank"),
+                ObjectByteCodec.create(
+                    ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundClearFluidTankPacket::machine),
+                    ByteCodec.INT.fieldOf(ServerboundClearFluidTankPacket::tank),
+                    ServerboundClearFluidTankPacket::new
+                )
+            );
         }
 
         @Override
-        public PacketContext handle(ServerboundClearFluidTankPacket packet) {
-            return (player, level) -> ModUtils.getMachineFromMenuPacket(packet.machine(), player, level).ifPresent(
+        public Consumer<Player> handle(ServerboundClearFluidTankPacket packet) {
+            return player -> ModUtils.getMachineFromMenuPacket(packet.machine(), player, player.level()).ifPresent(
                 machine -> {
                     if (!(machine instanceof BotariumFluidBlock<?> fluidBlock)) return;
-                    FluidContainer container = fluidBlock.getFluidContainer(level, machine.getBlockPos(), machine.getBlockState(), machine, null);
+                    FluidContainer container = fluidBlock.getFluidContainer(player.level(), machine.getBlockPos(), machine.getBlockState(), machine, null);
+                    if (container == null) return;
                     if (packet.tank() > container.getSize()) return;
                     container.internalExtract(container.getFluids().get(packet.tank()), false);
                     container.extractFluid(container.getFluids().get(packet.tank()), false);

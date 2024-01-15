@@ -1,8 +1,11 @@
 package earth.terrarium.adastra.common.network.messages;
 
-import com.teamresourceful.resourcefullib.common.networking.base.Packet;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
+import com.teamresourceful.resourcefullib.common.network.Packet;
+import com.teamresourceful.resourcefullib.common.network.base.ClientboundPacketType;
+import com.teamresourceful.resourcefullib.common.network.base.PacketType;
+import com.teamresourceful.resourcefullib.common.network.defaults.CodecPacketType;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.planets.Planet;
@@ -19,34 +22,31 @@ public record ClientboundSyncPlanetsPacket(
     Map<ResourceKey<Level>, Planet> planets
 ) implements Packet<ClientboundSyncPlanetsPacket> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "sync_planets");
-    public static final Handler HANDLER = new Handler();
+    public static final ClientboundPacketType<ClientboundSyncPlanetsPacket> TYPE = new Type();
 
     @Override
-    public ResourceLocation getID() {
-        return ID;
+    public PacketType<ClientboundSyncPlanetsPacket> type() {
+        return TYPE;
     }
 
-    @Override
-    public PacketHandler<ClientboundSyncPlanetsPacket> getHandler() {
-        return HANDLER;
-    }
+    private static class Type extends CodecPacketType<ClientboundSyncPlanetsPacket> implements ClientboundPacketType<ClientboundSyncPlanetsPacket> {
 
-    private static class Handler implements PacketHandler<ClientboundSyncPlanetsPacket> {
-        @Override
-        public void encode(ClientboundSyncPlanetsPacket packet, FriendlyByteBuf buf) {
-            AdAstraData.encodePlanets(buf);
+        public Type() {
+            super(
+                ClientboundSyncPlanetsPacket.class,
+                new ResourceLocation(AdAstra.MOD_ID, "add_role"),
+                ObjectByteCodec.create(
+                    ByteCodec.passthrough(
+                            (buf, a) -> AdAstraData.encodePlanets(new FriendlyByteBuf(buf)),
+                            (buf) -> AdAstraData.decodePlanets(new FriendlyByteBuf(buf)).stream()
+                                .collect(Collectors.toMap(Planet::dimension, Function.identity())))
+                        .fieldOf(ClientboundSyncPlanetsPacket::planets),
+                    ClientboundSyncPlanetsPacket::new));
         }
 
         @Override
-        public ClientboundSyncPlanetsPacket decode(FriendlyByteBuf buf) {
-            return new ClientboundSyncPlanetsPacket(AdAstraData.decodePlanets(buf).stream()
-                .collect(Collectors.toMap(Planet::dimension, Function.identity())));
-        }
-
-        @Override
-        public PacketContext handle(ClientboundSyncPlanetsPacket packet) {
-            return (player, level) -> AdAstraData.setPlanets(packet.planets);
+        public Runnable handle(ClientboundSyncPlanetsPacket packet) {
+            return () -> AdAstraData.setPlanets(packet.planets);
         }
     }
 }
