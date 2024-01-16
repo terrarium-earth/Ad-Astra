@@ -43,8 +43,7 @@ public class Mogler extends Hoglin {
         return moglerEntity;
     }
 
-    @Override
-    public void finishConversion(ServerLevel level) {
+    public void finishConversion() {
         ZombifiedMogler zombifiedMoglerEntity = this.convertTo(ModEntityTypes.ZOMBIFIED_MOGLER.get(), true);
         if (zombifiedMoglerEntity != null) {
             zombifiedMoglerEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));

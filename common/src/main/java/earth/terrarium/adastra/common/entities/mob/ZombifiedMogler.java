@@ -1,7 +1,6 @@
 package earth.terrarium.adastra.common.entities.mob;
 
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
@@ -26,10 +25,5 @@ public class ZombifiedMogler extends Zoglin {
     @Override
     public boolean removeWhenFarAway(double distanceSquared) {
         return false;
-    }
-
-    @Override
-    public boolean isTargetable(LivingEntity entity) {
-        return super.isTargetable(entity) && !(entity instanceof ZombifiedMogler);
     }
 }

@@ -2,10 +2,6 @@ architectury {
     fabric()
 }
 
-loom {
-    accessWidenerPath.set(project(":common").loom.accessWidenerPath)
-}
-
 val common: Configuration by configurations.creating {
     configurations.compileClasspath.get().extendsFrom(this)
     configurations.runtimeClasspath.get().extendsFrom(this)

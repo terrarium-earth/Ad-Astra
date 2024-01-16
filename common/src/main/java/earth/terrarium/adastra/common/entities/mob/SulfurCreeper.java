@@ -31,8 +31,7 @@ public class SulfurCreeper extends Creeper {
             .add(Attributes.MOVEMENT_SPEED, 0.35);
     }
 
-    @Override
-    protected void explodeCreeper() {
+    public void explodeCreeper() {
         if (this.level().isClientSide) return;
         float power = isPowered() ? 2 : 1;
         this.dead = true;

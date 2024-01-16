@@ -3,7 +3,6 @@ architectury {
 }
 
 loom {
-    accessWidenerPath.set(project(":common").loom.accessWidenerPath)
     runs {
         create("data") {
             data()

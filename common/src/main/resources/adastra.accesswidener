@@ -1,4 +1,0 @@
-accessWidener   v2  named
-extendable method net/minecraft/world/entity/monster/hoglin/Hoglin finishConversion (Lnet/minecraft/server/level/ServerLevel;)V
-extendable method net/minecraft/world/entity/monster/Zoglin isTargetable (Lnet/minecraft/world/entity/LivingEntity;)Z
-extendable method net/minecraft/world/entity/monster/Creeper explodeCreeper ()V
