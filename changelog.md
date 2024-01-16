@@ -8,3 +8,5 @@
 - Fixed crash when loading chunk with ticking pipes. (#428)
 - Fixed REI crash (#421)
 - Fixed cheese not being edible.
+- Fixed etrionic blast furnace layer not being cutout.
+- Fixed etrionic blast furnace skipping cooking progress when items are taken out and put back in.

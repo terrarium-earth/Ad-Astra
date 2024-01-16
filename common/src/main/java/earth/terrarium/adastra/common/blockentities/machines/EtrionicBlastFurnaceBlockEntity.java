@@ -101,12 +101,11 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
         }
 
         boolean isCooking = false;
+        boolean shouldClear = true;
         for (int i = 0; i < 4; i++) {
             if (recipes[i] == null) continue;
-            if (!canCraft(energyStorage, recipes[i], i + 1)) {
-                clearRecipe(i);
-                recipes[i] = null;
-                return;
+            if (canCraft(energyStorage, recipes[i], i + 1)) {
+                shouldClear = false;
             }
             energyStorage.internalExtract(MachineConfig.etrionicBlastFurnaceBlastingEnergyPerItem, false);
             isCooking = true;
@@ -114,10 +113,14 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
             for (int j = 0; j < 4; j++) {
                 craft(recipes[j], j, j + 1);
             }
-
         }
         if (isCooking) {
             cookTime++;
+        }
+        if (shouldClear) {
+            for (int i = 0; i < 4; i++) {
+                clearRecipe(i);
+            }
         }
     }
 
