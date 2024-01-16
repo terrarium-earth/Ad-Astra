@@ -48,12 +48,11 @@ import java.util.*;
 public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBlock, Wrenchable, TransferablePipe {
     public static final MapCodec<PipeBlock> CODEC = RecordCodecBuilder.mapCodec(
         instance -> instance.group(
-                Codec.LONG.fieldOf("transfer_rate").forGetter(PipeBlock::transferRate),
-                Type.CODEC.fieldOf("type").forGetter(PipeBlock::type),
-                Codec.DOUBLE.fieldOf("size").forGetter(PipeBlock::size),
-                propertiesCodec()
-            )
-            .apply(instance, PipeBlock::new)
+            Codec.LONG.fieldOf("transfer_rate").forGetter(PipeBlock::transferRate),
+            Type.CODEC.fieldOf("type").forGetter(PipeBlock::type),
+            Codec.DOUBLE.fieldOf("size").forGetter(PipeBlock::size),
+            propertiesCodec()
+        ).apply(instance, PipeBlock::new)
     );
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;

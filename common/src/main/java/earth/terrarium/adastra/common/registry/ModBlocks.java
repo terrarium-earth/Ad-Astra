@@ -53,37 +53,43 @@ public class ModBlocks {
     public static final ResourcefulRegistry<Block> SMALL_INDUSTRIAL_LAMPS = ResourcefulRegistries.create(BLOCKS);
 
     public static final BlockBehaviour.Properties IRON_PROPERTIES = BlockBehaviour.Properties.of()
-        .mapColor(MapColor.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+        .mapColor(MapColor.METAL)
+        .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
         .requiresCorrectToolForDrops()
         .strength(5, 6)
         .sound(SoundType.COPPER);
 
     public static final BlockBehaviour.Properties STEEL_PROPERTIES = BlockBehaviour.Properties.of()
-        .mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+        .mapColor(MapColor.COLOR_GRAY)
+        .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
         .requiresCorrectToolForDrops()
         .strength(5, 12)
         .sound(SoundType.COPPER);
 
     public static final BlockBehaviour.Properties ETRIUM_PROPERTIES = BlockBehaviour.Properties.of()
-        .mapColor(MapColor.COLOR_BLUE).instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+        .mapColor(MapColor.COLOR_BLUE)
+        .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
         .requiresCorrectToolForDrops()
         .strength(5, 5)
         .sound(SoundType.COPPER);
 
     public static final BlockBehaviour.Properties DESH_PROPERTIES = BlockBehaviour.Properties.of()
-        .mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+        .mapColor(MapColor.COLOR_ORANGE)
+        .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
         .requiresCorrectToolForDrops()
         .strength(5, 9)
         .sound(SoundType.COPPER);
 
     public static final BlockBehaviour.Properties OSTRUM_PROPERTIES = BlockBehaviour.Properties.of()
-        .mapColor(MapColor.COLOR_PURPLE).instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+        .mapColor(MapColor.COLOR_PURPLE)
+        .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
         .requiresCorrectToolForDrops()
         .strength(5, 16)
         .sound(SoundType.COPPER);
 
     public static final BlockBehaviour.Properties CALORITE_PROPERTIES = BlockBehaviour.Properties.of()
-        .mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+        .mapColor(MapColor.COLOR_RED)
+        .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
         .requiresCorrectToolForDrops()
         .strength(7, 22)
         .sound(SoundType.NETHERITE_BLOCK);

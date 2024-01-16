@@ -34,7 +34,6 @@ dependencies {
     val reiVersion: String by project
 
     neoForge(group = "net.neoforged", name = "neoforge", version = neoforgeVersion)
-    modCompileOnly(group = "me.shedaniel", name = "RoughlyEnoughItems-api-forge", version = reiVersion)
 
     modLocalRuntime(group = "maven.modrinth", name = "jade", version = "13.2.2")
 //    modLocalRuntime(group = "maven.modrinth", name = "mekanism", version = "10.4.2.16")

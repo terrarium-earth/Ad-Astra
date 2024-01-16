@@ -45,7 +45,7 @@ public class EnvironmentEffects {
 
                 if (state.isAir()) continue;
                 short temperature = TemperatureApi.API.getTemperature(level, pos);
-                if (AdAstraEvents.environmentTick(level, pos, state, temperature)) {
+                if (AdAstraEvents.EnvironmentTickEvent.post(level, pos, state, temperature)) {
                     if (temperature > PlanetConstants.MAX_LIVEABLE_TEMPERATURE) {
                         tickHot(level, pos, state);
                     } else if (temperature < PlanetConstants.FREEZE_TEMPERATURE) {

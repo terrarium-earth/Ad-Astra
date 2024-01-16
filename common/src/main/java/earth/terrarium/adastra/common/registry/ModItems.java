@@ -22,6 +22,7 @@ import earth.terrarium.adastra.common.tags.ModPaintingVariantTags;
 import earth.terrarium.adastra.common.utils.PlatformUtils;
 import earth.terrarium.botarium.common.registry.fluid.FluidBucketItem;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 
 @SuppressWarnings("unused")
@@ -116,7 +117,11 @@ public class ModItems {
 
     public static final RegistryEntry<Item> SPACE_PAINTING = BASIC_ITEMS.register("space_painting", () -> new SpacePaintingItem(new Item.Properties(), ModPaintingVariants.EARTH, ModPaintingVariantTags.SPACE_PAINTINGS));
 
-    public static final RegistryEntry<Item> CHEESE = BASIC_ITEMS.register("cheese", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> CHEESE = BASIC_ITEMS.register("cheese", () -> new Item(new Item.Properties()
+        .food(new FoodProperties.Builder()
+            .nutrition(4)
+            .saturationMod(1.0f)
+            .build())));
 
     public static final RegistryEntry<Item> ETRIONIC_CAPACITOR = ITEMS.register("etrionic_capacitor", () -> new EtrionicCapacitorItem(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> GAS_TANK = BASIC_ITEMS.register("gas_tank", () -> new GasTankItem(new Item.Properties().stacksTo(1), 1000, 10));

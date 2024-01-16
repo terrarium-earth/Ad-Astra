@@ -53,7 +53,7 @@ jobs:
           version: ${{ steps.properties.outputs.version }}
           version-type: release
           changelog-file: changelog.md
-          loaders: forge
+          loaders: neoforge
           game-versions: ${{ steps.properties.outputs.minecraftVersion }}
           version-resolver: exact
 
@@ -66,7 +66,7 @@ jobs:
       - name: Upload Fabric Releases (Curse/Modrinth/Github)
         id: fabric_release
         if: contains(steps.properties.outputs.enabledPlatforms, 'fabric')
-        uses: Kir-Antipov/mc-publish@v3.2
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           curseforge-id: ${{ vars.CURSE_ID }}
           curseforge-token: ${{ secrets.CURSE_TOKEN }}
@@ -93,7 +93,7 @@ jobs:
       - name: Generate Discord Embed
         run: ./gradlew injectEmbed
         env:
-          FORGE_RELEASE_URL: ${{ steps.forge_release.outputs.modrinth-version }}
+          FORGE_RELEASE_URL: ${{ steps.neoforge_release.outputs.modrinth-version }}
           FABRIC_RELEASE_URL: ${{ steps.fabric_release.outputs.modrinth-version }}
 
       - name: Upload Discord Embed
