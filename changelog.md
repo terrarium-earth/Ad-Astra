@@ -10,3 +10,4 @@
 - Fixed cheese not being edible.
 - Fixed etrionic blast furnace layer not being cutout.
 - Fixed etrionic blast furnace skipping cooking progress when items are taken out and put back in.
+- Fixed side interactions putting items in wrong slot and not working for blocks like furnaces (#423)
