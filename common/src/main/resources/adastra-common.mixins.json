@@ -9,6 +9,7 @@
     "common.LivingEntityMixin",
     "common.MobMixin",
     "common.PlayerMixin",
+    "common.ServerGamePacketListenerImplMixin",
     "common.ServerLevelMixin",
     "common.SlotAccessor",
     "common.entities.CreeperMixin",
