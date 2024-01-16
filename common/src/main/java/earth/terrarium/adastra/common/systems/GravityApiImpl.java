@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.systems;
 
+import earth.terrarium.adastra.api.events.AdAstraEvents;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
@@ -39,7 +40,8 @@ public class GravityApiImpl implements GravityApi {
 
     @Override
     public float getGravity(Entity entity) {
-        return getGravity(entity.level(), BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ()));
+        float gravity = getGravity(entity.level(), BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ()));
+        return AdAstraEvents.EntityGravityEvent.post(entity, gravity).orElse(gravity);
     }
 
     @Override

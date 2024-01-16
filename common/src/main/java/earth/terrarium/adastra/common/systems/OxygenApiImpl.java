@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.systems;
 
+import earth.terrarium.adastra.api.events.AdAstraEvents;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
@@ -36,7 +37,8 @@ public class OxygenApiImpl implements OxygenApi {
 
     @Override
     public boolean hasOxygen(Entity entity) {
-        return hasOxygen(entity.level(), BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ()));
+        boolean hasOxygen = hasOxygen(entity.level(), BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ()));
+        return AdAstraEvents.EntityHasOxygenEvent.post(entity, hasOxygen).orElse(hasOxygen);
     }
 
     @Override
@@ -63,10 +65,10 @@ public class OxygenApiImpl implements OxygenApi {
 
     @Override
     public void entityTick(ServerLevel level, LivingEntity entity) {
-        if (this.hasOxygen(entity)) return;
         if (entity.getType().is(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN)) return;
         if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE)) return;
         if (SpaceSuitItem.hasFullSet(entity) && SpaceSuitItem.hasOxygen(entity)) return;
+        if (this.hasOxygen(entity)) return;
         entity.hurt(ModDamageSources.create(level, ModDamageSources.OXYGEN), 2);
         entity.setAirSupply(-80);
     }
