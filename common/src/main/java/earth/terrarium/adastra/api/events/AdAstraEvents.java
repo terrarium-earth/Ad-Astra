@@ -56,14 +56,14 @@ public final class AdAstraEvents {
         }
 
         @ApiStatus.Internal
-        static Optional<Boolean> post(Entity entity, boolean hasOxygen) {
+        static boolean post(Entity entity, boolean hasOxygen) {
             for (var listener : ENTITY_HAS_OXYGEN_LISTENERS) {
                 Optional<Boolean> newHasOxygen = listener.tick(entity, hasOxygen);
                 if (newHasOxygen.isPresent()) {
-                    return newHasOxygen;
+                    return newHasOxygen.get();
                 }
             }
-            return Optional.empty();
+            return hasOxygen;
         }
     }
 
@@ -141,14 +141,14 @@ public final class AdAstraEvents {
         }
 
         @ApiStatus.Internal
-        static Optional<Float> post(Entity entity, float gravity) {
+        static float post(Entity entity, float gravity) {
             for (var listener : ENTITY_GRAVITY_LISTENERS) {
                 Optional<Float> newGravity = listener.tick(entity, gravity);
                 if (newGravity.isPresent()) {
-                    return newGravity;
+                    return newGravity.get();
                 }
             }
-            return Optional.empty();
+            return gravity;
         }
     }
 

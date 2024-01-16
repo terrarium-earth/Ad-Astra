@@ -41,7 +41,7 @@ public class GravityApiImpl implements GravityApi {
     @Override
     public float getGravity(Entity entity) {
         float gravity = getGravity(entity.level(), BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ()));
-        return AdAstraEvents.EntityGravityEvent.post(entity, gravity).orElse(gravity);
+        return AdAstraEvents.EntityGravityEvent.post(entity, gravity);
     }
 
     @Override
