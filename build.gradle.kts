@@ -168,8 +168,6 @@ subprojects {
 
                 exclude(".cache/**") // Remove datagen cache from jar.
                 exclude("**/adastra/datagen/**") // Remove data gen code from jar.
-
-                exclude("architectury.common.json")
             }
 
             "remapJar"(RemapJarTask::class) {

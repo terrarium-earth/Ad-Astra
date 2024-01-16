@@ -3,11 +3,9 @@ architectury {
 }
 
 loom {
-    accessWidenerPath.set(project(":common").loom.accessWidenerPath)
     forge {
         mixinConfig("adastra-common.mixins.json")
         mixinConfig("adastra.mixins.json")
-        convertAccessWideners.set(true)
     }
     runs {
         create("data") {
