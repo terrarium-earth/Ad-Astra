@@ -91,27 +91,39 @@ public class TemperatureApiImpl implements TemperatureApi {
             if (SpaceSuitItem.hasFullSet(entity, ModItemTags.HEAT_RESISTANT_ARMOR)) return;
             if (entity.hasEffect(MobEffects.FIRE_RESISTANCE)) return;
             if (AdAstraEvents.HotTemperatureTickEvent.post(level, entity)) {
-                entity.hurt(entity.damageSources().onFire(), 6);
-                entity.setSecondsOnFire(10);
+                burnEntity(entity);
             }
         } else if (this.isCold(level, entity.blockPosition())) {
             if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_EXTREME_COLD)) return;
             if (SpaceSuitItem.hasFullSet(entity, ModItemTags.FREEZE_RESISTANT_ARMOR)) return;
             if (AdAstraEvents.ColdTemperatureTickEvent.post(level, entity)) {
-                entity.hurt(entity.damageSources().freeze(), 3);
-                entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze() + 20, entity.getTicksFrozen() + 5 * 10));
-                ModUtils.sendParticles(level,
-                    ParticleTypes.SNOWFLAKE,
-                    entity.getX(),
-                    entity.getY() + 1,
-                    entity.getZ(), 1,
-                    Mth.randomBetween(level.random, -1.0f, 1.0f) * 0.085f,
-                    0.05,
-                    Mth.randomBetween(level.random,
-                        -1.0f,
-                        1.0f) * 0.085,
-                    0);
+                freezeEntity(entity, level);
             }
+        }
+    }
+
+    private void burnEntity(LivingEntity entity) {
+        entity.hurt(entity.damageSources().onFire(), 6);
+        entity.setSecondsOnFire(10);
+    }
+
+    private void freezeEntity(LivingEntity entity, ServerLevel level) {
+        if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_EXTREME_COLD)) return;
+        if (SpaceSuitItem.hasFullSet(entity, ModItemTags.FREEZE_RESISTANT_ARMOR)) return;
+        if (AdAstraEvents.ColdTemperatureTickEvent.post(level, entity)) {
+            entity.hurt(entity.damageSources().freeze(), 3);
+            entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze() + 20, entity.getTicksFrozen() + 5 * 10));
+            ModUtils.sendParticles(level,
+                ParticleTypes.SNOWFLAKE,
+                entity.getX(),
+                entity.getY() + 1,
+                entity.getZ(), 1,
+                Mth.randomBetween(level.random, -1.0f, 1.0f) * 0.085f,
+                0.05,
+                Mth.randomBetween(level.random,
+                    -1.0f,
+                    1.0f) * 0.085,
+                0);
         }
     }
 }
