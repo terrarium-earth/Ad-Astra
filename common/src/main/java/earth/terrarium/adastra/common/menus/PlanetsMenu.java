@@ -193,7 +193,7 @@ public class PlanetsMenu extends AbstractContainerMenu {
 
     public List<Planet> getSortedPlanets() {
         return AdAstraData.planets().values().stream()
-            .filter(planet -> disabledPlanets().contains(planet.dimension().location()))
+            .filter(planet -> !disabledPlanets().contains(planet.dimension().location()))
             .filter(planet -> tier() >= planet.tier())
             .sorted(Comparator.comparingInt(Planet::tier).thenComparing(p -> getPlanetName(p.dimension()).getString()))
             .toList();
