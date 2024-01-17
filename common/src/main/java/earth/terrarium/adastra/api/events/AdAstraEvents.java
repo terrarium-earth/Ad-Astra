@@ -2,6 +2,7 @@ package earth.terrarium.adastra.api.events;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,9 +14,11 @@ import java.util.List;
 
 public final class AdAstraEvents {
     private static final List<OxygenTickEvent> OXYGEN_TICK_LISTENERS = new ArrayList<>();
+    private static final List<EntityOxygenEvent> ENTITY_OXYGEN_LISTENERS = new ArrayList<>();
     private static final List<TemperatureTickEvent> TEMPERATURE_TICK_LISTENERS = new ArrayList<>();
     private static final List<HotTemperatureTickEvent> HOT_TEMPERATURE_TICK_LISTENERS = new ArrayList<>();
     private static final List<ColdTemperatureTickEvent> COLD_TEMPERATURE_TICK_LISTENERS = new ArrayList<>();
+    private static final List<EntityGravityEvent> ENTITY_GRAVITY_LISTENERS = new ArrayList<>();
     private static final List<GravityTickEvent> GRAVITY_TICK_LISTENERS = new ArrayList<>();
     private static final List<ZeroGravityTickEvent> ZERO_GRAVITY_TICK_LISTENERS = new ArrayList<>();
     private static final List<AcidRainTickEvent> ACID_RAIN_TICK_LISTENERS = new ArrayList<>();
@@ -40,6 +43,26 @@ public final class AdAstraEvents {
                 }
             }
             return true;
+        }
+    }
+
+    @FunctionalInterface
+    public interface EntityOxygenEvent {
+        boolean hasOxygen(Entity entity, boolean hasOxygen);
+
+        static void register(EntityOxygenEvent listener) {
+            ENTITY_OXYGEN_LISTENERS.add(listener);
+        }
+
+        @ApiStatus.Internal
+        static boolean post(Entity entity, boolean hasOxygen) {
+            for (var listener : ENTITY_OXYGEN_LISTENERS) {
+                boolean newOxygen = listener.hasOxygen(entity, hasOxygen);
+                if (newOxygen != hasOxygen) {
+                    return newOxygen;
+                }
+            }
+            return hasOxygen;
         }
     }
 
@@ -105,6 +128,26 @@ public final class AdAstraEvents {
                 }
             }
             return true;
+        }
+    }
+
+    @FunctionalInterface
+    public interface EntityGravityEvent {
+        float getGravity(Entity entity, float gravity);
+
+        static void register(EntityGravityEvent listener) {
+            ENTITY_GRAVITY_LISTENERS.add(listener);
+        }
+
+        @ApiStatus.Internal
+        static float post(Entity entity, float gravity) {
+            for (var listener : ENTITY_GRAVITY_LISTENERS) {
+                float newGravity = listener.getGravity(entity, gravity);
+                if (newGravity != gravity) {
+                    return newGravity;
+                }
+            }
+            return gravity;
         }
     }
 
