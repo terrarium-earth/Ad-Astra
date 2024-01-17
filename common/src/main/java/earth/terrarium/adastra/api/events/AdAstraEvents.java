@@ -1,6 +1,5 @@
 package earth.terrarium.adastra.api.events;
 
-import com.teamresourceful.resourcefullib.common.utils.TriState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -12,7 +11,6 @@ import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public final class AdAstraEvents {
     private static final List<OxygenTickEvent> OXYGEN_TICK_LISTENERS = new ArrayList<>();
@@ -50,7 +48,7 @@ public final class AdAstraEvents {
 
     @FunctionalInterface
     public interface EntityOxygenEvent {
-        TriState hasOxygen(Entity entity, boolean hasOxygen);
+        boolean hasOxygen(Entity entity, boolean hasOxygen);
 
         static void register(EntityOxygenEvent listener) {
             ENTITY_OXYGEN_LISTENERS.add(listener);
@@ -59,9 +57,9 @@ public final class AdAstraEvents {
         @ApiStatus.Internal
         static boolean post(Entity entity, boolean hasOxygen) {
             for (var listener : ENTITY_OXYGEN_LISTENERS) {
-                TriState newOxygen = listener.hasOxygen(entity, hasOxygen);
-                if (newOxygen.isDefined()) {
-                    return newOxygen.isTrue();
+                boolean newOxygen = listener.hasOxygen(entity, hasOxygen);
+                if (newOxygen != hasOxygen) {
+                    return newOxygen;
                 }
             }
             return hasOxygen;
@@ -135,7 +133,7 @@ public final class AdAstraEvents {
 
     @FunctionalInterface
     public interface EntityGravityEvent {
-        Optional<Float> getGravity(Entity entity, float gravity);
+        float getGravity(Entity entity, float gravity);
 
         static void register(EntityGravityEvent listener) {
             ENTITY_GRAVITY_LISTENERS.add(listener);
@@ -144,9 +142,9 @@ public final class AdAstraEvents {
         @ApiStatus.Internal
         static float post(Entity entity, float gravity) {
             for (var listener : ENTITY_GRAVITY_LISTENERS) {
-                Optional<Float> newGravity = listener.getGravity(entity, gravity);
-                if (newGravity.isPresent()) {
-                    return newGravity.get();
+                float newGravity = listener.getGravity(entity, gravity);
+                if (newGravity != gravity) {
+                    return newGravity;
                 }
             }
             return gravity;
