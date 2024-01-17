@@ -6,6 +6,7 @@
     "mixins": [
         "common.CustomDyeableArmorItemMixin",
         "common.RenderedItemMixin",
+        "common.entities.GlacianRamMixin",
         "common.multipart.LevelMixin"
     ],
     "client": [
