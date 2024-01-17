@@ -46,10 +46,12 @@ public record ServerboundSetFlagUrlPacket(BlockPos pos, String url) implements P
         @Override
         public Consumer<Player> handle(ServerboundSetFlagUrlPacket packet) {
             return player -> {
-                boolean valid = URL_REGEX.matcher(packet.url()).matches();
-                if (valid && player.level().getBlockEntity(packet.pos()) instanceof FlagBlockEntity flag && flag.getOwner() !=
-
-                    null && player.getUUID().equals(flag.getOwner().getId())) {
+                if (URL_REGEX.matcher(packet.url()).matches()
+                    && player.distanceToSqr(packet.pos().getCenter()) <= 64
+                    && player.level().getBlockEntity(packet.pos()) instanceof FlagBlockEntity flag
+                    && flag.getOwner() != null
+                    && player.getUUID().equals(flag.getOwner().getId())
+                ) {
                     flag.setContent(UrlContent.of(packet.url()));
                     var blockState = player.level().getBlockState(packet.pos());
                     player.level().sendBlockUpdated(packet.pos(), blockState, blockState, Block.UPDATE_ALL);
