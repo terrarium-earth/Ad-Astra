@@ -1,14 +1,4 @@
-- Fixed etrionic capacitor crashing in round-robin mode with when it's not charging anything.
-- Fixed REI fluid bars displaying incorrectly.
-- Updated to new Resourcefullib packet format.
-- Fixed the invalid launch text displaying to players even in correct dimensions on servers.
-- Fixed Planet Data not being send to players when joining forge servers.
-- Added ServerboundLandPacket validation. (#427)
-- Fixed old worlds not being compatible after updating. If you've created a new world in 1.15.7 or 1.15.8, There is a chance it'll break. But old worlds should work fine.
-- Fixed crash when loading chunk with ticking pipes. (#428)
-- Fixed REI crash (#421)
-- Fixed cheese not being edible.
-- Fixed etrionic blast furnace layer not being cutout.
-- Fixed etrionic blast furnace skipping cooking progress when items are taken out and put back in.
-- Fixed side interactions putting items in wrong slot and not working for blocks like furnaces (#423)
-- You can no longer get kicked for flying in a rocket or jet suit.
+- Add Oxygen and Gravity events (#430)
+- Fixed Oxygen Distributor and Gravity Normalizer sending significantly 
+more data than they should (#434)
+- Fixed oxygen distributor displaying an incorrect oxygen consumption rate on fabric

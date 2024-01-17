@@ -54,6 +54,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     private double accumulatedFluid;
     private int shutDownTicks;
     private int limit = MachineConfig.maxDistributionBlocks;
+    private boolean shouldSyncPositions;
 
     private float yRot;
     private float lastYRot;
@@ -66,9 +67,11 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     @Override
     public void load(@NotNull CompoundTag tag) {
         super.load(tag);
-        lastDistributedBlocks.clear();
-        for (var pos : tag.getLongArray("LastDistributedBlocks")) {
-            lastDistributedBlocks.add(BlockPos.of(pos));
+        if (tag.contains("LastDistributedBlocks")) {
+            lastDistributedBlocks.clear();
+            for (var pos : tag.getLongArray("LastDistributedBlocks")) {
+                lastDistributedBlocks.add(BlockPos.of(pos));
+            }
         }
         energyPerTick = tag.getLong("EnergyPerTick");
         fluidPerTick = tag.getFloat("FluidPerTick");
@@ -80,7 +83,6 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.putLongArray("LastDistributedBlocks", lastDistributedBlocks.stream().mapToLong(BlockPos::asLong).toArray());
         tag.putLong("EnergyPerTick", energyPerTick);
         tag.putFloat("FluidPerTick", fluidPerTick);
         tag.putInt("DistributedBlocksCount", distributedBlocksCount);
@@ -193,6 +195,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         lastDistributedBlocks.removeAll(positions);
         clearOxygenBlocks();
         lastDistributedBlocks.addAll(positions);
+        shouldSyncPositions = true;
     }
 
     protected void clearOxygenBlocks() {
@@ -271,5 +274,17 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     @Override
     public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
         return new int[]{1, 2};
+    }
+
+    // Only sync positions when recalculating the distributed blocks.
+    @Override
+    public @NotNull CompoundTag getUpdateTag() {
+        var tag = super.getUpdateTag();
+        if (shouldSyncPositions) {
+            tag.putLongArray("LastDistributedBlocks", lastDistributedBlocks.stream()
+                .mapToLong(BlockPos::asLong).toArray());
+            shouldSyncPositions = false;
+        }
+        return tag;
     }
 }

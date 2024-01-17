@@ -3,27 +3,30 @@ package earth.terrarium.adastra.client.renderers.world;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import earth.terrarium.adastra.common.blockentities.base.MachineBlockEntity;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Block;
 import org.joml.Matrix4f;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
+import java.util.function.Supplier;
 
 public class OverlayRenderer {
     private final Map<BlockPos, Set<BlockPos>> positions = new HashMap<>();
     private final int color;
     private final BooleanSupplier config;
+    private final Supplier<Block> block;
 
-    public OverlayRenderer(int color, BooleanSupplier config) {
+    public OverlayRenderer(int color, BooleanSupplier config, Supplier<Block> block) {
         this.color = color;
         this.config = config;
+        this.block = block;
     }
 
     public void addPositions(BlockPos pos, Set<BlockPos> positions) {
@@ -52,7 +55,7 @@ public class OverlayRenderer {
         if (level.getGameTime() % 40 == 0) {
             positions.keySet().removeIf(pos -> !level.isLoaded(pos)
                 || !canAdd(pos)
-                || !(level.getBlockEntity(pos) instanceof MachineBlockEntity)
+                || !(level.getBlockState(pos).is(block.get()))
             );
         }
 

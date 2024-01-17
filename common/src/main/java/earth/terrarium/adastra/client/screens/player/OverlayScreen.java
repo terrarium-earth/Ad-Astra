@@ -52,7 +52,7 @@ public class OverlayScreen {
                 poseStack.popPose();
             }
 
-            graphics.blit(ROCKET_BAR, 0, height / 2, 0, 0, 16, 128, 15, 128);
+            graphics.blit(ROCKET_BAR, 0, height / 2, 0, 0, 16, 128, 16, 128);
 
             poseStack.pushPose();
             double y = Mth.clamp(rocket.getY(), 100, AdAstraConfig.atmosphereLeave);
