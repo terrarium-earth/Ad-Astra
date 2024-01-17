@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.common.menus.base;
 
 import earth.terrarium.adastra.common.compat.cadmus.CadmusIntegration;
+import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;
@@ -15,6 +16,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -33,11 +35,12 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
 
     @Override
     public AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
-        return new PlanetsMenu(containerId, inventory, Map.of(), Object2BooleanMaps.emptyMap(), Set.of());
+        return new PlanetsMenu(containerId, inventory, Set.of(), Map.of(), Object2BooleanMaps.emptyMap(), Set.of());
     }
 
     @Override
     public void writeExtraData(ServerPlayer player, FriendlyByteBuf buffer) {
+        buffer.writeUtf(AdAstraConfig.disabledPlanets);
 
         buffer.writeVarInt(AdAstraData.planets().size());
         AdAstraData.planets().keySet().forEach(dimension -> {
@@ -70,6 +73,15 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
 
         buffer.writeVarInt(locations.size());
         locations.forEach(buffer::writeGlobalPos);
+    }
+
+    public static Set<ResourceLocation> createDisabledPlanetsFromBuf(FriendlyByteBuf buf) {
+        Set<ResourceLocation> disabledPlanets = new HashSet<>();
+        String[] planets = buf.readUtf().split(",");
+        for (var planet : planets) {
+            disabledPlanets.add(new ResourceLocation(planet));
+        }
+        return Collections.unmodifiableSet(disabledPlanets);
     }
 
     public static Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> createSpaceStationsFromBuf(FriendlyByteBuf buf) {

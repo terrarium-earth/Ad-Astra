@@ -51,7 +51,6 @@ public record ServerboundClearFluidTankPacket(
                     FluidContainer container = fluidBlock.getFluidContainer();
                     if (container == null) return;
                     int tank = Mth.clamp(packet.tank(), 0, container.getSize() - 1);
-                    if (tank > container.getSize()) return;
                     container.internalExtract(container.getFluids().get(tank), false);
                     container.extractFluid(container.getFluids().get(tank), false);
                 }

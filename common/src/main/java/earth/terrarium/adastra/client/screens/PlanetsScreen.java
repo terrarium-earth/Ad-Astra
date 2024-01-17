@@ -70,7 +70,9 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
         this.imageWidth = width;
         this.imageHeight = height;
 
-        var planets = AdAstraData.planets().values().stream().filter(planet -> menu.tier() >= planet.tier()).toList();
+        var planets = AdAstraData.planets().values().stream()
+            .filter(planet -> !menu.disabledPlanets().contains(planet.dimension().location()))
+            .filter(planet -> menu.tier() >= planet.tier()).toList();
         hasMultipleSolarSystems = planets.stream().map(Planet::solarSystem).distinct().count() > 1;
         pageIndex = hasMultipleSolarSystems ? 0 : 1;
     }

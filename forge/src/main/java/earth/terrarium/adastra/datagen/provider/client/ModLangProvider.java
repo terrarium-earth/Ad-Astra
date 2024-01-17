@@ -343,6 +343,7 @@ public class ModLangProvider extends LanguageProvider {
         add("config.ad_astra.launchFromAnywhere", "Launch from anywhere");
         add("config.ad_astra.planetRandomTickSpeed", "Planet random tick speed");
         add("config.ad_astra.forcePlanetTick", "Force planet tick");
+        add("config.ad_astra.disabledPlanets", "Disabled planets");
         add("config.ad_astra.atmosphereLeave", "Atmosphere leave");
 
         add("config.ad_astra.machines", "Machines");

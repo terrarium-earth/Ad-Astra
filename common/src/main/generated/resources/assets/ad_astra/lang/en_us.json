@@ -396,6 +396,7 @@
   "config.ad_astra.deshTierEnergyCapacity": "Desh tier energy capacity",
   "config.ad_astra.deshTierFluidCapacity": "Desh tier max fluid capacity",
   "config.ad_astra.deshTierMaxEnergyInOut": "Desh tier max energy in/out",
+  "config.ad_astra.disabledPlanets": "Disabled planets",
   "config.ad_astra.distributionRefreshRate": "Distribution refresh rate",
   "config.ad_astra.energizerEnergyCapacity": "Energizer energy capacity",
   "config.ad_astra.etrionicBlastFurnaceBlastingEnergyPerItem": "Etrionic blast furnace blasting energy per item",

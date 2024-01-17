@@ -67,6 +67,14 @@ public final class AdAstraConfig {
     @Comment("The y level where rockets should leave the dimension and enter space.")
     public static int atmosphereLeave = 600;
 
+    @ConfigEntry(
+        id = "disabledPlanets",
+        type = EntryType.STRING,
+        translation = "config.ad_astra.disabledPlanets"
+    )
+    @Comment("A comma-separated list of planet IDs that should be hidden from the planets screen. e.g. minecraft:overworld,ad_astra:moon,ad_astra:mars,ad_astra:venus,ad_astra:mercury,ad_astra:glacio")
+    public static String disabledPlanets = "";
+
     @InlineCategory
     public static MachineConfig machineConfig;
 }

@@ -62,6 +62,11 @@ public final class ModUtils {
         if (!(player.containerMenu instanceof PlanetsMenu)) return false;
         if (player.isCreative() || player.isSpectator() || player.hasPermissions(2)) return true;
 
+        String[] planets = AdAstraConfig.disabledPlanets.split(",");
+        for (var planet : planets) {
+            if (planet.equals(targetPlanet.dimension().location().toString())) return false;
+        }
+
         if (!(player.getVehicle() instanceof Rocket rocket)) return false;
         if (rocket.getY() < AdAstraConfig.atmosphereLeave) return false;
         return rocket.tier() >= targetPlanet.tier();
