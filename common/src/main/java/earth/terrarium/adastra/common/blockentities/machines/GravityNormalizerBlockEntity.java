@@ -202,7 +202,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     }
 
     private long calculateEnergyPerTick() {
-        return Math.max(1, lastDistributedBlocks.size() / 15);
+        return Math.max(1, lastDistributedBlocks.size() / 24);
     }
 
     @Override
