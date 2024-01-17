@@ -25,13 +25,11 @@ public abstract class GlacianRamMixin extends Animal implements IForgeShearable 
 
     @Override
     public boolean isShearable(@NotNull ItemStack item, Level level, BlockPos pos) {
-        GlacianRam self = (GlacianRam) (Object) this;
-        return self.readyForShearing();
+        return ((GlacianRam) (Object) this).readyForShearing();
     }
 
     @Override
     public @NotNull List<ItemStack> onSheared(@Nullable Player player, @NotNull ItemStack item, Level level, BlockPos pos, int fortune) {
-        GlacianRam self = (GlacianRam) (Object) this;
-        return self.onSheared(player, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS);
+        return ((GlacianRam) (Object) this).onSheared(player, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS);
     }
 }
