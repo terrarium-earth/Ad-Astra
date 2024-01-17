@@ -14,7 +14,7 @@ public class ModMenuConfig implements ModMenuApi {
         return parent -> {
             ResourcefulConfig config = AdAstra.CONFIGURATOR.getConfig(AdAstraConfig.class);
             if (config == null) return null;
-            return new ConfigScreen(null, config);
+            return new ConfigScreen(parent, null, config);
         };
     }
 }
