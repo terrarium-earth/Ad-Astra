@@ -1,13 +1,11 @@
 package earth.terrarium.adastra.common.config;
 
-import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
-import com.teamresourceful.resourcefulconfig.common.annotations.Config;
-import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
-import com.teamresourceful.resourcefulconfig.common.annotations.InlineCategory;
+import com.teamresourceful.resourcefulconfig.common.annotations.*;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
 import com.teamresourceful.resourcefulconfig.web.annotations.Gradient;
 import com.teamresourceful.resourcefulconfig.web.annotations.Link;
 import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
+import earth.terrarium.adastra.client.config.AdAstraConfigClient;
 
 @Config("ad_astra")
 @WebInfo(
@@ -26,6 +24,10 @@ import com.teamresourceful.resourcefulconfig.web.annotations.WebInfo;
     }
 )
 public final class AdAstraConfig {
+    @ConfigButton(text = "Client Config", translation = "config.ad_astra.clientConfig")
+    public static void clientConfig() {
+        AdAstraConfigClient.open();
+    }
 
     @ConfigEntry(
         id = "allowFlagImages",

@@ -339,6 +339,7 @@ public class ModLangProvider extends LanguageProvider {
         add("tag.item.ad_astra.strophar_caps", "Strophar Caps");
         add("tag.item.ad_astra.destroyed_in_space", "Destroyed in Space");
 
+        add("config.ad_astra.clientConfig", "Client Config");
         add("config.ad_astra.allowFlagImages", "Allow flag images");
         add("config.ad_astra.launchFromAnywhere", "Launch from anywhere");
         add("config.ad_astra.planetRandomTickSpeed", "Planet random tick speed");

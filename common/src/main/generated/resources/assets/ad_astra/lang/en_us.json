@@ -392,6 +392,7 @@
   "block.ad_astra.yellow_industrial_lamp": "Yellow Industrial Lamp",
   "config.ad_astra.allowFlagImages": "Allow flag images",
   "config.ad_astra.atmosphereLeave": "Atmosphere leave",
+  "config.ad_astra.clientConfig": "Client Config",
   "config.ad_astra.coalGeneratorEnergyGenerationPerTick": "Coal generator energy generation per tick",
   "config.ad_astra.deshTierEnergyCapacity": "Desh tier energy capacity",
   "config.ad_astra.deshTierFluidCapacity": "Desh tier max fluid capacity",
