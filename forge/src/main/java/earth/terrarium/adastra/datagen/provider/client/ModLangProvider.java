@@ -3,10 +3,12 @@ package earth.terrarium.adastra.datagen.provider.client;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.registry.ModItems;
+import earth.terrarium.adastra.datagen.provider.server.registry.ModBiomeDataProvider;
 import earth.terrarium.botarium.common.registry.fluid.BotariumFlowingFluid;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
@@ -297,6 +299,30 @@ public class ModLangProvider extends LanguageProvider {
         add("planet.ad_astra.venus_orbit", "Venus Orbit");
         add("planet.ad_astra.mercury_orbit", "Mercury Orbit");
         add("planet.ad_astra.glacio_orbit", "Glacio Orbit");
+
+        add("dimension." + Planet.MOON.location().toLanguageKey(), "Moon");
+        add("dimension." + Planet.MARS.location().toLanguageKey(), "Mars");
+        add("dimension." + Planet.VENUS.location().toLanguageKey(), "Venus");
+        add("dimension." + Planet.MERCURY.location().toLanguageKey(), "Mercury");
+        add("dimension." + Planet.GLACIO.location().toLanguageKey(), "Glacio");
+
+        add("dimension." + Planet.EARTH_ORBIT.location().toLanguageKey(), "Earth Orbit");
+        add("dimension." + Planet.MOON_ORBIT.location().toLanguageKey(), "Moon Orbit");
+        add("dimension." + Planet.MARS_ORBIT.location().toLanguageKey(), "Mars Orbit");
+        add("dimension." + Planet.VENUS_ORBIT.location().toLanguageKey(), "Venus Orbit");
+        add("dimension." + Planet.MERCURY_ORBIT.location().toLanguageKey(), "Mercury Orbit");
+        add("dimension." + Planet.GLACIO_ORBIT.location().toLanguageKey(), "Glacio Orbit");
+
+        add("biome." + ModBiomeDataProvider.SPACE.location().toLanguageKey(), "Space");
+        add("biome." + ModBiomeDataProvider.LUNAR_WASTELANDS.location().toLanguageKey(), "Lunar Wastelands");
+        add("biome." + ModBiomeDataProvider.MARTIAN_CANYON_CREEK.location().toLanguageKey(), "Martian Canyon Creek");
+        add("biome." + ModBiomeDataProvider.MARTIAN_POLAR_CAPS.location().toLanguageKey(), "Martian Polar Caps");
+        add("biome." + ModBiomeDataProvider.MARTIAN_WASTELANDS.location().toLanguageKey(), "Martian Wastelands");
+        add("biome." + ModBiomeDataProvider.INFERNAL_VENUS_BARRENS.location().toLanguageKey(), "Infernal Venus Barrens");
+        add("biome." + ModBiomeDataProvider.VENUS_WASTELANDS.location().toLanguageKey(), "Venus Wastelands");
+        add("biome." + ModBiomeDataProvider.MERCURY_DELTAS.location().toLanguageKey(), "Mercury Deltas");
+        add("biome." + ModBiomeDataProvider.GLACIO_ICE_PEAKS.location().toLanguageKey(), "Glacio Ice Peaks");
+        add("biome." + ModBiomeDataProvider.GLACIO_SNOWY_BARRENS.location().toLanguageKey(), "Glacio Snowy Barrens");
 
         add("tag.item.ad_astra.globes", "Globes");
         add("tag.item.ad_astra.flags", "Flags");
