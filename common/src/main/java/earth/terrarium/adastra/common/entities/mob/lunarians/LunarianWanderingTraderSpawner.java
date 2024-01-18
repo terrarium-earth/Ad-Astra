@@ -71,6 +71,7 @@ public class LunarianWanderingTraderSpawner implements CustomSpawner {
         if (playerEntity == null) return true;
         if (this.random.nextInt(10) != 0) return false;
         if (!PlanetApi.API.isPlanet(level.dimension())) return false;
+        if (Level.OVERWORLD.equals(level.dimension())) return false;
 
         BlockPos blockPos = playerEntity.blockPosition();
         PoiManager pointOfInterestStorage = level.getPoiManager();

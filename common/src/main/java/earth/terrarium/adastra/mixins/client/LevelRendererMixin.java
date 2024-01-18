@@ -9,13 +9,30 @@ import com.mojang.blaze3d.vertex.VertexBuffer;
 import earth.terrarium.adastra.client.utils.DimensionRenderingUtils;
 import earth.terrarium.adastra.common.registry.ModParticleTypes;
 import earth.terrarium.adastra.common.tags.ModBiomeTags;
+import net.minecraft.client.Camera;
 import net.minecraft.client.CloudStatus;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.ParticleStatus;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,8 +40,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Objects;
 
 @Mixin(value = LevelRenderer.class, priority = 2000)
 public abstract class LevelRendererMixin {
@@ -63,13 +81,8 @@ public abstract class LevelRendererMixin {
     @Shadow
     protected abstract BufferBuilder.RenderedBuffer buildClouds(BufferBuilder builder, double x, double y, double z, Vec3 cloudColor);
 
-    @ModifyArg(method = "tickRain", at = @At(
-        value = "INVOKE",
-        target = "Lnet/minecraft/client/multiplayer/ClientLevel;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V"
-    ), index = 0)
-    private ParticleOptions adastra$tickRain(ParticleOptions original) {
-        return adastra$hasAcidRain() ? ModParticleTypes.ACID_RAIN.get() : original;
-    }
+    @Shadow
+    private int rainSoundTime;
 
     @Inject(method = "renderSnowAndRain", at = @At(
         value = "INVOKE",
@@ -174,6 +187,68 @@ public abstract class LevelRendererMixin {
                 RenderSystem.enableCull();
                 RenderSystem.disableBlend();
                 RenderSystem.defaultBlendFunc();
+            }
+        }
+    }
+
+    // A copy of vanilla's rain rendering with custom particles because there's some mod that overwrites this, so it
+    // has to be copied in full.
+    @Inject(
+        method = "tickRain",
+        at = @At(
+            value = "HEAD"
+        ),
+        cancellable = true)
+    public void adastra$tickRain(Camera camera, CallbackInfo ci) {
+        if (adastra$hasAcidRain()) {
+            ci.cancel();
+            float f = Objects.requireNonNull(this.minecraft.level).getRainLevel(1.0F) / (Minecraft.useFancyGraphics() ? 1.0F : 2.0F);
+            if (!(f <= 0.0F)) {
+                RandomSource randomSource = RandomSource.create((long) this.ticks * 312987231L);
+                LevelReader levelReader = this.minecraft.level;
+                BlockPos blockPos = BlockPos.containing(camera.getPosition());
+                BlockPos blockPos2 = null;
+                int i = (int) (100.0F * f * f) / (this.minecraft.options.particles().get() == ParticleStatus.DECREASED ? 2 : 1);
+
+                for (int j = 0; j < i; ++j) {
+                    int k = randomSource.nextInt(21) - 10;
+                    int l = randomSource.nextInt(21) - 10;
+                    BlockPos blockPos3 = levelReader.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, blockPos.offset(k, 0, l));
+                    if (blockPos3.getY() > levelReader.getMinBuildHeight() && blockPos3.getY() <= blockPos.getY() + 10 && blockPos3.getY() >= blockPos.getY() - 10) {
+                        Biome biome = levelReader.getBiome(blockPos3).value();
+                        if (biome.getPrecipitationAt(blockPos3) == Biome.Precipitation.RAIN) {
+                            blockPos2 = blockPos3.below();
+                            if (this.minecraft.options.particles().get() == ParticleStatus.MINIMAL) {
+                                break;
+                            }
+
+                            double d = randomSource.nextDouble();
+                            double e = randomSource.nextDouble();
+                            BlockState blockState = levelReader.getBlockState(blockPos2);
+                            FluidState fluidState = levelReader.getFluidState(blockPos2);
+                            VoxelShape voxelShape = blockState.getCollisionShape(levelReader, blockPos2);
+                            double g = voxelShape.max(Direction.Axis.Y, d, e);
+                            double h = fluidState.getHeight(levelReader, blockPos2);
+                            double m = Math.max(g, h);
+                            ParticleOptions particleOptions = !fluidState.is(FluidTags.LAVA) && !blockState.is(Blocks.MAGMA_BLOCK) && !CampfireBlock.isLitCampfire(blockState)
+                                ? ModParticleTypes.ACID_RAIN.get()
+                                : ParticleTypes.SMOKE;
+                            this.minecraft
+                                .level
+                                .addParticle(particleOptions, (double) blockPos2.getX() + d, (double) blockPos2.getY() + m, (double) blockPos2.getZ() + e, 0.0, 0.0, 0.0);
+                        }
+                    }
+                }
+
+                if (blockPos2 != null && randomSource.nextInt(3) < rainSoundTime++) {
+                    rainSoundTime = 0;
+                    if (blockPos2.getY() > blockPos.getY() + 1
+                        && levelReader.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, blockPos).getY() > Mth.floor((float) blockPos.getY())) {
+                        this.minecraft.level.playLocalSound(blockPos2, SoundEvents.WEATHER_RAIN_ABOVE, SoundSource.WEATHER, 0.1F, 0.5F, false);
+                    } else {
+                        this.minecraft.level.playLocalSound(blockPos2, SoundEvents.WEATHER_RAIN, SoundSource.WEATHER, 0.2F, 1.0F, false);
+                    }
+                }
             }
         }
     }
