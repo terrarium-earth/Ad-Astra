@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_polished_conglomerate",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_polished_conglomerate"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/polished_conglomerate_from_conglomerate_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

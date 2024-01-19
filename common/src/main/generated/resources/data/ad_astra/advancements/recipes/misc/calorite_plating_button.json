@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_calorite_plating_button",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_calorite_plating_button"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:calorite_plating_button"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

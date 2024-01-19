@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_desh_cable",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_desh_cable"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:desh_cable"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

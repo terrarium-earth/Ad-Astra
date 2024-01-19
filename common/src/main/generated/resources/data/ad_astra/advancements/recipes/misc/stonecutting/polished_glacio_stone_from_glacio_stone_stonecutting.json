@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_polished_glacio_stone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_polished_glacio_stone"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/polished_glacio_stone_from_glacio_stone_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

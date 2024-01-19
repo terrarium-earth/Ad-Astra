@@ -15,16 +15,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.ad_astra.under_pressure.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "ad_astra:compressor"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.ad_astra.under_pressure.title"
     }

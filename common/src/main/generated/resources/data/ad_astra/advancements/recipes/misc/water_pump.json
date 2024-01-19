@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_water_pump",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_water_pump"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:water_pump"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

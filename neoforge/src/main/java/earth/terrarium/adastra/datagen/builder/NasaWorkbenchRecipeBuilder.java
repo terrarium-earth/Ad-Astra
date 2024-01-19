@@ -28,10 +28,12 @@ public class NasaWorkbenchRecipeBuilder extends CodecRecipeBuilder {
 
     @Override
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        recipeOutput.accept(id, recipe, recipeOutput.advancement()
+        var builder = recipeOutput.advancement()
             .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
             .rewards(AdvancementRewards.Builder.recipe(id))
-            .requirements(AdvancementRequirements.Strategy.OR)
+            .requirements(AdvancementRequirements.Strategy.OR);
+        criteria.forEach(builder::addCriterion);
+        recipeOutput.accept(id, recipe, builder
             .build(new ResourceLocation(id.getNamespace(), "recipes/nasa_workbench/" + id.getPath())));
     }
 }

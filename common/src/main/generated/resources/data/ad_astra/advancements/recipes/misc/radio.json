@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_radio",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_radio"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:radio"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_fluid_pipe_duct",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_fluid_pipe_duct"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:fluid_pipe_duct"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

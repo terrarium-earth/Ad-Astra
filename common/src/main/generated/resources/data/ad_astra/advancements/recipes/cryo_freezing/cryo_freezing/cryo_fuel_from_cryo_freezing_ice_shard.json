@@ -17,6 +17,5 @@
     "recipes": [
       "ad_astra:cryo_freezing/cryo_fuel_from_cryo_freezing_ice_shard"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

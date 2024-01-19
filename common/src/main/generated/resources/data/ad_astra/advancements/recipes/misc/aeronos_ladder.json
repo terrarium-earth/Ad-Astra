@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_aeronos_ladder",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_aeronos_ladder"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:aeronos_ladder"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

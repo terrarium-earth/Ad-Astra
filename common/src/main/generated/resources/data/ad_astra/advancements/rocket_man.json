@@ -30,17 +30,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.ad_astra.rocket_man.description"
     },
     "frame": "goal",
-    "hidden": false,
     "icon": {
       "item": "ad_astra:jet_suit_helmet",
       "nbt": "{Damage:0}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.ad_astra.rocket_man.title"
     }

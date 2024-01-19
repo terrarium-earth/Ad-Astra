@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_iron_plateblock",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_iron_plateblock"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:iron_plateblock"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

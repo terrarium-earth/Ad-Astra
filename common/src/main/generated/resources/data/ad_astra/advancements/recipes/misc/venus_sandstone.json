@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_venus_sandstone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_venus_sandstone"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:venus_sandstone"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

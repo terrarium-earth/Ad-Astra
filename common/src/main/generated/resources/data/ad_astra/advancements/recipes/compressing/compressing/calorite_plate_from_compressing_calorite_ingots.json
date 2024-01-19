@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_item",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_item"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:compressing/calorite_plate_from_compressing_calorite_ingots"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

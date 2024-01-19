@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_polished_mars_stone_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_polished_mars_stone_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/polished_mars_stone_slab_from_polished_mars_stone_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

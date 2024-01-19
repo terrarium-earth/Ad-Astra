@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_fan",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_fan"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:fan"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

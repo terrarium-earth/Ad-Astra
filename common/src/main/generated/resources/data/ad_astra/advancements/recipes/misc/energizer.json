@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_energizer",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_energizer"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:energizer"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

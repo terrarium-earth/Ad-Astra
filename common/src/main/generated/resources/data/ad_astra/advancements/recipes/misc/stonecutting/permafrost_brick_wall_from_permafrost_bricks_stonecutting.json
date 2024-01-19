@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_permafrost_brick_wall",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_permafrost_brick_wall"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/permafrost_brick_wall_from_permafrost_bricks_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

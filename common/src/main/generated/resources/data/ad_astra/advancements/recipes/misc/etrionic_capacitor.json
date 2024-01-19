@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_etrionic_capacitor",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_etrionic_capacitor"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:etrionic_capacitor"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

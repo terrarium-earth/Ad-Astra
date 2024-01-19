@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_steel_trapdoor",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_steel_trapdoor"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:steel_trapdoor"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

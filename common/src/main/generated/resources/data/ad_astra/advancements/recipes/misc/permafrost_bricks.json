@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_permafrost_bricks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_permafrost_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:permafrost_bricks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_large_gas_tank",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_large_gas_tank"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:large_gas_tank"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

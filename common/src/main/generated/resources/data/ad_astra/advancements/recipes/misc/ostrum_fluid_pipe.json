@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_ostrum_fluid_pipe",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_ostrum_fluid_pipe"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:ostrum_fluid_pipe"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

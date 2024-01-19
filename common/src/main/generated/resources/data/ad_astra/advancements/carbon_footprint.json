@@ -15,16 +15,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.ad_astra.carbon_footprint.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "ad_astra:coal_generator"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.ad_astra.carbon_footprint.title"
     }

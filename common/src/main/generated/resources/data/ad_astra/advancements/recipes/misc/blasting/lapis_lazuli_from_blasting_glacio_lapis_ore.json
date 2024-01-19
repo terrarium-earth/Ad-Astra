@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_lapis_lazuli",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_lapis_lazuli"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:blasting/lapis_lazuli_from_blasting_glacio_lapis_ore"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

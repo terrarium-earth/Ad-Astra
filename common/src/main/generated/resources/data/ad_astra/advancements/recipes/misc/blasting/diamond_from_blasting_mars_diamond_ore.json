@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_diamond",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_diamond"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:blasting/diamond_from_blasting_mars_diamond_ore"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

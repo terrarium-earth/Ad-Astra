@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_pink_industrial_lamp",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_pink_industrial_lamp"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:pink_industrial_lamp"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

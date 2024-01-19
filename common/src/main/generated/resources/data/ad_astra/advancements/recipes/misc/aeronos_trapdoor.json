@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_aeronos_trapdoor",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_aeronos_trapdoor"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:aeronos_trapdoor"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

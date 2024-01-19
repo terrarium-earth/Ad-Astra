@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_calorite_plating_stairs",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_calorite_plating_stairs"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:calorite_plating_stairs"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cheese_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cheese_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:cheese_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

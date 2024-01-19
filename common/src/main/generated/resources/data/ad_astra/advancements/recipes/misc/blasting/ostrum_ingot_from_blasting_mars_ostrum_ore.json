@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_ostrum_ingot",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_ostrum_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:blasting/ostrum_ingot_from_blasting_mars_ostrum_ore"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

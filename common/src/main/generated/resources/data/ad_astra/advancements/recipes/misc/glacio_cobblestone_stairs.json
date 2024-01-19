@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_glacio_cobblestone_stairs",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_glacio_cobblestone_stairs"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:glacio_cobblestone_stairs"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

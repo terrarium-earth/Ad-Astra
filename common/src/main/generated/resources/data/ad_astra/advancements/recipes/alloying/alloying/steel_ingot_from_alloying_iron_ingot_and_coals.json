@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_item",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_item"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:alloying/steel_ingot_from_alloying_iron_ingot_and_coals"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

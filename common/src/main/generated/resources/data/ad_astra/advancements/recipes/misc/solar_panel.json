@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_solar_panel",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_solar_panel"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:solar_panel"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

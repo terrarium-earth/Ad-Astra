@@ -13,16 +13,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.ad_astra.ocean_cleanup.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "ad_astra:oil_bucket"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.ad_astra.ocean_cleanup.title"
     }

@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_calorite_plateblock",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_calorite_plateblock"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:calorite_plateblock"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

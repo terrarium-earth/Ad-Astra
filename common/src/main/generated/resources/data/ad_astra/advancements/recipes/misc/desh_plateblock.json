@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_desh_plateblock",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_desh_plateblock"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:desh_plateblock"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

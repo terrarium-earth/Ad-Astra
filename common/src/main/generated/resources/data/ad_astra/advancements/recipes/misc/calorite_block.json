@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_calorite_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_calorite_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:calorite_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

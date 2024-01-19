@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_iron_panel",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_iron_panel"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:iron_panel"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

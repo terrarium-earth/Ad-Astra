@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_magenta_flag",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_magenta_flag"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:magenta_flag"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

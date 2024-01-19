@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_ti_69",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_ti_69"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:ti_69"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

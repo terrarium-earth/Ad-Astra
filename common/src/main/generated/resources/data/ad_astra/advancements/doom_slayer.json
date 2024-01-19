@@ -30,17 +30,14 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.ad_astra.doom_slayer.description"
     },
     "frame": "goal",
-    "hidden": false,
     "icon": {
       "item": "ad_astra:netherite_space_helmet",
       "nbt": "{Damage:0}"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.ad_astra.doom_slayer.title"
     }

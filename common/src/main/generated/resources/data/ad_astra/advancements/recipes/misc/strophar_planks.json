@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_strophar_planks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_strophar_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:strophar_planks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

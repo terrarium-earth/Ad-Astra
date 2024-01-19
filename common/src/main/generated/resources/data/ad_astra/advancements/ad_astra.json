@@ -19,8 +19,6 @@
     "description": {
       "translate": "advancements.ad_astra.ad_astra.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "ad_astra:earth_globe"
     },

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_desh_ingot",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_desh_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:blasting/desh_ingot_from_blasting_deepslate_desh_ore"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

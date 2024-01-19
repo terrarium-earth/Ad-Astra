@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_raw_calorite",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_raw_calorite"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:raw_calorite"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

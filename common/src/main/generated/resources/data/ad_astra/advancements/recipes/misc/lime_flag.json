@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_lime_flag",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_lime_flag"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:lime_flag"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

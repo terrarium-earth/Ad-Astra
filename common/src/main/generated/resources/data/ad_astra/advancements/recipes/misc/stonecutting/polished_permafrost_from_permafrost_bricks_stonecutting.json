@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_polished_permafrost",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_polished_permafrost"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/polished_permafrost_from_permafrost_bricks_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

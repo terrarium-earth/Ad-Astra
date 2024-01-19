@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_ostrum_plating",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_ostrum_plating"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:ostrum_plating"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

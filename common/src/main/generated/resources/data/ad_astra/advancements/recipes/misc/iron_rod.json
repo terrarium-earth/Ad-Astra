@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_iron_rod",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_iron_rod"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:iron_rod"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

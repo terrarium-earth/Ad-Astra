@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_venus_stone_brick_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_venus_stone_brick_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/venus_stone_brick_slab_from_venus_stone_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

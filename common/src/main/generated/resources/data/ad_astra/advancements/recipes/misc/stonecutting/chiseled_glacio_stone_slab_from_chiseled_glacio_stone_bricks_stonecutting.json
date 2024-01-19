@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_chiseled_glacio_stone_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_chiseled_glacio_stone_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/chiseled_glacio_stone_slab_from_chiseled_glacio_stone_bricks_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

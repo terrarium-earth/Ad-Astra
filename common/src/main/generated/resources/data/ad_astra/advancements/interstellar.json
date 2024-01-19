@@ -9,16 +9,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.ad_astra.interstellar.description"
     },
     "frame": "goal",
-    "hidden": false,
     "icon": {
       "item": "ad_astra:glacio_globe"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.ad_astra.interstellar.title"
     }

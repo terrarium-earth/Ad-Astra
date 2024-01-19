@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_mercury_stone_brick_wall",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_mercury_stone_brick_wall"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:mercury_stone_brick_wall"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

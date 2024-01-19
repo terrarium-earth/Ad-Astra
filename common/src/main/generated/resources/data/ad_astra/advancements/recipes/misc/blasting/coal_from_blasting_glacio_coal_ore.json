@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_coal",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_coal"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:blasting/coal_from_blasting_glacio_coal_ore"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

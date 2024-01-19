@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_wheel",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_wheel"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:wheel"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

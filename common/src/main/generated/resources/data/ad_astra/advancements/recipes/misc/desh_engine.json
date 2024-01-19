@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_desh_engine",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_desh_engine"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:desh_engine"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

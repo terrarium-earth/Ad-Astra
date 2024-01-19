@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_permafrost_tiles",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_permafrost_tiles"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:permafrost_tiles"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

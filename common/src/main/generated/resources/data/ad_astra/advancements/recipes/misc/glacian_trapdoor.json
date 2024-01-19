@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_glacian_trapdoor",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_glacian_trapdoor"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:glacian_trapdoor"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

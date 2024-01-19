@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_oxygen_distributor",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_oxygen_distributor"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:oxygen_distributor"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

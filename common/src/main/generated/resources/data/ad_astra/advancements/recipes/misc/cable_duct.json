@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_cable_duct",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cable_duct"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:cable_duct"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

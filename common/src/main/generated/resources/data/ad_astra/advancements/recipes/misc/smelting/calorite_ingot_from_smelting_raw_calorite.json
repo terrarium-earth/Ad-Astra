@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_calorite_ingot",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_calorite_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:smelting/calorite_ingot_from_smelting_raw_calorite"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

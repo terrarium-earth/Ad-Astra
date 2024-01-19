@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cracked_permafrost_bricks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cracked_permafrost_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:smelting/cracked_permafrost_bricks_from_smelting_permafrost_bricks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

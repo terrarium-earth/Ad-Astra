@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_glacian_planks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_glacian_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:glacian_planks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

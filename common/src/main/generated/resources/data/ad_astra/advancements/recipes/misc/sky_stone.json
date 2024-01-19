@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_sky_stone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_sky_stone"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:sky_stone"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

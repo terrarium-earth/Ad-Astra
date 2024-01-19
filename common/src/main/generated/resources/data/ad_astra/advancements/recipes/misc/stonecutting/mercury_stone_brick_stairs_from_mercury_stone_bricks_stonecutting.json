@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_mercury_stone_brick_stairs",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_mercury_stone_brick_stairs"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/mercury_stone_brick_stairs_from_mercury_stone_bricks_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_mars_cobblestone_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_mars_cobblestone_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/mars_cobblestone_slab_from_mars_cobblestone_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

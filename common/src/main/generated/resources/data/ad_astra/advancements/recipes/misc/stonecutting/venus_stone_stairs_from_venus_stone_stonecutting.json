@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_venus_stone_stairs",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_venus_stone_stairs"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/venus_stone_stairs_from_venus_stone_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

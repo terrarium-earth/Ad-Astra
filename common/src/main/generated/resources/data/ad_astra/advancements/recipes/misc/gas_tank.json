@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_gas_tank",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_gas_tank"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:gas_tank"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

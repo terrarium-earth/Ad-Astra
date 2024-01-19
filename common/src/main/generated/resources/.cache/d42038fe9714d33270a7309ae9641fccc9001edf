@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-30T20:48:06.728224	Tags for minecraft:entity_type mod id ad_astra
+// 1.20.4	2024-01-18T19:05:15.85045	Tags for minecraft:entity_type mod id ad_astra
 0b80548f23bc5bee90b92328d46ae7e13cb3a2db data/ad_astra/tags/entity_types/acid_rain_immune.json
 8fb6c3dafcd9086f49a8ea003414895786cd6d3d data/ad_astra/tags/entity_types/can_survive_extreme_cold.json
 68b0da066fd014874f1d7b886cd84b74d69bf3db data/ad_astra/tags/entity_types/can_survive_extreme_heat.json

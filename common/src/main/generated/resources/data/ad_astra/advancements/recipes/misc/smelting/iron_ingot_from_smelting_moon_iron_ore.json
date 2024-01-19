@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_iron_ingot",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_iron_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:smelting/iron_ingot_from_smelting_moon_iron_ore"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

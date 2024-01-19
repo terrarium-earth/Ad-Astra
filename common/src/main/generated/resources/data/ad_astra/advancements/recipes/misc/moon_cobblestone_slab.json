@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_moon_cobblestone_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_moon_cobblestone_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:moon_cobblestone_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

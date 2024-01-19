@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_orange_flag",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_orange_flag"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:orange_flag"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

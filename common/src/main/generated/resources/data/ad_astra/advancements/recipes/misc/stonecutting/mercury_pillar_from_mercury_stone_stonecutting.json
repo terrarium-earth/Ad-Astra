@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_mercury_pillar",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_mercury_pillar"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/mercury_pillar_from_mercury_stone_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
