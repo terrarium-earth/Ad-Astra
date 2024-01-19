@@ -171,7 +171,7 @@ public class ModAdvancementProvider extends ForgeAdvancementProvider {
                     true,
                     false
                 )
-                .addCriterion("has_zip_gun", new UsingItemTrigger.TriggerInstance(ContextAwarePredicate.ANY, ItemPredicate.Builder.item().of(ModItems.ZIP_GUN.get()).build()))
+                .addCriterion("using_zip_gun", new UsingItemTrigger.TriggerInstance(ContextAwarePredicate.ANY, ItemPredicate.Builder.item().of(ModItems.ZIP_GUN.get()).build()))
                 .save(consumer, path("zip_gun"));
 
             Advancement ti69 = Advancement.Builder.advancement()
