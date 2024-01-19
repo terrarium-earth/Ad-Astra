@@ -1,15 +1,21 @@
 package earth.terrarium.adastra.common.compat.rei.displays;
 
 import earth.terrarium.adastra.common.compat.rei.categories.CryoFreezingCategory;
+import earth.terrarium.adastra.common.recipes.machines.AlloyingRecipe;
 import earth.terrarium.adastra.common.recipes.machines.CryoFreezingRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
 import java.util.List;
 
 public record CryoFreezingDisplay(CryoFreezingRecipe recipe) implements Display {
+    public CryoFreezingDisplay(RecipeHolder<CryoFreezingRecipe> recipe) {
+        this(recipe.value());
+    }
+
     @Override
     public List<EntryIngredient> getInputEntries() {
         return List.of(EntryIngredients.ofIngredient(recipe.input()));

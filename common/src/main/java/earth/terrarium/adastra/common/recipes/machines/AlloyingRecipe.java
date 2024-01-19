@@ -9,7 +9,6 @@ import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
 import earth.terrarium.adastra.common.blockentities.machines.EtrionicBlastFurnaceBlockEntity;
-import earth.terrarium.adastra.common.recipes.base.IngredientByteCodec;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.ItemUtils;
@@ -38,7 +37,7 @@ public record AlloyingRecipe(
     public static final ByteCodec<AlloyingRecipe> NETWORK_CODEC = ObjectByteCodec.create(
         ByteCodec.INT.fieldOf(AlloyingRecipe::cookingTime),
         ByteCodec.INT.fieldOf(AlloyingRecipe::energy),
-        IngredientByteCodec.CODEC.listOf().fieldOf(AlloyingRecipe::ingredients),
+        ExtraByteCodecs.INGREDIENT.listOf().fieldOf(AlloyingRecipe::ingredients),
         ExtraByteCodecs.ITEM_STACK.fieldOf(AlloyingRecipe::result),
         AlloyingRecipe::new
     );

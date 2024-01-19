@@ -13,6 +13,7 @@ import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.function.Consumer;
@@ -49,9 +50,9 @@ public record ServerboundClearFluidTankPacket(
                     if (!(machine instanceof BotariumFluidBlock<?> fluidBlock)) return;
                     FluidContainer container = fluidBlock.getFluidContainer(player.level(), machine.getBlockPos(), machine.getBlockState(), machine, null);
                     if (container == null) return;
-                    if (packet.tank() > container.getSize()) return;
-                    container.internalExtract(container.getFluids().get(packet.tank()), false);
-                    container.extractFluid(container.getFluids().get(packet.tank()), false);
+                    int tank = Mth.clamp(packet.tank(), 0, container.getSize() - 1);
+                    container.internalExtract(container.getFluids().get(tank), false);
+                    container.extractFluid(container.getFluids().get(tank), false);
                 }
             );
         }

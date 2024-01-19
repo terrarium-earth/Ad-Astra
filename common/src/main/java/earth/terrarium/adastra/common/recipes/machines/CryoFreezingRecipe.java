@@ -4,10 +4,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.bytecodecs.base.ByteCodec;
 import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
+import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
 import earth.terrarium.adastra.common.blockentities.machines.CryoFreezerBlockEntity;
-import earth.terrarium.adastra.common.recipes.base.IngredientByteCodec;
+import earth.terrarium.adastra.common.recipes.base.BotariumByteCodecs;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
@@ -34,8 +35,8 @@ public record CryoFreezingRecipe(
     public static final ByteCodec<CryoFreezingRecipe> NETWORK_CODEC = ObjectByteCodec.create(
         ByteCodec.INT.fieldOf(CryoFreezingRecipe::cookingTime),
         ByteCodec.INT.fieldOf(CryoFreezingRecipe::energy),
-        IngredientByteCodec.CODEC.fieldOf(CryoFreezingRecipe::input),
-        IngredientByteCodec.FLUID_HOLDER_CODEC.fieldOf(CryoFreezingRecipe::result),
+        ExtraByteCodecs.INGREDIENT.fieldOf(CryoFreezingRecipe::input),
+        BotariumByteCodecs.FLUID_HOLDER_CODEC.fieldOf(CryoFreezingRecipe::result),
         CryoFreezingRecipe::new
     );
 

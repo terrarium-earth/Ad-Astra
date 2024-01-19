@@ -22,6 +22,7 @@ import net.minecraft.core.GlobalPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -37,6 +38,7 @@ public class PlanetsMenu extends AbstractContainerMenu {
     protected final Inventory inventory;
     protected final Player player;
     protected final Level level;
+    protected final Set<ResourceLocation> disabledPlanets;
     protected final Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> spaceStations;
     protected final Map<ResourceKey<Level>, List<Pair<ItemStack, Integer>>> ingredients;
     protected final Object2BooleanMap<ResourceKey<Level>> claimedChunks = new Object2BooleanOpenHashMap<>();
@@ -45,6 +47,7 @@ public class PlanetsMenu extends AbstractContainerMenu {
     public PlanetsMenu(int containerId, Inventory inventory, FriendlyByteBuf buf) {
         this(containerId,
             inventory,
+            PlanetsMenuProvider.createDisabledPlanetsFromBuf(buf),
             PlanetsMenuProvider.createSpaceStationsFromBuf(buf),
             PlanetsMenuProvider.createClaimedChunksFromBuf(buf),
             PlanetsMenuProvider.createSpawnLocationsFromBuf(buf));
@@ -52,6 +55,7 @@ public class PlanetsMenu extends AbstractContainerMenu {
 
     public PlanetsMenu(int containerId,
                        Inventory inventory,
+                       Set<ResourceLocation> disabledPlanets,
                        Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> spaceStations,
                        Object2BooleanMap<ResourceKey<Level>> claimedChunks,
                        Set<GlobalPos> spawnLocations) {
@@ -60,6 +64,7 @@ public class PlanetsMenu extends AbstractContainerMenu {
         player = inventory.player;
         level = player.level();
         tier = player.getVehicle() instanceof Rocket vehicle ? vehicle.tier() : 100;
+        this.disabledPlanets = disabledPlanets;
         this.spaceStations = spaceStations;
         this.ingredients = getSpaceStationRecipes();
         this.spawnLocations = spawnLocations;
@@ -82,6 +87,10 @@ public class PlanetsMenu extends AbstractContainerMenu {
 
     public Player player() {
         return player;
+    }
+
+    public Set<ResourceLocation> disabledPlanets() {
+        return disabledPlanets;
     }
 
     public Map<ResourceKey<Level>, List<Pair<ItemStack, Integer>>> ingredients() {
@@ -186,6 +195,8 @@ public class PlanetsMenu extends AbstractContainerMenu {
 
     public List<Planet> getSortedPlanets() {
         return AdAstraData.planets().values().stream()
+            .filter(planet -> !disabledPlanets().contains(planet.dimension().location()))
+            .filter(planet -> tier() >= planet.tier())
             .sorted(Comparator.comparingInt(Planet::tier).thenComparing(p -> getPlanetName(p.dimension()).getString()))
             .toList();
     }

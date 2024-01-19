@@ -38,7 +38,7 @@ public class EnergyBarWidget extends ConfigurationWidget implements CursorWidget
         int x = this.getX();
         int y = this.getY();
         try (var ignored = RenderUtils.createScissorBox(Minecraft.getInstance(), graphics.pose(), x, y + GuiUtils.ENERGY_BAR_HEIGHT - (int) (GuiUtils.ENERGY_BAR_HEIGHT * ratio), GuiUtils.ENERGY_BAR_WIDTH, GuiUtils.ENERGY_BAR_HEIGHT)) {
-            graphics.blit(GuiUtils.ENERGY_BAR, x, y, 0, 0, GuiUtils.ENERGY_BAR_WIDTH, GuiUtils.ENERGY_BAR_HEIGHT, GuiUtils.ENERGY_BAR_WIDTH, GuiUtils.ENERGY_BAR_HEIGHT);
+            graphics.blitSprite(GuiUtils.ENERGY_BAR, x, y, GuiUtils.ENERGY_BAR_WIDTH, GuiUtils.ENERGY_BAR_HEIGHT);
         }
 
         if (this.isHoveredOrFocused()) {

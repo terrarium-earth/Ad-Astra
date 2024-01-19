@@ -1,26 +1,15 @@
 package earth.terrarium.adastra.common.blockentities.base.sideconfig;
 
-import earth.terrarium.adastra.client.utils.GuiUtils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 
 import java.util.Locale;
 
 public enum Configuration {
-    NONE(GuiUtils.NONE_BUTTON),
-    PUSH(GuiUtils.PUSH_BUTTON),
-    PULL(GuiUtils.PULL_BUTTON),
-    PUSH_PULL(GuiUtils.PUSH_PULL_BUTTON);
+    NONE,
+    PUSH,
+    PULL,
+    PUSH_PULL;
 
-    private final ResourceLocation icon;
-
-    Configuration(ResourceLocation icon) {
-        this.icon = icon;
-    }
-
-    public ResourceLocation icon() {
-        return this.icon;
-    }
 
     public boolean canPush() {
         return this == PUSH || this == PUSH_PULL;

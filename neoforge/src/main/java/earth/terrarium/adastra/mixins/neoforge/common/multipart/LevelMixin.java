@@ -1,4 +1,4 @@
-package earth.terrarium.adastra.mixins.forge.common.multipart;
+package earth.terrarium.adastra.mixins.neoforge.common.multipart;
 
 import earth.terrarium.adastra.common.entities.multipart.MultipartEntity;
 import earth.terrarium.adastra.common.entities.multipart.MultipartPartEntity;

@@ -22,12 +22,12 @@ import java.util.Locale;
 
 public class OverlayScreen {
 
-    public static final ResourceLocation BATTERY_EMPTY = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/overlay/battery_empty.png");
-    public static final ResourceLocation BATTERY = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/overlay/battery.png");
-    public static final ResourceLocation OXYGEN_TANK_EMPTY = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/overlay/oxygen_tank_empty.png");
-    public static final ResourceLocation OXYGEN_TANK = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/overlay/oxygen_tank.png");
-    public static final ResourceLocation ROCKET_BAR = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/overlay/rocket_bar.png");
-    public static final ResourceLocation ROCKET = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/overlay/rocket.png");
+    public static final ResourceLocation BATTERY_EMPTY = new ResourceLocation(AdAstra.MOD_ID, "overlay/battery_empty");
+    public static final ResourceLocation BATTERY = new ResourceLocation(AdAstra.MOD_ID, "overlay/battery");
+    public static final ResourceLocation OXYGEN_TANK_EMPTY = new ResourceLocation(AdAstra.MOD_ID, "overlay/oxygen_tank_empty");
+    public static final ResourceLocation OXYGEN_TANK = new ResourceLocation(AdAstra.MOD_ID, "overlay/oxygen_tank");
+    public static final ResourceLocation ROCKET_BAR = new ResourceLocation(AdAstra.MOD_ID, "overlay/rocket_bar");
+    public static final ResourceLocation ROCKET = new ResourceLocation(AdAstra.MOD_ID, "overlay/rocket");
 
     public static void render(GuiGraphics graphics, float partialTick) {
         var player = Minecraft.getInstance().player;
@@ -57,7 +57,7 @@ public class OverlayScreen {
             poseStack.pushPose();
             double y = Mth.clamp(rocket.getY(), 100, AdAstraConfig.atmosphereLeave);
             poseStack.translate(0.3f, (AdAstraConfig.atmosphereLeave - y - 500) / 4.5, 0);
-            graphics.blit(ROCKET, 3, height / 2 + 113, 0, 0, 8, 11, 8, 11);
+            graphics.blitSprite(ROCKET, 3, height / 2 + 113, 8, 11);
             poseStack.popPose();
         }
 
@@ -75,8 +75,8 @@ public class OverlayScreen {
 
             poseStack.pushPose();
             poseStack.scale(scale, scale, scale);
-            graphics.blit(OXYGEN_TANK_EMPTY, x, y, 0, 0, 62, 52, 62, 52);
-            graphics.blit(OXYGEN_TANK, x, y + 52 - barHeight, 0, 52 - barHeight, 62, barHeight, 62, 52);
+            graphics.blitSprite(OXYGEN_TANK_EMPTY, x, y, 62, 52);
+            graphics.blitSprite(OXYGEN_TANK, x, y + 52 - barHeight, 0, 52 - barHeight, 62, barHeight, 62, 52);
 
             var text = String.format("%.1f%%", ratio * 100);
             int textWidth = font.width(text);
@@ -102,8 +102,8 @@ public class OverlayScreen {
 
             poseStack.pushPose();
             poseStack.scale(scale, scale, scale);
-            graphics.blit(BATTERY_EMPTY, x, y, 0, 0, 49, 27, 49, 27);
-            graphics.blit(BATTERY, x, y, 0, 27, barWidth, 27, 49, 27);
+            graphics.blitSprite(BATTERY_EMPTY, x, y, 49, 27);
+            graphics.blitSprite(BATTERY, x, y, 0, 27, barWidth, 27, 49, 27);
 
 
             var text = String.format("%.1f%%", ratio * 100);

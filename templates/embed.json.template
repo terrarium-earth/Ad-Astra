@@ -7,13 +7,13 @@
                     "type": 2,
                     "label": "Fabric",
                     "style": 5,
-                    "url": "https://modrinth.com/mod/ad_astra/version/${fabric_link}"
+                    "url": "https://modrinth.com/mod/ad-astra/version/${fabric_link}"
                 },
                 {
                     "type": 2,
                     "label": "NeoForge",
                     "style": 5,
-                    "url": "https://modrinth.com/mod/ad_astra/version/${forge_link}"
+                    "url": "https://modrinth.com/mod/ad-astra/version/${forge_link}"
                 }
             ]
         }

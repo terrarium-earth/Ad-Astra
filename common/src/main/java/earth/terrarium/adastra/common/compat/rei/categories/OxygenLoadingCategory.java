@@ -3,8 +3,8 @@ package earth.terrarium.adastra.common.compat.rei.categories;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.screens.machines.OxygenLoaderScreen;
 import earth.terrarium.adastra.common.compat.rei.displays.OxygenLoadingDisplay;
-import earth.terrarium.adastra.common.compat.rei.widgets.EnergyBarWidget;
-import earth.terrarium.adastra.common.compat.rei.widgets.FluidBarWidget;
+import earth.terrarium.adastra.common.compat.rei.widgets.ReiEnergyBarWidget;
+import earth.terrarium.adastra.common.compat.rei.widgets.ReiFluidBarWidget;
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.botarium.common.fluid.FluidConstants;
@@ -61,12 +61,12 @@ public class OxygenLoadingCategory implements DisplayCategory<OxygenLoadingDispl
         widgets.add(Widgets.createSlot(new Point(bounds.x + 127, bounds.y + 22)).backgroundEnabled(false));
         widgets.add(Widgets.createSlot(new Point(bounds.x + 127, bounds.y + 52)).backgroundEnabled(false));
 
-        widgets.add(new EnergyBarWidget(new Point(bounds.x + 144, bounds.y + 54), -display.recipe().energy(), MachineConfig.STEEL.energyCapacity, MachineConfig.STEEL.maxEnergyInOut, 0));
+        widgets.add(new ReiEnergyBarWidget(new Point(bounds.x + 144, bounds.y + 54), -display.recipe().energy(), MachineConfig.STEEL.energyCapacity, MachineConfig.STEEL.maxEnergyInOut, 0));
 
         int cookTime = display.recipe().cookingTime();
         long capacity = FluidConstants.fromMillibuckets(MachineConfig.STEEL.fluidCapacity);
-        widgets.add(new FluidBarWidget(new Point(bounds.x + 37, bounds.y + 53), false, capacity, cookTime, display.recipe().input().getFluids().get(0)));
-        widgets.add(new FluidBarWidget(new Point(bounds.x + 94, bounds.y + 53), true, capacity, cookTime, display.recipe().result()));
+        widgets.add(new ReiFluidBarWidget(new Point(bounds.x + 37, bounds.y + 53), false, capacity, cookTime, display.recipe().input().getFluids().get(0)));
+        widgets.add(new ReiFluidBarWidget(new Point(bounds.x + 94, bounds.y + 53), true, capacity, cookTime, display.recipe().result()));
 
         return widgets;
     }

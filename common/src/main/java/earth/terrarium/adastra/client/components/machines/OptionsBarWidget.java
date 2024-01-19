@@ -16,7 +16,7 @@ import java.util.List;
 
 public class OptionsBarWidget extends ContainerWidget {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/optionbar.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "optionbar");
     public static final int PADDING = 6;
     public static final int SPACING = 3;
 
@@ -50,13 +50,13 @@ public class OptionsBarWidget extends ContainerWidget {
 
     @Override
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-        graphics.blitNineSliced(TEXTURE,
-            this.getX(), this.getY(),
-            this.getWidth(), this.getHeight(),
-            PADDING, PADDING, PADDING, PADDING,
-            30, 30,
-            0, 0
-        );
+//        graphics.blitNineSliced(TEXTURE, // TODO
+//            this.getX(), this.getY(),
+//            this.getWidth(), this.getHeight(),
+//            PADDING, PADDING, PADDING, PADDING,
+//            30, 30,
+//            0, 0
+//        );
         super.render(graphics, mouseX, mouseY, partialTicks);
     }
 

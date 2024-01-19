@@ -1,6 +1,5 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
-import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
@@ -18,7 +17,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -265,18 +263,8 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
     }
 
     public enum Mode {
-        ALLOYING(GuiUtils.CRAFTING_BUTTON),
-        BLASTING(GuiUtils.FURNACE_BUTTON);
-
-        private final ResourceLocation icon;
-
-        Mode(ResourceLocation icon) {
-            this.icon = icon;
-        }
-
-        public ResourceLocation icon() {
-            return this.icon;
-        }
+        ALLOYING,
+        BLASTING;
 
         public Component translation() {
             return Component.translatable("tooltip.ad_astra.etrionic_blast_furnace.mode.%s".formatted(name().toLowerCase(Locale.ROOT)));

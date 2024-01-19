@@ -4,7 +4,7 @@ import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
-import me.shedaniel.rei.api.client.gui.widgets.BurningFire;
+import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -13,32 +13,19 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 
-public class EnergyBarWidget extends BurningFire {
+public class ReiEnergyBarWidget extends Widget {
     private final Rectangle bounds;
     private final long perTick;
     private final long capacity;
     private final long maxIn;
     private final long maxOut;
 
-    public EnergyBarWidget(Point point, long perTick, long capacity, long maxIn, long maxOut) {
+    public ReiEnergyBarWidget(Point point, long perTick, long capacity, long maxIn, long maxOut) {
         this.bounds = new Rectangle(new Rectangle(point.x, point.y, GuiUtils.ENERGY_BAR_WIDTH, GuiUtils.ENERGY_BAR_HEIGHT));
         this.perTick = perTick;
         this.capacity = capacity;
         this.maxIn = maxIn;
         this.maxOut = maxOut;
-    }
-
-    @Override
-    public double getAnimationDuration() {
-        return 0;
-    }
-
-    @Override
-    public void setAnimationDuration(double animationDurationMS) {}
-
-    @Override
-    public Rectangle getBounds() {
-        return bounds;
     }
 
     @Override

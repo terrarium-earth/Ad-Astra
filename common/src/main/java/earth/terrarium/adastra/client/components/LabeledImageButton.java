@@ -4,18 +4,18 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class LabeledImageButton extends ImageButton {
 
-    public LabeledImageButton(int x, int y, int width, int height, int xTexStart, int yTexStart, int yDiffTex, ResourceLocation resourceLocation, int textureWidth, int textureHeight, OnPress onPress) {
-        super(x, y, width, height, xTexStart, yTexStart, yDiffTex, resourceLocation, textureWidth, textureHeight, onPress);
+    public LabeledImageButton(int x, int y, int width, int height, WidgetSprites sprites, OnPress onPress) {
+        super(x, y, width, height, sprites, onPress);
     }
 
-    public LabeledImageButton(int x, int y, int width, int height, int xTexStart, int yTexStart, int yDiffTex, ResourceLocation resourceLocation, int textureWidth, int textureHeight, OnPress onPress, Component message) {
-        super(x, y, width, height, xTexStart, yTexStart, yDiffTex, resourceLocation, textureWidth, textureHeight, onPress, message);
+    public LabeledImageButton(int x, int y, int width, int height, WidgetSprites sprites, OnPress onPress, Component message) {
+        super(x, y, width, height, sprites, onPress, message);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class LabeledImageButton extends ImageButton {
         }
 
         RenderSystem.enableBlend();
-        renderTexture(graphics, resourceLocation, getX(), getY(), xTexStart, yTexStart, yDiffTex, width, height, textureWidth, textureHeight);
+        super.renderWidget(graphics, mouseX, mouseY, partialTick);
         RenderSystem.disableBlend();
 
         if (!isActive()) {

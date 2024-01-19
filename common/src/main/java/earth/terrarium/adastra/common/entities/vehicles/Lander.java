@@ -44,7 +44,7 @@ public class Lander extends Vehicle {
 
     @Override
     protected Vector3f getPassengerAttachmentPoint(Entity entity, EntityDimensions dimensions, float scale) {
-        return new Vector3f(0, 2.3f, 0);
+        return new Vector3f(0, 2.5f, 0);
     }
 
     @Override

@@ -45,14 +45,13 @@ public class SidedConfigWidget extends ContainerWidget {
 
         SideConfigButtons buttons = createSideButtons(this.index);
 
-        addRenderableWidget(new PressableImageButton(this.getX(), this.getY(), 18, 18, 0, 0, 18, GuiUtils.RESET_BUTTON, 18, 54,
+        addRenderableWidget(new PressableImageButton(this.getX(), this.getY(), 18, 18, GuiUtils.RESET_BUTTON_SPRITES,
             button -> {
                 entity.resetToDefault(this.index);
                 NetworkHandler.CHANNEL.sendToServer(new ServerboundResetSideConfigPacket(entity.getBlockPos(), this.index));
                 init();
             }
-        ))
-            .setTooltip(Tooltip.create(ConstantComponents.RESET_TO_DEFAULT));
+        )).setTooltip(Tooltip.create(ConstantComponents.RESET_TO_DEFAULT));
 
         buttons.center(this.getX(), this.getY(), this.getWidth(), this.getHeight());
     }

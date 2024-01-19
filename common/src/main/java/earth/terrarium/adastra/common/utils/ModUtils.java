@@ -1,5 +1,14 @@
 package earth.terrarium.adastra.common.utils;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.bytecodecs.utils.ByteBufUtils;
+import com.teamresourceful.resourcefullib.common.codecs.yabn.YabnOps;
+import com.teamresourceful.yabn.YabnParser;
+import com.teamresourceful.yabn.elements.YabnElement;
+import com.teamresourceful.yabn.reader.ArrayByteReader;
+import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
@@ -12,6 +21,7 @@ import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.resources.RegistryOps;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -62,6 +72,11 @@ public final class ModUtils {
         if (!(player.containerMenu instanceof PlanetsMenu)) return false;
         if (player.isCreative() || player.isSpectator() || player.hasPermissions(2)) return true;
 
+        String[] planets = AdAstraConfig.disabledPlanets.split(",");
+        for (var planet : planets) {
+            if (planet.equals(targetPlanet.dimension().location().toString())) return false;
+        }
+
         if (!(player.getVehicle() instanceof Rocket rocket)) return false;
         if (rocket.getY() < AdAstraConfig.atmosphereLeave) return false;
         return rocket.tier() >= targetPlanet.tier();
@@ -106,5 +121,32 @@ public final class ModUtils {
         }
         landerInventory.setItem(0, rocket.getDropStack());
         rocket.discard();
+    }
+
+    public static <B> ByteCodec<B> toByteCodec(Codec<B> codec) {
+        return toByteCodec(codec, "Failed to find element", "Failed to parse element");
+    }
+
+    public static <B> ByteCodec<B> toByteCodec(Codec<B> codec, String notFound, String failedToParse) {
+        return ByteCodec.passthrough((buf, item) -> {
+            DataResult<YabnElement> result = codec.encodeStart(RegistryOps.create(YabnOps.COMPRESSED, AdAstra.getRegistryAccess()), item);
+            Optional<YabnElement> optional = result.result();
+            optional.ifPresentOrElse(element -> {
+                byte[] bytes = element.toFullData();
+                buf.writeBoolean(true);
+                ByteBufUtils.writeVarInt(buf, bytes.length);
+                buf.writeBytes(bytes);
+            }, () -> buf.writeBoolean(false));
+        }, buf -> {
+            if (buf.readBoolean()) {
+                int length = ByteBufUtils.readVarInt(buf);
+                byte[] bytes = new byte[length];
+                buf.readBytes(bytes);
+                return codec.parse(RegistryOps.create(YabnOps.COMPRESSED, AdAstra.getRegistryAccess()), YabnParser.parse(new ArrayByteReader(bytes)))
+                    .result()
+                    .orElseThrow(() -> new RuntimeException(failedToParse));
+            }
+            throw new RuntimeException(notFound);
+        });
     }
 }

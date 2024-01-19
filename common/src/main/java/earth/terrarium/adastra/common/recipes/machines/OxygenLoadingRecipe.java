@@ -2,9 +2,12 @@ package earth.terrarium.adastra.common.recipes.machines;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
 import earth.terrarium.adastra.common.blockentities.machines.OxygenLoaderBlockEntity;
+import earth.terrarium.adastra.common.recipes.base.BotariumByteCodecs;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
@@ -27,6 +30,14 @@ public record OxygenLoadingRecipe(
             QuantifiedFluidIngredient.CODEC.fieldOf("input").forGetter(OxygenLoadingRecipe::input),
             FluidHolder.CODEC.fieldOf("result").forGetter(OxygenLoadingRecipe::result)
         ).apply(instance, OxygenLoadingRecipe::new));
+
+    public static final ByteCodec<OxygenLoadingRecipe> NETWORK_CODEC = ObjectByteCodec.create(
+        ByteCodec.INT.fieldOf(OxygenLoadingRecipe::cookingTime),
+        ByteCodec.INT.fieldOf(OxygenLoadingRecipe::energy),
+        BotariumByteCodecs.QUANTIFIED_FLUID_INGREDIENT_CODEC.fieldOf(OxygenLoadingRecipe::input),
+        BotariumByteCodecs.FLUID_HOLDER_CODEC.fieldOf(OxygenLoadingRecipe::result),
+        OxygenLoadingRecipe::new
+    );
 
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {

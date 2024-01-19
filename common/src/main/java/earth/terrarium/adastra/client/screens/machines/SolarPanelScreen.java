@@ -30,7 +30,7 @@ public class SolarPanelScreen extends MachineScreen<SolarPanelMenu, SolarPanelBl
     protected void renderBg(@NotNull GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         super.renderBg(graphics, partialTick, mouseX, mouseY);
         if (entity.isDay()) {
-            graphics.blit(GuiUtils.SUN, leftPos + 35, topPos + 59, 0, 0, 21, 21, 21, 21);
+            graphics.blitSprite(GuiUtils.SUN, leftPos + 35, topPos + 59, 21, 21);
         }
         boolean full = entity.getEnergyStorage().getStoredEnergy() >= entity.getEnergyStorage().getMaxCapacity();
         graphics.drawString(

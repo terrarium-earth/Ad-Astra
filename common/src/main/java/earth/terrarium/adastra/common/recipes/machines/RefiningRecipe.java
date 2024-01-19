@@ -2,9 +2,12 @@ package earth.terrarium.adastra.common.recipes.machines;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
 import earth.terrarium.adastra.common.blockentities.machines.FuelRefineryBlockEntity;
+import earth.terrarium.adastra.common.recipes.base.BotariumByteCodecs;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
@@ -27,6 +30,14 @@ public record RefiningRecipe(
             QuantifiedFluidIngredient.CODEC.fieldOf("input").forGetter(RefiningRecipe::input),
             FluidHolder.CODEC.fieldOf("result").forGetter(RefiningRecipe::result)
         ).apply(instance, RefiningRecipe::new));
+
+    public static final ByteCodec<RefiningRecipe> NETWORK_CODEC = ObjectByteCodec.create(
+        ByteCodec.INT.fieldOf(RefiningRecipe::cookingTime),
+        ByteCodec.INT.fieldOf(RefiningRecipe::energy),
+        BotariumByteCodecs.QUANTIFIED_FLUID_INGREDIENT_CODEC.fieldOf(RefiningRecipe::input),
+        BotariumByteCodecs.FLUID_HOLDER_CODEC.fieldOf(RefiningRecipe::result),
+        RefiningRecipe::new
+    );
 
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {

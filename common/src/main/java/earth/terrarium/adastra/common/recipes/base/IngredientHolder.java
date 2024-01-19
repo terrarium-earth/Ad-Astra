@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.bytecodecs.base.ByteCodec;
 import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
+import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public record IngredientHolder(Ingredient ingredient, int count) {
@@ -13,7 +14,7 @@ public record IngredientHolder(Ingredient ingredient, int count) {
     ).apply(instance, IngredientHolder::new));
 
     public static final ByteCodec<IngredientHolder> NETWORK_CODEC = ObjectByteCodec.create(
-        IngredientByteCodec.CODEC.fieldOf(IngredientHolder::ingredient),
+        ExtraByteCodecs.INGREDIENT.fieldOf(IngredientHolder::ingredient),
         ByteCodec.INT.fieldOf(IngredientHolder::count),
         IngredientHolder::new
     );

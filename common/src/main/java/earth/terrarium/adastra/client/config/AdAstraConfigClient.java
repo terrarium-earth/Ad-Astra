@@ -3,8 +3,12 @@ package earth.terrarium.adastra.client.config;
 import com.teamresourceful.resourcefulconfig.api.annotations.Config;
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo;
+import com.teamresourceful.resourcefulconfig.api.types.ResourcefulConfig;
 import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
+import com.teamresourceful.resourcefulconfig.client.ConfigScreen;
+import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.config.info.AdAstraConfigInfo;
+import net.minecraft.client.Minecraft;
 
 @Config(
     value = "ad_astra-client",
@@ -84,4 +88,10 @@ public final class AdAstraConfigClient {
         translation = "Reduce volume and increase pitch in space"
     )
     public static boolean spaceMuffler = true;
+
+    public static void open() {
+        ResourcefulConfig config = AdAstra.CONFIGURATOR.getConfig(AdAstraConfigClient.class);
+        if (config == null) return;
+        Minecraft.getInstance().setScreen(new ConfigScreen(Minecraft.getInstance().screen, config));
+    }
 }

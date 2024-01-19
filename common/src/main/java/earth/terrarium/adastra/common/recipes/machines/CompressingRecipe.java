@@ -9,7 +9,6 @@ import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
 import earth.terrarium.adastra.common.blockentities.machines.CompressorBlockEntity;
-import earth.terrarium.adastra.common.recipes.base.IngredientByteCodec;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.ItemUtils;
@@ -36,7 +35,7 @@ public record CompressingRecipe(
     public static final ByteCodec<CompressingRecipe> NETWORK_CODEC = ObjectByteCodec.create(
         ByteCodec.INT.fieldOf(CompressingRecipe::cookingTime),
         ByteCodec.INT.fieldOf(CompressingRecipe::energy),
-        IngredientByteCodec.CODEC.fieldOf(CompressingRecipe::ingredient),
+        ExtraByteCodecs.INGREDIENT.fieldOf(CompressingRecipe::ingredient),
         ExtraByteCodecs.ITEM_STACK.fieldOf(CompressingRecipe::result),
         CompressingRecipe::new
     );

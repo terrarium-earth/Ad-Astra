@@ -4,7 +4,7 @@ import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
-import me.shedaniel.rei.api.client.gui.widgets.BurningFire;
+import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -14,32 +14,19 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 
-public class EtaWidget extends BurningFire {
+public class ReiEtaWidget extends Widget {
     private final Rectangle bounds;
     private final int cookTime;
     private final ResourceLocation texture;
     private final int textureWidth;
     private final int textureHeight;
 
-    public EtaWidget(Point point, int cookTime, ResourceLocation texture, int textureWidth, int textureHeight) {
+    public ReiEtaWidget(Point point, int cookTime, ResourceLocation texture, int textureWidth, int textureHeight) {
         this.bounds = new Rectangle(new Rectangle(point.x, point.y, GuiUtils.ENERGY_BAR_WIDTH, GuiUtils.ENERGY_BAR_HEIGHT));
         this.cookTime = cookTime;
         this.texture = texture;
         this.textureWidth = textureWidth;
         this.textureHeight = textureHeight;
-    }
-
-    @Override
-    public double getAnimationDuration() {
-        return 0;
-    }
-
-    @Override
-    public void setAnimationDuration(double animationDurationMS) {}
-
-    @Override
-    public Rectangle getBounds() {
-        return bounds;
     }
 
     @Override

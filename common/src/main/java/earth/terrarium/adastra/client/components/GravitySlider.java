@@ -35,6 +35,6 @@ public class GravitySlider extends AbstractSliderButton {
 
     @Override
     public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        graphics.blit(GuiUtils.SLIDER, getX() + (int) (value * (double) (width - 8)), getY(), 0, 0, 5, 21, 5, 21);
+        graphics.blitSprite(GuiUtils.SLIDER, getX() + (int) (value * (double) (width - 8)), getY(), 5, 21);
     }
 }

@@ -1,4 +1,4 @@
-package earth.terrarium.adastra.client.forge;
+package earth.terrarium.adastra.client.neoforge;
 
 import earth.terrarium.adastra.client.ClientPlatformUtils;
 import net.minecraft.client.model.geom.ModelLayerLocation;

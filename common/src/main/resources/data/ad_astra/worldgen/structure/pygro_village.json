@@ -1,7 +1,7 @@
 {
   "type": "minecraft:jigsaw",
   "start_pool": "ad_astra:crimson_village/crimson_start",
-  "size": 25,
+  "size": 20,
   "max_distance_from_center": 80,
   "biomes": "#ad_astra:has_structure/pygro_village",
   "step": "surface_structures",

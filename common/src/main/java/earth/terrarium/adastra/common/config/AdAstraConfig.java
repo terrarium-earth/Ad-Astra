@@ -1,10 +1,9 @@
 package earth.terrarium.adastra.common.config;
 
-import com.teamresourceful.resourcefulconfig.api.annotations.Comment;
-import com.teamresourceful.resourcefulconfig.api.annotations.Config;
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
-import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo;
+import com.teamresourceful.resourcefulconfig.api.annotations.*;
 import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
+import com.teamresourceful.resourcefulconfig.api.types.options.Position;
+import earth.terrarium.adastra.client.config.AdAstraConfigClient;
 import earth.terrarium.adastra.common.config.info.AdAstraConfigInfo;
 
 @Config(
@@ -15,6 +14,10 @@ import earth.terrarium.adastra.common.config.info.AdAstraConfigInfo;
 )
 @ConfigInfo.Provider(AdAstraConfigInfo.class)
 public final class AdAstraConfig {
+    @ConfigButton(target = "", text = "Client Config", translation = "config.ad_astra.clientConfig", position = Position.BEFORE)
+    public static void clientConfig() {
+        AdAstraConfigClient.open();
+    }
 
     @ConfigEntry(
         id = "allowFlagImages",
@@ -55,4 +58,12 @@ public final class AdAstraConfig {
     )
     @Comment("The y level where rockets should leave the dimension and enter space.")
     public static int atmosphereLeave = 600;
+
+    @ConfigEntry(
+        id = "disabledPlanets",
+        type = EntryType.STRING,
+        translation = "config.ad_astra.forcePlanetTick"
+    )
+    @Comment("A comma-separated list of planet IDs that should be hidden from the planets screen. e.g. minecraft:overworld,ad_astra:moon,ad_astra:mars,ad_astra:venus,ad_astra:mercury,ad_astra:glacio")
+    public static String disabledPlanets = "";
 }

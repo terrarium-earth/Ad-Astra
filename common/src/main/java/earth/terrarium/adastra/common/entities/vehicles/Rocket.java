@@ -154,7 +154,7 @@ public class Rocket extends Vehicle {
 
     @Override
     protected Vector3f getPassengerAttachmentPoint(Entity entity, EntityDimensions dimensions, float scale) {
-        return new Vector3f(0, this.properties.ridingOffset, 0);
+        return new Vector3f(0, this.properties.ridingOffset + 0.3f, 0);
     }
 
     @Override

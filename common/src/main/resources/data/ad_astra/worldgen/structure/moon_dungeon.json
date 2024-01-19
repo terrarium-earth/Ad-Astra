@@ -1,7 +1,7 @@
 {
   "type": "minecraft:jigsaw",
   "start_pool": "ad_astra:dungeon/moon/entrance",
-  "size": 35,
+  "size": 20,
   "max_distance_from_center": 80,
   "biomes": "#ad_astra:has_structure/moon_dungeon",
   "step": "surface_structures",

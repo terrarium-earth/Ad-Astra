@@ -1,6 +1,6 @@
-package earth.terrarium.adastra.mixins.forge.common;
+package earth.terrarium.adastra.mixins.neoforge.common;
 
-import earth.terrarium.adastra.client.forge.ClientPlatformUtilsImpl;
+import earth.terrarium.adastra.client.neoforge.ClientPlatformUtilsImpl;
 import earth.terrarium.adastra.client.models.armor.SpaceSuitModel;
 import earth.terrarium.adastra.common.items.armor.JetSuitItem;
 import earth.terrarium.adastra.common.items.armor.base.CustomDyeableArmorItem;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;

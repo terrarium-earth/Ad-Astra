@@ -8,7 +8,6 @@ import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
 import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
-import earth.terrarium.adastra.common.recipes.base.IngredientByteCodec;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import net.minecraft.world.Container;
@@ -32,7 +31,7 @@ public record NasaWorkbenchRecipe(
         ).apply(instance, NasaWorkbenchRecipe::new));
 
     public static final ByteCodec<NasaWorkbenchRecipe> NETWORK_CODEC = ObjectByteCodec.create(
-        IngredientByteCodec.CODEC.listOf().fieldOf(NasaWorkbenchRecipe::ingredients),
+        ExtraByteCodecs.INGREDIENT.listOf().fieldOf(NasaWorkbenchRecipe::ingredients),
         ExtraByteCodecs.ITEM_STACK.fieldOf(NasaWorkbenchRecipe::result),
         NasaWorkbenchRecipe::new
     );

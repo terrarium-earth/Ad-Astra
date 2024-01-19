@@ -6,6 +6,7 @@ import earth.terrarium.adastra.client.components.machines.OptionsBarWidget;
 import earth.terrarium.adastra.client.screens.base.MachineScreen;
 import earth.terrarium.adastra.common.blockentities.machines.OxygenDistributorBlockEntity;
 import earth.terrarium.adastra.common.menus.machines.OxygenDistributorMenu;
+import earth.terrarium.botarium.common.fluid.FluidConstants;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
@@ -46,9 +47,11 @@ public class OxygenDistributorScreen extends MachineScreen<OxygenDistributorMenu
             topPos + 9,
             0x68d975
         );
+
+        float fluidPerTick = entity.fluidPerTick() / (FluidConstants.getBucketAmount() / 1000f);
         graphics.drawString(
             font,
-            Component.translatable("tooltip.ad_astra.fluid_per_tick", Math.round(entity.fluidPerTick() * 1000.0f) / 1000.0f),
+            Component.translatable("tooltip.ad_astra.fluid_per_tick", Math.round(fluidPerTick * 1000.0f) / 1000.0f),
             leftPos + 11,
             topPos + 20,
             0x68d975

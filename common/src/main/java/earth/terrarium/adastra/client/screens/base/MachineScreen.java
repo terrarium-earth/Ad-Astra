@@ -28,7 +28,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends ContainerMachineBlockEntity> extends AbstractContainerCursorScreen<T> implements ConfigurationScreen, AbstractContainerScreenExtension {
+public abstract class MachineScreen<M extends BaseContainerMenu<E>, E extends ContainerMachineBlockEntity> extends AbstractContainerCursorScreen<M> implements ConfigurationScreen, AbstractContainerScreenExtension {
 
     public static final ResourceLocation IRON_SLOT = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/slots/iron.png");
     public static final ResourceLocation STEEL_SLOT = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/slots/steel.png");
@@ -37,13 +37,13 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
     private final ResourceLocation slotTexture;
 
     private final Rect2i inventoryRect;
-    protected final U entity;
+    protected final E entity;
 
     protected SidedConfigWidget sideConfigWidget;
     protected OptionsBarWidget optionsBarWidget;
 
     public MachineScreen(
-        T menu, Inventory inventory, Component component,
+        M menu, Inventory inventory, Component component,
         ResourceLocation texture, ResourceLocation slotTexture,
         int width, int height
     ) {
@@ -123,6 +123,12 @@ public abstract class MachineScreen<T extends BaseContainerMenu<U>, U extends Co
                 tickable.tick();
             }
         }
+    }
+
+    @Override
+    public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float f) {
+        super.render(graphics, mouseX, mouseY, f);
+        renderTooltip(graphics, mouseX, mouseY);
     }
 
     @Override

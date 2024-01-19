@@ -45,6 +45,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     private int distributedBlocksCount;
     private int shutDownTicks;
     private int limit = MachineConfig.maxDistributionBlocks;
+    private boolean shouldSyncPositions;
     private float targetGravity = 1;
 
     private float animation;
@@ -58,9 +59,11 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     @Override
     public void load(@NotNull CompoundTag tag) {
         super.load(tag);
-        lastDistributedBlocks.clear();
-        for (var pos : tag.getLongArray("LastDistributedBlocks")) {
-            lastDistributedBlocks.add(BlockPos.of(pos));
+        if (tag.contains("LastDistributedBlocks")) {
+            lastDistributedBlocks.clear();
+            for (var pos : tag.getLongArray("LastDistributedBlocks")) {
+                lastDistributedBlocks.add(BlockPos.of(pos));
+            }
         }
         energyPerTick = tag.getLong("EnergyPerTick");
         distributedBlocksCount = tag.getInt("DistributedBlocksCount");
@@ -71,7 +74,6 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.putLongArray("LastDistributedBlocks", lastDistributedBlocks.stream().mapToLong(BlockPos::asLong).toArray());
         tag.putLong("EnergyPerTick", energyPerTick);
         tag.putInt("DistributedBlocksCount", distributedBlocksCount);
         tag.putInt("Limit", limit);
@@ -147,6 +149,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
         lastDistributedBlocks.removeAll(positions);
         clearGravityBlocks();
         lastDistributedBlocks.addAll(positions);
+        shouldSyncPositions = true;
     }
 
     protected void clearGravityBlocks() {
@@ -213,5 +216,17 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     @Override
     public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
         return new int[]{};
+    }
+
+    // Only sync positions when recalculating the distributed blocks.
+    @Override
+    public @NotNull CompoundTag getUpdateTag() {
+        var tag = super.getUpdateTag();
+        if (shouldSyncPositions) {
+            tag.putLongArray("LastDistributedBlocks", lastDistributedBlocks.stream()
+                .mapToLong(BlockPos::asLong).toArray());
+            shouldSyncPositions = false;
+        }
+        return tag;
     }
 }
