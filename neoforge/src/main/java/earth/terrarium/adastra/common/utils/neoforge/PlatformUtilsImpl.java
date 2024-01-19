@@ -1,4 +1,4 @@
-package earth.terrarium.adastra.common.utils.forge;
+package earth.terrarium.adastra.common.utils.neoforge;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -7,8 +7,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.portal.PortalInfo;
-import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.common.util.ITeleporter;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.neoforged.neoforge.common.util.ITeleporter;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -19,7 +19,7 @@ public class PlatformUtilsImpl {
     }
 
     public static Supplier<Item> createSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, Item.Properties properties) {
-        return () -> new ForgeSpawnEggItem(type, primaryColor, secondaryColor, properties);
+        return () -> new DeferredSpawnEggItem(type, primaryColor, secondaryColor, properties);
     }
 
     private record AdAstraTeleporter(PortalInfo target) implements ITeleporter {

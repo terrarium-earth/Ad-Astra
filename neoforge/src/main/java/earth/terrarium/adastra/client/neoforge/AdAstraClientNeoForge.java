@@ -1,7 +1,7 @@
-package earth.terrarium.adastra.client.forge;
+package earth.terrarium.adastra.client.neoforge;
 
+import com.teamresourceful.resourcefulconfig.api.types.ResourcefulConfig;
 import com.teamresourceful.resourcefulconfig.client.ConfigScreen;
-import com.teamresourceful.resourcefulconfig.common.config.ResourcefulConfig;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.AdAstraClient;
 import earth.terrarium.adastra.client.dimension.ModDimensionRenderers;
@@ -9,35 +9,35 @@ import earth.terrarium.adastra.common.config.AdAstraConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ConfigScreenHandler;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.client.ConfigScreenHandler;
+import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.TickEvent;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class AdAstraClientForge {
+public class AdAstraClientNeoForge {
     public static final Map<Item, BlockEntityWithoutLevelRenderer> ITEM_RENDERERS = new HashMap<>();
 
     public static void init() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraClientForge::onSetupItemColors);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onRegisterClientHud);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onClientTick);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onRenderLevelStage);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraClientNeoForge::onSetupItemColors);
+        NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onRegisterClientHud);
+        NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onClientTick);
+        NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onRenderLevelStage);
 
         ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
             () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> {
                 ResourcefulConfig config = AdAstra.CONFIGURATOR.getConfig(AdAstraConfig.class);
                 if (config == null) return null;
-                return new ConfigScreen(null, config);
+                return new ConfigScreen(parent, config);
             })
         );
     }

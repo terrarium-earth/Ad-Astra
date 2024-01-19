@@ -5,18 +5,17 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.tags.ModEntityTypeTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.TagEntry;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-@SuppressWarnings("DataFlowIssue")
 public class ModEntityTypeTagProvider extends TagsProvider<EntityType<?>> {
 
     public ModEntityTypeTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, ExistingFileHelper existingFileHelper) {
@@ -32,15 +31,15 @@ public class ModEntityTypeTagProvider extends TagsProvider<EntityType<?>> {
         surviveSpace(EntityType.WITHER);
         surviveSpace(EntityType.ALLAY);
 
-        tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.ZOMBIE)));
-        tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.HUSK)));
+        tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.element(BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.ZOMBIE)));
+        tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.element(BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.HUSK)));
         tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.tag(EntityTypeTags.SKELETONS.location()));
 
         tag(ModEntityTypeTags.CAN_SURVIVE_EXTREME_COLD).add(TagEntry.tag(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES.location()));
 
         tag(ModEntityTypeTags.CAN_SURVIVE_ACID_RAIN).add(TagEntry.tag(ModEntityTypeTags.CAN_SURVIVE_EXTREME_HEAT.location()));
 
-        tag(ModEntityTypeTags.IGNORES_AIR_VORTEX).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(EntityType.LEASH_KNOT)));
+        tag(ModEntityTypeTags.IGNORES_AIR_VORTEX).add(TagEntry.element(BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.LEASH_KNOT)));
 
         acidRainImmune(ModEntityTypes.TIER_1_ROCKET.get());
         acidRainImmune(ModEntityTypes.TIER_2_ROCKET.get());
@@ -70,20 +69,20 @@ public class ModEntityTypeTagProvider extends TagsProvider<EntityType<?>> {
     }
 
     private void surviveHeat(EntityType<?> type) {
-        tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
-        tag(ModEntityTypeTags.CAN_SURVIVE_EXTREME_HEAT).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
+        tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.element(BuiltInRegistries.ENTITY_TYPE.getKey(type)));
+        tag(ModEntityTypeTags.CAN_SURVIVE_EXTREME_HEAT).add(TagEntry.element(BuiltInRegistries.ENTITY_TYPE.getKey(type)));
     }
 
     private void surviveCold(EntityType<?> type) {
-        tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
-        tag(ModEntityTypeTags.CAN_SURVIVE_EXTREME_COLD).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
+        tag(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN).add(TagEntry.element(BuiltInRegistries.ENTITY_TYPE.getKey(type)));
+        tag(ModEntityTypeTags.CAN_SURVIVE_EXTREME_COLD).add(TagEntry.element(BuiltInRegistries.ENTITY_TYPE.getKey(type)));
     }
 
     private void surviveSpace(EntityType<?> type) {
-        tag(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
+        tag(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE).add(TagEntry.element(BuiltInRegistries.ENTITY_TYPE.getKey(type)));
     }
 
     private void acidRainImmune(EntityType<?> type) {
-        tag(ModEntityTypeTags.ACID_RAIN_IMMUNE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
+        tag(ModEntityTypeTags.ACID_RAIN_IMMUNE).add(TagEntry.element(BuiltInRegistries.ENTITY_TYPE.getKey(type)));
     }
 }

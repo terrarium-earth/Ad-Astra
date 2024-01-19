@@ -29,6 +29,7 @@ public class AdAstraFabric {
         onAddReloadListener();
         ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register((player, joined) -> AdAstra.onDatapackSync(player));
         ServerTickEvents.END_SERVER_TICK.register(AdAstra::onServerTick);
+        ServerLifecycleEvents.SERVER_STARTED.register(AdAstra::onServerStarted);
         ModEntityTypes.registerAttributes((type, builder) -> FabricDefaultAttributeRegistry.register(type.get(), builder.get()));
         CommandRegistrationCallback.EVENT.register((dispatcher, ctx, environment) -> AdAstraCommands.register(dispatcher));
 

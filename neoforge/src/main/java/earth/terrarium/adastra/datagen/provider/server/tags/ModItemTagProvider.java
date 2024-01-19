@@ -16,11 +16,10 @@ import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-@SuppressWarnings("deprecation")
 public class ModItemTagProvider extends TagsProvider<Item> {
 
     public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, ExistingFileHelper existingFileHelper) {
@@ -114,7 +113,7 @@ public class ModItemTagProvider extends TagsProvider<Item> {
             .add(element(Items.RED_MUSHROOM_BLOCK))
             .add(element(Items.BIG_DRIPLEAF))
             .add(element(Items.SMALL_DRIPLEAF))
-            .add(element(Items.GRASS))
+            .add(element(Items.SHORT_GRASS))
             .add(element(Items.TALL_GRASS))
             .add(element(Items.SWEET_BERRIES))
             .add(element(Items.BAMBOO));

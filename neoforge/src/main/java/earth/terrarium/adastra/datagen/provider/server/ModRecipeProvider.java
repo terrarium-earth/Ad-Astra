@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.adastra.common.tags.ModItemTags;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -14,24 +15,23 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ModRecipeProvider extends RecipeProvider {
-    private Consumer<FinishedRecipe> output;
+    private RecipeOutput output;
 
-    public ModRecipeProvider(PackOutput output) {
-        super(output);
+    public ModRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(packOutput, lookupProvider);
     }
 
     @Override
-    protected void buildRecipes(@NotNull Consumer<FinishedRecipe> writer) {
-        this.output = writer;
-        ModMachineRecipeProvider.createRecipes(writer);
+    protected void buildRecipes(RecipeOutput output) {
+        this.output = output;
+        ModMachineRecipeProvider.createRecipes(output);
 
         shaped(ModItems.ROVER, 1, ModItems.DESH_ENGINE, r -> r
             .define('W', ModItems.WHEEL.get())
@@ -1231,43 +1231,43 @@ public class ModRecipeProvider extends RecipeProvider {
 
     private void smelt(Supplier<Item> result, Supplier<Item> mainItem) {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(mainItem.get()), RecipeCategory.MISC, result.get(), 0.1f, 200)
-            .unlockedBy("has_" + ForgeRegistries.ITEMS.getKey(result.get()).getPath(), has(mainItem.get()))
+            .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(result.get()).getPath(), has(mainItem.get()))
             .save(output, new ResourceLocation(AdAstra.MOD_ID, "smelting/%s_from_smelting_%s"
-                .formatted(ForgeRegistries.ITEMS.getKey(result.get()).getPath(), ForgeRegistries.ITEMS.getKey(mainItem.get()).getPath())));
+                .formatted(BuiltInRegistries.ITEM.getKey(result.get()).getPath(), BuiltInRegistries.ITEM.getKey(mainItem.get()).getPath())));
     }
 
     private void smelt(Supplier<Item> result, TagKey<Item> mainItem) {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(mainItem), RecipeCategory.MISC, result.get(), 0.1f, 200)
-            .unlockedBy("has_" + ForgeRegistries.ITEMS.getKey(result.get()).getPath(), has(mainItem))
+            .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(result.get()).getPath(), has(mainItem))
             .save(output, new ResourceLocation(AdAstra.MOD_ID, "smelting/%s_from_smelting_%s"
-                .formatted(ForgeRegistries.ITEMS.getKey(result.get()).getPath(), mainItem.location().getPath())));
+                .formatted(BuiltInRegistries.ITEM.getKey(result.get()).getPath(), mainItem.location().getPath())));
     }
 
     private void blast(Supplier<Item> result, Supplier<Item> mainItem) {
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(mainItem.get()), RecipeCategory.MISC, result.get(), 0.1f, 100)
-            .unlockedBy("has_" + ForgeRegistries.ITEMS.getKey(result.get()).getPath(), has(mainItem.get()))
+            .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(result.get()).getPath(), has(mainItem.get()))
             .save(output, new ResourceLocation(AdAstra.MOD_ID, "blasting/%s_from_blasting_%s"
-                .formatted(ForgeRegistries.ITEMS.getKey(result.get()).getPath(), ForgeRegistries.ITEMS.getKey(mainItem.get()).getPath())));
+                .formatted(BuiltInRegistries.ITEM.getKey(result.get()).getPath(), BuiltInRegistries.ITEM.getKey(mainItem.get()).getPath())));
     }
 
     private void blast(Supplier<Item> result, TagKey<Item> mainItem) {
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(mainItem), RecipeCategory.MISC, result.get(), 0.1f, 100)
-            .unlockedBy("has_" + ForgeRegistries.ITEMS.getKey(result.get()).getPath(), has(mainItem))
+            .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(result.get()).getPath(), has(mainItem))
             .save(output, new ResourceLocation(AdAstra.MOD_ID, "blasting/%s_from_blasting_%s"
-                .formatted(ForgeRegistries.ITEMS.getKey(result.get()).getPath(), mainItem.location().getPath())));
+                .formatted(BuiltInRegistries.ITEM.getKey(result.get()).getPath(), mainItem.location().getPath())));
     }
 
     private void stoneCutting(Supplier<Item> result, int count, Supplier<Item> mainItem) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(mainItem.get()), RecipeCategory.MISC, result.get(), count)
-            .unlockedBy("has_" + ForgeRegistries.ITEMS.getKey(result.get()).getPath(), has(mainItem.get()))
+            .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(result.get()).getPath(), has(mainItem.get()))
             .save(output, new ResourceLocation(AdAstra.MOD_ID, "stonecutting/%s_from_%s_stonecutting"
-                .formatted(ForgeRegistries.ITEMS.getKey(result.get()).getPath(), ForgeRegistries.ITEMS.getKey(mainItem.get()).getPath())));
+                .formatted(BuiltInRegistries.ITEM.getKey(result.get()).getPath(), BuiltInRegistries.ITEM.getKey(mainItem.get()).getPath())));
     }
 
     private void stoneCutting(Supplier<Item> result, int count, TagKey<Item> mainItem) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(mainItem), RecipeCategory.MISC, result.get(), count)
-            .unlockedBy("has_" + ForgeRegistries.ITEMS.getKey(result.get()).getPath(), has(mainItem))
+            .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(result.get()).getPath(), has(mainItem))
             .save(output, new ResourceLocation(AdAstra.MOD_ID, "stonecutting/%s_from_%s_stonecutting"
-                .formatted(ForgeRegistries.ITEMS.getKey(result.get()).getPath(), mainItem.location().getPath())));
+                .formatted(BuiltInRegistries.ITEM.getKey(result.get()).getPath(), mainItem.location().getPath())));
     }
 }

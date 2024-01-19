@@ -12,6 +12,7 @@ import earth.terrarium.adastra.common.network.messages.ClientboundSyncPlanetsPac
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.registry.*;
 import earth.terrarium.adastra.common.utils.radio.StationLoader;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -21,11 +22,14 @@ import net.minecraft.world.item.Item;
 
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 public class AdAstra {
 
     public static final String MOD_ID = "ad_astra";
     public static final Configurator CONFIGURATOR = new Configurator(MOD_ID);
+
+    private static Supplier<RegistryAccess> registryAccessSupplier;
 
     public static void init() {
         CONFIGURATOR.register(AdAstraConfig.class);
@@ -79,5 +83,13 @@ public class AdAstra {
                 NetworkHandler.CHANNEL.sendToPlayer(new ClientboundSyncLocalPlanetDataPacket(new PlanetData(oxygen, temperature, gravity)), player);
             }
         });
+    }
+
+    public static void onServerStarted(MinecraftServer server) {
+        registryAccessSupplier = server::registryAccess;
+    }
+
+    public static RegistryAccess getRegistryAccess() {
+        return registryAccessSupplier.get();
     }
 }

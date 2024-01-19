@@ -1,38 +1,40 @@
-package earth.terrarium.adastra.forge;
+package earth.terrarium.adastra.neoforge;
 
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.systems.OxygenApi;
-import earth.terrarium.adastra.client.forge.AdAstraClientForge;
+import earth.terrarium.adastra.client.neoforge.AdAstraClientNeoForge;
 import earth.terrarium.adastra.common.commands.AdAstraCommands;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.tags.ModBlockTags;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.OnDatapackSyncEvent;
-import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.DistExecutor;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.TickEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 
 @Mod(AdAstra.MOD_ID)
-public class AdAstraForge {
+public class AdAstraNeoForge {
 
-    public AdAstraForge() {
+    public AdAstraNeoForge() {
         AdAstra.init();
-        MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onAddReloadListener);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onDatapackSync);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onServerTick);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraForge::registerCommands);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onBlockPlace);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::onAttributes);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::commonSetup);
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AdAstraClientForge::init);
+        NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onAddReloadListener);
+        NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onDatapackSync);
+        NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onServerTick);
+        NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::registerCommands);
+        NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onBlockPlace);
+        NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onServerStarted);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraNeoForge::onAttributes);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraNeoForge::commonSetup);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AdAstraClientNeoForge::init);
     }
 
     public static void onAddReloadListener(AddReloadListenerEvent event) {
@@ -74,5 +76,9 @@ public class AdAstraForge {
             && !OxygenApi.API.hasOxygen(level, event.getPos())) {
             event.setCanceled(true);
         }
+    }
+
+    private static void onServerStarted(ServerAboutToStartEvent event) {
+        AdAstra.onServerStarted(event.getServer());
     }
 }

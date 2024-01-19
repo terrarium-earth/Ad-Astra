@@ -3,19 +3,21 @@ package earth.terrarium.adastra.datagen.provider.client;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.registry.ModItems;
+import earth.terrarium.adastra.datagen.provider.server.registry.ModBiomeDataProvider;
 import earth.terrarium.botarium.common.registry.fluid.BotariumFlowingFluid;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.codehaus.plexus.util.StringUtils;
 
 import java.util.Objects;
@@ -298,6 +300,30 @@ public class ModLangProvider extends LanguageProvider {
         add("planet.ad_astra.mercury_orbit", "Mercury Orbit");
         add("planet.ad_astra.glacio_orbit", "Glacio Orbit");
 
+        add("dimension." + Planet.MOON.location().toLanguageKey(), "Moon");
+        add("dimension." + Planet.MARS.location().toLanguageKey(), "Mars");
+        add("dimension." + Planet.VENUS.location().toLanguageKey(), "Venus");
+        add("dimension." + Planet.MERCURY.location().toLanguageKey(), "Mercury");
+        add("dimension." + Planet.GLACIO.location().toLanguageKey(), "Glacio");
+
+        add("dimension." + Planet.EARTH_ORBIT.location().toLanguageKey(), "Earth Orbit");
+        add("dimension." + Planet.MOON_ORBIT.location().toLanguageKey(), "Moon Orbit");
+        add("dimension." + Planet.MARS_ORBIT.location().toLanguageKey(), "Mars Orbit");
+        add("dimension." + Planet.VENUS_ORBIT.location().toLanguageKey(), "Venus Orbit");
+        add("dimension." + Planet.MERCURY_ORBIT.location().toLanguageKey(), "Mercury Orbit");
+        add("dimension." + Planet.GLACIO_ORBIT.location().toLanguageKey(), "Glacio Orbit");
+
+        add("biome." + ModBiomeDataProvider.SPACE.location().toLanguageKey(), "Space");
+        add("biome." + ModBiomeDataProvider.LUNAR_WASTELANDS.location().toLanguageKey(), "Lunar Wastelands");
+        add("biome." + ModBiomeDataProvider.MARTIAN_CANYON_CREEK.location().toLanguageKey(), "Martian Canyon Creek");
+        add("biome." + ModBiomeDataProvider.MARTIAN_POLAR_CAPS.location().toLanguageKey(), "Martian Polar Caps");
+        add("biome." + ModBiomeDataProvider.MARTIAN_WASTELANDS.location().toLanguageKey(), "Martian Wastelands");
+        add("biome." + ModBiomeDataProvider.INFERNAL_VENUS_BARRENS.location().toLanguageKey(), "Infernal Venus Barrens");
+        add("biome." + ModBiomeDataProvider.VENUS_WASTELANDS.location().toLanguageKey(), "Venus Wastelands");
+        add("biome." + ModBiomeDataProvider.MERCURY_DELTAS.location().toLanguageKey(), "Mercury Deltas");
+        add("biome." + ModBiomeDataProvider.GLACIO_ICE_PEAKS.location().toLanguageKey(), "Glacio Ice Peaks");
+        add("biome." + ModBiomeDataProvider.GLACIO_SNOWY_BARRENS.location().toLanguageKey(), "Glacio Snowy Barrens");
+
         add("tag.item.ad_astra.globes", "Globes");
         add("tag.item.ad_astra.flags", "Flags");
         add("tag.item.ad_astra.sliding_doors", "Sliding Doors");
@@ -339,10 +365,12 @@ public class ModLangProvider extends LanguageProvider {
         add("tag.item.ad_astra.strophar_caps", "Strophar Caps");
         add("tag.item.ad_astra.destroyed_in_space", "Destroyed in Space");
 
+        add("config.ad_astra.clientConfig", "Client Config");
         add("config.ad_astra.allowFlagImages", "Allow flag images");
         add("config.ad_astra.launchFromAnywhere", "Launch from anywhere");
         add("config.ad_astra.planetRandomTickSpeed", "Planet random tick speed");
         add("config.ad_astra.forcePlanetTick", "Force planet tick");
+        add("config.ad_astra.disabledPlanets", "Disabled planets");
         add("config.ad_astra.atmosphereLeave", "Atmosphere leave");
 
         add("config.ad_astra.machines", "Machines");
@@ -443,6 +471,6 @@ public class ModLangProvider extends LanguageProvider {
 
     public void addFluid(Supplier<? extends Fluid> key, String name) {
         if (key.get() instanceof BotariumFlowingFluid) return;
-        add("fluid_type.%s.%s".formatted(AdAstra.MOD_ID, Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(key.get())).getPath()), name);
+        add("fluid_type.%s.%s".formatted(AdAstra.MOD_ID, Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(key.get())).getPath()), name);
     }
 }

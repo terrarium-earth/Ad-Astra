@@ -1,4 +1,4 @@
-package earth.terrarium.adastra.common.compat.rei.forge;
+package earth.terrarium.adastra.common.compat.rei.neoforge;
 
 import earth.terrarium.adastra.common.compat.rei.AdAstraReiPlugin;
 import me.shedaniel.rei.forge.REIPluginClient;

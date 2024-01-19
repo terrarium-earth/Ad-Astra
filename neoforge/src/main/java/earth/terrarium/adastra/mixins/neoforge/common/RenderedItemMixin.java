@@ -1,12 +1,12 @@
-package earth.terrarium.adastra.mixins.forge.common;
+package earth.terrarium.adastra.mixins.neoforge.common;
 
-import earth.terrarium.adastra.client.forge.AdAstraClientForge;
+import earth.terrarium.adastra.client.neoforge.AdAstraClientNeoForge;
 import earth.terrarium.adastra.common.items.rendered.RenderedBlockItem;
 import earth.terrarium.adastra.common.items.rendered.RenderedItem;
 import earth.terrarium.adastra.common.items.rendered.TooltipRenderedBlockItem;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.function.Consumer;
@@ -23,7 +23,7 @@ public abstract class RenderedItemMixin extends Item {
         consumer.accept(new IClientItemExtensions() {
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return AdAstraClientForge.ITEM_RENDERERS.get(RenderedItemMixin.this);
+                return AdAstraClientNeoForge.ITEM_RENDERERS.get(RenderedItemMixin.this);
             }
         });
     }

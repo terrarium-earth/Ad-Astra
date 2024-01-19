@@ -15,13 +15,12 @@ import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
-@SuppressWarnings("deprecation")
 public class ModBlockTagProvider extends TagsProvider<Block> {
 
     private static final List<Supplier<Block>> MINEABLE_WITH_SHOVEL = List.of(
@@ -146,7 +145,7 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
             .add(element(Blocks.BIG_DRIPLEAF))
             .add(element(Blocks.BIG_DRIPLEAF_STEM))
             .add(element(Blocks.SMALL_DRIPLEAF))
-            .add(element(Blocks.GRASS))
+            .add(element(Blocks.SHORT_GRASS))
             .add(element(Blocks.TALL_GRASS))
             .add(element(Blocks.SWEET_BERRY_BUSH))
             .add(element(Blocks.BAMBOO));

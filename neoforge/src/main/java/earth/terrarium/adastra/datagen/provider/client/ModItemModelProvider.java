@@ -4,13 +4,13 @@ package earth.terrarium.adastra.datagen.provider.client;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.registry.ModItems;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.Objects;
 
@@ -30,7 +30,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     public void spawnEggItem(Item item) {
-        getBuilder(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item)).toString())
+        getBuilder(Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item)).toString())
             .parent(new ModelFile.UncheckedModelFile("item/template_spawn_egg"));
     }
 }
