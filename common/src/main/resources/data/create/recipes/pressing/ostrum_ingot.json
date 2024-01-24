@@ -16,13 +16,12 @@
   "type": "create:pressing",
   "ingredients": [
     {
-      "tag": "ad_astra_platform:ostrum_ingots"
+      "tag": "ad_astra:ostrum_ingots"
     }
   ],
   "results": [
     {
-      "item": "ad_astra:ostrum_plate",
-      "count": 1
+      "item": "ad_astra:ostrum_plate"
     }
   ]
 }

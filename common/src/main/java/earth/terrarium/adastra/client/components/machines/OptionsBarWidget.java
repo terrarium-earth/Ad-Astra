@@ -20,7 +20,7 @@ public class OptionsBarWidget extends ContainerWidget {
     public static final int PADDING = 6;
     public static final int SPACING = 3;
 
-    protected final GridLayout layout = Util.make(new GridLayout(0, 0), layout -> {
+    protected final GridLayout layout = Util.make(new GridLayout(), layout -> {
         layout.columnSpacing(SPACING);
         layout.defaultCellSetting().alignVerticallyMiddle();
     });
@@ -69,8 +69,7 @@ public class OptionsBarWidget extends ContainerWidget {
     public static class Builder {
         private final List<LayoutElement> elements = new ArrayList<>();
 
-        private Builder() {
-        }
+        private Builder() {}
 
         public Builder addElement(int index, LayoutElement element) {
             this.elements.add(index, element);

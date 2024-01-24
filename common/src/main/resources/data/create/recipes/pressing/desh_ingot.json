@@ -16,13 +16,12 @@
   "type": "create:pressing",
   "ingredients": [
     {
-      "tag": "ad_astra_platform:desh_ingots"
+      "tag": "ad_astra:desh_ingots"
     }
   ],
   "results": [
     {
-      "item": "ad_astra:desh_plate",
-      "count": 1
+      "item": "ad_astra:desh_plate"
     }
   ]
 }

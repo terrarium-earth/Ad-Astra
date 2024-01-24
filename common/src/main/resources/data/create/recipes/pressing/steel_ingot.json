@@ -16,13 +16,12 @@
   "type": "create:pressing",
   "ingredients": [
     {
-      "tag": "ad_astra_platform:steel_ingots"
+      "tag": "ad_astra:steel_ingots"
     }
   ],
   "results": [
     {
-      "item": "ad_astra:steel_plate",
-      "count": 1
+      "item": "ad_astra:steel_plate"
     }
   ]
 }

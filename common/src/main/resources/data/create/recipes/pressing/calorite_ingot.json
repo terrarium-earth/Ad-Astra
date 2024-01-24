@@ -16,13 +16,12 @@
   "type": "create:pressing",
   "ingredients": [
     {
-      "tag": "ad_astra_platform:calorite_ingots"
+      "tag": "ad_astra:calorite_ingots"
     }
   ],
   "results": [
     {
-      "item": "ad_astra:calorite_plate",
-      "count": 1
+      "item": "ad_astra:calorite_plate"
     }
   ]
 }

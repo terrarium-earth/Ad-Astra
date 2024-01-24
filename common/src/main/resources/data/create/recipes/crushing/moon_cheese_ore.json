@@ -22,21 +22,18 @@
   "results": [
     {
       "item": "ad_astra:cheese",
-      "count": 1
+      "count": 2
     },
     {
       "item": "ad_astra:cheese",
-      "count": 1,
       "chance": 0.25
     },
     {
       "item": "create:experience_nugget",
-      "count": 1,
       "chance": 0.75
     },
     {
       "item": "ad_astra:moon_cobblestone",
-      "count": 1,
       "chance": 0.125
     }
   ],

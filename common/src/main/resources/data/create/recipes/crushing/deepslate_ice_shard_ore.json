@@ -26,17 +26,14 @@
     },
     {
       "item": "ad_astra:ice_shard",
-      "count": 1,
       "chance": 0.25
     },
     {
       "item": "create:experience_nugget",
-      "count": 1,
       "chance": 0.75
     },
     {
       "item": "minecraft:deepslate",
-      "count": 1,
       "chance": 0.125
     }
   ],

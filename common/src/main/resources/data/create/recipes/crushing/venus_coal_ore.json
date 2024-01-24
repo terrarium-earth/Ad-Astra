@@ -21,24 +21,20 @@
   ],
   "results": [
     {
-      "item": "minecraft:coal",
-      "count": 1
+      "item": "minecraft:coal"
     },
     {
       "item": "minecraft:coal",
-      "count": 1,
       "chance": 0.75
     },
     {
       "item": "create:experience_nugget",
-      "count": 1,
       "chance": 0.75
     },
     {
       "item": "ad_astra:venus_cobblestone",
-      "count": 1,
       "chance": 0.125
     }
   ],
-  "processingTime": 300
+  "processingTime": 150
 }

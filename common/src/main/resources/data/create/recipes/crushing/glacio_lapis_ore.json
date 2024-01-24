@@ -26,19 +26,16 @@
     },
     {
       "item": "minecraft:lapis_lazuli",
-      "count": 1,
-      "chance": 0.75
+      "chance": 0.5
     },
     {
       "item": "create:experience_nugget",
-      "count": 1,
       "chance": 0.75
     },
     {
       "item": "ad_astra:glacio_cobblestone",
-      "count": 1,
       "chance": 0.125
     }
   ],
-  "processingTime": 300
+  "processingTime": 250
 }

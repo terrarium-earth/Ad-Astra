@@ -21,12 +21,10 @@
   ],
   "results": [
     {
-      "item": "minecraft:raw_gold",
-      "count": 1
+      "item": "create:crushed_raw_gold"
     },
     {
-      "item": "minecraft:raw_gold",
-      "count": 1,
+      "item": "create:crushed_raw_gold",
       "chance": 0.75
     },
     {
@@ -36,9 +34,8 @@
     },
     {
       "item": "ad_astra:venus_cobblestone",
-      "count": 1,
       "chance": 0.125
     }
   ],
-  "processingTime": 300
+  "processingTime": 250
 }

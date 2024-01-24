@@ -21,22 +21,18 @@
   ],
   "results": [
     {
-      "item": "ad_astra:raw_desh",
-      "count": 1
+      "item": "ad_astra:raw_desh"
     },
     {
       "item": "ad_astra:raw_desh",
-      "count": 1,
       "chance": 0.25
     },
     {
       "item": "create:experience_nugget",
-      "count": 1,
       "chance": 0.75
     },
     {
       "item": "ad_astra:moon_cobblestone",
-      "count": 1,
       "chance": 0.125
     }
   ],

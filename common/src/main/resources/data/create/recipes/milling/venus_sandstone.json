@@ -16,7 +16,7 @@
   "type": "create:milling",
   "ingredients": [
     {
-      "tag": "ad_astra:venus_sandstone"
+      "item": "ad_astra:venus_sandstone"
     }
   ],
   "results": [

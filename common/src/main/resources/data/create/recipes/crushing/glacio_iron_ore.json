@@ -21,24 +21,20 @@
   ],
   "results": [
     {
-      "item": "minecraft:raw_iron",
-      "count": 1
+      "item": "create:crushed_raw_iron"
     },
     {
-      "item": "ad_astra:raw_iron",
-      "count": 1,
-      "chance": 0.25
+      "item": "create:crushed_raw_iron",
+      "chance": 0.75
     },
     {
       "item": "create:experience_nugget",
-      "count": 1,
       "chance": 0.75
     },
     {
       "item": "ad_astra:glacio_cobblestone",
-      "count": 1,
       "chance": 0.125
     }
   ],
-  "processingTime": 300
+  "processingTime": 250
 }

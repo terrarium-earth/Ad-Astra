@@ -17,9 +17,7 @@ public abstract class ConfigurationWidget extends AbstractWidget {
     }
 
     @Override
-    protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {
-
-    }
+    protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {}
 
     @Override
     protected boolean isValidClickButton(int button) {
