@@ -167,8 +167,8 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         tag(BlockTags.COAL_ORES).add(element(ModBlocks.GLACIO_COAL_ORE.get()));
 
         tag(BlockTags.COPPER_ORES).add(element(ModBlocks.GLACIO_COPPER_ORE.get()));
-        tag(BlockTags.COPPER_ORES).add(element(ModBlocks.MARS_DIAMOND_ORE.get()));
-        tag(BlockTags.COPPER_ORES).add(element(ModBlocks.VENUS_DIAMOND_ORE.get()));
+        tag(BlockTags.DIAMOND_ORES).add(element(ModBlocks.MARS_DIAMOND_ORE.get()));
+        tag(BlockTags.DIAMOND_ORES).add(element(ModBlocks.VENUS_DIAMOND_ORE.get()));
 
         tag(BlockTags.DOORS).add(element(ModBlocks.STEEL_DOOR.get()));
         tag(BlockTags.WOODEN_DOORS).add(element(ModBlocks.AERONOS_DOOR.get()));

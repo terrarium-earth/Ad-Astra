@@ -138,8 +138,8 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         tag(ItemTags.COAL_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIO_COAL_ORE.get())));
 
         tag(ItemTags.COPPER_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIO_COPPER_ORE.get())));
-        tag(ItemTags.COPPER_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MARS_DIAMOND_ORE.get())));
-        tag(ItemTags.COPPER_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_DIAMOND_ORE.get())));
+        tag(ItemTags.DIAMOND_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.MARS_DIAMOND_ORE.get())));
+        tag(ItemTags.DIAMOND_ORES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.VENUS_DIAMOND_ORE.get())));
 
         tag(ItemTags.DOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STEEL_DOOR.get())));
         tag(ItemTags.WOODEN_DOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_DOOR.get())));

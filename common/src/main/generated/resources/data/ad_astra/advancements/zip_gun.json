@@ -1,7 +1,7 @@
 {
   "parent": "ad_astra:dj",
   "criteria": {
-    "has_zip_gun": {
+    "using_zip_gun": {
       "conditions": {
         "item": {
           "items": [
@@ -29,7 +29,7 @@
   },
   "requirements": [
     [
-      "has_zip_gun"
+      "using_zip_gun"
     ]
   ],
   "sends_telemetry_event": true
