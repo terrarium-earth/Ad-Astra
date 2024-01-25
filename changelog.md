@@ -2,3 +2,4 @@
 - Fixed create compat (#441)
 - Fixed diamond ore incorrect tag (#440)
 - Fixed waterlogged blocks getting destroyed in space (#437)
+- Fixed missing blocks in mars temple and lunarian tower.
