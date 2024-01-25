@@ -1,2 +1,4 @@
 - Added biome and dimension translations
 - Fixed create compat (#441)
+- Fixed diamond ore incorrect tag (#440)
+- Fixed waterlogged blocks getting destroyed in space (#437)

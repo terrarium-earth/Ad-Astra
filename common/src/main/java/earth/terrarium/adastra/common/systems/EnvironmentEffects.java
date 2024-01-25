@@ -17,6 +17,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.material.FluidState;
@@ -76,14 +77,18 @@ public class EnvironmentEffects {
 
     private static void tickCold(ServerLevel level, BlockPos pos, BlockState state) {
         FluidState fluidState = state.getFluidState();
-        if (fluidState.isSource() && fluidState.is(ModFluidTags.FREEZES_IN_SPACE)) {
+        if (state.hasProperty(BlockStateProperties.WATERLOGGED)) {
+            level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.WATERLOGGED, false));
+        } else if (fluidState.isSource() && fluidState.is(ModFluidTags.FREEZES_IN_SPACE)) {
             level.setBlockAndUpdate(pos, Blocks.ICE.defaultBlockState());
         }
     }
 
     private static void tickHot(ServerLevel level, BlockPos pos, BlockState state) {
         FluidState fluidState = state.getFluidState();
-        if (fluidState.isSource() && fluidState.is(ModFluidTags.EVAPORATES_IN_SPACE)) {
+        if (state.hasProperty(BlockStateProperties.WATERLOGGED)) {
+            level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.WATERLOGGED, false));
+        } else if (fluidState.isSource() && fluidState.is(ModFluidTags.EVAPORATES_IN_SPACE)) {
             level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
             level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5f, 2.6f + (level.random.nextFloat() - level.random.nextFloat()) * 0.8f);
             ModUtils.sendParticles(level, ParticleTypes.LARGE_SMOKE, pos.getX(), pos.getY(), pos.getZ(), 8, 0.5, 0.5, 0.5, 0);
