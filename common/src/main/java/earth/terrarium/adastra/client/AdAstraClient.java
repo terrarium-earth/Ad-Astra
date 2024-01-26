@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.config.AdAstraConfigClient;
+import earth.terrarium.adastra.client.dimension.AdAstraPlanetRenderers;
 import earth.terrarium.adastra.client.models.armor.SpaceSuitModel;
 import earth.terrarium.adastra.client.models.entities.mobs.*;
 import earth.terrarium.adastra.client.models.entities.vehicles.LanderModel;
@@ -48,6 +49,7 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.DyeableArmorItem;
 import net.minecraft.world.item.Item;
@@ -183,13 +185,13 @@ public class AdAstraClient {
         consumer.accept(ModParticleTypes.OXYGEN_BUBBLE.get(), OxygenBubbleParticle.Provider::new);
     }
 
-    public static void onRegisterModels(Consumer<ResourceLocation> register) {
-        ModBlocks.GLOBES.stream().forEach(b -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/%s_cube".formatted(b.getId().getPath()))));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/%s_flipped".formatted(ModBlocks.AIRLOCK.getId().getPath())));
-        register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/%s_flipped".formatted(ModBlocks.REINFORCED_DOOR.getId().getPath())));
-        register.accept(OxygenDistributorBlockEntityRenderer.TOP);
-        register.accept(GravityNormalizerBlockEntityRenderer.TOP);
-        register.accept(GravityNormalizerBlockEntityRenderer.TOE);
+    public static void onRegisterModels(Consumer<ResourceLocation> consumer) {
+        ModBlocks.GLOBES.stream().forEach(b -> consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "block/%s_cube".formatted(b.getId().getPath()))));
+        consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "block/%s_flipped".formatted(ModBlocks.AIRLOCK.getId().getPath())));
+        consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "block/%s_flipped".formatted(ModBlocks.REINFORCED_DOOR.getId().getPath())));
+        consumer.accept(OxygenDistributorBlockEntityRenderer.TOP);
+        consumer.accept(GravityNormalizerBlockEntityRenderer.TOP);
+        consumer.accept(GravityNormalizerBlockEntityRenderer.TOE);
     }
 
     public static void onRegisterItemRenderers(BiConsumer<Item, BlockEntityWithoutLevelRenderer> consumer) {
@@ -207,15 +209,19 @@ public class AdAstraClient {
         consumer.accept(OverlayScreen::render);
     }
 
-    public static void onAddItemColors(BiConsumer<ItemColor, ItemLike[]> register) {
-        register.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.SPACE_HELMET.get(), ModItems.SPACE_SUIT.get(), ModItems.SPACE_PANTS.get(), ModItems.SPACE_BOOTS.get()});
-        register.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.NETHERITE_SPACE_HELMET.get(), ModItems.NETHERITE_SPACE_SUIT.get(), ModItems.NETHERITE_SPACE_PANTS.get(), ModItems.NETHERITE_SPACE_BOOTS.get()});
-        register.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.JET_SUIT_HELMET.get(), ModItems.JET_SUIT.get(), ModItems.JET_SUIT_PANTS.get(), ModItems.JET_SUIT_BOOTS.get()});
+    public static void onAddItemColors(BiConsumer<ItemColor, ItemLike[]> consumer) {
+        consumer.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.SPACE_HELMET.get(), ModItems.SPACE_SUIT.get(), ModItems.SPACE_PANTS.get(), ModItems.SPACE_BOOTS.get()});
+        consumer.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.NETHERITE_SPACE_HELMET.get(), ModItems.NETHERITE_SPACE_SUIT.get(), ModItems.NETHERITE_SPACE_PANTS.get(), ModItems.NETHERITE_SPACE_BOOTS.get()});
+        consumer.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.JET_SUIT_HELMET.get(), ModItems.JET_SUIT.get(), ModItems.JET_SUIT_PANTS.get(), ModItems.JET_SUIT_BOOTS.get()});
     }
 
     public static void renderOverlays(PoseStack stack, Camera camera) {
         OXYGEN_OVERLAY_RENDERER.render(stack, camera);
         GRAVITY_OVERLAY_RENDERER.render(stack, camera);
+    }
+
+    public static void onAddReloadListener(BiConsumer<ResourceLocation, PreparableReloadListener> consumer) {
+        consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "planet_renderers"), new AdAstraPlanetRenderers());
     }
 
     public static void clientTick(Minecraft minecraft) {

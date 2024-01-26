@@ -25,12 +25,12 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
 
     @Override
     protected void build(BiConsumer<ResourceLocation, Planet> consumer) {
-        orbit(consumer, "earth_orbit", Planet.EARTH_ORBIT, PlanetConstants.SPACE_SOLAR_POWER, PlanetConstants.SOLAR_SYSTEM, 1);
-        orbit(consumer, "moon_orbit", Planet.MOON_ORBIT, PlanetConstants.MOON_ORBIT_SOLAR_POWER, PlanetConstants.SOLAR_SYSTEM, 1);
-        orbit(consumer, "mars_orbit", Planet.MARS_ORBIT, PlanetConstants.MARS_ORBIT_SOLAR_POWER, PlanetConstants.SOLAR_SYSTEM, 2);
-        orbit(consumer, "venus_orbit", Planet.VENUS_ORBIT, PlanetConstants.VENUS_ORBIT_SOLAR_POWER, PlanetConstants.SOLAR_SYSTEM, 3);
-        orbit(consumer, "mercury_orbit", Planet.MERCURY_ORBIT, PlanetConstants.MERCURY_ORBIT_SOLAR_POWER, PlanetConstants.SOLAR_SYSTEM, 3);
-        orbit(consumer, "glacio_orbit", Planet.GLACIO_ORBIT, PlanetConstants.GLACIO_ORBIT_SOLAR_POWER, PlanetConstants.PROXIMA_CENTAURI, 4);
+        orbit(consumer, Planet.EARTH_ORBIT, PlanetConstants.SPACE_SOLAR_POWER, PlanetConstants.SOLAR_SYSTEM, 1);
+        orbit(consumer, Planet.MOON_ORBIT, PlanetConstants.MOON_ORBIT_SOLAR_POWER, PlanetConstants.SOLAR_SYSTEM, 1);
+        orbit(consumer, Planet.MARS_ORBIT, PlanetConstants.MARS_ORBIT_SOLAR_POWER, PlanetConstants.SOLAR_SYSTEM, 2);
+        orbit(consumer, Planet.VENUS_ORBIT, PlanetConstants.VENUS_ORBIT_SOLAR_POWER, PlanetConstants.SOLAR_SYSTEM, 3);
+        orbit(consumer, Planet.MERCURY_ORBIT, PlanetConstants.MERCURY_ORBIT_SOLAR_POWER, PlanetConstants.SOLAR_SYSTEM, 3);
+        orbit(consumer, Planet.GLACIO_ORBIT, PlanetConstants.GLACIO_ORBIT_SOLAR_POWER, PlanetConstants.PROXIMA_CENTAURI, 4);
 
         consumer.accept(
             new ResourceLocation(AdAstra.MOD_ID, "earth"),
@@ -111,9 +111,9 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
         );
     }
 
-    private static void orbit(BiConsumer<ResourceLocation, Planet> consumer, String name, ResourceKey<Level> planet, int solarPower, ResourceLocation galaxy, int tier) {
+    private static void orbit(BiConsumer<ResourceLocation, Planet> consumer, ResourceKey<Level> planet, int solarPower, ResourceLocation galaxy, int tier) {
         consumer.accept(
-            new ResourceLocation(AdAstra.MOD_ID, name),
+            planet.location(),
             new Planet(planet,
                 false,
                 PlanetConstants.SPACE_TEMPERATURE,

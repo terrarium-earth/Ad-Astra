@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.datagen.provider.server.registry;
 
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.client.dimension.ModDimensionRenderers;
+import earth.terrarium.adastra.common.planets.Planet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -34,12 +34,12 @@ public class ModDimensionTypeProvider {
     }
 
     public static void bootstrap(BootstapContext<DimensionType> context) {
-        orbit(context, EARTH_ORBIT, ModDimensionRenderers.EARTH_ORBIT_EFFECTS);
-        orbit(context, MOON_ORBIT, ModDimensionRenderers.MOON_ORBIT_EFFECTS);
-        orbit(context, MARS_ORBIT, ModDimensionRenderers.MARS_ORBIT_EFFECTS);
-        orbit(context, VENUS_ORBIT, ModDimensionRenderers.VENUS_ORBIT_EFFECTS);
-        orbit(context, MERCURY_ORBIT, ModDimensionRenderers.MERCURY_ORBIT_EFFECTS);
-        orbit(context, GLACIO_ORBIT, ModDimensionRenderers.GLACIO_ORBIT_EFFECTS);
+        orbit(context, EARTH_ORBIT, Planet.EARTH_ORBIT.location());
+        orbit(context, MOON_ORBIT, Planet.MOON_ORBIT.location());
+        orbit(context, MARS_ORBIT, Planet.MARS_ORBIT.location());
+        orbit(context, VENUS_ORBIT, Planet.VENUS_ORBIT.location());
+        orbit(context, MERCURY_ORBIT, Planet.MERCURY_ORBIT.location());
+        orbit(context, GLACIO_ORBIT, Planet.GLACIO_ORBIT.location());
 
         context.register(
             MOON,
@@ -56,7 +56,7 @@ public class ModDimensionTypeProvider {
                 384,
                 384,
                 BlockTags.INFINIBURN_OVERWORLD,
-                ModDimensionRenderers.MOON_EFFECTS,
+                Planet.MOON.location(),
                 0.0f,
                 createMonsterSettings(
                     false,
@@ -79,7 +79,7 @@ public class ModDimensionTypeProvider {
                 384,
                 384,
                 BlockTags.INFINIBURN_OVERWORLD,
-                ModDimensionRenderers.MARS_EFFECTS,
+                Planet.MARS.location(),
                 0.0f,
                 createMonsterSettings(
                     false,
@@ -102,7 +102,7 @@ public class ModDimensionTypeProvider {
                 384,
                 384,
                 BlockTags.INFINIBURN_OVERWORLD,
-                ModDimensionRenderers.VENUS_EFFECTS,
+                Planet.VENUS.location(),
                 0.0f,
                 createMonsterSettings(
                     true,
@@ -125,7 +125,7 @@ public class ModDimensionTypeProvider {
                 384,
                 384,
                 BlockTags.INFINIBURN_OVERWORLD,
-                ModDimensionRenderers.MERCURY_EFFECTS,
+                Planet.MERCURY.location(),
                 0.0f,
                 createMonsterSettings(
                     true,
@@ -148,7 +148,7 @@ public class ModDimensionTypeProvider {
                 384,
                 384,
                 BlockTags.INFINIBURN_OVERWORLD,
-                ModDimensionRenderers.GLACIO_EFFECTS,
+                Planet.GLACIO.location(),
                 0.0f,
                 createMonsterSettings(
                     false,

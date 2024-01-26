@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.client;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import earth.terrarium.adastra.client.dimension.ModDimensionSpecialEffects;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -11,13 +12,16 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.NotImplementedException;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class ClientPlatformUtils {
@@ -49,6 +53,11 @@ public class ClientPlatformUtils {
 
     @ExpectPlatform
     public static void registerArmor(ResourceLocation texture, ModelLayerLocation layer, ArmorFactory factory, Item... items) {
+        throw new NotImplementedException();
+    }
+
+    @ExpectPlatform
+    public static void registerPlanetRenderers(Map<ResourceKey<Level>, ModDimensionSpecialEffects> renderers) {
         throw new NotImplementedException();
     }
 }

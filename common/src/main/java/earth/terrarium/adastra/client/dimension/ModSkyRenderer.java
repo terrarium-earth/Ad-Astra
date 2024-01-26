@@ -1,11 +1,9 @@
-package earth.terrarium.adastra.client.dimension.renderers;
+package earth.terrarium.adastra.client.dimension;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
-import earth.terrarium.adastra.client.dimension.ModDimensionSpecialEffects;
-import earth.terrarium.adastra.client.dimension.SkyRenderable;
 import earth.terrarium.adastra.client.utils.DimensionRenderingUtils;
 import earth.terrarium.adastra.mixins.client.LevelRendererAccessor;
 import net.minecraft.client.Camera;
@@ -18,49 +16,26 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.random.WeightedEntry;
 import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 
-import java.util.List;
-import java.util.function.BiFunction;
-
 public class ModSkyRenderer {
-    private final int stars;
-    private final int sunriseAngle;
-    private final boolean renderInRain;
-    private final int sunriseColor;
-    private final BiFunction<ClientLevel, Float, Float> starBrightness;
-    private final SimpleWeightedRandomList<Integer> starColors;
-    private final List<SkyRenderable> skyRenderables;
+    private final PlanetRenderer renderer;
 
     @Nullable
     private VertexBuffer starBuffer;
 
-    public ModSkyRenderer(
-        int stars,
-        int sunriseAngle,
-        boolean renderInRain,
-        int sunriseColor,
-        BiFunction<ClientLevel, Float, Float> starBrightness,
-        SimpleWeightedRandomList<Integer> starColors,
-        List<SkyRenderable> skyRenderables
-    ) {
-        this.stars = stars;
-        this.sunriseAngle = sunriseAngle;
-        this.renderInRain = renderInRain;
-        this.sunriseColor = sunriseColor;
-        this.starBrightness = starBrightness;
-        this.starColors = starColors;
-        this.skyRenderables = skyRenderables;
+    public ModSkyRenderer(PlanetRenderer renderer) {
+        this.renderer = renderer;
     }
 
     public void render(ClientLevel level, float partialTick, PoseStack poseStack, Camera camera, Matrix4f projectionMatrix, boolean isFoggy, Runnable setupFog) {
         setupFog.run();
         if (isFoggy || inFog(camera)) return;
-        if (!renderInRain && level.isRaining()) return;
+        if (!renderer.renderInRain() && level.isRaining()) return;
         if (starBuffer == null) createStars();
         BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
 
@@ -80,7 +55,7 @@ public class ModSkyRenderer {
         RenderSystem.disableBlend();
 
         RenderSystem.setShaderColor(1, 1, 1, 1);
-        skyRenderables.forEach(renderable -> {
+        renderer.skyRenderables().forEach(renderable -> {
             var globalRotation = switch (renderable.movementType()) {
                 case STATIC -> renderable.globalRotation();
                 case TIME_OF_DAY -> renderable.globalRotation().add(0, 0, level.getTimeOfDay(partialTick) * 360);
@@ -130,7 +105,7 @@ public class ModSkyRenderer {
         VertexBuffer.unbind();
         RenderSystem.enableBlend();
 
-        float[] color = ModDimensionSpecialEffects.getSunriseColor(level.getTimeOfDay(partialTick), partialTick, sunriseColor);
+        float[] color = ModDimensionSpecialEffects.getSunriseColor(level.getTimeOfDay(partialTick), partialTick, renderer.sunriseColor());
         if (color != null) {
             renderSunrise(bufferBuilder, level, partialTick, poseStack, color);
         }
@@ -143,7 +118,7 @@ public class ModSkyRenderer {
         poseStack.pushPose();
         poseStack.mulPose(Axis.XP.rotationDegrees(90));
 
-        poseStack.mulPose(Axis.ZP.rotationDegrees(sunriseAngle));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(renderer.sunriseAngle()));
 
         float sunAngle = Mth.sin(level.getSunAngle(partialTick)) < 0 ? 180 : 0;
         poseStack.mulPose(Axis.ZP.rotationDegrees(sunAngle));
@@ -199,12 +174,15 @@ public class ModSkyRenderer {
         float r = FastColor.ARGB32.red(color) / 255f;
         float g = FastColor.ARGB32.green(color) / 255f;
         float b = FastColor.ARGB32.blue(color) / 255f;
-        float a = renderInRain ? 1 : 1 - level.getRainLevel(partialTick);
+        float a = renderer.renderInRain() ? 1 : 1 - level.getRainLevel(partialTick);
         RenderSystem.setShaderColor(r, g, b, a);
     }
 
     public void renderStars(ClientLevel level, float partialTick, PoseStack poseStack, Matrix4f projectionMatrix, Runnable setupFog) {
-        float starLight = starBrightness.apply(level, partialTick);
+        float starLight = renderer.starBrightness().orElseGet(() -> {
+            float rainLevel = 1 - level.getRainLevel(partialTick);
+            return level.getStarBrightness(partialTick) * rainLevel;
+        });
         if (starLight <= 0) return;
         if (starBuffer == null) return;
         RenderSystem.setShaderColor(starLight, starLight, starLight, starLight);
@@ -238,7 +216,7 @@ public class ModSkyRenderer {
         var random = RandomSource.create(10842);
         builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
 
-        for (int i = 0; i < stars; i++) {
+        for (int i = 0; i < renderer.stars(); i++) {
             double x = random.nextFloat() * 2 - 1;
             double y = random.nextFloat() * 2 - 1;
             double z = random.nextFloat() * 2 - 1;
@@ -270,7 +248,7 @@ public class ModSkyRenderer {
             double sinRot = Math.sin(rot);
             double cosRot = Math.cos(rot);
 
-            int color = starColors.getRandomValue(random).orElse(0xffffffff);
+            int color = renderer.starColors().getRandom(random).map(WeightedEntry.Wrapper::getData).orElse(0xffffffff);
 
             for (int j = 0; j < 4; j++) {
                 double xOffset = ((j & 2) - 1) * scale;

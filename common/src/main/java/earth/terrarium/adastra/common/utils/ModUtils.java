@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.utils;
 
+import com.mojang.serialization.Codec;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.portal.PortalInfo;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Locale;
 import java.util.Optional;
 
 public final class ModUtils {
@@ -70,6 +72,10 @@ public final class ModUtils {
         if (!(player.getVehicle() instanceof Rocket rocket)) return false;
         if (rocket.getY() < AdAstraConfig.atmosphereLeave) return false;
         return rocket.tier() >= targetPlanet.tier();
+    }
+
+    public static <T extends Enum<T>> Codec<T> createEnumCodec(Class<T> enumClass) {
+        return Codec.STRING.xmap(s -> Enum.valueOf(enumClass, s.toUpperCase(Locale.ROOT)), Enum::name);
     }
 
     public static Direction relative(BlockEntity from, Direction to) {

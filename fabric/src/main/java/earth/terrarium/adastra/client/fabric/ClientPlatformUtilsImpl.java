@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.client.fabric;
 
 import earth.terrarium.adastra.client.ClientPlatformUtils;
+import earth.terrarium.adastra.client.dimension.ModDimensionSpecialEffects;
 import earth.terrarium.adastra.common.items.armor.JetSuitItem;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.minecraft.client.Minecraft;
@@ -9,8 +10,12 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
+
+import java.util.Map;
 
 public class ClientPlatformUtilsImpl {
     public static BakedModel getModel(ModelManager dispatcher, ResourceLocation id) {
@@ -28,5 +33,9 @@ public class ClientPlatformUtilsImpl {
 
             model.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityTranslucent(texture)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         }, items);
+    }
+
+    public static void registerPlanetRenderers(Map<ResourceKey<Level>, ModDimensionSpecialEffects> renderers) {
+        AdAstraClientFabric.registerDimensionEffects(renderers);
     }
 }

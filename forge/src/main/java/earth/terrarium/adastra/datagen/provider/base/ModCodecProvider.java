@@ -2,6 +2,7 @@ package earth.terrarium.adastra.datagen.provider.base;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
+import com.teamresourceful.resourcefullib.common.lib.Constants;
 import net.minecraft.core.Registry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -19,7 +20,11 @@ public abstract class ModCodecProvider<T> implements DataProvider {
     private final Codec<T> codec;
 
     public ModCodecProvider(PackOutput packOutput, Codec<T> codec, ResourceKey<Registry<T>> registry) {
-        this.pathProvider = packOutput.createPathProvider(PackOutput.Target.DATA_PACK, registry.location().getPath());
+        this(packOutput, codec, registry, PackOutput.Target.DATA_PACK);
+    }
+
+     public ModCodecProvider(PackOutput packOutput, Codec<T> codec, ResourceKey<Registry<T>> registry, PackOutput.Target target) {
+        this.pathProvider = packOutput.createPathProvider(target, registry.location().getPath());
         this.codec = codec;
     }
 
@@ -30,7 +35,7 @@ public abstract class ModCodecProvider<T> implements DataProvider {
         build((key, value) ->
             futures.add(DataProvider.saveStable(
                 output,
-                codec.encodeStart(JsonOps.INSTANCE, value).getOrThrow(false, error -> {}),
+                codec.encodeStart(JsonOps.INSTANCE, value).getOrThrow(false, Constants.LOGGER::error),
                 pathProvider.json(key)
             ))
         );

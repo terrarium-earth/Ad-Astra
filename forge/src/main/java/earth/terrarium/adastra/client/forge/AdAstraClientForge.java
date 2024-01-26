@@ -4,7 +4,6 @@ import com.teamresourceful.resourcefulconfig.client.ConfigScreen;
 import com.teamresourceful.resourcefulconfig.common.config.ResourcefulConfig;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.AdAstraClient;
-import earth.terrarium.adastra.client.dimension.ModDimensionRenderers;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -70,8 +69,8 @@ public class AdAstraClientForge {
     }
 
     @SubscribeEvent
-    public static void onRegisterDimensionSpecialEffects(RegisterDimensionSpecialEffectsEvent event) {
-        ModDimensionRenderers.onRegisterDimensionSpecialEffects((dimension, effects) -> event.register(dimension.location(), effects)); //
+    public static void onClientReloadListeners(RegisterClientReloadListenersEvent event) {
+        AdAstraClient.onAddReloadListener((id, listener) -> event.registerReloadListener(listener));
     }
 
     private static void onClientTick(TickEvent.ClientTickEvent event) {

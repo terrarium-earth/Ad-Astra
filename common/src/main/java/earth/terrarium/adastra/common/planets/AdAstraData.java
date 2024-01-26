@@ -31,15 +31,15 @@ public class AdAstraData extends SimpleJsonResourceReloadListener {
     protected void apply(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profiler) {
         PLANETS.clear();
         DIMENSIONS_TO_PLANETS.clear();
-        for (Map.Entry<ResourceLocation, JsonElement> entry : object.entrySet()) {
-            JsonObject json = GsonHelper.convertToJsonObject(entry.getValue(), "planets");
+        object.forEach((key, value) -> {
+            JsonObject json = GsonHelper.convertToJsonObject(value, "planets");
             Planet planet = Planet.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow(false, Constants.LOGGER::error);
             PLANETS.put(planet.dimension(), planet);
             DIMENSIONS_TO_PLANETS.put(planet.dimension(), planet.dimension());
             for (ResourceKey<Level> dimension : planet.additionalLaunchDimensions()) {
                 DIMENSIONS_TO_PLANETS.put(dimension, planet.dimension());
             }
-        }
+        });
     }
 
     public static void encodePlanets(FriendlyByteBuf buf) {
