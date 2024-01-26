@@ -74,7 +74,7 @@ public class RadioStream extends InputStream {
             this.waiting.set(false);
         }
         this.data = this.cache.poll();
-        return this.cache.isEmpty();
+        return this.data == null;
     }
 
     @Override
