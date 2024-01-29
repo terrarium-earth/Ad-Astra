@@ -35,8 +35,13 @@ dependencies {
     val mixinExtrasVersion: String by project
     val forgeVersion: String by project
     val reiVersion: String by project
+    val jeiVersion: String by project
 
     forge(group = "net.minecraftforge", name = "forge", version = "$minecraftVersion-$forgeVersion")
+
+    modLocalRuntime(group = "mezz.jei", name = "jei-$minecraftVersion-forge", version = jeiVersion) {
+        isTransitive = false
+    }
 
     modLocalRuntime(group = "maven.modrinth", name = "jade", version = "2iRQrBk4")
     modLocalRuntime(group = "maven.modrinth", name = "mekanism", version = "10.4.2.16")
@@ -51,4 +56,5 @@ dependencies {
         implementation(this)
         "include"(this)
     }
+
 }
