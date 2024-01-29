@@ -77,6 +77,30 @@ public final class AdAstraConfig {
     @Comment("A comma-separated list of planet IDs that should be hidden from the planets screen. e.g. minecraft:overworld,ad_astra:moon,ad_astra:mars,ad_astra:venus,ad_astra:mercury,ad_astra:glacio")
     public static String disabledPlanets = "";
 
+    @ConfigEntry(
+        id = "disableOxygen",
+        type = EntryType.BOOLEAN,
+        translation = "config.ad_astra.disableOxygen"
+    )
+    @Comment("Disables oxygen damage.")
+    public static boolean disableOxygen;
+
+    @ConfigEntry(
+        id = "disableTemperature",
+        type = EntryType.BOOLEAN,
+        translation = "config.ad_astra.disableTemperature"
+    )
+    @Comment("Disables temperature damage.")
+    public static boolean disableTemperature;
+
+    @ConfigEntry(
+        id = "disableGravity",
+        type = EntryType.BOOLEAN,
+        translation = "config.ad_astra.disableGravity"
+    )
+    @Comment("Uses normal gravity for all planets.")
+    public static boolean disableGravity;
+
     @InlineCategory
     public static MachineConfig machineConfig;
 }

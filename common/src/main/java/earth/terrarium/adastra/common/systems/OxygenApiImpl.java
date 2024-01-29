@@ -3,6 +3,7 @@ package earth.terrarium.adastra.common.systems;
 import earth.terrarium.adastra.api.events.AdAstraEvents;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
+import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
 import earth.terrarium.adastra.common.planets.Planet;
@@ -65,6 +66,7 @@ public class OxygenApiImpl implements OxygenApi {
 
     @Override
     public void entityTick(ServerLevel level, LivingEntity entity) {
+        if (AdAstraConfig.disableOxygen) return;
         if (entity.getType().is(ModEntityTypeTags.LIVES_WITHOUT_OXYGEN)) return;
         if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_IN_SPACE)) return;
         if (SpaceSuitItem.hasFullSet(entity) && SpaceSuitItem.hasOxygen(entity)) return;

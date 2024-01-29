@@ -372,6 +372,9 @@ public class ModLangProvider extends LanguageProvider {
         add("config.ad_astra.forcePlanetTick", "Force planet tick");
         add("config.ad_astra.disabledPlanets", "Disabled planets");
         add("config.ad_astra.atmosphereLeave", "Atmosphere leave");
+        add("config.ad_astra.disableOxygen", "Disable oxygen");
+        add("config.ad_astra.disableTemperature", "Disable temperature");
+        add("config.ad_astra.disableGravity", "Disable gravity");
 
         add("config.ad_astra.machines", "Machines");
         add("config.ad_astra.ironTierMaxEnergyInOut", "Iron tier max energy in/out");

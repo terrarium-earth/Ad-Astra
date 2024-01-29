@@ -18,3 +18,4 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 - Re-added planet sky rendering resource pack support.
 - Added German radio station (#438) 
 - Fixed crash with cryo freezer moving fluids
+- Added config to disable oxygen, temperature, and gravity
