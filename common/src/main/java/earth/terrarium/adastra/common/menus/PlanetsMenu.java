@@ -48,16 +48,17 @@ public class PlanetsMenu extends AbstractContainerMenu {
             inventory,
             PlanetsMenuProvider.createDisabledPlanetsFromBuf(buf),
             PlanetsMenuProvider.createSpaceStationsFromBuf(buf),
-            PlanetsMenuProvider.createClaimedChunksFromBuf(buf),
-            PlanetsMenuProvider.createSpawnLocationsFromBuf(buf));
+            PlanetsMenuProvider.createSpawnLocationsFromBuf(buf),
+            PlanetsMenuProvider.createClaimedChunksFromBuf(buf)
+        );
     }
 
     public PlanetsMenu(int containerId,
                        Inventory inventory,
                        Set<ResourceLocation> disabledPlanets,
                        Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> spaceStations,
-                       Object2BooleanMap<ResourceKey<Level>> claimedChunks,
-                       Set<GlobalPos> spawnLocations) {
+                       Set<GlobalPos> spawnLocations,
+                       Object2BooleanMap<ResourceKey<Level>> claimedChunks) {
         super(ModMenus.PLANETS.get(), containerId);
         this.inventory = inventory;
         player = inventory.player;

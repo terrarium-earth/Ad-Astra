@@ -11,6 +11,11 @@ public record IngredientHolder(Ingredient ingredient, int count) {
         Codec.INT.fieldOf("count").orElse(1).forGetter(IngredientHolder::count)
     ).apply(instance, IngredientHolder::new));
 
+    public static final Codec<IngredientHolder> NETWORK_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        IngredientCodec.NETWORK_CODEC.fieldOf("ingredient").forGetter(IngredientHolder::ingredient),
+        Codec.INT.fieldOf("count").orElse(1).forGetter(IngredientHolder::count)
+    ).apply(instance, IngredientHolder::new));
+
     public static IngredientHolder of(Ingredient ingredient) {
         return new IngredientHolder(ingredient, 1);
     }

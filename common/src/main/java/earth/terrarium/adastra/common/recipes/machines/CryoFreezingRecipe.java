@@ -33,6 +33,16 @@ public record CryoFreezingRecipe(
         ).apply(instance, CryoFreezingRecipe::new));
     }
 
+    public static Codec<CryoFreezingRecipe> netCodec(ResourceLocation id) {
+        return RecordCodecBuilder.create(instance -> instance.group(
+            RecordCodecBuilder.point(id),
+            Codec.INT.fieldOf("cookingtime").forGetter(CryoFreezingRecipe::cookingTime),
+            Codec.INT.fieldOf("energy").forGetter(CryoFreezingRecipe::energy),
+            IngredientCodec.NETWORK_CODEC.fieldOf("ingredient").forGetter(CryoFreezingRecipe::input),
+            FluidHolder.NEW_CODEC.fieldOf("result").forGetter(CryoFreezingRecipe::result)
+        ).apply(instance, CryoFreezingRecipe::new));
+    }
+
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
         if (!input.test(container.getItem(1))) return false;

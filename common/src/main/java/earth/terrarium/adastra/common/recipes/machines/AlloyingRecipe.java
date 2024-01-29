@@ -36,6 +36,16 @@ public record AlloyingRecipe(
         ).apply(instance, AlloyingRecipe::new));
     }
 
+    public static Codec<AlloyingRecipe> netCodec(ResourceLocation id) {
+        return RecordCodecBuilder.create(instance -> instance.group(
+            RecordCodecBuilder.point(id),
+            Codec.INT.fieldOf("cookingtime").forGetter(AlloyingRecipe::cookingTime),
+            Codec.INT.fieldOf("energy").forGetter(AlloyingRecipe::energy),
+            IngredientCodec.NETWORK_CODEC.listOf().fieldOf("ingredients").forGetter(AlloyingRecipe::ingredients),
+            ItemStackCodec.NETWORK_CODEC.fieldOf("result").forGetter(AlloyingRecipe::result)
+        ).apply(instance, AlloyingRecipe::new));
+    }
+
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
         if (container.getContainerSize() < ingredients.size()) return false;

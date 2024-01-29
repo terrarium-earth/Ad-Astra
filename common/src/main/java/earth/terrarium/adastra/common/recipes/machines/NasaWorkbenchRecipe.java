@@ -32,6 +32,14 @@ public record NasaWorkbenchRecipe(
         ).apply(instance, NasaWorkbenchRecipe::new));
     }
 
+    public static Codec<NasaWorkbenchRecipe> netCodec(ResourceLocation id) {
+        return RecordCodecBuilder.create(instance -> instance.group(
+            RecordCodecBuilder.point(id),
+            IngredientCodec.NETWORK_CODEC.listOf().fieldOf("ingredients").forGetter(NasaWorkbenchRecipe::ingredients),
+            ItemStackCodec.NETWORK_CODEC.fieldOf("result").forGetter(NasaWorkbenchRecipe::result)
+        ).apply(instance, NasaWorkbenchRecipe::new));
+    }
+
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
         if (container.getContainerSize() < 14) return false;

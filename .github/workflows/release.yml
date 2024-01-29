@@ -61,7 +61,14 @@ jobs:
             resourceful-lib | depends | *
             resourceful-config | depends | *
             botarium | depends | *
+            cadmus | recommends | *
+            argonauts | recommends | *
+          curseforge-dependencies: |
             shimmer | recommends | *
+            athena | recommends | *
+          modrinth-dependencies: |
+            athena-ctm | recommends | *
+            shimmer! | recommends | *
 
       - name: Upload Fabric Releases (Curse/Modrinth/Github)
         id: fabric_release
@@ -88,7 +95,14 @@ jobs:
             resourceful-lib | depends | *
             resourceful-config | depends | *
             botarium | depends | *
+            cadmus | recommends | *
+            argonauts | recommends | *
+          curseforge-dependencies: |
             shimmer | recommends | *
+            athena | recommends | *
+          modrinth-dependencies: |
+            athena-ctm | recommends | *
+            shimmer! | recommends | *
 
       - name: Generate Discord Embed
         run: ./gradlew injectEmbed

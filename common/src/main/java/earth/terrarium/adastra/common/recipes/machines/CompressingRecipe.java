@@ -34,6 +34,16 @@ public record CompressingRecipe(
         ).apply(instance, CompressingRecipe::new));
     }
 
+    public static Codec<CompressingRecipe> netCodec(ResourceLocation id) {
+        return RecordCodecBuilder.create(instance -> instance.group(
+            RecordCodecBuilder.point(id),
+            Codec.INT.fieldOf("cookingtime").forGetter(CompressingRecipe::cookingTime),
+            Codec.INT.fieldOf("energy").forGetter(CompressingRecipe::energy),
+            IngredientCodec.NETWORK_CODEC.fieldOf("ingredient").forGetter(CompressingRecipe::ingredient),
+            ItemStackCodec.NETWORK_CODEC.fieldOf("result").forGetter(CompressingRecipe::result)
+        ).apply(instance, CompressingRecipe::new));
+    }
+
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
         if (!ingredient.test(container.getItem(1))) return false;

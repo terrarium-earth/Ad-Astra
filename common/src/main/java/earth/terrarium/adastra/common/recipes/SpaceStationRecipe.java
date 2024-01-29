@@ -28,6 +28,14 @@ public record SpaceStationRecipe(ResourceLocation id, List<IngredientHolder> ing
         ).apply(instance, SpaceStationRecipe::new));
     }
 
+    public static Codec<SpaceStationRecipe> netCodec(ResourceLocation id) {
+        return RecordCodecBuilder.create(instance -> instance.group(
+            RecordCodecBuilder.point(id),
+            IngredientHolder.NETWORK_CODEC.listOf().fieldOf("ingredients").forGetter(SpaceStationRecipe::ingredients),
+            ResourceKey.codec(Registries.DIMENSION).fieldOf("dimension").forGetter(SpaceStationRecipe::dimension)
+        ).apply(instance, SpaceStationRecipe::new));
+    }
+
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
         for (IngredientHolder holder : ingredients) {
