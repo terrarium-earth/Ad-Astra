@@ -15,7 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -30,7 +29,7 @@ public class EnergizerBlock extends MachineBlock {
 
     public static final IntegerProperty POWER = IntegerProperty.create("power", 0, 5);
 
-    public EnergizerBlock(BlockBehaviour.Properties properties) {
+    public EnergizerBlock(Properties properties) {
         super(properties);
         registerDefaultState(stateDefinition.any()
             .setValue(FACING, Direction.NORTH)

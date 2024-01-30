@@ -2,35 +2,42 @@ package earth.terrarium.adastra.common.recipes.machines;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
+import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
 import earth.terrarium.adastra.common.blockentities.machines.OxygenLoaderBlockEntity;
+import earth.terrarium.adastra.common.recipes.base.BotariumByteCodecs;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.QuantifiedFluidIngredient;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public record OxygenLoadingRecipe(
-    ResourceLocation id,
     int cookingTime, int energy,
     QuantifiedFluidIngredient input,
     FluidHolder result
 ) implements CodecRecipe<Container> {
 
-    public static Codec<OxygenLoadingRecipe> codec(ResourceLocation id) {
-        return RecordCodecBuilder.create(instance -> instance.group(
-            RecordCodecBuilder.point(id),
+    public static final Codec<OxygenLoadingRecipe> CODEC = RecordCodecBuilder.create(
+        instance -> instance.group(
             Codec.INT.fieldOf("cookingtime").forGetter(OxygenLoadingRecipe::cookingTime),
             Codec.INT.fieldOf("energy").forGetter(OxygenLoadingRecipe::energy),
             QuantifiedFluidIngredient.CODEC.fieldOf("input").forGetter(OxygenLoadingRecipe::input),
-            FluidHolder.NEW_CODEC.fieldOf("result").forGetter(OxygenLoadingRecipe::result)
+            FluidHolder.CODEC.fieldOf("result").forGetter(OxygenLoadingRecipe::result)
         ).apply(instance, OxygenLoadingRecipe::new));
-    }
+
+    public static final ByteCodec<OxygenLoadingRecipe> NETWORK_CODEC = ObjectByteCodec.create(
+        ByteCodec.INT.fieldOf(OxygenLoadingRecipe::cookingTime),
+        ByteCodec.INT.fieldOf(OxygenLoadingRecipe::energy),
+        BotariumByteCodecs.QUANTIFIED_FLUID_INGREDIENT_CODEC.fieldOf(OxygenLoadingRecipe::input),
+        BotariumByteCodecs.FLUID_HOLDER_CODEC.fieldOf(OxygenLoadingRecipe::result),
+        OxygenLoadingRecipe::new
+    );
 
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
@@ -46,7 +53,7 @@ public record OxygenLoadingRecipe(
     }
 
     @Override
-    public @NotNull RecipeSerializer<?> getSerializer() {
+    public CodecRecipeSerializer<? extends CodecRecipe<Container>> serializer() {
         return ModRecipeSerializers.OXYGEN_LOADING.get();
     }
 

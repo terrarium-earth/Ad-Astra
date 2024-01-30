@@ -30,9 +30,7 @@ public abstract class ConfigurationWidget extends AbstractWidget {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        super.render(graphics, mouseX, mouseY, partialTick);
-
+    protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         if (!this.visible) return;
         ConfigurationScreen.ifPresent(
             (screen) -> {

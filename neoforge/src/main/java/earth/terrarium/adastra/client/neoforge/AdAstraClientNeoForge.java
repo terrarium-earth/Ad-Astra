@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.client.neoforge;
 
+import com.teamresourceful.resourcefulconfig.api.types.ResourcefulConfig;
 import com.teamresourceful.resourcefulconfig.client.ConfigScreen;
-import com.teamresourceful.resourcefulconfig.common.config.ResourcefulConfig;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.AdAstraClient;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
@@ -9,15 +9,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.client.ConfigScreenHandler;
-import net.neoforged.client.event.*;
-import net.neoforged.common.MinecraftForge;
-import net.neoforged.event.TickEvent;
-import net.neoforged.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.client.ConfigScreenHandler;
+import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.TickEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,15 +28,15 @@ public class AdAstraClientNeoForge {
 
     public static void init() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraClientNeoForge::onSetupItemColors);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onRegisterClientHud);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onClientTick);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onRenderLevelStage);
+        NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onRegisterClientHud);
+        NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onClientTick);
+        NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onRenderLevelStage);
 
         ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
             () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> {
                 ResourcefulConfig config = AdAstra.CONFIGURATOR.getConfig(AdAstraConfig.class);
                 if (config == null) return null;
-                return new ConfigScreen(parent, null, config);
+                return new ConfigScreen(parent, config);
             })
         );
     }

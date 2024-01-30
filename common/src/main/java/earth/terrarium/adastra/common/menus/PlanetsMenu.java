@@ -27,6 +27,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 
 import java.util.*;
@@ -48,17 +49,16 @@ public class PlanetsMenu extends AbstractContainerMenu {
             inventory,
             PlanetsMenuProvider.createDisabledPlanetsFromBuf(buf),
             PlanetsMenuProvider.createSpaceStationsFromBuf(buf),
-            PlanetsMenuProvider.createSpawnLocationsFromBuf(buf),
-            PlanetsMenuProvider.createClaimedChunksFromBuf(buf)
-        );
+            PlanetsMenuProvider.createClaimedChunksFromBuf(buf),
+            PlanetsMenuProvider.createSpawnLocationsFromBuf(buf));
     }
 
     public PlanetsMenu(int containerId,
                        Inventory inventory,
                        Set<ResourceLocation> disabledPlanets,
                        Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> spaceStations,
-                       Set<GlobalPos> spawnLocations,
-                       Object2BooleanMap<ResourceKey<Level>> claimedChunks) {
+                       Object2BooleanMap<ResourceKey<Level>> claimedChunks,
+                       Set<GlobalPos> spawnLocations) {
         super(ModMenus.PLANETS.get(), containerId);
         this.inventory = inventory;
         player = inventory.player;
@@ -107,7 +107,8 @@ public class PlanetsMenu extends AbstractContainerMenu {
     }
 
     private Map<ResourceKey<Level>, List<Pair<ItemStack, Integer>>> getSpaceStationRecipes() {
-        List<SpaceStationRecipe> spaceStationRecipes = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.SPACE_STATION_RECIPE.get());
+        List<SpaceStationRecipe> spaceStationRecipes = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.SPACE_STATION_RECIPE.get())
+            .stream().map(RecipeHolder::value).toList();
         Map<ResourceKey<Level>, List<Pair<ItemStack, Integer>>> recipes = new HashMap<>(spaceStationRecipes.size());
         for (var recipe : spaceStationRecipes) {
             for (IngredientHolder holder : recipe.ingredients()) {

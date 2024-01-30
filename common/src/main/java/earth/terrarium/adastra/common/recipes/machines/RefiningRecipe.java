@@ -2,35 +2,42 @@ package earth.terrarium.adastra.common.recipes.machines;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamresourceful.bytecodecs.base.ByteCodec;
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
+import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
 import earth.terrarium.adastra.common.blockentities.machines.FuelRefineryBlockEntity;
+import earth.terrarium.adastra.common.recipes.base.BotariumByteCodecs;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.QuantifiedFluidIngredient;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public record RefiningRecipe(
-    ResourceLocation id,
     int cookingTime, int energy,
     QuantifiedFluidIngredient input,
     FluidHolder result
 ) implements CodecRecipe<Container> {
 
-    public static Codec<RefiningRecipe> codec(ResourceLocation id) {
-        return RecordCodecBuilder.create(instance -> instance.group(
-            RecordCodecBuilder.point(id),
+    public static final Codec<RefiningRecipe> CODEC = RecordCodecBuilder.create(
+        instance -> instance.group(
             Codec.INT.fieldOf("cookingtime").forGetter(RefiningRecipe::cookingTime),
             Codec.INT.fieldOf("energy").forGetter(RefiningRecipe::energy),
             QuantifiedFluidIngredient.CODEC.fieldOf("input").forGetter(RefiningRecipe::input),
-            FluidHolder.NEW_CODEC.fieldOf("result").forGetter(RefiningRecipe::result)
+            FluidHolder.CODEC.fieldOf("result").forGetter(RefiningRecipe::result)
         ).apply(instance, RefiningRecipe::new));
-    }
+
+    public static final ByteCodec<RefiningRecipe> NETWORK_CODEC = ObjectByteCodec.create(
+        ByteCodec.INT.fieldOf(RefiningRecipe::cookingTime),
+        ByteCodec.INT.fieldOf(RefiningRecipe::energy),
+        BotariumByteCodecs.QUANTIFIED_FLUID_INGREDIENT_CODEC.fieldOf(RefiningRecipe::input),
+        BotariumByteCodecs.FLUID_HOLDER_CODEC.fieldOf(RefiningRecipe::result),
+        RefiningRecipe::new
+    );
 
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
@@ -46,7 +53,7 @@ public record RefiningRecipe(
     }
 
     @Override
-    public @NotNull RecipeSerializer<?> getSerializer() {
+    public CodecRecipeSerializer<? extends CodecRecipe<Container>> serializer() {
         return ModRecipeSerializers.REFINING.get();
     }
 

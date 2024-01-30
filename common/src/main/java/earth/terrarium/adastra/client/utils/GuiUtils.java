@@ -10,6 +10,7 @@ import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -22,45 +23,58 @@ import java.util.List;
 import java.util.function.Function;
 
 public class GuiUtils {
-    public static final ResourceLocation ENERGY_BAR = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/energy_bar.png");
+    public static final ResourceLocation ENERGY_BAR = new ResourceLocation(AdAstra.MOD_ID, "energy_bar");
     public static final int ENERGY_BAR_WIDTH = 13;
     public static final int ENERGY_BAR_HEIGHT = 46;
 
-    public static final ResourceLocation FLUID_BAR = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/fluid_bar.png");
+    public static final ResourceLocation FLUID_BAR = new ResourceLocation(AdAstra.MOD_ID, "fluid_bar");
     public static final int FLUID_BAR_WIDTH = 12;
     public static final int FLUID_BAR_HEIGHT = 46;
 
-    public static final ResourceLocation BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/button.png");
-    public static final ResourceLocation SQUARE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/square_button.png");
-    public static final ResourceLocation SETTINGS_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/settings_button.png");
-    public static final ResourceLocation RESET_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/reset_button.png");
-    public static final ResourceLocation SHOW_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/show_button.png");
-    public static final ResourceLocation HIDE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/hide_button.png");
+    public static final ResourceLocation HAMMER = new ResourceLocation(AdAstra.MOD_ID, "hammer");
+    public static final ResourceLocation SNOWFLAKE = new ResourceLocation(AdAstra.MOD_ID, "snowflake");
+    public static final ResourceLocation SUN = new ResourceLocation(AdAstra.MOD_ID, "sun");
+    public static final ResourceLocation FIRE = new ResourceLocation(AdAstra.MOD_ID, "fire");
+    public static final ResourceLocation ARROW = new ResourceLocation(AdAstra.MOD_ID, "arrow");
+    public static final ResourceLocation SLIDER = new ResourceLocation(AdAstra.MOD_ID, "slider");
 
-    public static final ResourceLocation CRAFTING_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/crafting_button.png");
-    public static final ResourceLocation FURNACE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/furnace_button.png");
+    public static final WidgetSprites SETTINGS_BUTTON_SPRITES = createPressableButtonSprites("settings_button");
+    public static final WidgetSprites RESET_BUTTON_SPRITES = createPressableButtonSprites("reset_button");
+    public static final WidgetSprites SHOW_BUTTON_SPRITES = createPressableButtonSprites("show_button");
+    public static final WidgetSprites HIDE_BUTTON_SPRITES = createPressableButtonSprites("hide_button");
 
-    public static final ResourceLocation NONE_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/side_config/none.png");
-    public static final ResourceLocation PUSH_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/side_config/push.png");
-    public static final ResourceLocation PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/side_config/pull.png");
-    public static final ResourceLocation PUSH_PULL_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/side_config/push_pull.png");
+    public static final WidgetSprites CRAFTING_BUTTON_SPRITES = createPressableButtonSprites("crafting_button");
+    public static final WidgetSprites FURNACE_BUTTON_SPRITES = createPressableButtonSprites("furnace_button");
 
-    public static final ResourceLocation REDSTONE_ALWAYS_ON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/redstone/always_on_button.png");
-    public static final ResourceLocation REDSTONE_ON_WHEN_POWERED = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/redstone/on_when_powered_button.png");
-    public static final ResourceLocation REDSTONE_ON_WHEN_NOT_POWERED = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/redstone/on_when_not_powered_button.png");
-    public static final ResourceLocation REDSTONE_NEVER_ON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/redstone/never_on_button.png");
+    public static final WidgetSprites NONE_BUTTON_SPRITES = createButtonSprites("side_config/none");
+    public static final WidgetSprites PUSH_BUTTON_SPRITES = createButtonSprites("side_config/push");
+    public static final WidgetSprites PULL_BUTTON_SPRITES = createButtonSprites("side_config/pull");
+    public static final WidgetSprites PUSH_PULL_BUTTON_SPRITES = createButtonSprites("side_config/push_pull");
 
-    public static final ResourceLocation HAMMER = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/hammer.png");
-    public static final ResourceLocation SNOWFLAKE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/snowflake.png");
-    public static final ResourceLocation SUN = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/sun.png");
-    public static final ResourceLocation FIRE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/fire.png");
-    public static final ResourceLocation ARROW = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/arrow.png");
-    public static final ResourceLocation SLIDER = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/slider.png");
+    public static final WidgetSprites REDSTONE_ALWAYS_ON_SPRITES = createPressableButtonSprites("redstone/always_on_button");
+    public static final WidgetSprites REDSTONE_ON_WHEN_POWERED_SPRITES = createPressableButtonSprites("redstone/on_when_powered_button");
+    public static final WidgetSprites REDSTONE_ON_WHEN_NOT_POWERED_SPRITES = createPressableButtonSprites("redstone/on_when_not_powered_button");
+    public static final WidgetSprites REDSTONE_NEVER_ON_SPRITES = createPressableButtonSprites("redstone/never_on_button");
+
+    public static WidgetSprites createPressableButtonSprites(String name) {
+        return new WidgetSprites(
+            new ResourceLocation(AdAstra.MOD_ID, "buttons/" + name),
+            new ResourceLocation(AdAstra.MOD_ID, "buttons/" + name + "_pressed"),
+            new ResourceLocation(AdAstra.MOD_ID, "buttons/" + name + "_highlighted")
+        );
+    }
+
+    public static WidgetSprites createButtonSprites(String name) {
+        return new WidgetSprites(
+            new ResourceLocation(AdAstra.MOD_ID, "buttons/" + name),
+            new ResourceLocation(AdAstra.MOD_ID, "buttons/" + name + "_highlighted")
+        );
+    }
 
     public static void drawEnergyBar(GuiGraphics graphics, int mouseX, int mouseY, int x, int y, long energy, long capacity, Component... tooltips) {
         float ratio = energy / (float) capacity;
         try (var ignored = RenderUtils.createScissorBox(Minecraft.getInstance(), graphics.pose(), x + 6, y - 31 + ENERGY_BAR_HEIGHT - (int) (ENERGY_BAR_HEIGHT * ratio), ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT)) {
-            graphics.blit(ENERGY_BAR, x + 6, y - 31, 0, 0, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT);
+            graphics.blitSprite(ENERGY_BAR, x + 6, y - 31, ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT);
         }
 
         drawTooltips(mouseX, mouseY, x + 6, x + 19, y - 31, y + 15, list -> {
@@ -87,7 +101,7 @@ public class GuiUtils {
         }
 
         RenderSystem.enableBlend();
-        graphics.blit(FLUID_BAR, x + 6, y - 31, 0, 0, FLUID_BAR_WIDTH, FLUID_BAR_HEIGHT, FLUID_BAR_WIDTH, FLUID_BAR_HEIGHT);
+        graphics.blitSprite(FLUID_BAR, x + 6, y - 31, FLUID_BAR_WIDTH, FLUID_BAR_HEIGHT);
         RenderSystem.disableBlend();
 
         drawTooltips(mouseX, mouseY, x + 6, x + 18, y - 31, y + 15, list -> {
@@ -100,7 +114,7 @@ public class GuiUtils {
     public static void drawHorizontalProgressBar(GuiGraphics graphics, ResourceLocation texture, int mouseX, int mouseY, int x, int y, int width, int height, int progress, int maxProgress, boolean reverse, Component... tooltips) {
         int widthProgress = (int) (width * (progress / (float) maxProgress));
         if (reverse) widthProgress = width - widthProgress;
-        graphics.blit(texture, x, y, 0, 0, widthProgress, height, width, height);
+        graphics.blitSprite(texture, x, y, 0, 0, widthProgress, height, width, height);
 
         drawTooltips(mouseX, mouseY, x, x + width, y, y + height, list -> {
             Collections.addAll(list, tooltips);
@@ -111,7 +125,7 @@ public class GuiUtils {
     public static void drawVerticalProgressBar(GuiGraphics graphics, ResourceLocation texture, int mouseX, int mouseY, int x, int y, int width, int height, int progress, int maxProgress, Component... tooltips) {
         int heightProgress = (int) (height * (progress / (float) maxProgress));
         heightProgress = height - heightProgress;
-        graphics.blit(texture, x, y + heightProgress, 0, heightProgress, width, height - heightProgress, width, height);
+        graphics.blitSprite(texture, x, y + heightProgress, 0, heightProgress, width, height - heightProgress, width, height);
 
         drawTooltips(mouseX, mouseY, x, x + width, y, y + height, list -> {
             Collections.addAll(list, tooltips);

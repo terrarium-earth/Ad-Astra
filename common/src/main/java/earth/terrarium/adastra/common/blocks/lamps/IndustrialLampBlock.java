@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blocks.lamps;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -16,6 +17,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 @SuppressWarnings("deprecation")
 public class IndustrialLampBlock extends FaceAttachedHorizontalDirectionalBlock {
+    public static final MapCodec<IndustrialLampBlock> CODEC = simpleCodec(IndustrialLampBlock::new);
+
     public static final VoxelShape NORTH_SHAPE = Shapes.join(
         Block.box(0, 3, 14, 16, 13, 16),
         Block.box(1, 4, 8, 15, 12, 14), BooleanOp.OR);
@@ -53,6 +56,11 @@ public class IndustrialLampBlock extends FaceAttachedHorizontalDirectionalBlock 
         registerDefaultState(stateDefinition.any()
             .setValue(FACING, Direction.NORTH)
             .setValue(FACE, AttachFace.WALL));
+    }
+
+    @Override
+    protected MapCodec<? extends FaceAttachedHorizontalDirectionalBlock> codec() {
+        return CODEC;
     }
 
     @Override

@@ -13,6 +13,7 @@ import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -40,12 +41,12 @@ public class AdAstraJeiPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         ClientLevel level = Objects.requireNonNull(Minecraft.getInstance().level);
 
-        registration.addRecipes(CompressingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.COMPRESSING.get()));
-        registration.addRecipes(AlloyingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.ALLOYING.get()));
-        registration.addRecipes(OxygenLoadingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get()));
-        registration.addRecipes(RefiningCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get()));
-        registration.addRecipes(CryoFreezingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYO_FREEZING.get()));
-        registration.addRecipes(NasaWorkbenchCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.NASA_WORKBENCH.get()));
+        registration.addRecipes(CompressingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.COMPRESSING.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(AlloyingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.ALLOYING.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(OxygenLoadingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(RefiningCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(CryoFreezingCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYO_FREEZING.get()).stream().map(RecipeHolder::value).toList());
+        registration.addRecipes(NasaWorkbenchCategory.RECIPE, level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.NASA_WORKBENCH.get()).stream().map(RecipeHolder::value).toList());
     }
 
     @Override

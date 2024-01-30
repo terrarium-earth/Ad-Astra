@@ -70,7 +70,7 @@ public class FluidBarWidget extends ConfigurationWidget implements CursorWidget,
         }
 
         RenderSystem.enableBlend();
-        graphics.blit(GuiUtils.FLUID_BAR, x, y, 0, 0, GuiUtils.FLUID_BAR_WIDTH, GuiUtils.FLUID_BAR_HEIGHT, GuiUtils.FLUID_BAR_WIDTH, GuiUtils.FLUID_BAR_HEIGHT);
+        graphics.blitSprite(GuiUtils.FLUID_BAR, x, y, GuiUtils.FLUID_BAR_WIDTH, GuiUtils.FLUID_BAR_HEIGHT);
         RenderSystem.disableBlend();
 
         if (this.isHoveredOrFocused()) {

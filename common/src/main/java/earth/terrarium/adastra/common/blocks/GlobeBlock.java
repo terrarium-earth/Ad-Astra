@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blocks;
 
+import com.mojang.serialization.MapCodec;
 import earth.terrarium.adastra.common.blockentities.GlobeBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,6 +37,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class GlobeBlock extends BasicEntityBlock implements SimpleWaterloggedBlock {
+    public static final MapCodec<GlobeBlock> CODEC = simpleCodec(GlobeBlock::new);
     public static final VoxelShape SHAPE = Shapes.box(0.2, 0, 0.2, 0.8, 1, 0.8);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
@@ -44,6 +47,11 @@ public class GlobeBlock extends BasicEntityBlock implements SimpleWaterloggedBlo
         registerDefaultState(stateDefinition.any()
             .setValue(WATERLOGGED, false)
             .setValue(POWERED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Override

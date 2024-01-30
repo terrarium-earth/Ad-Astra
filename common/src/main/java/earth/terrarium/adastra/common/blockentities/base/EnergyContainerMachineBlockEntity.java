@@ -30,6 +30,10 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
         }
     }
 
+    public WrappedBlockEnergyContainer getEnergyStorage() {
+        return getEnergyStorage(level, worldPosition, getBlockState(), this, null);
+    }
+
     public void extractBatterySlot() {
         ItemStack stack = this.getItem(0);
         if (stack.isEmpty()) return;

@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blocks;
 
+import com.mojang.serialization.MapCodec;
 import earth.terrarium.adastra.client.screens.blocks.FlagUrlScreen;
 import earth.terrarium.adastra.common.blockentities.flag.FlagBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
@@ -22,10 +23,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -44,6 +42,8 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class FlagBlock extends BasicEntityBlock implements SimpleWaterloggedBlock {
+    public static final MapCodec<FlagBlock> CODEC = simpleCodec(FlagBlock::new);
+
     public static final EightDirectionProperty FACING = EightDirectionProperty.FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -60,6 +60,11 @@ public class FlagBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
             .setValue(HALF, DoubleBlockHalf.LOWER)
             .setValue(FACING, EightDirectionProperty.Direction.NORTH)
             .setValue(WATERLOGGED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -101,12 +106,12 @@ public class FlagBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide() && player.isCreative()) {
             preventCreativeDropFromBottomPart(level, pos, state, player);
         }
 
-        super.playerWillDestroy(level, pos, state, player);
+        return super.playerWillDestroy(level, pos, state, player);
     }
 
     @Override

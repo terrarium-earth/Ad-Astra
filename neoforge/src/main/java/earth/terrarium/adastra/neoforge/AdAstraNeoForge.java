@@ -19,6 +19,7 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.TickEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 
 @Mod(AdAstra.MOD_ID)
 public class AdAstraNeoForge {
@@ -30,6 +31,7 @@ public class AdAstraNeoForge {
         NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onServerTick);
         NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::registerCommands);
         NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onBlockPlace);
+        NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onServerStarted);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraNeoForge::onAttributes);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraNeoForge::commonSetup);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AdAstraClientNeoForge::init);
@@ -74,5 +76,9 @@ public class AdAstraNeoForge {
             && !OxygenApi.API.hasOxygen(level, event.getPos())) {
             event.setCanceled(true);
         }
+    }
+
+    private static void onServerStarted(ServerAboutToStartEvent event) {
+        AdAstra.onServerStarted(event.getServer());
     }
 }

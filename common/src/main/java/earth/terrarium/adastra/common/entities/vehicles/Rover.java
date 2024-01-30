@@ -154,7 +154,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
         if (!hasPassenger(passenger)) return;
 
         float zOffset = getControllingPassenger() == passenger ? -0.6f : 0.4f;
-        float yOffset = (float) ((this.isRemoved() ? 0.01f : this.getPassengersRidingOffset()) + passenger.getMyRidingOffset());
+        float yOffset = (this.isRemoved() ? 0.01f : 0.95f) + passenger.getMyRidingOffset(this);
         Vec3 position = new Vec3(-0.5, 0, zOffset).yRot(-getYRot() * (float) (Math.PI / 180) - (float) (Math.PI / 2));
 
         clampRotation(passenger);

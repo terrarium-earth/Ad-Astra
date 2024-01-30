@@ -4,7 +4,6 @@ import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -56,7 +55,7 @@ public class EtrionicBlastFurnaceBlock extends MachineBlock {
         Block.box(5, 16, 5, 11, 16, 11)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
-    public EtrionicBlastFurnaceBlock(BlockBehaviour.Properties properties) {
+    public EtrionicBlastFurnaceBlock(Properties properties) {
         super(properties);
     }
 

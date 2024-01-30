@@ -34,7 +34,6 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class LaunchPadBlock extends Block implements SimpleWaterloggedBlock {
-
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final EnumProperty<LaunchPadPartProperty> PART = EnumProperty.create("part", LaunchPadPartProperty.class);
@@ -111,9 +110,9 @@ public class LaunchPadBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         destroy(level, pos, state);
-        super.playerWillDestroy(level, pos, state, player);
+        return super.playerWillDestroy(level, pos, state, player);
     }
 
     @Override

@@ -39,7 +39,7 @@ dependencies {
         isTransitive = false
     }
 
-    modLocalRuntime(group = "maven.modrinth", name = "jade", version = "13.2.2")
+//    modLocalRuntime(group = "maven.modrinth", name = "jade", version = "13.2.2")
 //    modLocalRuntime(group = "maven.modrinth", name = "mekanism", version = "10.4.2.16")
 
     forgeRuntimeLibrary("com.teamresourceful:yabn:1.0.3")

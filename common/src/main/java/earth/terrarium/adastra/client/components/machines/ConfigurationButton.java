@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.client.components.machines;
 
 import earth.terrarium.adastra.client.components.PressableImageButton;
+import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
@@ -11,6 +12,7 @@ import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.CommonComponents;
@@ -27,7 +29,7 @@ public class ConfigurationButton extends PressableImageButton {
     private Configuration configuration;
 
     public ConfigurationButton(ContainerMachineBlockEntity entity, int index, ConfigurationEntry entry, Direction direction, Configuration configuration) {
-        super(0, 0, 16, 16, 0, 0, 16, configuration.icon(), 16, 32,
+        super(0, 0, 16, 16, spritesFromConfiguration(configuration),
             (b) -> {},
             getSideConfigTooltip(entity, entry.type(), direction, configuration)
         );
@@ -46,7 +48,7 @@ public class ConfigurationButton extends PressableImageButton {
         entry.set(direction, this.configuration);
         NetworkHandler.CHANNEL.sendToServer(new ServerboundSetSideConfigPacket(entity.getBlockPos(), configIndex, direction, this.configuration));
         setTooltip(Tooltip.create(getSideConfigTooltip(entity, entry.type(), direction, this.configuration)));
-        setTexture(this.configuration.icon());
+        setSprites(spritesFromConfiguration(configuration));
     }
 
     private static Component getSideConfigTooltip(BlockEntity entity, ConfigurationType type, Direction direction, Configuration action) {
@@ -57,5 +59,14 @@ public class ConfigurationButton extends PressableImageButton {
             Component.translatable("side_config.ad_astra.type.direction", TooltipUtils.getRelativeDirectionComponent(direction), TooltipUtils.getDirectionComponent(relative)).withStyle(ChatFormatting.GOLD),
             Component.translatable("side_config.ad_astra.type.action", action.translation().getString()).withStyle(ChatFormatting.GOLD)
         );
+    }
+
+    public static WidgetSprites spritesFromConfiguration(Configuration configuration) {
+        return switch (configuration) {
+            case NONE -> GuiUtils.NONE_BUTTON_SPRITES;
+            case PUSH -> GuiUtils.PUSH_BUTTON_SPRITES;
+            case PULL -> GuiUtils.PULL_BUTTON_SPRITES;
+            case PUSH_PULL -> GuiUtils.PUSH_PULL_BUTTON_SPRITES;
+        };
     }
 }

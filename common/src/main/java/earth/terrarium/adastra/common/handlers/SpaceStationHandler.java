@@ -50,7 +50,7 @@ public class SpaceStationHandler extends SaveHandler {
     }
 
     public static SpaceStationHandler read(ServerLevel level) {
-        return read(level.getDataStorage(), SpaceStationHandler::new, "adastra_space_station_data");
+        return read(level.getDataStorage(), HandlerType.create(SpaceStationHandler::new), "adastra_space_station_data");
     }
 
     public static Map<UUID, Set<SpaceStation>> getAllSpaceStations(ServerLevel level) {
@@ -91,21 +91,21 @@ public class SpaceStationHandler extends SaveHandler {
         if (player.isCreative() || player.isSpectator()) return true;
 
         var recipe = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.SPACE_STATION_RECIPE.get()).stream()
-            .filter(r -> dimension.equals(r.dimension())).findFirst().orElse(null);
+            .filter(r -> dimension.equals(r.value().dimension())).findFirst().orElse(null);
         if (recipe == null) return false;
-        return recipe.matches(player.getInventory(), level);
+        return recipe.value().matches(player.getInventory(), level);
     }
 
     public static void consumeIngredients(Player player, Level level) {
         if (player.isCreative() || player.isSpectator()) return;
 
         var recipe = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.SPACE_STATION_RECIPE.get()).stream()
-            .filter(r -> level.dimension().equals(r.dimension())).findFirst().orElse(null);
+            .filter(r -> level.dimension().equals(r.value().dimension())).findFirst().orElse(null);
         if (recipe == null) return;
-        if (!recipe.matches(player.getInventory(), level)) return;
+        if (!recipe.value().matches(player.getInventory(), level)) return;
 
         var inventory = player.getInventory();
-        for (IngredientHolder holder : recipe.ingredients()) {
+        for (IngredientHolder holder : recipe.value().ingredients()) {
             for (int i = 0; i < inventory.getContainerSize(); i++) {
                 if (holder.ingredient().test(inventory.getItem(i))) {
                     inventory.removeItem(i, holder.count());

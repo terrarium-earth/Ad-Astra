@@ -11,6 +11,7 @@ import earth.terrarium.adastra.common.recipes.machines.NasaWorkbenchRecipe;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
+import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -23,6 +24,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -81,7 +83,7 @@ public class NasaWorkbenchBlockEntity extends ContainerMachineBlockEntity {
     @Override
     public void update() {
         if (level().isClientSide()) return;
-        recipe = quickCheck.getRecipeFor(this, level()).orElse(null);
+        recipe = Optionull.map(quickCheck.getRecipeFor(this, level()).orElse(null), RecipeHolder::value);
     }
 
     public boolean canCraft() {

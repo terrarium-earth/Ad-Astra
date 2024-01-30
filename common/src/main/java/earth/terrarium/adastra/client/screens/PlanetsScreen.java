@@ -26,6 +26,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.CommonComponents;
@@ -43,11 +44,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
-    public static final ResourceLocation BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/planets/button.png");
-    public static final ResourceLocation BACK_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/planets/back_button.png");
-    public static final ResourceLocation PLUS_BUTTON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/planets/plus_button.png");
-    public static final ResourceLocation SELECTION_MENU = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/planets/selection_menu.png");
-    public static final ResourceLocation SMALL_SELECTION_MENU = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/planets/small_selection_menu.png");
+    public static final ResourceLocation SELECTION_MENU = new ResourceLocation(AdAstra.MOD_ID, "planets/selection_menu");
+    public static final ResourceLocation SMALL_SELECTION_MENU = new ResourceLocation(AdAstra.MOD_ID, "planets/small_selection_menu");
+
+    public static final WidgetSprites BUTTON_SPRITES = new WidgetSprites(
+        new ResourceLocation(AdAstra.MOD_ID, "planets/button"),
+        new ResourceLocation(AdAstra.MOD_ID, "planets/button_highlighted")
+    );
+
+    public static final WidgetSprites BACK_BUTTON_SPRITES = new WidgetSprites(
+        new ResourceLocation(AdAstra.MOD_ID, "planets/back_button"),
+        new ResourceLocation(AdAstra.MOD_ID, "planets/back_button_highlighted")
+    );
+
+    public static final WidgetSprites PLUS_BUTTON_SPRITES = new WidgetSprites(
+        new ResourceLocation(AdAstra.MOD_ID, "planets/plus_button"),
+        new ResourceLocation(AdAstra.MOD_ID, "planets/plus_button_highlighted")
+    );
 
     private final List<Button> buttons = new ArrayList<>();
     private Button backButton;
@@ -94,12 +107,12 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
             }
         }
 
-        backButton = addRenderableWidget(new LabeledImageButton(10, height / 2 - 85, 12, 12, 0, 12, 12, BACK_BUTTON, 12, 24, b -> {
+        backButton = addRenderableWidget(new LabeledImageButton(10, height / 2 - 85, 12, 12, BACK_BUTTON_SPRITES, b -> {
             pageIndex--;
             rebuildWidgets();
         }));
 
-        addSpaceStatonButton = addRenderableWidget(new LabeledImageButton(114, height / 2 - 41, 12, 12, 0, 12, 12, PLUS_BUTTON, 12, 24, b -> {
+        addSpaceStatonButton = addRenderableWidget(new LabeledImageButton(114, height / 2 - 41, 12, 12, PLUS_BUTTON_SPRITES, b -> {
             if (selectedPlanet != null) {
                 int ownedSpaceStationCount = menu.getOwnedAndTeamSpaceStations(selectedPlanet.orbitIfPresent()).size();
                 Component name = Component.translatable("text.ad_astra.text.space_station_name", ownedSpaceStationCount + 1);
@@ -120,7 +133,7 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     private void createSolarSystemButtons() {
         selectedSolarSystem = null;
         AdAstraData.solarSystems().forEach(solarSystem -> {
-            var button = addWidget(new LabeledImageButton(10, 0, 99, 20, 0, 0, 20, BUTTON, 99, 40, b -> {
+            var button = addWidget(new LabeledImageButton(10, 0, 99, 20, BUTTON_SPRITES, b -> {
                 pageIndex = 1;
                 selectedSolarSystem = solarSystem;
                 rebuildWidgets();
@@ -134,7 +147,7 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
             if (planet.isSpace()) continue;
             if (menu.tier() < planet.tier()) continue;
             if (!planet.solarSystem().equals(selectedSolarSystem)) continue;
-            buttons.add(addWidget(new LabeledImageButton(10, 0, 99, 20, 0, 0, 20, BUTTON, 99, 40, b -> {
+            buttons.add(addWidget(new LabeledImageButton(10, 0, 99, 20, BUTTON_SPRITES, b -> {
                 pageIndex = 2;
                 selectedPlanet = planet;
                 rebuildWidgets();
@@ -146,8 +159,8 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
         if (selectedPlanet == null) return;
         var pos = menu.getLandingPos(selectedPlanet.dimension(), true);
         var button = addRenderableWidget(new LabeledImageButton(
-            114, height / 2 - 77, 99, 20, 0, 0, 20, BUTTON,
-            99, 40, b -> land(selectedPlanet.dimension()), ConstantComponents.LAND));
+            114, height / 2 - 77, 99, 20, BUTTON_SPRITES,
+            b -> land(selectedPlanet.dimension()), ConstantComponents.LAND));
         button.setTooltip(Tooltip.create(Component.translatable("tooltip.ad_astra.land",
             menu.getPlanetName(selectedPlanet.dimension()), pos.getX(), pos.getZ()).withStyle(ChatFormatting.AQUA)));
 
@@ -157,7 +170,7 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     private void addSpaceStationButtons(ResourceKey<Level> dimension) {
         menu.getOwnedAndTeamSpaceStations(dimension).forEach(station -> {
             var pos = station.getSecond().position();
-            var button = addWidget(new LabeledImageButton(114, height / 2, 99, 20, 0, 0, 20, BUTTON, 99, 40, b ->
+            var button = addWidget(new LabeledImageButton(114, height / 2, 99, 20, BUTTON_SPRITES, b ->
                 landOnSpaceStation(dimension, pos), station.getSecond().name()));
             button.setTooltip(getSpaceStationLandTooltip(dimension, pos, station.getFirst()));
             spaceStationButtons.add(button);
@@ -199,7 +212,6 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        renderBackground(graphics);
         super.render(graphics, mouseX, mouseY, partialTick);
 
         renderButtons(graphics, mouseX, mouseY, partialTick);
@@ -240,10 +252,10 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         if (pageIndex == 2) {
-            graphics.blit(SELECTION_MENU, 7, height / 2 - 88, 0, 0, 209, 177, 209, 177);
+            graphics.blitSprite(SELECTION_MENU, 7, height / 2 - 88, 209, 177);
             graphics.drawCenteredString(font, ConstantComponents.SPACE_STATION, 163, height / 2 - 15, 0xffffff);
         } else {
-            graphics.blit(SMALL_SELECTION_MENU, 7, height / 2 - 88, 0, 0, 105, 177, 105, 177);
+            graphics.blitSprite(SMALL_SELECTION_MENU, 7, height / 2 - 88, 105, 177);
         }
 
         if (pageIndex == 2 && selectedPlanet != null) {
@@ -258,7 +270,7 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     }
 
     @Override
-    public void renderBackground(GuiGraphics graphics) {
+    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         graphics.fill(0, 0, width, height, 0xff000419);
 
         // Render diamond pattern lines
@@ -348,11 +360,11 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {}
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
         if (mouseX < 112 && mouseX > 6 && mouseY > height / 2f - 43 && mouseY < height / 2f + 88) {
-            setScrollAmount(scrollAmount - delta * 16 / 2f);
+            setScrollAmount(scrollAmount - scrollY * 16 / 2f);
         } else if (mouseX > 112 && mouseX < 224 && mouseY > height / 2f - 2 && mouseY < height / 2f + 88) {
-            setSpaceStationScrollAmount(spaceStationScrollAmount - delta * 16 / 2f);
+            setSpaceStationScrollAmount(spaceStationScrollAmount - scrollY * 16 / 2f);
         }
         return true;
     }
