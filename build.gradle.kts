@@ -50,8 +50,8 @@ subprojects {
 
     repositories {
         mavenCentral()
-        maven(url = "https://maven.architectury.dev/")
         maven(url = "https://maven.teamresourceful.com/repository/maven-public/")
+        maven(url = "https://maven.neoforged.net/releases/")
         maven(url = "https://maven.firstdarkdev.xyz/snapshots")
         maven {
             url = uri("https://www.cursemaven.com")
@@ -93,7 +93,7 @@ subprojects {
 
             officialMojangMappings()
 
-            parchment(create(group = "org.parchmentmc.data", name = "parchment-$minecraftVersion", version = parchmentVersion))
+            parchment(create(group = "org.parchmentmc.data", name = "parchment-1.20.3", version = parchmentVersion))
         })
 
         "modApi"(group = "com.teamresourceful.resourcefullib", name = "resourcefullib-$modLoader-$minecraftVersion", version = resourcefulLibVersion)
@@ -106,25 +106,25 @@ subprojects {
             "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-default-plugin", version = reiVersion)
             implementation("annotationProcessor"(group = "io.github.llamalad7", name = "mixinextras-common", version = mixinExtrasVersion))
 
-            "modCompileOnly"(group = "earth.terrarium.cadmus", name = "cadmus-$modLoader-$minecraftVersion", version = cadmusVersion) {
+            "modCompileOnly"(group = "earth.terrarium.cadmus", name = "cadmus-$modLoader-1.20.2", version = cadmusVersion) {
                 isTransitive = false
             }
-            "modCompileOnly"(group = "earth.terrarium.argonauts", name = "argonauts-$modLoader-$minecraftVersion", version = argonautsVersion) {
+            "modCompileOnly"(group = "earth.terrarium.argonauts", name = "argonauts-$modLoader-1.20.2", version = argonautsVersion) {
                 isTransitive = false
             }
         } else {
             "include"(implementation(group = "javazoom", name = "jlayer", version = "1.0.1"))
-            "modLocalRuntime"(group = "earth.terrarium.cadmus", name = "cadmus-$modLoader-$minecraftVersion", version = cadmusVersion) {
-                isTransitive = false
-            }
-            "modLocalRuntime"(group = "earth.terrarium.argonauts", name = "argonauts-$modLoader-$minecraftVersion", version = argonautsVersion) {
-                isTransitive = false
-            }
+//            "modLocalRuntime"(group = "earth.terrarium.cadmus", name = "cadmus-$modLoader-$minecraftVersion", version = cadmusVersion) {
+//                isTransitive = false
+//            }
+//            "modLocalRuntime"(group = "earth.terrarium.argonauts", name = "argonauts-$modLoader-$minecraftVersion", version = argonautsVersion) {
+//                isTransitive = false
+//            }
 
             "modLocalRuntime"(group = "earth.terrarium.athena", name = "athena-$modLoader-$minecraftVersion", version = athenaVersion)
             "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-api-$modLoader", version = reiVersion)
             "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-default-plugin-$modLoader", version = reiVersion)
-            "modLocalRuntime"(group = "vazkii.patchouli", name = "Patchouli", version = "$minecraftVersion-$patchouliVersion-${modLoader.uppercase()}")
+//            "modLocalRuntime"(group = "vazkii.patchouli", name = "Patchouli", version = "$minecraftVersion-$patchouliVersion-${modLoader.uppercase()}")
 //            "modLocalRuntime"(group = "com.lowdragmc.shimmer", name = "Shimmer-$modLoader", version = "$minecraftVersion-$shimmerVersion") { isTransitive = false }
         }
     }

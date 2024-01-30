@@ -1,6 +1,6 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "ad_astra"
+rootProject.name = "adastra"
 
 pluginManagement {
     repositories {
@@ -13,4 +13,4 @@ pluginManagement {
 
 include("common")
 include("fabric")
-include("forge")
+include("neoforge")

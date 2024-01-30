@@ -1,0 +1,55 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "Terrarium License"
+issueTrackerURL = "https://github.com/terrarium-earth/ad-astra/issues"
+
+[[mods]]
+modId = "ad_astra"
+version = "${version}"
+displayName = "Ad Astra"
+updateJSONURL = "https://api.modrinth.com/updates/3ufwT9JF/forge_updates.json"
+displayURL = "https://modrinth.com/mod/ad-astra"
+logoFile = "icon.png"
+authors = "Alex Nijjar"
+credits = "CodexAdrian, Facu, Fizz, MsRandom, ThatGravyBoat"
+description = "Live long and prosper, Ad Astra!"
+
+[[mixins]]
+config = "adastra.mixins.json"
+[[mixins]]
+config = "adastra-common.mixins.json"
+
+[[dependencies.ad_astra]]
+modId = "neoforge"
+type="required"
+versionRange = "[20.4,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.ad_astra]]
+modId = "minecraft"
+type="required"
+versionRange = "[1.20.4,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.ad_astra]]
+modId = "resourcefullib"
+type="required"
+versionRange = "[2.4.6,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.ad_astra]]
+modId = "resourcefulconfig"
+type="required"
+versionRange = "[2.4.4,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.ad_astra]]
+modId = "botarium"
+type="required"
+versionRange = "[3.0.7,)"
+ordering = "NONE"
+side = "BOTH"
