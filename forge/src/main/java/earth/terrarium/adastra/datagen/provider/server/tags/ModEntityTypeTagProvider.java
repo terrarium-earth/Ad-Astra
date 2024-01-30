@@ -84,6 +84,6 @@ public class ModEntityTypeTagProvider extends TagsProvider<EntityType<?>> {
     }
 
     private void acidRainImmune(EntityType<?> type) {
-        tag(ModEntityTypeTags.ACID_RAIN_IMMUNE).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
+        tag(ModEntityTypeTags.CAN_SURVIVE_ACID_RAIN).add(TagEntry.element(ForgeRegistries.ENTITY_TYPES.getKey(type)));
     }
 }

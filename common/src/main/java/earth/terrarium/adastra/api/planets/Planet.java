@@ -1,8 +1,9 @@
-package earth.terrarium.adastra.common.planets;
+package earth.terrarium.adastra.api.planets;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.common.planets.AdAstraData;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

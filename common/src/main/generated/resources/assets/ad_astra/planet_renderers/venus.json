@@ -16,7 +16,7 @@
         0.0,
         0.0
       ],
-      "localRotation": [
+      "local_rotation": [
         0.0,
         0.0,
         0.0
@@ -34,7 +34,7 @@
         0.0,
         160.0
       ],
-      "localRotation": [
+      "local_rotation": [
         0.0,
         100.0,
         0.0
@@ -52,7 +52,7 @@
         0.0,
         -10.0
       ],
-      "localRotation": [
+      "local_rotation": [
         0.0,
         100.0,
         0.0

@@ -1,11 +1,11 @@
 package earth.terrarium.adastra.datagen.provider.client;
 
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.client.dimension.MovementType;
 import earth.terrarium.adastra.client.dimension.PlanetRenderer;
 import earth.terrarium.adastra.client.dimension.SkyRenderable;
 import earth.terrarium.adastra.client.utils.DimensionRenderingUtils;
-import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.datagen.provider.base.ModCodecProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.data.PackOutput;

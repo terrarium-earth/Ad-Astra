@@ -1,6 +1,8 @@
 ## WARNING
+
 This is an alpha release. Expect bugs and frequent updates until we reach a stable version.
 If you're updating from 1.15.5 or below, please back up your world and expect the following breaking changes:
+
 - Sliding doors will break and need to be placed again.
 - Launch pads will break and need to be placed again.
 - Cables and fluid pipes will break and need to be placed again.
@@ -10,4 +12,6 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 
 ## Changes
 
-- Fixed JEI/REI not showing ingredients in recipes
+- Fixed `local_rotation` name in the planet renderer JSON API.
+- Fixed acid rain damaging entities even if they're immune.
+- Fixed portal sound playing on fabric when changing dimensions in a rocket.

@@ -1,8 +1,8 @@
 package earth.terrarium.adastra.datagen.provider.server;
 
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
-import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.datagen.provider.base.ModCodecProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.data.PackOutput;
@@ -41,7 +41,9 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.EARTH_GRAVITY,
                 PlanetConstants.EARTH_SOLAR_POWER,
                 PlanetConstants.SOLAR_SYSTEM,
-                Optional.of(Planet.EARTH_ORBIT), 1, List.of()
+                Optional.of(Planet.EARTH_ORBIT),
+                1,
+                List.of()
             )
         );
 
@@ -53,7 +55,8 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.MOON_GRAVITY,
                 PlanetConstants.MOON_SOLAR_POWER,
                 PlanetConstants.SOLAR_SYSTEM,
-                Optional.of(Planet.MOON_ORBIT), 1,
+                Optional.of(Planet.MOON_ORBIT),
+                1,
                 List.of()
             )
         );
@@ -66,7 +69,8 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.MARS_GRAVITY,
                 PlanetConstants.MARS_SOLAR_POWER,
                 PlanetConstants.SOLAR_SYSTEM,
-                Optional.of(Planet.MARS_ORBIT), 2,
+                Optional.of(Planet.MARS_ORBIT),
+                2,
                 List.of()
             )
         );
@@ -79,7 +83,8 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.VENUS_GRAVITY,
                 PlanetConstants.VENUS_SOLAR_POWER,
                 PlanetConstants.SOLAR_SYSTEM,
-                Optional.of(Planet.VENUS_ORBIT), 3,
+                Optional.of(Planet.VENUS_ORBIT),
+                3,
                 List.of()
             )
         );
@@ -92,7 +97,8 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.MERCURY_GRAVITY,
                 PlanetConstants.MERCURY_SOLAR_POWER,
                 PlanetConstants.SOLAR_SYSTEM,
-                Optional.of(Planet.MERCURY_ORBIT), 3,
+                Optional.of(Planet.MERCURY_ORBIT),
+                3,
                 List.of()
             )
         );
@@ -105,7 +111,8 @@ public class ModPlanetProvider extends ModCodecProvider<Planet> {
                 PlanetConstants.GLACIO_GRAVITY,
                 PlanetConstants.GLACIO_SOLAR_POWER,
                 PlanetConstants.PROXIMA_CENTAURI,
-                Optional.of(Planet.GLACIO_ORBIT), 4,
+                Optional.of(Planet.GLACIO_ORBIT),
+                4,
                 List.of()
             )
         );

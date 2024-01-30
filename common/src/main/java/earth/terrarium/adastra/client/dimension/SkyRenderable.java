@@ -20,7 +20,7 @@ public record SkyRenderable(
         ResourceLocation.CODEC.fieldOf("texture").forGetter(SkyRenderable::texture),
         Codec.FLOAT.fieldOf("scale").forGetter(SkyRenderable::scale),
         Vec3.CODEC.fieldOf("global_rotation").forGetter(SkyRenderable::globalRotation),
-        Vec3.CODEC.fieldOf("localRotation").forGetter(SkyRenderable::localRotation),
+        Vec3.CODEC.fieldOf("local_rotation").forGetter(SkyRenderable::localRotation),
         ModUtils.createEnumCodec(MovementType.class).fieldOf("movement_type").forGetter(SkyRenderable::movementType),
         Codec.BOOL.fieldOf("blend").forGetter(SkyRenderable::blend),
         Codec.INT.fieldOf("back_light_color").forGetter(SkyRenderable::backLightColor),

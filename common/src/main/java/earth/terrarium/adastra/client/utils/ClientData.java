@@ -1,6 +1,6 @@
 package earth.terrarium.adastra.client.utils;
 
-import earth.terrarium.adastra.common.handlers.base.PlanetData;
+import earth.terrarium.adastra.api.systems.PlanetData;
 import earth.terrarium.adastra.common.registry.ModSoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;

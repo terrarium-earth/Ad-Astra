@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.common.utils;
 
 import com.mojang.serialization.Codec;
+import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
@@ -8,7 +9,6 @@ import earth.terrarium.adastra.common.entities.vehicles.Lander;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
 import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
-import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

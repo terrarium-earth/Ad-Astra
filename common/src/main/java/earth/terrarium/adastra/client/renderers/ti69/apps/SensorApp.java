@@ -2,11 +2,11 @@ package earth.terrarium.adastra.client.renderers.ti69.apps;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.api.systems.PlanetData;
 import earth.terrarium.adastra.client.renderers.ti69.Ti69Renderer;
 import earth.terrarium.adastra.client.utils.ClientData;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
-import earth.terrarium.adastra.common.handlers.base.PlanetData;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LightTexture;

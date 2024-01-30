@@ -2,6 +2,7 @@ package earth.terrarium.adastra.common.menus;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.datafixers.util.Pair;
+import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.common.compat.argonauts.ArgonautsIntegration;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
@@ -10,7 +11,6 @@ import earth.terrarium.adastra.common.menus.base.PlanetsMenuProvider;
 import earth.terrarium.adastra.common.network.NetworkHandler;
 import earth.terrarium.adastra.common.network.messages.ServerboundConstructSpaceStationPacket;
 import earth.terrarium.adastra.common.planets.AdAstraData;
-import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.recipes.SpaceStationRecipe;
 import earth.terrarium.adastra.common.recipes.base.IngredientHolder;
 import earth.terrarium.adastra.common.registry.ModMenus;

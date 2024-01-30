@@ -1,7 +1,11 @@
-package earth.terrarium.adastra.common.handlers.base;
+package earth.terrarium.adastra.api.systems;
 
 import java.util.Objects;
 
+/**
+ * A mutable data class that stores the oxygen, temperature, and gravity of a planet.
+ * Data is packed into a single integer for efficient storage and transmission.
+ */
 public final class PlanetData {
     private static final int OXYGEN_BIT_LENGTH = 1; // boolean
     private static final int TEMPERATURE_BIT_LENGTH = Short.SIZE; // 16-bit signed short

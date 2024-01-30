@@ -1,7 +1,6 @@
 package earth.terrarium.adastra.api.planets;
 
 import earth.terrarium.adastra.api.ApiHelper;
-import earth.terrarium.adastra.common.planets.Planet;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +13,7 @@ public interface PlanetApi {
      * Gets the planet data for the given level, or null if the level is not a planet.
      *
      * @param level The level to get the planet data for.
-     * @return The planet data for the given level.
+     * @return The planet data for the given level, or null if the level is not a planet.
      */
     @Nullable
     Planet getPlanet(Level level);
@@ -23,7 +22,7 @@ public interface PlanetApi {
      * Gets the planet data for the given level, or null if the level is not a planet.
      *
      * @param level The level to get the planet data for.
-     * @return The planet data for the given level.
+     * @return The planet data for the given level, or null if the level is not a planet.
      */
     @Nullable
     Planet getPlanet(ResourceKey<Level> level);

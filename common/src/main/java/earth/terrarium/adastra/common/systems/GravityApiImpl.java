@@ -1,12 +1,12 @@
 package earth.terrarium.adastra.common.systems;
 
 import earth.terrarium.adastra.api.events.AdAstraEvents;
+import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.api.systems.GravityApi;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
-import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.mixins.common.LivingEntityAccessor;
 import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
@@ -43,7 +43,7 @@ public class GravityApiImpl implements GravityApi {
     public float getGravity(Entity entity) {
         if (AdAstraConfig.disableGravity) return 1;
         float gravity = getGravity(entity.level(), BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ()));
-        return AdAstraEvents.EntityGravityEvent.post(entity, gravity);
+        return AdAstraEvents.EntityGravityEvent.fire(entity, gravity);
     }
 
     @Override

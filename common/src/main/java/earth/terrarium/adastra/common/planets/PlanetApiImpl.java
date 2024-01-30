@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.planets;
 
+import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import net.minecraft.Optionull;

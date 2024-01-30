@@ -23,7 +23,7 @@ public abstract class ModCodecProvider<T> implements DataProvider {
         this(packOutput, codec, registry, PackOutput.Target.DATA_PACK);
     }
 
-     public ModCodecProvider(PackOutput packOutput, Codec<T> codec, ResourceKey<Registry<T>> registry, PackOutput.Target target) {
+    public ModCodecProvider(PackOutput packOutput, Codec<T> codec, ResourceKey<Registry<T>> registry, PackOutput.Target target) {
         this.pathProvider = packOutput.createPathProvider(target, registry.location().getPath());
         this.codec = codec;
     }

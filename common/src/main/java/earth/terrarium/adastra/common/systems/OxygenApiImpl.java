@@ -1,12 +1,12 @@
 package earth.terrarium.adastra.common.systems;
 
 import earth.terrarium.adastra.api.events.AdAstraEvents;
+import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
-import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
 import earth.terrarium.adastra.common.tags.ModEntityTypeTags;
 import net.minecraft.Optionull;
@@ -39,7 +39,7 @@ public class OxygenApiImpl implements OxygenApi {
     @Override
     public boolean hasOxygen(Entity entity) {
         boolean hasOxygen = hasOxygen(entity.level(), BlockPos.containing(entity.getX(), entity.getEyeY(), entity.getZ()));
-        return AdAstraEvents.EntityOxygenEvent.post(entity, hasOxygen);
+        return AdAstraEvents.EntityOxygenEvent.fire(entity, hasOxygen);
     }
 
     @Override

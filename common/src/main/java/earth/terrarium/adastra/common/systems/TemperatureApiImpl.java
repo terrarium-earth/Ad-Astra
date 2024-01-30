@@ -1,13 +1,13 @@
 package earth.terrarium.adastra.common.systems;
 
 import earth.terrarium.adastra.api.events.AdAstraEvents;
+import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.api.systems.TemperatureApi;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.handlers.PlanetHandler;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
-import earth.terrarium.adastra.common.planets.Planet;
 import earth.terrarium.adastra.common.tags.ModEntityTypeTags;
 import earth.terrarium.adastra.common.tags.ModItemTags;
 import earth.terrarium.adastra.common.utils.ModUtils;
@@ -92,13 +92,13 @@ public class TemperatureApiImpl implements TemperatureApi {
             if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_EXTREME_HEAT)) return;
             if (SpaceSuitItem.hasFullSet(entity, ModItemTags.HEAT_RESISTANT_ARMOR)) return;
             if (entity.hasEffect(MobEffects.FIRE_RESISTANCE)) return;
-            if (AdAstraEvents.HotTemperatureTickEvent.post(level, entity)) {
+            if (AdAstraEvents.HotTemperatureTickEvent.fire(level, entity)) {
                 burnEntity(entity);
             }
         } else if (this.isCold(level, entity.blockPosition())) {
             if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_EXTREME_COLD)) return;
             if (SpaceSuitItem.hasFullSet(entity, ModItemTags.FREEZE_RESISTANT_ARMOR)) return;
-            if (AdAstraEvents.ColdTemperatureTickEvent.post(level, entity)) {
+            if (AdAstraEvents.ColdTemperatureTickEvent.fire(level, entity)) {
                 freezeEntity(entity, level);
             }
         }
@@ -112,7 +112,7 @@ public class TemperatureApiImpl implements TemperatureApi {
     private void freezeEntity(LivingEntity entity, ServerLevel level) {
         if (entity.getType().is(ModEntityTypeTags.CAN_SURVIVE_EXTREME_COLD)) return;
         if (SpaceSuitItem.hasFullSet(entity, ModItemTags.FREEZE_RESISTANT_ARMOR)) return;
-        if (AdAstraEvents.ColdTemperatureTickEvent.post(level, entity)) {
+        if (AdAstraEvents.ColdTemperatureTickEvent.fire(level, entity)) {
             entity.hurt(entity.damageSources().freeze(), 3);
             entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze() + 20, entity.getTicksFrozen() + 5 * 10));
             ModUtils.sendParticles(level,

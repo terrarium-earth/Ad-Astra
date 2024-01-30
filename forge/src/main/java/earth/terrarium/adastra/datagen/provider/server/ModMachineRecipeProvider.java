@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.datagen.provider.server;
 
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.planets.Planet;
+import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.common.recipes.base.IngredientHolder;
 import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.registry.ModItems;

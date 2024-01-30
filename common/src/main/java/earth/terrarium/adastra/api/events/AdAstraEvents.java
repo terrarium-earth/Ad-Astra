@@ -36,7 +36,7 @@ public final class AdAstraEvents {
          * @return false to prevent ticking of oxygen
          */
         @ApiStatus.Internal
-        static boolean post(ServerLevel level, LivingEntity entity) {
+        static boolean fire(ServerLevel level, LivingEntity entity) {
             for (var listener : OXYGEN_TICK_LISTENERS) {
                 if (!listener.tick(level, entity)) {
                     return false;
@@ -55,7 +55,7 @@ public final class AdAstraEvents {
         }
 
         @ApiStatus.Internal
-        static boolean post(Entity entity, boolean hasOxygen) {
+        static boolean fire(Entity entity, boolean hasOxygen) {
             for (var listener : ENTITY_OXYGEN_LISTENERS) {
                 boolean newOxygen = listener.hasOxygen(entity, hasOxygen);
                 if (newOxygen != hasOxygen) {
@@ -78,7 +78,7 @@ public final class AdAstraEvents {
          * @return false to prevent ticking of temperature
          */
         @ApiStatus.Internal
-        static boolean post(ServerLevel level, LivingEntity entity) {
+        static boolean fire(ServerLevel level, LivingEntity entity) {
             for (var listener : TEMPERATURE_TICK_LISTENERS) {
                 if (!listener.tick(level, entity)) {
                     return false;
@@ -100,7 +100,7 @@ public final class AdAstraEvents {
          * @return false to prevent the entity from burning
          */
         @ApiStatus.Internal
-        static boolean post(ServerLevel level, LivingEntity entity) {
+        static boolean fire(ServerLevel level, LivingEntity entity) {
             for (var listener : HOT_TEMPERATURE_TICK_LISTENERS) {
                 if (!listener.tick(level, entity)) {
                     return false;
@@ -121,9 +121,31 @@ public final class AdAstraEvents {
          * @return false to prevent the entity from freezing
          */
         @ApiStatus.Internal
-        static boolean post(ServerLevel level, LivingEntity entity) {
+        static boolean fire(ServerLevel level, LivingEntity entity) {
             for (var listener : COLD_TEMPERATURE_TICK_LISTENERS) {
                 if (!listener.tick(level, entity)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    @FunctionalInterface
+    public interface GravityTickEvent {
+        boolean tick(Level level, LivingEntity entity, Vec3 travelVector, BlockPos movementAffectingPos);
+
+        static void register(GravityTickEvent listener) {
+            GRAVITY_TICK_LISTENERS.add(listener);
+        }
+
+        /**
+         * @return false to prevent ticking of gravity
+         */
+        @ApiStatus.Internal
+        static boolean fire(Level level, LivingEntity entity, Vec3 travelVector, BlockPos movementAffectingPos) {
+            for (var listener : GRAVITY_TICK_LISTENERS) {
+                if (!listener.tick(level, entity, travelVector, movementAffectingPos)) {
                     return false;
                 }
             }
@@ -140,7 +162,7 @@ public final class AdAstraEvents {
         }
 
         @ApiStatus.Internal
-        static float post(Entity entity, float gravity) {
+        static float fire(Entity entity, float gravity) {
             for (var listener : ENTITY_GRAVITY_LISTENERS) {
                 float newGravity = listener.getGravity(entity, gravity);
                 if (newGravity != gravity) {
@@ -148,28 +170,6 @@ public final class AdAstraEvents {
                 }
             }
             return gravity;
-        }
-    }
-
-    @FunctionalInterface
-    public interface GravityTickEvent {
-        boolean tick(Level level, LivingEntity entity, Vec3 travelVector, BlockPos movementAffectingPos);
-
-        static void register(GravityTickEvent listener) {
-            GRAVITY_TICK_LISTENERS.add(listener);
-        }
-
-        /**
-         * @return false to prevent ticking of gravity
-         */
-        @ApiStatus.Internal
-        static boolean post(Level level, LivingEntity entity, Vec3 travelVector, BlockPos movementAffectingPos) {
-            for (var listener : GRAVITY_TICK_LISTENERS) {
-                if (!listener.tick(level, entity, travelVector, movementAffectingPos)) {
-                    return false;
-                }
-            }
-            return true;
         }
     }
 
@@ -185,7 +185,7 @@ public final class AdAstraEvents {
          * @return false to prevent ticking of zero gravity
          */
         @ApiStatus.Internal
-        static boolean post(Level level, LivingEntity entity, Vec3 travelVector, BlockPos movementAffectingPos) {
+        static boolean fire(Level level, LivingEntity entity, Vec3 travelVector, BlockPos movementAffectingPos) {
             for (var listener : ZERO_GRAVITY_TICK_LISTENERS) {
                 if (!listener.tick(level, entity, travelVector, movementAffectingPos)) {
                     return false;
@@ -207,7 +207,7 @@ public final class AdAstraEvents {
          * @return false to prevent ticking of acid rain
          */
         @ApiStatus.Internal
-        static boolean post(ServerLevel level, LivingEntity entity) {
+        static boolean fire(ServerLevel level, LivingEntity entity) {
             for (var listener : ACID_RAIN_TICK_LISTENERS) {
                 if (!listener.tick(level, entity)) {
                     return false;
@@ -231,7 +231,7 @@ public final class AdAstraEvents {
          * @return false to prevent ticking of environment
          */
         @ApiStatus.Internal
-        static boolean post(ServerLevel level, BlockPos pos, BlockState state, short temperature) {
+        static boolean fire(ServerLevel level, BlockPos pos, BlockState state, short temperature) {
             for (var listener : ENVIRONMENT_TICK_LISTENERS) {
                 if (!listener.tick(level, pos, state, temperature)) {
                     return false;

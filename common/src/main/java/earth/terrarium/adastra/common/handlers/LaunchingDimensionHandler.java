@@ -1,8 +1,8 @@
 package earth.terrarium.adastra.common.handlers;
 
 import com.teamresourceful.resourcefullib.common.utils.SaveHandler;
+import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.common.planets.AdAstraData;
-import earth.terrarium.adastra.common.planets.Planet;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;

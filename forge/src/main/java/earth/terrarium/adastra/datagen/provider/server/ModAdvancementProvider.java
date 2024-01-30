@@ -2,7 +2,7 @@ package earth.terrarium.adastra.datagen.provider.server;
 
 
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.planets.Planet;
+import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.common.registry.ModItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;

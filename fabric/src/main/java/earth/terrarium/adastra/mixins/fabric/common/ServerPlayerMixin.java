@@ -2,7 +2,7 @@ package earth.terrarium.adastra.mixins.fabric.common;
 
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import com.mojang.authlib.GameProfile;
-import earth.terrarium.adastra.common.entities.vehicles.Vehicle;
+import earth.terrarium.adastra.common.config.AdAstraConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,7 +27,8 @@ public abstract class ServerPlayerMixin extends Player {
             ordinal = 5
         )
     )
+    // Prevent the portal teleportation sound from playing when leaving the atmosphere.
     private boolean adastra$changeDimension(ServerGamePacketListenerImpl instance, Packet<?> packet) {
-        return !(getVehicle() instanceof Vehicle);
+        return getY() > AdAstraConfig.atmosphereLeave + 1 || getY() < AdAstraConfig.atmosphereLeave - 1;
     }
 }

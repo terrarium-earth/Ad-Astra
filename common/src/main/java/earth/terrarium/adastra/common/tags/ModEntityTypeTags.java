@@ -12,7 +12,6 @@ public final class ModEntityTypeTags {
     public static final TagKey<EntityType<?>> CAN_SURVIVE_EXTREME_HEAT = tag("can_survive_extreme_heat");
     public static final TagKey<EntityType<?>> CAN_SURVIVE_IN_SPACE = tag("can_survive_in_space");
     public static final TagKey<EntityType<?>> CAN_SURVIVE_ACID_RAIN = tag("can_survive_in_acid_rain");
-    public static final TagKey<EntityType<?>> ACID_RAIN_IMMUNE = tag("acid_rain_immune");
 
     public static final TagKey<EntityType<?>> IGNORES_AIR_VORTEX = tag("ignores_air_vortex");
 
