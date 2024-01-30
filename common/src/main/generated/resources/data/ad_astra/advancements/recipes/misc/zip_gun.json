@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_zip_gun",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_zip_gun"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:zip_gun"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

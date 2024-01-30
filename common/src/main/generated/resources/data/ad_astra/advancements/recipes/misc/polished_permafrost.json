@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_polished_permafrost",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_polished_permafrost"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:polished_permafrost"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

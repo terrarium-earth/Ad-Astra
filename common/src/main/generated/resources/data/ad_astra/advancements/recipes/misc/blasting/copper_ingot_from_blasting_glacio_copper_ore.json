@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_copper_ingot",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_copper_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:blasting/copper_ingot_from_blasting_glacio_copper_ore"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_venus_pillar",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_venus_pillar"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/venus_pillar_from_venus_stone_bricks_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

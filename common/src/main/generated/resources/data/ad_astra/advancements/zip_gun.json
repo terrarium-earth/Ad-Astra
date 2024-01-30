@@ -1,7 +1,7 @@
 {
   "parent": "ad_astra:dj",
   "criteria": {
-    "using_zip_gun": {
+    "has_zip_gun": {
       "conditions": {
         "item": {
           "items": [
@@ -13,23 +13,19 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.ad_astra.zip_gun.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "ad_astra:zip_gun"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.ad_astra.zip_gun.title"
     }
   },
   "requirements": [
     [
-      "using_zip_gun"
+      "has_zip_gun"
     ]
   ],
   "sends_telemetry_event": true

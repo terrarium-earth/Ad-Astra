@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_aeronos_fence",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_aeronos_fence"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:aeronos_fence"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

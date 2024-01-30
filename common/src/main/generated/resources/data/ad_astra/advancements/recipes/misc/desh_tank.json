@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_desh_tank",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_desh_tank"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:desh_tank"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

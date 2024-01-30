@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_steel_engine",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_steel_engine"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:steel_engine"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

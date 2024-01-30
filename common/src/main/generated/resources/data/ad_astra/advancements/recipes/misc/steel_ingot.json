@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_steel_ingot",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_steel_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:steel_ingot"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

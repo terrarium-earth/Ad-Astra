@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_steel_plating_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_steel_plating_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:steel_plating_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

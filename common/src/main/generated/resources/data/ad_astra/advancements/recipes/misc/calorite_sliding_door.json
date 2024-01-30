@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_calorite_sliding_door",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_calorite_sliding_door"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:calorite_sliding_door"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

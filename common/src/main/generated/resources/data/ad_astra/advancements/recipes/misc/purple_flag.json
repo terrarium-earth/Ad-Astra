@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_purple_flag",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_purple_flag"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:purple_flag"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

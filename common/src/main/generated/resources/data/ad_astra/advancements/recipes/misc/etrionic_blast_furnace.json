@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_etrionic_blast_furnace",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_etrionic_blast_furnace"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:etrionic_blast_furnace"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

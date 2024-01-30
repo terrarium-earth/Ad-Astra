@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_chiseled_mercury_stone_stairs",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_chiseled_mercury_stone_stairs"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:chiseled_mercury_stone_stairs"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

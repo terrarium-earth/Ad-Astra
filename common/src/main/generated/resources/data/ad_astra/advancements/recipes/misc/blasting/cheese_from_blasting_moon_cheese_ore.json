@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cheese",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cheese"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:blasting/cheese_from_blasting_moon_cheese_ore"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

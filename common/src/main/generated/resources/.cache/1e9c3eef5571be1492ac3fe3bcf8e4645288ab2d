@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-12T01:14:45.66697	Tags for minecraft:worldgen/biome mod id ad_astra
+// 1.20.4	2024-01-30T16:30:34.907124	Tags for minecraft:worldgen/biome mod id ad_astra
 80f3200773c082058ab2db57853bb2cd78abf5d9 data/ad_astra/tags/worldgen/biome/has_acid_rain.json
 c186d74674560cb77f87571d50628fb910de9789 data/ad_astra/tags/worldgen/biome/has_structure/lunarian_village.json
 9369cdbff72781cc723cbf99a7efab00a9d808fb data/ad_astra/tags/worldgen/biome/has_structure/mars_temple.json

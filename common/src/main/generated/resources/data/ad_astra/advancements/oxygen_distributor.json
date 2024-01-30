@@ -15,16 +15,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.ad_astra.oxygen_distributor.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "ad_astra:oxygen_distributor"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.ad_astra.oxygen_distributor.title"
     }

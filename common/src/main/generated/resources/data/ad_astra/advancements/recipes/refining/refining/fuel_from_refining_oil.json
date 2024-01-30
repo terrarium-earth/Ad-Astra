@@ -17,6 +17,5 @@
     "recipes": [
       "ad_astra:refining/fuel_from_refining_oil"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

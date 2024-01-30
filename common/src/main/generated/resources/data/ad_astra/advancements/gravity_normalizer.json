@@ -15,16 +15,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.ad_astra.gravity_normalizer.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "ad_astra:gravity_normalizer"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.ad_astra.gravity_normalizer.title"
     }

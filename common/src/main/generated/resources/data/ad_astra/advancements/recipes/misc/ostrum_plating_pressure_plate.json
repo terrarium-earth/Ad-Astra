@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_ostrum_plating_pressure_plate",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_ostrum_plating_pressure_plate"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:ostrum_plating_pressure_plate"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

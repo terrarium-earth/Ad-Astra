@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_iron_plating",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_iron_plating"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:iron_plating"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

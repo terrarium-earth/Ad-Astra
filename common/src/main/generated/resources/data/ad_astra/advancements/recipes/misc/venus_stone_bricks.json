@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_venus_stone_bricks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_venus_stone_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:venus_stone_bricks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

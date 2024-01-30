@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_ostrum_ingot",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_ostrum_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:ostrum_ingot"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

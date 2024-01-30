@@ -17,6 +17,5 @@
     "recipes": [
       "ad_astra:space_station/mercury_orbit_space_station"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

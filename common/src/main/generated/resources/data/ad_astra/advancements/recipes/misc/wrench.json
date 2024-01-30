@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_wrench",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_wrench"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:wrench"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

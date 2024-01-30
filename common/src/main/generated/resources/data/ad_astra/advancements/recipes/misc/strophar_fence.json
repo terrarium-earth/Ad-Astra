@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_strophar_fence",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_strophar_fence"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:strophar_fence"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

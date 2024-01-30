@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_polished_venus_stone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_polished_venus_stone"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/polished_venus_stone_from_venus_stone_bricks_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_white_flag",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_white_flag"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:white_flag"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

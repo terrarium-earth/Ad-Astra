@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_glacian_stairs",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_glacian_stairs"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:glacian_stairs"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

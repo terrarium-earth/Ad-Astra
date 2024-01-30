@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_item",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_item"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:nasa_workbench/tier_2_rocket_from_nasa_workbench"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_steel_pillar",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_steel_pillar"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:steel_pillar"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

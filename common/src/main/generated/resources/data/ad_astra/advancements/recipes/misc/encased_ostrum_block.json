@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_encased_ostrum_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_encased_ostrum_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:encased_ostrum_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

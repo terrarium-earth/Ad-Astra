@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_steel_cable",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_steel_cable"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:steel_cable"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_glacian_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_glacian_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:glacian_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

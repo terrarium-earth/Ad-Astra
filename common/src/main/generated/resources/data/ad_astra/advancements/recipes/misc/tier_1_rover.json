@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_tier_1_rover",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_tier_1_rover"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:tier_1_rover"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

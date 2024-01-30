@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_polished_moon_stone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_polished_moon_stone"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:polished_moon_stone"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

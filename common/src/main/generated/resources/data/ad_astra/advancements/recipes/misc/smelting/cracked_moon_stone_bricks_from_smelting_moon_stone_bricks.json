@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cracked_moon_stone_bricks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cracked_moon_stone_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:smelting/cracked_moon_stone_bricks_from_smelting_moon_stone_bricks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

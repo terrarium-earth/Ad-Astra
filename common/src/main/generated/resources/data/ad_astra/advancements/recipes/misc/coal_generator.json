@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_coal_generator",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_coal_generator"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:coal_generator"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

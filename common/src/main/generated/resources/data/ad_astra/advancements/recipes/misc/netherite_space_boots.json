@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_netherite_space_boots",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_netherite_space_boots"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:netherite_space_boots"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

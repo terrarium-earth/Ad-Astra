@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_small_lime_industrial_lamp",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_small_lime_industrial_lamp"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:small_lime_industrial_lamp"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -15,16 +15,12 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancements.ad_astra.rover.description"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
       "item": "ad_astra:tier_1_rover"
     },
-    "show_toast": true,
     "title": {
       "translate": "advancements.ad_astra.rover.title"
     }

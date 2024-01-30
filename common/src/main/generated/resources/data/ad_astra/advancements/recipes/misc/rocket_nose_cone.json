@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_rocket_nose_cone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_rocket_nose_cone"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:rocket_nose_cone"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

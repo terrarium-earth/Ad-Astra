@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_strophar_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_strophar_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:strophar_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

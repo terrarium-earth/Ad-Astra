@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_jet_suit",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_jet_suit"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:jet_suit"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

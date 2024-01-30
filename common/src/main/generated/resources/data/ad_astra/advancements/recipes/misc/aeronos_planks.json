@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_aeronos_planks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_aeronos_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:aeronos_planks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

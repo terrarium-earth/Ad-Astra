@@ -17,6 +17,5 @@
     "recipes": [
       "ad_astra:cryo_freezing/cryo_fuel_from_cryo_freezing_blue_ice"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

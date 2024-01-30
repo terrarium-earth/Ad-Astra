@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_pink_flag",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_pink_flag"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:pink_flag"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

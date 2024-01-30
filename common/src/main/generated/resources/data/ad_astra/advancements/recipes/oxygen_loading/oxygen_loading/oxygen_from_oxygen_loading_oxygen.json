@@ -17,6 +17,5 @@
     "recipes": [
       "ad_astra:oxygen_loading/oxygen_from_oxygen_loading_oxygen"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_chiseled_moon_stone_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_chiseled_moon_stone_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:chiseled_moon_stone_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

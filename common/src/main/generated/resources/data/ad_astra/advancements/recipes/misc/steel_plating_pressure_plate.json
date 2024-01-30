@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_steel_plating_pressure_plate",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_steel_plating_pressure_plate"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:steel_plating_pressure_plate"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

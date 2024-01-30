@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_glacian_button",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_glacian_button"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:glacian_button"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

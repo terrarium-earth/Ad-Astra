@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cheese",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cheese"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:smelting/cheese_from_smelting_moon_cheese_ore"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

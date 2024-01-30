@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_calorite_nugget",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_calorite_nugget"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:calorite_nugget"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

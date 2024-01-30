@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_chiseled_moon_stone_bricks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_chiseled_moon_stone_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:chiseled_moon_stone_bricks"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

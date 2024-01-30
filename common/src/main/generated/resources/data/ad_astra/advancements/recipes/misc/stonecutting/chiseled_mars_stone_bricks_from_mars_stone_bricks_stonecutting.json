@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_chiseled_mars_stone_bricks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_chiseled_mars_stone_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/chiseled_mars_stone_bricks_from_mars_stone_bricks_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

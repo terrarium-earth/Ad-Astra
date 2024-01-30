@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_encased_iron_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_encased_iron_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:encased_iron_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

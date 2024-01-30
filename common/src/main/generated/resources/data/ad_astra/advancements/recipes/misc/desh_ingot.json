@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_desh_ingot",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_desh_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:desh_ingot"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

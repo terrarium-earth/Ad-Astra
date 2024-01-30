@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_fuel_refinery",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_fuel_refinery"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:fuel_refinery"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

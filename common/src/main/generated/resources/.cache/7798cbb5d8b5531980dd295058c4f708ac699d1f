@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-29T21:04:01.350615	Tags for minecraft:fluid mod id ad_astra
+// 1.20.4	2024-01-30T16:30:34.902839	Tags for minecraft:fluid mod id ad_astra
 177c9e2ff17d4101adeb82bf787abd6ab892330a data/ad_astra/tags/fluids/efficient_fuel.json
 cf3608bd187922aeb48c566c19e8482b0dca34c7 data/ad_astra/tags/fluids/evaporates_in_space.json
 cf3608bd187922aeb48c566c19e8482b0dca34c7 data/ad_astra/tags/fluids/freezes_in_space.json

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_mars_stone_brick_stairs",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_mars_stone_brick_stairs"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:mars_stone_brick_stairs"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

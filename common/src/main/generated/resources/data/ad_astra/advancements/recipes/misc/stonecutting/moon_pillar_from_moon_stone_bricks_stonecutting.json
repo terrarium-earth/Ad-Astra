@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_moon_pillar",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_moon_pillar"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/moon_pillar_from_moon_stone_bricks_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

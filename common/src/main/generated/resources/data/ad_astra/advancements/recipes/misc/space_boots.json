@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_space_boots",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_space_boots"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:space_boots"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

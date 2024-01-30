@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_airlock",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_airlock"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:airlock"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

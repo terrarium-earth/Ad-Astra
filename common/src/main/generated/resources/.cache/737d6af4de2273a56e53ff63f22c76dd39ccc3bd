@@ -1,9 +1,9 @@
-// 1.20.1	2024-01-24T13:02:41.084444	Tags for minecraft:block mod id ad_astra
+// 1.20.4	2024-01-30T16:30:34.905983	Tags for minecraft:block mod id ad_astra
 375e4bc49d396a2ae2b2a9dcddc300ab07a3aa48 data/ad_astra/tags/blocks/aeronos_caps.json
 8030232b3adfa6e804799644b412d6697c9f985a data/ad_astra/tags/blocks/cable_ducts.json
 9e5430f8f65b6281a9fe76442a62537371f1da72 data/ad_astra/tags/blocks/calorite_blocks.json
 1c3b5f4f600d0258598142a532fa9c870e58dc06 data/ad_astra/tags/blocks/desh_blocks.json
-f7155298af5bdf97b0a6ca83b6ba413d5c5dd894 data/ad_astra/tags/blocks/destroyed_in_space.json
+1172076e4e993f8ccd4375d1f09225e12405326e data/ad_astra/tags/blocks/destroyed_in_space.json
 49278667ca98b5260c0d1482db7a8783f77eaef4 data/ad_astra/tags/blocks/flags.json
 d10acd25289b91dd382a0b3b47088961846033c6 data/ad_astra/tags/blocks/fluid_pipe_ducts.json
 e5e2d1a810418e09c6d0059a742a494f43fcd81e data/ad_astra/tags/blocks/glacian_logs.json

@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_encased_calorite_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_encased_calorite_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:encased_calorite_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_steel_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_steel_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:steel_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_nasa_workbench",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_nasa_workbench"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:nasa_workbench"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_rocket_fin",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_rocket_fin"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:rocket_fin"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

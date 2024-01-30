@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_space_suit",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_space_suit"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:space_suit"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_moon_stone_slab",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_moon_stone_slab"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:stonecutting/moon_stone_slab_from_moon_stone_stonecutting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

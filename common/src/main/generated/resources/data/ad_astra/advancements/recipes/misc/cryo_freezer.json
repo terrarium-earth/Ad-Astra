@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_cryo_freezer",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cryo_freezer"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:cryo_freezer"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

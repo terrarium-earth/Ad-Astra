@@ -20,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_ostrum_tank",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_ostrum_tank"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:ostrum_tank"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

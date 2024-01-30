@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_polished_venus_stone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_polished_venus_stone"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:polished_venus_stone"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

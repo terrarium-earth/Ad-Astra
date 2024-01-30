@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_glacian_fence",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_glacian_fence"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:glacian_fence"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

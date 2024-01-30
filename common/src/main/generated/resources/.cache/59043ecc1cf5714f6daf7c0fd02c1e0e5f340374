@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-24T13:02:41.082424	Tags for minecraft:item mod id ad_astra
+// 1.20.4	2024-01-30T16:30:34.903912	Tags for minecraft:item mod id ad_astra
 375e4bc49d396a2ae2b2a9dcddc300ab07a3aa48 data/ad_astra/tags/items/aeronos_caps.json
 8030232b3adfa6e804799644b412d6697c9f985a data/ad_astra/tags/items/cable_ducts.json
 9e5430f8f65b6281a9fe76442a62537371f1da72 data/ad_astra/tags/items/calorite_blocks.json
@@ -9,7 +9,7 @@ f05386bd15bbdda7314d1b7a40d4f8855afc0200 data/ad_astra/tags/items/calorite_plate
 ed289cc805bd3fd911e1f135adc0a2808ed56025 data/ad_astra/tags/items/desh_ingots.json
 28f223da450cf6665f700fe64ee959b213a3ac9d data/ad_astra/tags/items/desh_nuggets.json
 2ebf22e2e98afd19b1c91aac439b62575d658854 data/ad_astra/tags/items/desh_plates.json
-14f9fb4640def28d212de564e1d59b2b61683fce data/ad_astra/tags/items/destroyed_in_space.json
+73883681c8705b924ded86b2d57c880fed29965b data/ad_astra/tags/items/destroyed_in_space.json
 322406e5b1fcfe1533ab85e2d773eff44fe88039 data/ad_astra/tags/items/flags.json
 d10acd25289b91dd382a0b3b47088961846033c6 data/ad_astra/tags/items/fluid_pipe_ducts.json
 7ead9b5710c97d56e46885d3ac8947f4784c164a data/ad_astra/tags/items/freeze_resistant_armor.json

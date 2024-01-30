@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_iron_sliding_door",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_iron_sliding_door"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:iron_sliding_door"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

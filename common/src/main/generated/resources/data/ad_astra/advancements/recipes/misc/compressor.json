@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_compressor",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_compressor"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:compressor"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

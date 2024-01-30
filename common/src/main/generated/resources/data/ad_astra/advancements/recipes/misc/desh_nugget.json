@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_desh_nugget",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_desh_nugget"
     ]
   ],
   "rewards": {
     "recipes": [
       "ad_astra:desh_nugget"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
