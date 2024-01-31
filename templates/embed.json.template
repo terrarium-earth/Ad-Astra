@@ -11,7 +11,7 @@
                 },
                 {
                     "type": 2,
-                    "label": "Forge",
+                    "label": "NeoForge",
                     "style": 5,
                     "url": "https://modrinth.com/mod/ad-astra/version/${forge_link}"
                 }
