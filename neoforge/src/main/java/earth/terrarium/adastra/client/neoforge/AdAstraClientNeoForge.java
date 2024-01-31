@@ -9,11 +9,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.client.ConfigScreenHandler;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.NeoForge;
@@ -26,8 +26,8 @@ import java.util.Map;
 public class AdAstraClientNeoForge {
     public static final Map<Item, BlockEntityWithoutLevelRenderer> ITEM_RENDERERS = new HashMap<>();
 
-    public static void init() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraClientNeoForge::onSetupItemColors);
+    public static void init(IEventBus bus) {
+        bus.addListener(AdAstraClientNeoForge::onSetupItemColors);
         NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onRegisterClientHud);
         NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onClientTick);
         NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onRenderLevelStage);

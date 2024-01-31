@@ -7,11 +7,10 @@ import earth.terrarium.adastra.common.commands.AdAstraCommands;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.tags.ModBlockTags;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.DistExecutor;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
@@ -24,7 +23,7 @@ import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 @Mod(AdAstra.MOD_ID)
 public class AdAstraNeoForge {
 
-    public AdAstraNeoForge() {
+    public AdAstraNeoForge(IEventBus bus) {
         AdAstra.init();
         NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onAddReloadListener);
         NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onDatapackSync);
@@ -32,9 +31,11 @@ public class AdAstraNeoForge {
         NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::registerCommands);
         NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onBlockPlace);
         NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onServerStarted);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraNeoForge::onAttributes);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraNeoForge::commonSetup);
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AdAstraClientNeoForge::init);
+        bus.addListener(AdAstraNeoForge::onAttributes);
+        bus.addListener(AdAstraNeoForge::commonSetup);
+        if (FMLEnvironment.dist.isClient()) {
+            AdAstraClientNeoForge.init(bus);
+        }
     }
 
     public static void onAddReloadListener(AddReloadListenerEvent event) {
