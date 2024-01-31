@@ -32,6 +32,7 @@ public class EnergyBarWidget extends ConfigurationWidget implements CursorWidget
 
     @Override
     protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        super.renderWidget(graphics, mouseX, mouseY, partialTick);
         long capacity = this.container.getMaxCapacity();
         long energy = this.container.getStoredEnergy();
         float ratio = energy / (float) capacity;
@@ -48,6 +49,7 @@ public class EnergyBarWidget extends ConfigurationWidget implements CursorWidget
                 TooltipUtils.getMaxEnergyInComponent(container.maxInsert()),
                 TooltipUtils.getMaxEnergyOutComponent(container.maxExtract())
             )));
+            setTooltipDelay(-1);
         }
     }
 

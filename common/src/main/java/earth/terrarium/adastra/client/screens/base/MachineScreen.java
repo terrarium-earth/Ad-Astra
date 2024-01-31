@@ -19,8 +19,12 @@ import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.adastra.mixins.common.SlotAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.layouts.LayoutElement;
+import net.minecraft.client.gui.navigation.ScreenRectangle;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -41,6 +45,8 @@ public abstract class MachineScreen<M extends BaseContainerMenu<E>, E extends Co
 
     protected SidedConfigWidget sideConfigWidget;
     protected OptionsBarWidget optionsBarWidget;
+
+    AbstractWidget test;
 
     public MachineScreen(
         M menu, Inventory inventory, Component component,
@@ -77,10 +83,11 @@ public abstract class MachineScreen<M extends BaseContainerMenu<E>, E extends Co
         if (this.menu instanceof BaseConfigurableContainerMenu<?> configurableMenu) {
             for (MenuConfiguration configuration : configurableMenu.getConfigurations()) {
                 LayoutElement element = switch (configuration.type()) {
-                    case SLOT -> addRenderableWidget(new SlotWidget(((SlotConfiguration) configuration)));
-                    case ENERGY -> addRenderableWidget(new EnergyBarWidget(((EnergyConfiguration) configuration)));
+                    case SLOT ->  addRenderableWidget(new SlotWidget(((SlotConfiguration) configuration)));
+                    case ENERGY ->
+                        test = addRenderableWidget(new EnergyBarWidget(((EnergyConfiguration) configuration)));
                     case FLUID ->
-                        addRenderableWidget(new FluidBarWidget(entity.getBlockPos(), (FluidConfiguration) configuration));
+                         addRenderableWidget(new FluidBarWidget(entity.getBlockPos(), (FluidConfiguration) configuration));
                 };
 
                 element.setPosition(this.leftPos + configuration.x(), this.topPos + configuration.y());
@@ -124,6 +131,10 @@ public abstract class MachineScreen<M extends BaseContainerMenu<E>, E extends Co
             }
         }
     }
+
+    public void setTooltipForNextRenderPass(Tooltip tooltip, ClientTooltipPositioner positioner, boolean override) {
+		this.setTooltipForNextRenderPass(tooltip.toCharSequence(this.minecraft), positioner, override);
+	}
 
     @Override
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float f) {

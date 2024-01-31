@@ -12,11 +12,6 @@ public class SlotWidget extends ConfigurationWidget implements CursorWidget {
     }
 
     @Override
-    protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-
-    }
-
-    @Override
     public CursorScreen.Cursor getCursor() {
         return CursorScreen.Cursor.DEFAULT;
     }

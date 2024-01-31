@@ -377,18 +377,13 @@ public class ModLangProvider extends LanguageProvider {
         add("config.ad_astra.disableGravity", "Disable gravity");
 
         add("config.ad_astra.machines", "Machines");
-        add("config.ad_astra.ironTierMaxEnergyInOut", "Iron tier max energy in/out");
-        add("config.ad_astra.steelTierMaxEnergyInOut", "Steel tier max energy in/out");
-        add("config.ad_astra.deshTierMaxEnergyInOut", "Desh tier max energy in/out");
-        add("config.ad_astra.ostrumTierMaxEnergyInOut", "Ostrum tier max energy in/out");
-        add("config.ad_astra.ironTierEnergyCapacity", "Iron tier energy capacity");
-        add("config.ad_astra.steelTierEnergyCapacity", "Steel tier energy capacity");
-        add("config.ad_astra.deshTierEnergyCapacity", "Desh tier energy capacity");
-        add("config.ad_astra.ostrumTierEnergyCapacity", "Ostrum tier energy capacity");
-
-        add("config.ad_astra.steelTierFluidCapacity", "Steel tier max fluid capacity");
-        add("config.ad_astra.deshTierFluidCapacity", "Desh tier max fluid capacity");
-        add("config.ad_astra.ostrumTierFluidCapacity", "Ostrum tier max fluid capacity");
+        add("config.ad_astra.machine.maxEnergyInOut", "Max energy in/out");
+        add("config.ad_astra.machine.energyCapacity", "Energy capacity");
+        add("config.ad_astra.machine.fluidCapacity", "Fluid capacity");
+        add("config.ad_astra.ironTier", "Iron tier");
+        add("config.ad_astra.steelTier", "Steel tier");
+        add("config.ad_astra.deshTier", "Desh tier");
+        add("config.ad_astra.ostrumTier", "Ostrum tier");
 
         add("config.ad_astra.coalGeneratorEnergyGenerationPerTick", "Coal generator energy generation per tick");
         add("config.ad_astra.etrionicBlastFurnaceBlastingEnergyPerItem", "Etrionic blast furnace blasting energy per item");

@@ -55,7 +55,7 @@ public class AlloyingCategory implements DisplayCategory<AlloyingDisplay> {
 
         widgets.add(Widgets.createTexturedWidget(EtrionicBlastFurnaceScreen.TEXTURE, bounds.x, bounds.y, 0, 0, 184, 110, 184, 201));
         widgets.add(Widgets.createTexturedWidget(EtrionicBlastFurnaceScreen.TEXTURE, bounds.x, bounds.y + 110, 0, 194, 184, 7, 184, 201));
-        widgets.add(Widgets.createTexturedWidget(EtrionicBlastFurnaceScreen.FURNACE_OVERLAY, bounds.x + 30, bounds.y + 52, 0, 0, 32, 43, 32, 43));
+        widgets.add(Widgets.createTexturedWidget(EtrionicBlastFurnaceScreen.FURNACE_OVERLAY_FULL_TEXTURE, bounds.x + 30, bounds.y + 52, 0, 0, 32, 43, 32, 43));
 
         widgets.add(Widgets.createSlot(new Point(bounds.x + 29, bounds.y + 38)).backgroundEnabled(false).entries(display.getInputEntries().get(0)).markInput());
         widgets.add(Widgets.createSlot(new Point(bounds.x + 47, bounds.y + 38)).backgroundEnabled(false).entries(display.getInputEntries().get(1)).markInput());

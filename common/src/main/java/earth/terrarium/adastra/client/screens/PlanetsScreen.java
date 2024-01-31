@@ -250,27 +250,11 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     }
 
     @Override
-    protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-        if (pageIndex == 2) {
-            graphics.blitSprite(SELECTION_MENU, 7, height / 2 - 88, 209, 177);
-            graphics.drawCenteredString(font, ConstantComponents.SPACE_STATION, 163, height / 2 - 15, 0xffffff);
-        } else {
-            graphics.blitSprite(SMALL_SELECTION_MENU, 7, height / 2 - 88, 105, 177);
-        }
-
-        if (pageIndex == 2 && selectedPlanet != null) {
-            var title = Component.translatable("planet.%s.%s".formatted(selectedPlanet.dimension().location().getNamespace(), selectedPlanet.dimension().location().getPath()));
-            graphics.drawCenteredString(font, title, 57, height / 2 - 60, 0xffffff);
-        } else if (pageIndex == 1 && selectedSolarSystem != null) {
-            var title = Component.translatable("solar_system.%s.%s".formatted(selectedSolarSystem.getNamespace(), selectedSolarSystem.getPath()));
-            graphics.drawCenteredString(font, title, 57, height / 2 - 60, 0xffffff);
-        } else {
-            graphics.drawCenteredString(font, ConstantComponents.CATALOG, 57, height / 2 - 60, 0xffffff);
-        }
-    }
+    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {}
 
     @Override
     public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        super.renderBackground(graphics, mouseX, mouseY, partialTick);
         graphics.fill(0, 0, width, height, 0xff000419);
 
         // Render diamond pattern lines
@@ -302,6 +286,26 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
             renderProximaCentauri(graphics);
         } else if (PlanetConstants.SOLAR_SYSTEM.equals(selectedSolarSystem)) {
             renderSolarSystem(graphics);
+        }
+        renderSelectionMenu(graphics);
+    }
+
+    protected void renderSelectionMenu(GuiGraphics graphics) {
+        if (pageIndex == 2) {
+            graphics.blitSprite(SELECTION_MENU, 7, height / 2 - 88, 209, 177);
+            graphics.drawCenteredString(font, ConstantComponents.SPACE_STATION, 163, height / 2 - 15, 0xffffff);
+        } else {
+            graphics.blitSprite(SMALL_SELECTION_MENU, 7, height / 2 - 88, 105, 177);
+        }
+
+        if (pageIndex == 2 && selectedPlanet != null) {
+            var title = Component.translatable("planet.%s.%s".formatted(selectedPlanet.dimension().location().getNamespace(), selectedPlanet.dimension().location().getPath()));
+            graphics.drawCenteredString(font, title, 57, height / 2 - 60, 0xffffff);
+        } else if (pageIndex == 1 && selectedSolarSystem != null) {
+            var title = Component.translatable("solar_system.%s.%s".formatted(selectedSolarSystem.getNamespace(), selectedSolarSystem.getPath()));
+            graphics.drawCenteredString(font, title, 57, height / 2 - 60, 0xffffff);
+        } else {
+            graphics.drawCenteredString(font, ConstantComponents.CATALOG, 57, height / 2 - 60, 0xffffff);
         }
     }
 

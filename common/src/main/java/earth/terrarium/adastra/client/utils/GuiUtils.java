@@ -31,11 +31,11 @@ public class GuiUtils {
     public static final int FLUID_BAR_WIDTH = 12;
     public static final int FLUID_BAR_HEIGHT = 46;
 
-    public static final ResourceLocation HAMMER = new ResourceLocation(AdAstra.MOD_ID, "hammer");
-    public static final ResourceLocation SNOWFLAKE = new ResourceLocation(AdAstra.MOD_ID, "snowflake");
+    public static final ResourceLocation HAMMER = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/hammer.png");
+    public static final ResourceLocation SNOWFLAKE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/snowflake.png");
+    public static final ResourceLocation FIRE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/fire.png");
+    public static final ResourceLocation ARROW = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/arrow.png");
     public static final ResourceLocation SUN = new ResourceLocation(AdAstra.MOD_ID, "sun");
-    public static final ResourceLocation FIRE = new ResourceLocation(AdAstra.MOD_ID, "fire");
-    public static final ResourceLocation ARROW = new ResourceLocation(AdAstra.MOD_ID, "arrow");
     public static final ResourceLocation SLIDER = new ResourceLocation(AdAstra.MOD_ID, "slider");
 
     public static final WidgetSprites SETTINGS_BUTTON_SPRITES = createPressableButtonSprites("settings_button");
@@ -46,10 +46,10 @@ public class GuiUtils {
     public static final WidgetSprites CRAFTING_BUTTON_SPRITES = createPressableButtonSprites("crafting_button");
     public static final WidgetSprites FURNACE_BUTTON_SPRITES = createPressableButtonSprites("furnace_button");
 
-    public static final WidgetSprites NONE_BUTTON_SPRITES = createButtonSprites("side_config/none");
-    public static final WidgetSprites PUSH_BUTTON_SPRITES = createButtonSprites("side_config/push");
-    public static final WidgetSprites PULL_BUTTON_SPRITES = createButtonSprites("side_config/pull");
-    public static final WidgetSprites PUSH_PULL_BUTTON_SPRITES = createButtonSprites("side_config/push_pull");
+    public static final WidgetSprites NONE_BUTTON_SPRITES = createPressableButtonSprites("side_config/none");
+    public static final WidgetSprites PUSH_BUTTON_SPRITES = createPressableButtonSprites("side_config/push");
+    public static final WidgetSprites PULL_BUTTON_SPRITES = createPressableButtonSprites("side_config/pull");
+    public static final WidgetSprites PUSH_PULL_BUTTON_SPRITES = createPressableButtonSprites("side_config/push_pull");
 
     public static final WidgetSprites REDSTONE_ALWAYS_ON_SPRITES = createPressableButtonSprites("redstone/always_on_button");
     public static final WidgetSprites REDSTONE_ON_WHEN_POWERED_SPRITES = createPressableButtonSprites("redstone/on_when_powered_button");
@@ -60,13 +60,6 @@ public class GuiUtils {
         return new WidgetSprites(
             new ResourceLocation(AdAstra.MOD_ID, "buttons/" + name),
             new ResourceLocation(AdAstra.MOD_ID, "buttons/" + name + "_pressed"),
-            new ResourceLocation(AdAstra.MOD_ID, "buttons/" + name + "_highlighted")
-        );
-    }
-
-    public static WidgetSprites createButtonSprites(String name) {
-        return new WidgetSprites(
-            new ResourceLocation(AdAstra.MOD_ID, "buttons/" + name),
             new ResourceLocation(AdAstra.MOD_ID, "buttons/" + name + "_highlighted")
         );
     }
@@ -114,7 +107,7 @@ public class GuiUtils {
     public static void drawHorizontalProgressBar(GuiGraphics graphics, ResourceLocation texture, int mouseX, int mouseY, int x, int y, int width, int height, int progress, int maxProgress, boolean reverse, Component... tooltips) {
         int widthProgress = (int) (width * (progress / (float) maxProgress));
         if (reverse) widthProgress = width - widthProgress;
-        graphics.blitSprite(texture, x, y, 0, 0, widthProgress, height, width, height);
+        graphics.blit(texture, x, y, 0, 0, widthProgress, height, width, height);
 
         drawTooltips(mouseX, mouseY, x, x + width, y, y + height, list -> {
             Collections.addAll(list, tooltips);
@@ -125,7 +118,7 @@ public class GuiUtils {
     public static void drawVerticalProgressBar(GuiGraphics graphics, ResourceLocation texture, int mouseX, int mouseY, int x, int y, int width, int height, int progress, int maxProgress, Component... tooltips) {
         int heightProgress = (int) (height * (progress / (float) maxProgress));
         heightProgress = height - heightProgress;
-        graphics.blitSprite(texture, x, y + heightProgress, 0, heightProgress, width, height - heightProgress, width, height);
+        graphics.blit(texture, x, y + heightProgress, 0, heightProgress, width, height - heightProgress, width, height);
 
         drawTooltips(mouseX, mouseY, x, x + width, y, y + height, list -> {
             Collections.addAll(list, tooltips);

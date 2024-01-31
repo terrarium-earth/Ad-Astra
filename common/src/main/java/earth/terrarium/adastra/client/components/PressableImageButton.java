@@ -27,23 +27,8 @@ public class PressableImageButton extends ImageButton {
     }
 
     @Override
-	public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-		ResourceLocation texture = sprites.get(isActive(), isHoveredOrFocused());
-		guiGraphics.blitSprite(texture, getX(), getY(), width, height);
+	public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+		ResourceLocation texture = sprites.get(!isFocused(), isHovered());
+		graphics.blitSprite(texture, getX(), getY(), width, height);
 	}
-
-//    @Override
-//    public void renderTexture(@NotNull GuiGraphics graphics, @NotNull ResourceLocation texture, int x, int y, int uOffset, int vOffset, int textureDifference, int width, int height, int textureWidth, int textureHeight) {
-//        int v = vOffset + textureDifference;
-//        if (!this.isActive()) {
-//            v = vOffset + textureDifference * 2;
-//        } else if (this.isFocused()) {
-//            v = vOffset;
-//        } else if (this.isHovered()) {
-//            v = vOffset - textureDifference;
-//        }
-//
-//        RenderSystem.enableDepthTest();
-//        graphics.blit(this.texture != null ? this.texture : texture, x, y, uOffset, v, width, height, textureWidth, textureHeight);
-//    }
 }

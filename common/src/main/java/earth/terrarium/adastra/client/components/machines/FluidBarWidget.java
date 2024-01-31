@@ -48,6 +48,7 @@ public class FluidBarWidget extends ConfigurationWidget implements CursorWidget,
 
     @Override
     protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        super.renderWidget(graphics, mouseX, mouseY, partialTick);
         FluidHolder holder = this.container.getFluids().get(this.tank);
         long capacity = this.container.getTankCapacity(this.tank);
         long amount = holder.getFluidAmount();
@@ -86,6 +87,7 @@ public class FluidBarWidget extends ConfigurationWidget implements CursorWidget,
                     ConstantComponents.CLEAR_FLUID_TANK
                 )));
             }
+            setTooltipDelay(-1);
         }
     }
 

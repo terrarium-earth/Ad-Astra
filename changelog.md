@@ -12,6 +12,4 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 
 ## Changes
 
-- Fixed `local_rotation` name in the planet renderer JSON API.
-- Fixed acid rain damaging entities even if they're immune.
-- Fixed portal sound playing on fabric when changing dimensions in a rocket.
+- 1.20.4 port.

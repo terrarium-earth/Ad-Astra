@@ -20,7 +20,7 @@ public final class MachineConfig {
         translation = "config.ad_astra.ironTier"
     )
     public static final MachineTypeConfigObject IRON = new MachineTypeConfigObject(
-        100, 10000, 0
+        100, 10_000, 0
     );
 
     @ConfigEntry(
@@ -29,7 +29,7 @@ public final class MachineConfig {
         translation = "config.ad_astra.steelTier"
     )
     public static final MachineTypeConfigObject STEEL = new MachineTypeConfigObject(
-        150, 20000, 3000
+        150, 20_000, 3000
     );
 
     @ConfigEntry(
@@ -38,7 +38,7 @@ public final class MachineConfig {
         translation = "config.ad_astra.deshTier"
     )
     public static final MachineTypeConfigObject DESH = new MachineTypeConfigObject(
-        250, 50000, 5000
+        250, 50_000, 5000
     );
 
     @ConfigEntry(
@@ -47,7 +47,7 @@ public final class MachineConfig {
         translation = "config.ad_astra.ostrumTier"
     )
     public static final MachineTypeConfigObject OSTRUM = new MachineTypeConfigObject(
-        500, 100000, 10000
+        500, 100_000, 10_000
     );
 
     @ConfigEntry(
@@ -91,7 +91,7 @@ public final class MachineConfig {
         translation = "config.ad_astra.maxDistributionBlocks"
     )
     @Comment("The maximum number of blocks that an oxygen distributor and gravity normalizer can distribute to.")
-    public static int maxDistributionBlocks = 6_000;
+    public static int maxDistributionBlocks = 6000;
 
     @ConfigEntry(
         id = "distributionRefreshRate",
