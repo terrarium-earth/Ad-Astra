@@ -7,7 +7,6 @@ import earth.terrarium.adastra.common.commands.AdAstraCommands;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.tags.ModBlockTags;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.OnDatapackSyncEvent;
@@ -15,10 +14,10 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 
 @Mod(AdAstra.MOD_ID)
 public class AdAstraForge {
@@ -32,7 +31,9 @@ public class AdAstraForge {
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onBlockPlace);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::onAttributes);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::commonSetup);
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AdAstraClientForge::init);
+        if (FMLEnvironment.dist.isClient()) {
+            AdAstraClientForge.init();
+        }
     }
 
     public static void onAddReloadListener(AddReloadListenerEvent event) {

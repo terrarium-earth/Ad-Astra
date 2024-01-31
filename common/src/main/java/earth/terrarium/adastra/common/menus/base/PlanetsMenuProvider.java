@@ -35,7 +35,7 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
 
     @Override
     public AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
-        return new PlanetsMenu(containerId, inventory, Set.of(), Map.of(), Set.of(), Object2BooleanMaps.emptyMap());
+        return new PlanetsMenu(containerId, inventory, Set.of(), Map.of(), Object2BooleanMaps.emptyMap(), Set.of());
     }
 
     @Override
@@ -59,20 +59,20 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
             });
         });
 
+        if (CadmusIntegration.cadmusLoaded()) {
+            buffer.writeVarInt(AdAstraData.planets().size());
+            AdAstraData.planets().keySet().forEach(dimension -> {
+                buffer.writeResourceKey(dimension);
+                buffer.writeBoolean(CadmusIntegration.isClaimed(player.server.getLevel(dimension), player.chunkPosition()));
+            });
+        }
+
         List<GlobalPos> locations = new ArrayList<>();
         AdAstraData.planets().forEach((dimension, planet) ->
             LaunchingDimensionHandler.getSpawningLocation(player, player.serverLevel(), planet).ifPresent(locations::add));
 
         buffer.writeVarInt(locations.size());
         locations.forEach(buffer::writeGlobalPos);
-
-        buffer.writeVarInt(AdAstraData.planets().size());
-        if (CadmusIntegration.cadmusLoaded()) {
-            AdAstraData.planets().keySet().forEach(dimension -> {
-                buffer.writeResourceKey(dimension);
-                buffer.writeBoolean(CadmusIntegration.isClaimed(player.server.getLevel(dimension), player.chunkPosition()));
-            });
-        }
     }
 
     public static Set<ResourceLocation> createDisabledPlanetsFromBuf(FriendlyByteBuf buf) {
@@ -115,16 +115,18 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
 
 
     public static Object2BooleanMap<ResourceKey<Level>> createClaimedChunksFromBuf(FriendlyByteBuf buf) {
-        int dimensionCount = buf.readVarInt();
-        if (dimensionCount == 0) return Object2BooleanMaps.emptyMap();
-        Object2BooleanMap<ResourceKey<Level>> claimedChunks = new Object2BooleanOpenHashMap<>();
+        if (CadmusIntegration.cadmusLoaded()) {
+            int dimensionCount = buf.readVarInt();
+            Object2BooleanMap<ResourceKey<Level>> claimedChunks = new Object2BooleanOpenHashMap<>();
 
-        for (int i = 0; i < dimensionCount; i++) {
-            ResourceKey<Level> dimension = buf.readResourceKey(Registries.DIMENSION);
-            claimedChunks.put(dimension, buf.readBoolean());
+            for (int i = 0; i < dimensionCount; i++) {
+                ResourceKey<Level> dimension = buf.readResourceKey(Registries.DIMENSION);
+                claimedChunks.put(dimension, buf.readBoolean());
+            }
+
+            return Object2BooleanMaps.unmodifiable(claimedChunks);
         }
-
-        return Object2BooleanMaps.unmodifiable(claimedChunks);
+        return Object2BooleanMaps.emptyMap();
     }
 
     public static Set<GlobalPos> createSpawnLocationsFromBuf(FriendlyByteBuf buf) {

@@ -399,8 +399,8 @@ public class ModLangProvider extends LanguageProvider {
         add("config.ad_astra.distributionRefreshRate", "Distribution refresh rate");
         add("config.ad_astra.pipeRefreshRate", "Pipe refresh rate");
 
-        add("subtitles.ad_astra.block.rocket_launch", "Rocket launches");
-        add("subtitles.ad_astra.block.rocket", "Rocket flies");
+        add("subtitles.ad_astra.entity.rocket_launch", "Rocket launches");
+        add("subtitles.ad_astra.entity.rocket", "Rocket flies");
         add("subtitles.ad_astra.block.wrench", "Wrench ratchets");
         add("subtitles.ad_astra.block.sliding_door_open", "Sliding door opens");
         add("subtitles.ad_astra.block.sliding_door_close", "Sliding door closes");
