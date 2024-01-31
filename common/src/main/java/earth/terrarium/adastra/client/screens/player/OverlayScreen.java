@@ -23,9 +23,9 @@ import java.util.Locale;
 public class OverlayScreen {
 
     public static final ResourceLocation BATTERY_EMPTY = new ResourceLocation(AdAstra.MOD_ID, "overlay/battery_empty");
-    public static final ResourceLocation BATTERY = new ResourceLocation(AdAstra.MOD_ID, "overlay/battery");
+    public static final ResourceLocation BATTERY = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/overlay/battery.png");
     public static final ResourceLocation OXYGEN_TANK_EMPTY = new ResourceLocation(AdAstra.MOD_ID, "overlay/oxygen_tank_empty");
-    public static final ResourceLocation OXYGEN_TANK = new ResourceLocation(AdAstra.MOD_ID, "overlay/oxygen_tank");
+    public static final ResourceLocation OXYGEN_TANK = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/overlay/oxygen_tank.png");
     public static final ResourceLocation ROCKET_BAR = new ResourceLocation(AdAstra.MOD_ID, "overlay/rocket_bar");
     public static final ResourceLocation ROCKET = new ResourceLocation(AdAstra.MOD_ID, "overlay/rocket");
 
@@ -76,7 +76,7 @@ public class OverlayScreen {
             poseStack.pushPose();
             poseStack.scale(scale, scale, scale);
             graphics.blitSprite(OXYGEN_TANK_EMPTY, x, y, 62, 52);
-            graphics.blitSprite(OXYGEN_TANK, x, y + 52 - barHeight, 0, 52 - barHeight, 62, barHeight, 62, 52);
+            graphics.blit(OXYGEN_TANK, x, y + 52 - barHeight, 0, 52 - barHeight, 62, barHeight, 62, 52);
 
             var text = String.format("%.1f%%", ratio * 100);
             int textWidth = font.width(text);
@@ -103,8 +103,7 @@ public class OverlayScreen {
             poseStack.pushPose();
             poseStack.scale(scale, scale, scale);
             graphics.blitSprite(BATTERY_EMPTY, x, y, 49, 27);
-            graphics.blitSprite(BATTERY, x, y, 0, 27, barWidth, 27, 49, 27);
-
+            graphics.blit(BATTERY, x, y, 0, 27, barWidth, 27, 49, 27);
 
             var text = String.format("%.1f%%", ratio * 100);
             int textWidth = font.width(text);
