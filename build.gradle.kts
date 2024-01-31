@@ -106,7 +106,7 @@ subprojects {
             "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-default-plugin", version = reiVersion)
             implementation("annotationProcessor"(group = "io.github.llamalad7", name = "mixinextras-common", version = mixinExtrasVersion))
 
-            "modCompileOnly"(group = "earth.terrarium.cadmus", name = "cadmus-$modLoader-1.20.2", version = cadmusVersion) {
+            "modCompileOnly"(group = "earth.terrarium.cadmus", name = "cadmus-$modLoader-1.20.1", version = cadmusVersion) {
                 isTransitive = false
             }
             "modCompileOnly"(group = "earth.terrarium.argonauts", name = "argonauts-$modLoader-1.20.2", version = argonautsVersion) {

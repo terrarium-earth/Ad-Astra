@@ -13,8 +13,7 @@ public class CadmusIntegration {
     }
 
     public static void claim(ServerPlayer player, ChunkPos pos) {
-        // TODO re-add when cadmus is updated
-//        ClaimApi.API.claim(player.serverLevel(), pos, false, player);
+        ClaimApi.API.claim(player.serverLevel(), pos, false, player);
     }
 
     public static boolean isClaimed(ServerLevel level, ChunkPos pos) {
