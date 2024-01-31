@@ -6,7 +6,6 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 
 public class PressableImageButton extends ImageButton {
     private WidgetSprites sprites;
@@ -27,8 +26,8 @@ public class PressableImageButton extends ImageButton {
     }
 
     @Override
-	public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-		ResourceLocation texture = sprites.get(!isFocused(), isHovered());
-		graphics.blitSprite(texture, getX(), getY(), width, height);
-	}
+    public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        ResourceLocation texture = sprites.get(!isFocused(), isHovered());
+        graphics.blitSprite(texture, getX(), getY(), width, height);
+    }
 }

@@ -11,7 +11,7 @@ public class AdAstraConfigLinks {
     public static final ResourcefulConfigLink MODRINTH = create(Type.MODRINTH, "https://modrinth.com/mod/ad-astra");
     public static final ResourcefulConfigLink CURSEFORGE = create(Type.CURSEFORGE, "https://www.curseforge.com/minecraft/mc-mods/ad-astra");
 
-    public static final ResourcefulConfigLink[] LINKS = new ResourcefulConfigLink[] {
+    public static final ResourcefulConfigLink[] LINKS = new ResourcefulConfigLink[]{
         DISCORD,
         GITHUB,
         MODRINTH,
