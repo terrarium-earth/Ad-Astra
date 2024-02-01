@@ -139,7 +139,7 @@ public class LaunchPadBlock extends Block implements SimpleWaterloggedBlock {
         }
     }
 
-    private BlockPos getController(BlockState state, BlockPos pos) {
+    public BlockPos getController(BlockState state, BlockPos pos) {
         var part = state.getValue(PART);
         return pos.south(part.xOffset()).west(part.yOffset());
     }
