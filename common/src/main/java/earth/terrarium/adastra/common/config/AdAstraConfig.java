@@ -14,7 +14,12 @@ import earth.terrarium.adastra.common.config.info.AdAstraConfigInfo;
 )
 @ConfigInfo.Provider(AdAstraConfigInfo.class)
 public final class AdAstraConfig {
-    @ConfigButton(target = "", text = "Client Config", translation = "config.ad_astra.clientConfig", position = Position.BEFORE)
+    @ConfigButton(
+        target = "",
+        text = "Client Config",
+        translation = "config.ad_astra.clientConfig",
+        position = Position.BEFORE
+    )
     public static void clientConfig() {
         AdAstraConfigClient.open();
     }

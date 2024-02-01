@@ -17,7 +17,6 @@ dependencies {
     }
 
     val minecraftVersion: String by project
-    val mixinExtrasVersion: String by project
     val fabricLoaderVersion: String by project
     val fabricApiVersion: String by project
     val modMenuVersion: String by project

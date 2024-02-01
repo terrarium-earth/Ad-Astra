@@ -4,9 +4,9 @@ import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.network.Packet;
 import com.teamresourceful.resourcefullib.common.network.base.ClientboundPacketType;
 import com.teamresourceful.resourcefullib.common.network.base.PacketType;
+import com.teamresourceful.resourcefullib.common.network.defaults.CodecPacketType;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.radio.screen.RadioScreen;
-import earth.terrarium.adastra.common.network.CodecPacketType;
 import earth.terrarium.adastra.common.utils.radio.StationInfo;
 import net.minecraft.resources.ResourceLocation;
 

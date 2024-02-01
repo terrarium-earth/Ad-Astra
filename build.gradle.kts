@@ -106,20 +106,20 @@ subprojects {
             "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-default-plugin", version = reiVersion)
             implementation("annotationProcessor"(group = "io.github.llamalad7", name = "mixinextras-common", version = mixinExtrasVersion))
 
-            "modCompileOnly"(group = "earth.terrarium.cadmus", name = "cadmus-$modLoader-1.20.1", version = cadmusVersion) {
+            "modCompileOnly"(group = "earth.terrarium.cadmus", name = "cadmus-$modLoader-$minecraftVersion", version = cadmusVersion) {
                 isTransitive = false
             }
-            "modCompileOnly"(group = "earth.terrarium.argonauts", name = "argonauts-$modLoader-1.20.2", version = argonautsVersion) {
+            "modCompileOnly"(group = "earth.terrarium.argonauts", name = "argonauts-$modLoader-$minecraftVersion", version = argonautsVersion) {
                 isTransitive = false
             }
         } else {
             "include"(implementation(group = "javazoom", name = "jlayer", version = "1.0.1"))
-//            "modLocalRuntime"(group = "earth.terrarium.cadmus", name = "cadmus-$modLoader-$minecraftVersion", version = cadmusVersion) {
-//                isTransitive = false
-//            }
-//            "modLocalRuntime"(group = "earth.terrarium.argonauts", name = "argonauts-$modLoader-$minecraftVersion", version = argonautsVersion) {
-//                isTransitive = false
-//            }
+            "modLocalRuntime"(group = "earth.terrarium.cadmus", name = "cadmus-$modLoader-$minecraftVersion", version = cadmusVersion) {
+                isTransitive = false
+            }
+            "modLocalRuntime"(group = "earth.terrarium.argonauts", name = "argonauts-$modLoader-$minecraftVersion", version = argonautsVersion) {
+                isTransitive = false
+            }
 
             "modLocalRuntime"(group = "earth.terrarium.athena", name = "athena-$modLoader-$minecraftVersion", version = athenaVersion)
             "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-api-$modLoader", version = reiVersion)
