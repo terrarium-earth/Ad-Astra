@@ -7,19 +7,25 @@
       ]
     }
   ],
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "modern_industrialization"
+    }
+  ],
   "type": "modern_industrialization:macerator",
   "duration": 800,
   "eu": 2,
   "item_inputs": [
     {
       "amount": 1,
-      "tag": "c:calorite_ores"
+      "tag": "c:ostrum_ores"
     }
   ],
   "item_outputs": [
     {
       "amount": 3,
-      "item": "ad_astra:raw_calorite"
+      "item": "ad_astra:raw_ostrum"
     }
   ]
 }

@@ -12,4 +12,4 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 
 ## Changes
 
-- Fixed sliding doors not dropping when broken (#447)
+- Added Neoforge Modern Industrialization support.

@@ -7,6 +7,12 @@
       ]
     }
   ],
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "modern_industrialization"
+    }
+  ],
   "type": "modern_industrialization:cutting_machine",
   "duration": 100,
   "eu": 2,
@@ -19,13 +25,13 @@
   "item_inputs": [
     {
       "amount": 1,
-      "tag": "ad_astra:glacian_logs"
+      "item": "ad_astra:glacian_planks"
     }
   ],
   "item_outputs": [
     {
-      "amount": 6,
-      "item": "ad_astra:glacian_planks"
+      "amount": 2,
+      "item": "ad_astra:glacian_slab"
     }
   ]
 }

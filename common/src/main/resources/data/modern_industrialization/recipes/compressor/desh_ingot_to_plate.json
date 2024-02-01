@@ -7,6 +7,12 @@
       ]
     }
   ],
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "modern_industrialization"
+    }
+  ],
   "type": "modern_industrialization:compressor",
   "duration": 200,
   "eu": 2,
