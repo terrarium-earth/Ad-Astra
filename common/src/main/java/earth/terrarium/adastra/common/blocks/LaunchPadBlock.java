@@ -135,7 +135,7 @@ public class LaunchPadBlock extends Block implements SimpleWaterloggedBlock {
         var controllerPos = getController(state, pos);
         for (var part : LaunchPadPartProperty.values()) {
             var partPos = controllerPos.north(part.xOffset()).east(part.yOffset());
-            level.destroyBlock(partPos, false);
+            level.destroyBlock(partPos, true);
         }
     }
 
