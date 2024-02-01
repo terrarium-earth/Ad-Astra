@@ -1,7 +1,7 @@
 ## WARNING
 
-This is an alpha release. Expect bugs and frequent updates until we reach a stable version.
-If you're updating from 1.15.5 or below, please back up your world and expect the following breaking changes:
+This is an beta release. If you're updating from 1.15.5 or below, please back up your world and expect the following
+breaking changes:
 
 - Sliding doors will break and need to be placed again.
 - Launch pads will break and need to be placed again.
@@ -12,5 +12,4 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 
 ## Changes
 
-- Fixed Rocket not opening planet screen for some people.
-- Added missing rocket subtitle translations.
+- Fixed sliding doors not dropping when broken (#447)

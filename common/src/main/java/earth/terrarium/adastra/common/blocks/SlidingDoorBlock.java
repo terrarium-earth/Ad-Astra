@@ -202,7 +202,7 @@ public class SlidingDoorBlock extends BasicEntityBlock implements Wrenchable {
         var controllerPos = getController(state, pos);
         for (var part : SlidingDoorPartProperty.values()) {
             var partPos = controllerPos.relative(direction, part.xOffset()).above(part.yOffset());
-            level.destroyBlock(partPos, false);
+            level.destroyBlock(partPos, true);
         }
     }
 

@@ -37,6 +37,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import org.apache.commons.lang3.text.WordUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -124,7 +125,7 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
                 pageIndex = 1;
                 selectedSolarSystem = solarSystem;
                 rebuildWidgets();
-            }, Component.translatable("solar_system.%s.%s".formatted(solarSystem.getNamespace(), solarSystem.getPath()))));
+            }, Component.translatableWithFallback("solar_system.%s.%s".formatted(solarSystem.getNamespace(), solarSystem.getPath()), title(solarSystem.getPath()))));
             buttons.add(button);
         });
     }
@@ -247,10 +248,10 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
         }
 
         if (pageIndex == 2 && selectedPlanet != null) {
-            var title = Component.translatable("planet.%s.%s".formatted(selectedPlanet.dimension().location().getNamespace(), selectedPlanet.dimension().location().getPath()));
+            var title = Component.translatableWithFallback("planet.%s.%s".formatted(selectedPlanet.dimension().location().getNamespace(), selectedPlanet.dimension().location().getPath()), title(selectedPlanet.dimension().location().getPath()));
             graphics.drawCenteredString(font, title, 57, height / 2 - 60, 0xffffff);
         } else if (pageIndex == 1 && selectedSolarSystem != null) {
-            var title = Component.translatable("solar_system.%s.%s".formatted(selectedSolarSystem.getNamespace(), selectedSolarSystem.getPath()));
+            var title = Component.translatableWithFallback("solar_system.%s.%s".formatted(selectedSolarSystem.getNamespace(), selectedSolarSystem.getPath()), title(selectedSolarSystem.getPath()));
             graphics.drawCenteredString(font, title, 57, height / 2 - 60, 0xffffff);
         } else {
             graphics.drawCenteredString(font, ConstantComponents.CATALOG, 57, height / 2 - 60, 0xffffff);
@@ -390,5 +391,11 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     public void landOnSpaceStation(ResourceKey<Level> dimension, ChunkPos pos) {
         NetworkHandler.CHANNEL.sendToServer(new ServerboundLandOnSpaceStationPacket(dimension, pos));
         close();
+    }
+
+    // StringUtils only replaces the first word so WordUtils is needed
+    @SuppressWarnings("deprecation")
+    private String title(String string) {
+        return WordUtils.capitalizeFully(string.replace("_", " "));
     }
 }
