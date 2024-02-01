@@ -1,4 +1,4 @@
-package earth.terrarium.adastra.forge.compat;
+package earth.terrarium.adastra.common.compat.create;
 
 import com.simibubi.create.content.kinetics.mechanicalArm.ArmInteractionPointType;
 import earth.terrarium.adastra.AdAstra;

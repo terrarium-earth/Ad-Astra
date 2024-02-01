@@ -6,7 +6,7 @@ import earth.terrarium.adastra.client.forge.AdAstraClientForge;
 import earth.terrarium.adastra.common.commands.AdAstraCommands;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.tags.ModBlockTags;
-import earth.terrarium.adastra.forge.compat.CreateCompat;
+import earth.terrarium.adastra.common.compat.create.CreateCompat;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;

@@ -17,6 +17,17 @@ loom {
     }
 }
 
+repositories {
+    maven {
+        url = uri("https://maven.tterrag.com/")
+        content {
+            includeGroup("com.tterrag.registrate")
+            includeGroup("com.jozufozu.flywheel")
+            includeGroup("com.simibubi.create")
+        }
+    }
+}
+
 val common: Configuration by configurations.creating {
     configurations.compileClasspath.get().extendsFrom(this)
     configurations.runtimeClasspath.get().extendsFrom(this)
