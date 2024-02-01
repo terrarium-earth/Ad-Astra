@@ -1,6 +1,6 @@
 ## WARNING
 
-This is an beta release. If you're updating from 1.15.5 or below, please back up your world and expect the following
+This is a beta release. If you're updating from 1.15.5 or below, please back up your world and expect the following
 breaking changes:
 
 - Sliding doors will break and need to be placed again.
