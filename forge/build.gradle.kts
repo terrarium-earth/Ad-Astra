@@ -36,6 +36,9 @@ dependencies {
     val forgeVersion: String by project
     val reiVersion: String by project
     val jeiVersion: String by project
+    val registrateForgeVersion: String by project
+    val flywheelForgeVersion: String by project
+    val createForgeVersion: String by project
 
     forge(group = "net.minecraftforge", name = "forge", version = "$minecraftVersion-$forgeVersion")
 
@@ -50,6 +53,10 @@ dependencies {
     forgeRuntimeLibrary("com.teamresourceful:bytecodecs:1.0.2")
 
     forgeRuntimeLibrary(group = "javazoom", name = "jlayer", version = "1.0.1")
+
+    modImplementation("com.tterrag.registrate:Registrate:${registrateForgeVersion}")
+    modImplementation("com.jozufozu.flywheel:flywheel-forge-${minecraftVersion}:${flywheelForgeVersion}")
+    modImplementation("com.simibubi.create:create-${minecraftVersion}:${createForgeVersion}:slim") { isTransitive = false }
 
     // TODO: remove in neoforge
     "annotationProcessor"(group = "io.github.llamalad7", name = "mixinextras-forge", version = mixinExtrasVersion).apply {
