@@ -46,6 +46,7 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
@@ -80,6 +81,12 @@ public class AdAstraClient {
         registerItemProperties();
         registerRenderLayers();
         registerArmor();
+
+        AdAstra.setRegistryAccess(() -> {
+            var connection = Minecraft.getInstance().getConnection();
+            if (connection == null) return RegistryAccess.EMPTY;
+            return connection.registryAccess();
+        });
     }
 
     private static void registerScreens() {

@@ -29,7 +29,6 @@ dependencies {
 
     val minecraftVersion: String by project
     val neoforgeVersion: String by project
-    val reiVersion: String by project
     val jeiVersion: String by project
 
     neoForge(group = "net.neoforged", name = "neoforge", version = neoforgeVersion)

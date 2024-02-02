@@ -87,7 +87,11 @@ public class AdAstra {
     }
 
     public static void onServerStarted(MinecraftServer server) {
-        registryAccessSupplier = server::registryAccess;
+        setRegistryAccess(server::registryAccess);
+    }
+
+    public static void setRegistryAccess(Supplier<RegistryAccess> supplier) {
+        registryAccessSupplier = supplier;
     }
 
     public static RegistryAccess getRegistryAccess() {

@@ -13,3 +13,4 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 ## Changes
 
 - Reduced zero gravity threshold.
+- Fixed players not able to join servers.
