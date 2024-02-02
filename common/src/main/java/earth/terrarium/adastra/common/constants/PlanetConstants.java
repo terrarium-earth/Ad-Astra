@@ -47,5 +47,5 @@ public class PlanetConstants {
     public static final int MAX_LIVEABLE_TEMPERATURE = 70;
 
     public static final float SPACE_FRICTION = 0.999f;
-    public static final float ZERO_GRAVITY_THRESHOLD = 0.09f;
+    public static final float ZERO_GRAVITY_THRESHOLD = 0.05f;
 }

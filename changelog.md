@@ -12,6 +12,4 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 
 ## Changes
 
-- Added Neoforge Modern Industrialization support.
-- Fixed launch pad not dropping block.
-- Fixed rocket being able to launch with any amount of fuel.
+- Reduced zero gravity threshold.
