@@ -156,7 +156,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> CHEESE_BLOCK = CUBES.register("cheese_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SPONGE).sound(SoundType.SLIME_BLOCK)));
     public static final RegistryEntry<Block> SKY_STONE = CUBES.register("sky_stone", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)));
 
-    public static final RegistryEntry<Block> VENT = CUBES.register("vent", () -> new TransparentBlock(IRON_PROPERTIES.noOcclusion()));
+    public static final RegistryEntry<Block> VENT = CUBES.register("vent", () -> new TransparentBlock(IRON_PROPERTIES.noOcclusion()) {});
     public static final RegistryEntry<Block> IRON_FACTORY_BLOCK = CTM_CUBES.register("iron_factory_block", () -> new Block(IRON_PROPERTIES));
     public static final RegistryEntry<Block> ENCASED_IRON_BLOCK = CUBES.register("encased_iron_block", () -> new Block(IRON_PROPERTIES));
     public static final RegistryEntry<Block> IRON_PLATEBLOCK = CUBES.register("iron_plateblock", () -> new Block(IRON_PROPERTIES));

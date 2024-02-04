@@ -12,5 +12,5 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 
 ## Changes
 
-- Reduced zero gravity threshold.
-- Fixed players not able to join servers.
+- Fixed fluid map colors being incorrect.
+- Fixed crash on startup when Architectury API is not installed due to accessing protected TransparentBlock class.
