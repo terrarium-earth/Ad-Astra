@@ -4,6 +4,18 @@
     {
       "id": "techreborn:oil",
       "required": false
+    },
+    {
+      "id": "forge:crude_oil",
+      "required": false
+    },
+    {
+      "id": "c:oil",
+      "required": false
+    },
+    {
+      "id": "c:crude_oil",
+      "required": false
     }
   ]
 }
