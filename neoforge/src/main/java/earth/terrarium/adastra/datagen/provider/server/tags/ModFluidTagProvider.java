@@ -55,5 +55,8 @@ public class ModFluidTagProvider extends TagsProvider<Fluid> {
         tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("forge:biodiesel")));
 
         tag(ModFluidTags.OIL).add(TagEntry.optionalElement(new ResourceLocation("techreborn:oil")));
+        tag(ModFluidTags.OIL).add(TagEntry.optionalElement(new ResourceLocation("forge:crude_oil")));
+        tag(ModFluidTags.OIL).add(TagEntry.optionalElement(new ResourceLocation("c:oil")));
+        tag(ModFluidTags.OIL).add(TagEntry.optionalElement(new ResourceLocation("c:crude_oil")));
     }
 }
