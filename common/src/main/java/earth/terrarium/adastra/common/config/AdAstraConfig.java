@@ -14,6 +14,7 @@ import earth.terrarium.adastra.common.config.info.AdAstraConfigInfo;
 )
 @ConfigInfo.Provider(AdAstraConfigInfo.class)
 public final class AdAstraConfig {
+    @SuppressWarnings("unused")
     @ConfigButton(
         target = "",
         text = "Client Config",
@@ -95,4 +96,12 @@ public final class AdAstraConfig {
     )
     @Comment("Uses normal gravity for all planets.")
     public static boolean disableGravity;
+
+    @ConfigEntry(
+        id = "disableAirVortexes",
+        type = EntryType.BOOLEAN,
+        translation = "config.ad_astra.disableAirVortexes"
+    )
+    @Comment("An Air Vortex is created when an oxygenated structure breaks its seal, causing every entity inside to rapidly get sucked out. This setting disables that.")
+    public static boolean disableAirVortexes;
 }
