@@ -22,15 +22,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public class OxygenLoadingCategory implements IRecipeCategory<OxygenLoadingRecipe> {
+public record OxygenLoadingCategory(IGuiHelper guiHelper) implements IRecipeCategory<OxygenLoadingRecipe> {
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "oxygen_loading");
     public static final RecipeType<OxygenLoadingRecipe> RECIPE = new RecipeType<>(ID, OxygenLoadingRecipe.class);
-
-    private final IGuiHelper guiHelper;
-
-    public OxygenLoadingCategory(IGuiHelper guiHelper) {
-        this.guiHelper = guiHelper;
-    }
 
     @Override
     public RecipeType<OxygenLoadingRecipe> getRecipeType() {

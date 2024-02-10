@@ -24,15 +24,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public class CryoFreezingCategory implements IRecipeCategory<CryoFreezingRecipe> {
+public record CryoFreezingCategory(IGuiHelper guiHelper) implements IRecipeCategory<CryoFreezingRecipe> {
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "cryo_freezing");
     public static final RecipeType<CryoFreezingRecipe> RECIPE = new RecipeType<>(ID, CryoFreezingRecipe.class);
-
-    private final IGuiHelper guiHelper;
-
-    public CryoFreezingCategory(IGuiHelper guiHelper) {
-        this.guiHelper = guiHelper;
-    }
 
     @Override
     public RecipeType<CryoFreezingRecipe> getRecipeType() {

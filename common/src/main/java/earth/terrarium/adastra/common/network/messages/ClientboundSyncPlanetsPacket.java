@@ -34,12 +34,12 @@ public record ClientboundSyncPlanetsPacket(
         public Type() {
             super(
                 ClientboundSyncPlanetsPacket.class,
-                new ResourceLocation(AdAstra.MOD_ID, "add_role"),
+                new ResourceLocation(AdAstra.MOD_ID, "sync_planets"),
                 ObjectByteCodec.create(
                     ByteCodec.passthrough(
-                            (buf, a) -> AdAstraData.encodePlanets(new FriendlyByteBuf(buf)),
+                            (buf, planet) -> AdAstraData.encodePlanets(new FriendlyByteBuf(buf)),
                             (buf) -> AdAstraData.decodePlanets(new FriendlyByteBuf(buf)).stream()
-                                .collect(Collectors.toMap(Planet::dimension, Function.identity())))
+                                .collect(Collectors.toUnmodifiableMap(Planet::dimension, Function.identity())))
                         .fieldOf(ClientboundSyncPlanetsPacket::planets),
                     ClientboundSyncPlanetsPacket::new));
         }

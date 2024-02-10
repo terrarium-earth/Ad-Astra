@@ -31,7 +31,7 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> writer) {
         this.output = writer;
-        ModMachineRecipeProvider.createRecipes(writer);
+        ModCustomRecipeProvider.createRecipes(writer);
 
         shaped(ModItems.ROVER, 1, ModItems.DESH_ENGINE, r -> r
             .define('W', ModItems.WHEEL.get())

@@ -26,5 +26,6 @@
         "tag": "ad_astra:desh_plates"
       }
     }
-  ]
+  ],
+  "structure": "ad_astra:space_station"
 }

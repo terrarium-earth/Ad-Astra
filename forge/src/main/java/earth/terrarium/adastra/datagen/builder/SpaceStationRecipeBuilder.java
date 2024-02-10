@@ -29,10 +29,12 @@ public class SpaceStationRecipeBuilder implements RecipeBuilder {
 
     private final List<IngredientHolder> ingredients;
     private final ResourceKey<Level> dimension;
+    private final ResourceLocation structure;
 
-    public SpaceStationRecipeBuilder(List<IngredientHolder> ingredients, ResourceKey<Level> dimension) {
+    public SpaceStationRecipeBuilder(List<IngredientHolder> ingredients, ResourceKey<Level> dimension, ResourceLocation structure) {
         this.ingredients = ingredients;
         this.dimension = dimension;
+        this.structure = structure;
     }
 
     @Override
@@ -60,7 +62,7 @@ public class SpaceStationRecipeBuilder implements RecipeBuilder {
 
         finishedRecipeConsumer.accept(new SpaceStationRecipeBuilder.Result(
             recipeId,
-            ingredients, dimension,
+            ingredients, dimension, structure,
             this.advancement, new ResourceLocation(recipeId.getNamespace(), "recipes/space_stations/" + recipeId.getPath()))
         );
     }
@@ -69,13 +71,14 @@ public class SpaceStationRecipeBuilder implements RecipeBuilder {
         ResourceLocation id,
         List<IngredientHolder> ingredients,
         ResourceKey<Level> dimension,
+        ResourceLocation structure,
         Advancement.Builder advancement, ResourceLocation advancementId
     ) implements FinishedRecipe {
 
         @Override
         public void serializeRecipeData(@NotNull JsonObject json) {
             SpaceStationRecipe.codec(id)
-                .encodeStart(JsonOps.INSTANCE, new SpaceStationRecipe(id, ingredients, dimension))
+                .encodeStart(JsonOps.INSTANCE, new SpaceStationRecipe(id, ingredients, dimension, structure))
                 .resultOrPartial(Constants.LOGGER::error)
                 .ifPresent(out ->
                     out.getAsJsonObject().entrySet().forEach(entry -> json.add(entry.getKey(), entry.getValue()))

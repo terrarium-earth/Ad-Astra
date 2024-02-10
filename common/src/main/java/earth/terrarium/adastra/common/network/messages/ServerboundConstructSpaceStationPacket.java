@@ -12,6 +12,7 @@ import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.network.CodecPacketType;
+import earth.terrarium.adastra.common.recipes.SpaceStationRecipe;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -33,8 +34,6 @@ public record ServerboundConstructSpaceStationPacket(
     ResourceKey<Level> dimension, Component name) implements Packet<ServerboundConstructSpaceStationPacket> {
 
     public static final ServerboundPacketType<ServerboundConstructSpaceStationPacket> TYPE = new Type();
-
-    public static final ResourceLocation SPACE_STATION_STRUCTURE = new ResourceLocation(AdAstra.MOD_ID, "space_station");
 
     @Override
     public PacketType<ServerboundConstructSpaceStationPacket> type() {
@@ -74,14 +73,16 @@ public record ServerboundConstructSpaceStationPacket(
                     return;
                 }
 
+                SpaceStationRecipe recipe = SpaceStationRecipe.getSpaceStation(targetLevel, targetLevel.dimension()).orElse(null);
+                if (recipe == null) return;
                 if (SpaceStationHandler.isInSpaceStation(serverPlayer, targetLevel)) return;
-                if (!SpaceStationHandler.hasIngredients(serverPlayer, targetLevel, targetLevel.dimension())) return;
-                SpaceStationHandler.consumeIngredients(serverPlayer, targetLevel);
+                if (!SpaceStationRecipe.hasIngredients(serverPlayer, targetLevel, recipe)) return;
+                SpaceStationRecipe.consumeIngredients(serverPlayer, targetLevel);
 
                 var pos = player.chunkPosition();
 
                 // Construct space station structure from structure nbt file
-                StructureTemplate structure = targetLevel.getStructureManager().getOrCreate(SPACE_STATION_STRUCTURE);
+                StructureTemplate structure = targetLevel.getStructureManager().getOrCreate(recipe.structure());
                 BlockPos stationPos = BlockPos.containing((pos.getMiddleBlockX() - (structure.getSize().getX() / 2.0f)), 100, (pos.getMiddleBlockZ() - (structure.getSize().getZ() / 2.0f)));
                 targetLevel.getChunkSource().addRegionTicket(TicketType.PORTAL, new ChunkPos(stationPos), 1, stationPos);
                 structure.placeInWorld(targetLevel, stationPos, stationPos, new StructurePlaceSettings(), targetLevel.random, 2);

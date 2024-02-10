@@ -5,7 +5,6 @@ import com.mojang.datafixers.util.Pair;
 import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.common.compat.argonauts.ArgonautsIntegration;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
-import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;
 import earth.terrarium.adastra.common.menus.base.PlanetsMenuProvider;
 import earth.terrarium.adastra.common.network.NetworkHandler;
@@ -102,7 +101,9 @@ public class PlanetsMenu extends AbstractContainerMenu {
 
     public boolean canConstruct(ResourceKey<Level> dimension) {
         if (isClaimed(dimension)) return false;
-        return SpaceStationHandler.hasIngredients(player, level, dimension);
+        var recipe = SpaceStationRecipe.getSpaceStation(level, dimension).orElse(null);
+        if (recipe == null) return false;
+        return SpaceStationRecipe.hasIngredients(player, level, recipe);
     }
 
     private Map<ResourceKey<Level>, List<Pair<ItemStack, Integer>>> getSpaceStationRecipes() {

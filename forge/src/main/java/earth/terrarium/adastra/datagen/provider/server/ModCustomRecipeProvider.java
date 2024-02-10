@@ -32,9 +32,10 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-public abstract class ModMachineRecipeProvider extends RecipeProvider {
+public abstract class ModCustomRecipeProvider extends RecipeProvider {
+    public static final ResourceLocation SPACE_STATION_STRUCTURE = new ResourceLocation(AdAstra.MOD_ID, "space_station");
 
-    public ModMachineRecipeProvider(PackOutput output) {
+    public ModCustomRecipeProvider(PackOutput output) {
         super(output);
     }
 
@@ -165,7 +166,8 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
                 IngredientHolder.of(Ingredient.of(ModItemTags.DESH_INGOTS), 32),
                 IngredientHolder.of(Ingredient.of(ModItemTags.DESH_PLATES), 32)
             ),
-            Planet.EARTH_ORBIT);
+            Planet.EARTH_ORBIT,
+            SPACE_STATION_STRUCTURE);
 
         createSpaceStation(writer, List.of(
                 IngredientHolder.of(Ingredient.of(ModItemTags.IRON_PLATES), 64),
@@ -173,7 +175,8 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
                 IngredientHolder.of(Ingredient.of(ModItemTags.DESH_INGOTS), 32),
                 IngredientHolder.of(Ingredient.of(ModItemTags.DESH_PLATES), 32)
             ),
-            Planet.MOON_ORBIT);
+            Planet.MOON_ORBIT,
+            SPACE_STATION_STRUCTURE);
 
         createSpaceStation(writer, List.of(
                 IngredientHolder.of(Ingredient.of(ModItemTags.STEEL_INGOTS), 32),
@@ -181,7 +184,8 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
                 IngredientHolder.of(Ingredient.of(ModItemTags.OSTRUM_INGOTS), 32),
                 IngredientHolder.of(Ingredient.of(ModItemTags.OSTRUM_PLATES), 32)
             ),
-            Planet.MARS_ORBIT);
+            Planet.MARS_ORBIT,
+            SPACE_STATION_STRUCTURE);
 
         createSpaceStation(writer, List.of(
                 IngredientHolder.of(Ingredient.of(ModItemTags.STEEL_INGOTS), 64),
@@ -189,7 +193,8 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
                 IngredientHolder.of(Ingredient.of(ModItemTags.CALORITE_INGOTS), 32),
                 IngredientHolder.of(Ingredient.of(ModItemTags.CALORITE_PLATES), 32)
             ),
-            Planet.VENUS_ORBIT);
+            Planet.VENUS_ORBIT,
+            SPACE_STATION_STRUCTURE);
 
         createSpaceStation(writer, List.of(
                 IngredientHolder.of(Ingredient.of(ModItemTags.STEEL_INGOTS), 64),
@@ -197,7 +202,8 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
                 IngredientHolder.of(Ingredient.of(ModItemTags.CALORITE_INGOTS), 32),
                 IngredientHolder.of(Ingredient.of(ModItemTags.CALORITE_PLATES), 32)
             ),
-            Planet.MERCURY_ORBIT);
+            Planet.MERCURY_ORBIT,
+            SPACE_STATION_STRUCTURE);
 
 
         createSpaceStation(writer, List.of(
@@ -206,7 +212,8 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
                 IngredientHolder.of(Ingredient.of(ModItemTags.OSTRUM_PLATES), 32),
                 IngredientHolder.of(Ingredient.of(ModItemTags.CALORITE_PLATES), 32)
             ),
-            Planet.GLACIO_ORBIT);
+            Planet.GLACIO_ORBIT,
+            SPACE_STATION_STRUCTURE);
     }
 
     public static void createCompressing(Consumer<FinishedRecipe> writer, int cookingtime, int energy, TagKey<Item> ingredient, ItemStack result) {
@@ -289,8 +296,8 @@ public abstract class ModMachineRecipeProvider extends RecipeProvider {
         builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "nasa_workbench/%s_from_nasa_workbench".formatted(resultId.getPath())));
     }
 
-    public static void createSpaceStation(Consumer<FinishedRecipe> writer, List<IngredientHolder> ingredients, ResourceKey<Level> dimension) {
-        var builder = new SpaceStationRecipeBuilder(ingredients, dimension);
+    public static void createSpaceStation(Consumer<FinishedRecipe> writer, List<IngredientHolder> ingredients, ResourceKey<Level> dimension, ResourceLocation structure) {
+        var builder = new SpaceStationRecipeBuilder(ingredients, dimension, structure);
         builder.save(writer, new ResourceLocation(AdAstra.MOD_ID, "space_station/%s_space_station".formatted(dimension.location().getPath())));
     }
 

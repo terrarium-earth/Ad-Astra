@@ -22,15 +22,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public class AlloyingCategory implements IRecipeCategory<AlloyingRecipe> {
+public record AlloyingCategory(IGuiHelper guiHelper) implements IRecipeCategory<AlloyingRecipe> {
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "alloying");
     public static final RecipeType<AlloyingRecipe> RECIPE = new RecipeType<>(ID, AlloyingRecipe.class);
-
-    private final IGuiHelper guiHelper;
-
-    public AlloyingCategory(IGuiHelper guiHelper) {
-        this.guiHelper = guiHelper;
-    }
 
     @Override
     public RecipeType<AlloyingRecipe> getRecipeType() {
