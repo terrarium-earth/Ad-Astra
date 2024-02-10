@@ -18,3 +18,4 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 - Space station recipes now specify the nbt structure file. This allows you to set different space station structures for different planets.
 - Added config to disable Air Vortexes.
 - Fixed planet data not being sent on NeoForge (#466).
+- Fixed Comfort's Hammock breaking with Ad Astra (#470).

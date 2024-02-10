@@ -31,7 +31,7 @@ side = "BOTH"
 [[dependencies.ad_astra]]
 modId = "resourcefullib"
 mandatory = true
-versionRange = "[2.1.19,)"
+versionRange = "[2.1.23,)"
 ordering = "NONE"
 side = "BOTH"
 
