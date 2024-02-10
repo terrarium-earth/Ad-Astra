@@ -7,6 +7,7 @@ import earth.terrarium.adastra.client.config.AdAstraConfigClient;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
+import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
@@ -176,6 +177,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         Set<BlockPos> lastPositionsCopy = new HashSet<>(lastDistributedBlocks);
         this.resetLastDistributedBlocks(positions);
 
+        if (AdAstraConfig.disableAirVortexes) return;
         if (positions.size() < limit) return;
         if (lastPositionsCopy.size() >= limit) return;
         if (OxygenApi.API.hasOxygen(level)) return;

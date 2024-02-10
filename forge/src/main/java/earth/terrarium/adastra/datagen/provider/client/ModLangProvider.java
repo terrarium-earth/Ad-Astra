@@ -375,6 +375,7 @@ public class ModLangProvider extends LanguageProvider {
         add("config.ad_astra.disableOxygen", "Disable oxygen");
         add("config.ad_astra.disableTemperature", "Disable temperature");
         add("config.ad_astra.disableGravity", "Disable gravity");
+        add("config.ad_astra.disableAirVortexes", "Disable air vortexes");
 
         add("config.ad_astra.machines", "Machines");
         add("config.ad_astra.ironTierMaxEnergyInOut", "Iron tier max energy in/out");
