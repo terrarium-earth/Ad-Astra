@@ -22,15 +22,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public class CompressingCategory implements IRecipeCategory<CompressingRecipe> {
+public record CompressingCategory(IGuiHelper guiHelper) implements IRecipeCategory<CompressingRecipe> {
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "compressing");
     public static final RecipeType<CompressingRecipe> RECIPE = new RecipeType<>(ID, CompressingRecipe.class);
-
-    private final IGuiHelper guiHelper;
-
-    public CompressingCategory(IGuiHelper guiHelper) {
-        this.guiHelper = guiHelper;
-    }
 
     @Override
     public RecipeType<CompressingRecipe> getRecipeType() {

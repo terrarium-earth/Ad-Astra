@@ -19,8 +19,8 @@ import java.util.List;
 public class SpaceStationRecipeBuilder extends CodecRecipeBuilder {
     private final SpaceStationRecipe recipe;
 
-    public SpaceStationRecipeBuilder(List<IngredientHolder> ingredients, ResourceKey<Level> dimension) {
-        recipe = new SpaceStationRecipe(ingredients, dimension);
+    public SpaceStationRecipeBuilder(List<IngredientHolder> ingredients, ResourceKey<Level> dimension, ResourceLocation structure) {
+        recipe = new SpaceStationRecipe(ingredients, dimension, structure);
     }
 
     @Override

@@ -17,6 +17,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -46,7 +47,9 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
         AdAstraData.planets().keySet().forEach(dimension -> {
             buffer.writeResourceKey(dimension);
 
-            var spaceStations = SpaceStationHandler.getAllSpaceStations(player.server.getLevel(dimension));
+            ServerLevel targetLevel = player.server.getLevel(dimension);
+            if (targetLevel == null) throw new IllegalStateException("Dimension " + dimension + " does not exist.");
+            var spaceStations = SpaceStationHandler.getAllSpaceStations(targetLevel);
             buffer.writeVarInt(spaceStations.size());
 
             spaceStations.forEach((id, stations) -> {

@@ -2,18 +2,13 @@ package earth.terrarium.adastra.common.handlers;
 
 import com.teamresourceful.resourcefullib.common.utils.SaveHandler;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;
-import earth.terrarium.adastra.common.recipes.base.IngredientHolder;
-import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.Level;
 
 import java.util.*;
 
@@ -85,33 +80,5 @@ public class SpaceStationHandler extends SaveHandler {
 
     public static Set<SpaceStation> getOwnedSpaceStations(UUID id, ServerLevel level) {
         return read(level).spaceStationData.getOrDefault(id, Set.of());
-    }
-
-    public static boolean hasIngredients(Player player, Level level, ResourceKey<Level> dimension) {
-        if (player.isCreative() || player.isSpectator()) return true;
-
-        var recipe = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.SPACE_STATION_RECIPE.get()).stream()
-            .filter(r -> dimension.equals(r.value().dimension())).findFirst().orElse(null);
-        if (recipe == null) return false;
-        return recipe.value().matches(player.getInventory(), level);
-    }
-
-    public static void consumeIngredients(Player player, Level level) {
-        if (player.isCreative() || player.isSpectator()) return;
-
-        var recipe = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.SPACE_STATION_RECIPE.get()).stream()
-            .filter(r -> level.dimension().equals(r.value().dimension())).findFirst().orElse(null);
-        if (recipe == null) return;
-        if (!recipe.value().matches(player.getInventory(), level)) return;
-
-        var inventory = player.getInventory();
-        for (IngredientHolder holder : recipe.value().ingredients()) {
-            for (int i = 0; i < inventory.getContainerSize(); i++) {
-                if (holder.ingredient().test(inventory.getItem(i))) {
-                    inventory.removeItem(i, holder.count());
-                    break;
-                }
-            }
-        }
     }
 }

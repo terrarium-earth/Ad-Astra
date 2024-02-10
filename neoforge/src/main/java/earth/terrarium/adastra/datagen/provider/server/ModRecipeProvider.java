@@ -28,7 +28,7 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(RecipeOutput output) {
         this.output = output;
-        ModMachineRecipeProvider.createRecipes(output);
+        ModCustomRecipeProvider.createRecipes(output);
 
         shaped(ModItems.ROVER, 1, ModItems.DESH_ENGINE, r -> r
             .define('W', ModItems.WHEEL.get())

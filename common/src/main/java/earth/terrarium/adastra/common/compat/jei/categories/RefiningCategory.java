@@ -22,15 +22,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public class RefiningCategory implements IRecipeCategory<RefiningRecipe> {
+public record RefiningCategory(IGuiHelper guiHelper) implements IRecipeCategory<RefiningRecipe> {
     public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "refining");
     public static final RecipeType<RefiningRecipe> RECIPE = new RecipeType<>(ID, RefiningRecipe.class);
-
-    private final IGuiHelper guiHelper;
-
-    public RefiningCategory(IGuiHelper guiHelper) {
-        this.guiHelper = guiHelper;
-    }
 
     @Override
     public RecipeType<RefiningRecipe> getRecipeType() {

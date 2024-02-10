@@ -103,7 +103,9 @@ public class PlanetsMenu extends AbstractContainerMenu {
 
     public boolean canConstruct(ResourceKey<Level> dimension) {
         if (isClaimed(dimension)) return false;
-        return SpaceStationHandler.hasIngredients(player, level, dimension);
+        var recipe = SpaceStationRecipe.getSpaceStation(level, dimension).orElse(null);
+        if (recipe == null) return false;
+        return SpaceStationRecipe.hasIngredients(player, level, recipe.value());
     }
 
     private Map<ResourceKey<Level>, List<Pair<ItemStack, Integer>>> getSpaceStationRecipes() {
