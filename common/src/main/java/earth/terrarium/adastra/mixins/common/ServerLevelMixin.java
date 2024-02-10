@@ -79,7 +79,7 @@ public abstract class ServerLevelMixin {
     )
     public void adastra$tick(BooleanSupplier hasTimeLeft, CallbackInfo ci) {
         ServerLevel level = (ServerLevel) (Object) this;
-        if (PlanetApi.API.isExtraterrestrial(level)) {
+        if (PlanetApi.API.isExtraterrestrial(level) && !Level.OVERWORLD.equals(level.dimension())) {
             // Fix night not advancing when sleeping in space
             long time = level.getLevelData().getDayTime() + 24000L;
             level.getServer().getAllLevels().forEach(l -> l.setDayTime(time - time % 24000L));
