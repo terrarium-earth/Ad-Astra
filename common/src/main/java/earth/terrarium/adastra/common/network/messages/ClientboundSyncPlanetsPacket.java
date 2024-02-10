@@ -46,7 +46,7 @@ public record ClientboundSyncPlanetsPacket(
 
         @Override
         public Runnable handle(ClientboundSyncPlanetsPacket packet) {
-            return () -> AdAstraData.setPlanets(packet.planets);
+            return () -> AdAstraData.setPlanets(Map.copyOf(packet.planets));
         }
     }
 }

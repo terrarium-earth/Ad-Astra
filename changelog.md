@@ -2,3 +2,4 @@
 - Fixed crash on startup when Architectury API is not installed due to accessing protected TransparentBlock class.
 - Space station recipes now specify the nbt structure file. This allows you to set different space station structures for different planets.
 - Added config to disable Air Vortexes.
+- Fixed planet data not being sent on NeoForge (#466).
