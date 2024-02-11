@@ -407,6 +407,7 @@
   "config.ad_astra.coalGeneratorEnergyGenerationPerTick": "Coal generator energy generation per tick",
   "config.ad_astra.description": "Live long and prosper, and may the force be with you.",
   "config.ad_astra.deshTier": "Desh tier",
+  "config.ad_astra.disableAirVortexes": "Disable air vortexes",
   "config.ad_astra.disableGravity": "Disable gravity",
   "config.ad_astra.disableOxygen": "Disable oxygen",
   "config.ad_astra.disableTemperature": "Disable temperature",
