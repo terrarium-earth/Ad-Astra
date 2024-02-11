@@ -12,10 +12,4 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 
 ## Changes
 
-- Reduced zero gravity threshold.
-- Fixed fluid map colors being incorrect.
-- Added forge and fabric oil tags to oil tag (#460)
-- Space station recipes now specify the nbt structure file. This allows you to set different space station structures for different planets.
-- Added config to disable Air Vortexes.
-- Fixed planet data not being sent on NeoForge (#466).
-- Fixed Comfort's Hammock breaking with Ad Astra (#470).
+- Fixed Ad Astra using a shared property object for all metal blocks, causing them to have properties like no occlusion when they should have it.
