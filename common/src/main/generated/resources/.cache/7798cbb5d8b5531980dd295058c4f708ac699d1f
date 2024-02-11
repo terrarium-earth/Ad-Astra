@@ -1,10 +1,10 @@
-// 1.20.1	2024-02-07T02:45:28.988402	Tags for minecraft:fluid mod id ad_astra
+// 1.20.1	2024-02-11T17:14:50.795788	Tags for minecraft:fluid mod id ad_astra
 177c9e2ff17d4101adeb82bf787abd6ab892330a data/ad_astra/tags/fluids/efficient_fuel.json
 cf3608bd187922aeb48c566c19e8482b0dca34c7 data/ad_astra/tags/fluids/evaporates_in_space.json
 cf3608bd187922aeb48c566c19e8482b0dca34c7 data/ad_astra/tags/fluids/freezes_in_space.json
-b11e379dddd685cf39ec4c89bccbf2dda3dc8b4d data/ad_astra/tags/fluids/fuel.json
+19006bc389179d9ecf139382e875ce903840b6d0 data/ad_astra/tags/fluids/fuel.json
 f6ca4e8c6beb4dcc0ab209d2fca1dfa5009bad47 data/ad_astra/tags/fluids/hydrogen.json
-cf36664d3947c12d3091e1e1d0b6d933b08bb854 data/ad_astra/tags/fluids/oil.json
+02d9f07d65e3fb7b28e3e276bb99b31f92f95df9 data/ad_astra/tags/fluids/oil.json
 ae5df289b9e00ac9d1b053aed01c8f2b3e94057c data/ad_astra/tags/fluids/oxygen.json
 169053d1b00c68b76bb66a96b544352e1953b4e5 data/ad_astra/tags/fluids/tier_1_rocket_fuel.json
 169053d1b00c68b76bb66a96b544352e1953b4e5 data/ad_astra/tags/fluids/tier_1_rover_fuel.json
@@ -12,3 +12,11 @@ ae5df289b9e00ac9d1b053aed01c8f2b3e94057c data/ad_astra/tags/fluids/oxygen.json
 169053d1b00c68b76bb66a96b544352e1953b4e5 data/ad_astra/tags/fluids/tier_3_rocket_fuel.json
 169053d1b00c68b76bb66a96b544352e1953b4e5 data/ad_astra/tags/fluids/tier_4_rocket_fuel.json
 62b86c19d3471b75a8288dba78c665f4503b508e data/ad_astra/tags/fluids/zip_gun_propellants.json
+87e130c8b2442855ed780529fd0875d3f55d421c data/c/tags/fluids/fuel.json
+df46d35b0d02d95b18853e362cb8e5474c3db8e9 data/c/tags/fluids/hydrogen.json
+f4f33d274a7f054e18b707dd7731c9172b04d876 data/c/tags/fluids/oil.json
+2724168a46f990627b9ccc009c46a4da699788f2 data/c/tags/fluids/oxygen.json
+87e130c8b2442855ed780529fd0875d3f55d421c data/forge/tags/fluids/fuel.json
+df46d35b0d02d95b18853e362cb8e5474c3db8e9 data/forge/tags/fluids/hydrogen.json
+f4f33d274a7f054e18b707dd7731c9172b04d876 data/forge/tags/fluids/oil.json
+2724168a46f990627b9ccc009c46a4da699788f2 data/forge/tags/fluids/oxygen.json

@@ -1,6 +1,14 @@
 {
   "values": [
     "ad_astra:fuel",
+    {
+      "id": "#c:fuel",
+      "required": false
+    },
+    {
+      "id": "#forge:fuel",
+      "required": false
+    },
     "ad_astra:cryo_fuel",
     {
       "id": "#c:diesel",

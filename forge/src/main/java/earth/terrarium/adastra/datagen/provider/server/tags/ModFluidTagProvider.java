@@ -4,15 +4,16 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagEntry;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -22,32 +23,26 @@ public class ModFluidTagProvider extends TagsProvider<Fluid> {
         super(output, Registries.FLUID, completableFuture, AdAstra.MOD_ID, existingFileHelper);
     }
 
-    @SuppressWarnings("DataFlowIssue")
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(ModFluidTags.OXYGEN).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(ModFluids.OXYGEN.get())));
-        tag(ModFluidTags.HYDROGEN).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(ModFluids.HYDROGEN.get())));
-        tag(ModFluidTags.OIL).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(ModFluids.OIL.get())));
-        tag(ModFluidTags.FUEL).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(ModFluids.FUEL.get())));
-        tag(ModFluidTags.FUEL).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(ModFluids.CRYO_FUEL.get())));
-        tag(ModFluidTags.EFFICIENT_FUEL).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(ModFluids.CRYO_FUEL.get())));
+        add(ModFluidTags.OXYGEN, ModFluids.OXYGEN.get(), "oxygen", "oxygen");
+        add(ModFluidTags.HYDROGEN, ModFluids.HYDROGEN.get(), "hydrogen", "hydrogen");
+        add(ModFluidTags.OIL, ModFluids.OIL.get(), "oil", "oil");
+        add(ModFluidTags.FUEL, ModFluids.FUEL.get(), "fuel", "fuel");
+        add(ModFluidTags.FUEL, ModFluids.CRYO_FUEL.get());
+        add(ModFluidTags.EFFICIENT_FUEL, ModFluids.CRYO_FUEL.get());
 
-        tag(ModFluidTags.TIER_1_ROCKET_FUEL).add(TagEntry.tag(ModFluidTags.FUEL.location()));
-        tag(ModFluidTags.TIER_2_ROCKET_FUEL).add(TagEntry.tag(ModFluidTags.FUEL.location()));
-        tag(ModFluidTags.TIER_3_ROCKET_FUEL).add(TagEntry.tag(ModFluidTags.FUEL.location()));
-        tag(ModFluidTags.TIER_4_ROCKET_FUEL).add(TagEntry.tag(ModFluidTags.FUEL.location()));
-        tag(ModFluidTags.TIER_1_ROVER_FUEL).add(TagEntry.tag(ModFluidTags.FUEL.location()));
+        add(ModFluidTags.TIER_1_ROCKET_FUEL, ModFluidTags.FUEL);
+        add(ModFluidTags.TIER_2_ROCKET_FUEL, ModFluidTags.FUEL);
+        add(ModFluidTags.TIER_3_ROCKET_FUEL, ModFluidTags.FUEL);
+        add(ModFluidTags.TIER_4_ROCKET_FUEL, ModFluidTags.FUEL);
+        add(ModFluidTags.TIER_1_ROVER_FUEL, ModFluidTags.FUEL);
 
-        tag(ModFluidTags.ZIP_GUN_PROPELLANTS).addTag(ModFluidTags.OXYGEN).addTag(ModFluidTags.HYDROGEN);
+        add(ModFluidTags.ZIP_GUN_PROPELLANTS, ModFluidTags.OXYGEN);
+        add(ModFluidTags.ZIP_GUN_PROPELLANTS, ModFluidTags.HYDROGEN);
 
-        tag(ModFluidTags.FREEZES_IN_SPACE).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(Fluids.WATER)));
-        tag(ModFluidTags.EVAPORATES_IN_SPACE).add(TagEntry.element(ForgeRegistries.FLUIDS.getKey(Fluids.WATER)));
-
-        tag(ModFluidTags.OXYGEN).add(TagEntry.optionalTag(new ResourceLocation("c:oxygen")));
-        tag(ModFluidTags.OXYGEN).add(TagEntry.optionalTag(new ResourceLocation("forge:oxygen")));
-
-        tag(ModFluidTags.HYDROGEN).add(TagEntry.optionalTag(new ResourceLocation("c:hydrogen")));
-        tag(ModFluidTags.HYDROGEN).add(TagEntry.optionalTag(new ResourceLocation("forge:hydrogen")));
+        add(ModFluidTags.FREEZES_IN_SPACE, Fluids.WATER);
+        add(ModFluidTags.EVAPORATES_IN_SPACE, Fluids.WATER);
 
         tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("c:diesel")));
         tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("forge:diesel")));
@@ -56,8 +51,43 @@ public class ModFluidTagProvider extends TagsProvider<Fluid> {
         tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("forge:biodiesel")));
 
         tag(ModFluidTags.OIL).add(TagEntry.optionalElement(new ResourceLocation("techreborn:oil")));
-        tag(ModFluidTags.OIL).add(TagEntry.optionalElement(new ResourceLocation("forge:crude_oil")));
-        tag(ModFluidTags.OIL).add(TagEntry.optionalElement(new ResourceLocation("c:oil")));
-        tag(ModFluidTags.OIL).add(TagEntry.optionalElement(new ResourceLocation("c:crude_oil")));
+        tag(ModFluidTags.OIL).add(TagEntry.optionalTag(new ResourceLocation("forge:crude_oil")));
+        tag(ModFluidTags.OIL).add(TagEntry.optionalTag(new ResourceLocation("c:crude_oil")));
+    }
+
+    private void add(TagKey<Fluid> tag, Fluid fluid) {
+        tag(tag).add(element(fluid));
+    }
+
+    private void add(TagKey<Fluid> tag, TagKey<Fluid> fluid) {
+        tag(tag).addTag(fluid);
+    }
+
+    private void add(TagKey<Fluid> tag, Fluid fluid, String fabricCommonTag, String forgeCommonTag) {
+        add(tag, fluid);
+        addFabricTag(fluid, tag, fabricCommonTag);
+        addForgeTag(fluid, tag, forgeCommonTag);
+    }
+
+    private void addFabricTag(Fluid fluid, TagKey<Fluid> tag, String fabricCommonTag) {
+        tag(tag).add(TagEntry.optionalTag(new ResourceLocation("c", fabricCommonTag)));
+
+        var commonTag = TagKey.create(Registries.FLUID, new ResourceLocation("c", fabricCommonTag));
+        tag(commonTag).add(element(fluid));
+    }
+
+    private void addForgeTag(Fluid fluid, TagKey<Fluid> tag, String forgeCommonTag) {
+        tag(tag).add(TagEntry.optionalTag(new ResourceLocation("forge", forgeCommonTag)));
+
+        var commonTag = TagKey.create(Registries.FLUID, new ResourceLocation("forge", forgeCommonTag));
+        tag(commonTag).add(element(fluid));
+    }
+
+    private static TagEntry element(Fluid fluid) {
+        return TagEntry.element(loc(fluid));
+    }
+
+    private static ResourceLocation loc(Fluid fluid) {
+        return BuiltInRegistries.FLUID.getKey(fluid);
     }
 }

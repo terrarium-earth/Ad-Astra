@@ -12,4 +12,5 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 
 ## Changes
 
+- Added platform fluid tags.
 - Fixed Ad Astra using a shared property object for all metal blocks, causing them to have properties like no occlusion when they should have it.
