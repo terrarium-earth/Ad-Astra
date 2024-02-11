@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-11T13:00:28.33028	Block States: ad_astra
+// 1.20.1	2024-02-11T17:40:43.998749	Block States: ad_astra
 3b0e47b473b6710ddeb7f46108de3f3ad99e83e3 assets/ad_astra/blockstates/aeronos_cap.json
 97fb99c686b024024655b4d9507104dc77161f29 assets/ad_astra/blockstates/aeronos_door.json
 0f6adcffc18bba1418df5c168e72a767e1075feb assets/ad_astra/blockstates/aeronos_fence.json
@@ -332,6 +332,7 @@ abe34c53bf466a7711ddd6706fa2f33c4e4d9f60 assets/ad_astra/models/block/aeronos_fe
 b6b6f4e11d18a3741f62c6e9d920608161fc265a assets/ad_astra/models/block/aeronos_fence_gate_open.json
 ea63c2dd81347b9b0322586ff1965dcef444daca assets/ad_astra/models/block/aeronos_fence_gate_wall.json
 614fef79660450a4c4ead2ef2481877513dd99e6 assets/ad_astra/models/block/aeronos_fence_gate_wall_open.json
+10b3a7e2f200c33e3528d05d21873107e734f376 assets/ad_astra/models/block/aeronos_fence_inventory.json
 3f3341a9acae2ad07631703d2ac4124eeb50b72a assets/ad_astra/models/block/aeronos_fence_post.json
 bb0676977f46628d269801b91165f27db6f49682 assets/ad_astra/models/block/aeronos_fence_side.json
 febf07c97b62a5e1e8db88438a85eada446d79e7 assets/ad_astra/models/block/aeronos_planks.json
@@ -486,6 +487,7 @@ bab86cc7da92ae5cad60ec3f4cc760f486d8b958 assets/ad_astra/models/block/glacian_do
 4a206a24ec4e15ab0da96c28352aad93436627c6 assets/ad_astra/models/block/glacian_fence_gate_open.json
 76799a142d175cf512ebe499ea69289d15bb9119 assets/ad_astra/models/block/glacian_fence_gate_wall.json
 e313f1813ba5b04c45a071b49ca2c59b6328108e assets/ad_astra/models/block/glacian_fence_gate_wall_open.json
+8ef04165c06e20cec645533d4957b39a00a55efb assets/ad_astra/models/block/glacian_fence_inventory.json
 8be7f7a376506056ed660985a8580ba92ae3055e assets/ad_astra/models/block/glacian_fence_post.json
 c6eee6045c253e4a9cb0cbef8ab3fa83165ebf66 assets/ad_astra/models/block/glacian_fence_side.json
 19697e07b02046cc3f3d2ea42a6b5e6f6d8f538f assets/ad_astra/models/block/glacian_fur.json
@@ -814,6 +816,7 @@ da0e4f3ef5bad304baf749a4a012a61be4ca7cf6 assets/ad_astra/models/block/strophar_d
 6ff48499816c6ee541e453a9957308cee72e68dd assets/ad_astra/models/block/strophar_fence_gate_open.json
 aba9669a62394ea3c877def83ad43bbaeaea6f39 assets/ad_astra/models/block/strophar_fence_gate_wall.json
 b29bff580a0e345dfd334bd07a545c14c872d249 assets/ad_astra/models/block/strophar_fence_gate_wall_open.json
+1e57a74db2a69ee2226764691c90c1284c67459b assets/ad_astra/models/block/strophar_fence_inventory.json
 7c8daa8e2f98d3c62274fecc7280da75c34b23eb assets/ad_astra/models/block/strophar_fence_post.json
 4808201c6a523219a85cf0380aeba80cbc3b6a0c assets/ad_astra/models/block/strophar_fence_side.json
 54bdd7d64c4c8100276d042ba587a6683d99f6fa assets/ad_astra/models/block/strophar_planks.json
@@ -868,8 +871,8 @@ fc5925b5d30c002b272c825e9b1c1180bb00acd6 assets/ad_astra/models/block/white_indu
 0a6e7955b74e1f27017c69d3b24a0a7d48b21d61 assets/ad_astra/models/block/yellow_flag.json
 62f4e9cda03e976f737ab82ac582e7b8e673715c assets/ad_astra/models/block/yellow_industrial_lamp.json
 895a10b4de19aa48d31a7910b10a153946b7c085 assets/ad_astra/models/item/aeronos_cap.json
-5b3ddc791d621b1e5b975901d06c3c69c33e6cd9 assets/ad_astra/models/item/aeronos_fence.json
-5b3ddc791d621b1e5b975901d06c3c69c33e6cd9 assets/ad_astra/models/item/aeronos_fence_gate.json
+d8084f0e2b21cb90210c2d2f2b18f822849cafff assets/ad_astra/models/item/aeronos_fence.json
+bf6ad4f86faaccbcaf3421663ed3fdd1cc9eb0e6 assets/ad_astra/models/item/aeronos_fence_gate.json
 5b3ddc791d621b1e5b975901d06c3c69c33e6cd9 assets/ad_astra/models/item/aeronos_planks.json
 cbe829313012249c9a9f9b2a6081914c0823ace9 assets/ad_astra/models/item/aeronos_slab.json
 9923018ae2637963a2baac259db1d3b33f1c2766 assets/ad_astra/models/item/aeronos_stairs.json
@@ -953,8 +956,8 @@ ac44d09448ad290c90f9b29486c0b930ac0c8d6f assets/ad_astra/models/item/encased_des
 1d417c10adf2751781872dd72539e9ed98740cbc assets/ad_astra/models/item/fluid_pipe_duct.json
 2109edba0604953240c0df7151a3401a4a038125 assets/ad_astra/models/item/fuel_refinery.json
 d69515df5432858cdaaa5eba234a8ea5f44b4ee8 assets/ad_astra/models/item/glacian_button.json
-6e4e3b97c8e862fea7bc9c76e779bac656b9610e assets/ad_astra/models/item/glacian_fence.json
-6e4e3b97c8e862fea7bc9c76e779bac656b9610e assets/ad_astra/models/item/glacian_fence_gate.json
+01908f67fcffd25028476293f0b7d9cd3dcb77c6 assets/ad_astra/models/item/glacian_fence.json
+e1ab4712bb0ba8d0048966dfa886c2446a1f2297 assets/ad_astra/models/item/glacian_fence_gate.json
 a6722608802f2e6f652087c6536c5930f1ba0650 assets/ad_astra/models/item/glacian_fur.json
 a70092cb66df4cd297c2df4d6ca34364ce3941d5 assets/ad_astra/models/item/glacian_leaves.json
 b83a6ae2668e7907b292509dded152442f210772 assets/ad_astra/models/item/glacian_log.json
@@ -1139,8 +1142,8 @@ ccff619a08b959ab14d211da6e75f472e748d14e assets/ad_astra/models/item/steel_plati
 7bea0c1238bd3a47b5a29fe4049c74aafacee5a4 assets/ad_astra/models/item/steel_trapdoor.json
 dcf00c24eea51fcecf0bc3b5f0e0a37c863e97c2 assets/ad_astra/models/item/stripped_glacian_log.json
 4103a1eb28f0421134447cbe26b6f860a6f257a3 assets/ad_astra/models/item/strophar_cap.json
-565735e72fac6d199c7ed42901b6634d5bf27724 assets/ad_astra/models/item/strophar_fence.json
-565735e72fac6d199c7ed42901b6634d5bf27724 assets/ad_astra/models/item/strophar_fence_gate.json
+460a8645b391c9be3a85f3df3b4ec7ad8bbcdfc1 assets/ad_astra/models/item/strophar_fence.json
+ae7223e59b4fea7df42bf92af90a6447ddbf862f assets/ad_astra/models/item/strophar_fence_gate.json
 565735e72fac6d199c7ed42901b6634d5bf27724 assets/ad_astra/models/item/strophar_planks.json
 5eb46e00c7ad93e385a35c2ecfc66bfe214422c0 assets/ad_astra/models/item/strophar_slab.json
 46fb9059fd1d9d81ebeda990657b532214c94474 assets/ad_astra/models/item/strophar_stairs.json

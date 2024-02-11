@@ -72,13 +72,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockItem(ModBlocks.GLACIAN_TRAPDOOR.get(), models().getBuilder(name(ModBlocks.GLACIAN_TRAPDOOR.get()) + "_bottom"));
         simpleBlockItem(ModBlocks.STEEL_TRAPDOOR.get(), models().getBuilder(name(ModBlocks.STEEL_TRAPDOOR.get()) + "_bottom"));
 
-        simpleBlockItem(ModBlocks.AERONOS_FENCE.get(), models().getBuilder(name(ModBlocks.AERONOS_PLANKS.get())));
-        simpleBlockItem(ModBlocks.STROPHAR_FENCE.get(), models().getBuilder(name(ModBlocks.STROPHAR_PLANKS.get())));
-        simpleBlockItem(ModBlocks.GLACIAN_FENCE.get(), models().getBuilder(name(ModBlocks.GLACIAN_PLANKS.get())));
+        simpleBlockItem(ModBlocks.AERONOS_FENCE.get(), models().fenceInventory(name(ModBlocks.AERONOS_FENCE.get()) + "_inventory", blockTexture(ModBlocks.AERONOS_PLANKS.get())));
+        simpleBlockItem(ModBlocks.STROPHAR_FENCE.get(), models().fenceInventory(name(ModBlocks.STROPHAR_FENCE.get()) + "_inventory", blockTexture(ModBlocks.STROPHAR_PLANKS.get())));
+        simpleBlockItem(ModBlocks.GLACIAN_FENCE.get(), models().fenceInventory(name(ModBlocks.GLACIAN_FENCE.get()) + "_inventory", blockTexture(ModBlocks.GLACIAN_PLANKS.get())));
 
-        simpleBlockItem(ModBlocks.AERONOS_FENCE_GATE.get(), models().getBuilder(name(ModBlocks.AERONOS_PLANKS.get())));
-        simpleBlockItem(ModBlocks.STROPHAR_FENCE_GATE.get(), models().getBuilder(name(ModBlocks.STROPHAR_PLANKS.get())));
-        simpleBlockItem(ModBlocks.GLACIAN_FENCE_GATE.get(), models().getBuilder(name(ModBlocks.GLACIAN_PLANKS.get())));
+        simpleBlockItem(ModBlocks.AERONOS_FENCE_GATE.get(), models().fenceGate(name(ModBlocks.AERONOS_FENCE_GATE.get()), blockTexture(ModBlocks.AERONOS_PLANKS.get())));
+        simpleBlockItem(ModBlocks.STROPHAR_FENCE_GATE.get(), models().fenceGate(name(ModBlocks.STROPHAR_FENCE_GATE.get()), blockTexture(ModBlocks.STROPHAR_PLANKS.get())));
+        simpleBlockItem(ModBlocks.GLACIAN_FENCE_GATE.get(), models().fenceGate(name(ModBlocks.GLACIAN_FENCE_GATE.get()), blockTexture(ModBlocks.GLACIAN_PLANKS.get())));
 
         machine(ModBlocks.COMPRESSOR.get());
         machine(ModBlocks.COAL_GENERATOR.get());
