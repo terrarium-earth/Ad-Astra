@@ -35,7 +35,7 @@ public class FluidPipeBlockEntity extends PipeBlockEntity {
         var sourceContainer = FluidContainer.of(source, direction);
         if (sourceContainer == null) return;
         if (!(FluidContainer.holdsFluid(consumer, direction))) return;
-        var consumerContainer = FluidContainer.of(consumer, direction);
+        var consumerContainer = FluidContainer.of(consumer, direction.getOpposite());
         if (consumerContainer == null) return;
         for (var fluid : sourceContainer.getFluids()) {
             if (fluid.isEmpty()) continue;

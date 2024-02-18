@@ -31,7 +31,7 @@ public class TransferUtils {
             if (!filter.test(direction)) continue;
             BlockEntity nearbyEntity = machine.level().getBlockEntity(pos.relative(direction));
             if (nearbyEntity == null) continue;
-            EnergyContainer nearbyContainer = EnergyContainer.of(nearbyEntity, direction);
+            EnergyContainer nearbyContainer = EnergyContainer.of(nearbyEntity, direction.getOpposite());
             if (nearbyContainer == null) continue;
             EnergyApi.moveEnergy(container, nearbyContainer, amount, false);
         }
@@ -48,7 +48,7 @@ public class TransferUtils {
             if (!filter.test(direction)) continue;
             BlockEntity nearbyEntity = machine.level().getBlockEntity(pos.relative(direction));
             if (nearbyEntity == null) continue;
-            EnergyContainer nearbyContainer = EnergyContainer.of(nearbyEntity, direction);
+            EnergyContainer nearbyContainer = EnergyContainer.of(nearbyEntity, direction.getOpposite());
             if (nearbyContainer == null) continue;
             EnergyApi.moveEnergy(nearbyContainer, container, amount, false);
         }
@@ -65,7 +65,7 @@ public class TransferUtils {
             BlockEntity nearbyEntity = machine.level().getBlockEntity(pos.relative(direction));
             if (nearbyEntity == null) continue;
             if (!FluidContainer.holdsFluid(nearbyEntity, direction)) continue;
-            FluidContainer nearbyContainer = FluidContainer.of(nearbyEntity, direction);
+            FluidContainer nearbyContainer = FluidContainer.of(nearbyEntity, direction.getOpposite());
             if (nearbyContainer == null) continue;
             FluidHolder holder = container.getFluids().get(tank);
             if (holder.isEmpty()) continue;
@@ -84,7 +84,7 @@ public class TransferUtils {
             BlockEntity nearbyEntity = machine.level().getBlockEntity(pos.relative(direction));
             if (nearbyEntity == null) continue;
             if (!FluidContainer.holdsFluid(nearbyEntity, direction)) continue;
-            FluidContainer nearbyContainer = FluidContainer.of(nearbyEntity, direction);
+            FluidContainer nearbyContainer = FluidContainer.of(nearbyEntity, direction.getOpposite());
             if (nearbyContainer == null) continue;
             FluidHolder holder = nearbyContainer.getFluids().get(tank);
             if (holder.isEmpty()) continue;

@@ -22,3 +22,4 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 - Added painting translations (#485).
 - The Nasa workbench now works with recipes with less than 14 ingredients (#483).
 - Prevent configured pipes from resetting on neighbor update (#484).
+- Fixed machines and cables input/output energy to the wrong side of blocks adjacent (#467).
