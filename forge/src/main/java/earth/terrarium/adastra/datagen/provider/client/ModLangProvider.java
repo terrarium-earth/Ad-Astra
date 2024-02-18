@@ -482,6 +482,35 @@ public class ModLangProvider extends LanguageProvider {
         add("advancements.ad_astra.tier_4_rocket.description", "Construct a Tier 4 Rocket");
         add("advancements.ad_astra.interstellar.title", "Interstellar");
         add("advancements.ad_astra.interstellar.description", "Reach a new solar system");
+
+        add("painting.ad_astra.mercury.author", "Facu");
+        add("painting.ad_astra.mercury.title", "Mercury");
+        add("painting.ad_astra.moon.author", "Facu");
+        add("painting.ad_astra.moon.title", "Moon");
+        add("painting.ad_astra.pluto.author", "Facu");
+        add("painting.ad_astra.pluto.title", "Pluto");
+        add("painting.ad_astra.earth.author", "Facu");
+        add("painting.ad_astra.earth.title", "Earth");
+        add("painting.ad_astra.glacio.author", "Facu");
+        add("painting.ad_astra.glacio.title", "Glacio");
+        add("painting.ad_astra.mars.author", "Facu");
+        add("painting.ad_astra.mars.title", "Mars");
+        add("painting.ad_astra.venus.author", "Facu");
+        add("painting.ad_astra.venus.title", "Venus");
+        add("painting.ad_astra.jupiter.author", "Facu");
+        add("painting.ad_astra.jupiter.title", "Jupiter");
+        add("painting.ad_astra.neptune.author", "Facu");
+        add("painting.ad_astra.neptune.title", "Neptune");
+        add("painting.ad_astra.uranus.author", "Facu");
+        add("painting.ad_astra.uranus.title", "Uranus");
+        add("painting.ad_astra.saturn.author", "Facu");
+        add("painting.ad_astra.saturn.title", "Saturn");
+        add("painting.ad_astra.the_milky_way.author", "Facu");
+        add("painting.ad_astra.the_milky_way.title", "The Milky Way");
+        add("painting.ad_astra.alpha_centauri.author", "Facu");
+        add("painting.ad_astra.alpha_centauri.title", "Alpha Centauri");
+        add("painting.ad_astra.sun.author", "Facu");
+        add("painting.ad_astra.sun.title", "Sun");
     }
 
     public void add(Component component, String name) {
