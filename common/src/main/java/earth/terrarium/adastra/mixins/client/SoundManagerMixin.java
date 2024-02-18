@@ -52,19 +52,21 @@ public abstract class SoundManagerMixin {
             return false;
         }
 
-        float volume = source == SoundSource.MUSIC || source == SoundSource.RECORDS ? 1 : 0.1f;
-        SoundInstance newSound = new SimpleSoundInstance(sound.getLocation(), source,
-            volume, 0.1f, level.random,
-            sound.isLooping(), delay,
-            sound.getAttenuation(), sound.getX(),
-            sound.getY(), sound.getZ(), sound.isRelative()
-        );
+        Minecraft.getInstance().execute(() -> {
+            float volume = source == SoundSource.MUSIC || source == SoundSource.RECORDS ? 1 : 0.1f;
+            SoundInstance newSound = new SimpleSoundInstance(sound.getLocation(), source,
+                volume, 0.1f, level.random,
+                sound.isLooping(), delay,
+                sound.getAttenuation(), sound.getX(),
+                sound.getY(), sound.getZ(), sound.isRelative()
+            );
 
-        if (delay == 0) {
-            soundEngine.play(newSound);
-        } else {
-            soundEngine.playDelayed(newSound, delay);
-        }
+            if (delay == 0) {
+                soundEngine.play(newSound);
+            } else {
+                soundEngine.playDelayed(newSound, delay);
+            }
+        });
         return true;
     }
 }

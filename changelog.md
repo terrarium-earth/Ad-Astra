@@ -17,3 +17,4 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 - Fixed fences and fence gates being rendered as full blocks in the inventory (#472).
 - Fixed planet stones dropping itself and not the cobblestone variant.
 - Fixed Lunarian having no translations (#476).
+- Fixed random accessed from netty thread crash when orbit sounds play. (#473).
