@@ -54,6 +54,11 @@
             "url": "https://stream.antenne1.de/a1stg/livestream2.mp3",
             "title": "antenne1",
             "name": "antenne1"
+        },
+        {
+            "url": "https://play.sas-media.ru/play_256",
+            "title": "Noise FM",
+            "name": "Noise FM"
         }
     ]
 }
