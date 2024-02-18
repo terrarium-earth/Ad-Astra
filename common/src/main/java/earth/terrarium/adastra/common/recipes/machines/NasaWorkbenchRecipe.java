@@ -38,8 +38,8 @@ public record NasaWorkbenchRecipe(
 
     @Override
     public boolean matches(@NotNull Container container, @NotNull Level level) {
-        if (container.getContainerSize() < 14) return false;
-        for (int i = 0; i < 14; i++) {
+        if (container.getContainerSize() < ingredients.size()) return false;
+        for (int i = 0; i < ingredients.size(); i++) {
             if (!ingredients.get(i).test(container.getItem(i))) {
                 return false;
             }

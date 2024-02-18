@@ -52,23 +52,31 @@ public class NasaWorkbenchCategory implements DisplayCategory<NasaWorkbenchDispl
         widgets.add(Widgets.createTexturedWidget(NasaWorkbenchScreen.TEXTURE, bounds.x, bounds.y, 0, 0, 177, 140, 177, 224));
         widgets.add(Widgets.createTexturedWidget(NasaWorkbenchScreen.TEXTURE, bounds.x, bounds.y + 135, 0, 217, 177, 7, 177, 224));
 
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 56, bounds.y + 20)).backgroundEnabled(false).entries(display.getInputEntries().get(0)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 47, bounds.y + 38)).backgroundEnabled(false).entries(display.getInputEntries().get(1)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 65, bounds.y + 38)).backgroundEnabled(false).entries(display.getInputEntries().get(2)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 47, bounds.y + 56)).backgroundEnabled(false).entries(display.getInputEntries().get(3)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 65, bounds.y + 56)).backgroundEnabled(false).entries(display.getInputEntries().get(4)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 47, bounds.y + 74)).backgroundEnabled(false).entries(display.getInputEntries().get(5)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 65, bounds.y + 74)).backgroundEnabled(false).entries(display.getInputEntries().get(6)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 29, bounds.y + 92)).backgroundEnabled(false).entries(display.getInputEntries().get(7)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 47, bounds.y + 92)).backgroundEnabled(false).entries(display.getInputEntries().get(8)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 65, bounds.y + 92)).backgroundEnabled(false).entries(display.getInputEntries().get(9)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 83, bounds.y + 92)).backgroundEnabled(false).entries(display.getInputEntries().get(10)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 29, bounds.y + 110)).backgroundEnabled(false).entries(display.getInputEntries().get(11)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 56, bounds.y + 110)).backgroundEnabled(false).entries(display.getInputEntries().get(12)).markInput());
-        widgets.add(Widgets.createSlot(new Point(bounds.x + 83, bounds.y + 110)).backgroundEnabled(false).entries(display.getInputEntries().get(13)).markInput());
+        slot(widgets, display, bounds, 56, 20, 0);
+        slot(widgets, display, bounds, 47, 38, 1);
+        slot(widgets, display, bounds, 65, 38, 2);
+        slot(widgets, display, bounds, 47, 56, 3);
+        slot(widgets, display, bounds, 65, 56, 4);
+        slot(widgets, display, bounds, 47, 74, 5);
+        slot(widgets, display, bounds, 65, 74, 6);
+        slot(widgets, display, bounds, 29, 92, 7);
+        slot(widgets, display, bounds, 47, 92, 8);
+        slot(widgets, display, bounds, 65, 92, 9);
+        slot(widgets, display, bounds, 83, 92, 10);
+        slot(widgets, display, bounds, 29, 110, 11);
+        slot(widgets, display, bounds, 56, 110, 12);
+        slot(widgets, display, bounds, 83, 110, 13);
 
         widgets.add(Widgets.createSlot(new Point(bounds.x + 129, bounds.y + 56)).backgroundEnabled(false).entries(display.getOutputEntries().get(0)).markOutput());
 
         return widgets;
+    }
+
+    private void slot(List<Widget> widgets, NasaWorkbenchDisplay display, Rectangle bounds, int x, int y, int index) {
+        var slot = Widgets.createSlot(new Point(bounds.x + x, bounds.y + y)).backgroundEnabled(false);
+        if (index < display.getInputEntries().size()) {
+            slot.entries(display.getInputEntries().get(index)).markInput();
+        }
+        widgets.add(slot);
     }
 }
