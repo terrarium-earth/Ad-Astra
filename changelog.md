@@ -5,3 +5,4 @@
 - Fixed Lunarian having no translations (#476).
 - Fixed random accessed from netty thread crash when orbit sounds play. (#473).
 - Fixed The Ti-69s red and green lights being swapped from the item texture (#479).
+- Added painting translations (#485).
