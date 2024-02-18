@@ -59,7 +59,12 @@ public class ModLootTableProvider extends LootTableProvider {
         ModBlocks.AERONOS_DOOR,
         ModBlocks.STROPHAR_DOOR,
         ModBlocks.GLACIAN_DOOR,
-        ModBlocks.STEEL_DOOR
+        ModBlocks.STEEL_DOOR,
+        ModBlocks.MOON_STONE,
+        ModBlocks.MARS_STONE,
+        ModBlocks.VENUS_STONE,
+        ModBlocks.MERCURY_STONE,
+        ModBlocks.GLACIO_STONE
     );
 
     @Override
@@ -108,6 +113,12 @@ public class ModLootTableProvider extends LootTableProvider {
             add(ModBlocks.STROPHAR_DOOR.get(), createDoorTable(ModBlocks.STROPHAR_DOOR.get()));
             add(ModBlocks.GLACIAN_DOOR.get(), createDoorTable(ModBlocks.GLACIAN_DOOR.get()));
             add(ModBlocks.STEEL_DOOR.get(), createDoorTable(ModBlocks.STEEL_DOOR.get()));
+
+            add(ModBlocks.MOON_STONE.get(), b -> createSingleItemTableWithSilkTouch(b, ModItems.MOON_COBBLESTONE.get()));
+            add(ModBlocks.MARS_STONE.get(), b -> createSingleItemTableWithSilkTouch(b, ModItems.MARS_COBBLESTONE.get()));
+            add(ModBlocks.VENUS_STONE.get(), b -> createSingleItemTableWithSilkTouch(b, ModItems.VENUS_COBBLESTONE.get()));
+            add(ModBlocks.MERCURY_STONE.get(), b -> createSingleItemTableWithSilkTouch(b, ModItems.MERCURY_COBBLESTONE.get()));
+            add(ModBlocks.GLACIO_STONE.get(), b -> createSingleItemTableWithSilkTouch(b, ModItems.GLACIO_COBBLESTONE.get()));
 
             ModBlocks.FLAGS.stream().forEach(b -> add(b.get(), b2 ->
                 createSinglePropConditionTable(b2, FlagBlock.HALF, DoubleBlockHalf.LOWER)));
