@@ -32,7 +32,7 @@ public class CableBlockEntity extends PipeBlockEntity {
     public void moveContents(long transferRate, @NotNull BlockEntity source, @NotNull BlockEntity consumer, Direction direction) {
         var sourceContainer = EnergyContainer.of(source, direction);
         if (sourceContainer == null) return;
-        var consumerContainer = EnergyContainer.of(consumer, direction);
+        var consumerContainer = EnergyContainer.of(consumer, direction.getOpposite());
         if (consumerContainer == null) return;
         EnergyApi.moveEnergy(sourceContainer, consumerContainer, Math.min(transferRate, sourceContainer.getStoredEnergy()), false);
     }
