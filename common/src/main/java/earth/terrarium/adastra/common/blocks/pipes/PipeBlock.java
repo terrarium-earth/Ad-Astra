@@ -188,11 +188,12 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
         if (level.isClientSide()) return;
         var directionProperty = DIRECTION_TO_CONNECTION.get(direction);
 
-        if (canConnect(level, pos, direction)) {
-            level.setBlockAndUpdate(pos, state.setValue(directionProperty, PipeProperty.NORMAL));
-        } else {
-            level.setBlockAndUpdate(pos, state.setValue(directionProperty, PipeProperty.NONE));
-        }
+        boolean canConnect = canConnect(level, pos, direction);
+
+        var pipe = state.getValue(directionProperty);
+        if ((pipe.isInsert() || pipe.isExtract()) && canConnect) return;
+
+        level.setBlockAndUpdate(pos, state.setValue(directionProperty, canConnect ? PipeProperty.NORMAL : PipeProperty.NONE));
     }
 
     private boolean canConnect(Level level, BlockPos pos, Direction direction) {
