@@ -45,21 +45,28 @@ public record NasaWorkbenchCategory(IGuiHelper guiHelper) implements IRecipeCate
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, NasaWorkbenchRecipe recipe, IFocusGroup focuses) {
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredients(Ingredient.of(ModItems.NASA_WORKBENCH.get()));
-        builder.addSlot(RecipeIngredientRole.INPUT, 57, 16).addIngredients(recipe.ingredients().get(0));
-        builder.addSlot(RecipeIngredientRole.INPUT, 48, 34).addIngredients(recipe.ingredients().get(1));
-        builder.addSlot(RecipeIngredientRole.INPUT, 66, 34).addIngredients(recipe.ingredients().get(2));
-        builder.addSlot(RecipeIngredientRole.INPUT, 48, 52).addIngredients(recipe.ingredients().get(3));
-        builder.addSlot(RecipeIngredientRole.INPUT, 66, 52).addIngredients(recipe.ingredients().get(4));
-        builder.addSlot(RecipeIngredientRole.INPUT, 48, 70).addIngredients(recipe.ingredients().get(5));
-        builder.addSlot(RecipeIngredientRole.INPUT, 66, 70).addIngredients(recipe.ingredients().get(6));
-        builder.addSlot(RecipeIngredientRole.INPUT, 30, 88).addIngredients(recipe.ingredients().get(7));
-        builder.addSlot(RecipeIngredientRole.INPUT, 48, 88).addIngredients(recipe.ingredients().get(8));
-        builder.addSlot(RecipeIngredientRole.INPUT, 66, 88).addIngredients(recipe.ingredients().get(9));
-        builder.addSlot(RecipeIngredientRole.INPUT, 84, 88).addIngredients(recipe.ingredients().get(10));
-        builder.addSlot(RecipeIngredientRole.INPUT, 30, 106).addIngredients(recipe.ingredients().get(11));
-        builder.addSlot(RecipeIngredientRole.INPUT, 57, 106).addIngredients(recipe.ingredients().get(12));
-        builder.addSlot(RecipeIngredientRole.INPUT, 84, 106).addIngredients(recipe.ingredients().get(13));
+        slot(builder, recipe, 57, 16, 0);
+        slot(builder, recipe, 48, 34, 1);
+        slot(builder, recipe, 66, 34, 2);
+        slot(builder, recipe, 48, 52, 3);
+        slot(builder, recipe, 66, 52, 4);
+        slot(builder, recipe, 48, 70, 5);
+        slot(builder, recipe, 66, 70, 6);
+        slot(builder, recipe, 30, 88, 7);
+        slot(builder, recipe, 48, 88, 8);
+        slot(builder, recipe, 66, 88, 9);
+        slot(builder, recipe, 84, 88, 10);
+        slot(builder, recipe, 30, 106, 11);
+        slot(builder, recipe, 57, 106, 12);
+        slot(builder, recipe, 84, 106, 13);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 130, 52).addItemStack(recipe.result());
+    }
+
+    private void slot(IRecipeLayoutBuilder builder, NasaWorkbenchRecipe display, int x, int y, int index) {
+        var slot = builder.addSlot(RecipeIngredientRole.INPUT, x, y);
+        if (index < display.ingredients().size()) {
+            slot.addIngredients(display.ingredients().get(index));
+        }
     }
 
     @Override
