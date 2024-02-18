@@ -18,3 +18,4 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 - Fixed planet stones dropping itself and not the cobblestone variant.
 - Fixed Lunarian having no translations (#476).
 - Fixed random accessed from netty thread crash when orbit sounds play. (#473).
+- Fixed The Ti-69s red and green lights being swapped from the item texture (#479).
