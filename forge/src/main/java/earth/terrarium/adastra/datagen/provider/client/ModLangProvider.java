@@ -67,6 +67,21 @@ public class ModLangProvider extends LanguageProvider {
 
         add("itemGroup.ad_astra.main", "Ad Astra");
 
+        add("entity.ad_astra.lunarian.armorer", "Lunarian Armorer");
+        add("entity.ad_astra.lunarian.butcher", "Lunarian Butcher");
+        add("entity.ad_astra.lunarian.cartographer", "Lunarian Cartographer");
+        add("entity.ad_astra.lunarian.cleric", "Lunarian Cleric");
+        add("entity.ad_astra.lunarian.farmer", "Lunarian Farmer");
+        add("entity.ad_astra.lunarian.fisherman", "Lunarian Fisherman");
+        add("entity.ad_astra.lunarian.fletcher", "Lunarian Fletcher");
+        add("entity.ad_astra.lunarian.leatherworker", "Lunarian Leatherworker");
+        add("entity.ad_astra.lunarian.librarian", "Lunarian Librarian");
+        add("entity.ad_astra.lunarian.mason", "Lunarian Mason");
+        add("entity.ad_astra.lunarian.none", "Lunarian");
+        add("entity.ad_astra.lunarian.shepherd", "Lunarian Shepherd");
+        add("entity.ad_astra.lunarian.toolsmith", "Lunarian Toolsmith");
+        add("entity.ad_astra.lunarian.weaponsmith", "Lunarian Weaponsmith");
+
         addItem(ModItems.TI_69, "TI-69");
         add("item.ad_astra.astrodux", "Astrodux");
         add("item.ad_astra.astrodux.landing", "Welcome to your guide to the depths of Space.$(br2)Ad Astra is in development. Some features in the guide may be missing or incomplete.");
