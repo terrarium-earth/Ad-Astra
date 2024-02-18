@@ -7,3 +7,4 @@
 - Fixed The Ti-69s red and green lights being swapped from the item texture (#479).
 - Added painting translations (#485).
 - The Nasa workbench now works with recipes with less than 14 ingredients (#483).
+- Prevent configured pipes from resetting on neighbor update (#484).
