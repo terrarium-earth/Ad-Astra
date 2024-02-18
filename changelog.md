@@ -15,3 +15,4 @@ See https://modrinth.com/mod/ad-astra/version/1.15.7 for the full changelog.
 - Added platform fluid tags.
 - Fixed Ad Astra using a shared property object for all metal blocks, causing them to have properties like no occlusion when they should have it.
 - Fixed fences and fence gates being rendered as full blocks in the inventory (#472).
+- Fixed planet stones dropping itself and not the cobblestone variant.
