@@ -25,6 +25,8 @@ public final class ModItemTags {
 
     public static final TagKey<Item> IRON_PLATES = tag("iron_plates");
     public static final TagKey<Item> IRON_RODS = tag("iron_rods");
+    
+    public static final TagKey<Item> ICE_SHARD_ORES = tag("ice_shard_ores");
 
     public static final TagKey<Item> STEEL_INGOTS = tag("steel_ingots");
     public static final TagKey<Item> STEEL_NUGGETS = tag("steel_nuggets");
@@ -38,6 +40,7 @@ public final class ModItemTags {
     public static final TagKey<Item> RAW_DESH = tag("raw_desh");
     public static final TagKey<Item> DESH_BLOCKS = tag("desh_blocks");
     public static final TagKey<Item> RAW_DESH_BLOCKS = tag("raw_desh_blocks");
+    public static final TagKey<Item> DESH_ORES = tag("desh_ores");
 
     public static final TagKey<Item> OSTRUM_INGOTS = tag("ostrum_ingots");
     public static final TagKey<Item> OSTRUM_NUGGETS = tag("ostrum_nuggets");
@@ -45,6 +48,7 @@ public final class ModItemTags {
     public static final TagKey<Item> RAW_OSTRUM = tag("raw_ostrum");
     public static final TagKey<Item> OSTRUM_BLOCKS = tag("ostrum_blocks");
     public static final TagKey<Item> RAW_OSTRUM_BLOCKS = tag("raw_ostrum_blocks");
+    public static final TagKey<Item> OSTRUM_ORES = tag("ostrum_ores");
 
     public static final TagKey<Item> CALORITE_INGOTS = tag("calorite_ingots");
     public static final TagKey<Item> CALORITE_NUGGETS = tag("calorite_nuggets");
@@ -52,6 +56,7 @@ public final class ModItemTags {
     public static final TagKey<Item> RAW_CALORITE = tag("raw_calorite");
     public static final TagKey<Item> CALORITE_BLOCKS = tag("calorite_blocks");
     public static final TagKey<Item> RAW_CALORITE_BLOCKS = tag("raw_calorite_blocks");
+    public static final TagKey<Item> CALORITE_ORES = tag("calorite_ores");
 
     public static final TagKey<Item> GLACIAN_LOGS = tag("glacian_logs");
     public static final TagKey<Item> AERONOS_CAPS = tag("aeronos_caps");

@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
@@ -110,13 +111,21 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         add(ModBlockTags.GLACIO_STONE_REPLACEABLES, ModBlocks.GLACIO_STONE.get());
         add(ModBlockTags.GLACIO_STONE_REPLACEABLES, ModBlocks.PERMAFROST.get());
 
+        Arrays.asList(ModBlocks.MOON_ICE_SHARD_ORE.get(), ModBlocks.MARS_ICE_SHARD_ORE.get(), ModBlocks.GLACIO_ICE_SHARD_ORE.get(), ModBlocks.DEEPSLATE_ICE_SHARD_ORE.get()).forEach(item -> add(ModBlockTags.ICE_SHARD_ORES, item, "ice_shard_ores", "ores/ice_shard"));
+
         add(ModBlockTags.STEEL_BLOCKS, ModBlocks.STEEL_BLOCK.get(), "steel_blocks", "storage_blocks/steel");
+
         add(ModBlockTags.DESH_BLOCKS, ModBlocks.DESH_BLOCK.get(), "desh_blocks", "storage_blocks/desh");
         add(ModBlockTags.RAW_DESH_BLOCKS, ModBlocks.RAW_DESH_BLOCK.get(), "raw_desh_blocks", "storage_blocks/raw_desh");
+        Arrays.asList(ModBlocks.MOON_DESH_ORE.get(), ModBlocks.DEEPSLATE_DESH_ORE.get()).forEach(block -> add(ModBlockTags.DESH_ORES, block, "desh_ores", "ores/desh"));
+
         add(ModBlockTags.OSTRUM_BLOCKS, ModBlocks.OSTRUM_BLOCK.get(), "ostrum_blocks", "storage_blocks/ostrum");
         add(ModBlockTags.RAW_OSTRUM_BLOCKS, ModBlocks.RAW_OSTRUM_BLOCK.get(), "raw_ostrum_blocks", "storage_blocks/raw_ostrum");
+        Arrays.asList(ModBlocks.MARS_OSTRUM_ORE.get(), ModBlocks.DEEPSLATE_OSTRUM_ORE.get()).forEach(block -> add(ModBlockTags.OSTRUM_ORES, block, "ostrum_ores", "ores/ostrum"));
+
         add(ModBlockTags.CALORITE_BLOCKS, ModBlocks.CALORITE_BLOCK.get(), "calorite_blocks", "storage_blocks/calorite");
         add(ModBlockTags.RAW_CALORITE_BLOCKS, ModBlocks.RAW_CALORITE_BLOCK.get(), "raw_calorite_blocks", "storage_blocks/raw_calorite");
+        Arrays.asList(ModBlocks.VENUS_CALORITE_ORE.get(), ModBlocks.DEEPSLATE_CALORITE_ORE.get()).forEach(block -> add(ModBlockTags.CALORITE_ORES, block, "calorite_ores", "ores/calorite"));
 
         add(ModBlockTags.GLACIAN_LOGS, ModBlocks.GLACIAN_LOG.get());
         add(ModBlockTags.GLACIAN_LOGS, ModBlocks.STRIPPED_GLACIAN_LOG.get());

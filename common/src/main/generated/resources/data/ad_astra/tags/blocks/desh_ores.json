@@ -1,0 +1,22 @@
+{
+  "values": [
+    "ad_astra:moon_desh_ore",
+    {
+      "id": "#c:desh_ores",
+      "required": false
+    },
+    {
+      "id": "#forge:ores/desh",
+      "required": false
+    },
+    "ad_astra:deepslate_desh_ore",
+    {
+      "id": "#c:desh_ores",
+      "required": false
+    },
+    {
+      "id": "#forge:ores/desh",
+      "required": false
+    }
+  ]
+}

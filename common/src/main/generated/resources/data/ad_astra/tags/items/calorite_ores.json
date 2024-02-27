@@ -1,0 +1,22 @@
+{
+  "values": [
+    "ad_astra:venus_calorite_ore",
+    {
+      "id": "#c:calorite_ores",
+      "required": false
+    },
+    {
+      "id": "#forge:ores/calorite",
+      "required": false
+    },
+    "ad_astra:deepslate_calorite_ore",
+    {
+      "id": "#c:calorite_ores",
+      "required": false
+    },
+    {
+      "id": "#forge:ores/calorite",
+      "required": false
+    }
+  ]
+}
