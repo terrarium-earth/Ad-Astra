@@ -1,4 +1,4 @@
-package earth.terrarium.adastra.mixins.client;
+package earth.terrarium.adastra.mixins.fabric.client;
 
 import earth.terrarium.adastra.common.entities.vehicles.Vehicle;
 import net.minecraft.client.Camera;
