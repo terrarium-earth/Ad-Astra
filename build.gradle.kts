@@ -127,6 +127,8 @@ subprojects {
 //            "modLocalRuntime"(group = "vazkii.patchouli", name = "Patchouli", version = "$minecraftVersion-$patchouliVersion-${modLoader.uppercase()}")
 //            "modLocalRuntime"(group = "com.lowdragmc.shimmer", name = "Shimmer-$modLoader", version = "$minecraftVersion-$shimmerVersion") { isTransitive = false }
         }
+
+        "modCompileOnly"(group = "me.shedaniel", name = "REIPluginCompatibilities-forge-annotations", version = "8.+")
     }
 
     java {
