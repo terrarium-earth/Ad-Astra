@@ -48,7 +48,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
 
     private final BlastingRecipe[] recipes = new BlastingRecipe[4];
 
-    private Mode mode = Mode.BLASTING;
+    private Mode mode = Mode.ALLOYING;
     protected int cookTime;
     protected int cookTimeTotal;
 

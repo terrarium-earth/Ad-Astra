@@ -151,8 +151,7 @@ public class TooltipUtils {
     }
 
     public static Component getEtaComponent(int progress, int maxProgress, boolean reverse) {
-        int eta = (maxProgress - progress) / 20;
-        if (reverse) eta = progress / 20;
+        int eta = reverse ? progress / 20 : (maxProgress - progress) / 20;
         return Component.translatable("tooltip.ad_astra.eta",
             eta).withStyle(ChatFormatting.GOLD);
     }
