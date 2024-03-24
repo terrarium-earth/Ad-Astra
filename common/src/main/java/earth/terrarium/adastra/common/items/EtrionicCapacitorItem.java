@@ -149,7 +149,6 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
 
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             var stack = inventory.getItem(i);
-            if (stack.is(this)) continue;
             if (stack.isEmpty() || stack.is(this)) continue;
             ItemStackHolder to = new ItemStackHolder(stack);
             EnergyApi.moveEnergy(from, to, maxExtract / energyItems, false);
@@ -182,7 +181,6 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
 
     // NeoForge disabling of nbt change animation
     @SuppressWarnings("unused")
-    @PlatformOnly(PlatformOnly.FORGE)
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
         return false;
     }

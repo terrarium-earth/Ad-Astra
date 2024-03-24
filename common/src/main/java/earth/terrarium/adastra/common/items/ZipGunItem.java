@@ -176,7 +176,6 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
 
     // NeoForge disabling of nbt change animation
     @SuppressWarnings("unused")
-    @PlatformOnly(PlatformOnly.FORGE)
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
         return false;
     }

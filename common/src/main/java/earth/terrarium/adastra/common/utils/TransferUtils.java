@@ -67,6 +67,7 @@ public class TransferUtils {
             if (!FluidContainer.holdsFluid(nearbyEntity, direction)) continue;
             FluidContainer nearbyContainer = FluidContainer.of(nearbyEntity, direction.getOpposite());
             if (nearbyContainer == null) continue;
+            if (tank >= container.getFluids().size()) continue;
             FluidHolder holder = container.getFluids().get(tank);
             if (holder.isEmpty()) continue;
             if (FluidApi.moveFluid(container, nearbyContainer, FluidHolder.ofMillibuckets(holder.getFluid(), amount), false) > 0) {
@@ -86,6 +87,7 @@ public class TransferUtils {
             if (!FluidContainer.holdsFluid(nearbyEntity, direction)) continue;
             FluidContainer nearbyContainer = FluidContainer.of(nearbyEntity, direction.getOpposite());
             if (nearbyContainer == null) continue;
+            if (tank >= container.getFluids().size()) continue;
             FluidHolder holder = nearbyContainer.getFluids().get(tank);
             if (holder.isEmpty()) continue;
             if (FluidApi.moveFluid(nearbyContainer, container, FluidHolder.ofMillibuckets(holder.getFluid(), amount), false) > 0) {

@@ -1,2 +1,3 @@
 - Made etrionic blast furnace use alloying mode by default.
 - Added client config translations.
+- Fixed crash with PipeZ (#508).
