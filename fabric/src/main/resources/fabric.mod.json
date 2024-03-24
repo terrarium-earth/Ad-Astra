@@ -15,7 +15,7 @@
         "ThatGravyBoat"
     ],
     "contact": {
-        "website": "https://modrinth.com/mod/ad-astra",
+        "website": "https://www.curseforge.com/minecraft/mc-mods/ad-astra",
         "repo": "https://github.com/terrarium-earth/ad-astra",
         "issues": "https://github.com/terrarium-earth/ad-astra/issues"
     },
@@ -35,9 +35,6 @@
         ],
         "jei_mod_plugin": [
             "earth.terrarium.adastra.common.compat.jei.AdAstraJeiPlugin"
-        ],
-        "modmenu": [
-            "earth.terrarium.adastra.common.config.fabric.ModMenuConfig"
         ]
     },
     "mixins": [

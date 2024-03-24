@@ -1,1 +1,2 @@
-- Fixed fluids invisible in some GUIs and JEI.
+- Made etrionic blast furnace use alloying mode by default.
+- Added client config translations.

@@ -1,14 +1,11 @@
 package earth.terrarium.adastra.client.config;
 
+import com.teamresourceful.resourcefulconfig.api.annotations.Comment;
 import com.teamresourceful.resourcefulconfig.api.annotations.Config;
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo;
-import com.teamresourceful.resourcefulconfig.api.types.ResourcefulConfig;
 import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
-import com.teamresourceful.resourcefulconfig.client.ConfigScreen;
-import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.config.info.AdAstraConfigInfo;
-import net.minecraft.client.Minecraft;
 
 @Config(
     value = "ad_astra-client",
@@ -20,78 +17,73 @@ import net.minecraft.client.Minecraft;
 public final class AdAstraConfigClient {
 
     @ConfigEntry(
-        type = EntryType.BOOLEAN,
         id = "showOxygenDistributorArea",
-        translation = "Show Oxygen Distributor Area"
+        type = EntryType.BOOLEAN,
+        translation = "config.ad_astra.showOxygenDistributorArea"
     )
     public static boolean showOxygenDistributorArea;
 
     @ConfigEntry(
-        type = EntryType.BOOLEAN,
         id = "showGravityNormalizerArea",
-        translation = "Show Gravity Normalizer Area"
+        type = EntryType.BOOLEAN,
+        translation = "config.ad_astra.showGravityNormalizerArea"
     )
     public static boolean showGravityNormalizerArea;
 
     @ConfigEntry(
-        type = EntryType.BOOLEAN,
         id = "jetSuitEnabled",
-        translation = "Jet Suit Enabled"
+        type = EntryType.BOOLEAN,
+        translation = "config.ad_astra.jetSuitEnabled"
     )
     public static boolean jetSuitEnabled = true;
 
     @ConfigEntry(
-        type = EntryType.INTEGER,
         id = "oxygenBarX",
-        translation = "Oxygen Bar X"
+        type = EntryType.INTEGER,
+        translation = "config.ad_astra.oxygenBarX"
     )
     public static int oxygenBarX = 5;
 
     @ConfigEntry(
-        type = EntryType.INTEGER,
         id = "oxygenBarY",
-        translation = "Oxygen Bar Y"
+        type = EntryType.INTEGER,
+        translation = "config.ad_astra.oxygenBarY"
     )
     public static int oxygenBarY = 25;
 
     @ConfigEntry(
-        type = EntryType.FLOAT,
         id = "oxygenBarScale",
-        translation = "Oxygen Bar Scale"
+        type = EntryType.FLOAT,
+        translation = "config.ad_astra.oxygenBarScale"
     )
     public static float oxygenBarScale = 1;
 
     @ConfigEntry(
-        type = EntryType.INTEGER,
         id = "energyBarX",
-        translation = "Energy Bar X"
+        type = EntryType.INTEGER,
+        translation = "config.ad_astra.energyBarX"
     )
     public static int energyBarX = 11;
 
     @ConfigEntry(
-        type = EntryType.INTEGER,
         id = "energyBarY",
-        translation = "Energy Bar Y"
+        type = EntryType.INTEGER,
+        translation = "config.ad_astra.energyBarY"
     )
     public static int energyBarY = 95;
 
     @ConfigEntry(
-        type = EntryType.FLOAT,
         id = "energyBarScale",
-        translation = "Energy Bar Scale"
+        type = EntryType.FLOAT,
+        translation = "config.ad_astra.energyBarScale"
     )
     public static float energyBarScale = 1;
 
     @ConfigEntry(
-        type = EntryType.BOOLEAN,
         id = "spaceMuffler",
-        translation = "Reduce volume and increase pitch in space"
+        type = EntryType.BOOLEAN,
+        translation = "config.ad_astra.spaceMuffler"
     )
+    @Comment("Reduce volume and increase pitch in space.")
     public static boolean spaceMuffler = true;
-
-    public static void open() {
-        ResourcefulConfig config = AdAstra.CONFIGURATOR.getConfig(AdAstraConfigClient.class);
-        if (config == null) return;
-        Minecraft.getInstance().setScreen(new ConfigScreen(Minecraft.getInstance().screen, config));
-    }
 }

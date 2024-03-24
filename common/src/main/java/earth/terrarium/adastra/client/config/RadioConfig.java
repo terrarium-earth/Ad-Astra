@@ -11,7 +11,7 @@ public final class RadioConfig {
     @ConfigEntry(
         type = EntryType.INTEGER,
         id = "volume",
-        translation = "Volume"
+        translation = "config.ad_astra.volume"
     )
     @ConfigOption.Range(min = 0, max = 100)
     public static int volume = 50;

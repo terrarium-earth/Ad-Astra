@@ -413,6 +413,18 @@ public class ModLangProvider extends LanguageProvider {
         add("config.ad_astra.distributionRefreshRate", "Distribution refresh rate");
         add("config.ad_astra.pipeRefreshRate", "Pipe refresh rate");
 
+        add("config.ad_astra.showOxygenDistributorArea", "Show oxygen distributor area");
+        add("config.ad_astra.showGravityNormalizerArea", "Show gravity normalizer area");
+        add("config.ad_astra.jetSuitEnabled", "Jet suit enabled");
+        add("config.ad_astra.oxygenBarX", "Oxygen bar x");
+        add("config.ad_astra.oxygenBarY", "Oxygen bar y");
+        add("config.ad_astra.oxygenBarScale", "Oxygen bar scale");
+        add("config.ad_astra.energyBarX", "Energy bar x");
+        add("config.ad_astra.energyBarY", "Energy bar y");
+        add("config.ad_astra.energyBarScale", "Energy bar scale");
+        add("config.ad_astra.spaceMuffler", "Space muffler");
+        add("config.ad_astra.volume", "Volume");
+
         add("subtitles.ad_astra.entity.rocket_launch", "Rocket launches");
         add("subtitles.ad_astra.entity.rocket", "Rocket flies");
         add("subtitles.ad_astra.block.wrench", "Wrench ratchets");

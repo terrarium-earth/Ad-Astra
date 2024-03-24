@@ -1,9 +1,10 @@
 package earth.terrarium.adastra.common.config;
 
-import com.teamresourceful.resourcefulconfig.api.annotations.*;
+import com.teamresourceful.resourcefulconfig.api.annotations.Comment;
+import com.teamresourceful.resourcefulconfig.api.annotations.Config;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigEntry;
+import com.teamresourceful.resourcefulconfig.api.annotations.ConfigInfo;
 import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
-import com.teamresourceful.resourcefulconfig.api.types.options.Position;
-import earth.terrarium.adastra.client.config.AdAstraConfigClient;
 import earth.terrarium.adastra.common.config.info.AdAstraConfigInfo;
 
 @Config(
@@ -14,16 +15,6 @@ import earth.terrarium.adastra.common.config.info.AdAstraConfigInfo;
 )
 @ConfigInfo.Provider(AdAstraConfigInfo.class)
 public final class AdAstraConfig {
-    @SuppressWarnings("unused")
-    @ConfigButton(
-        target = "",
-        text = "Client Config",
-        translation = "config.ad_astra.clientConfig",
-        position = Position.BEFORE
-    )
-    public static void clientConfig() {
-        AdAstraConfigClient.open();
-    }
 
     @ConfigEntry(
         id = "allowFlagImages",

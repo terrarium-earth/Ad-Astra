@@ -1,20 +1,14 @@
 package earth.terrarium.adastra.client.neoforge;
 
-import com.teamresourceful.resourcefulconfig.api.types.ResourcefulConfig;
-import com.teamresourceful.resourcefulconfig.client.ConfigScreen;
-import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.AdAstraClient;
-import earth.terrarium.adastra.common.config.AdAstraConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.ConfigScreenHandler;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.TickEvent;
@@ -31,14 +25,6 @@ public class AdAstraClientNeoForge {
         NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onRegisterClientHud);
         NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onClientTick);
         NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onRenderLevelStage);
-
-        ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
-            () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> {
-                ResourcefulConfig config = AdAstra.CONFIGURATOR.getConfig(AdAstraConfig.class);
-                if (config == null) return null;
-                return new ConfigScreen(parent, config);
-            })
-        );
     }
 
     @SubscribeEvent

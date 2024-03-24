@@ -27,7 +27,7 @@ dependencies {
 
     modLocalRuntime(group = "me.shedaniel", name = "RoughlyEnoughItems-fabric", version = reiVersion)
 
-    modApi(group = "com.terraformersmc", name = "modmenu", version = modMenuVersion)
+    modLocalRuntime(group = "com.terraformersmc", name = "modmenu", version = modMenuVersion)
 
     modLocalRuntime(group = "RebornCore", name = "RebornCore-1.20", version = "5.10.2") { isTransitive = false }
     modLocalRuntime(group = "TechReborn", name = "TechReborn-1.20", version = "5.10.2") { isTransitive = false }
