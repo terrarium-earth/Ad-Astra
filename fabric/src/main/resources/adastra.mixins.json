@@ -9,8 +9,9 @@
         "common.multipart.LevelMixin"
     ],
     "client": [
+        "client.CameraMixin"
     ],
     "injectors": {
         "defaultRequire": 1
-  }
+    }
 }

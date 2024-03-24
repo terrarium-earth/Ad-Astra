@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.client.neoforge;
 
 import earth.terrarium.adastra.client.AdAstraClient;
+import earth.terrarium.adastra.common.entities.vehicles.Vehicle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
@@ -25,6 +26,7 @@ public class AdAstraClientNeoForge {
         NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onRegisterClientHud);
         NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onClientTick);
         NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onRenderLevelStage);
+        NeoForge.EVENT_BUS.addListener(AdAstraClientNeoForge::onCalculateCameraDistance);
     }
 
     @SubscribeEvent
@@ -77,5 +79,11 @@ public class AdAstraClientNeoForge {
 
     private static void onSetupItemColors(RegisterColorHandlersEvent.Item event) {
         AdAstraClient.onAddItemColors(event::register);
+    }
+
+    private static void onCalculateCameraDistance(CalculateDetachedCameraDistanceEvent event) {
+        if (event.getDistance() < 12.0 && event.getCamera().getEntity().getVehicle() instanceof Vehicle vehicle && vehicle.zoomOutCameraInThirdPerson()) {
+            event.setDistance(12.0);
+        }
     }
 }
