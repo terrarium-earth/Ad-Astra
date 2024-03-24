@@ -2,7 +2,7 @@ package earth.terrarium.adastra.client.screens.blocks;
 
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ServerboundSetFlagUrlPacket;
+import earth.terrarium.adastra.common.network.packets.ServerboundSetFlagUrlPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

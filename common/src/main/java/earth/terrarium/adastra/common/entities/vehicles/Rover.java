@@ -3,7 +3,7 @@ package earth.terrarium.adastra.common.entities.vehicles;
 import earth.terrarium.adastra.client.radio.audio.RadioHandler;
 import earth.terrarium.adastra.common.menus.vehicles.RoverMenu;
 import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ClientboundPlayStationPacket;
+import earth.terrarium.adastra.common.network.packets.ClientboundPlayStationPacket;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.adastra.common.tags.ModFluidTags;

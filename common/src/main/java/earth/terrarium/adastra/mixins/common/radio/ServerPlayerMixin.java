@@ -1,7 +1,7 @@
 package earth.terrarium.adastra.mixins.common.radio;
 
 import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ClientboundPlayStationPacket;
+import earth.terrarium.adastra.common.network.packets.ClientboundPlayStationPacket;
 import earth.terrarium.adastra.common.utils.radio.RadioHolder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;

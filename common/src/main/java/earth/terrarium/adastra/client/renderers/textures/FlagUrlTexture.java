@@ -75,7 +75,6 @@ public class FlagUrlTexture extends SimpleTexture {
                                     }
                                 });
                             }
-
                         });
                     }
                 } catch (IOException | InterruptedException e) {

@@ -235,6 +235,5 @@ public class SlidingDoorBlock extends BasicEntityBlock implements Wrenchable {
             }
         }
         level.playSound(null, pos, ModSoundEvents.WRENCH.get(), SoundSource.BLOCKS, 1, level.random.nextFloat() * 0.2f + 0.9f);
-
     }
 }

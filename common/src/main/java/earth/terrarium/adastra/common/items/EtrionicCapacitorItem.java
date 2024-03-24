@@ -180,7 +180,7 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
         return false;
     }
 
-    // Forge disabling of nbt change animation
+    // NeoForge disabling of nbt change animation
     @SuppressWarnings("unused")
     @PlatformOnly(PlatformOnly.FORGE)
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {

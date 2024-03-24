@@ -25,6 +25,7 @@ public abstract class BaseContainerMenu<T extends BlockEntity> extends AbstractC
 
     private static final int START_INDEX = 0;
 
+    @NotNull
     protected final T entity;
     protected final Inventory inventory;
     protected final Player player;
@@ -41,6 +42,7 @@ public abstract class BaseContainerMenu<T extends BlockEntity> extends AbstractC
         addPlayerInvSlots();
     }
 
+    @NotNull
     public T getEntity() {
         return entity;
     }
@@ -112,5 +114,4 @@ public abstract class BaseContainerMenu<T extends BlockEntity> extends AbstractC
         if (!level.isClientSide) return null;
         return WorldUtils.getTileEntity(type, level, buf.readBlockPos());
     }
-
 }

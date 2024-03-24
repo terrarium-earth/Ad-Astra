@@ -83,7 +83,6 @@ public class EatPermafrostGoal extends Goal {
                     this.mob.ate();
                 }
             }
-
         }
     }
 }

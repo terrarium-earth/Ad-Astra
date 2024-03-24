@@ -5,7 +5,7 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.config.RadioConfig;
 import earth.terrarium.adastra.client.radio.audio.RadioHandler;
 import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ServerboundRequestStationsPacket;
+import earth.terrarium.adastra.common.network.packets.ServerboundRequestStationsPacket;
 import earth.terrarium.adastra.common.utils.radio.StationInfo;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;

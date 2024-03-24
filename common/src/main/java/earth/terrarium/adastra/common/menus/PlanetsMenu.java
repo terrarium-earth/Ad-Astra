@@ -8,7 +8,7 @@ import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;
 import earth.terrarium.adastra.common.menus.base.PlanetsMenuProvider;
 import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ServerboundConstructSpaceStationPacket;
+import earth.terrarium.adastra.common.network.packets.ServerboundConstructSpaceStationPacket;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.recipes.SpaceStationRecipe;
 import earth.terrarium.adastra.common.recipes.base.IngredientHolder;

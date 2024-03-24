@@ -9,7 +9,7 @@ import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
 import earth.terrarium.adastra.common.menus.slots.InventorySlot;
 import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ServerboundResetSideConfigPacket;
+import earth.terrarium.adastra.common.network.packets.ServerboundResetSideConfigPacket;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.network.chat.Component;

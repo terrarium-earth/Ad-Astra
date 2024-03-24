@@ -1,4 +1,4 @@
-package earth.terrarium.adastra.common.network.messages;
+package earth.terrarium.adastra.common.network.packets;
 
 import com.teamresourceful.bytecodecs.base.ByteCodec;
 import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;

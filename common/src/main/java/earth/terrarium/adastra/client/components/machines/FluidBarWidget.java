@@ -10,7 +10,7 @@ import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.configuration.FluidConfiguration;
 import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ServerboundClearFluidTankPacket;
+import earth.terrarium.adastra.common.network.packets.ServerboundClearFluidTankPacket;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;

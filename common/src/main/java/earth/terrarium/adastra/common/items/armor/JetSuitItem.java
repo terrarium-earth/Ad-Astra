@@ -145,7 +145,7 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
             0, 0, 0);
     }
 
-    @SuppressWarnings("unused") // Forge
+    @SuppressWarnings("unused") // NeoForge
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
         if (entity.level().isClientSide()) return true;
         if (this.type != Type.CHESTPLATE) return true;
@@ -161,7 +161,7 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
         return true;
     }
 
-    @SuppressWarnings("unused") // Forge
+    @SuppressWarnings("unused") // NeoForge
     public boolean canElytraFly(ItemStack stack, LivingEntity entity) {
         return entity instanceof Player player && canFly(player, stack) && isFullFlightEnabled(player);
     }

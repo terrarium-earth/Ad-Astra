@@ -129,6 +129,7 @@ public class ModEntityTypes {
             .fireImmune()
             .build("lunarian_wandering_trader"));
 
+
     public static final RegistryEntry<EntityType<SulfurCreeper>> SULFUR_CREEPER = ENTITY_TYPES.register("sulfur_creeper", () ->
         EntityType.Builder.of(SulfurCreeper::new, MobCategory.MONSTER)
             .sized(0.6f, 1.7f)

@@ -10,7 +10,7 @@ import earth.terrarium.adastra.common.blockentities.machines.GravityNormalizerBl
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.menus.machines.GravityNormalizerMenu;
 import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ServerboundSetGravityNormalizerTargetPacket;
+import earth.terrarium.adastra.common.network.packets.ServerboundSetGravityNormalizerTargetPacket;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.network.chat.CommonComponents;

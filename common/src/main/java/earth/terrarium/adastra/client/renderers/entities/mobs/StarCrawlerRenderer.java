@@ -20,5 +20,4 @@ public class StarCrawlerRenderer extends MobRenderer<StarCrawler, StarCrawlerMod
     public @NotNull ResourceLocation getTextureLocation(StarCrawler entity) {
         return TEXTURE;
     }
-
 }

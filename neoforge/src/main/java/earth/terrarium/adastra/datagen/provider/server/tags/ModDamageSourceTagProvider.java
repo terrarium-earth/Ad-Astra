@@ -8,7 +8,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.tags.TagEntry;
 import net.minecraft.world.damagesource.DamageType;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -22,6 +21,7 @@ public class ModDamageSourceTagProvider extends TagsProvider<DamageType> {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(DamageTypeTags.BYPASSES_ARMOR).add(TagEntry.optionalElement(ModDamageSources.OXYGEN.location()));
+        tag(DamageTypeTags.BYPASSES_ARMOR).addOptional(ModDamageSources.OXYGEN.location());
+        tag(DamageTypeTags.NO_IMPACT).addOptional(ModDamageSources.OXYGEN.location());
     }
 }

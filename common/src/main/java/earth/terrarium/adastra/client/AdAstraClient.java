@@ -28,7 +28,7 @@ import earth.terrarium.adastra.client.screens.vehicles.RoverScreen;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.items.EtrionicCapacitorItem;
 import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ServerboundSyncKeybindPacket;
+import earth.terrarium.adastra.common.network.packets.ServerboundSyncKeybindPacket;
 import earth.terrarium.adastra.common.registry.*;
 import earth.terrarium.adastra.common.tags.ModItemTags;
 import earth.terrarium.adastra.common.utils.KeybindManager;

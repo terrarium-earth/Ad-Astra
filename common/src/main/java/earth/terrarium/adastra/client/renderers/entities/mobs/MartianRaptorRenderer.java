@@ -19,5 +19,4 @@ public class MartianRaptorRenderer extends MobRenderer<MartianRaptor, MartianRap
     public ResourceLocation getTextureLocation(MartianRaptor entity) {
         return TEXTURE;
     }
-
 }

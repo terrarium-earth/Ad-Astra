@@ -1,4 +1,4 @@
-package earth.terrarium.adastra.common.network.messages;
+package earth.terrarium.adastra.common.network.packets;
 
 import com.teamresourceful.resourcefullib.common.network.Packet;
 import com.teamresourceful.resourcefullib.common.network.base.PacketType;

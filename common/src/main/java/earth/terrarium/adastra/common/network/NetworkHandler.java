@@ -2,7 +2,7 @@ package earth.terrarium.adastra.common.network;
 
 import com.teamresourceful.resourcefullib.common.network.Network;
 import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.network.messages.*;
+import earth.terrarium.adastra.common.network.packets.*;
 import net.minecraft.resources.ResourceLocation;
 
 public final class NetworkHandler {

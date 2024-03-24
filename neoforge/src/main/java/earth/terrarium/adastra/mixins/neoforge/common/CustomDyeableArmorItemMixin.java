@@ -61,7 +61,6 @@ public abstract class CustomDyeableArmorItemMixin extends Item {
                 if (replacement != original) {
                     uncheckedCopyTo(original, replacement);
                     return replacement;
-
                 } else {
                     return original;
                 }

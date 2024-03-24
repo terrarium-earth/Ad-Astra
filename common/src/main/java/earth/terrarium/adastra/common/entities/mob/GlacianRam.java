@@ -232,7 +232,6 @@ public class GlacianRam extends Animal implements Shearable {
         } else {
             super.handleEntityEvent(status);
         }
-
     }
 
     public float getNeckAngle(float delta) {

@@ -5,7 +5,7 @@ import earth.terrarium.adastra.common.container.VehicleContainer;
 import earth.terrarium.adastra.common.entities.multipart.MultipartEntity;
 import earth.terrarium.adastra.common.entities.multipart.MultipartPartEntity;
 import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ServerboundVehicleControlPacket;
+import earth.terrarium.adastra.common.network.packets.ServerboundVehicleControlPacket;
 import earth.terrarium.adastra.mixins.common.LivingEntityAccessor;
 import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
 import earth.terrarium.botarium.common.menu.MenuHooks;

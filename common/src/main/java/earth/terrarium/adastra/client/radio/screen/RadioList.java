@@ -12,7 +12,7 @@ import earth.terrarium.adastra.client.config.AdAstraConfigClient;
 import earth.terrarium.adastra.client.config.RadioConfig;
 import earth.terrarium.adastra.client.radio.audio.RadioHandler;
 import earth.terrarium.adastra.common.network.NetworkHandler;
-import earth.terrarium.adastra.common.network.messages.ServerboundSetStationPacket;
+import earth.terrarium.adastra.common.network.packets.ServerboundSetStationPacket;
 import earth.terrarium.adastra.common.utils.radio.StationInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
