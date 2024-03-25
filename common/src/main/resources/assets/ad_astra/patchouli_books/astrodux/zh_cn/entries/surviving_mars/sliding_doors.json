@@ -1,0 +1,29 @@
+{
+  "name": "滑动门",
+  "icon": "ad_astra:ostrum_sliding_door",
+  "sortnum": 3,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "滑动门",
+      "item": "ad_astra:airlock",
+      "text": "滑动门是大型3x3大小的门。它们在关闭时会密封氧气，使其成为气闸的绝佳候选者。可以通过使用扳手按住Shift键右键来锁定它们。锁定的门只在接受到红石信号时打开。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:iron_sliding_door",
+      "recipe2": "ad_astra:steel_sliding_door"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:desh_sliding_door",
+      "recipe2": "ad_astra:ostrum_sliding_door"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:airlock",
+      "recipe2": "ad_astra:reinforced_door"
+    }
+  ]
+}

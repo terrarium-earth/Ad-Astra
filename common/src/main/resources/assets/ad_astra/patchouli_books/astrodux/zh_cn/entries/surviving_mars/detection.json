@@ -1,0 +1,18 @@
+{
+  "name": "探测环境",
+  "icon": "ad_astra:oxygen_sensor",
+  "sortnum": 7,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "氧传感器",
+      "item": "ad_astra:oxygen_sensor",
+      "text": "氧传感器在检测到氧气时会发出红石信号。您可以按住Shift键并右键单击它来反转信号。尽管叫做氧传感器，您仍然可以通过使用扳手右键单击来更改其检测类型。它可以选择检测氧气、安全温度和正常重力。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:oxygen_sensor"
+    }
+  ]
+}

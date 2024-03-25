@@ -1,14 +1,14 @@
 {
-  "name": "能源站",
+  "name": "充能器",
   "icon": "ad_astra:energizer",
-  "sortnum": 2,
+  "sortnum": 5,
   "category": "ad_astra:surviving_mars",
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "title": "能源站",
+      "title": "充能器",
       "item": "ad_astra:energizer",
-      "text": "能源站可以储存大量能量、为附近的机器供电或为物品充电。手持需要充电的物品，右击能源站即可为其充电。能源站最多能够储存2,000,000单位能量, 足够支持附近的机器工作很长时间。被破坏时，能源站会保留其中的能量。"
+      "text": "充能器可以储存大量电能、为附近的机器供电或为物品充电。手持需要充电的物品，右击充能器即可为其充电。能源站最多能够储存2M单位能量, 足够支持附近的机器工作很长时间。被破坏时，能源站会保留其中的能量。"
     },
     {
       "type": "patchouli:crafting",

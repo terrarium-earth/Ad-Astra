@@ -1,0 +1,18 @@
+{
+  "name": "旗帜",
+  "icon": "ad_astra:blue_flag",
+  "sortnum": 1,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "旗帜",
+      "item": "ad_astra:lime_flag",
+      "text": "旗帜是装饰方块，有16种颜色可供选择。默认情况下，放置时，它们将显示标志所有者的面孔。它们可以配置为通过右键单击并在GUI中输入的URL自定义图像。这会在旗帜上显示互联网图像。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:black_flag"
+    }
+  ]
+}

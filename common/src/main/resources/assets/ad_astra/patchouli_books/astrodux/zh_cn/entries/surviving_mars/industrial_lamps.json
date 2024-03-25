@@ -1,0 +1,19 @@
+{
+  "name": "工业台灯",
+  "icon": "ad_astra:lime_industrial_lamp",
+  "sortnum": 2,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "工业台灯",
+      "item": "ad_astra:small_blue_industrial_lamp",
+      "text": "工业灯有所有16种颜色可供选择，有小和大两个尺寸。默认情况下，工业台灯都只会发出正常的白光;但是，如果你有$(l:https://modrinth.com/mod/shimmer)Shimmer$(/l)模组，则每盏灯都会发出各自的颜色。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:magenta_industrial_lamp",
+      "recipe2": "ad_astra:small_red_industrial_lamp"
+    }
+  ]
+}
