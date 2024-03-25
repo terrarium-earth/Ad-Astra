@@ -1,0 +1,18 @@
+{
+  "name": "发电",
+  "icon": "ad_astra:coal_generator",
+  "sortnum": 0,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "燃煤发电机",
+      "item": "ad_astra:coal_generator",
+      "text": "电能是模组的核心资源。它可用于所有机器，也是所有机器所必需的。产生能源的方法有很多种，最基本的方式是燃煤发电机。它使用木材或煤炭等可燃资源来发电。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:coal_generator"
+    }
+  ]
+}

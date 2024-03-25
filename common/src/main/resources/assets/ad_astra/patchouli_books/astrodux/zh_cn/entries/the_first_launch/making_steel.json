@@ -1,0 +1,24 @@
+{
+  "name": "炼钢",
+  "icon": "ad_astra:etrionic_blast_furnace",
+  "sortnum": 2,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "电力高炉",
+      "item": "ad_astra:etrionic_blast_furnace",
+      "text": "电力高炉是高炉的升级版。它有两种模式：冶炼与合铸。冶炼的原理类似于高炉，但有4个输入槽，效率是高炉的4倍。合铸可以融合材料制成合金。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:etrionic_blast_furnace"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "钢",
+      "item": "ad_astra:steel_ingot",
+      "text": "钢是在电力高炉中用铁和煤融合制成的。每个铁锭和煤可以产生1个钢锭。钢对于大多数配方来说是必不可少的，也是第一枚火箭的主要材料。"
+    }
+  ]
+}

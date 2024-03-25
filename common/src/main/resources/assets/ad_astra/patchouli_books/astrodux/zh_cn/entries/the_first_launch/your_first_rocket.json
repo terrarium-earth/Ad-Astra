@@ -1,18 +1,18 @@
 {
   "name": "第一枚火箭",
   "icon": "ad_astra:nasa_workbench",
-  "sortnum": 1,
+  "sortnum": 3,
   "category": "ad_astra:the_first_launch",
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "title": "NASA工程装配台",
+      "title": "NASA工作台",
       "item": "ad_astra:nasa_workbench",
-      "text": "想要制造火箭，首先要造出各种部件：头锥、板材、鳍片、燃料储罐和火箭引擎。随后，你就可以在专门为火箭制造而设计的一种装配台——NASA工程装配台中组装出一枚货真价实的火箭了。"
+      "text": "想要制造火箭，首先要造出各种部件：头锥、板材、尾鳍、燃料储罐和火箭引擎。随后，你就可以在专门为火箭制造而设计的一种工作台——NASA工作台中组装出一枚货真价实的火箭了。"
     },
     {
       "type": "patchouli:crafting",
-      "title": "NASA工程装配台",
+      "title": "NASA工作台",
       "recipe": "ad_astra:nasa_workbench"
     },
     {
@@ -30,13 +30,13 @@
         },
         "symmetrical": true
       },
-      "text": "想要发射你的火箭，你需要一块火箭发射基座。"
+      "text": "想要发射你的火箭，你需要一块发射台。"
     },
     {
       "type": "patchouli:crafting",
-      "title": "火箭发射基座",
+      "title": "NASA工作台",
       "recipe": "ad_astra:launch_pad",
-      "text": "火箭可以摆放在基座中心。"
+      "text": "发射台建成后，将火箭放在中心。如果你愿意，你可以为发射台的任何部分充能，以便在加油后自动发射火箭。"
     }
   ]
 }
