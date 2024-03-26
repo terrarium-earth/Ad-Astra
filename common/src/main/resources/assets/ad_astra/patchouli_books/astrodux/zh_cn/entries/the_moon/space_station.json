@@ -12,7 +12,27 @@
     {
       "type": "patchouli:text",
       "title": "空间站",
-      "text": "空间站作为基础结构，允许你对其进行最大幅度的扩展，以实现你的太空梦。它们总会在你发射火箭的相同位置生成，所以牢记坐标，以防迷路。"
+      "text": "空间站作为基础结构，允许你对其进行最大幅度的扩展，以实现你的太空梦。你所有的空间站都出现在行星屏幕上。其他玩家无法在与你相同的区域生成新的空间站，所以你的结构是安全的。"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "漫游太空",
+      "text": "太空中的物理现象与地球有很大不同。在这个零重力环境中，您将漂浮在周围，不受重力或空气阻力的影响。这可能会使四处走动变得困难。一种可以帮助您的工具是压缩枪。压缩枪需要氧气，并会迅速消耗它来推动你前进。这使您可以在太空中四处走动。小心控制你的速度。由于没有空气阻力，你可能会飞得很远而迷路。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "压缩枪",
+      "recipe": "ad_astra:zip_gun"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cadmus",
+      "text": "如果安装了$(l:https://modrinth.com/mod/cadmus)Cadmus$(/l)模组，您的空间站中的3x3区块将被占领。此外，玩家将无法在你占领的任何区块中创建新的空间站。"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Argonauts",
+      "text": "如果安装了$(l:https://modrinth.com/mod/argonauts)Argonauts$(/l)模组，你的队伍（Party）或公会（Guild）中的其他玩家将能够降落在你的空间站，你也将能够降落在他们的空间站。"
     }
   ]
 }

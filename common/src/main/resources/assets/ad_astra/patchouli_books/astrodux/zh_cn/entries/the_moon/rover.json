@@ -1,19 +1,29 @@
 {
-  "name": "巡游者",
+  "name": "漫游车",
   "icon": "ad_astra:tier_1_rover",
   "sortnum": 3,
   "category": "ad_astra:the_moon",
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "title": "巡游者",
+      "title": "漫游车",
       "item": "ad_astra:tier_1_rover",
-      "text": "巡游者是在外星的崎岖地表上自在漫游的不二选择。它不可置信地快，在拥有八格存储空间的同时支持两名玩家同时乘坐。在驾驶巡游者前，你需要为它填满燃油（潜行时右击，然后将燃油桶从左侧放入）。"
+      "text": "漫游车是在外星的崎岖地表上自在行走的不二选择。它不可置信地快，在拥有16格存储空间的同时支持两名玩家同时乘坐。在驾驶巡游者前，你需要为它填满燃油（潜行时右击，然后将燃油桶从左侧放入）。"
     },
     {
       "type": "patchouli:entity",
       "entity": "ad_astra:tier_1_rover",
       "scale": 0.36
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "漫游车配方",
+      "recipe": "ad_astra:tier_1_rover"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "收音机",
+      "text": "漫游车有一个内置的收音机，可以播放真正的互联网流媒体广播电台。通过与漫游车上的收音机交互或按($(k:ad_astra.open_radio))来使用它。如果多个玩家在漫游车中，他们也会听到相同的广播。"
     }
   ]
 }

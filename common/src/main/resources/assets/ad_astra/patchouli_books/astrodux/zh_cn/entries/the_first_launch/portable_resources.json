@@ -1,0 +1,29 @@
+{
+  "name": "可移动资源",
+  "icon": "ad_astra:gas_tank",
+  "sortnum": 6,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "流体储罐",
+      "item": "ad_astra:gas_tank",
+      "text": "流体储罐允许你以方便的便携式形式储存氧气。按住右键会将氧气分配到物品栏中的物品中，偏向于盔甲。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:gas_tank",
+      "recipe2": "ad_astra:large_gas_tank"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "电容器",
+      "item": "ad_astra:etrionic_capacitor",
+      "text": "电容器是一种类似于电池的物品，用于以便携形式存储电能。它可以放置在机器的能量槽中为它们提供动力，并且像流体储罐一样，可以通过按住右键单击将其分配到您的库存中。它具有两种模式：顺序模式和轮询调度模式。顺序模式将逐个分配能量，而轮询调度模式将均匀分配能量。潜行时右键以更改模式。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:etrionic_capacitor"
+    }
+  ]
+}

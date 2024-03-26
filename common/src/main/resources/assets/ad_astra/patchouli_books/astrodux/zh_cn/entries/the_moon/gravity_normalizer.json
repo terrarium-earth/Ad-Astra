@@ -1,0 +1,19 @@
+{
+  "name": "重力规正器",
+  "icon": "ad_astra:gravity_normalizer",
+  "sortnum": 3,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "重力规正器",
+      "item": "ad_astra:gravity_normalizer",
+      "text": "重力规正器允许您在密闭区域产生人工重力，类似于氧气分配器。它有一个滑块来设置目标重力——从0-G到2-G。重力规正器需要相当大的功率来运行，因此如果您的结构不需要调整重力，请谨慎使用。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Gravity Normalizer Recipe",
+      "recipe": "ad_astra:gravity_normalizer"
+    }
+  ]
+}

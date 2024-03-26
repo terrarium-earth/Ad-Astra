@@ -1,0 +1,18 @@
+{
+  "name": "收音机",
+  "icon": "ad_astra:radio",
+  "sortnum": 7,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "收音机",
+      "item": "ad_astra:radio",
+      "text": "在发射之前，为什么不听几首歌呢？收音机是一个可以播放真正的互联网流媒体广播电台的方块！你可以收听多种流派的几个电台。此外，附近的任何人都会听到同一个电台。最终，你将能够使用收音机来制作具有内置收音机的漫游车，可以四处行驶并欣赏音乐。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:radio"
+    }
+  ]
+}

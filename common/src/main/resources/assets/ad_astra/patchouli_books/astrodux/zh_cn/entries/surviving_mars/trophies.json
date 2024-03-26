@@ -12,7 +12,7 @@
     },
     {
       "type": "patchouli:spotlight",
-      "title": "太空艺术画",
+      "title": "太空画",
       "item": "ad_astra:space_painting",
       "text": "在地牢中的宝箱里，你还能找到一些来自太空的画作。太空艺术画总共有14张，将它贴在墙上就会随机选择一张展示，跟普通的画一样。"
     }
