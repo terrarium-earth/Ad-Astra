@@ -6,10 +6,12 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
+import me.shedaniel.rei.plugincompatibilities.api.REIPluginCompatIgnore;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
 import java.util.List;
 
+@REIPluginCompatIgnore
 public record CompressingDisplay(CompressingRecipe recipe) implements Display {
     public CompressingDisplay(RecipeHolder<CompressingRecipe> recipe) {
         this(recipe.value());
