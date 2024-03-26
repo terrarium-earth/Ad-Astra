@@ -24,14 +24,19 @@ public final class ModBlockTags {
     public static final TagKey<Block> GLOBES = tag("globes");
     public static final TagKey<Block> FLAGS = tag("flags");
     public static final TagKey<Block> SLIDING_DOORS = tag("sliding_doors");
+    
+    public static final TagKey<Block> ICE_SHARD_ORES = tag("ice_shard_ores");
 
     public static final TagKey<Block> STEEL_BLOCKS = tag("steel_blocks");
     public static final TagKey<Block> DESH_BLOCKS = tag("desh_blocks");
     public static final TagKey<Block> RAW_DESH_BLOCKS = tag("raw_desh_blocks");
+    public static final TagKey<Block> DESH_ORES = tag("desh_ores");
     public static final TagKey<Block> OSTRUM_BLOCKS = tag("ostrum_blocks");
     public static final TagKey<Block> RAW_OSTRUM_BLOCKS = tag("raw_ostrum_blocks");
+    public static final TagKey<Block> OSTRUM_ORES = tag("ostrum_ores");
     public static final TagKey<Block> CALORITE_BLOCKS = tag("calorite_blocks");
     public static final TagKey<Block> RAW_CALORITE_BLOCKS = tag("raw_calorite_blocks");
+    public static final TagKey<Block> CALORITE_ORES = tag("calorite_ores");
 
     public static final TagKey<Block> GLACIAN_LOGS = tag("glacian_logs");
     public static final TagKey<Block> AERONOS_CAPS = tag("aeronos_caps");

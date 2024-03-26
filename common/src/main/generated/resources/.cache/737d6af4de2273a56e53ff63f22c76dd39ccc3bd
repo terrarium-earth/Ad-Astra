@@ -1,19 +1,23 @@
-// 1.20.4	2024-01-30T16:30:34.905983	Tags for minecraft:block mod id ad_astra
+// 1.20.4	2024-02-28T00:59:24.0697618	Tags for minecraft:block mod id ad_astra
 375e4bc49d396a2ae2b2a9dcddc300ab07a3aa48 data/ad_astra/tags/blocks/aeronos_caps.json
 8030232b3adfa6e804799644b412d6697c9f985a data/ad_astra/tags/blocks/cable_ducts.json
 9e5430f8f65b6281a9fe76442a62537371f1da72 data/ad_astra/tags/blocks/calorite_blocks.json
+660459e2ae4843ee4522efebdc2f7ab90b4b3d1a data/ad_astra/tags/blocks/calorite_ores.json
 1c3b5f4f600d0258598142a532fa9c870e58dc06 data/ad_astra/tags/blocks/desh_blocks.json
+a143ec2ff6fb9ff191593ee5cdf364cabc0a0fe9 data/ad_astra/tags/blocks/desh_ores.json
 1172076e4e993f8ccd4375d1f09225e12405326e data/ad_astra/tags/blocks/destroyed_in_space.json
 49278667ca98b5260c0d1482db7a8783f77eaef4 data/ad_astra/tags/blocks/flags.json
 d10acd25289b91dd382a0b3b47088961846033c6 data/ad_astra/tags/blocks/fluid_pipe_ducts.json
 e5e2d1a810418e09c6d0059a742a494f43fcd81e data/ad_astra/tags/blocks/glacian_logs.json
 b2aa5eed7b47157f4fb4f9695530c8e9be22dc7e data/ad_astra/tags/blocks/glacio_stone_replaceables.json
 f8fd8be682f32975426f904d4f7a022c6d7bf39f data/ad_astra/tags/blocks/globes.json
+7a77f655decc76e56bbb95a5240c0901ec0bc45c data/ad_astra/tags/blocks/ice_shard_ores.json
 a20e261a07e1e22d9ae7c5cc3e9df15dbc303d21 data/ad_astra/tags/blocks/launch_pads.json
 9b3555c148120aeff092ca85e6ab6935c59a06f8 data/ad_astra/tags/blocks/mars_stone_replaceables.json
 cbee5151470be1d38872ba2e6d2d742a6a7fc520 data/ad_astra/tags/blocks/mercury_stone_replaceables.json
 ffb01c7f1027d82018d51bb21f7ddd68ea6bee5a data/ad_astra/tags/blocks/moon_stone_replaceables.json
 9d585f93b0648ead67d851972938aa7e80d2f350 data/ad_astra/tags/blocks/ostrum_blocks.json
+d09980a23fe5234dc67cee1276314917ec20e0e7 data/ad_astra/tags/blocks/ostrum_ores.json
 ca67d73ce58ac5ef5c63c7be6d0e3db87421c771 data/ad_astra/tags/blocks/passes_flood_fill.json
 51a634c15edd9b500e763a76291dba415160b087 data/ad_astra/tags/blocks/raw_calorite_blocks.json
 889ee1b11aa6baee975e57668195ef6202e96c1a data/ad_astra/tags/blocks/raw_desh_blocks.json
@@ -23,12 +27,21 @@ bcb57fc6e31c0f265fe07d507e4f2bc84dcaadcd data/ad_astra/tags/blocks/sliding_doors
 8ab58327558f09297f12a44aefd3254382c4e224 data/ad_astra/tags/blocks/strophar_caps.json
 745729209d9209464123824e34ad09665e7bb55e data/ad_astra/tags/blocks/venus_stone_replaceables.json
 8d5e80ce8d227e8bb4980a0060fac973aae3924e data/c/tags/blocks/calorite_blocks.json
+442679a3bb25474008b3db0e011cfab36877cc85 data/c/tags/blocks/calorite_ores.json
 eb291297801c6ab3ad1d141cbf1ff496b2c15da5 data/c/tags/blocks/desh_blocks.json
+e3275a08f5f47b00769c8a9781da246ea29d0ec3 data/c/tags/blocks/desh_ores.json
+d1cadf97d11ea045b0d74e299b2762c885186c0d data/c/tags/blocks/ice_shard_ores.json
 1bb62a664bee855e44fb653e7107be416a41f1c6 data/c/tags/blocks/ostrum_blocks.json
+52533e09d0685a9c0600c71279040c7cec9ce963 data/c/tags/blocks/ostrum_ores.json
 1969d5defc9d5583485efb36eecbe0ccd69ccd16 data/c/tags/blocks/raw_calorite_blocks.json
 634f8d30bdaeb4e6c32e3012f068ab01e3cbd765 data/c/tags/blocks/raw_desh_blocks.json
 047608da22912be3bd79a9e64c8f4a616eb89f80 data/c/tags/blocks/raw_ostrum_blocks.json
 8624111f9360c939093cb5a4a19e2b9ef133f29d data/c/tags/blocks/steel_blocks.json
+2e4ff23aeebcd9809586eb40277ca654367db5b9 data/forge/tags/blocks/ores.json
+442679a3bb25474008b3db0e011cfab36877cc85 data/forge/tags/blocks/ores/calorite.json
+e3275a08f5f47b00769c8a9781da246ea29d0ec3 data/forge/tags/blocks/ores/desh.json
+d1cadf97d11ea045b0d74e299b2762c885186c0d data/forge/tags/blocks/ores/ice_shard.json
+52533e09d0685a9c0600c71279040c7cec9ce963 data/forge/tags/blocks/ores/ostrum.json
 23e9dcde012c0f96ab2537e5af5b14373cc042d4 data/forge/tags/blocks/storage_blocks.json
 8d5e80ce8d227e8bb4980a0060fac973aae3924e data/forge/tags/blocks/storage_blocks/calorite.json
 eb291297801c6ab3ad1d141cbf1ff496b2c15da5 data/forge/tags/blocks/storage_blocks/desh.json

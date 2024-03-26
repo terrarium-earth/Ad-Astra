@@ -1,0 +1,22 @@
+{
+  "values": [
+    "ad_astra:mars_ostrum_ore",
+    {
+      "id": "#c:ostrum_ores",
+      "required": false
+    },
+    {
+      "id": "#forge:ores/ostrum",
+      "required": false
+    },
+    "ad_astra:deepslate_ostrum_ore",
+    {
+      "id": "#c:ostrum_ores",
+      "required": false
+    },
+    {
+      "id": "#forge:ores/ostrum",
+      "required": false
+    }
+  ]
+}

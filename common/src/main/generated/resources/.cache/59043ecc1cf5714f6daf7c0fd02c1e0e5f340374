@@ -1,13 +1,15 @@
-// 1.20.4	2024-01-30T16:30:34.903912	Tags for minecraft:item mod id ad_astra
+// 1.20.4	2024-02-28T00:59:24.0647746	Tags for minecraft:item mod id ad_astra
 375e4bc49d396a2ae2b2a9dcddc300ab07a3aa48 data/ad_astra/tags/items/aeronos_caps.json
 8030232b3adfa6e804799644b412d6697c9f985a data/ad_astra/tags/items/cable_ducts.json
 9e5430f8f65b6281a9fe76442a62537371f1da72 data/ad_astra/tags/items/calorite_blocks.json
 19b0f60e06dec4769b066c94d255c43f3b685c18 data/ad_astra/tags/items/calorite_ingots.json
 98e7b31b21efc1f547039eef07a55e285d7cc688 data/ad_astra/tags/items/calorite_nuggets.json
+660459e2ae4843ee4522efebdc2f7ab90b4b3d1a data/ad_astra/tags/items/calorite_ores.json
 f05386bd15bbdda7314d1b7a40d4f8855afc0200 data/ad_astra/tags/items/calorite_plates.json
 1c3b5f4f600d0258598142a532fa9c870e58dc06 data/ad_astra/tags/items/desh_blocks.json
 ed289cc805bd3fd911e1f135adc0a2808ed56025 data/ad_astra/tags/items/desh_ingots.json
 28f223da450cf6665f700fe64ee959b213a3ac9d data/ad_astra/tags/items/desh_nuggets.json
+a143ec2ff6fb9ff191593ee5cdf364cabc0a0fe9 data/ad_astra/tags/items/desh_ores.json
 2ebf22e2e98afd19b1c91aac439b62575d658854 data/ad_astra/tags/items/desh_plates.json
 73883681c8705b924ded86b2d57c880fed29965b data/ad_astra/tags/items/destroyed_in_space.json
 322406e5b1fcfe1533ab85e2d773eff44fe88039 data/ad_astra/tags/items/flags.json
@@ -17,6 +19,7 @@ e5e2d1a810418e09c6d0059a742a494f43fcd81e data/ad_astra/tags/items/glacian_logs.j
 f8fd8be682f32975426f904d4f7a022c6d7bf39f data/ad_astra/tags/items/globes.json
 2b62110b91f25bd210f1c46e8d1e3ed65cc20da5 data/ad_astra/tags/items/heat_resistant_armor.json
 55467742a07025d217b3d8f9cc3a3dbd516b579a data/ad_astra/tags/items/held_over_head.json
+7a77f655decc76e56bbb95a5240c0901ec0bc45c data/ad_astra/tags/items/ice_shard_ores.json
 cf738c9da9478e503f1dd026d869cd6a4d5b3123 data/ad_astra/tags/items/iron_plates.json
 f929fd753f4393b747360c8ebfe7a4eb1f4371e5 data/ad_astra/tags/items/iron_rods.json
 5a1367234faee053eb570f4f295750736da31baf data/ad_astra/tags/items/jet_suit_items.json
@@ -24,6 +27,7 @@ f929fd753f4393b747360c8ebfe7a4eb1f4371e5 data/ad_astra/tags/items/iron_rods.json
 9d585f93b0648ead67d851972938aa7e80d2f350 data/ad_astra/tags/items/ostrum_blocks.json
 6da192656447baacea2594746fae19d9b198c0ac data/ad_astra/tags/items/ostrum_ingots.json
 9a926ffe32eae8d89df60035456316b3c47dade2 data/ad_astra/tags/items/ostrum_nuggets.json
+d09980a23fe5234dc67cee1276314917ec20e0e7 data/ad_astra/tags/items/ostrum_ores.json
 48713c3331053ee09bac33a894856a8f10ca7d0f data/ad_astra/tags/items/ostrum_plates.json
 ba03187b932d2a1e7843d9afcac64b6d7069b8dc data/ad_astra/tags/items/raw_calorite.json
 51a634c15edd9b500e763a76291dba415160b087 data/ad_astra/tags/items/raw_calorite_blocks.json
@@ -42,16 +46,20 @@ aae4da863d2012d9d2a2c5c131f0c2801a72ea3e data/ad_astra/tags/items/steel_rods.jso
 8d5e80ce8d227e8bb4980a0060fac973aae3924e data/c/tags/items/calorite_blocks.json
 6723d71c744cd2453f0d096f1818e9d720576a94 data/c/tags/items/calorite_ingots.json
 8845a0eac7e756c25b6702b88ef8dcbc0bb77d23 data/c/tags/items/calorite_nuggets.json
+442679a3bb25474008b3db0e011cfab36877cc85 data/c/tags/items/calorite_ores.json
 7c3cca0f5df08ef54f8be7f78ab2b6576d9121b6 data/c/tags/items/calorite_plates.json
 eb291297801c6ab3ad1d141cbf1ff496b2c15da5 data/c/tags/items/desh_blocks.json
 20a6598ec39ead0b4b014452b473380c0ae320f0 data/c/tags/items/desh_ingots.json
 003843a9696da3861f0e05f01eb619d9d46d2efc data/c/tags/items/desh_nuggets.json
+e3275a08f5f47b00769c8a9781da246ea29d0ec3 data/c/tags/items/desh_ores.json
 b4d7aa87f3f238f43356074d57000564a0882f49 data/c/tags/items/desh_plates.json
+d1cadf97d11ea045b0d74e299b2762c885186c0d data/c/tags/items/ice_shard_ores.json
 327adb5432dbcfa89abb2a677077611b5ad711af data/c/tags/items/iron_plates.json
 2e17b7e39a0e5e234917f8928e639e6d5e8a7263 data/c/tags/items/iron_rods.json
 1bb62a664bee855e44fb653e7107be416a41f1c6 data/c/tags/items/ostrum_blocks.json
 f82abc41a2366459f33d49d6d0628df2faa05de4 data/c/tags/items/ostrum_ingots.json
 9b085df7144378e9a3613dcd87ada75f97b9035f data/c/tags/items/ostrum_nuggets.json
+52533e09d0685a9c0600c71279040c7cec9ce963 data/c/tags/items/ostrum_ores.json
 958589fc5c9d9bb6448b68d20e49b5789a81725a data/c/tags/items/ostrum_plates.json
 13bd4123daf6193e54014fcba7b02460d4d5d2ce data/c/tags/items/raw_calorite.json
 1969d5defc9d5583485efb36eecbe0ccd69ccd16 data/c/tags/items/raw_calorite_blocks.json
@@ -74,6 +82,11 @@ f82abc41a2366459f33d49d6d0628df2faa05de4 data/forge/tags/items/ingots/ostrum.jso
 003843a9696da3861f0e05f01eb619d9d46d2efc data/forge/tags/items/nuggets/desh.json
 9b085df7144378e9a3613dcd87ada75f97b9035f data/forge/tags/items/nuggets/ostrum.json
 618711c8a87802069bcb6e1712bf86d8237d271b data/forge/tags/items/nuggets/steel.json
+2e4ff23aeebcd9809586eb40277ca654367db5b9 data/forge/tags/items/ores.json
+442679a3bb25474008b3db0e011cfab36877cc85 data/forge/tags/items/ores/calorite.json
+e3275a08f5f47b00769c8a9781da246ea29d0ec3 data/forge/tags/items/ores/desh.json
+d1cadf97d11ea045b0d74e299b2762c885186c0d data/forge/tags/items/ores/ice_shard.json
+52533e09d0685a9c0600c71279040c7cec9ce963 data/forge/tags/items/ores/ostrum.json
 84833c63919f1aa93daa20fa28f08da203a2d407 data/forge/tags/items/plates.json
 7c3cca0f5df08ef54f8be7f78ab2b6576d9121b6 data/forge/tags/items/plates/calorite.json
 b4d7aa87f3f238f43356074d57000564a0882f49 data/forge/tags/items/plates/desh.json
