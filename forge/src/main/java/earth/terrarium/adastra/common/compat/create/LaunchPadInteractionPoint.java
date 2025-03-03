@@ -25,10 +25,6 @@ import java.util.Optional;
 
 public class LaunchPadInteractionPoint extends ArmInteractionPointType {
 
-    public LaunchPadInteractionPoint(ResourceLocation id) {
-        super(id);
-    }
-
     @Override
     public boolean canCreatePoint(Level level, BlockPos blockPos, BlockState blockState) {
         return blockState.is(ModBlocks.LAUNCH_PAD.get());
