@@ -36,9 +36,6 @@ public class AdAstraForge {
         if (FMLEnvironment.dist.isClient()) {
             AdAstraClientForge.init();
         }
-        if(ModList.get().isLoaded("create")) {
-            CreateCompat.init();
-        }
     }
 
     public static void onAddReloadListener(AddReloadListenerEvent event) {
@@ -67,6 +64,9 @@ public class AdAstraForge {
 
     public static void commonSetup(FMLCommonSetupEvent event) {
         AdAstra.postInit();
+        if(ModList.get().isLoaded("create")) {
+            CreateCompat.init();
+        }
     }
 
     private static void registerCommands(RegisterCommandsEvent event) {
