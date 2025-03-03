@@ -9,8 +9,9 @@ import net.minecraft.resources.ResourceLocation;
 public class CreateCompat {
 
     public static void init() {
-    //  ArmInteractionPointType.register(new LaunchPadInteractionPoint(new ResourceLocation(AdAstra.MOD_ID, "launch_pad")));
-        Registry.register(CreateBuiltInRegistries.ARM_INTERACTION_POINT_TYPE, new ResourceLocation(AdAstra.MOD_ID, "launch_pad"), new LaunchPadInteractionPoint());
+        Registry.register(CreateBuiltInRegistries.ARM_INTERACTION_POINT_TYPE,
+            new ResourceLocation(AdAstra.MOD_ID, "launch_pad"),
+            new LaunchPadInteractionPoint());
     }
 
 }
