@@ -20,6 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.registries.RegisterEvent;
 
 @Mod(AdAstra.MOD_ID)
 public class AdAstraForge {
@@ -33,6 +34,7 @@ public class AdAstraForge {
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onBlockPlace);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::onAttributes);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::commonSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::onRegister);
         if (FMLEnvironment.dist.isClient()) {
             AdAstraClientForge.init();
         }
@@ -64,6 +66,9 @@ public class AdAstraForge {
 
     public static void commonSetup(FMLCommonSetupEvent event) {
         AdAstra.postInit();
+    }
+
+    public static void onRegister(RegisterEvent event) {
         if(ModList.get().isLoaded("create")) {
             CreateCompat.init();
         }

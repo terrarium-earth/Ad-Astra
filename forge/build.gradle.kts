@@ -14,6 +14,12 @@ loom {
             programArgs("--output", project(":common").file("src/main/generated/resources").absolutePath)
             programArgs("--existing", project(":common").file("src/main/resources").absolutePath)
         }
+        named("client") {
+            property("mixin.env.remapRefMap", "true")
+            property("mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg")
+
+            programArgs("-mixin.config=create.mixins.json")
+        }
     }
 }
 
@@ -50,6 +56,7 @@ dependencies {
     val registrateForgeVersion: String by project
     val flywheelForgeVersion: String by project
     val createForgeVersion: String by project
+    val ponderForgeVersion: String by project
 
     forge(group = "net.minecraftforge", name = "forge", version = "$minecraftVersion-$forgeVersion")
 
@@ -66,9 +73,11 @@ dependencies {
 
     forgeRuntimeLibrary(group = "javazoom", name = "jlayer", version = "1.0.1")
 
-    modImplementation("com.tterrag.registrate:Registrate:${registrateForgeVersion}")
-    modImplementation("com.jozufozu.flywheel:flywheel-forge-${minecraftVersion}:${flywheelForgeVersion}")
+    modImplementation("dev.engine-room.flywheel:flywheel-forge-api-${minecraftVersion}:${flywheelForgeVersion}")
+    modImplementation("dev.engine-room.flywheel:flywheel-forge-${minecraftVersion}:${flywheelForgeVersion}")
     modImplementation("com.simibubi.create:create-${minecraftVersion}:${createForgeVersion}:slim") { isTransitive = false }
+    modImplementation("net.createmod.ponder:Ponder-Forge-${minecraftVersion}:${ponderForgeVersion}")
+    modImplementation("com.tterrag.registrate:Registrate:${registrateForgeVersion}")
 
     // TODO: remove in neoforge
     "annotationProcessor"(group = "io.github.llamalad7", name = "mixinextras-forge", version = mixinExtrasVersion).apply {

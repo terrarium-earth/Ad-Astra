@@ -53,6 +53,7 @@ subprojects {
         maven(url = "https://maven.architectury.dev/")
         maven(url = "https://maven.teamresourceful.com/repository/maven-public/")
         maven(url = "https://maven.firstdarkdev.xyz/snapshots")
+        maven(url = "https://maven.createmod.net")
         maven {
             url = uri("https://www.cursemaven.com")
             content {
