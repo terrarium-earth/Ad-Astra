@@ -1,0 +1,28 @@
+{
+  "name": "Melhor Combustível",
+  "icon": "ad_astra:cryo_freezer",
+  "sortnum": 6,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Congelador Criogênico",
+      "item": "ad_astra:cryo_freezer",
+      "text": "O combustível é difícil de conseguir, é necessário sair em busca de fontes de óleo no oceano. O Combustível Criogênico introduz uma nova maneira de obter um combustível melhor - o combustível criogênico. O combustível criogênico é muito mais eficiente que o combustível refinado, permitindo lançar um foguete com apenas um balde de combustível."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ele é criado ao coletar fragmentos de gelo, que podem ser encontrados como um minério subterrâneo em planetas frios. O fragmento de gelo precisa ser colocado dentro do Congelador Criogênico, onde será convertido em 25 mB de combustível criogênico. Alternativamente, você pode converter gelo, gelo comprimido e gelo azul em combustível. Depois de criar pelo menos dois baldes (um para o lançamento e outro para a viagem de volta), coloque os baldes na slot de combustível do foguete."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:cryo_freezer"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Combustível Criogênico",
+      "item": "ad_astra:cryo_fuel_bucket",
+      "text": "Além de ser um excelente combustível, o combustível criogênico tem outras características. Quando colocado, ele causará dano a qualquer coisa dentro de sua área, de forma semelhante à lava. Também congela a água, permitindo criar uma fonte infinita de gelo."
+    }
+  ]
+}

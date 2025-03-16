@@ -1,0 +1,32 @@
+{
+  "name": "Cabos",
+  "icon": "ad_astra:desh_cable",
+  "sortnum": 6,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Cabos",
+      "item": "ad_astra:desh_cable",
+      "text": "Cabos permitem transferência de energia de longo alcance. Existem duas variantes: aço e desh – desh, com uma taxa de transferência mais alta. Quando usados com uma chave inglesa, os cabos podem ser configurados para se estender em direções ou para desconectar de nós na rede."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:steel_cable",
+      "recipe2": "ad_astra:desh_cable"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:wrench"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Dutos de cabos",
+      "text": "Cabos não são blocos sólidos. Como tal, eles não vedarão uma estrutura, o que impede que distribuidores de oxigênio e normalizadores de gravidade funcionem. O duto de cabos é um bloco completo que funciona exatamente como os cabos, evitando vazamentos."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:cable_duct"
+    }
+  ]
+}

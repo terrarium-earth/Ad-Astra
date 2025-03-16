@@ -1,0 +1,19 @@
+{
+  "name": "Marte",
+  "icon": "ad_astra:/textures/environment/mars.png",
+  "sortnum": 8,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Marte",
+      "text": "Agora que você explorou a lua e trabalhou com desh, você quer ir mais longe e ir para o planeta vermelho. Construir um foguete de nível dois capaz de viajar para Marte é semelhante a construir o foguete de nível um, mas com materiais de desh em vez de aço. Construa as partes, monte o foguete na bancada da NASA, abasteça-o e vá para Marte!"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Ostrum",
+      "item": "ad_astra:ostrum_ingot",
+      "text": "Ostrum é o próximo material que você procura no planeta vermelho. É usado para construir armaduras espaciais mais poderosas, construir máquinas excepcionais e construir um foguete capaz de suportar calor extremo, permitindo que você viaje para planetas quentes."
+    }
+  ]
+}

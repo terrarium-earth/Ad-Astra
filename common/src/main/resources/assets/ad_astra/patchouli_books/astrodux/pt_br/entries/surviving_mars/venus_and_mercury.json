@@ -1,0 +1,18 @@
+{
+  "name": "Vênus e Mercúrio",
+  "icon": "ad_astra:/textures/environment/venus.png",
+  "sortnum": 8,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Calorite",
+      "item": "ad_astra:calorite_ingot",
+      "text": "Quando você tiver Ostrum suficiente para fabricar um traje espacial de netherite completo e todos os componentes do foguete de nível três, poderá viajar para Vênus e Mercúrio. Atenção: se entrar nesses planetas sem um traje espacial de netherite ou resistência ao fogo, você morrerá rapidamente. O próximo material que você deve buscar é a Calorite."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A Calorite é usada para fabricar o foguete definitivo, capaz de viajar para um novo sistema estelar."
+    }
+  ]
+}
