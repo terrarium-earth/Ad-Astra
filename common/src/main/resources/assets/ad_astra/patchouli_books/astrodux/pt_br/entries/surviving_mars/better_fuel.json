@@ -12,7 +12,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Ele é criado ao coletar fragmentos de gelo, que podem ser encontrados como um minério subterrâneo em planetas frios. O fragmento de gelo precisa ser colocado dentro do Congelador Criogênico, onde será convertido em 25 mB de combustível criogênico. Alternativamente, você pode converter gelo, gelo comprimido e gelo azul em combustível. Depois de criar pelo menos dois baldes (um para o lançamento e outro para a viagem de volta), coloque os baldes na slot de combustível do foguete."
+      "text": "Ele é criado ao coletar fragmentos de gelo, que podem ser encontrados como um minério subterrâneo em planetas frios. O fragmento de gelo precisa ser colocado dentro do Congelador Criogênico, onde será convertido em 25 mB de combustível criogênico. Alternativamente, você pode converter gelo, gelo comprimido e gelo azul em combustível. Depois de criar pelo menos dois baldes (um para o lançamento e outro para a viagem de volta), coloque os baldes no slot de combustível do foguete."
     },
     {
       "type": "patchouli:crafting",

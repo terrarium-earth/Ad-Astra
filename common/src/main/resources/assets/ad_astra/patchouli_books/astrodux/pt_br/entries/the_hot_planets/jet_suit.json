@@ -12,7 +12,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Possui dois modos de voo: subida ($(k:jump)) e impulso ($(k:jump) + $(k:sprint)). O modo de subida faz o usuário voar para cima, enquanto o modo de impulso é semelhante ao voo de uma elytra constantemente impulsionada por fogos de artifício. O Traje a Jato é alimentado por energia e precisa ser carregado para voar. Pode ser recarregado em um energizador ao clicar com o botão direito segurando o traje. Ative/desative o voo pressionando ($(k:ad_astra.toggle_suit_flight))."
+      "text": "Possui dois modos de voo: subida ($(k:jump)) e impulso ($(k:jump) + $(k:sprint)). O modo de subida faz o usuário voar para cima, enquanto o modo de impulso é semelhante ao voo de uma elytra constantemente impulsionada por fogos de artifício. O Traje a Jato é alimentado por energia e precisa ser carregado para voar. Pode ser recarregado em um energizador ao clicar com o botão direito segurando o traje. Ative/desative o vôo pressionando ($(k:ad_astra.toggle_suit_flight))."
     },
     {
       "type": "patchouli:crafting",

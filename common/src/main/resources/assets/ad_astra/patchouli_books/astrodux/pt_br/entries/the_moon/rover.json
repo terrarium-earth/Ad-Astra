@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "title": "Rover",
       "item": "ad_astra:tier_1_rover",
-      "text": "O rover é um veículo terrestre capaz de dirigir no terreno acidentado de luas e planetas. É excepcionalmente rápido, possui um inventário capaz de armazenar 16 itens e tem dois assentos para vários passageiros. Você também pode atropelar mobs e causar danos sérios. Para usá-lo, encha o rover com combustível (shift-clique e coloque baldes de combustível no slot de entrada esquerdo)."
+      "text": "O rover é um veículo terrestre capaz de andar no terreno acidentado de luas e planetas. É excepcionalmente rápido, possui um inventário capaz de armazenar 16 itens e tem dois assentos para vários passageiros. Você também pode atropelar mobs e causar danos sérios. Para usá-lo, encha o rover com combustível (shift-clique e coloque baldes de combustível no slot de entrada esquerdo)."
     },
     {
       "type": "patchouli:entity",
