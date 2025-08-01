@@ -9,10 +9,7 @@
 	"ingredient": {
 		"value": [
 			{
-				"tag": "ad_astra:venus_sandstone"
-			},
-			{
-				"item": "ad_astra:venus_sandstone_brick_stairs"
+				"item": "ad_astra:venus_sandstone"
 			}
 		]
 	},
