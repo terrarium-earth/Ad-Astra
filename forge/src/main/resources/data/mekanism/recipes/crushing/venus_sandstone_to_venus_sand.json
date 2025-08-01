@@ -8,7 +8,7 @@
 	"type": "mekanism:crushing",
 	"input": {
 		"ingredient": {
-			"tag": "forge:sandstone/venus_sandstone"
+			"item": "ad_astra:venus_sandstone"
 		}
 	},
 	"output": {

@@ -8,7 +8,7 @@
 	"type": "immersiveengineering:crusher",
 	"energy": 3200,
 	"input": {
-		"tag": "forge:sandstone/venus_sandstone"
+		"item": "ad_astra:venus_sandstone"
 	},
 	"result": {
 		"count": 2,
