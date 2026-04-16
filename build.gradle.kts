@@ -93,22 +93,22 @@ subprojects {
 
             officialMojangMappings()
 
-            parchment(create(group = "org.parchmentmc.data", name = "parchment-1.20.6", version = parchmentVersion))
+            parchment(create(group = "org.parchmentmc.data", name = "parchment-$minecraftVersion", version = parchmentVersion))
         })
 
         "modApi"(
             group = "com.teamresourceful.resourcefullib",
-            name = "resourcefullib-$modLoader-1.20.5",
+            name = "resourcefullib-$modLoader-$minecraftVersion",
             version = resourcefulLibVersion
         )
         "modApi"(
             group = "com.teamresourceful.resourcefulconfig",
-            name = "resourcefulconfig-$modLoader-1.20.5",
+            name = "resourcefulconfig-$modLoader-$minecraftVersion",
             version = resourcefulConfigVersion
         )
         "modApi"(
             group = "earth.terrarium.botarium",
-            name = "botarium-$modLoader-1.20.4",
+            name = "botarium-$modLoader-$minecraftVersion",
             version = botariumVersion
         )
         if (isCommon) {
@@ -149,7 +149,7 @@ subprojects {
 
             "modLocalRuntime"(
                 group = "earth.terrarium.athena",
-                name = "athena-$modLoader-1.20.5",
+                name = "athena-$modLoader-$minecraftVersion",
                 version = athenaVersion
             )
             "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-api-$modLoader", version = reiVersion)
