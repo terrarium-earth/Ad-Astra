@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class SolarPanelScreen extends MachineScreen<SolarPanelMenu, SolarPanelBlockEntity> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/solar_panel.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/container/solar_panel.png");
 
     public SolarPanelScreen(SolarPanelMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component, TEXTURE, STEEL_SLOT, 177, 230);

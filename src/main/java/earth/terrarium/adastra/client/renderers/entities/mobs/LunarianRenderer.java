@@ -15,20 +15,20 @@ import org.jetbrains.annotations.NotNull;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE.
 public class LunarianRenderer extends MobRenderer<Lunarian, LunarianModel<Lunarian>> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/lunarian.png");
-    public static final ResourceLocation FARMER_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/farmer_lunarian.png");
-    public static final ResourceLocation FISHERMAN_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/fisherman_lunarian.png");
-    public static final ResourceLocation SHEPHERD_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/shepherd_lunarian.png");
-    public static final ResourceLocation FLETCHER_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/fletcher_lunarian.png");
-    public static final ResourceLocation LIBRARIAN_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/librarian_lunarian.png");
-    public static final ResourceLocation CARTOGRAPHER_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/cartographer_lunarian.png");
-    public static final ResourceLocation CLERIC_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/cleric_lunarian.png");
-    public static final ResourceLocation ARMORER_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/armorer_lunarian.png");
-    public static final ResourceLocation WEAPONSMITH_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/weaponsmith_lunarian.png");
-    public static final ResourceLocation TOOLSMITH_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/toolsmith_lunarian.png");
-    public static final ResourceLocation BUTCHER_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/butcher_lunarian.png");
-    public static final ResourceLocation LEATHERWORKER_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/leatherworker_lunarian.png");
-    public static final ResourceLocation MASON_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/mason_lunarian.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/lunarian.png");
+    public static final ResourceLocation FARMER_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/farmer_lunarian.png");
+    public static final ResourceLocation FISHERMAN_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/fisherman_lunarian.png");
+    public static final ResourceLocation SHEPHERD_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/shepherd_lunarian.png");
+    public static final ResourceLocation FLETCHER_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/fletcher_lunarian.png");
+    public static final ResourceLocation LIBRARIAN_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/librarian_lunarian.png");
+    public static final ResourceLocation CARTOGRAPHER_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/cartographer_lunarian.png");
+    public static final ResourceLocation CLERIC_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/cleric_lunarian.png");
+    public static final ResourceLocation ARMORER_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/armorer_lunarian.png");
+    public static final ResourceLocation WEAPONSMITH_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/weaponsmith_lunarian.png");
+    public static final ResourceLocation TOOLSMITH_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/toolsmith_lunarian.png");
+    public static final ResourceLocation BUTCHER_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/butcher_lunarian.png");
+    public static final ResourceLocation LEATHERWORKER_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/leatherworker_lunarian.png");
+    public static final ResourceLocation MASON_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/mason_lunarian.png");
 
     public LunarianRenderer(EntityRendererProvider.Context context) {
         super(context, new LunarianModel<>(context.bakeLayer(LunarianModel.LAYER_LOCATION)), 0.5f);

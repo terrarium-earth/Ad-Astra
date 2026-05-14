@@ -113,7 +113,7 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
         ItemStackHolder holder = new ItemStackHolder(stack);
         var container = FluidContainer.of(holder);
         if (container == null) return false;
-        FluidHolder extracted = container.extractFluid(FluidHolder.ofMillibuckets(container.getFirstFluid().getFluid(), FluidConstants.fromMillibuckets(amount)), false);
+        FluidHolder extracted = container.extractFluid(FluidHolder.ofMillibuckets(container.getFirstFluid().getFluid(), FluidAmounts.toPlatformAmount(amount)), false);
         stack.setTag(holder.getStack().getTag());
         return extracted.getFluidAmount() > 0;
     }
@@ -139,7 +139,7 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
     }
 
     public long getCapacity() {
-        return FluidConstants.fromMillibuckets(3000);
+        return FluidAmounts.toPlatformAmount(3000);
     }
 
     @Override

@@ -59,7 +59,7 @@ public class ModConfiguredFeatureProvider {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_INFERNAL_SPIRE_COLUMN = register("small_infernal_spire_column");
 
     private static ResourceKey<ConfiguredFeature<?, ?>> register(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(AdAstra.MOD_ID, name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {

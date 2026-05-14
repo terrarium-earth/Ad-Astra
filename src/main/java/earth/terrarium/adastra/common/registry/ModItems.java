@@ -10,9 +10,7 @@ import earth.terrarium.adastra.common.items.armor.JetSuitItem;
 import earth.terrarium.adastra.common.items.armor.NetheriteSpaceSuitItem;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
 import earth.terrarium.adastra.common.items.armor.base.CustomDyeableArmorItem;
-import earth.terrarium.adastra.common.items.armor.materials.JetSuitMaterial;
-import earth.terrarium.adastra.common.items.armor.materials.NetheriteSpaceSuitMaterial;
-import earth.terrarium.adastra.common.items.armor.materials.SpaceSuitMaterial;
+import earth.terrarium.adastra.common.items.armor.materials.ModArmorMaterials;
 import earth.terrarium.adastra.common.items.machines.EnergizerBlockItem;
 import earth.terrarium.adastra.common.items.rendered.RenderedBlockItem;
 import earth.terrarium.adastra.common.items.rendered.TooltipRenderedBlockItem;
@@ -20,7 +18,6 @@ import earth.terrarium.adastra.common.items.vehicles.RocketItem;
 import earth.terrarium.adastra.common.items.vehicles.RoverItem;
 import earth.terrarium.adastra.common.tags.ModPaintingVariantTags;
 import earth.terrarium.adastra.common.utils.PlatformUtils;
-import earth.terrarium.botarium.common.registry.fluid.FluidBucketItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
@@ -97,20 +94,20 @@ public class ModItems {
 
     public static final RegistryEntry<Item> RADIO = ITEMS.register("radio", () -> new TooltipBlockItem(ModBlocks.RADIO.get(), ConstantComponents.RADIO_INFO, new Item.Properties()));
 
-    public static final RegistryEntry<Item> SPACE_HELMET = BASIC_ITEMS.register("space_helmet", () -> new CustomDyeableArmorItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final RegistryEntry<Item> SPACE_SUIT = BASIC_ITEMS.register("space_suit", () -> new SpaceSuitItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, 1000, new Item.Properties()));
-    public static final RegistryEntry<Item> SPACE_PANTS = BASIC_ITEMS.register("space_pants", () -> new CustomDyeableArmorItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-    public static final RegistryEntry<Item> SPACE_BOOTS = BASIC_ITEMS.register("space_boots", () -> new CustomDyeableArmorItem(SpaceSuitMaterial.MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final RegistryEntry<Item> SPACE_HELMET = BASIC_ITEMS.register("space_helmet", () -> new CustomDyeableArmorItem(ModArmorMaterials.SPACE_SUIT, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryEntry<Item> SPACE_SUIT = BASIC_ITEMS.register("space_suit", () -> new SpaceSuitItem(ModArmorMaterials.SPACE_SUIT, ArmorItem.Type.CHESTPLATE, 1000, new Item.Properties()));
+    public static final RegistryEntry<Item> SPACE_PANTS = BASIC_ITEMS.register("space_pants", () -> new CustomDyeableArmorItem(ModArmorMaterials.SPACE_SUIT, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryEntry<Item> SPACE_BOOTS = BASIC_ITEMS.register("space_boots", () -> new CustomDyeableArmorItem(ModArmorMaterials.SPACE_SUIT, ArmorItem.Type.BOOTS, new Item.Properties()));
 
-    public static final RegistryEntry<Item> NETHERITE_SPACE_HELMET = ITEMS.register("netherite_space_helmet", () -> new CustomDyeableArmorItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> NETHERITE_SPACE_SUIT = BASIC_ITEMS.register("netherite_space_suit", () -> new NetheriteSpaceSuitItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, 2000, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> NETHERITE_SPACE_PANTS = BASIC_ITEMS.register("netherite_space_pants", () -> new CustomDyeableArmorItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> NETHERITE_SPACE_BOOTS = BASIC_ITEMS.register("netherite_space_boots", () -> new CustomDyeableArmorItem(NetheriteSpaceSuitMaterial.MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> NETHERITE_SPACE_HELMET = ITEMS.register("netherite_space_helmet", () -> new CustomDyeableArmorItem(ModArmorMaterials.NETHERITE_SPACE_SUIT, ArmorItem.Type.HELMET, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> NETHERITE_SPACE_SUIT = BASIC_ITEMS.register("netherite_space_suit", () -> new NetheriteSpaceSuitItem(ModArmorMaterials.NETHERITE_SPACE_SUIT, ArmorItem.Type.CHESTPLATE, 2000, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> NETHERITE_SPACE_PANTS = BASIC_ITEMS.register("netherite_space_pants", () -> new CustomDyeableArmorItem(ModArmorMaterials.NETHERITE_SPACE_SUIT, ArmorItem.Type.LEGGINGS, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> NETHERITE_SPACE_BOOTS = BASIC_ITEMS.register("netherite_space_boots", () -> new CustomDyeableArmorItem(ModArmorMaterials.NETHERITE_SPACE_SUIT, ArmorItem.Type.BOOTS, new Item.Properties().fireResistant()));
 
-    public static final RegistryEntry<Item> JET_SUIT_HELMET = ITEMS.register("jet_suit_helmet", () -> new CustomDyeableArmorItem(JetSuitMaterial.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> JET_SUIT = BASIC_ITEMS.register("jet_suit", () -> new JetSuitItem(JetSuitMaterial.MATERIAL, ArmorItem.Type.CHESTPLATE, 4000, 1_000_000, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> JET_SUIT_PANTS = BASIC_ITEMS.register("jet_suit_pants", () -> new CustomDyeableArmorItem(JetSuitMaterial.MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> JET_SUIT_BOOTS = BASIC_ITEMS.register("jet_suit_boots", () -> new CustomDyeableArmorItem(JetSuitMaterial.MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> JET_SUIT_HELMET = ITEMS.register("jet_suit_helmet", () -> new CustomDyeableArmorItem(ModArmorMaterials.JET_SUIT, ArmorItem.Type.HELMET, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> JET_SUIT = BASIC_ITEMS.register("jet_suit", () -> new JetSuitItem(ModArmorMaterials.JET_SUIT, ArmorItem.Type.CHESTPLATE, 4000, 1_000_000, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> JET_SUIT_PANTS = BASIC_ITEMS.register("jet_suit_pants", () -> new CustomDyeableArmorItem(ModArmorMaterials.JET_SUIT, ArmorItem.Type.LEGGINGS, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> JET_SUIT_BOOTS = BASIC_ITEMS.register("jet_suit_boots", () -> new CustomDyeableArmorItem(ModArmorMaterials.JET_SUIT, ArmorItem.Type.BOOTS, new Item.Properties().fireResistant()));
 
     public static final RegistryEntry<Item> TI_69 = ITEMS.register("ti_69", () -> new Ti69Item(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> WRENCH = ITEMS.register("wrench", () -> new WrenchItem(new Item.Properties().stacksTo(1)));
@@ -121,7 +118,7 @@ public class ModItems {
     public static final RegistryEntry<Item> CHEESE = BASIC_ITEMS.register("cheese", () -> new Item(new Item.Properties()
         .food(new FoodProperties.Builder()
             .nutrition(4)
-            .saturationMod(1.0f)
+            .saturationModifier(1.0f)
             .build())));
 
     public static final RegistryEntry<Item> ETRIONIC_CAPACITOR = ITEMS.register("etrionic_capacitor", () -> new EtrionicCapacitorItem(new Item.Properties().stacksTo(1)));
@@ -180,28 +177,28 @@ public class ModItems {
     public static final RegistryEntry<Item> AERONOS_MUSHROOM = BASIC_ITEMS.register("aeronos_mushroom", () -> new BlockItem(ModBlocks.AERONOS_MUSHROOM.get(), new Item.Properties()));
     public static final RegistryEntry<Item> STROPHAR_MUSHROOM = BASIC_ITEMS.register("strophar_mushroom", () -> new BlockItem(ModBlocks.STROPHAR_MUSHROOM.get(), new Item.Properties()));
 
-    public static final RegistryEntry<Item> OXYGEN_BUCKET = BASIC_ITEMS.register("oxygen_bucket", () -> new FluidBucketItem(
-        ModFluidProperties.OXYGEN,
+    public static final RegistryEntry<Item> OXYGEN_BUCKET = BASIC_ITEMS.register("oxygen_bucket", () -> new BucketItem(
+        ModFluidProperties.OXYGEN.get().data(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
-    public static final RegistryEntry<Item> HYDROGEN_BUCKET = BASIC_ITEMS.register("hydrogen_bucket", () -> new FluidBucketItem(
-        ModFluidProperties.HYDROGEN,
+    public static final RegistryEntry<Item> HYDROGEN_BUCKET = BASIC_ITEMS.register("hydrogen_bucket", () -> new BucketItem(
+        ModFluidProperties.HYDROGEN.get().data(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
-    public static final RegistryEntry<Item> OIL_BUCKET = BASIC_ITEMS.register("oil_bucket", () -> new FluidBucketItem(
-        ModFluidProperties.OIL,
+    public static final RegistryEntry<Item> OIL_BUCKET = BASIC_ITEMS.register("oil_bucket", () -> new BucketItem(
+        ModFluidProperties.OIL.get().data(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
-    public static final RegistryEntry<Item> FUEL_BUCKET = BASIC_ITEMS.register("fuel_bucket", () -> new FluidBucketItem(
-        ModFluidProperties.FUEL,
+    public static final RegistryEntry<Item> FUEL_BUCKET = BASIC_ITEMS.register("fuel_bucket", () -> new BucketItem(
+        ModFluidProperties.FUEL.get().data(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
-    public static final RegistryEntry<Item> CRYO_FUEL_BUCKET = BASIC_ITEMS.register("cryo_fuel_bucket", () -> new FluidBucketItem(
-        ModFluidProperties.CRYO_FUEL,
+    public static final RegistryEntry<Item> CRYO_FUEL_BUCKET = BASIC_ITEMS.register("cryo_fuel_bucket", () -> new BucketItem(
+        ModFluidProperties.CRYO_FUEL.get().data(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 

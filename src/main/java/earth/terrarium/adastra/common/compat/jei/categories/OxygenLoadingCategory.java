@@ -24,7 +24,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public record OxygenLoadingCategory(IGuiHelper guiHelper) implements IRecipeCategory<OxygenLoadingRecipe> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "oxygen_loading");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "oxygen_loading");
     public static final RecipeType<OxygenLoadingRecipe> RECIPE = new RecipeType<>(ID, OxygenLoadingRecipe.class);
 
     @Override
@@ -64,7 +64,7 @@ public record OxygenLoadingCategory(IGuiHelper guiHelper) implements IRecipeCate
         new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), MachineConfig.STEEL.energyCapacity, MachineConfig.STEEL.maxEnergyInOut, 0).draw(graphics, 146, 50);
 
         int cookTime = recipe.cookingTime();
-        long capacity = FluidConstants.fromMillibuckets(MachineConfig.STEEL.fluidCapacity);
+        long capacity = FluidAmounts.toPlatformAmount(MachineConfig.STEEL.fluidCapacity);
         new FluidBarDrawable(mouseX, mouseY, false, capacity, cookTime, recipe.input()
             .getFluids().get(0).copyWithAmount(recipe.input().getFluidAmount()))
             .draw(graphics, 39, 49);

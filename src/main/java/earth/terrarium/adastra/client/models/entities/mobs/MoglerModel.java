@@ -17,7 +17,7 @@ import net.minecraft.world.entity.monster.hoglin.Hoglin;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE.
 public class MoglerModel<T extends Entity> extends EntityModel<T> {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "mogler"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "mogler"), "main");
 
     private final ModelPart body;
     private final ModelPart head;

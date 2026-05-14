@@ -40,7 +40,7 @@ public record ServerboundLandPacket(ResourceKey<Level> dimension,
         public Type() {
             super(
                 ServerboundLandPacket.class,
-                new ResourceLocation(AdAstra.MOD_ID, "land"),
+                ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "land"),
                 ObjectByteCodec.create(
                     ExtraByteCodecs.DIMENSION.fieldOf(ServerboundLandPacket::dimension),
                     ByteCodec.BOOLEAN.fieldOf(ServerboundLandPacket::tryPreviousLocation),

@@ -11,6 +11,7 @@ import earth.terrarium.adastra.common.entities.vehicles.Lander;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.items.armor.JetSuitItem;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -22,14 +23,14 @@ import java.util.Locale;
 
 public class OverlayScreen {
 
-    public static final ResourceLocation BATTERY_EMPTY = new ResourceLocation(AdAstra.MOD_ID, "overlay/battery_empty");
-    public static final ResourceLocation BATTERY = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/overlay/battery.png");
-    public static final ResourceLocation OXYGEN_TANK_EMPTY = new ResourceLocation(AdAstra.MOD_ID, "overlay/oxygen_tank_empty");
-    public static final ResourceLocation OXYGEN_TANK = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/overlay/oxygen_tank.png");
-    public static final ResourceLocation ROCKET_BAR = new ResourceLocation(AdAstra.MOD_ID, "overlay/rocket_bar");
-    public static final ResourceLocation ROCKET = new ResourceLocation(AdAstra.MOD_ID, "overlay/rocket");
+    public static final ResourceLocation BATTERY_EMPTY = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "overlay/battery_empty");
+    public static final ResourceLocation BATTERY = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/sprites/overlay/battery.png");
+    public static final ResourceLocation OXYGEN_TANK_EMPTY = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "overlay/oxygen_tank_empty");
+    public static final ResourceLocation OXYGEN_TANK = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/sprites/overlay/oxygen_tank.png");
+    public static final ResourceLocation ROCKET_BAR = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "overlay/rocket_bar");
+    public static final ResourceLocation ROCKET = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "overlay/rocket");
 
-    public static void render(GuiGraphics graphics, float partialTick) {
+    public static void render(GuiGraphics graphics, DeltaTracker deltaTracker) {
         var player = Minecraft.getInstance().player;
         if (player == null || player.isSpectator()) return;
         var level = player.level();

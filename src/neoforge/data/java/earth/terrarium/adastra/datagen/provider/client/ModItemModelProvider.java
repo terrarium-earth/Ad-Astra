@@ -16,7 +16,7 @@ import java.util.Objects;
 
 public class ModItemModelProvider extends ItemModelProvider {
 
-    public static final ResourceLocation RENDERED_ITEM = new ResourceLocation(AdAstra.MOD_ID, "item/rendered_item");
+    public static final ResourceLocation RENDERED_ITEM = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "item/rendered_item");
 
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, AdAstra.MOD_ID, existingFileHelper);

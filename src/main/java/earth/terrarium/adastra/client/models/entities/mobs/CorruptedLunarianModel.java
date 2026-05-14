@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE.
 public class CorruptedLunarianModel extends EntityModel<CorruptedLunarian> {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "corrupted_lunarian"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "corrupted_lunarian"), "main");
 
     private final ModelPart head;
     private final ModelPart body;

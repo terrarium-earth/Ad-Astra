@@ -66,7 +66,7 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
             var stack = inventory.getItem(i);
             if (stack.isEmpty() || stack.is(this)) continue;
             ItemStackHolder to = new ItemStackHolder(stack);
-            long moved = FluidApi.moveFluid(from, to, container.copyWithAmount(FluidConstants.fromMillibuckets(distributionAmount)), false);
+            long moved = FluidApi.moveFluid(from, to, container.copyWithAmount(FluidAmounts.toPlatformAmount(distributionAmount)), false);
             inventory.setItem(i, to.getStack());
             if (moved > 0) return true;
         }
@@ -78,7 +78,7 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
         return new WrappedItemFluidContainer(
             holder,
             new SimpleFluidContainer(
-                FluidConstants.fromMillibuckets(tankSize),
+                FluidAmounts.toPlatformAmount(tankSize),
                 1,
                 (t, f) -> true));
     }
@@ -86,7 +86,7 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         tooltipComponents.add(TooltipUtils.getFluidComponent(FluidUtils.getTank(stack), FluidUtils.getTankCapacity(stack)));
-        tooltipComponents.add(TooltipUtils.getMaxFluidOutComponent(FluidConstants.fromMillibuckets(distributionAmount)));
+        tooltipComponents.add(TooltipUtils.getMaxFluidOutComponent(FluidAmounts.toPlatformAmount(distributionAmount)));
         TooltipUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.GAS_TANK_INFO);
     }
 

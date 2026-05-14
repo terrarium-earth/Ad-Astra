@@ -29,11 +29,11 @@ public class ModDimensionProvider {
     public static final ResourceKey<LevelStem> GLACIO = register("glacio");
 
     private static ResourceKey<LevelStem> register(String name) {
-        return ResourceKey.create(Registries.LEVEL_STEM, new ResourceLocation(AdAstra.MOD_ID, name));
+        return ResourceKey.create(Registries.LEVEL_STEM, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 
     private static ResourceKey<NoiseGeneratorSettings> registerNoise(String name) {
-        return ResourceKey.create(Registries.NOISE_SETTINGS, new ResourceLocation(AdAstra.MOD_ID, name));
+        return ResourceKey.create(Registries.NOISE_SETTINGS, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 
     public static void bootstrap(BootstapContext<LevelStem> context) {

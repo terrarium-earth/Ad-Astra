@@ -14,10 +14,10 @@ import net.minecraft.resources.ResourceLocation;
 
 public class RocketModel<T extends Rocket> extends EntityModel<T> {
 
-    public static final ModelLayerLocation TIER_1_LAYER = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "tier_1_rocket"), "main");
-    public static final ModelLayerLocation TIER_2_LAYER = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "tier_2_rocket"), "main");
-    public static final ModelLayerLocation TIER_3_LAYER = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "tier_3_rocket"), "main");
-    public static final ModelLayerLocation TIER_4_LAYER = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "tier_4_rocket"), "main");
+    public static final ModelLayerLocation TIER_1_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "tier_1_rocket"), "main");
+    public static final ModelLayerLocation TIER_2_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "tier_2_rocket"), "main");
+    public static final ModelLayerLocation TIER_3_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "tier_3_rocket"), "main");
+    public static final ModelLayerLocation TIER_4_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "tier_4_rocket"), "main");
 
     private final ModelPart root;
 

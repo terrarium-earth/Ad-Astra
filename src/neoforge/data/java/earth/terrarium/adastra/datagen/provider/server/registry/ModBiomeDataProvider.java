@@ -38,7 +38,7 @@ public class ModBiomeDataProvider {
     public static final ResourceKey<Biome> GLACIO_SNOWY_BARRENS = register("glacio_snowy_barrens");
 
     private static ResourceKey<Biome> register(String name) {
-        return ResourceKey.create(Registries.BIOME, new ResourceLocation(AdAstra.MOD_ID, name));
+        return ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 
     public static void bootstrap(BootstapContext<Biome> context) {

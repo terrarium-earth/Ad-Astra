@@ -15,7 +15,7 @@ import net.minecraft.world.entity.Entity;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE.
 public class SulfurCreeperModel<T extends Entity> extends EntityModel<T> {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "sulfur_creeper"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "sulfur_creeper"), "main");
 
     private final ModelPart body;
 

@@ -2,6 +2,7 @@ package earth.terrarium.adastra.client;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import earth.terrarium.adastra.client.dimension.ModDimensionSpecialEffects;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -47,7 +48,7 @@ public class ClientPlatformUtils {
     @FunctionalInterface
     public interface RenderHud {
 
-        void renderHud(GuiGraphics graphics, float partialTick);
+        void renderHud(GuiGraphics graphics, DeltaTracker deltaTracker);
     }
 
     @ExpectPlatform

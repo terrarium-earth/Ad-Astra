@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 
 public class LanderRenderer extends EntityRenderer<Lander> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/lander/lander.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/lander/lander.png");
 
     protected final EntityModel<Lander> model;
 

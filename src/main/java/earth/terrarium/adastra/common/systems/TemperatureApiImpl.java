@@ -108,7 +108,7 @@ public class TemperatureApiImpl implements TemperatureApi {
 
     private void burnEntity(LivingEntity entity) {
         entity.hurt(entity.damageSources().onFire(), 6);
-        entity.setSecondsOnFire(10);
+        entity.setRemainingFireTicks(10*20);
     }
 
     private void freezeEntity(LivingEntity entity, ServerLevel level) {

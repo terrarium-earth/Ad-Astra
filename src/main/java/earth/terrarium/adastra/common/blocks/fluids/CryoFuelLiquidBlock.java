@@ -1,9 +1,9 @@
 package earth.terrarium.adastra.common.blocks.fluids;
 
+import com.teamresourceful.resourcefullib.common.fluid.ResourcefulLiquidBlock;
+import com.teamresourceful.resourcefullib.common.fluid.data.FluidData;
 import earth.terrarium.adastra.common.registry.ModDamageSources;
 import earth.terrarium.adastra.common.registry.ModFluids;
-import earth.terrarium.botarium.common.registry.fluid.BotariumLiquidBlock;
-import earth.terrarium.botarium.common.registry.fluid.FluidData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -21,7 +21,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 
 @SuppressWarnings("deprecation")
-public class CryoFuelLiquidBlock extends BotariumLiquidBlock {
+public class CryoFuelLiquidBlock extends ResourcefulLiquidBlock {
 
     public CryoFuelLiquidBlock(FluidData data, Properties properties) {
         super(data, properties);

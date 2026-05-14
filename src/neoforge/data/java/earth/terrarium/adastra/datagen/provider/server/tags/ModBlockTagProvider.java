@@ -300,19 +300,19 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
     }
 
     private void addFabricTag(Block item, TagKey<Block> tag, String fabricCommonTag) {
-        tag(tag).add(TagEntry.optionalTag(new ResourceLocation("c", fabricCommonTag)));
+        tag(tag).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("c", fabricCommonTag)));
 
-        var commonTag = TagKey.create(Registries.BLOCK, new ResourceLocation("c", fabricCommonTag));
+        var commonTag = TagKey.create(Registries.BLOCK, ResourceLocation.withDefaultNamespace("c", fabricCommonTag));
         tag(commonTag).add(element(item));
     }
 
     private void addForgeTag(Block item, TagKey<Block> tag, String forgeCommonTag) {
-        tag(tag).add(TagEntry.optionalTag(new ResourceLocation("forge", forgeCommonTag)));
+        tag(tag).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("forge", forgeCommonTag)));
 
-        var commonTag = TagKey.create(Registries.BLOCK, new ResourceLocation("forge", forgeCommonTag));
+        var commonTag = TagKey.create(Registries.BLOCK, ResourceLocation.withDefaultNamespace("forge", forgeCommonTag));
         tag(commonTag).add(element(item));
 
-        var folderTag = TagKey.create(Registries.BLOCK, new ResourceLocation("forge", forgeCommonTag.split("/")[0]));
+        var folderTag = TagKey.create(Registries.BLOCK, ResourceLocation.withDefaultNamespace("forge", forgeCommonTag.split("/")[0]));
         tag(folderTag).add(TagEntry.tag(commonTag.location()));
     }
 

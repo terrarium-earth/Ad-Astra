@@ -47,13 +47,14 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.DyeableArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.function.BiConsumer;
@@ -174,7 +175,7 @@ public class AdAstraClient {
     }
 
     private static void registerItemProperties() {
-        ClientHooks.registerItemProperty(ModItems.ETRIONIC_CAPACITOR.get(), new ResourceLocation(AdAstra.MOD_ID, "toggled"), (stack, level, entity, i) -> EtrionicCapacitorItem.active(stack) ? 0 : 1);
+        ClientHooks.registerItemProperty(ModItems.ETRIONIC_CAPACITOR.get(), ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "toggled"), (stack, level, entity, i) -> EtrionicCapacitorItem.active(stack) ? 0 : 1);
     }
 
     public static void registerRenderLayers() {
@@ -194,9 +195,9 @@ public class AdAstraClient {
     }
 
     public static void onRegisterModels(Consumer<ResourceLocation> consumer) {
-        ModBlocks.GLOBES.stream().forEach(b -> consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "block/%s_cube".formatted(b.getId().getPath()))));
-        consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "block/%s_flipped".formatted(ModBlocks.AIRLOCK.getId().getPath())));
-        consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "block/%s_flipped".formatted(ModBlocks.REINFORCED_DOOR.getId().getPath())));
+        ModBlocks.GLOBES.stream().forEach(b -> consumer.accept(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "block/%s_cube".formatted(b.getId().getPath()))));
+        consumer.accept(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "block/%s_flipped".formatted(ModBlocks.AIRLOCK.getId().getPath())));
+        consumer.accept(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "block/%s_flipped".formatted(ModBlocks.REINFORCED_DOOR.getId().getPath())));
         consumer.accept(OxygenDistributorBlockEntityRenderer.TOP);
         consumer.accept(GravityNormalizerBlockEntityRenderer.TOP);
         consumer.accept(GravityNormalizerBlockEntityRenderer.TOE);
@@ -218,9 +219,9 @@ public class AdAstraClient {
     }
 
     public static void onAddItemColors(BiConsumer<ItemColor, ItemLike[]> consumer) {
-        consumer.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.SPACE_HELMET.get(), ModItems.SPACE_SUIT.get(), ModItems.SPACE_PANTS.get(), ModItems.SPACE_BOOTS.get()});
-        consumer.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.NETHERITE_SPACE_HELMET.get(), ModItems.NETHERITE_SPACE_SUIT.get(), ModItems.NETHERITE_SPACE_PANTS.get(), ModItems.NETHERITE_SPACE_BOOTS.get()});
-        consumer.accept((stack, i) -> i > 0 ? -1 : ((DyeableArmorItem) stack.getItem()).getColor(stack), new ItemLike[]{ModItems.JET_SUIT_HELMET.get(), ModItems.JET_SUIT.get(), ModItems.JET_SUIT_PANTS.get(), ModItems.JET_SUIT_BOOTS.get()});
+        consumer.accept((stack, i) -> i > 0 ? -1 : stack.getOrDefault(DataComponents.DYED_COLOR, new DyedItemColor(0xa06540, false)).rgb(), new ItemLike[]{ModItems.SPACE_HELMET.get(), ModItems.SPACE_SUIT.get(), ModItems.SPACE_PANTS.get(), ModItems.SPACE_BOOTS.get()});
+        consumer.accept((stack, i) -> i > 0 ? -1 : stack.getOrDefault(DataComponents.DYED_COLOR, new DyedItemColor(0xa06540, false)).rgb(), new ItemLike[]{ModItems.NETHERITE_SPACE_HELMET.get(), ModItems.NETHERITE_SPACE_SUIT.get(), ModItems.NETHERITE_SPACE_PANTS.get(), ModItems.NETHERITE_SPACE_BOOTS.get()});
+        consumer.accept((stack, i) -> i > 0 ? -1 : stack.getOrDefault(DataComponents.DYED_COLOR, new DyedItemColor(0xa06540, false)).rgb(), new ItemLike[]{ModItems.JET_SUIT_HELMET.get(), ModItems.JET_SUIT.get(), ModItems.JET_SUIT_PANTS.get(), ModItems.JET_SUIT_BOOTS.get()});
     }
 
     public static void renderOverlays(PoseStack stack, Camera camera) {
@@ -229,7 +230,7 @@ public class AdAstraClient {
     }
 
     public static void onAddReloadListener(BiConsumer<ResourceLocation, PreparableReloadListener> consumer) {
-        consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "planet_renderers"), new AdAstraPlanetRenderers());
+        consumer.accept(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "planet_renderers"), new AdAstraPlanetRenderers());
     }
 
     public static void clientTick(Minecraft minecraft) {

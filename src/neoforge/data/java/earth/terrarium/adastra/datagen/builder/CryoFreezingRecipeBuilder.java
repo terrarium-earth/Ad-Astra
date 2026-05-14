@@ -34,6 +34,6 @@ public class CryoFreezingRecipeBuilder extends CodecRecipeBuilder {
             .requirements(AdvancementRequirements.Strategy.OR);
         criteria.forEach(builder::addCriterion);
         recipeOutput.accept(id, recipe, builder
-            .build(new ResourceLocation(id.getNamespace(), "recipes/cryo_freezing/" + id.getPath())));
+            .build(ResourceLocation.withDefaultNamespace(id.getNamespace(), "recipes/cryo_freezing/" + id.getPath())));
     }
 }

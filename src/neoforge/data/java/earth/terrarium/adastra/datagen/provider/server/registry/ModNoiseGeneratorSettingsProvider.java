@@ -25,7 +25,7 @@ public class ModNoiseGeneratorSettingsProvider {
     protected static final NoiseSettings SIMPLE_NOISE_SETTINGS = NoiseSettings.create(0, 256, 2, 1);
 
     private static ResourceKey<NoiseGeneratorSettings> register(String name) {
-        return ResourceKey.create(Registries.NOISE_SETTINGS, new ResourceLocation(AdAstra.MOD_ID, name));
+        return ResourceKey.create(Registries.NOISE_SETTINGS, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 
     public static void bootstrap(BootstapContext<NoiseGeneratorSettings> context) {

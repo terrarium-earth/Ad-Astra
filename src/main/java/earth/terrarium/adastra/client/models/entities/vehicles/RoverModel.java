@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 
 public class RoverModel extends EntityModel<Rover> {
 
-    public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "rover"), "main");
+    public static final ModelLayerLocation LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "rover"), "main");
 
     private final ModelPart root;
 

@@ -23,8 +23,8 @@ import java.util.*;
 
 public class RadioScreen extends BaseCursorScreen {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/radio/ui.png");
-    private static final ResourceLocation CLOCK = new ResourceLocation(AdAstra.MOD_ID, "textures/radio/clock.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/radio/ui.png");
+    private static final ResourceLocation CLOCK = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/radio/clock.png");
     private static final int WIDTH = 253;
     private static final int HEIGHT = 138;
 

@@ -68,6 +68,6 @@ public final class ModItemTags {
     public static final TagKey<Item> DESTROYED_IN_SPACE = tag("destroyed_in_space");
 
     private static TagKey<Item> tag(String name) {
-        return TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, name));
+        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 }

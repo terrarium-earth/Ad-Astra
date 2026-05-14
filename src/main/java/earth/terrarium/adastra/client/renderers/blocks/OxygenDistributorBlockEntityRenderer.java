@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.state.properties.AttachFace;
 
 public class OxygenDistributorBlockEntityRenderer implements BlockEntityRenderer<OxygenDistributorBlockEntity> {
 
-    public static final ResourceLocation TOP = new ResourceLocation(AdAstra.MOD_ID, "block/oxygen_distributor_top");
+    public static final ResourceLocation TOP = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "block/oxygen_distributor_top");
 
     @Override
     public void render(OxygenDistributorBlockEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {

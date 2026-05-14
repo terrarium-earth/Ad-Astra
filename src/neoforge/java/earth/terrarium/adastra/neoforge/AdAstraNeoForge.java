@@ -15,10 +15,10 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.neoforged.neoforge.event.TickEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 @Mod(AdAstra.MOD_ID)
 public class AdAstraNeoForge {
@@ -52,10 +52,8 @@ public class AdAstraNeoForge {
         }
     }
 
-    public static void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase == TickEvent.Phase.END) {
-            AdAstra.onServerTick(event.getServer());
-        }
+    public static void onServerTick(ServerTickEvent.Post event) {
+        AdAstra.onServerTick(event.getServer());
     }
 
     public static void onAttributes(EntityAttributeCreationEvent event) {

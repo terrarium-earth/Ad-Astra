@@ -23,10 +23,10 @@ import net.minecraft.world.item.ItemStack;
 
 public class RocketRenderer extends EntityRenderer<Rocket> {
 
-    public static final ResourceLocation TIER_1_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/rocket/tier_1_rocket.png");
-    public static final ResourceLocation TIER_2_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/rocket/tier_2_rocket.png");
-    public static final ResourceLocation TIER_3_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/rocket/tier_3_rocket.png");
-    public static final ResourceLocation TIER_4_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/rocket/tier_4_rocket.png");
+    public static final ResourceLocation TIER_1_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/rocket/tier_1_rocket.png");
+    public static final ResourceLocation TIER_2_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/rocket/tier_2_rocket.png");
+    public static final ResourceLocation TIER_3_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/rocket/tier_3_rocket.png");
+    public static final ResourceLocation TIER_4_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/rocket/tier_4_rocket.png");
 
     protected final EntityModel<Rocket> model;
     private final ResourceLocation texture;

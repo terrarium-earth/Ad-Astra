@@ -72,7 +72,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
         return fluidContainer = new WrappedBlockFluidContainer(
             this,
             new ExtractOnlyFluidContainer(
-                i -> FluidConstants.fromMillibuckets(MachineConfig.OSTRUM.fluidCapacity),
+                i -> FluidAmounts.toPlatformAmount(MachineConfig.OSTRUM.fluidCapacity),
                 1,
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYO_FREEZING.get())
                     .stream()
@@ -88,7 +88,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
         TransferUtils.pushItemsNearby(this, pos, new int[]{3}, sideConfig.get(2), filter);
         TransferUtils.pullItemsNearby(this, pos, new int[]{3}, sideConfig.get(2), filter);
         TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(3), filter);
-        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidConstants.fromMillibuckets(200), 0, sideConfig.get(4), filter);
+        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidAmounts.toPlatformAmount(200), 0, sideConfig.get(4), filter);
     }
 
     @Override

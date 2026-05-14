@@ -67,7 +67,7 @@ public class CryoFreezingCategory implements DisplayCategory<CryoFreezingDisplay
 
         widgets.add(new ReiEtaWidget(new Point(bounds.x + 54, bounds.y + 71), display.recipe().cookingTime(), GuiUtils.SNOWFLAKE, 13, 13));
         int cookTime = display.recipe().cookingTime();
-        long capacity = FluidConstants.fromMillibuckets(MachineConfig.OSTRUM.fluidCapacity);
+        long capacity = FluidAmounts.toPlatformAmount(MachineConfig.OSTRUM.fluidCapacity);
         widgets.add(new ReiFluidBarWidget(new Point(bounds.x + 80, bounds.y + 69), true, capacity, cookTime, display.recipe().result()));
 
         return widgets;

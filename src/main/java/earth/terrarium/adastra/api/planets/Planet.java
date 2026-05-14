@@ -21,18 +21,18 @@ public record Planet(
     List<ResourceKey<Level>> additionalLaunchDimensions
 ) {
 
-    public static final ResourceKey<Level> EARTH_ORBIT = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "earth_orbit"));
-    public static final ResourceKey<Level> MOON_ORBIT = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "moon_orbit"));
-    public static final ResourceKey<Level> MARS_ORBIT = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "mars_orbit"));
-    public static final ResourceKey<Level> VENUS_ORBIT = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "venus_orbit"));
-    public static final ResourceKey<Level> MERCURY_ORBIT = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "mercury_orbit"));
-    public static final ResourceKey<Level> GLACIO_ORBIT = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "glacio_orbit"));
+    public static final ResourceKey<Level> EARTH_ORBIT = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "earth_orbit"));
+    public static final ResourceKey<Level> MOON_ORBIT = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "moon_orbit"));
+    public static final ResourceKey<Level> MARS_ORBIT = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "mars_orbit"));
+    public static final ResourceKey<Level> VENUS_ORBIT = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "venus_orbit"));
+    public static final ResourceKey<Level> MERCURY_ORBIT = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "mercury_orbit"));
+    public static final ResourceKey<Level> GLACIO_ORBIT = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "glacio_orbit"));
 
-    public static final ResourceKey<Level> MOON = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "moon"));
-    public static final ResourceKey<Level> MARS = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "mars"));
-    public static final ResourceKey<Level> VENUS = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "venus"));
-    public static final ResourceKey<Level> MERCURY = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "mercury"));
-    public static final ResourceKey<Level> GLACIO = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "glacio"));
+    public static final ResourceKey<Level> MOON = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "moon"));
+    public static final ResourceKey<Level> MARS = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "mars"));
+    public static final ResourceKey<Level> VENUS = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "venus"));
+    public static final ResourceKey<Level> MERCURY = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "mercury"));
+    public static final ResourceKey<Level> GLACIO = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "glacio"));
 
     public static final Codec<Planet> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         ResourceKey.codec(Registries.DIMENSION).fieldOf("dimension").forGetter(Planet::dimension),

@@ -8,9 +8,11 @@ import earth.terrarium.adastra.common.tags.ModItemTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -69,13 +71,13 @@ public abstract class CustomDyeableArmorItemMixin extends Item {
     }
 
     @Override
-    public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+    public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
         if (stack.is(ModItemTags.JET_SUITS)) {
-            return SpaceSuitModel.JET_SUIT_TEXTURE.toString();
+            return SpaceSuitModel.JET_SUIT_TEXTURE;
         } else if (stack.is(ModItemTags.NETHERITE_SPACE_SUITS)) {
-            return SpaceSuitModel.NETHERITE_SPACE_SUIT_TEXTURE.toString();
+            return SpaceSuitModel.NETHERITE_SPACE_SUIT_TEXTURE;
         } else if (stack.is(ModItemTags.SPACE_SUITS)) {
-            return SpaceSuitModel.SPACE_SUIT_TEXTURE.toString();
+            return SpaceSuitModel.SPACE_SUIT_TEXTURE;
         } else {
             return null;
         }

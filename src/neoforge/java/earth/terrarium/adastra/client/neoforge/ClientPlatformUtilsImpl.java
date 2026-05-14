@@ -5,6 +5,7 @@ import earth.terrarium.adastra.client.dimension.ModDimensionSpecialEffects;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -18,7 +19,7 @@ public class ClientPlatformUtilsImpl {
     public static final Map<Item, ArmorRenderer> ARMOR_RENDERERS = new HashMap<>();
     public static final Map<ResourceKey<Level>, ModDimensionSpecialEffects> DIMENSION_RENDERERS = new HashMap<>();
 
-    public static BakedModel getModel(ModelManager dispatcher, ResourceLocation id) {
+    public static BakedModel getModel(ModelManager dispatcher, ModelResourceLocation id) {
         return dispatcher.getModel(id);
     }
 

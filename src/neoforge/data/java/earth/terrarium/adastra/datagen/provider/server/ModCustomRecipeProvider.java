@@ -32,7 +32,7 @@ import java.util.stream.Stream;
 
 public abstract class ModCustomRecipeProvider extends RecipeProvider {
 
-    public static final ResourceLocation SPACE_STATION_STRUCTURE = new ResourceLocation(AdAstra.MOD_ID, "space_station");
+    public static final ResourceLocation SPACE_STATION_STRUCTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "space_station");
     private static RecipeOutput output;
 
     public ModCustomRecipeProvider(PackOutput packOutput) {
@@ -224,7 +224,7 @@ public abstract class ModCustomRecipeProvider extends RecipeProvider {
 
         new CompressingRecipeBuilder(cookingtime, energy, Ingredient.of(ingredient), result)
             .unlockedBy("has_item", has(ingredient))
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, "compressing/%s_from_compressing_%s".formatted(resultId.getPath(), ingredientId.getPath())));
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "compressing/%s_from_compressing_%s".formatted(resultId.getPath(), ingredientId.getPath())));
     }
 
     public static void createCompressing(int cookingtime, int energy, Item ingredient, ItemStack result) {
@@ -233,7 +233,7 @@ public abstract class ModCustomRecipeProvider extends RecipeProvider {
 
         new CompressingRecipeBuilder(cookingtime, energy, Ingredient.of(ingredient), result)
             .unlockedBy("has_item", has(ingredient))
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, "compressing/%s_from_compressing_%s".formatted(resultId.getPath(), ingredientId.getPath())));
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "compressing/%s_from_compressing_%s".formatted(resultId.getPath(), ingredientId.getPath())));
     }
 
     public static void createAlloying(int cookingtime, int energy, List<Ingredient> ingredients, ItemStack result) {
@@ -250,7 +250,7 @@ public abstract class ModCustomRecipeProvider extends RecipeProvider {
             })
             .toList();
 
-        builder.save(output, new ResourceLocation(
+        builder.save(output, ResourceLocation.withDefaultNamespace(
             AdAstra.MOD_ID,
             "alloying/%s_from_alloying_%s".formatted(resultId.getPath(), String.join("_and_", ingredientNames))
         ));
@@ -260,14 +260,14 @@ public abstract class ModCustomRecipeProvider extends RecipeProvider {
         ResourceLocation resultFluidId = Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(resultFluid.getFluid()));
 
         new OxygenLoadingRecipeBuilder(cookingtime, energy, ingredient, resultFluid)
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, "oxygen_loading/%s_from_oxygen_loading_%s".formatted(resultFluidId.getPath(), name)));
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "oxygen_loading/%s_from_oxygen_loading_%s".formatted(resultFluidId.getPath(), name)));
     }
 
     public static void createRefining(int cookingtime, int energy, QuantifiedFluidIngredient ingredient, FluidHolder resultFluid, String name) {
         ResourceLocation resultFluidId = Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(resultFluid.getFluid()));
 
         new RefiningRecipeBuilder(cookingtime, energy, ingredient, resultFluid)
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, "refining/%s_from_refining_%s".formatted(resultFluidId.getPath(), name)));
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "refining/%s_from_refining_%s".formatted(resultFluidId.getPath(), name)));
     }
 
     public static void createCryoFreezing(int cookingtime, int energy, ItemStack ingredient, FluidHolder resultFluid) {
@@ -275,7 +275,7 @@ public abstract class ModCustomRecipeProvider extends RecipeProvider {
         ResourceLocation resultFluidId = Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(resultFluid.getFluid()));
 
         new CryoFreezingRecipeBuilder(cookingtime, energy, Ingredient.of(ingredient), resultFluid)
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, "cryo_freezing/%s_from_cryo_freezing_%s".formatted(resultFluidId.getPath(), ingredientId.getPath())));
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "cryo_freezing/%s_from_cryo_freezing_%s".formatted(resultFluidId.getPath(), ingredientId.getPath())));
     }
 
     public static void createNasaWorkbench(List<Ingredient> ingredients, ItemStack result) {
@@ -283,12 +283,12 @@ public abstract class ModCustomRecipeProvider extends RecipeProvider {
 
         new NasaWorkbenchRecipeBuilder(ingredients, result)
             .unlockedBy("has_item", has(ModItems.NASA_WORKBENCH.get()))
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, "nasa_workbench/%s_from_nasa_workbench".formatted(resultId.getPath())));
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "nasa_workbench/%s_from_nasa_workbench".formatted(resultId.getPath())));
     }
 
     public static void createSpaceStation(List<IngredientHolder> ingredients, ResourceKey<Level> dimension, ResourceLocation structure) {
         new SpaceStationRecipeBuilder(ingredients, dimension, structure)
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, "space_station/%s_space_station".formatted(dimension.location().getPath())));
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "space_station/%s_space_station".formatted(dimension.location().getPath())));
     }
 
     private static class TagIngredient extends Ingredient {

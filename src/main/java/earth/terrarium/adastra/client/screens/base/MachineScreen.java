@@ -33,8 +33,8 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class MachineScreen<M extends BaseContainerMenu<E>, E extends ContainerMachineBlockEntity> extends AbstractContainerCursorScreen<M> implements ConfigurationScreen, AbstractContainerScreenExtension {
 
-    public static final ResourceLocation IRON_SLOT = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/slots/iron.png");
-    public static final ResourceLocation STEEL_SLOT = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/slots/steel.png");
+    public static final ResourceLocation IRON_SLOT = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/container/slots/iron.png");
+    public static final ResourceLocation STEEL_SLOT = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/container/slots/steel.png");
 
     private final ResourceLocation texture;
     private final ResourceLocation slotTexture;

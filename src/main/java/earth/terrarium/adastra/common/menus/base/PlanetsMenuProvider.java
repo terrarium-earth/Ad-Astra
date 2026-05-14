@@ -70,7 +70,7 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
         Set<ResourceLocation> disabledPlanets = new HashSet<>();
         String[] planets = buf.readUtf().split(",");
         for (var planet : planets) {
-            disabledPlanets.add(new ResourceLocation(planet));
+            disabledPlanets.add(ResourceLocation.withDefaultNamespace(planet));
         }
         return Collections.unmodifiableSet(disabledPlanets);
     }

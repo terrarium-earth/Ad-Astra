@@ -51,22 +51,22 @@ import java.util.List;
 
 public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
 
-    public static final ResourceLocation SELECTION_MENU = new ResourceLocation(AdAstra.MOD_ID, "planets/selection_menu");
-    public static final ResourceLocation SMALL_SELECTION_MENU = new ResourceLocation(AdAstra.MOD_ID, "planets/small_selection_menu");
+    public static final ResourceLocation SELECTION_MENU = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "planets/selection_menu");
+    public static final ResourceLocation SMALL_SELECTION_MENU = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "planets/small_selection_menu");
 
     public static final WidgetSprites BUTTON_SPRITES = new WidgetSprites(
-        new ResourceLocation(AdAstra.MOD_ID, "planets/button"),
-        new ResourceLocation(AdAstra.MOD_ID, "planets/button_highlighted")
+        ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "planets/button"),
+        ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "planets/button_highlighted")
     );
 
     public static final WidgetSprites BACK_BUTTON_SPRITES = new WidgetSprites(
-        new ResourceLocation(AdAstra.MOD_ID, "planets/back_button"),
-        new ResourceLocation(AdAstra.MOD_ID, "planets/back_button_highlighted")
+        ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "planets/back_button"),
+        ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "planets/back_button_highlighted")
     );
 
     public static final WidgetSprites PLUS_BUTTON_SPRITES = new WidgetSprites(
-        new ResourceLocation(AdAstra.MOD_ID, "planets/plus_button"),
-        new ResourceLocation(AdAstra.MOD_ID, "planets/plus_button_highlighted")
+        ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "planets/plus_button"),
+        ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "planets/plus_button_highlighted")
     );
 
     private final List<Button> buttons = new ArrayList<>();

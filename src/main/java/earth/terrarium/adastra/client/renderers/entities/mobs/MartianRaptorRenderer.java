@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE.
 public class MartianRaptorRenderer extends MobRenderer<MartianRaptor, MartianRaptorModel> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/martian_raptor.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/martian_raptor.png");
 
     public MartianRaptorRenderer(EntityRendererProvider.Context context) {
         super(context, new MartianRaptorModel(context.bakeLayer(MartianRaptorModel.LAYER_LOCATION)), 0.5f);

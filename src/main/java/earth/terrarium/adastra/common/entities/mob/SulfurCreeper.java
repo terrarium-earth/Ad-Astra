@@ -45,7 +45,7 @@ public class SulfurCreeper extends Creeper {
                 if (!FluidContainer.holdsFluid(stack)) continue;
                 FluidContainer container = FluidContainer.of(holder);
                 if (container == null) continue;
-                long amount = Math.max(0, (long) ((7 - player.getPosition(0).distanceTo(player.getPosition(0))) * (FluidConstants.fromMillibuckets(125))));
+                long amount = Math.max(0, (long) ((7 - player.getPosition(0).distanceTo(player.getPosition(0))) * (FluidAmounts.toPlatformAmount(125))));
                 container.extractFluid(container.getFirstFluid().copyWithAmount(amount), false);
                 player.setItemSlot(EquipmentSlot.CHEST, holder.getStack());
             }

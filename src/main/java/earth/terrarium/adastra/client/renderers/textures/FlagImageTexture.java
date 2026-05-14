@@ -17,7 +17,7 @@ import java.io.IOException;
 public class FlagImageTexture extends SimpleTexture {
 
     private static final Logger LOGGER = LogUtils.getLogger();
-    private static final ResourceLocation DEFAULT_FLAG = new ResourceLocation(AdAstra.MOD_ID, "textures/block/flag/warning_flag.png");
+    private static final ResourceLocation DEFAULT_FLAG = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/block/flag/warning_flag.png");
 
     private final FlagColor[] colors;
     private boolean loaded;

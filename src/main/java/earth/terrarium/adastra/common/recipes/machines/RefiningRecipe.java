@@ -1,46 +1,52 @@
 package earth.terrarium.adastra.common.recipes.machines;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.teamresourceful.bytecodecs.base.ByteCodec;
-import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
 import earth.terrarium.adastra.common.blockentities.machines.FuelRefineryBlockEntity;
-import earth.terrarium.adastra.common.recipes.base.BotariumByteCodecs;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.utils.QuantifiedFluidIngredient;
-import net.minecraft.world.Container;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
+import earth.terrarium.common_storage_lib.resources.fluid.ingredient.SizedFluidIngredient;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public record RefiningRecipe(
     int cookingTime, int energy,
-    QuantifiedFluidIngredient input,
-    FluidHolder result
-) implements CodecRecipe<Container> {
+    SizedFluidIngredient input,
+    ResourceStack<FluidResource> result
+) implements CodecRecipe<RecipeInput> {
 
-    public static final Codec<RefiningRecipe> CODEC = RecordCodecBuilder.create(
+    public static final MapCodec<RefiningRecipe> CODEC = RecordCodecBuilder.mapCodec(
         instance -> instance.group(
             Codec.INT.fieldOf("cookingtime").forGetter(RefiningRecipe::cookingTime),
             Codec.INT.fieldOf("energy").forGetter(RefiningRecipe::energy),
-            QuantifiedFluidIngredient.CODEC.fieldOf("input").forGetter(RefiningRecipe::input),
-            FluidHolder.CODEC.fieldOf("result").forGetter(RefiningRecipe::result)
+            SizedFluidIngredient.FLAT_CODEC.fieldOf("input").forGetter(RefiningRecipe::input),
+            ResourceStack.FLUID_CODEC.fieldOf("result").forGetter(RefiningRecipe::result)
         ).apply(instance, RefiningRecipe::new));
 
-    public static final ByteCodec<RefiningRecipe> NETWORK_CODEC = ObjectByteCodec.create(
-        ByteCodec.INT.fieldOf(RefiningRecipe::cookingTime),
-        ByteCodec.INT.fieldOf(RefiningRecipe::energy),
-        BotariumByteCodecs.QUANTIFIED_FLUID_INGREDIENT_CODEC.fieldOf(RefiningRecipe::input),
-        BotariumByteCodecs.FLUID_HOLDER_CODEC.fieldOf(RefiningRecipe::result),
+    public static final StreamCodec<RegistryFriendlyByteBuf, RefiningRecipe> NETWORK_CODEC = StreamCodec.composite(
+        ByteBufCodecs.INT,
+        RefiningRecipe::cookingTime,
+        ByteBufCodecs.INT,
+        RefiningRecipe::energy,
+        SizedFluidIngredient.STREAM_CODEC,
+        RefiningRecipe::input,
+        ResourceStack.FLUID_STREAM_CODEC,
+        RefiningRecipe::result,
         RefiningRecipe::new
     );
 
     @Override
-    public boolean matches(@NotNull Container container, @NotNull Level level) {
+    public boolean matches(@NotNull RecipeInput container, @NotNull Level level) {
         if (!(container instanceof FuelRefineryBlockEntity entity)) return false;
         if (!input.test(entity.getFluidContainer().getFirstFluid())) return false;
         if (entity.getEnergyStorage().internalExtract(energy, true) < energy) return false;
@@ -53,7 +59,7 @@ public record RefiningRecipe(
     }
 
     @Override
-    public CodecRecipeSerializer<? extends CodecRecipe<Container>> serializer() {
+    public CodecRecipeSerializer<? extends CodecRecipe<RecipeInput>> serializer() {
         return ModRecipeSerializers.REFINING.get();
     }
 

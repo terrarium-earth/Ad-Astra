@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE.
 public class LunarianWanderingTraderRenderer extends MobRenderer<LunarianWanderingTrader, LunarianModel<LunarianWanderingTrader>> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/lunarian/lunarian_wandering_trader.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/lunarian/lunarian_wandering_trader.png");
 
     public LunarianWanderingTraderRenderer(EntityRendererProvider.Context context) {
         super(context, new LunarianModel<>(context.bakeLayer(LunarianModel.LAYER_LOCATION)), 0.5f);

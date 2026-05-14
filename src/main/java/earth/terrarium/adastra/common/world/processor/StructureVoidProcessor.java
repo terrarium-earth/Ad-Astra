@@ -1,6 +1,6 @@
 package earth.terrarium.adastra.common.world.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import earth.terrarium.adastra.common.registry.ModStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class StructureVoidProcessor extends StructureProcessor {
 
-    public static final Codec<StructureVoidProcessor> CODEC = Codec.unit(StructureVoidProcessor::new);
+    public static final MapCodec<StructureVoidProcessor> CODEC = MapCodec.unit(StructureVoidProcessor::new);
 
     private StructureVoidProcessor() {
     }

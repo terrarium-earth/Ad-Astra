@@ -44,15 +44,15 @@ public class ModFluidTagProvider extends TagsProvider<Fluid> {
         add(ModFluidTags.FREEZES_IN_SPACE, Fluids.WATER);
         add(ModFluidTags.EVAPORATES_IN_SPACE, Fluids.WATER);
 
-        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("c:diesel")));
-        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("forge:diesel")));
-        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("c:biodiesel")));
-        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("forge:biodiesel")));
-        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(new ResourceLocation("forge:biodiesel")));
+        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("c:diesel")));
+        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("forge:diesel")));
+        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("c:biodiesel")));
+        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("forge:biodiesel")));
+        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("forge:biodiesel")));
 
-        tag(ModFluidTags.OIL).add(TagEntry.optionalElement(new ResourceLocation("techreborn:oil")));
-        tag(ModFluidTags.OIL).add(TagEntry.optionalTag(new ResourceLocation("forge:crude_oil")));
-        tag(ModFluidTags.OIL).add(TagEntry.optionalTag(new ResourceLocation("c:crude_oil")));
+        tag(ModFluidTags.OIL).add(TagEntry.optionalElement(ResourceLocation.withDefaultNamespace("techreborn:oil")));
+        tag(ModFluidTags.OIL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("forge:crude_oil")));
+        tag(ModFluidTags.OIL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("c:crude_oil")));
     }
 
     private void add(TagKey<Fluid> tag, Fluid fluid) {
@@ -70,16 +70,16 @@ public class ModFluidTagProvider extends TagsProvider<Fluid> {
     }
 
     private void addFabricTag(Fluid fluid, TagKey<Fluid> tag, String fabricCommonTag) {
-        tag(tag).add(TagEntry.optionalTag(new ResourceLocation("c", fabricCommonTag)));
+        tag(tag).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("c", fabricCommonTag)));
 
-        var commonTag = TagKey.create(Registries.FLUID, new ResourceLocation("c", fabricCommonTag));
+        var commonTag = TagKey.create(Registries.FLUID, ResourceLocation.withDefaultNamespace("c", fabricCommonTag));
         tag(commonTag).add(element(fluid));
     }
 
     private void addForgeTag(Fluid fluid, TagKey<Fluid> tag, String forgeCommonTag) {
-        tag(tag).add(TagEntry.optionalTag(new ResourceLocation("forge", forgeCommonTag)));
+        tag(tag).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("forge", forgeCommonTag)));
 
-        var commonTag = TagKey.create(Registries.FLUID, new ResourceLocation("forge", forgeCommonTag));
+        var commonTag = TagKey.create(Registries.FLUID, ResourceLocation.withDefaultNamespace("forge", forgeCommonTag));
         tag(commonTag).add(element(fluid));
     }
 

@@ -25,7 +25,7 @@ public class AdAstraJeiPlugin implements IModPlugin {
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
-        return new ResourceLocation(AdAstra.MOD_ID, "jei");
+        return ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "jei");
     }
 
     @Override

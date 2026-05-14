@@ -34,7 +34,7 @@ public record ClientboundSyncPlanetsPacket(
         public Type() {
             super(
                 ClientboundSyncPlanetsPacket.class,
-                new ResourceLocation(AdAstra.MOD_ID, "sync_planets"),
+                ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "sync_planets"),
                 ObjectByteCodec.create(
                     ByteCodec.passthrough(
                             (buf, planet) -> AdAstraData.encodePlanets(new FriendlyByteBuf(buf)),

@@ -33,7 +33,7 @@ public record ServerboundSetGravityNormalizerTargetPacket(
         public Type() {
             super(
                 ServerboundSetGravityNormalizerTargetPacket.class,
-                new ResourceLocation(AdAstra.MOD_ID, "set_gravity_normalizer_target"),
+                ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "set_gravity_normalizer_target"),
                 ObjectByteCodec.create(
                     ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundSetGravityNormalizerTargetPacket::machine),
                     ByteCodec.FLOAT.fieldOf(ServerboundSetGravityNormalizerTargetPacket::target),

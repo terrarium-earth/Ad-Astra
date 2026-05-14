@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RocketScreen extends VehicleScreen<RocketMenu, Rocket> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/rocket.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/container/rocket.png");
 
     public RocketScreen(RocketMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component, TEXTURE, 177, 174);

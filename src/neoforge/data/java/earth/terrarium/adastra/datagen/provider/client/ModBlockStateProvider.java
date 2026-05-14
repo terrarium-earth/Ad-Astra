@@ -22,7 +22,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 
-    public static final ResourceLocation WATER_STILL = new ResourceLocation("block/water_still");
+    public static final ResourceLocation WATER_STILL = ResourceLocation.withDefaultNamespace("block/water_still");
     protected static final ExistingFileHelper.ResourceType TEXTURE = new ExistingFileHelper.ResourceType(PackType.CLIENT_RESOURCES, ".png", "textures");
 
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -171,7 +171,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .texture("east", modLoc("block/machine_side"))
                     .texture("west", modLoc("block/machine_side"))
                     .texture("particle", texture)
-                    .parent(models().getExistingFile(new ResourceLocation("block/cube"))))
+                    .parent(models().getExistingFile(ResourceLocation.withDefaultNamespace("block/cube"))))
                 .rotationY((int) (facing.toYRot() + 180) % 360)
                 .build();
         });
@@ -194,7 +194,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .texture("east", modLoc("block/steel_machine_side"))
                     .texture("west", modLoc("block/steel_machine_side"))
                     .texture("particle", texture)
-                    .parent(models().getExistingFile(new ResourceLocation("block/cube"))))
+                    .parent(models().getExistingFile(ResourceLocation.withDefaultNamespace("block/cube"))))
                 .rotationY((int) (facing.toYRot() + 180) % 360)
                 .build();
         });
@@ -271,7 +271,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .texture("east", texture)
                     .texture("west", texture)
                     .texture("particle", texture)
-                    .parent(models().getExistingFile(new ResourceLocation("block/cube"))))
+                    .parent(models().getExistingFile(ResourceLocation.withDefaultNamespace("block/cube"))))
                 .rotationY((int) (facing.toYRot() + 180) % 360)
                 .build();
         });
@@ -518,13 +518,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private ResourceLocation findTexture(Block block, String replace) {
-        ResourceLocation path = new ResourceLocation(AdAstra.MOD_ID, blockTexture(block).getPath().replace(replace, ""));
+        ResourceLocation path = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, blockTexture(block).getPath().replace(replace, ""));
         if (!models().existingFileHelper.exists(path, TEXTURE)) {
-            path = new ResourceLocation(AdAstra.MOD_ID, blockTexture(block).getPath().replace(replace, "s"));
+            path = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, blockTexture(block).getPath().replace(replace, "s"));
             if (!models().existingFileHelper.exists(path, TEXTURE)) {
-                path = new ResourceLocation(AdAstra.MOD_ID, blockTexture(block).getPath().replace(replace, "_bricks"));
+                path = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, blockTexture(block).getPath().replace(replace, "_bricks"));
                 if (!models().existingFileHelper.exists(path, TEXTURE)) {
-                    path = new ResourceLocation(AdAstra.MOD_ID, blockTexture(block).getPath().replace(replace, "_planks"));
+                    path = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, blockTexture(block).getPath().replace(replace, "_planks"));
                 }
             }
         }

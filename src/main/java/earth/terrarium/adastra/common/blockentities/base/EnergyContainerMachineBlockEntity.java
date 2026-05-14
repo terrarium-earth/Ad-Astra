@@ -1,7 +1,6 @@
 package earth.terrarium.adastra.common.blockentities.base;
 
-import earth.terrarium.botarium.energy.EnergyProvider;
-import earth.terrarium.botarium.storage.base.ValueStorage;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;

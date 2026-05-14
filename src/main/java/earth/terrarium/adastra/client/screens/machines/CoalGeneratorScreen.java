@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class CoalGeneratorScreen extends MachineScreen<CoalGeneratorMenu, CoalGeneratorBlockEntity> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/coal_generator.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/container/coal_generator.png");
 
     public CoalGeneratorScreen(CoalGeneratorMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component, TEXTURE, IRON_SLOT, 176, 189);

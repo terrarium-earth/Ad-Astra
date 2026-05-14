@@ -92,7 +92,7 @@ public class Rocket extends Vehicle {
     public Rocket(EntityType<?> type, Level level, RocketProperties properties) {
         super(type, level);
         this.properties = properties;
-        fluidContainer = new SimpleFluidContainer(FluidConstants.fromMillibuckets(3000), 1, (amount, fluid) -> fluid.is(properties.fuel));
+        fluidContainer = new SimpleFluidContainer(FluidAmounts.toPlatformAmount(3000), 1, (amount, fluid) -> fluid.is(properties.fuel));
     }
 
     @Override
@@ -389,7 +389,7 @@ public class Rocket extends Vehicle {
 
     public boolean consumeFuel(boolean simulate) {
         if (level().isClientSide()) return false;
-        long buckets = FluidConstants.fromMillibuckets(fluidContainer.getFirstFluid().is(ModFluidTags.EFFICIENT_FUEL) ? AdAstraConfig.launchEfficientFuelCost : AdAstraConfig.launchFuelCost);
+        long buckets = FluidAmounts.toPlatformAmount(fluidContainer.getFirstFluid().is(ModFluidTags.EFFICIENT_FUEL) ? AdAstraConfig.launchEfficientFuelCost : AdAstraConfig.launchFuelCost);
         return fluidContainer.extractFluid(fluidContainer.getFirstFluid().copyWithAmount(buckets), simulate).getFluidAmount() >= buckets;
     }
 
@@ -409,7 +409,7 @@ public class Rocket extends Vehicle {
 
     public FluidHolder fluid() {
         return FluidHolder.of(
-            BuiltInRegistries.FLUID.get(new ResourceLocation(entityData.get(FUEL_TYPE))),
+            BuiltInRegistries.FLUID.get(ResourceLocation.withDefaultNamespace(entityData.get(FUEL_TYPE))),
             entityData.get(FUEL));
     }
 

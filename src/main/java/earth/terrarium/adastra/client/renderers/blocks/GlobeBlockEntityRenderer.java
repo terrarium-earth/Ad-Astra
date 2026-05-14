@@ -33,7 +33,7 @@ public class GlobeBlockEntityRenderer implements BlockEntityRenderer<GlobeBlockE
         String blockId = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
         BakedModel blockModel = ClientPlatformUtils.getModel(
             Minecraft.getInstance().getModelManager(),
-            new ResourceLocation(AdAstra.MOD_ID, "block/%s_cube".formatted(blockId)));
+            ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "block/%s_cube".formatted(blockId)));
 
         try (var ignored = new CloseablePoseStack(poseStack)) {
             poseStack.translate(0.5, 0, 0.5);

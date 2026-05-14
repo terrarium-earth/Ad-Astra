@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RoverScreen extends VehicleScreen<RoverMenu, Rover> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/rover.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/container/rover.png");
 
     public RoverScreen(RoverMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component, TEXTURE, 177, 181);

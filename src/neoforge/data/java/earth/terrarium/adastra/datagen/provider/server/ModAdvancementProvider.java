@@ -35,7 +35,7 @@ public class ModAdvancementProvider extends AdvancementProvider {
                     ModItems.EARTH_GLOBE.get(),
                     Component.translatable("advancements.ad_astra.ad_astra.title"),
                     Component.translatable("advancements.ad_astra.ad_astra.description"),
-                    new ResourceLocation(AdAstra.MOD_ID, "textures/block/steel_panel.png"),
+                    ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/block/steel_panel.png"),
                     AdvancementType.TASK,
                     false,
                     false,

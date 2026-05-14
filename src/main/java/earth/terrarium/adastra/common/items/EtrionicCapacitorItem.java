@@ -2,6 +2,7 @@ package earth.terrarium.adastra.common.items;
 
 import dev.architectury.injectables.annotations.PlatformOnly;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.adastra.common.registry.ModDataComponents;
 import earth.terrarium.adastra.common.utils.DistributionMode;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.botarium.common.energy.EnergyApi;
@@ -10,7 +11,6 @@ import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -36,33 +36,29 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
     }
 
     public static boolean active(ItemStack stack) {
-        CompoundTag tag = stack.getOrCreateTag();
-        if (tag.contains(ACTIVE_TAG)) {
-            return tag.getBoolean(ACTIVE_TAG);
+        if (stack.has(ModDataComponents.ACTIVE.get())) {
+            return stack.getOrDefault(ModDataComponents.ACTIVE.get(), false);
         }
         return true;
     }
 
     public static boolean toggleActive(ItemStack stack) {
-        CompoundTag tag = stack.getOrCreateTag();
         boolean active = active(stack);
-        tag.putBoolean(ACTIVE_TAG, !active);
+        stack.set(ModDataComponents.ACTIVE.get(), !active);
         return !active;
     }
 
     public static DistributionMode mode(ItemStack stack) {
-        CompoundTag tag = stack.getOrCreateTag();
-        if (tag.contains(MODE_TAG)) {
-            return DistributionMode.values()[tag.getByte(MODE_TAG)];
+        if (stack.has(ModDataComponents.MODE.get())) {
+            return DistributionMode.values()[stack.getOrDefault(ModDataComponents.MODE.get(), (byte) 0)];
         }
         return DistributionMode.SEQUENTIAL;
     }
 
     public static DistributionMode toggleMode(ItemStack stack) {
-        CompoundTag tag = stack.getOrCreateTag();
         DistributionMode mode = mode(stack);
         DistributionMode toggled = mode == DistributionMode.SEQUENTIAL ? DistributionMode.ROUND_ROBIN : DistributionMode.SEQUENTIAL;
-        tag.putByte(MODE_TAG, (byte) toggled.ordinal());
+        stack.set(ModDataComponents.MODE.get(), (byte) toggled.ordinal());
         return toggled;
     }
 

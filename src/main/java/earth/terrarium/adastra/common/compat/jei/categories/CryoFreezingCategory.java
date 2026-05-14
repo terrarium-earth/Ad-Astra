@@ -26,7 +26,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public record CryoFreezingCategory(IGuiHelper guiHelper) implements IRecipeCategory<CryoFreezingRecipe> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "cryo_freezing");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "cryo_freezing");
     public static final RecipeType<CryoFreezingRecipe> RECIPE = new RecipeType<>(ID, CryoFreezingRecipe.class);
 
     @Override
@@ -66,7 +66,7 @@ public record CryoFreezingCategory(IGuiHelper guiHelper) implements IRecipeCateg
 
         new EtaDrawable(mouseX, mouseY, recipe.cookingTime(), GuiUtils.SNOWFLAKE, 13, 13).draw(graphics, 55, 67);
         int cookTime = recipe.cookingTime();
-        long capacity = FluidConstants.fromMillibuckets(MachineConfig.OSTRUM.fluidCapacity);
+        long capacity = FluidAmounts.toPlatformAmount(MachineConfig.OSTRUM.fluidCapacity);
         new FluidBarDrawable(mouseX, mouseY, true, capacity, cookTime, recipe.result()).draw(graphics, 81, 65);
     }
 }

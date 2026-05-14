@@ -31,7 +31,7 @@ public record ServerboundRequestStationsPacket() implements Packet<ServerboundRe
 
         @Override
         public ResourceLocation id() {
-            return new ResourceLocation(AdAstra.MOD_ID, "request_stations");
+            return ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "request_stations");
         }
 
         @Override

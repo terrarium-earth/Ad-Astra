@@ -10,6 +10,7 @@ import earth.terrarium.botarium.common.fluid.base.BotariumFluidItem;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedItemFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
@@ -38,7 +39,7 @@ public abstract class VehicleItem extends RenderedItem implements BotariumFluidI
         return new WrappedItemFluidContainer(
             holder,
             new SimpleFluidContainer(
-                FluidConstants.fromMillibuckets(3000),
+                FluidAmounts.toPlatformAmount(3000),
                 1,
                 (t, f) -> f.is(ModFluidTags.FUEL)));
     }

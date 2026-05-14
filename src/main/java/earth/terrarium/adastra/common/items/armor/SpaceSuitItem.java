@@ -16,6 +16,7 @@ import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedItemFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
@@ -37,7 +38,7 @@ public class SpaceSuitItem extends CustomDyeableArmorItem implements BotariumFlu
 
     protected final long tankSize;
 
-    public SpaceSuitItem(ArmorMaterial material, Type type, long tankSize, Properties properties) {
+    public SpaceSuitItem(Holder<ArmorMaterial> material, Type type, long tankSize, Properties properties) {
         super(material, type, properties);
         this.tankSize = tankSize;
     }
@@ -46,7 +47,7 @@ public class SpaceSuitItem extends CustomDyeableArmorItem implements BotariumFlu
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
         tooltipComponents.add(TooltipUtils.getFluidComponent(
             FluidUtils.getTank(stack),
-            FluidConstants.fromMillibuckets(tankSize),
+            FluidAmounts.toPlatformAmount(tankSize),
             ModFluids.OXYGEN.get()));
         TooltipUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.SPACE_SUIT_INFO);
     }
@@ -56,7 +57,7 @@ public class SpaceSuitItem extends CustomDyeableArmorItem implements BotariumFlu
         return new WrappedItemFluidContainer(
             holder,
             new SimpleFluidContainer(
-                FluidConstants.fromMillibuckets(tankSize),
+                FluidAmounts.toPlatformAmount(tankSize),
                 1,
                 (t, f) -> f.is(ModFluidTags.OXYGEN)));
     }
@@ -105,7 +106,7 @@ public class SpaceSuitItem extends CustomDyeableArmorItem implements BotariumFlu
         ItemStackHolder holder = new ItemStackHolder(stack);
         var container = FluidContainer.of(holder);
         if (container == null) return;
-        FluidHolder extracted = container.extractFluid(container.getFirstFluid().copyWithAmount(FluidConstants.fromMillibuckets(amount)), false);
+        FluidHolder extracted = container.extractFluid(container.getFirstFluid().copyWithAmount(FluidAmounts.toPlatformAmount(amount)), false);
         if (holder.isDirty() || extracted.getFluidAmount() > 0) {
             stack.setTag(holder.getStack().getTag());
         }
@@ -119,7 +120,7 @@ public class SpaceSuitItem extends CustomDyeableArmorItem implements BotariumFlu
     }
 
     public static boolean hasOxygen(Entity entity) {
-        return getOxygenAmount(entity) > FluidConstants.fromMillibuckets(1);
+        return getOxygenAmount(entity) > FluidAmounts.toPlatformAmount(1);
     }
 
     @Override

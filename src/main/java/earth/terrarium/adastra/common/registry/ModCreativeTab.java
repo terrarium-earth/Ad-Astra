@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.common.registry;
 
-import com.teamresourceful.resourcefullib.common.item.tabs.ResourcefulCreativeTab;
+import com.teamresourceful.resourcefullib.common.item.tabs.ResourcefulCreativeModeTab;
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
@@ -13,18 +14,17 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 @SuppressWarnings({"unused", "SameParameterValue"})
 public class ModCreativeTab {
 
     public static final ResourcefulRegistry<CreativeModeTab> TABS = ResourcefulRegistries.create(BuiltInRegistries.CREATIVE_MODE_TAB, AdAstra.MOD_ID);
-    public static final Supplier<CreativeModeTab> TAB = new ResourcefulCreativeTab(new ResourceLocation(AdAstra.MOD_ID, "main"))
+    public static final RegistryEntry<CreativeModeTab> TAB = TABS.register("main", () -> new ResourcefulCreativeModeTab(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "main"))
         .setItemIcon(ModItems.TIER_1_ROCKET)
         .addContent(ModCreativeTab::getCustomNbtItems)
         .addRegistry(ModItems.ITEMS)
-        .build();
+        .build());
 
     public static Stream<ItemStack> getCustomNbtItems() {
         List<ItemStack> list = new ArrayList<>();

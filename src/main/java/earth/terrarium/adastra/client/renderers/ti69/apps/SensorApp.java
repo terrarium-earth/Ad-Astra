@@ -17,7 +17,7 @@ import org.joml.Matrix4f;
 
 public class SensorApp implements Ti69App {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "sensor");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "sensor");
 
     @Override
     public void render(PoseStack pose, MultiBufferSource bufferSource, Matrix4f matrix4f, Font font, ClientLevel level, boolean rightHanded) {

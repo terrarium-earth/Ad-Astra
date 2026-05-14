@@ -11,7 +11,9 @@ import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
 import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
@@ -19,6 +21,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -33,7 +36,7 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
 
     private final long energyCapacity;
 
-    public JetSuitItem(ArmorMaterial material, Type type, int tankSize, int energy, Properties properties) {
+    public JetSuitItem(Holder<ArmorMaterial> material, Type type, int tankSize, int energy, Item.Properties properties) {
         super(material, type, tankSize, properties);
         this.energyCapacity = energy;
     }
@@ -42,7 +45,7 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
         tooltipComponents.add(TooltipUtils.getFluidComponent(
             FluidUtils.getTank(stack),
-            FluidConstants.fromMillibuckets(tankSize),
+            FluidAmounts.toPlatformAmount(tankSize),
             ModFluids.OXYGEN.get()));
         var energy = getEnergyStorage(stack);
         tooltipComponents.add(TooltipUtils.getEnergyComponent(energy.getStoredEnergy(), energyCapacity));
@@ -160,7 +163,7 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
         if (nextFlightTick % 10 != 0) return true;
 
         if (nextFlightTick % 20 == 0) {
-            stack.hurtAndBreak(1, entity, e -> e.broadcastBreakEvent(EquipmentSlot.CHEST));
+            stack.hurtAndBreak(1, entity, EquipmentSlot.CHEST);
         }
 
         entity.gameEvent(GameEvent.ELYTRA_GLIDE);

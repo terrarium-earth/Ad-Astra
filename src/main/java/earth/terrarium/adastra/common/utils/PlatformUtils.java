@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.level.portal.PortalInfo;
 import org.apache.commons.lang3.NotImplementedException;
 
@@ -14,7 +15,7 @@ import java.util.function.Supplier;
 public class PlatformUtils {
 
     @ExpectPlatform
-    public static Entity teleportToDimension(Entity entity, ServerLevel level, PortalInfo portalInfo) {
+    public static Entity teleportToDimension(Entity entity, ServerLevel level, DimensionTransition portalInfo) {
         throw new NotImplementedException();
     }
 

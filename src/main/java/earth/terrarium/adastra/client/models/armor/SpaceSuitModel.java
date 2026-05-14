@@ -27,13 +27,13 @@ import org.jetbrains.annotations.Nullable;
 
 public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
 
-    public static final ModelLayerLocation SPACE_SUIT_LAYER = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "space_suit"), "main");
-    public static final ModelLayerLocation NETHERITE_SPACE_SUIT_LAYER = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "netherite_space_suit"), "main");
-    public static final ModelLayerLocation JET_SUIT_LAYER = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "jet_suit"), "main");
+    public static final ModelLayerLocation SPACE_SUIT_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "space_suit"), "main");
+    public static final ModelLayerLocation NETHERITE_SPACE_SUIT_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "netherite_space_suit"), "main");
+    public static final ModelLayerLocation JET_SUIT_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "jet_suit"), "main");
 
-    public static final ResourceLocation SPACE_SUIT_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armor/space_suit.png");
-    public static final ResourceLocation NETHERITE_SPACE_SUIT_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armor/netherite_space_suit.png");
-    public static final ResourceLocation JET_SUIT_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armor/jet_suit.png");
+    public static final ResourceLocation SPACE_SUIT_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/armor/space_suit.png");
+    public static final ResourceLocation NETHERITE_SPACE_SUIT_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/armor/netherite_space_suit.png");
+    public static final ResourceLocation JET_SUIT_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/armor/jet_suit.png");
 
     private final ModelPart visor;
     private final ModelPart belt;

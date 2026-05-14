@@ -14,8 +14,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class CryoFreezerScreen extends MachineScreen<CryoFreezerMenu, CryoFreezerBlockEntity> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/cryo_freezer.png");
-    public static final ResourceLocation CRYO_SLOT = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/slots/cryo.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/container/cryo_freezer.png");
+    public static final ResourceLocation CRYO_SLOT = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/container/slots/cryo.png");
 
     public static final Rect2i CLICK_AREA = new Rect2i(108, 10, 26, 25);
 

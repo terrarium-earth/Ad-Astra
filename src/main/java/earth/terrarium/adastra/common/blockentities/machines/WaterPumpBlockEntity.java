@@ -71,7 +71,7 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
         return fluidContainer = new WrappedBlockFluidContainer(
             this,
             new ExtractOnlyFluidContainer(
-                i -> FluidConstants.fromMillibuckets(MachineConfig.DESH.fluidCapacity),
+                i -> FluidAmounts.toPlatformAmount(MachineConfig.DESH.fluidCapacity),
                 1,
                 (tank, holder) -> holder.is(FluidTags.WATER)));
     }
@@ -91,7 +91,7 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
 
     private void pump(ServerLevel level, WrappedBlockEnergyContainer energyStorage) {
         energyStorage.internalExtract(MachineConfig.waterPumpEnergyPerTick, false);
-        fluidContainer.internalInsert(FluidHolder.ofMillibuckets(Fluids.WATER, FluidConstants.fromMillibuckets(MachineConfig.waterPumpFluidGenerationPerTick)), false);
+        fluidContainer.internalInsert(FluidHolder.ofMillibuckets(Fluids.WATER, FluidAmounts.toPlatformAmount(MachineConfig.waterPumpFluidGenerationPerTick)), false);
         ModUtils.sendParticles(level,
             ModParticleTypes.OXYGEN_BUBBLE.get(),
             getBlockPos().getX() + 0.5,
@@ -105,7 +105,7 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
     @Override
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
         TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(0), filter);
-        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidConstants.fromMillibuckets(MachineConfig.waterPumpFluidGenerationPerTick), 0, sideConfig.get(1), filter);
+        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidAmounts.toPlatformAmount(MachineConfig.waterPumpFluidGenerationPerTick), 0, sideConfig.get(1), filter);
     }
 
     @Override

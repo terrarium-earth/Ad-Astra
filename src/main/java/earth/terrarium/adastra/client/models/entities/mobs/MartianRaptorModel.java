@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE
 public class MartianRaptorModel extends EntityModel<MartianRaptor> {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "martian_raptor"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "martian_raptor"), "main");
 
     private final ModelPart body;
     private final ModelPart left_leg;

@@ -20,7 +20,7 @@ public class ModConfiguredCarverProvider {
     public static final ResourceKey<ConfiguredWorldCarver<?>> MOON_CRATER = register("moon_crater");
 
     private static ResourceKey<ConfiguredWorldCarver<?>> register(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_CARVER, new ResourceLocation(AdAstra.MOD_ID, name));
+        return ResourceKey.create(Registries.CONFIGURED_CARVER, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 
     public static void bootstrap(BootstapContext<ConfiguredWorldCarver<?>> context) {

@@ -40,7 +40,8 @@ public class AdAstra {
         NetworkHandler.init();
         StationLoader.init();
 
-        ModFluidProperties.FLUID_PROPERTIES.initialize();
+        ModDataComponents.DATA_COMPONENT_TYPES.init();
+        ModFluidProperties.FLUID_PROPERTIES.init();
         ModFluids.FLUIDS.init();
         ModBlocks.BLOCKS.init();
         ModItems.ITEMS.init();
@@ -71,7 +72,7 @@ public class AdAstra {
     }
 
     public static void onAddReloadListener(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {
-        registry.accept(new ResourceLocation(AdAstra.MOD_ID, "planets"), new AdAstraData());
+        registry.accept(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "planets"), new AdAstraData());
     }
 
     public static void onDatapackSync(ServerPlayer player) {

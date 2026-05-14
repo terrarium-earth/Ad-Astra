@@ -16,10 +16,10 @@ public class VolumeButton extends Button {
 
     private static final Debouncer VOLUME_DEBOUNCER = new Debouncer();
 
-    private static final ResourceLocation VOLUME_UP = new ResourceLocation(AdAstra.MOD_ID, "radio/volume_up");
-    private static final ResourceLocation VOLUME_DOWN = new ResourceLocation(AdAstra.MOD_ID, "radio/volume_down");
-    private static final ResourceLocation VOLUME_UP_HOVER = new ResourceLocation(AdAstra.MOD_ID, "radio/volume_up_hover");
-    private static final ResourceLocation VOLUME_DOWN_HOVER = new ResourceLocation(AdAstra.MOD_ID, "radio/volume_down_hover");
+    private static final ResourceLocation VOLUME_UP = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "radio/volume_up");
+    private static final ResourceLocation VOLUME_DOWN = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "radio/volume_down");
+    private static final ResourceLocation VOLUME_UP_HOVER = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "radio/volume_up_hover");
+    private static final ResourceLocation VOLUME_DOWN_HOVER = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "radio/volume_down_hover");
 
     private final ResourceLocation normal;
     private final ResourceLocation hovered;

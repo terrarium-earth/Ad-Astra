@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -19,7 +20,7 @@ import java.util.Map;
 
 public class ClientPlatformUtilsImpl {
 
-    public static BakedModel getModel(ModelManager dispatcher, ResourceLocation id) {
+    public static BakedModel getModel(ModelManager dispatcher, ModelResourceLocation id) {
         return dispatcher.getModel(id);
     }
 
@@ -32,7 +33,7 @@ public class ClientPlatformUtilsImpl {
                 suit.spawnParticles(entity.level(), entity, original, stack);
             }
 
-            model.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityTranslucent(texture)), packedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+            model.renderToBuffer(poseStack, buffer.getBuffer(RenderType.entityTranslucent(texture)), packedLight, OverlayTexture.NO_OVERLAY, -1);
         }, items);
     }
 

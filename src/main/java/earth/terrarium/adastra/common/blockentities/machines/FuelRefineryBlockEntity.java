@@ -73,7 +73,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
         return fluidContainer = new WrappedBlockFluidContainer(
             this,
             new BiFluidContainer(
-                FluidConstants.fromMillibuckets(MachineConfig.STEEL.fluidCapacity),
+                FluidAmounts.toPlatformAmount(MachineConfig.STEEL.fluidCapacity),
                 1,
                 1,
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())
@@ -90,8 +90,8 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
         TransferUtils.pullItemsNearby(this, pos, new int[]{3}, sideConfig.get(1), filter);
         TransferUtils.pushItemsNearby(this, pos, new int[]{2, 4}, sideConfig.get(2), filter);
         TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(3), filter);
-        TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidConstants.fromMillibuckets(200), 0, sideConfig.get(4), filter);
-        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidConstants.fromMillibuckets(200), 1, sideConfig.get(5), filter);
+        TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidAmounts.toPlatformAmount(200), 0, sideConfig.get(4), filter);
+        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidAmounts.toPlatformAmount(200), 1, sideConfig.get(5), filter);
     }
 
     @Override

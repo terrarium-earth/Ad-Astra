@@ -31,7 +31,7 @@ public class ModDimensionTypeProvider {
     public static final ResourceKey<DimensionType> GLACIO = register("glacio");
 
     private static ResourceKey<DimensionType> register(String name) {
-        return ResourceKey.create(Registries.DIMENSION_TYPE, new ResourceLocation(AdAstra.MOD_ID, name));
+        return ResourceKey.create(Registries.DIMENSION_TYPE, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 
     public static void bootstrap(BootstapContext<DimensionType> context) {

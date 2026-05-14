@@ -19,10 +19,10 @@ import org.joml.Matrix4f;
 
 public class Ti69Renderer {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/ti-69/ti-69.png");
-    public static final ResourceLocation SCREEN = new ResourceLocation(AdAstra.MOD_ID, "textures/ti-69/screen.png");
-    public static final ResourceLocation OVERLAY = new ResourceLocation(AdAstra.MOD_ID, "textures/ti-69/overlay.png");
-    public static final ResourceLocation ICONS = new ResourceLocation(AdAstra.MOD_ID, "textures/ti-69/icons.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/ti-69/ti-69.png");
+    public static final ResourceLocation SCREEN = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/ti-69/screen.png");
+    public static final ResourceLocation OVERLAY = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/ti-69/overlay.png");
+    public static final ResourceLocation ICONS = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/ti-69/icons.png");
 
     public static void renderTi69(PoseStack poseStack, MultiBufferSource buffer, int combinedLight, float equippedProgress, HumanoidArm hand, float swingProgress, ArmRenderer armRenderer) {
         boolean rightHanded = hand == HumanoidArm.RIGHT;

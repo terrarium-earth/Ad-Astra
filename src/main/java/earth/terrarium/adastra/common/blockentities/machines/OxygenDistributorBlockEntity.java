@@ -119,14 +119,14 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         }
 
         long fluidPerTick = calculateFluidPerTick();
-        boolean canDistribute = canCraftDistribution(Math.max(FluidConstants.fromMillibuckets(1), fluidPerTick));
+        boolean canDistribute = canCraftDistribution(Math.max(FluidAmounts.toPlatformAmount(1), fluidPerTick));
         if (canFunction() && canDistribute) {
             getEnergyStorage().internalExtract(calculateEnergyPerTick(), false);
             setLit(true);
             accumulatedFluid += fluidPerTick;
             int wholeBuckets = (int) (accumulatedFluid / 1000f);
             if (wholeBuckets > 0) {
-                consumeDistribution(FluidConstants.fromMillibuckets(Math.max(1, wholeBuckets / 1000)));
+                consumeDistribution(FluidAmounts.toPlatformAmount(Math.max(1, wholeBuckets / 1000)));
                 accumulatedFluid -= wholeBuckets;
             }
 
@@ -153,8 +153,8 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         TransferUtils.pullItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
         TransferUtils.pushItemsNearby(this, pos, new int[]{2}, sideConfig.get(1), filter);
         TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(2), filter);
-        TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidConstants.fromMillibuckets(200), 0, sideConfig.get(3), filter);
-        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidConstants.fromMillibuckets(200), 1, sideConfig.get(4), filter);
+        TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidAmounts.toPlatformAmount(200), 0, sideConfig.get(3), filter);
+        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidAmounts.toPlatformAmount(200), 1, sideConfig.get(4), filter);
     }
 
     @Override
@@ -230,7 +230,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
                 AdAstraClient.OXYGEN_OVERLAY_RENDERER.removePositions(pos);
                 if (AdAstraClient.OXYGEN_OVERLAY_RENDERER.canAdd(pos)
                     && canFunction()
-                    && canCraftDistribution(FluidConstants.fromMillibuckets(Math.max(1, calculateFluidPerTick() / 1000)))) {
+                    && canCraftDistribution(FluidAmounts.toPlatformAmount(Math.max(1, calculateFluidPerTick() / 1000)))) {
                     AdAstraClient.OXYGEN_OVERLAY_RENDERER.addPositions(pos, lastDistributedBlocks);
                 }
             } else AdAstraClient.OXYGEN_OVERLAY_RENDERER.clearPositions();
@@ -276,7 +276,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     }
 
     private long calculateFluidPerTick() {
-        return FluidConstants.fromMillibuckets(Math.max(1, lastDistributedBlocks.size() / 1500));
+        return FluidAmounts.toPlatformAmount(Math.max(1, lastDistributedBlocks.size() / 1500));
     }
 
     @Override

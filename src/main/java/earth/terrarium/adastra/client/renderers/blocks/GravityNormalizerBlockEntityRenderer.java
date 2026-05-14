@@ -26,8 +26,8 @@ import org.joml.Quaternionf;
 
 public class GravityNormalizerBlockEntityRenderer implements BlockEntityRenderer<GravityNormalizerBlockEntity> {
 
-    public static final ResourceLocation TOP = new ResourceLocation(AdAstra.MOD_ID, "block/gravity_normalizer_top");
-    public static final ResourceLocation TOE = new ResourceLocation(AdAstra.MOD_ID, "block/gravity_normalizer_toe");
+    public static final ResourceLocation TOP = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "block/gravity_normalizer_top");
+    public static final ResourceLocation TOE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "block/gravity_normalizer_toe");
 
     private static final float SIN_45 = (float) Math.sin(Math.PI / 4);
 

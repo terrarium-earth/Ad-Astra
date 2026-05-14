@@ -29,7 +29,7 @@ public sealed class RadioSoundInstance extends AbstractSoundInstance implements 
     @SuppressWarnings("deprecation")
     public RadioSoundInstance(String url, RandomSource randomSource) {
         super(
-            new ResourceLocation(AdAstra.MOD_ID, "radio/" + Hashing.sha1().hashUnencodedChars(url)),
+            ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "radio/" + Hashing.sha1().hashUnencodedChars(url)),
             SoundSource.MASTER,
             randomSource
         );

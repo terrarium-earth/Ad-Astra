@@ -48,7 +48,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
     public static final EntityDataAccessor<Long> FUEL = SynchedEntityData.defineId(Rover.class, EntityDataSerializers.LONG);
     public static final EntityDataAccessor<String> FUEL_TYPE = SynchedEntityData.defineId(Rover.class, EntityDataSerializers.STRING);
 
-    private final SimpleFluidContainer fluidContainer = new SimpleFluidContainer(FluidConstants.fromMillibuckets(3000), 1, (amount, fluid) -> fluid.is(ModFluidTags.TIER_1_ROVER_FUEL));
+    private final SimpleFluidContainer fluidContainer = new SimpleFluidContainer(FluidAmounts.toPlatformAmount(3000), 1, (amount, fluid) -> fluid.is(ModFluidTags.TIER_1_ROVER_FUEL));
 
     private float speed;
     private float angle;
@@ -277,7 +277,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
 
     public void consumeFuel() {
         if (level().isClientSide() || tickCount % 5 != 0) return;
-        fluidContainer.extractFluid(fluidContainer.getFirstFluid().copyWithAmount(FluidConstants.fromMillibuckets(1)), false);
+        fluidContainer.extractFluid(fluidContainer.getFirstFluid().copyWithAmount(FluidAmounts.toPlatformAmount(1)), false);
     }
 
     public boolean hasEnoughFuel() {
@@ -289,7 +289,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder {
 
     public FluidHolder fluid() {
         return FluidHolder.of(
-            BuiltInRegistries.FLUID.get(new ResourceLocation(entityData.get(FUEL_TYPE))),
+            BuiltInRegistries.FLUID.get(ResourceLocation.withDefaultNamespace(entityData.get(FUEL_TYPE))),
             entityData.get(FUEL),
             null);
     }

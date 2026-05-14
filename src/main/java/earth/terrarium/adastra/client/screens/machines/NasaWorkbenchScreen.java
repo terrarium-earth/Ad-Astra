@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class NasaWorkbenchScreen extends MachineScreen<NasaWorkbenchMenu, NasaWorkbenchBlockEntity> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/nasa_workbench.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/container/nasa_workbench.png");
     public static final Rect2i CLICK_AREA = new Rect2i(93, 52, 26, 25);
 
     public NasaWorkbenchScreen(NasaWorkbenchMenu menu, Inventory inventory, Component component) {
