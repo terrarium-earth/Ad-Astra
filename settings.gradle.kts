@@ -4,14 +4,8 @@ rootProject.name = "adastra"
 
 pluginManagement {
     repositories {
-        maven(url = "https://maven.architectury.dev/")
-        maven(url = "https://maven.neoforged.net/releases/")
-        maven(url = "https://kneelawk.com/maven")
-        maven(url = "https://maven.teamresourceful.com/repository/maven-public/")
         gradlePluginPortal()
+        maven(url = "https://maven.teamresourceful.com/repository/maven-public/")
+        maven(url = "https://maven.msrandom.net/repository/cloche")
     }
 }
-
-include("common")
-include("fabric")
-include("neoforge")

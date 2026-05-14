@@ -1,262 +1,307 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import dev.architectury.plugin.ArchitectPluginExtension
+import earth.terrarium.cloche.api.metadata.CommonMetadata
 import groovy.json.StringEscapeUtils
-import net.fabricmc.loom.api.LoomGradleExtensionAPI
-import net.fabricmc.loom.task.RemapJarTask
 
 plugins {
     java
-    id("maven-publish")
+    `maven-publish`
     id("com.teamresourceful.resourcefulgradle") version "0.0.+"
-    id("dev.architectury.loom") version "1.6.9999-PR.207+kneelawk" apply false
-    id("architectury-plugin") version "3.4-SNAPSHOT"
-    id("com.github.johnrengelman.shadow") version "7.1.2" apply false
-}
-
-architectury {
-    val minecraftVersion: String by project
-    minecraft = minecraftVersion
+    id("earth.terrarium.cloche") version "0.18.14"
 }
 
 val stationsFile: String = file("stations.json").absolutePath
 
-subprojects {
-    apply(plugin = "maven-publish")
-    apply(plugin = "dev.architectury.loom")
-    apply(plugin = "architectury-plugin")
-    apply(plugin = "com.github.johnrengelman.shadow")
+val minecraftVersion: String by project
+val modId = project.name
 
-    val minecraftVersion: String by project
-    val modLoader = project.name
-    val modId = rootProject.name
-    val isCommon = modLoader == rootProject.projects.common.name
+base {
+    archivesName.set("$modId-$minecraftVersion")
+}
 
-    base {
-        archivesName.set("$modId-$modLoader-$minecraftVersion")
+repositories {
+    mavenCentral()
+
+    cloche {
+        main()
+        mavenNeoforged()
+        mavenNeoforgedMeta()
+        mavenFabric()
     }
 
-    configure<LoomGradleExtensionAPI> {
-        silentMojangMappingsLicense()
+    maven(url = "https://maven.teamresourceful.com/repository/maven-public/")
+    maven(url = "https://maven.firstdarkdev.xyz/snapshots")
+    maven(url = "https://maven.shedaniel.me")
 
-        runConfigs {
-            "client" {
-                property("adastra.stations", stationsFile)
+    maven {
+        url = uri("https://www.cursemaven.com")
+        content {
+            includeGroup("curse.maven")
+        }
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = uri("https://api.modrinth.com/maven")
             }
-            "server" {
-                property("adastra.stations", stationsFile)
-            }
+        }
+        filter {
+            includeGroup("maven.modrinth")
+        }
+    }
+}
+
+cloche {
+    val reiVersion: String by project
+
+    minecraftVersion = project.property("minecraftVersion") as String
+
+    metadata {
+        modId = "ad_astra"
+
+        name = "Ad Astra"
+        description = "Live long and prosper, Ad Astra!"
+
+        url = "https://www.curseforge.com/minecraft/mc-mods/ad-astra"
+        issues = "https://github.com/terrarium-earth/ad-astra/issues"
+        icon = "icon.png"
+        license = "Terrarium License"
+
+        author("Alex Nijjar", "alex@terrarium.earth")
+        contributor("CodexAdrian", "adrian@terrarium.earth")
+        contributor("Facu")
+        contributor("Fizz")
+        contributor("MsRandom", "ashley@terrarium.earth")
+        contributor("ThatGravyBoat", "sophie@terrarium.earth")
+
+        require("resourcefullib", "3.0.0")
+        require("resourcefulconfig", "3.0.0")
+        require("common_storage_lib", "0.0.7")
+    }
+
+    common {
+        mixins.from("src/main/adastra-common.mixins.json")
+
+        dependencies {
+            implementation(module(group = "javazoom", name = "jlayer", version = "1.0.1"))
+            compileOnly(module(group = "me.shedaniel", name = "REIPluginCompatibilities-forge-annotations", version = "8.+"))
+            compileOnly("org.jetbrains:annotations:26.1.0")
         }
     }
 
-    repositories {
-        mavenCentral()
-        maven(url = "https://maven.teamresourceful.com/repository/maven-public/")
-        maven(url = "https://maven.neoforged.net/releases/")
-        maven(url = "https://maven.firstdarkdev.xyz/snapshots")
-        maven {
-            url = uri("https://www.cursemaven.com")
-            content {
-                includeGroup("curse.maven")
-            }
+    neoforge {
+        val neoforgeVersion: String by project
+
+        loaderVersion = neoforgeVersion
+
+        data()
+
+        mixins.from("src/neoforge/adastra.mixins.json")
+
+        dependencies {
+//    modLocalRuntime(group = "maven.modrinth", name = "jade", version = "13.2.2")
+//    modLocalRuntime(group = "maven.modrinth", name = "mekanism", version = "10.4.2.16")
+
+            legacyClasspath("com.teamresourceful:yabn:1.0.3")
+            legacyClasspath("com.teamresourceful:bytecodecs:1.0.2")
+
+            legacyClasspath(module(group = "javazoom", name = "jlayer", version = "1.0.1"))
         }
-        exclusiveContent {
-            forRepository {
-                maven {
-                    name = "Modrinth"
-                    url = uri("https://api.modrinth.com/maven")
-                }
-            }
-            filter {
-                includeGroup("maven.modrinth")
-            }
+
+        runs {
+            data()
         }
     }
 
-    dependencies {
-        val mixinExtrasVersion: String by project
-        val resourcefulLibVersion: String by project
-        val resourcefulConfigVersion: String by project
-        val botariumVersion: String by project
-        val athenaVersion: String by project
-        val cadmusVersion: String by project
-        val argonautsVersion: String by project
-        val jeiVersion: String by project
-        val reiVersion: String by project
-        val patchouliVersion: String by project
-        val shimmerVersion: String by project
+    fabric {
+        val fabricLoaderVersion: String by project
 
-        "minecraft"("::$minecraftVersion")
+        includedClient()
 
-        @Suppress("UnstableApiUsage")
-        "mappings"(project.the<LoomGradleExtensionAPI>().layered {
-            val parchmentVersion: String by project
+        loaderVersion = fabricLoaderVersion
 
-            officialMojangMappings()
+        mixins.from("src/fabric/adastra.mixins.json")
 
-            parchment(create(group = "org.parchmentmc.data", name = "parchment-1.20.6", version = parchmentVersion))
-        })
+        metadata {
+            entrypoint("main", "earth.terrarium.adastra.fabric.AdAstraFabric::init")
+            entrypoint("main", "earth.terrarium.adastra.AdAstra::postInit")
 
-        "modApi"(
-            group = "com.teamresourceful.resourcefullib",
-            name = "resourcefullib-$modLoader-1.20.5",
-            version = resourcefulLibVersion
-        )
-        "modApi"(
-            group = "com.teamresourceful.resourcefulconfig",
-            name = "resourcefulconfig-$modLoader-1.20.5",
-            version = resourcefulConfigVersion
-        )
-        "modApi"(
-            group = "earth.terrarium.botarium",
-            name = "botarium-$modLoader-1.20.4",
-            version = botariumVersion
-        )
-        if (isCommon) {
-            implementation(group = "javazoom", name = "jlayer", version = "1.0.1")
-            // "modApi"(group = "mezz.jei", name = "jei-$minecraftVersion-common-api", version = jeiVersion)
-            "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-api", version = reiVersion)
-            "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-default-plugin", version = reiVersion)
-            implementation(
-                "annotationProcessor"(
-                    group = "io.github.llamalad7",
-                    name = "mixinextras-common",
-                    version = mixinExtrasVersion
+            entrypoint("client", "earth.terrarium.adastra.client.fabric.AdAstraClientFabric::init")
+
+            entrypoint("rei_client", "earth.terrarium.adastra.common.compat.rei.AdAstraReiPlugin")
+            entrypoint("jei_mod_plugin", "earth.terrarium.adastra.common.compat.jei.AdAstraJeiPlugin")
+
+            dependency {
+                modId = "fabric-api"
+                type = CommonMetadata.Dependency.Type.Required
+            }
+        }
+
+        dependencies {
+            val fabricApiVersion: String by project
+            val modMenuVersion: String by project
+
+            fabricApi(fabricApiVersion)
+
+            modLocalRuntime(module(group = "me.shedaniel", name = "RoughlyEnoughItems-fabric", version = reiVersion))
+
+            modLocalRuntime(module(group = "com.terraformersmc", name = "modmenu", version = modMenuVersion))
+
+            // modLocalRuntime(module(group = "RebornCore", name = "RebornCore-1.20", version = "5.10.2")) { isTransitive = false }
+            // modLocalRuntime(module(group = "TechReborn", name = "TechReborn-1.20", version = "5.10.2")) { isTransitive = false }
+
+            modLocalRuntime(module(group = "maven.modrinth", name = "jade", version = "15.10.5+fabric"))
+            // modLocalRuntime(module(group = "maven.modrinth", name = "dcwa", version = "5.0")) // Disable custom world advice
+        }
+    }
+
+    targets.all {
+        datagenDirectory = file("src/main/generated/resources")
+
+        runs {
+            client {
+                jvmArgs("-Dadastra.stations=", stationsFile)
+            }
+
+            server {
+                jvmArgs("-Dadastra.stations=", stationsFile)
+            }
+        }
+
+        dependencies {
+            val resourcefulLibVersion: String by project
+            val resourcefulConfigVersion: String by project
+            val cslVersion: String by project
+            val athenaVersion: String by project
+            val cadmusVersion: String by project
+            val argonautsVersion: String by project
+            val jeiVersion: String by project
+            val patchouliVersion: String by project
+            val shimmerVersion: String by project
+
+            modApi(
+                module(
+                    group = "com.teamresourceful.resourcefullib",
+                    name = "resourcefullib-$loaderName-1.21",
+                    version = resourcefulLibVersion
+                )
+            )
+            modApi(
+                module(
+                    group = "com.teamresourceful.resourcefulconfig",
+                    name = "resourcefulconfig-$loaderName-1.21",
+                    version = resourcefulConfigVersion
+                )
+            )
+            modApi(
+                module(
+                    group = "earth.terrarium.common_storage_lib",
+                    name = "common-storage-lib-$loaderName-${minecraftVersion.get()}",
+                    version = cslVersion
                 )
             )
 
             /*
-            "modCompileOnly"(group = "earth.terrarium.cadmus", name = "cadmus-$modLoader-$minecraftVersion", version = cadmusVersion) {
-                isTransitive = false
-            }
-            "modCompileOnly"(group = "earth.terrarium.argonauts", name = "argonauts-$modLoader-$minecraftVersion", version = argonautsVersion) {
-                isTransitive = false
-            }
-             */
-        } else {
-            "include"(implementation(group = "javazoom", name = "jlayer", version = "1.0.1"))
+modCompileOnly(module(group = "earth.terrarium.cadmus", name = "cadmus-$loaderName-$minecraftVersion", version = cadmusVersion)) {
+    isTransitive = false
+}
+modCompileOnly(module(group = "earth.terrarium.argonauts", name = "argonauts-$loaderName-$minecraftVersion", version = argonautsVersion)) {
+    isTransitive = false
+}
+ */
+
+            val jlayer = module(group = "javazoom", name = "jlayer", version = "1.0.1")
+            implementation(jlayer)
+            include(jlayer)
             /*
-            "modLocalRuntime"(group = "earth.terrarium.cadmus", name = "cadmus-$modLoader-$minecraftVersion", version = cadmusVersion) {
+            modLocalRuntime(module(group = "earth.terrarium.cadmus", name = "cadmus-$loaderName-$minecraftVersion", version = cadmusVersion)) {
                 isTransitive = false
             }
-            "modLocalRuntime"(group = "earth.terrarium.argonauts", name = "argonauts-$modLoader-$minecraftVersion", version = argonautsVersion) {
+            modLocalRuntime(module(group = "earth.terrarium.argonauts", name = "argonauts-$loaderName-$minecraftVersion", version = argonautsVersion)) {
                 isTransitive = false
             }
 
-            modLocalRuntime(group = "mezz.jei", name = "jei-$minecraftVersion-$modLoader", version = jeiVersion) {
+            modLocalRuntime(module(group = "mezz.jei", name = "jei-$minecraftVersion-$loaderName", version = jeiVersion)) {
                 isTransitive = false
             }
              */
 
-            "modLocalRuntime"(
-                group = "earth.terrarium.athena",
-                name = "athena-$modLoader-1.20.5",
-                version = athenaVersion
+            modLocalRuntime(
+                module(
+                    group = "earth.terrarium.athena",
+                    name = "athena-$loaderName-${minecraftVersion.get()}",
+                    version = athenaVersion
+                )
             )
-            "modCompileOnly"(group = "me.shedaniel", name = "RoughlyEnoughItems-api-$modLoader", version = reiVersion)
-            "modCompileOnly"(
-                group = "me.shedaniel",
-                name = "RoughlyEnoughItems-default-plugin-$modLoader",
-                version = reiVersion
+            modCompileOnly(module(group = "me.shedaniel", name = "RoughlyEnoughItems-api-$loaderName", version = reiVersion))
+            modCompileOnly(
+                module(
+                    group = "me.shedaniel",
+                    name = "RoughlyEnoughItems-default-plugin-$loaderName",
+                    version = reiVersion
+                )
             )
-//            "modLocalRuntime"(group = "vazkii.patchouli", name = "Patchouli", version = "$minecraftVersion-$patchouliVersion-${modLoader.uppercase()}")
-//            "modLocalRuntime"(group = "com.lowdragmc.shimmer", name = "Shimmer-$modLoader", version = "$minecraftVersion-$shimmerVersion") { isTransitive = false }
+//            modLocalRuntime(module(group = "vazkii.patchouli", name = "Patchouli", version = "$minecraftVersion-$patchouliVersion-${loaderName.uppercase()}"))
+//            modLocalRuntime(module(group = "com.lowdragmc.shimmer", name = "Shimmer-$loaderName", version = "$minecraftVersion-$shimmerVersion")) { isTransitive = false }
         }
     }
 
-    java {
-        withSourcesJar()
+    mappings {
+        val parchmentVersion: String by project
+
+        official()
+        parchment(parchmentVersion)
     }
+}
 
-    tasks.jar {
-        archiveClassifier.set("dev")
-    }
+java {
+    withSourcesJar()
+}
 
-    tasks.named<RemapJarTask>("remapJar") {
-        archiveClassifier.set(null as String?)
-    }
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
 
-    tasks.processResources {
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-        filesMatching(listOf("META-INF/neoforge.mods.toml", "fabric.mod.json")) {
-            expand("version" to project.version)
-        }
-    }
+            pom {
+                val github = "https://github.com/terrarium-earth/Ad-Astra"
 
-    if (!isCommon) {
-        configure<ArchitectPluginExtension> {
-            platformSetupLoomIde()
-        }
+                name.set("Ad Astra")
+                url.set(github)
 
-        val shadowCommon by configurations.creating {
-            isCanBeConsumed = false
-            isCanBeResolved = true
-        }
+                scm {
+                    connection.set("git:$github.git")
+                    developerConnection.set("git:$github.git")
+                    url.set(github)
+                }
 
-        tasks {
-            "shadowJar"(ShadowJar::class) {
-                archiveClassifier.set("dev-shadow")
-                configurations = listOf(shadowCommon)
-
-                exclude(".cache/**") // Remove datagen cache from jar.
-                exclude("**/adastra/datagen/**") // Remove data gen code from jar.
-            }
-
-            "remapJar"(RemapJarTask::class) {
-                dependsOn("shadowJar")
-                inputFile.set(named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
-            }
-        }
-    } else {
-        sourceSets.main.get().resources.srcDir("src/main/generated/resources")
-    }
-
-    publishing {
-        publications {
-            create<MavenPublication>("maven") {
-                artifactId = "$modId-$modLoader-$minecraftVersion"
-                from(components["java"])
-
-                pom {
-                    name.set("Ad Astra $modLoader")
-                    url.set("https://github.com/terrarium-earth/$modId")
-
-                    scm {
-                        connection.set("git:https://github.com/terrarium-earth/$modId.git")
-                        developerConnection.set("git:https://github.com/terrarium-earth/$modId.git")
-                        url.set("https://github.com/terrarium-earth/$modId")
-                    }
-
-                    licenses {
-                        license {
-                            name.set("Terrarium Licence (https://gist.github.com/CodexAdrian/4bb2a1868bb2d2a91ca74ea40424e69d)")
-                        }
+                licenses {
+                    license {
+                        name.set("Terrarium Licence (https://gist.github.com/CodexAdrian/4bb2a1868bb2d2a91ca74ea40424e69d)")
                     }
                 }
             }
         }
-        repositories {
-            maven {
-                setUrl("https://maven.teamresourceful.com/repository/terrarium/")
-                credentials {
-                    username = System.getenv("MAVEN_USER")
-                    password = System.getenv("MAVEN_PASS")
-                }
+    }
+    repositories {
+        maven {
+            setUrl("https://maven.teamresourceful.com/repository/terrarium/")
+            credentials {
+                username = System.getenv("MAVEN_USER")
+                password = System.getenv("MAVEN_PASS")
             }
         }
     }
+}
 
-    idea {
-        module {
-            excludeDirs.add(file("run"))
-        }
+idea {
+    module {
+        excludeDirs.add(file("run"))
     }
 }
 
 resourcefulGradle {
     templates {
         register("embed") {
-            val minecraftVersion: String by project
-            val version: String by project
             val changelog: String = file("changelog.md").readText(Charsets.UTF_8)
             val fabricLink: String? = System.getenv("FABRIC_RELEASE_URL")
             val forgeLink: String? = System.getenv("FORGE_RELEASE_URL")
@@ -267,8 +312,8 @@ resourcefulGradle {
                     "minecraft" to minecraftVersion,
                     "version" to version,
                     "changelog" to StringEscapeUtils.escapeJava(changelog),
-                    "fabric_link" to fabricLink,
-                    "forge_link" to forgeLink,
+                    "fabric_link" to fabricLink.orEmpty(),
+                    "forge_link" to forgeLink.orEmpty(),
                 )
             )
         }

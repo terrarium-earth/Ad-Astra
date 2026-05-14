@@ -48,7 +48,7 @@ jobs:
           modrinth-id: ${{ vars.MODRINTH_ID }}
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
-          files: ./neoforge/build/libs/!(*-@(dev|sources|dev-shadow)).jar
+          files: ./build/libs/!(*-@(dev|sources|dev-shadow))-neoforge.jar
           name: "[NeoForge] Ad Astra ${{ steps.properties.outputs.version }}"
           version: ${{ steps.properties.outputs.version }}
           version-type: release
@@ -85,7 +85,7 @@ jobs:
           modrinth-id: ${{ vars.MODRINTH_ID }}
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
-          files: ./fabric/build/libs/!(*-@(dev|sources|dev-shadow)).jar
+          files: ./build/libs/!(*-@(dev|sources|dev-shadow))-fabric.jar
           name: "[Fabric] Ad Astra ${{ steps.properties.outputs.version }}"
           version: ${{ steps.properties.outputs.version }}
           version-type: release
