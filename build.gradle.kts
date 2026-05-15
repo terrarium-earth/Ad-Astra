@@ -85,6 +85,7 @@ cloche {
             implementation(module(group = "javazoom", name = "jlayer", version = "1.0.1"))
             compileOnly(module(group = "me.shedaniel", name = "REIPluginCompatibilities-forge-annotations", version = "8.+"))
             compileOnly("org.jetbrains:annotations:26.1.0")
+            compileOnly("com.teamresourceful:bytecodecs:1.1.2")
         }
     }
 
@@ -102,7 +103,7 @@ cloche {
 //    modLocalRuntime(group = "maven.modrinth", name = "mekanism", version = "10.4.2.16")
 
             legacyClasspath("com.teamresourceful:yabn:1.0.3")
-            legacyClasspath("com.teamresourceful:bytecodecs:1.0.2")
+            legacyClasspath("com.teamresourceful:bytecodecs:1.1.2")
 
             legacyClasspath(module(group = "javazoom", name = "jlayer", version = "1.0.1"))
         }
@@ -220,10 +221,11 @@ modCompileOnly(module(group = "earth.terrarium.argonauts", name = "argonauts-$lo
                 isTransitive = false
             }
 
-            modLocalRuntime(module(group = "mezz.jei", name = "jei-$minecraftVersion-$loaderName", version = jeiVersion)) {
+             */
+
+            modCompileOnly(module(group = "mezz.jei", name = "jei-${minecraftVersion.get()}-$loaderName", version = jeiVersion)) {
                 isTransitive = false
             }
-             */
 
             modLocalRuntime(
                 module(
@@ -317,5 +319,11 @@ resourcefulGradle {
                 )
             )
         }
+    }
+}
+
+tasks {
+    withType(JavaCompile::class).configureEach {
+        options.compilerArgs.addAll(listOf("-Xmaxerrs", "2000"))
     }
 }
