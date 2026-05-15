@@ -5,6 +5,7 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.SideConfigur
 import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -58,17 +59,17 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
     }
 
     @Override
-    public void load(@NotNull CompoundTag tag) {
-        super.load(tag);
-        ContainerHelper.loadAllItems(tag, this.items);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
+        ContainerHelper.loadAllItems(tag, this.items, provider);
         ConfigurationEntry.load(tag, this.sideConfig, getDefaultConfig());
         this.redstoneControl = RedstoneControl.values()[tag.getByte("RedstoneControl")];
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        super.saveAdditional(tag);
-        ContainerHelper.saveAllItems(tag, this.items);
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
+        ContainerHelper.saveAllItems(tag, this.items, provider);
         ConfigurationEntry.save(tag, this.sideConfig);
         tag.putByte("RedstoneControl", (byte) redstoneControl.ordinal());
     }

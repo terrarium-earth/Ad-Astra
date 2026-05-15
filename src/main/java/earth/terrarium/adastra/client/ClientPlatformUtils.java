@@ -1,6 +1,5 @@
 package earth.terrarium.adastra.client;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import earth.terrarium.adastra.client.dimension.ModDimensionSpecialEffects;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
@@ -20,6 +19,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.msrandom.multiplatform.annotations.Expect;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.Map;
@@ -51,17 +51,17 @@ public class ClientPlatformUtils {
         void renderHud(GuiGraphics graphics, DeltaTracker deltaTracker);
     }
 
-    @ExpectPlatform
+    @Expect
     public static BakedModel getModel(ModelManager dispatcher, ResourceLocation id) {
         throw new NotImplementedException();
     }
 
-    @ExpectPlatform
+    @Expect
     public static void registerArmor(ResourceLocation texture, ModelLayerLocation layer, ArmorFactory factory, Item... items) {
         throw new NotImplementedException();
     }
 
-    @ExpectPlatform
+    @Expect
     public static void registerPlanetRenderers(Map<ResourceKey<Level>, ModDimensionSpecialEffects> renderers) {
         throw new NotImplementedException();
     }

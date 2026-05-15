@@ -31,7 +31,6 @@ public record ServerboundSetFurnaceModePacket(
 
         public Type() {
             super(
-                ServerboundSetFurnaceModePacket.class,
                 ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "set_furnace_mode"),
                 ObjectByteCodec.create(
                     ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundSetFurnaceModePacket::machine),

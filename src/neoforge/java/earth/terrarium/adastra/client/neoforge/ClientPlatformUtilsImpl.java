@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import net.msrandom.multiplatform.annotations.Actual;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,16 +20,19 @@ public class ClientPlatformUtilsImpl {
     public static final Map<Item, ArmorRenderer> ARMOR_RENDERERS = new HashMap<>();
     public static final Map<ResourceKey<Level>, ModDimensionSpecialEffects> DIMENSION_RENDERERS = new HashMap<>();
 
+    @Actual
     public static BakedModel getModel(ModelManager dispatcher, ModelResourceLocation id) {
         return dispatcher.getModel(id);
     }
 
+    @Actual
     public static void registerArmor(ResourceLocation texture, ModelLayerLocation layer, ClientPlatformUtils.ArmorFactory factory, Item... items) {
         for (Item item : items) {
             ARMOR_RENDERERS.put(item, new ArmorRenderer(texture, layer, factory));
         }
     }
 
+    @Actual
     public static void registerPlanetRenderers(Map<ResourceKey<Level>, ModDimensionSpecialEffects> renderers) {
         DIMENSION_RENDERERS.clear();
         DIMENSION_RENDERERS.putAll(renderers);

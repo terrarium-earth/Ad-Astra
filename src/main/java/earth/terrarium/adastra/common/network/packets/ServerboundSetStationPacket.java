@@ -35,7 +35,6 @@ public record ServerboundSetStationPacket(String url,
 
         public Type() {
             super(
-                ServerboundSetStationPacket.class,
                 ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "set_station"),
                 ObjectByteCodec.create(
                     ByteCodec.STRING.fieldOf(ServerboundSetStationPacket::url),

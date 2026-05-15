@@ -15,15 +15,18 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import net.msrandom.multiplatform.annotations.Actual;
 
 import java.util.Map;
 
 public class ClientPlatformUtilsImpl {
 
+    @Actual
     public static BakedModel getModel(ModelManager dispatcher, ModelResourceLocation id) {
         return dispatcher.getModel(id);
     }
 
+    @Actual
     public static void registerArmor(ResourceLocation texture, ModelLayerLocation layer, ClientPlatformUtils.ArmorFactory factory, Item... items) {
         ArmorRenderer.register((poseStack, buffer, stack, entity, slot, packedLight, original) -> {
             var root = Minecraft.getInstance().getEntityModels().bakeLayer(layer);
@@ -37,6 +40,7 @@ public class ClientPlatformUtilsImpl {
         }, items);
     }
 
+    @Actual
     public static void registerPlanetRenderers(Map<ResourceKey<Level>, ModDimensionSpecialEffects> renderers) {
         AdAstraClientFabric.registerDimensionEffects(renderers);
     }

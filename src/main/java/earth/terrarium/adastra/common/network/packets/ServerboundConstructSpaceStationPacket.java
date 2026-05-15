@@ -45,7 +45,6 @@ public record ServerboundConstructSpaceStationPacket(
 
         public Type() {
             super(
-                ServerboundConstructSpaceStationPacket.class,
                 ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "construct_space_station"),
                 ObjectByteCodec.create(
                     ExtraByteCodecs.DIMENSION.fieldOf(ServerboundConstructSpaceStationPacket::dimension),

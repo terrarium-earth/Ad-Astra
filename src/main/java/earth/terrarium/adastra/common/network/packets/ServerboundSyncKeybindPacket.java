@@ -27,7 +27,6 @@ public record ServerboundSyncKeybindPacket(boolean jumping, boolean sprinting,
 
         public Type() {
             super(
-                ServerboundSyncKeybindPacket.class,
                 ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "sync_keybinds"),
                 ObjectByteCodec.create(
                     ByteCodec.BOOLEAN.fieldOf(ServerboundSyncKeybindPacket::jumping),

@@ -113,4 +113,5 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
         }
         return RenderType.entitySolid(id);
     }
+
 }

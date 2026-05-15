@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.network.packets;
 
+import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
 import com.teamresourceful.resourcefullib.common.network.Packet;
 import com.teamresourceful.resourcefullib.common.network.base.ClientboundPacketType;
 import com.teamresourceful.resourcefullib.common.network.base.PacketType;
@@ -7,9 +8,6 @@ import com.teamresourceful.resourcefullib.common.network.defaults.CodecPacketTyp
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.radio.screen.RadioScreen;
 import earth.terrarium.adastra.common.utils.radio.StationInfo;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
@@ -26,16 +24,13 @@ public record ClientboundSendStationsPacket(
 
     private static class Type extends CodecPacketType<ClientboundSendStationsPacket> implements ClientboundPacketType<ClientboundSendStationsPacket> {
 
-        private static final StreamCodec<RegistryFriendlyByteBuf, ClientboundSendStationsPacket> STREAM_CODEC = StreamCodec.composite(
-            StationInfo.STREAM_CODEC.apply(ByteBufCodecs.list()),
-            ClientboundSendStationsPacket::stations,
-            ClientboundSendStationsPacket::new
-        );
-
         public Type() {
             super(
                 ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "send_stations"),
-                STREAM_CODEC
+                ObjectByteCodec.create(
+                    StationInfo.BYTE_CODEC.listOf().fieldOf(ClientboundSendStationsPacket::stations),
+                    ClientboundSendStationsPacket::new
+                )
             );
         }
 

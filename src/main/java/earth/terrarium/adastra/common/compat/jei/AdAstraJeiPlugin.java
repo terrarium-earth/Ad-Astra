@@ -3,7 +3,6 @@ package earth.terrarium.adastra.common.compat.jei;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.screens.machines.*;
 import earth.terrarium.adastra.common.compat.jei.categories.*;
-import earth.terrarium.adastra.common.registry.ModCreativeTab;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import me.shedaniel.rei.plugincompatibilities.api.REIPluginCompatIgnore;
@@ -75,6 +74,6 @@ public class AdAstraJeiPlugin implements IModPlugin {
 
     @Override
     public void registerItemSubtypes(ISubtypeRegistration registration) {
-        ModCreativeTab.getCustomNbtItems().forEach(stack -> registration.useNbtForSubtypes(stack.getItem()));
+//        ModCreativeTab.getCustomNbtItems().forEach(stack -> registration.useNbtForSubtypes(stack.getItem()));
     }
 }

@@ -2,10 +2,7 @@ package earth.terrarium.adastra.mixins.client;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexBuffer;
+import com.mojang.blaze3d.vertex.*;
 import earth.terrarium.adastra.client.utils.DimensionRenderingUtils;
 import earth.terrarium.adastra.common.registry.ModParticleTypes;
 import earth.terrarium.adastra.common.tags.ModBiomeTags;
@@ -79,7 +76,7 @@ public abstract class LevelRendererMixin {
     private VertexBuffer cloudBuffer;
 
     @Shadow
-    protected abstract BufferBuilder.RenderedBuffer buildClouds(BufferBuilder builder, double x, double y, double z, Vec3 cloudColor);
+    protected abstract MeshData buildClouds(Tesselator builder, double x, double y, double z, Vec3 cloudColor);
 
     @Shadow
     private int rainSoundTime;
@@ -103,7 +100,7 @@ public abstract class LevelRendererMixin {
             value = "HEAD"
         ),
         cancellable = true)
-    private void adastra$renderClouds(PoseStack poseStack, Matrix4f projectionMatrix, float partialTick, double camX, double camY, double camZ, CallbackInfo ci) {
+    private void adastra$renderClouds(PoseStack poseStack, Matrix4f frustumMatrix, Matrix4f projectionMatrix, float partialTick, double camX, double camY, double camZ, CallbackInfo ci) {
         if (adastra$hasAcidRain()) {
             ci.cancel();
             float f = this.level.effects().getCloudHeight();
@@ -146,19 +143,17 @@ public abstract class LevelRendererMixin {
 
                 if (this.generateClouds) {
                     this.generateClouds = false;
-                    BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
                     if (this.cloudBuffer != null) {
                         this.cloudBuffer.close();
                     }
 
                     this.cloudBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
-                    BufferBuilder.RenderedBuffer bufferbuilder$renderedbuffer = this.buildClouds(bufferbuilder, d2, d3, d4, vec3);
                     this.cloudBuffer.bind();
-                    this.cloudBuffer.upload(bufferbuilder$renderedbuffer);
+                    this.cloudBuffer.upload(this.buildClouds(Tesselator.getInstance(), d2, d3, d4, vec3));
                     VertexBuffer.unbind();
                 }
 
-                RenderSystem.setShader(GameRenderer::getPositionTexColorNormalShader);
+                RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
                 RenderSystem.setShaderTexture(0, DimensionRenderingUtils.VENUS_CLOUDS);
                 FogRenderer.levelFogColor();
                 poseStack.pushPose();

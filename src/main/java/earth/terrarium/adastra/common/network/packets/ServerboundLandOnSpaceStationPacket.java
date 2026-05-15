@@ -41,7 +41,6 @@ public record ServerboundLandOnSpaceStationPacket(ResourceKey<Level> dimension,
 
         public Type() {
             super(
-                ServerboundLandOnSpaceStationPacket.class,
                 ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "land_on_space_station"),
                 ObjectByteCodec.create(
                     ExtraByteCodecs.DIMENSION.fieldOf(ServerboundLandOnSpaceStationPacket::dimension),

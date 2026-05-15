@@ -33,7 +33,6 @@ public record ServerboundSetFlagUrlPacket(BlockPos pos, String url) implements P
 
         public Type() {
             super(
-                ServerboundSetFlagUrlPacket.class,
                 ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "set_flag_url"),
                 ObjectByteCodec.create(
                     ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundSetFlagUrlPacket::pos),

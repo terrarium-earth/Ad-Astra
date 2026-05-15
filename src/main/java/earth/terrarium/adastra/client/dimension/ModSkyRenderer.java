@@ -38,7 +38,7 @@ public class ModSkyRenderer {
         if (isFoggy || inFog(camera)) return;
         if (!renderer.renderInRain() && level.isRaining()) return;
         if (starBuffer == null) createStars();
-        BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
+        Tesselator tesselator = Tesselator.getInstance();
 
         setSkyColor(level, camera, partialTick);
 
@@ -46,7 +46,7 @@ public class ModSkyRenderer {
         VertexBuffer.unbind();
         RenderSystem.enableBlend();
 
-        renderSky(bufferBuilder, level, partialTick, poseStack, projectionMatrix);
+        renderSky(tesselator, level, partialTick, poseStack, projectionMatrix);
 
         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         poseStack.pushPose();
@@ -64,10 +64,10 @@ public class ModSkyRenderer {
                     renderable.globalRotation().add(0, 0, -level.getTimeOfDay(partialTick) * 360);
             };
 
-            renderSkyRenderable(bufferBuilder, poseStack, renderable.localRotation(), globalRotation, renderable.scale(), renderable.texture(), renderable.blend());
+            renderSkyRenderable(tesselator, poseStack, renderable.localRotation(), globalRotation, renderable.scale(), renderable.texture(), renderable.blend());
             if (renderable.backLightScale() > 0) {
                 setSkyRenderableColor(level, partialTick, renderable.backLightColor());
-                renderSkyRenderable(bufferBuilder, poseStack, renderable.localRotation(), globalRotation, renderable.backLightScale(), DimensionRenderingUtils.BACKLIGHT, true);
+                renderSkyRenderable(tesselator, poseStack, renderable.localRotation(), globalRotation, renderable.backLightScale(), DimensionRenderingUtils.BACKLIGHT, true);
                 RenderSystem.setShaderColor(1, 1, 1, 1);
             }
         });
@@ -95,7 +95,7 @@ public class ModSkyRenderer {
         RenderSystem.setShaderColor(r, g, b, 1);
     }
 
-    public void renderSky(BufferBuilder bufferBuilder, ClientLevel level, float partialTick, PoseStack poseStack, Matrix4f projectionMatrix) {
+    public void renderSky(Tesselator tesselator, ClientLevel level, float partialTick, PoseStack poseStack, Matrix4f projectionMatrix) {
         FogRenderer.levelFogColor();
         ShaderInstance shader = RenderSystem.getShader();
         if (shader == null) return;
@@ -108,11 +108,11 @@ public class ModSkyRenderer {
 
         float[] color = ModDimensionSpecialEffects.getSunriseColor(level.getTimeOfDay(partialTick), partialTick, renderer.sunriseColor());
         if (color != null) {
-            renderSunrise(bufferBuilder, level, partialTick, poseStack, color);
+            renderSunrise(tesselator, level, partialTick, poseStack, color);
         }
     }
 
-    public void renderSunrise(BufferBuilder bufferBuilder, ClientLevel level, float partialTick, PoseStack poseStack, float[] color) {
+    public void renderSunrise(Tesselator tesselator, ClientLevel level, float partialTick, PoseStack poseStack, float[] color) {
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
         RenderSystem.setShaderColor(1, 1, 1, 1);
 
@@ -130,21 +130,21 @@ public class ModSkyRenderer {
         float b = color[2];
 
         Matrix4f matrix = poseStack.last().pose();
-        bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
-        bufferBuilder.vertex(matrix, 0, 100, 0).color(r, g, b, color[3]).endVertex();
+        BufferBuilder bufferBuilder = tesselator.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
+        bufferBuilder.addVertex(matrix, 0, 100, 0).setColor(r, g, b, color[3]);
 
         for (int i = 0; i <= 16; i++) {
             float angle = (float) i * (float) (Math.PI * 2) / 16;
             float x = Mth.sin(angle);
             float y = Mth.cos(angle);
-            bufferBuilder.vertex(matrix, x * 120, y * 120, -y * 40 * color[3]).color(r, g, b, 0).endVertex();
+            bufferBuilder.addVertex(matrix, x * 120, y * 120, -y * 40 * color[3]).setColor(r, g, b, 0);
         }
 
-        BufferUploader.drawWithShader(bufferBuilder.end());
+        BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
         poseStack.popPose();
     }
 
-    public void renderSkyRenderable(BufferBuilder bufferBuilder, PoseStack poseStack, Vec3 localRotation, Vec3 globalRotation, float scale, ResourceLocation texture, boolean blend) {
+    public void renderSkyRenderable(Tesselator tesselator, PoseStack poseStack, Vec3 localRotation, Vec3 globalRotation, float scale, ResourceLocation texture, boolean blend) {
         if (blend) RenderSystem.enableBlend();
         poseStack.pushPose();
 
@@ -161,12 +161,12 @@ public class ModSkyRenderer {
         var matrix = poseStack.last().pose();
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderTexture(0, texture);
-        bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        bufferBuilder.vertex(matrix, -scale, 100, -scale).uv(1, 0).endVertex();
-        bufferBuilder.vertex(matrix, scale, 100, -scale).uv(0, 0).endVertex();
-        bufferBuilder.vertex(matrix, scale, 100, scale).uv(0, 1).endVertex();
-        bufferBuilder.vertex(matrix, -scale, 100, scale).uv(1, 1).endVertex();
-        BufferUploader.drawWithShader(bufferBuilder.end());
+        BufferBuilder bufferBuilder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        bufferBuilder.addVertex(matrix, -scale, 100, -scale).setUv(1, 0);
+        bufferBuilder.addVertex(matrix, scale, 100, -scale).setUv(0, 0);
+        bufferBuilder.addVertex(matrix, scale, 100, scale).setUv(0, 1);
+        bufferBuilder.addVertex(matrix, -scale, 100, scale).setUv(1, 1);
+        BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
         poseStack.popPose();
         RenderSystem.disableBlend();
     }
@@ -198,7 +198,6 @@ public class ModSkyRenderer {
 
     public void createStars() {
         Tesselator tesselator = Tesselator.getInstance();
-        BufferBuilder bufferBuilder = tesselator.getBuilder();
 
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
 
@@ -207,15 +206,15 @@ public class ModSkyRenderer {
         }
 
         starBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
-        BufferBuilder.RenderedBuffer renderedBuffer = drawStars(bufferBuilder);
+        MeshData renderedBuffer = drawStars(tesselator);
         starBuffer.bind();
         starBuffer.upload(renderedBuffer);
         VertexBuffer.unbind();
     }
 
-    public BufferBuilder.RenderedBuffer drawStars(BufferBuilder builder) {
+    public MeshData drawStars(Tesselator tesselator) {
         var random = RandomSource.create(10842);
-        builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
+        BufferBuilder bufferBuilder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
 
         for (int i = 0; i < renderer.stars(); i++) {
             double x = random.nextFloat() * 2 - 1;
@@ -249,7 +248,7 @@ public class ModSkyRenderer {
             double sinRot = Math.sin(rot);
             double cosRot = Math.cos(rot);
 
-            int color = renderer.starColors().getRandom(random).map(WeightedEntry.Wrapper::getData).orElse(0xffffffff);
+            int color = renderer.starColors().getRandom(random).map(WeightedEntry.Wrapper::data).orElse(0xffffffff);
 
             for (int j = 0; j < 4; j++) {
                 double xOffset = ((j & 2) - 1) * scale;
@@ -261,15 +260,15 @@ public class ModSkyRenderer {
                 double transformedX = rotatedX * sinPhi;
                 double transformedY = -rotatedX * cosPhi;
 
-                builder.vertex(
-                        xScale + transformedY * sinTheta - rotatedY * cosTheta,
-                        yScale + transformedX,
-                        zScale + rotatedY * sinTheta + transformedY * cosTheta)
-                    .color(color)
-                    .endVertex();
+                bufferBuilder.addVertex(
+                        (float)(xScale + transformedY * sinTheta - rotatedY * cosTheta),
+                        (float)(yScale + transformedX),
+                        (float)(zScale + rotatedY * sinTheta + transformedY * cosTheta))
+                    .setColor(color)
+                    ;
             }
         }
 
-        return builder.end();
+        return bufferBuilder.build();
     }
 }

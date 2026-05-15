@@ -7,15 +7,18 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.portal.DimensionTransition;
+import net.msrandom.multiplatform.annotations.Actual;
 
 import java.util.function.Supplier;
 
 public class PlatformUtilsImpl {
 
+    @Actual
     public static Entity teleportToDimension(Entity entity, ServerLevel level, DimensionTransition portalInfo) {
         return entity.changeDimension(portalInfo);
     }
 
+    @Actual
     public static Supplier<Item> createSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, Item.Properties properties) {
         return () -> new SpawnEggItem(type.get(), primaryColor, secondaryColor, properties);
     }

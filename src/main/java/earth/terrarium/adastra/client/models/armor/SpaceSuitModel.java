@@ -69,7 +69,7 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
         if ("neoforge".equals(ArchitecturyTarget.getCurrentTarget()) && texture != null) {
             MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
             buffer = bufferSource.getBuffer(RenderType.entityTranslucent(texture));
@@ -82,7 +82,7 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
         this.leftBoot.copyFrom(parentModel.leftLeg);
         parentModel.copyPropertiesTo(this);
 
-        super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, r, g, b, alpha);
+        super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, color);
     }
 
     @Override

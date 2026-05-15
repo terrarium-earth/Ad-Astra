@@ -33,7 +33,6 @@ public record ServerboundClearFluidTankPacket(
 
         public Type() {
             super(
-                ServerboundClearFluidTankPacket.class,
                 ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "clear_fluid_tank"),
                 ObjectByteCodec.create(
                     ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundClearFluidTankPacket::machine),
