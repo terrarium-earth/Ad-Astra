@@ -49,7 +49,7 @@ public record ServerboundSetFlagUrlPacket(BlockPos pos, String url) implements P
                     && player.distanceToSqr(packet.pos().getCenter()) <= 64
                     && player.level().getBlockEntity(packet.pos()) instanceof FlagBlockEntity flag
                     && flag.getOwner() != null
-                    && player.getUUID().equals(flag.getOwner().getId())
+                    && player.getUUID().equals(flag.getOwner().gameProfile().getId())
                 ) {
                     flag.setContent(UrlContent.of(packet.url()));
                     var blockState = player.level().getBlockState(packet.pos());

@@ -74,7 +74,7 @@ public class AdAstraClientFabric {
                     effects.renderClouds(
                         context.world(),
                         DimensionRenderingUtils.getTicks(),
-                        context.tickDelta(),
+                        context.tickCounter().getGameTimeDeltaPartialTick(false),
                         context.matrixStack(),
                         camera.x, camera.y, camera.z,
                         context.projectionMatrix());
@@ -85,7 +85,7 @@ public class AdAstraClientFabric {
                 DimensionRenderingRegistry.registerSkyRenderer(dimension, context -> effects.renderSky(
                     context.world(),
                     DimensionRenderingUtils.getTicks(),
-                    context.tickDelta(),
+                    context.tickCounter().getGameTimeDeltaPartialTick(false),
                     context.matrixStack(),
                     context.camera(),
                     context.projectionMatrix(),
@@ -100,7 +100,7 @@ public class AdAstraClientFabric {
                     effects.renderSnowAndRain(
                         context.world(),
                         DimensionRenderingUtils.getTicks(),
-                        context.tickDelta(),
+                        context.tickCounter().getGameTimeDeltaPartialTick(false),
                         context.lightmapTextureManager(),
                         camera.x, camera.y, camera.z
                     );
