@@ -4,7 +4,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import com.teamresourceful.resourcefullib.common.lib.Constants;
-import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.Planet;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

@@ -1,5 +1,7 @@
 package earth.terrarium.adastra.common.blockentities.base;
 
+import earth.terrarium.adastra.common.utils.EnergyUtils;
+import earth.terrarium.common_storage_lib.energy.EnergyProvider;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -35,7 +37,7 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
         if (stack.isEmpty()) return;
         if (!EnergyContainer.holdsEnergy(stack)) return;
         ItemStackHolder holder = new ItemStackHolder(stack);
-        EnergyApi.moveEnergy(holder, this, null, energyContainer.maxInsert(), false);
+        EnergyUtils.moveEnergy(holder, this, null, energyContainer.maxInsert(), false);
         if (holder.isDirty()) {
             this.setItem(0, holder.getStack());
         }
@@ -46,7 +48,7 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
         if (stack.isEmpty()) return;
         if (!EnergyContainer.holdsEnergy(stack)) return;
         ItemStackHolder holder = new ItemStackHolder(stack);
-        EnergyApi.moveEnergy(this, null, holder, energyContainer.maxExtract(), false);
+        EnergyUtils.moveEnergy(this, null, holder, energyContainer.maxExtract(), false);
         if (holder.isDirty()) {
             this.setItem(0, holder.getStack());
         }

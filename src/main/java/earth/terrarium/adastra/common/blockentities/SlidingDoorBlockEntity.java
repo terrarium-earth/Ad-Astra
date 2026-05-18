@@ -1,6 +1,5 @@
 package earth.terrarium.adastra.common.blockentities;
 
-import dev.architectury.injectables.annotations.PlatformOnly;
 import earth.terrarium.adastra.common.blockentities.base.TickableBlockEntity;
 import earth.terrarium.adastra.common.blocks.SlidingDoorBlock;
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
@@ -13,7 +12,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 
 public class SlidingDoorBlockEntity extends BlockEntity implements TickableBlockEntity {
 
@@ -57,11 +55,5 @@ public class SlidingDoorBlockEntity extends BlockEntity implements TickableBlock
             }
         }
         slideTicks = Mth.clamp(slideTicks + (isOpen ? 3 : -3), 0, 100);
-    }
-
-    @PlatformOnly("neoforge")
-    @SuppressWarnings("unused")
-    public AABB getRenderBoundingBox() {
-        return new AABB(this.getBlockPos()).inflate(3);
     }
 }

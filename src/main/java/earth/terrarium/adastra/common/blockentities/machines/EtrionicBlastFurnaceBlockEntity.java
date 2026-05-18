@@ -15,6 +15,7 @@ import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -209,16 +210,16 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
     }
 
     @Override
-    public void load(@NotNull CompoundTag tag) {
-        super.load(tag);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
         cookTime = tag.getInt("CookTime");
         cookTimeTotal = tag.getInt("CookTimeTotal");
         mode = Mode.values()[tag.getByte("Mode")];
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
         tag.putInt("CookTime", cookTime);
         tag.putInt("CookTimeTotal", cookTimeTotal);
         tag.putByte("Mode", (byte) mode.ordinal());

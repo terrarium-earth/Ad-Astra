@@ -4,8 +4,8 @@ import dev.architectury.injectables.annotations.PlatformOnly;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.registry.ModDataComponents;
 import earth.terrarium.adastra.common.utils.DistributionMode;
+import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.base.BotariumEnergyItem;
 import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
@@ -130,7 +130,7 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
             ItemStack stack = inventory.getItem(i);
             if (stack.isEmpty() || stack.is(this)) continue;
             ItemStackHolder to = new ItemStackHolder(stack);
-            long moved = EnergyApi.moveEnergy(from, to, maxExtract, false);
+            long moved = EnergyUtils.moveEnergy(from, to, maxExtract, false);
             inventory.setItem(i, to.getStack());
             if (moved > 0) return;
         }
@@ -149,7 +149,7 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
             ItemStack stack = inventory.getItem(i);
             if (stack.isEmpty() || stack.is(this)) continue;
             ItemStackHolder to = new ItemStackHolder(stack);
-            EnergyApi.moveEnergy(from, to, maxExtract / energyItems, false);
+            EnergyUtils.moveEnergy(from, to, maxExtract / energyItems, false);
             inventory.setItem(i, to.getStack());
         }
     }

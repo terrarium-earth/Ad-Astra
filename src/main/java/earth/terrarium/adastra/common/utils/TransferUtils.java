@@ -3,7 +3,6 @@ package earth.terrarium.adastra.common.utils;
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
-import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.fluid.FluidApi;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
@@ -33,7 +32,7 @@ public class TransferUtils {
             if (nearbyEntity == null) continue;
             EnergyContainer nearbyContainer = EnergyContainer.of(nearbyEntity, direction.getOpposite());
             if (nearbyContainer == null) continue;
-            EnergyApi.moveEnergy(container, nearbyContainer, amount, false);
+            EnergyUtils.moveEnergy(container, nearbyContainer, amount, false);
         }
     }
 
@@ -50,7 +49,7 @@ public class TransferUtils {
             if (nearbyEntity == null) continue;
             EnergyContainer nearbyContainer = EnergyContainer.of(nearbyEntity, direction.getOpposite());
             if (nearbyContainer == null) continue;
-            EnergyApi.moveEnergy(nearbyContainer, container, amount, false);
+            EnergyUtils.moveEnergy(nearbyContainer, container, amount, false);
         }
     }
 

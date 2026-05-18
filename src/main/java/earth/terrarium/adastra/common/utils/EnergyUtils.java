@@ -7,6 +7,7 @@ import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.ExtractOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -33,5 +34,16 @@ public class EnergyUtils {
                 .putLong("Energy", container.getMaxCapacity());
         }
         return stack;
+    }
+
+    public static long moveEnergy(ValueStorage from, ValueStorage to, long amount, boolean simulate) {
+        long extracted = from.extract(amount, true);
+        long inserted = to.extract(extracted, true);
+        long simulatedExtraction = from.extract(inserted, true);
+        if (!simulate && inserted > 0 && simulatedExtraction == inserted) {
+            from.extract(inserted, false);
+            to.insert(inserted, false);
+        }
+        return Math.max(0, inserted);
     }
 }

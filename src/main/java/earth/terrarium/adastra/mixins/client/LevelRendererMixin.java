@@ -2,7 +2,10 @@ package earth.terrarium.adastra.mixins.client;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.MeshData;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexBuffer;
 import earth.terrarium.adastra.client.utils.DimensionRenderingUtils;
 import earth.terrarium.adastra.common.registry.ModParticleTypes;
 import earth.terrarium.adastra.common.tags.ModBiomeTags;

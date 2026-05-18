@@ -1,11 +1,13 @@
 package earth.terrarium.adastra.common.blockentities.base;
 
-import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,13 +16,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-public abstract class RecipeMachineBlockEntity<T extends Recipe<Container>> extends EnergyContainerMachineBlockEntity {
+public abstract class RecipeMachineBlockEntity<T extends Recipe<RecipeInput>> extends EnergyContainerMachineBlockEntity implements RecipeInput {
 
     @Nullable
     protected T recipe;
     protected int cookTime;
     protected int cookTimeTotal;
-    protected final RecipeManager.CachedCheck<Container, T> quickCheck;
+    protected final RecipeManager.CachedCheck<RecipeInput, T> quickCheck;
 
     public RecipeMachineBlockEntity(BlockPos pos, BlockState state, int containerSize, Supplier<RecipeType<T>> recipeType) {
         super(pos, state, containerSize);
@@ -47,7 +49,7 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<Container>> exte
         return recipe == null;
     }
 
-    public abstract void recipeTick(ServerLevel level, WrappedBlockEnergyContainer energyStorage);
+    public abstract void recipeTick(ServerLevel level, ValueStorage energyStorage);
 
     public boolean canCraft() {
         return recipe != null && recipe.matches(this, level());
@@ -58,15 +60,15 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<Container>> exte
     public void updateSlots() {}
 
     @Override
-    public void load(@NotNull CompoundTag tag) {
-        super.load(tag);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
         cookTime = tag.getInt("CookTime");
         cookTimeTotal = tag.getInt("CookTimeTotal");
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
         tag.putInt("CookTime", cookTime);
         tag.putInt("CookTimeTotal", cookTimeTotal);
     }
@@ -83,5 +85,20 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<Container>> exte
 
     public int cookTimeTotal() {
         return cookTimeTotal;
+    }
+
+    @Override
+    public int size() {
+        return getContainerSize();
+    }
+
+    @Override
+    public @NotNull ItemStack getItem(int slot) {
+        return super.getItem(slot);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return super.isEmpty();
     }
 }

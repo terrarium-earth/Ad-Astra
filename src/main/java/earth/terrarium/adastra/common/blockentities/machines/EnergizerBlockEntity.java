@@ -7,9 +7,9 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.blocks.machines.EnergizerBlock;
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
-import earth.terrarium.botarium.common.energy.EnergyApi;
 import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
@@ -99,7 +99,7 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
         if (stack.isEmpty()) return;
         if (!EnergyContainer.holdsEnergy(stack)) return;
         ItemStackHolder holder = new ItemStackHolder(stack);
-        if (EnergyApi.moveEnergy(this, null, holder, getEnergyStorage().maxExtract(), false) == 0) return;
+        if (EnergyUtils.moveEnergy(this, null, holder, getEnergyStorage().maxExtract(), false) == 0) return;
         setItem(0, holder.getStack());
         ModUtils.sendParticles(level,
             ParticleTypes.ELECTRIC_SPARK,

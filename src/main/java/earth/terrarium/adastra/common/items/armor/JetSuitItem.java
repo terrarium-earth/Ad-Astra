@@ -9,7 +9,6 @@ import earth.terrarium.botarium.common.energy.base.BotariumEnergyItem;
 import earth.terrarium.botarium.common.energy.base.EnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
-import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import net.minecraft.client.model.HumanoidModel;

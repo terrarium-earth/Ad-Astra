@@ -6,6 +6,9 @@ import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.base.ItemFluidContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
+import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -167,5 +170,17 @@ public class FluidUtils {
         if (container == null) return ItemStack.EMPTY;
         container.extractFluid(amount, false);
         return copy.getStack();
+    }
+
+    public static long moveFluid(CommonStorage<FluidResource> from, CommonStorage<FluidResource> to, ResourceStack<FluidResource> amount, boolean simulate) {
+        long extracted = from.extract(amount.resource(), amount.amount(), true);
+        long inserted = to.insert(amount.resource(), extracted, true);
+        ResourceStack<FluidResource> toInsert = new ResourceStack<>(amount.resource(), inserted);
+        long simulatedExtraction = from.extract(toInsert.resource(), toInsert.amount(), true);
+        if (!simulate && inserted > 0 && simulatedExtraction == inserted) {
+            from.extract(toInsert.resource(), toInsert.amount(), false);
+            to.extract(toInsert.resource(), toInsert.amount(), false);
+        }
+        return Math.max(0, inserted);
     }
 }

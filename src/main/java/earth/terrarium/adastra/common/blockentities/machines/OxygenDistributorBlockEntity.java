@@ -21,7 +21,6 @@ import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.adastra.common.utils.floodfill.FloodFill3D;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -73,8 +72,8 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
 
 
     @Override
-    public void load(@NotNull CompoundTag tag) {
-        super.load(tag);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
         if (tag.contains("LastDistributedBlocks")) {
             lastDistributedBlocks.clear();
             for (var pos : tag.getLongArray("LastDistributedBlocks")) {
@@ -89,8 +88,8 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
         tag.putLong("EnergyPerTick", energyPerTick);
         tag.putFloat("FluidPerTick", fluidPerTick);
         tag.putInt("DistributedBlocksCount", distributedBlocksCount);

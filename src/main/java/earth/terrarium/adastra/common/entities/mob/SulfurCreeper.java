@@ -1,7 +1,6 @@
 package earth.terrarium.adastra.common.entities.mob;
 
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
-import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.world.effect.MobEffectInstance;
