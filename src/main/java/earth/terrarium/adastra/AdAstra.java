@@ -40,6 +40,7 @@ public class AdAstra {
         NetworkHandler.init();
         StationLoader.init();
 
+        ModDataManagers.REGISTRY.init();
         ModDataComponents.DATA_COMPONENT_TYPES.init();
         ModFluidProperties.FLUID_PROPERTIES.init();
         ModFluids.FLUIDS.init();
