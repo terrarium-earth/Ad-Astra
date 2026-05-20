@@ -77,16 +77,16 @@ public record ServerboundLandOnSpaceStationPacket(ResourceKey<Level> dimension,
     private static boolean isAllowed(ServerPlayer player, ServerLevel level, ChunkPos targetPos) {
         Set<SpaceStation> stations = new HashSet<>(SpaceStationHandler.getOwnedSpaceStations(player, level));
 
-        if (!ArgonautsIntegration.argonautsLoaded()) return stations
-            .stream()
-            .anyMatch(station -> station.position().equals(targetPos));
-
-        for (var member : ArgonautsIntegration.getClientPartyMembers(player.getUUID())) {
-            stations.addAll(SpaceStationHandler.getOwnedSpaceStations(member.getId(), level));
-        }
-        for (var member : ArgonautsIntegration.getClientGuildMembers(player.getUUID())) {
-            stations.addAll(SpaceStationHandler.getOwnedSpaceStations(member.getId(), level));
-        }
+//        if (!ArgonautsIntegration.argonautsLoaded()) return stations
+//            .stream()
+//            .anyMatch(station -> station.position().equals(targetPos));
+//
+//        for (var member : ArgonautsIntegration.getClientPartyMembers(player.getUUID())) {
+//            stations.addAll(SpaceStationHandler.getOwnedSpaceStations(member.getId(), level));
+//        }
+//        for (var member : ArgonautsIntegration.getClientGuildMembers(player.getUUID())) {
+//            stations.addAll(SpaceStationHandler.getOwnedSpaceStations(member.getId(), level));
+//        }
 
         return stations
             .stream()
