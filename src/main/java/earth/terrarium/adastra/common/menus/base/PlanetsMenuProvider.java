@@ -10,7 +10,9 @@ import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -36,7 +38,7 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
     }
 
     @Override
-    public void writeExtraData(ServerPlayer player, FriendlyByteBuf buffer) {
+    public void writeExtraData(ServerPlayer player, RegistryFriendlyByteBuf buffer) {
         buffer.writeUtf(AdAstraConfig.disabledPlanets);
 
         buffer.writeVarInt(AdAstraData.planets().size());
@@ -51,7 +53,7 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
             spaceStations.forEach((id, stations) -> {
                 buffer.writeVarInt(stations.size());
                 stations.forEach(station -> {
-                    buffer.writeComponent(station.name());
+                    ComponentSerialization.TRUSTED_STREAM_CODEC.encode(buffer, station.name());
                     buffer.writeChunkPos(station.position());
                 });
                 buffer.writeUUID(id);
@@ -75,7 +77,7 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
         return Collections.unmodifiableSet(disabledPlanets);
     }
 
-    public static Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> createSpaceStationsFromBuf(FriendlyByteBuf buf) {
+    public static Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> createSpaceStationsFromBuf(RegistryFriendlyByteBuf buf) {
         Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> spaceStationsMap = new HashMap<>();
 
         int planetsSize = buf.readVarInt();
@@ -89,7 +91,7 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
                 Set<SpaceStation> spaceStations = new HashSet<>();
 
                 for (int k = 0; k < stationGroupSize; k++) {
-                    Component stationName = buf.readComponent();
+                    Component stationName = ComponentSerialization.TRUSTED_STREAM_CODEC.decode(buf);
                     ChunkPos stationPos = buf.readChunkPos();
                     spaceStations.add(new SpaceStation(stationPos, stationName));
                 }
