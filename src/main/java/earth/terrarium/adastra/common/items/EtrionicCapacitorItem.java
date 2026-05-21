@@ -1,16 +1,17 @@
 package earth.terrarium.adastra.common.items;
 
-import dev.architectury.injectables.annotations.PlatformOnly;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.registry.ModDataComponents;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.adastra.common.utils.DistributionMode;
 import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.energy.base.BotariumEnergyItem;
-import earth.terrarium.botarium.common.energy.base.EnergyContainer;
-import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
-import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
-import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.common_storage_lib.context.ItemContext;
+import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
+import earth.terrarium.common_storage_lib.energy.EnergyApi;
+import earth.terrarium.common_storage_lib.energy.EnergyProvider;
+import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -22,11 +23,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<WrappedItemEnergyContainer> {
+public class EtrionicCapacitorItem extends Item implements EnergyProvider.Item {
 
     public static final String ACTIVE_TAG = "Active";
     public static final String MODE_TAG = "Mode";
@@ -63,30 +63,18 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
     }
 
     @Override
-    public WrappedItemEnergyContainer getEnergyStorage(ItemStack holder) {
-        return new WrappedItemEnergyContainer(
-            holder,
-            new SimpleEnergyContainer(250_000) {
-                @Override
-                public long maxInsert() {
-                    return 250;
-                }
-
-                @Override
-                public long maxExtract() {
-                    return 500;
-                }
-            });
+    public ValueStorage getEnergy(ItemStack itemStack, ItemContext context) {
+        return new SimpleValueStorage(context, ModDataManagers.VALUE_CONTENT.componentType(), 250_000);
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
-        WrappedItemEnergyContainer energy = getEnergyStorage(stack);
-        tooltipComponents.add(TooltipUtils.getEnergyComponent(energy.getStoredEnergy(), energy.getMaxCapacity()));
+    public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
+        var energy = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
+        tooltipComponents.add(TooltipUtils.getEnergyComponent(energy.getStoredAmount(), energy.getCapacity()));
         tooltipComponents.add(TooltipUtils.getActiveInactiveComponent(active(stack)));
         tooltipComponents.add(TooltipUtils.getDistributionModeComponent(mode(stack)));
-        tooltipComponents.add(TooltipUtils.getMaxEnergyInComponent(energy.maxInsert()));
-        tooltipComponents.add(TooltipUtils.getMaxEnergyOutComponent(energy.maxExtract()));
+//        tooltipComponents.add(TooltipUtils.getMaxEnergyInComponent(energy.maxInsert()));
+//        tooltipComponents.add(TooltipUtils.getMaxEnergyOutComponent(energy.maxExtract()));
         TooltipUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.ETRIONIC_CAPACITOR_INFO);
     }
 
@@ -115,31 +103,28 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
         if (!active(stack)) return;
         if (!(entity instanceof Player player)) return;
         Inventory inventory = player.getInventory();
-        WrappedItemEnergyContainer container = getEnergyStorage(stack);
-        if (container.getStoredEnergy() == 0) return;
-        ItemStackHolder from = new ItemStackHolder(stack);
+        var container = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
+        if (container.getCapacity() == 0) return;
         switch (mode(stack)) {
-            case SEQUENTIAL -> distributeSequential(from, container.maxExtract() * 5, inventory);
-            case ROUND_ROBIN -> distributeRoundRobin(from, container.maxExtract() * 5, inventory);
+            case SEQUENTIAL -> distributeSequential(container, 250 * 5, inventory);
+            case ROUND_ROBIN -> distributeRoundRobin(container, 250 * 5, inventory);
         }
-        inventory.setItem(slotId, from.getStack());
     }
 
-    public void distributeSequential(ItemStackHolder from, long maxExtract, Inventory inventory) {
+    public void distributeSequential(ValueStorage from, long maxExtract, Inventory inventory) {
         for (int i = inventory.getContainerSize() - 1; i >= 0; i--) {
             ItemStack stack = inventory.getItem(i);
             if (stack.isEmpty() || stack.is(this)) continue;
-            ItemStackHolder to = new ItemStackHolder(stack);
+            var to = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
             long moved = EnergyUtils.moveEnergy(from, to, maxExtract, false);
-            inventory.setItem(i, to.getStack());
             if (moved > 0) return;
         }
     }
 
-    public void distributeRoundRobin(ItemStackHolder from, long maxExtract, Inventory inventory) {
+    public void distributeRoundRobin(ValueStorage from, long maxExtract, Inventory inventory) {
         int energyItems = 0;
         for (int i = 0; i < inventory.getContainerSize(); i++) {
-            if (!EnergyContainer.holdsEnergy(inventory.getItem(i))) continue;
+            if (!new ModifyOnlyContext(inventory.getItem(i)).isPresent(EnergyApi.ITEM)) continue;
             if (inventory.getItem(i).is(this)) continue;
             energyItems++;
         }
@@ -148,38 +133,25 @@ public class EtrionicCapacitorItem extends Item implements BotariumEnergyItem<Wr
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             ItemStack stack = inventory.getItem(i);
             if (stack.isEmpty() || stack.is(this)) continue;
-            ItemStackHolder to = new ItemStackHolder(stack);
+            var to = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
             EnergyUtils.moveEnergy(from, to, maxExtract / energyItems, false);
-            inventory.setItem(i, to.getStack());
         }
     }
 
     @Override
     public boolean isBarVisible(@NotNull ItemStack stack) {
-        return getEnergyStorage(stack).getStoredEnergy() > 0;
+        var energyStorage = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
+        return energyStorage.getStoredAmount() > 0;
     }
 
     @Override
     public int getBarWidth(@NotNull ItemStack stack) {
-        WrappedItemEnergyContainer energyStorage = getEnergyStorage(stack);
-        return (int) (((double) energyStorage.getStoredEnergy() / energyStorage.getMaxCapacity()) * 13);
+        var energyStorage = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
+        return (int) (((double) energyStorage.getStoredAmount() / energyStorage.getCapacity()) * 13);
     }
 
     @Override
     public int getBarColor(@NotNull ItemStack stack) {
         return 0x63dcc2;
-    }
-
-    // Fabric disabling of nbt change animation
-    @SuppressWarnings("unused")
-    @PlatformOnly(PlatformOnly.FABRIC)
-    public boolean allowNbtUpdateAnimation(Player player, InteractionHand hand, ItemStack oldStack, ItemStack newStack) {
-        return false;
-    }
-
-    // NeoForge disabling of nbt change animation
-    @SuppressWarnings("unused")
-    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-        return false;
     }
 }

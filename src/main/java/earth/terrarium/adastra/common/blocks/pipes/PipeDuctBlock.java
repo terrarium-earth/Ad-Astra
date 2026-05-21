@@ -2,10 +2,11 @@ package earth.terrarium.adastra.common.blocks.pipes;
 
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.fluid.FluidConstants;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
@@ -28,12 +29,12 @@ public class PipeDuctBlock extends PipeBlock {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
         if (type() == Type.ENERGY) {
             tooltip.add(Component.translatable("tooltip.ad_astra.energy_transfer_tick", transferRate()).withStyle(ChatFormatting.GOLD));
             TooltipUtils.addDescriptionComponent(tooltip, ConstantComponents.CABLE_DUCT);
         } else {
-            tooltip.add(Component.translatable("tooltip.ad_astra.fluid_transfer_tick", FluidConstants.toMillibuckets(transferRate())).withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.translatable("tooltip.ad_astra.fluid_transfer_tick", FluidAmounts.toMillibuckets(transferRate())).withStyle(ChatFormatting.GOLD));
             TooltipUtils.addDescriptionComponent(tooltip, ConstantComponents.FLUID_DUCT_INFO);
         }
     }

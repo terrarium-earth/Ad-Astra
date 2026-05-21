@@ -1,11 +1,8 @@
 package earth.terrarium.adastra.common.utils;
 
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
-import earth.terrarium.botarium.common.fluid.FluidApi;
-import earth.terrarium.botarium.common.fluid.base.FluidContainer;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.base.ItemFluidContainer;
-import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
+import earth.terrarium.common_storage_lib.fluid.FluidApi;
 import earth.terrarium.common_storage_lib.resources.ResourceStack;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
@@ -16,14 +13,15 @@ import net.minecraft.world.level.material.Fluid;
 
 public class FluidUtils {
 
-    public static FluidHolder getTank(ItemStack stack) {
+    public static ResourceStack<FluidResource> getTank(ItemStack stack) {
         return getTank(stack, 0);
     }
 
-    public static FluidHolder getTank(ItemStack stack, int tank) {
-        var container = FluidContainer.of(new ItemStackHolder(stack));
-        if (container == null) return FluidHolder.empty();
-        return container.getFluids().get(tank);
+    public static ResourceStack<FluidResource> getTank(ItemStack stack, int tank) {
+        var container = new ModifyOnlyContext(stack).find(FluidApi.ITEM);
+
+        if (container == null) return ResourceStack.EMPTY_FLUID;
+        return container.getContents(tank);
     }
 
     public static boolean hasFluid(ItemStack stack) {
@@ -39,9 +37,9 @@ public class FluidUtils {
     }
 
     public static long getTankCapacity(ItemStack stack, int tank) {
-        var container = FluidContainer.of(new ItemStackHolder(stack));
+        var container = new ModifyOnlyContext(stack).find(FluidApi.ITEM);
         if (container == null) return 0;
-        return container.getTankCapacity(tank);
+        return container.getLimit(tank, FluidResource.BLANK);
     }
 
     public static ItemStack fluidFilledItem(RegistryEntry<Item> item, RegistryEntry<Fluid> fluid) {
@@ -62,10 +60,10 @@ public class FluidUtils {
      * @param resultSlot     The slot where the emptied stack will be moved to if successful
      * @param tank           The fluid container tank to insert the fluid to.
      */
-    public static void moveItemToContainer(Container container, FluidContainer fluidContainer, int slot, int resultSlot, int tank) {
+    public static void moveItemToContainer(Container container, CommonStorage<FluidResource> fluidContainer, int slot, int resultSlot, int tank) {
         var stack = container.getItem(slot);
         // Don't do anything if the stack is empty or doesn't contain a fluid container.
-        if (stack.isEmpty() || !FluidContainer.holdsFluid(stack)) return;
+        if (stack.isEmpty() || fluidContainer.getResource(0).isBlank()) return;
         var resultStack = container.getItem(resultSlot);
 
         // Get the fluid container from the item
@@ -107,7 +105,7 @@ public class FluidUtils {
      * @param resultSlot     The slot where the filled stack will be moved to if successful
      * @param tank           The fluid container tank to extract the fluid from
      */
-    public static void moveContainerToItem(Container container, FluidContainer fluidContainer, int slot, int resultSlot, int tank) {
+    public static void moveContainerToItem(Container container, CommonStorage<FluidResource> fluidContainer, int slot, int resultSlot, int tank) {
         var stack = container.getItem(slot);
         // Don't do anything if the stack is empty or doesn't contain a fluid container.
         if (stack.isEmpty() || !FluidContainer.holdsFluid(stack)) return;

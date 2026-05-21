@@ -1,9 +1,11 @@
 package earth.terrarium.adastra.common.utils;
 
 import earth.terrarium.adastra.common.constants.ConstantComponents;
-import earth.terrarium.botarium.common.fluid.FluidConstants;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -70,11 +72,11 @@ public class TooltipUtils {
         };
     }
 
-    public static Component getFluidComponent(FluidHolder fluid, long capacity, Fluid fallback) {
+    public static Component getFluidComponent(ResourceStack<FluidResource> fluid, long capacity, Fluid fallback) {
         if (fluid.isEmpty()) {
             return Component.translatable("tooltip.ad_astra.fluid",
                 getFormattedAmount(0),
-                getFormattedAmount(FluidConstants.toMillibuckets(capacity)),
+                getFormattedAmount(FluidAmounts.toMillibuckets(capacity)),
                 ClientFluidHooks.getDisplayName(FluidHolder.ofMillibuckets(fallback, capacity))
             ).withStyle(ChatFormatting.GOLD);
         }
@@ -82,37 +84,37 @@ public class TooltipUtils {
         return getFluidComponent(fluid, capacity);
     }
 
-    public static Component getFluidComponent(FluidHolder fluid, long capacity) {
+    public static Component getFluidComponent(ResourceStack<FluidResource> fluid, long capacity) {
         return Component.translatable("tooltip.ad_astra.fluid",
-            getFormattedAmount(FluidConstants.toMillibuckets(fluid.getFluidAmount())),
-            getFormattedAmount(FluidConstants.toMillibuckets(capacity)),
+            getFormattedAmount(FluidAmounts.toMillibuckets(fluid.amount())),
+            getFormattedAmount(FluidAmounts.toMillibuckets(capacity)),
             ClientFluidHooks.getDisplayName(fluid)
         ).withStyle(ChatFormatting.GOLD);
     }
 
     public static Component getFluidDifferenceComponent(long fluid) {
         return Component.translatable("tooltip.ad_astra.fluid_%s".formatted(fluid < 0 ? "out" : "in"),
-            getFormattedAmount(FluidConstants.toMillibuckets(Math.abs(fluid)))).withStyle(ChatFormatting.GOLD);
+            getFormattedAmount(FluidAmounts.toMillibuckets(Math.abs(fluid)))).withStyle(ChatFormatting.GOLD);
     }
 
     public static Component getMaxFluidInComponent(long maxIn) {
         return Component.translatable("tooltip.ad_astra.max_fluid_in",
-            getFormattedAmount(FluidConstants.toMillibuckets(maxIn))).withStyle(ChatFormatting.GREEN);
+            getFormattedAmount(FluidAmounts.toMillibuckets(maxIn))).withStyle(ChatFormatting.GREEN);
     }
 
     public static Component getMaxFluidOutComponent(long maxOut) {
         return Component.translatable("tooltip.ad_astra.max_fluid_out",
-            getFormattedAmount(FluidConstants.toMillibuckets(maxOut))).withStyle(ChatFormatting.GREEN);
+            getFormattedAmount(FluidAmounts.toMillibuckets(maxOut))).withStyle(ChatFormatting.GREEN);
     }
 
     public static Component getFluidUsePerIterationComponent(long usePerTick) {
         return Component.translatable("tooltip.ad_astra.fluid_use_per_iteration",
-            getFormattedAmount(FluidConstants.toMillibuckets(Math.abs(usePerTick)))).withStyle(ChatFormatting.AQUA);
+            getFormattedAmount(FluidAmounts.toMillibuckets(Math.abs(usePerTick)))).withStyle(ChatFormatting.AQUA);
     }
 
     public static Component getFluidGenerationPerIterationComponent(long gainPerTick) {
         return Component.translatable("tooltip.ad_astra.fluid_generation_per_iteration",
-            getFormattedAmount(FluidConstants.toMillibuckets(Math.abs(gainPerTick)))).withStyle(ChatFormatting.AQUA);
+            getFormattedAmount(FluidAmounts.toMillibuckets(Math.abs(gainPerTick)))).withStyle(ChatFormatting.AQUA);
     }
 
     public static Component getTicksPerIterationComponent(int time) {

@@ -8,7 +8,6 @@ import com.teamresourceful.resourcefullib.common.network.base.ServerboundPacketT
 import com.teamresourceful.resourcefullib.common.network.defaults.CodecPacketType;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.PlanetApi;
-import earth.terrarium.adastra.common.compat.argonauts.ArgonautsIntegration;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;

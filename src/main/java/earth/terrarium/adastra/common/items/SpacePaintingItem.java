@@ -5,8 +5,8 @@ import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -16,6 +16,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HangingEntityItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -56,9 +57,9 @@ public class SpacePaintingItem extends HangingEntityItem {
         }
         Painting painting = optional.get();
 
-        CompoundTag tag = stack.getTag();
-        if (tag != null) {
-            EntityType.updateCustomEntityTag(level, player, painting, tag);
+        CustomData customData = stack.get(DataComponents.CUSTOM_DATA);
+        if (customData != null) {
+            EntityType.updateCustomEntityTag(level, player, painting, customData);
         }
         if (painting.survives()) {
             if (!level.isClientSide) {

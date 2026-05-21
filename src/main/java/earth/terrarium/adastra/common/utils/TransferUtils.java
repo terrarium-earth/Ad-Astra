@@ -4,10 +4,10 @@ import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEn
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.botarium.common.energy.base.EnergyContainer;
-import earth.terrarium.botarium.common.fluid.FluidApi;
 import earth.terrarium.botarium.common.fluid.base.FluidContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
+import earth.terrarium.common_storage_lib.fluid.FluidApi;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;

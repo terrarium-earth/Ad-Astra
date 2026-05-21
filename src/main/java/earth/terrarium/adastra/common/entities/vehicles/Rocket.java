@@ -12,13 +12,17 @@ import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.registry.*;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.utils.FluidUtils;
-import earth.terrarium.botarium.common.fluid.FluidApi;
-import earth.terrarium.botarium.common.fluid.base.FluidContainer;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
-import earth.terrarium.botarium.common.item.ItemStackHolder;
 import earth.terrarium.botarium.common.menu.MenuHooks;
+import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
+import earth.terrarium.common_storage_lib.fluid.FluidApi;
+import earth.terrarium.common_storage_lib.fluid.impl.SimpleFluidStorage;
+import earth.terrarium.common_storage_lib.fluid.util.FluidProvider;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
+import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -48,11 +52,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Vector3f;
 
 import java.util.Map;
 
-public class Rocket extends Vehicle {
+public class Rocket extends Vehicle implements FluidProvider.Entity {
 
     private static final RocketProperties TIER_1_PROPERTIES = new RocketProperties(1, ModItems.TIER_1_ROCKET.get(), 1.0f, ModFluidTags.TIER_1_ROCKET_FUEL);
     private static final RocketProperties TIER_2_PROPERTIES = new RocketProperties(2, ModItems.TIER_2_ROCKET.get(), 1.0f, ModFluidTags.TIER_2_ROCKET_FUEL);
@@ -74,7 +77,6 @@ public class Rocket extends Vehicle {
     public static final EntityDataAccessor<Long> FUEL = SynchedEntityData.defineId(Rocket.class, EntityDataSerializers.LONG);
     public static final EntityDataAccessor<String> FUEL_TYPE = SynchedEntityData.defineId(Rocket.class, EntityDataSerializers.STRING);
 
-    private final SimpleFluidContainer fluidContainer;
     private final RocketProperties properties;
 
     private boolean launchpadBound;
@@ -91,18 +93,16 @@ public class Rocket extends Vehicle {
     public Rocket(EntityType<?> type, Level level, RocketProperties properties) {
         super(type, level);
         this.properties = properties;
-        fluidContainer = new SimpleFluidContainer(FluidAmounts.toPlatformAmount(3000), 1, (amount, fluid) -> fluid.is(properties.fuel));
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(IS_LAUNCHING, false);
-        this.entityData.define(LAUNCH_TICKS, -1);
-        this.entityData.define(HAS_LAUNCHED, false);
-        this.entityData.define(IS_IN_VALID_DIMENSION, AdAstraConfig.launchFromAnywhere || AdAstraData.canLaunchFrom(this.level().dimension()));
-        this.entityData.define(FUEL, 0L);
-        this.entityData.define(FUEL_TYPE, "air");
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        builder.define(IS_LAUNCHING, false);
+        builder.define(LAUNCH_TICKS, -1);
+        builder.define(HAS_LAUNCHED, false);
+        builder.define(IS_IN_VALID_DIMENSION, AdAstraConfig.launchFromAnywhere || AdAstraData.canLaunchFrom(this.level().dimension()));
+        builder.define(FUEL, 0L);
+        builder.define(FUEL_TYPE, "air");
     }
 
     @Override
@@ -113,7 +113,6 @@ public class Rocket extends Vehicle {
         entityData.set(HAS_LAUNCHED, compound.getBoolean("HasLaunched"));
         speed = compound.getFloat("Speed");
         angle = compound.getFloat("Angle");
-        fluidContainer.deserialize(compound);
     }
 
     @Override
@@ -124,11 +123,16 @@ public class Rocket extends Vehicle {
         compound.putBoolean("HasLaunched", hasLaunched());
         compound.putFloat("Speed", speed);
         compound.putFloat("Angle", angle);
-        fluidContainer.serialize(compound);
     }
 
-    public FluidContainer fluidContainer() {
-        return fluidContainer;
+    @Override
+    public CommonStorage<FluidResource> getFluids(Direction direction) {
+        return new SimpleFluidStorage(this, ModDataManagers.FLUID_CONTENTS, 1, FluidAmounts.toPlatformAmount(3000))
+            .filter(0, f -> f.is(properties.fuel));
+    }
+
+    public CommonStorage<FluidResource> fluidContainer() {
+        return getFluids(Direction.NORTH);
     }
 
     @Override
@@ -141,11 +145,11 @@ public class Rocket extends Vehicle {
 
     @Override
     public ItemStack getDropStack() {
-        ItemStackHolder stack = new ItemStackHolder(properties.item.getDefaultInstance());
-        var container = FluidContainer.of(stack);
-        if (container == null) return stack.getStack();
-        FluidApi.moveFluid(fluidContainer, container, fluidContainer.getFirstFluid(), false);
-        return stack.getStack();
+        ModifyOnlyContext context = new ModifyOnlyContext(properties.item.getDefaultInstance());
+        var container = context.find(FluidApi.ITEM);
+        if (container == null) return context.stack();
+        FluidUtils.moveFluid(fluidContainer(), container, fluidContainer().getContents(0), false);
+        return context.stack();
     }
 
     public int tier() {
@@ -153,8 +157,8 @@ public class Rocket extends Vehicle {
     }
 
     @Override
-    protected Vector3f getPassengerAttachmentPoint(Entity entity, EntityDimensions dimensions, float scale) {
-        return new Vector3f(0, this.properties.ridingOffset + 0.3f, 0);
+    protected Vec3 getPassengerAttachmentPoint(Entity entity, EntityDimensions dimensions, float scale) {
+        return new Vec3(0, this.properties.ridingOffset + 0.3f, 0);
     }
 
     @Override
@@ -221,12 +225,12 @@ public class Rocket extends Vehicle {
             spawnSmokeParticles();
         } else if (hasLaunched()) flightTick();
         if (!level().isClientSide()) {
-            FluidUtils.moveItemToContainer(inventory, fluidContainer, 0, 1, 0);
-            FluidUtils.moveContainerToItem(inventory, fluidContainer, 0, 1, 0);
+            FluidUtils.moveItemToContainer(inventory, fluidContainer(), 0, 1, 0);
+            FluidUtils.moveContainerToItem(inventory, fluidContainer(), 0, 1, 0);
 
-            var fluidHolder = fluidContainer.getFirstFluid();
-            entityData.set(FUEL, fluidHolder.getFluidAmount());
-            entityData.set(FUEL_TYPE, BuiltInRegistries.FLUID.getKey(fluidHolder.getFluid()).toString());
+            var resourceStack = fluidContainer().getContents(0);
+            entityData.set(FUEL, resourceStack.amount());
+            entityData.set(FUEL_TYPE, BuiltInRegistries.FLUID.getKey(resourceStack.resource().getType()).toString());
         }
     }
 
@@ -367,7 +371,7 @@ public class Rocket extends Vehicle {
             .inflate(2, 30, 2)
             .move(0, -37, 0), e -> true)) {
             if (entity.equals(getControllingPassenger())) continue;
-            entity.setSecondsOnFire(10);
+            entity.setRemainingFireTicks(10 * 20);
             entity.hurt(ModDamageSources.create(level(), ModDamageSources.ROCKET_FLAMES), 10);
         }
     }
@@ -388,8 +392,8 @@ public class Rocket extends Vehicle {
 
     public boolean consumeFuel(boolean simulate) {
         if (level().isClientSide()) return false;
-        long buckets = FluidAmounts.toPlatformAmount(fluidContainer.getFirstFluid().is(ModFluidTags.EFFICIENT_FUEL) ? AdAstraConfig.launchEfficientFuelCost : AdAstraConfig.launchFuelCost);
-        return fluidContainer.extractFluid(fluidContainer.getFirstFluid().copyWithAmount(buckets), simulate).getFluidAmount() >= buckets;
+        long buckets = FluidAmounts.toPlatformAmount(fluidContainer().getResource(0).is(ModFluidTags.EFFICIENT_FUEL) ? AdAstraConfig.launchEfficientFuelCost : AdAstraConfig.launchFuelCost);
+        return fluidContainer().extract(fluidContainer().getResource(0), buckets, simulate) >= buckets;
     }
 
     public boolean hasEnoughFuel() {
@@ -406,9 +410,9 @@ public class Rocket extends Vehicle {
         return new RocketMenu(containerId, inventory, this);
     }
 
-    public FluidHolder fluid() {
-        return FluidHolder.of(
-            BuiltInRegistries.FLUID.get(ResourceLocation.withDefaultNamespace(entityData.get(FUEL_TYPE))),
+    public ResourceStack<FluidResource> fluid() {
+        return new ResourceStack<>(
+            FluidResource.of(BuiltInRegistries.FLUID.get(ResourceLocation.withDefaultNamespace(entityData.get(FUEL_TYPE)))),
             entityData.get(FUEL));
     }
 
