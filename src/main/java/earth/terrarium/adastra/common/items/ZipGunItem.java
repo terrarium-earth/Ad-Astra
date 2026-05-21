@@ -112,8 +112,7 @@ public class ZipGunItem extends Item implements FluidProvider.Item {
         if (player.isCreative()) return true;
         var container = new ModifyOnlyContext(stack).find(FluidApi.ITEM);
         if (container == null) return false;
-        long extracted = container.extract(container.getContents(0).resource(), container.getAmount(0), false);
-//        stack.setTag(holder.getStack().getTag());
+        long extracted = container.extract(container.getContents(0).resource(), FluidAmounts.toPlatformAmount(amount), false);
         return extracted > 0;
     }
 
@@ -161,18 +160,5 @@ public class ZipGunItem extends Item implements FluidProvider.Item {
     @Override
     public int getBarColor(@NotNull ItemStack stack) {
         return ClientFluidHooks.getFluidColor(FluidUtils.getTank(stack));
-    }
-
-//    // Fabric disabling of nbt change animation
-//    @SuppressWarnings("unused")
-//    @PlatformOnly(PlatformOnly.FABRIC)
-//    public boolean allowNbtUpdateAnimation(Player player, InteractionHand hand, ItemStack oldStack, ItemStack newStack) {
-//        return false;
-//    }
-
-    // NeoForge disabling of nbt change animation
-    @SuppressWarnings("unused")
-    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-        return false;
     }
 }
