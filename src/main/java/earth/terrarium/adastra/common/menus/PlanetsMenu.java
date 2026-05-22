@@ -4,10 +4,9 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.datafixers.util.Pair;
 import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.client.screens.PlanetsScreen;
-import earth.terrarium.adastra.common.compat.argonauts.ArgonautsIntegration;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;
-import earth.terrarium.adastra.common.menus.base.PlanetsMenuProvider;
+import earth.terrarium.adastra.common.menus.content.PlanetsContent;
 import earth.terrarium.adastra.common.network.NetworkHandler;
 import earth.terrarium.adastra.common.network.packets.ServerboundConstructSpaceStationPacket;
 import earth.terrarium.adastra.common.planets.AdAstraData;
@@ -19,7 +18,6 @@ import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -44,14 +42,6 @@ public class PlanetsMenu extends AbstractContainerMenu {
     protected final Object2BooleanMap<ResourceKey<Level>> claimedChunks = new Object2BooleanOpenHashMap<>();
     protected final Set<GlobalPos> spawnLocations;
 
-    public PlanetsMenu(int containerId, Inventory inventory, FriendlyByteBuf buf) {
-        this(containerId,
-            inventory,
-            PlanetsMenuProvider.createDisabledPlanetsFromBuf(buf),
-            PlanetsMenuProvider.createSpaceStationsFromBuf(buf),
-            PlanetsMenuProvider.createSpawnLocationsFromBuf(buf));
-    }
-
     public PlanetsMenu(int containerId,
                        Inventory inventory,
                        Set<ResourceLocation> disabledPlanets,
@@ -67,6 +57,14 @@ public class PlanetsMenu extends AbstractContainerMenu {
         this.spaceStations = spaceStations;
         this.ingredients = getSpaceStationRecipes();
         this.spawnLocations = spawnLocations;
+    }
+
+    public PlanetsMenu(int containerId, Inventory inventory, Optional<PlanetsContent> planetsContent) {
+        this(containerId, inventory,
+            planetsContent.orElseThrow(() -> new IllegalStateException("PlanetsContent is required to open PlanetsMenu.")).disabledPlanets(),
+            planetsContent.orElseThrow(() -> new IllegalStateException("PlanetsContent is required to open PlanetsMenu.")).spaceStations(),
+            planetsContent.orElseThrow(() -> new IllegalStateException("PlanetsContent is required to open PlanetsMenu.")).spawnLocations()
+        );
     }
 
     @Override
@@ -167,16 +165,16 @@ public class PlanetsMenu extends AbstractContainerMenu {
     public List<Pair<String, SpaceStation>> getOwnedAndTeamSpaceStations(ResourceKey<Level> dimension) {
         List<Pair<String, SpaceStation>> stations = new ArrayList<>(getOwnedSpaceStations(dimension, player.getGameProfile()));
 
-        if (!ArgonautsIntegration.argonautsLoaded()) return stations;
-
-        for (var member : ArgonautsIntegration.getClientPartyMembers(player.getUUID())) {
-            if (member.equals(player.getGameProfile())) continue;
-            stations.addAll(getOwnedSpaceStations(dimension, member));
-        }
-        for (var member : ArgonautsIntegration.getClientGuildMembers(player.getUUID())) {
-            if (member.equals(player.getGameProfile())) continue;
-            stations.addAll(getOwnedSpaceStations(dimension, member));
-        }
+//        if (!ArgonautsIntegration.argonautsLoaded()) return stations;
+//
+//        for (var member : ArgonautsIntegration.getClientPartyMembers(player.getUUID())) {
+//            if (member.equals(player.getGameProfile())) continue;
+//            stations.addAll(getOwnedSpaceStations(dimension, member));
+//        }
+//        for (var member : ArgonautsIntegration.getClientGuildMembers(player.getUUID())) {
+//            if (member.equals(player.getGameProfile())) continue;
+//            stations.addAll(getOwnedSpaceStations(dimension, member));
+//        }
         return stations;
     }
 

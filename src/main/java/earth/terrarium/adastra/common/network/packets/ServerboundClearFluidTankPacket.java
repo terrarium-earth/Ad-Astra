@@ -9,8 +9,7 @@ import com.teamresourceful.resourcefullib.common.network.base.ServerboundPacketT
 import com.teamresourceful.resourcefullib.common.network.defaults.CodecPacketType;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.utils.ModUtils;
-import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
-import earth.terrarium.botarium.common.fluid.base.FluidContainer;
+import earth.terrarium.common_storage_lib.fluid.FluidApi;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -46,12 +45,11 @@ public record ServerboundClearFluidTankPacket(
         public Consumer<Player> handle(ServerboundClearFluidTankPacket packet) {
             return player -> ModUtils.getMachineFromMenuPacket(packet.machine(), player, player.level()).ifPresent(
                 machine -> {
-                    if (!(machine instanceof BotariumFluidBlock<?>)) return;
-                    FluidContainer container = FluidContainer.of(machine, null);
+                    if (!FluidApi.BLOCK.isPresent(machine, null)) return;
+                    var container = FluidApi.BLOCK.find(machine, null);
                     if (container == null) return;
-                    int tank = Mth.clamp(packet.tank(), 0, container.getSize() - 1);
-                    container.internalExtract(container.getFluids().get(tank), false);
-                    container.extractFluid(container.getFluids().get(tank), false);
+                    int tank = Mth.clamp(packet.tank(), 0, container.size() - 1);
+                    container.extract(container.getResource(tank), container.getAmount(tank), false);
                 }
             );
         }

@@ -2,11 +2,13 @@ package earth.terrarium.adastra.common.menus.vehicles;
 
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.menus.base.BaseEntityContainerMenu;
+import earth.terrarium.adastra.common.menus.content.EntityContent;
 import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
+
+import java.util.Optional;
 
 public class RocketMenu extends BaseEntityContainerMenu<Rocket> {
 
@@ -14,8 +16,8 @@ public class RocketMenu extends BaseEntityContainerMenu<Rocket> {
         super(ModMenus.ROCKET.get(), id, inventory, entity);
     }
 
-    public RocketMenu(int id, Inventory inventory, FriendlyByteBuf buf) {
-        super(ModMenus.ROCKET.get(), id, inventory, (Rocket) inventory.player.level().getEntity(buf.readVarInt()));
+    public RocketMenu(int id, Inventory inventory, Optional<EntityContent> content) {
+        super(ModMenus.ROCKET.get(), id, inventory, (Rocket) inventory.player.level().getEntity(content.get().entityId()));
     }
 
     @Override

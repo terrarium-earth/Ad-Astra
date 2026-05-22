@@ -2,11 +2,13 @@ package earth.terrarium.adastra.common.menus.vehicles;
 
 import earth.terrarium.adastra.common.entities.vehicles.Rover;
 import earth.terrarium.adastra.common.menus.base.BaseEntityContainerMenu;
+import earth.terrarium.adastra.common.menus.content.EntityContent;
 import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
+
+import java.util.Optional;
 
 public class RoverMenu extends BaseEntityContainerMenu<Rover> {
 
@@ -14,8 +16,8 @@ public class RoverMenu extends BaseEntityContainerMenu<Rover> {
         super(ModMenus.ROVER.get(), id, inventory, entity);
     }
 
-    public RoverMenu(int id, Inventory inventory, FriendlyByteBuf buf) {
-        super(ModMenus.ROVER.get(), id, inventory, (Rover) inventory.player.level().getEntity(buf.readVarInt()));
+    public RoverMenu(int id, Inventory inventory, Optional<EntityContent> content) {
+        super(ModMenus.ROVER.get(), id, inventory, (Rover) inventory.player.level().getEntity(content.get().entityId()));
     }
 
     @Override

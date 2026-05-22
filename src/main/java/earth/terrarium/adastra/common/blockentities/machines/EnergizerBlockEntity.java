@@ -7,13 +7,14 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.blocks.machines.EnergizerBlock;
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
-import earth.terrarium.botarium.common.energy.base.EnergyContainer;
-import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
-import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
+import earth.terrarium.common_storage_lib.energy.EnergyApi;
+import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -21,12 +22,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -47,18 +45,20 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
-        if (energyContainer != null) return energyContainer;
-        return energyContainer = new WrappedBlockEnergyContainer(
-            this,
-            new SimpleEnergyContainer(MachineConfig.energizerEnergyCapacity, MachineConfig.OSTRUM.maxEnergyInOut, MachineConfig.OSTRUM.maxEnergyInOut) {
-                @Override
-                public void setEnergy(long energy) {
-                    super.setEnergy(energy);
-                    if (level().getGameTime() % 10 != 0) return;
-                    onEnergyChange();
-                }
-            });
+    public ValueStorage getEnergy(Direction direction) {
+        return new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.OSTRUM.energyCapacity) {
+            @Override
+            public void set(long l) {
+                super.set(l);
+                if (level().getGameTime() % 10 != 0) return;
+                onEnergyChange();
+            }
+        };
+    }
+
+    @Override
+    public long maxInsertExtract() {
+        return MachineConfig.OSTRUM.maxEnergyInOut;
     }
 
     @Override
@@ -70,8 +70,8 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
 
     @Override
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
-        TransferUtils.pushEnergyNearby(this, pos, getEnergyStorage().maxExtract(), sideConfig.get(0), filter);
-        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(0), filter);
+        TransferUtils.pushEnergyNearby(this, pos, maxInsertExtract(), sideConfig.get(0), filter);
+        TransferUtils.pullEnergyNearby(this, pos, maxInsertExtract(), sideConfig.get(0), filter);
     }
 
     @Override
@@ -90,17 +90,18 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
     }
 
     public void onEnergyChange() {
-        int charge = Math.round(getEnergyStorage().getStoredEnergy() / (float) getEnergyStorage().getMaxCapacity() * 5);
+        int charge = Math.round(getEnergyStorage().getStoredAmount() / (float) getEnergyStorage().getCapacity() * 5);
         level().setBlock(getBlockPos(), getBlockState().setValue(EnergizerBlock.POWER, charge), Block.UPDATE_CLIENTS);
     }
 
     public void distributeToChargeSlot(ServerLevel level, BlockPos pos) {
         var stack = getItem(0);
         if (stack.isEmpty()) return;
-        if (!EnergyContainer.holdsEnergy(stack)) return;
-        ItemStackHolder holder = new ItemStackHolder(stack);
-        if (EnergyUtils.moveEnergy(this, null, holder, getEnergyStorage().maxExtract(), false) == 0) return;
-        setItem(0, holder.getStack());
+        ModifyOnlyContext itemContext = new ModifyOnlyContext(stack);
+        var container = itemContext.find(EnergyApi.ITEM);
+        if (container.getStoredAmount() <= 0) return;
+        if (EnergyUtils.moveEnergy(getEnergyStorage(), container, maxInsertExtract(), false) == 0) return;
+        setItem(0, itemContext.stack());
         ModUtils.sendParticles(level,
             ParticleTypes.ELECTRIC_SPARK,
             pos.getX() + 0.5,

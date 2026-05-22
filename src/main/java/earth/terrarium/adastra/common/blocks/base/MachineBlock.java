@@ -1,14 +1,12 @@
 package earth.terrarium.adastra.common.blocks.base;
 
 import com.mojang.serialization.MapCodec;
+import com.teamresourceful.resourcefullib.common.menu.ContentMenuProvider;
 import earth.terrarium.adastra.common.blockentities.base.BasicContainer;
-import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
-import earth.terrarium.botarium.common.menu.MenuHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -45,13 +43,13 @@ public class MachineBlock extends BasicEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (!level.isClientSide()) {
-            if (level.getBlockEntity(pos) instanceof ExtraDataMenuProvider provider) {
-                MenuHooks.openMenu((ServerPlayer) player, provider);
+            if (level.getBlockEntity(pos) instanceof ContentMenuProvider provider) {
+                provider.openMenu((ServerPlayer) player);
             }
         }
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return super.useWithoutItem(blockState, level, pos, player, hit);
     }
 
     @Override

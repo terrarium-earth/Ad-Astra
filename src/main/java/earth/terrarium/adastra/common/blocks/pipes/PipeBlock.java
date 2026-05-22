@@ -10,8 +10,8 @@ import earth.terrarium.adastra.common.blocks.properties.PipeProperty;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.registry.ModSoundEvents;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.energy.base.EnergyContainer;
-import earth.terrarium.botarium.common.fluid.base.FluidContainer;
+import earth.terrarium.common_storage_lib.energy.EnergyApi;
+import earth.terrarium.common_storage_lib.fluid.FluidApi;
 import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -21,6 +21,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -107,7 +108,7 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> tooltip, TooltipFlag tooltipFlag) {
         if (type == Type.ENERGY) {
             tooltip.add(Component.translatable("tooltip.ad_astra.energy_transfer_tick", transferRate).withStyle(ChatFormatting.GOLD));
             TooltipUtils.addDescriptionComponent(tooltip, ConstantComponents.CABLE_INFO);
@@ -227,9 +228,9 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
         if (entity == null) return false;
 
         if (type == Type.ENERGY) {
-            return EnergyContainer.holdsEnergy(entity, direction.getOpposite());
+            return EnergyApi.BLOCK.isPresent(entity, direction.getOpposite());
         } else if (type == Type.FLUID) {
-            return FluidContainer.holdsFluid(entity, direction.getOpposite());
+            return FluidApi.BLOCK.isPresent(entity, direction.getOpposite());
         }
         return false;
     }

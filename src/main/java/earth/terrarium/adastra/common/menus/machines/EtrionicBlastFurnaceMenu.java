@@ -4,15 +4,22 @@ import earth.terrarium.adastra.common.blockentities.machines.EtrionicBlastFurnac
 import earth.terrarium.adastra.common.menus.base.MachineMenu;
 import earth.terrarium.adastra.common.menus.configuration.EnergyConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.SlotConfiguration;
+import earth.terrarium.adastra.common.menus.content.PositionContent;
 import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 
+import java.util.Optional;
+
 public class EtrionicBlastFurnaceMenu extends MachineMenu<EtrionicBlastFurnaceBlockEntity> {
 
     public EtrionicBlastFurnaceMenu(int id, Inventory inventory, EtrionicBlastFurnaceBlockEntity entity) {
         super(ModMenus.ETRIONIC_BLAST_FURNACE.get(), id, inventory, entity);
+    }
+
+    public EtrionicBlastFurnaceMenu(int id, Inventory inv, Optional<PositionContent> content) {
+        this(id, inv, PositionContent.getOrNull(content, inv.player.level(), EtrionicBlastFurnaceBlockEntity.class));
     }
 
     @Override

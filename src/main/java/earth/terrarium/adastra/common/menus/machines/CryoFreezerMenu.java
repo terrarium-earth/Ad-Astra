@@ -5,6 +5,7 @@ import earth.terrarium.adastra.common.menus.base.MachineMenu;
 import earth.terrarium.adastra.common.menus.configuration.EnergyConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.FluidConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.SlotConfiguration;
+import earth.terrarium.adastra.common.menus.content.PositionContent;
 import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.menus.slots.PredicateSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
@@ -12,10 +13,16 @@ import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 
+import java.util.Optional;
+
 public class CryoFreezerMenu extends MachineMenu<CryoFreezerBlockEntity> {
 
     public CryoFreezerMenu(int id, Inventory inventory, CryoFreezerBlockEntity entity) {
         super(ModMenus.CRYO_FREEZER.get(), id, inventory, entity);
+    }
+
+    public CryoFreezerMenu(int id, Inventory inv, Optional<PositionContent> content) {
+        this(id, inv, PositionContent.getOrNull(content, inv.player.level(), CryoFreezerBlockEntity.class));
     }
 
     @Override

@@ -4,9 +4,10 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeInput;
 import org.jetbrains.annotations.NotNull;
 
-public interface BasicContainer extends Container {
+public interface BasicContainer extends Container, RecipeInput {
 
     NonNullList<ItemStack> items();
 
@@ -42,6 +43,11 @@ public interface BasicContainer extends Container {
 
     @Override
     default int getContainerSize() {
+        return items().size();
+    }
+
+    @Override
+    default int size() {
         return items().size();
     }
 

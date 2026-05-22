@@ -2,7 +2,6 @@ package earth.terrarium.adastra.common.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
 import earth.terrarium.adastra.common.menus.base.PlanetsMenuProvider;
-import earth.terrarium.botarium.common.menu.MenuHooks;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,7 +14,7 @@ public class PlanetsCommand {
                 .requires(source -> source.hasPermission(2))
                 .executes(context -> {
                     ServerPlayer player = context.getSource().getPlayerOrException();
-                    MenuHooks.openMenu(player, new PlanetsMenuProvider());
+                    new PlanetsMenuProvider().openMenu(player);
                     return 1;
                 })
             )

@@ -1,8 +1,6 @@
 package earth.terrarium.adastra.common.utils;
 
 import earth.terrarium.adastra.common.constants.ConstantComponents;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import earth.terrarium.common_storage_lib.resources.ResourceStack;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;

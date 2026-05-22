@@ -6,13 +6,11 @@ import earth.terrarium.adastra.common.blocks.LaunchPadBlock;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
-import earth.terrarium.adastra.common.menus.base.PlanetsMenuProvider;
 import earth.terrarium.adastra.common.menus.vehicles.RocketMenu;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.registry.*;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.utils.FluidUtils;
-import earth.terrarium.botarium.common.menu.MenuHooks;
 import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
 import earth.terrarium.common_storage_lib.fluid.FluidApi;
 import earth.terrarium.common_storage_lib.fluid.impl.SimpleFluidStorage;
@@ -417,7 +415,7 @@ public class Rocket extends Vehicle implements FluidProvider.Entity {
     }
 
     public void openPlanetsScreen(ServerPlayer player) {
-        MenuHooks.openMenu(player, new PlanetsMenuProvider());
+        openMenu(player);
         var packet = new ClientboundStopSoundPacket(BuiltInRegistries.SOUND_EVENT
             .getKey(ModSoundEvents.ROCKET.get()), SoundSource.AMBIENT);
         player.connection.send(packet);

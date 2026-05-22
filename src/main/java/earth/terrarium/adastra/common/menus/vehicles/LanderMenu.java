@@ -2,10 +2,12 @@ package earth.terrarium.adastra.common.menus.vehicles;
 
 import earth.terrarium.adastra.common.entities.vehicles.Lander;
 import earth.terrarium.adastra.common.menus.base.BaseEntityContainerMenu;
+import earth.terrarium.adastra.common.menus.content.EntityContent;
 import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
+
+import java.util.Optional;
 
 public class LanderMenu extends BaseEntityContainerMenu<Lander> {
 
@@ -13,8 +15,8 @@ public class LanderMenu extends BaseEntityContainerMenu<Lander> {
         super(ModMenus.LANDER.get(), id, inventory, entity);
     }
 
-    public LanderMenu(int id, Inventory inventory, FriendlyByteBuf buf) {
-        super(ModMenus.LANDER.get(), id, inventory, (Lander) inventory.player.level().getEntity(buf.readVarInt()));
+    public LanderMenu(int id, Inventory inventory, Optional<EntityContent> content) {
+        super(ModMenus.LANDER.get(), id, inventory, (Lander) inventory.player.level().getEntity(content.get().entityId()));
     }
 
     @Override

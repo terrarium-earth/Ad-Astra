@@ -5,15 +5,22 @@ import earth.terrarium.adastra.common.menus.base.MachineMenu;
 import earth.terrarium.adastra.common.menus.configuration.EnergyConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.FluidConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.SlotConfiguration;
+import earth.terrarium.adastra.common.menus.content.PositionContent;
 import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 
+import java.util.Optional;
+
 public class OxygenDistributorMenu extends MachineMenu<OxygenDistributorBlockEntity> {
 
     public OxygenDistributorMenu(int id, Inventory inventory, OxygenDistributorBlockEntity entity) {
         super(ModMenus.OXYGEN_DISTRIBUTOR.get(), id, inventory, entity);
+    }
+
+    public OxygenDistributorMenu(int id, Inventory inv, Optional<PositionContent> content) {
+        this(id, inv, PositionContent.getOrNull(content, inv.player.level(), OxygenDistributorBlockEntity.class));
     }
 
     @Override

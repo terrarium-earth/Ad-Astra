@@ -5,8 +5,9 @@ import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
 import com.teamresourceful.resourcefullib.client.utils.ScreenUtils;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -78,9 +79,9 @@ public class GuiUtils {
         });
     }
 
-    public static void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, int x, int y, FluidHolder fluid, long capacity, Component... tooltips) {
+    public static void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, int x, int y, ResourceStack<FluidResource> fluid, long capacity, Component... tooltips) {
         if (!fluid.isEmpty()) {
-            float ratio = fluid.getFluidAmount() / (float) capacity;
+            float ratio = fluid.amount() / (float) capacity;
             TextureAtlasSprite sprite = ClientFluidHooks.getFluidSprite(fluid);
             int color = ClientFluidHooks.getFluidColor(fluid);
             float r = FastColor.ARGB32.red(color) / 255f;

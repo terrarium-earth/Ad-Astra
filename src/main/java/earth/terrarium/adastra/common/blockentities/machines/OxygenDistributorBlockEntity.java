@@ -15,13 +15,14 @@ import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.container.BiFluidContainer;
 import earth.terrarium.adastra.common.entities.AirVortex;
 import earth.terrarium.adastra.common.menus.machines.OxygenDistributorMenu;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.adastra.common.registry.ModSoundEvents;
-import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.adastra.common.utils.floodfill.FloodFill3D;
-import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
+import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
 import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,12 +33,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.List;
@@ -103,12 +101,13 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
-        if (this.energyContainer != null) return this.energyContainer;
-        return this.energyContainer = new WrappedBlockEnergyContainer(
-            this,
-            EnergyUtils.machineInsertOnlyEnergy(MachineConfig.DESH)
-        );
+    public ValueStorage getEnergy(Direction direction) {
+        return new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.DESH.energyCapacity);
+    }
+
+    @Override
+    public long maxInsertExtract() {
+        return MachineConfig.DESH.maxEnergyInOut;
     }
 
     @Override
@@ -122,7 +121,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         long fluidPerTick = calculateFluidPerTick();
         boolean canDistribute = canCraftDistribution(Math.max(FluidAmounts.toPlatformAmount(1), fluidPerTick));
         if (canFunction() && canDistribute) {
-            getEnergyStorage().internalExtract(calculateEnergyPerTick(), false);
+            getEnergyStorage().extract(calculateEnergyPerTick(), false);
             setLit(true);
             accumulatedFluid += fluidPerTick;
             int wholeBuckets = (int) (accumulatedFluid / 1000f);
@@ -153,7 +152,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
         TransferUtils.pullItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
         TransferUtils.pushItemsNearby(this, pos, new int[]{2}, sideConfig.get(1), filter);
-        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(2), filter);
+        TransferUtils.pullEnergyNearby(this, pos, maxInsertExtract(), sideConfig.get(2), filter);
         TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidAmounts.toPlatformAmount(200), 0, sideConfig.get(3), filter);
         TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidAmounts.toPlatformAmount(200), 1, sideConfig.get(4), filter);
     }
@@ -165,7 +164,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
 
     private boolean canCraftDistribution(long fluidAmount) {
         long energy = calculateEnergyPerTick();
-        if (getEnergyStorage().internalExtract(energy, true) < energy) return false;
+        if (getEnergyStorage().extract(energy, true) < energy) return false;
         return ((BiFluidContainer) getFluidContainer().container()).output()
             .internalExtract(getFluidContainer().getFluids().get(1).copyWithAmount(fluidAmount), true).getFluidAmount() >= fluidAmount;
     }

@@ -7,10 +7,11 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.CoalGeneratorMenu;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.adastra.common.utils.TransferUtils;
-import earth.terrarium.botarium.common.energy.impl.ExtractOnlyEnergyContainer;
-import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.util.CommonHooks;
+import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -20,11 +21,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -49,11 +47,13 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
-        if (energyContainer != null) return energyContainer;
-        return energyContainer = new WrappedBlockEnergyContainer(
-            this,
-            new ExtractOnlyEnergyContainer(MachineConfig.IRON.energyCapacity, MachineConfig.IRON.maxEnergyInOut));
+    public ValueStorage getEnergy(Direction direction) {
+        return new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.IRON.energyCapacity);
+    }
+
+    @Override
+    public long maxInsertExtract() {
+        return MachineConfig.IRON.maxEnergyInOut;
     }
 
     @Override
@@ -82,14 +82,14 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
             return;
         }
         var input = getItem(1);
-        if (getEnergyStorage().internalInsert(MachineConfig.coalGeneratorEnergyGenerationPerTick, true) == 0) {
+        if (getEnergyStorage().insert(MachineConfig.coalGeneratorEnergyGenerationPerTick, true) == 0) {
             if (time % 10 == 0) setLit(false);
             return;
         }
 
         if (cookTime > 0) {
             cookTime--;
-            getEnergyStorage().internalInsert(MachineConfig.coalGeneratorEnergyGenerationPerTick, false);
+            getEnergyStorage().insert(MachineConfig.coalGeneratorEnergyGenerationPerTick, false);
             if (time % 10 == 0) setLit(true);
         } else if (!input.isEmpty()
             && !(input.getItem() instanceof BucketItem)) {
@@ -108,7 +108,7 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
         TransferUtils.pushItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
         TransferUtils.pullItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
-        TransferUtils.pushEnergyNearby(this, pos, getEnergyStorage().maxExtract(), sideConfig.get(1), filter);
+        TransferUtils.pushEnergyNearby(this, pos, maxInsertExtract(), sideConfig.get(1), filter);
     }
 
     @Override

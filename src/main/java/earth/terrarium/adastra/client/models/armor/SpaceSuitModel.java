@@ -3,7 +3,6 @@ package earth.terrarium.adastra.client.models.armor;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import dev.architectury.injectables.targets.ArchitecturyTarget;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.ClientPlatformUtils;
 import earth.terrarium.adastra.common.registry.ModItems;
@@ -17,12 +16,14 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.DyeableArmorItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.DyedItemColor;
 import org.jetbrains.annotations.Nullable;
 
 public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
@@ -60,8 +61,9 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
         this.texture = getTextureLocation(stack);
         this.setVisible();
 
-        if (stack.getItem() instanceof DyeableArmorItem armor) {
-            int color = armor.getColor(stack);
+        if (stack.is(ItemTags.DYEABLE)) {
+            DyedItemColor itemColor = stack.getOrDefault(DataComponents.DYED_COLOR, new DyedItemColor(DyedItemColor.LEATHER_COLOR, false));
+            int color = itemColor.rgb();
             r = FastColor.ARGB32.red(color) / 255f;
             g = FastColor.ARGB32.green(color) / 255f;
             b = FastColor.ARGB32.blue(color) / 255f;
@@ -70,10 +72,10 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        if ("neoforge".equals(ArchitecturyTarget.getCurrentTarget()) && texture != null) {
+//        if ("neoforge".equals(ArchitecturyTarget.getCurrentTarget()) && texture != null) {
             MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
             buffer = bufferSource.getBuffer(RenderType.entityTranslucent(texture));
-        }
+//        }
 
         if (this.parentModel == null) return;
         this.visor.copyFrom(parentModel.head);
