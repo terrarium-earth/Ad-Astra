@@ -10,7 +10,9 @@ import net.minecraft.world.item.component.DyedItemColor;
 public class CustomDyeableArmorItem extends ArmorItem {
 
     public CustomDyeableArmorItem(Holder<ArmorMaterial> armorMaterial, Type type, Properties properties) {
-        super(armorMaterial, type, properties.component(DataComponents.DYED_COLOR, new DyedItemColor(FastColor.ARGB32.opaque(0xa06540),false)));
+        super(armorMaterial, type, properties
+            .durability(type.getDurability(armorMaterial.value().getDefense(type)))
+            .component(DataComponents.DYED_COLOR, new DyedItemColor(FastColor.ARGB32.opaque(0xa06540),false)));
     }
 
     // Makes the default color white instead of brown
