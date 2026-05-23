@@ -1,7 +1,8 @@
-// 1.21.1	2026-05-23T23:28:32.7745293	Tags for minecraft:entity_type mod id ad_astra
+// 1.21.1	2026-05-24T01:18:01.4933745	Tags for minecraft:entity_type mod id ad_astra
 8fb6c3dafcd9086f49a8ea003414895786cd6d3d data/ad_astra/tags/entity_type/can_survive_extreme_cold.json
 68b0da066fd014874f1d7b886cd84b74d69bf3db data/ad_astra/tags/entity_type/can_survive_extreme_heat.json
 ae41cfc4a0317b0993a73cc0d737d15df6521d31 data/ad_astra/tags/entity_type/can_survive_in_acid_rain.json
 e48333a241d450d15ad28ac650f7cc3c54bcfc95 data/ad_astra/tags/entity_type/can_survive_in_space.json
 986ca8aa79b13bb6cb03aced4009597e607d57ac data/ad_astra/tags/entity_type/ignores_air_vortex.json
 2ab1ebb47d29a0796a1c73dfb0e5951e9c3b61ed data/ad_astra/tags/entity_type/lives_without_oxygen.json
+9958935de8843834d9434649dce7f75a9b335600 data/minecraft/tags/entity_type/undead.json

@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-23T23:28:32.7614972	Tags for minecraft:item mod id ad_astra
+// 1.21.1	2026-05-24T01:15:48.9638777	Tags for minecraft:item mod id ad_astra
 375e4bc49d396a2ae2b2a9dcddc300ab07a3aa48 data/ad_astra/tags/item/aeronos_caps.json
 8030232b3adfa6e804799644b412d6697c9f985a data/ad_astra/tags/item/cable_ducts.json
 911713d0495bba21d55618ad4a338f5a2ed3d41c data/ad_astra/tags/item/calorite_blocks.json
@@ -85,6 +85,7 @@ e7756a05d3658940079b4f65fc227c293ffca182 data/minecraft/tags/item/coal_ores.json
 d5a13d562c3fb7aed4f08127656dcd55b9669ec1 data/minecraft/tags/item/copper_ores.json
 86efe8ef378c07fd7a05ad44ac4a0e8830b9a8c0 data/minecraft/tags/item/diamond_ores.json
 2348e08e971793a343c2ed4527405754d6052382 data/minecraft/tags/item/doors.json
+0a8ee7cfae7f40b9f8a32b25b25cca9e0cdebe95 data/minecraft/tags/item/dyeable.json
 436d44368b8bcbca89efd576bd72cd644b2cb7b0 data/minecraft/tags/item/fence_gates.json
 63d5a371cfda84378a9891695b6462b7059f1775 data/minecraft/tags/item/gold_ores.json
 33e6dd9b13241b3c602a4ee8f0a63f3535da7895 data/minecraft/tags/item/iron_ores.json

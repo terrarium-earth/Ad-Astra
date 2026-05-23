@@ -40,11 +40,6 @@ public class MartianRaptor extends Monster {
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0));
     }
 
-//    @Override TODO: Add to undead entity type tag
-//    public MobType getMobType() {
-//        return MobType.UNDEAD;
-//    }
-
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.STRIDER_HURT;

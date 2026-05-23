@@ -236,6 +236,19 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         tag(ItemTags.WOODEN_STAIRS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_STAIRS.get())));
 
         tag(ItemTags.WOOL).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_FUR.get())));
+
+        tag(ItemTags.DYEABLE).add(element(ModItems.SPACE_HELMET.get()));
+        tag(ItemTags.DYEABLE).add(element(ModItems.SPACE_SUIT.get()));
+        tag(ItemTags.DYEABLE).add(element(ModItems.SPACE_PANTS.get()));
+        tag(ItemTags.DYEABLE).add(element(ModItems.SPACE_BOOTS.get()));
+        tag(ItemTags.DYEABLE).add(element(ModItems.NETHERITE_SPACE_HELMET.get()));
+        tag(ItemTags.DYEABLE).add(element(ModItems.NETHERITE_SPACE_SUIT.get()));
+        tag(ItemTags.DYEABLE).add(element(ModItems.NETHERITE_SPACE_PANTS.get()));
+        tag(ItemTags.DYEABLE).add(element(ModItems.NETHERITE_SPACE_BOOTS.get()));
+        tag(ItemTags.DYEABLE).add(element(ModItems.JET_SUIT_HELMET.get()));
+        tag(ItemTags.DYEABLE).add(element(ModItems.JET_SUIT.get()));
+        tag(ItemTags.DYEABLE).add(element(ModItems.JET_SUIT_PANTS.get()));
+        tag(ItemTags.DYEABLE).add(element(ModItems.JET_SUIT_BOOTS.get()));
     }
 
     private void add(TagKey<Item> tag, Item item) {

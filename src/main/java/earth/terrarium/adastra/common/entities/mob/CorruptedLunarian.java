@@ -54,11 +54,6 @@ public class CorruptedLunarian extends Monster implements RangedAttackMob {
         });
     }
 
-//    @Override TODO: Add to undead entity type tag
-//    public MobType getMobType() {
-//        return MobType.UNDEAD;
-//    }
-
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.PILLAGER_HURT;
