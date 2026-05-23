@@ -109,7 +109,9 @@ cloche {
         }
 
         runs {
-            data()
+            data(){
+                arguments("--existing", file("src/main/resources/").getAbsolutePath())
+            }
         }
     }
 
