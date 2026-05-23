@@ -102,8 +102,8 @@ cloche {
 //    modLocalRuntime(group = "maven.modrinth", name = "jade", version = "13.2.2")
 //    modLocalRuntime(group = "maven.modrinth", name = "mekanism", version = "10.4.2.16")
 
-            legacyClasspath("com.teamresourceful:yabn:1.0.3")
-            legacyClasspath("com.teamresourceful:bytecodecs:1.1.2")
+//            legacyClasspath("com.teamresourceful:yabn:1.0.3")
+//            legacyClasspath("com.teamresourceful:bytecodecsbytecodecs:1.1.2")
 
             legacyClasspath(module(group = "javazoom", name = "jlayer", version = "1.0.1"))
         }
