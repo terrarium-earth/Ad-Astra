@@ -44,15 +44,11 @@ public class ModFluidTagProvider extends TagsProvider<Fluid> {
         add(ModFluidTags.FREEZES_IN_SPACE, Fluids.WATER);
         add(ModFluidTags.EVAPORATES_IN_SPACE, Fluids.WATER);
 
-        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("c:diesel")));
-        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("forge:diesel")));
-        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("c:biodiesel")));
-        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("forge:biodiesel")));
-        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("forge:biodiesel")));
+        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(ResourceLocation.fromNamespaceAndPath("c", "diesel")));
+        tag(ModFluidTags.FUEL).add(TagEntry.optionalTag(ResourceLocation.fromNamespaceAndPath("c", "biodiesel")));
 
-        tag(ModFluidTags.OIL).add(TagEntry.optionalElement(ResourceLocation.withDefaultNamespace("techreborn:oil")));
-        tag(ModFluidTags.OIL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("forge:crude_oil")));
-        tag(ModFluidTags.OIL).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("c:crude_oil")));
+        tag(ModFluidTags.OIL).add(TagEntry.optionalElement(ResourceLocation.fromNamespaceAndPath("techreborn", "oil")));
+        tag(ModFluidTags.OIL).add(TagEntry.optionalTag(ResourceLocation.fromNamespaceAndPath("c", "crude_oil")));
     }
 
     private void add(TagKey<Fluid> tag, Fluid fluid) {
