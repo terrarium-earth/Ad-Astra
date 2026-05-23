@@ -6,16 +6,19 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
-import earth.terrarium.adastra.common.container.BiFluidContainer;
 import earth.terrarium.adastra.common.menus.machines.FuelRefineryMenu;
 import earth.terrarium.adastra.common.recipes.machines.RefiningRecipe;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
-import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
-import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import earth.terrarium.botarium.common.fluid.base.BotariumFluidBlock;
-import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
+import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.fluid.FluidApi;
+import earth.terrarium.common_storage_lib.fluid.util.FluidProvider;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
+import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -26,12 +29,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRecipe> implements BotariumFluidBlock<WrappedBlockFluidContainer> {
+public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRecipe> implements FluidProvider.Block {
 
     public static final List<ConfigurationEntry> SIDE_CONFIG = List.of(
         new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
@@ -41,8 +43,6 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
         new ConfigurationEntry(ConfigurationType.FLUID, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_FLUID),
         new ConfigurationEntry(ConfigurationType.FLUID, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID)
     );
-
-    private WrappedBlockFluidContainer fluidContainer;
 
     public FuelRefineryBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 5, ModRecipeTypes.REFINING);
@@ -54,55 +54,60 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
-        if (energyContainer != null) return energyContainer;
-        return energyContainer = new WrappedBlockEnergyContainer(
-            this,
-            EnergyUtils.machineInsertOnlyEnergy(MachineConfig.STEEL)
-        );
+    public ValueStorage getEnergy(Direction direction) {
+        return new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.STEEL.energyCapacity);
     }
 
     @Override
-    public @Nullable WrappedBlockFluidContainer getFluidContainer(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
-        return getFluidContainer();
+    public long maxInsertExtract() {
+        return MachineConfig.STEEL.maxEnergyInOut;
     }
 
-    public WrappedBlockFluidContainer getFluidContainer() {
-        if (fluidContainer != null) return fluidContainer;
-        return fluidContainer = new WrappedBlockFluidContainer(
-            this,
-            new BiFluidContainer(
-                FluidAmounts.toPlatformAmount(MachineConfig.STEEL.fluidCapacity),
-                1,
-                1,
-                (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())
-                    .stream()
-                    .anyMatch(r -> r.value().input().test(holder)),
-                (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())
-                    .stream()
-                    .anyMatch(r -> r.value().result().matches(holder))));
+    @Override
+    public CommonStorage<FluidResource> getFluids(Level level, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, Direction direction) {
+        return null;
     }
+
+    private CommonStorage<FluidResource> getFluidContainer() {
+        return FluidApi.BLOCK.find(this, null);
+    }
+
+//    public WrappedBlockFluidContainer getFluidContainer() { TODO: Implement fluid storage!
+//        if (fluidContainer != null) return fluidContainer;
+//        return fluidContainer = new WrappedBlockFluidContainer(
+//            this,
+//            new BiFluidContainer(
+//                FluidAmounts.toPlatformAmount(MachineConfig.STEEL.fluidCapacity),
+//                1,
+//                1,
+//                (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())
+//                    .stream()
+//                    .anyMatch(r -> r.value().input().test(holder)),
+//                (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())
+//                    .stream()
+//                    .anyMatch(r -> r.value().result().matches(holder))));
+//    }
 
     @Override
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
         TransferUtils.pullItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
         TransferUtils.pullItemsNearby(this, pos, new int[]{3}, sideConfig.get(1), filter);
         TransferUtils.pushItemsNearby(this, pos, new int[]{2, 4}, sideConfig.get(2), filter);
-        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(3), filter);
+        TransferUtils.pullEnergyNearby(this, pos, maxInsertExtract(), sideConfig.get(3), filter);
         TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidAmounts.toPlatformAmount(200), 0, sideConfig.get(4), filter);
         TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidAmounts.toPlatformAmount(200), 1, sideConfig.get(5), filter);
     }
 
     @Override
-    public void recipeTick(ServerLevel level, WrappedBlockEnergyContainer energyStorage) {
+    public void recipeTick(ServerLevel level, ValueStorage energyStorage) {
         if (recipe == null) return;
-        if (fluidContainer == null) getFluidContainer();
+        if (getFluidContainer() == null) return;
         if (!canCraft()) {
             clearRecipe();
             return;
         }
 
-        energyStorage.internalExtract(recipe.energy(), false);
+        energyStorage.extract(recipe.energy(), false);
 
         cookTime++;
         if (cookTime < cookTimeTotal) return;
@@ -113,13 +118,14 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
     public void craft() {
         if (recipe == null) return;
 
-        fluidContainer.internalExtract(getFluidContainer().getFirstFluid().copyWithAmount(recipe.input().getFluidAmount()), false);
-        fluidContainer.internalInsert(recipe.result(), false);
+        var fluidContainer = getFluidContainer();
+        fluidContainer.extract(getFluidContainer().getResource(0), recipe.input().getAmount(), false);
+        fluidContainer.insert(recipe.result().resource(), recipe.result().amount(), false);
 
         updateSlots();
 
         cookTime = 0;
-        if (fluidContainer.getFirstFluid().isEmpty()) clearRecipe();
+        if (fluidContainer.getResource(0).isBlank()) clearRecipe();
     }
 
     @Override
@@ -133,6 +139,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
 
     @Override
     public void updateSlots() {
+        var fluidContainer = getFluidContainer();
         FluidUtils.moveItemToContainer(this, fluidContainer, 1, 2, 0);
         FluidUtils.moveContainerToItem(this, fluidContainer, 3, 4, 1);
         sync();

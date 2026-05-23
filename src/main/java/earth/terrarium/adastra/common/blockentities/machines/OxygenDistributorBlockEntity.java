@@ -12,7 +12,6 @@ import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
-import earth.terrarium.adastra.common.container.BiFluidContainer;
 import earth.terrarium.adastra.common.entities.AirVortex;
 import earth.terrarium.adastra.common.menus.machines.OxygenDistributorMenu;
 import earth.terrarium.adastra.common.registry.ModDataManagers;
@@ -165,12 +164,12 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
     private boolean canCraftDistribution(long fluidAmount) {
         long energy = calculateEnergyPerTick();
         if (getEnergyStorage().extract(energy, true) < energy) return false;
-        return ((BiFluidContainer) getFluidContainer().container()).output()
-            .internalExtract(getFluidContainer().getFluids().get(1).copyWithAmount(fluidAmount), true).getFluidAmount() >= fluidAmount;
+        return getFluidContainer().get(1)
+            .extract(getFluidContainer().getResource(1) ,fluidAmount, true) >= fluidAmount;
     }
 
     protected void consumeDistribution(long fluidAmount) {
-        ((BiFluidContainer) getFluidContainer().container()).output().internalExtract(getFluidContainer().getFluids().get(1).copyWithAmount(fluidAmount), false);
+        getFluidContainer().get(1).extract(getFluidContainer().getResource(1) ,fluidAmount, false);
     }
 
     protected void tickOxygen(ServerLevel level, BlockPos pos, BlockState state) {

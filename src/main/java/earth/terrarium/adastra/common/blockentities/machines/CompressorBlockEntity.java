@@ -8,22 +8,20 @@ import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.CompressorMenu;
 import earth.terrarium.adastra.common.recipes.machines.CompressingRecipe;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
-import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.ItemUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
-import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
+import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -46,30 +44,31 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
-        if (energyContainer != null) return energyContainer;
-        return energyContainer = new WrappedBlockEnergyContainer(
-            this,
-            EnergyUtils.machineInsertOnlyEnergy(MachineConfig.IRON)
-        );
+    public ValueStorage getEnergy(Direction direction) {
+        return new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.IRON.energyCapacity);
+    }
+
+    @Override
+    public long maxInsertExtract() {
+        return MachineConfig.IRON.maxEnergyInOut;
     }
 
     @Override
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
         TransferUtils.pullItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
         TransferUtils.pushItemsNearby(this, pos, new int[]{2}, sideConfig.get(1), filter);
-        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(2), filter);
+        TransferUtils.pullEnergyNearby(this, pos, maxInsertExtract(), sideConfig.get(2), filter);
     }
 
     @Override
-    public void recipeTick(ServerLevel level, WrappedBlockEnergyContainer energyStorage) {
+    public void recipeTick(ServerLevel level, ValueStorage energyStorage) {
         if (recipe == null) return;
         if (!canCraft()) {
             clearRecipe();
             return;
         }
 
-        energyStorage.internalExtract(recipe.energy(), false);
+        energyStorage.extract(recipe.energy(), false);
 
         cookTime++;
         if (cookTime < cookTimeTotal) return;

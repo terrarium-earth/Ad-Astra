@@ -13,6 +13,7 @@ import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.fluid.FluidApi;
 import earth.terrarium.common_storage_lib.fluid.impl.SimpleFluidStorage;
 import earth.terrarium.common_storage_lib.fluid.util.FluidProvider;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
@@ -71,8 +72,14 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
 
     @Override
     public CommonStorage<FluidResource> getFluids(Level level, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, Direction direction) {
-        return new SimpleFluidStorage(this, ModDataManagers.FLUID_CONTENTS, 2, FluidAmounts.toPlatformAmount(MachineConfig.STEEL.fluidCapacity));
-//        return fluidContainer = new WrappedBlockFluidContainer(
+        return new SimpleFluidStorage(this, ModDataManagers.FLUID_CONTENTS, 2, FluidAmounts.toPlatformAmount(MachineConfig.STEEL.fluidCapacity))
+            .filter(0, f -> level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get())
+                .stream()
+                .anyMatch(r -> r.value().input().ingredient().test(f)))
+            .filter(1, f -> level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get())
+                .stream()
+                .anyMatch(r -> r.value().result().resource().isOf(f.getType())));
+//        return fluidContainer = new WrappedBlockFluidContainer( TODO: Implement fluid storage!
 //            this,
 //            new BiFluidContainer(
 //                FluidAmounts.toPlatformAmount(MachineConfig.STEEL.fluidCapacity),
@@ -84,6 +91,10 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
 //                (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get())
 //                    .stream()
 //                    .anyMatch(r -> r.value().result().matches(holder))));
+    }
+
+    protected CommonStorage<FluidResource> getFluidContainer() {
+        return FluidApi.BLOCK.find(this, null);
     }
 
     @Override
@@ -116,8 +127,8 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
     public void craft() {
         if (recipe == null) return;
 
-        fluidContainer.extract(getFluidContainer().getFirstFluid().copyWithAmount(recipe.input().getAmount()), false);
-        fluidContainer.insert(recipe.result(), false);
+        fluidContainer.extract(getFluidContainer().getResource(0), recipe.input().getAmount(), false);
+        fluidContainer.insert(recipe.result().resource(), recipe.result().amount(), false);
 
         updateSlots();
 
