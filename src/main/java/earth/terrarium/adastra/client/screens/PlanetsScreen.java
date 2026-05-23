@@ -1,10 +1,7 @@
 package earth.terrarium.adastra.client.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.*;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Axis;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
@@ -276,21 +273,21 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
         // Render diamond pattern lines
         RenderSystem.setShader(GameRenderer::getRendertypeLinesShader);
         Tesselator tessellator = Tesselator.getInstance();
-        BufferBuilder bufferBuilder = tessellator.getBuilder();
+
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
-        bufferBuilder.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
+        BufferBuilder bufferBuilder = tessellator.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
 
         for (int i = -height; i <= width; i += 24) {
-            bufferBuilder.vertex(i, 0, 0).color(0xff0f2559).endVertex();
-            bufferBuilder.vertex(i + height, height, 0).color(0xff0f2559).endVertex();
+            bufferBuilder.addVertex(i, 0, 0).setColor(0xff0f2559);
+            bufferBuilder.addVertex(i + height, height, 0).setColor(0xff0f2559);
         }
 
         for (int i = width + height; i >= 0; i -= 24) {
-            bufferBuilder.vertex(i, 0, 0).color(0xff0f2559).endVertex();
-            bufferBuilder.vertex(i - height, height, 0).color(0xff0f2559).endVertex();
+            bufferBuilder.addVertex(i, 0, 0).setColor(0xff0f2559);
+            bufferBuilder.addVertex(i - height, height, 0).setColor(0xff0f2559);
         }
 
-        tessellator.end();
+        BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
 
         AdAstraClientEvents.RenderSolarSystemEvent.fire(graphics, selectedSolarSystem, width, height);
         renderSelectionMenu(graphics);
@@ -331,8 +328,8 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
                 double x2 = x + r * Math.cos(nextAngle);
                 double y2 = y + r * Math.sin(nextAngle);
 
-                bufferBuilder.vertex(x1, y1, 0).color(color).endVertex();
-                bufferBuilder.vertex(x2, y2, 0).color(color).endVertex();
+                bufferBuilder.addVertex((float)x1, (float) y1, 0).setColor(color);
+                bufferBuilder.addVertex((float)x2, (float) y2, 0).setColor(color);
             }
         }
     }
@@ -408,12 +405,11 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
     static {
         AdAstraClientEvents.RenderSolarSystemEvent.register((graphics, solarSystem, width, height) -> {
             if (PlanetConstants.SOLAR_SYSTEM.equals(solarSystem)) {
-                Tesselator tessellator = Tesselator.getInstance();
-                BufferBuilder bufferBuilder = tessellator.getBuilder();
+                Tesselator tesselator = Tesselator.getInstance();
                 RenderSystem.setShader(GameRenderer::getPositionColorShader);
-                bufferBuilder.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
+                BufferBuilder bufferBuilder = tesselator.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
                 drawCircles(0, 4, 0xff24327b, bufferBuilder, width, height);
-                tessellator.end();
+                BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
 
                 graphics.blit(DimensionRenderingUtils.SUN, width / 2 - 8, height / 2 - 8, 0, 0, 16, 16, 16, 16);
                 float rotation = Util.getMillis() / 100f;
@@ -431,11 +427,10 @@ public class PlanetsScreen extends AbstractContainerScreen<PlanetsMenu> {
         AdAstraClientEvents.RenderSolarSystemEvent.register((graphics, solarSystem, width, height) -> {
             if (PlanetConstants.PROXIMA_CENTAURI.equals(solarSystem)) {
                 Tesselator tessellator = Tesselator.getInstance();
-                BufferBuilder bufferBuilder = tessellator.getBuilder();
                 RenderSystem.setShader(GameRenderer::getPositionColorShader);
-                bufferBuilder.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
+                BufferBuilder bufferBuilder = tessellator.begin(VertexFormat.Mode.DEBUG_LINES, DefaultVertexFormat.POSITION_COLOR);
                 drawCircles(1, 1, 0xff008080, bufferBuilder, width, height);
-                tessellator.end();
+                BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
 
                 graphics.blit(DimensionRenderingUtils.BLUE_SUN, width / 2 - 8, height / 2 - 8, 0, 0, 16, 16, 16, 16);
                 float rotation = Util.getMillis() / 100f % 360f;

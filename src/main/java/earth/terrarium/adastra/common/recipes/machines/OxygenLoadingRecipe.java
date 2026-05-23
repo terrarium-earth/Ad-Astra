@@ -48,14 +48,12 @@ public record OxygenLoadingRecipe(
     @Override
     public boolean matches(@NotNull RecipeInput container, @NotNull Level level) {
         if (!(container instanceof OxygenLoaderBlockEntity entity)) return false;
-        if (!input.test(entity.getFluidContainer().getFirstFluid())) return false;
-        if (entity.getEnergyStorage().internalExtract(energy, true) < energy) return false;
-        if (entity.getFluidContainer().getFluids().get(1).getFluidAmount() >= entity.getFluidContainer().getTankCapacity(1)) {
+        if (!input.test(entity.getFluidContainer().getContents(0))) return false;
+        if (entity.getEnergyStorage().extract(energy, true) < energy) return false;
+        if (entity.getFluidContainer().getAmount(1) >= entity.getFluidContainer().getLimit(1, FluidResource.BLANK)) {
             return false;
         }
-        return entity.getFluidContainer().internalExtract(entity.getFluidContainer().getFirstFluid()
-                .copyWithAmount(input.getFluidAmount()), true)
-            .getFluidAmount() >= input.getFluidAmount();
+        return entity.getFluidContainer().extract(entity.getFluidContainer().getResource(0), input.getAmount(), true) >= input.getAmount();
     }
 
     @Override

@@ -16,6 +16,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -75,12 +76,12 @@ public class FlagBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> tooltip, TooltipFlag tooltipFlag) {
         TooltipUtils.addDescriptionComponent(tooltip, ConstantComponents.FLAG_INFO);
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult blockHitResult) {
         if (level.isClientSide() && (AdAstraConfig.allowFlagImages || player.canUseGameMasterBlocks())) {
             if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
                 return action(level, pos.above(), player);
@@ -91,7 +92,7 @@ public class FlagBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
 
     private InteractionResult action(Level level, BlockPos pos, Player player) {
         if (level.getBlockEntity(pos) instanceof FlagBlockEntity entity) {
-            if (entity.getOwner() != null && player.getUUID().equals(entity.getOwner().getId())) {
+            if (entity.getOwner() != null && player.getUUID().equals(entity.getOwner().id())) {
                 FlagUrlScreen.open(pos);
             } else {
                 player.displayClientMessage(ConstantComponents.NOT_THE_OWNER, true);

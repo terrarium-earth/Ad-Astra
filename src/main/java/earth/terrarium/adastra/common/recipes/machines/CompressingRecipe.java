@@ -49,7 +49,7 @@ public record CompressingRecipe(
     public boolean matches(RecipeInput container, Level level) {
         if (!ingredient.test(container.getItem(1))) return false;
         if (!(container instanceof CompressorBlockEntity entity)) return true;
-        if (entity.getEnergyStorage().internalExtract(energy, true) < energy) return false;
+        if (entity.getEnergyStorage().extract(energy, true) < energy) return false;
         return ItemUtils.canAddItem(container.getItem(2), result);
     }
 

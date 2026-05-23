@@ -99,11 +99,6 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder, Fluid
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-    }
-
-    @Override
     protected void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         speed = compound.getFloat("Speed");
@@ -169,7 +164,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder, Fluid
         if (!hasPassenger(passenger)) return;
 
         float zOffset = getControllingPassenger() == passenger ? -0.6f : 0.4f;
-        float yOffset = (this.isRemoved() ? 0.01f : 0.95f) + passenger.getMyRidingOffset(this);
+        float yOffset = (float) ((this.isRemoved() ? 0.01f : 0.95f) + passenger.getPassengerRidingPosition(this).y());
         Vec3 position = new Vec3(-0.5, 0, zOffset).yRot(-getYRot() * (float) (Math.PI / 180) - (float) (Math.PI / 2));
 
         clampRotation(passenger);

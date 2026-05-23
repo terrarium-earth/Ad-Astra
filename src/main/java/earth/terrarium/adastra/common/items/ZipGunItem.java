@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.common.items;
 
 import earth.terrarium.adastra.api.systems.GravityApi;
+import earth.terrarium.adastra.client.ClientPlatformUtils;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
 import earth.terrarium.adastra.common.registry.ModDataManagers;
@@ -8,7 +9,6 @@ import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import earth.terrarium.common_storage_lib.context.ItemContext;
 import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
 import earth.terrarium.common_storage_lib.fluid.FluidApi;
@@ -159,6 +159,6 @@ public class ZipGunItem extends Item implements FluidProvider.Item {
 
     @Override
     public int getBarColor(@NotNull ItemStack stack) {
-        return ClientFluidHooks.getFluidColor(FluidUtils.getTank(stack));
+        return ClientPlatformUtils.getFluidColor(FluidUtils.getTank(stack));
     }
 }

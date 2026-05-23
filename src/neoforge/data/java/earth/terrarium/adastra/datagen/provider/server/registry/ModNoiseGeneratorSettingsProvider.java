@@ -2,7 +2,7 @@ package earth.terrarium.adastra.datagen.provider.server.registry;
 
 import earth.terrarium.adastra.AdAstra;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.SurfaceRuleData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +28,7 @@ public class ModNoiseGeneratorSettingsProvider {
         return ResourceKey.create(Registries.NOISE_SETTINGS, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 
-    public static void bootstrap(BootstapContext<NoiseGeneratorSettings> context) {
+    public static void bootstrap(BootstrapContext<NoiseGeneratorSettings> context) {
         context.register(SPACE, space());
     }
 

@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blockentities.flag;
 
+import com.mojang.authlib.GameProfile;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.flag.content.FlagContent;
 import earth.terrarium.adastra.common.blockentities.flag.content.UrlContent;
@@ -59,6 +60,10 @@ public class FlagBlockEntity extends BlockEntity {
     @Nullable
     public ResolvableProfile getOwner() {
         return this.owner;
+    }
+
+    public void setOwner(GameProfile profile) {
+        this.setOwner(new ResolvableProfile(profile));
     }
 
     public void setOwner(ResolvableProfile profile) {

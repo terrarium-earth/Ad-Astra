@@ -67,7 +67,7 @@ public class OverlayRenderer {
         RenderSystem.polygonOffset(-3, -3);
         RenderSystem.enablePolygonOffset();
         RenderSystem.disableCull();
-        RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
 
@@ -96,50 +96,50 @@ public class OverlayRenderer {
 
         // Bottom Face
         if (!others.contains(pos.below())) {
-            consumer.vertex(matrix, minX, minY, minZ).color(color).endVertex();
-            consumer.vertex(matrix, maxX, minY, minZ).color(color).endVertex();
-            consumer.vertex(matrix, maxX, minY, maxZ).color(color).endVertex();
-            consumer.vertex(matrix, minX, minY, maxZ).color(color).endVertex();
+            consumer.addVertex(matrix, minX, minY, minZ).setColor(color);
+            consumer.addVertex(matrix, maxX, minY, minZ).setColor(color);
+            consumer.addVertex(matrix, maxX, minY, maxZ).setColor(color);
+            consumer.addVertex(matrix, minX, minY, maxZ).setColor(color);
         }
 
         // Top Face
         if (!others.contains(pos.above())) {
-            consumer.vertex(matrix, minX, maxY, maxZ).color(color).endVertex();
-            consumer.vertex(matrix, maxX, maxY, maxZ).color(color).endVertex();
-            consumer.vertex(matrix, maxX, maxY, minZ).color(color).endVertex();
-            consumer.vertex(matrix, minX, maxY, minZ).color(color).endVertex();
+            consumer.addVertex(matrix, minX, maxY, maxZ).setColor(color);
+            consumer.addVertex(matrix, maxX, maxY, maxZ).setColor(color);
+            consumer.addVertex(matrix, maxX, maxY, minZ).setColor(color);
+            consumer.addVertex(matrix, minX, maxY, minZ).setColor(color);
         }
 
         // North Face
         if (!others.contains(pos.north())) {
-            consumer.vertex(matrix, minX, minY, minZ).color(color).endVertex();
-            consumer.vertex(matrix, minX, maxY, minZ).color(color).endVertex();
-            consumer.vertex(matrix, maxX, maxY, minZ).color(color).endVertex();
-            consumer.vertex(matrix, maxX, minY, minZ).color(color).endVertex();
+            consumer.addVertex(matrix, minX, minY, minZ).setColor(color);
+            consumer.addVertex(matrix, minX, maxY, minZ).setColor(color);
+            consumer.addVertex(matrix, maxX, maxY, minZ).setColor(color);
+            consumer.addVertex(matrix, maxX, minY, minZ).setColor(color);
         }
 
         // South Face
         if (!others.contains(pos.south())) {
-            consumer.vertex(matrix, maxX, minY, maxZ).color(color).endVertex();
-            consumer.vertex(matrix, maxX, maxY, maxZ).color(color).endVertex();
-            consumer.vertex(matrix, minX, maxY, maxZ).color(color).endVertex();
-            consumer.vertex(matrix, minX, minY, maxZ).color(color).endVertex();
+            consumer.addVertex(matrix, maxX, minY, maxZ).setColor(color);
+            consumer.addVertex(matrix, maxX, maxY, maxZ).setColor(color);
+            consumer.addVertex(matrix, minX, maxY, maxZ).setColor(color);
+            consumer.addVertex(matrix, minX, minY, maxZ).setColor(color);
         }
 
         // East Face
         if (!others.contains(pos.east())) {
-            consumer.vertex(matrix, maxX, minY, minZ).color(color).endVertex();
-            consumer.vertex(matrix, maxX, maxY, minZ).color(color).endVertex();
-            consumer.vertex(matrix, maxX, maxY, maxZ).color(color).endVertex();
-            consumer.vertex(matrix, maxX, minY, maxZ).color(color).endVertex();
+            consumer.addVertex(matrix, maxX, minY, minZ).setColor(color);
+            consumer.addVertex(matrix, maxX, maxY, minZ).setColor(color);
+            consumer.addVertex(matrix, maxX, maxY, maxZ).setColor(color);
+            consumer.addVertex(matrix, maxX, minY, maxZ).setColor(color);
         }
 
         // West Face
         if (!others.contains(pos.west())) {
-            consumer.vertex(matrix, minX, minY, maxZ).color(color).endVertex();
-            consumer.vertex(matrix, minX, maxY, maxZ).color(color).endVertex();
-            consumer.vertex(matrix, minX, maxY, minZ).color(color).endVertex();
-            consumer.vertex(matrix, minX, minY, minZ).color(color).endVertex();
+            consumer.addVertex(matrix, minX, minY, maxZ).setColor(color);
+            consumer.addVertex(matrix, minX, maxY, maxZ).setColor(color);
+            consumer.addVertex(matrix, minX, maxY, minZ).setColor(color);
+            consumer.addVertex(matrix, minX, minY, minZ).setColor(color);
         }
     }
 }

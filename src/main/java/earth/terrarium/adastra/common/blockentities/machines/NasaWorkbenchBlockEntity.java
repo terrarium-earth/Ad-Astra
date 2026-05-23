@@ -25,6 +25,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +41,7 @@ public class NasaWorkbenchBlockEntity extends ContainerMachineBlockEntity {
     );
 
     private static final int[] INPUT_SLOTS = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-    protected final RecipeManager.CachedCheck<Container, NasaWorkbenchRecipe> quickCheck = RecipeManager.createCheck(ModRecipeTypes.NASA_WORKBENCH.get());
+    protected final RecipeManager.CachedCheck<RecipeInput, NasaWorkbenchRecipe> quickCheck = RecipeManager.createCheck(ModRecipeTypes.NASA_WORKBENCH.get());
 
     @Nullable
     protected NasaWorkbenchRecipe recipe;

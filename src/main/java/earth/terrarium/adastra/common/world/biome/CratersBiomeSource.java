@@ -2,6 +2,7 @@ package earth.terrarium.adastra.common.world.biome;
 
 import com.google.common.collect.Streams;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.util.ExtraCodecs;
@@ -16,7 +17,7 @@ import java.util.stream.Stream;
 
 public class CratersBiomeSource extends BiomeSource {
 
-    public static final Codec<CratersBiomeSource> CODEC = RecordCodecBuilder.create(instance ->
+    public static final MapCodec<CratersBiomeSource> CODEC = RecordCodecBuilder.mapCodec(instance ->
         instance.group(
             Biome.CODEC.fieldOf("default_biome").forGetter(source -> source.defaultBiome),
             ExtraCodecs.nonEmptyList(DepthBiome.CODEC.listOf()).listOf().fieldOf("biomes").forGetter(source -> source.allowedBiomes),
@@ -35,7 +36,7 @@ public class CratersBiomeSource extends BiomeSource {
     }
 
     @Override
-    protected Codec<? extends BiomeSource> codec() {
+    protected MapCodec<? extends BiomeSource> codec() {
         return CODEC;
     }
 

@@ -76,7 +76,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
                 .anyMatch(r -> r.value().result().resource().isOf(f.getType())));
     }
 
-    private CommonStorage<FluidResource> getFluidContainer() {
+    public CommonStorage<FluidResource> getFluidContainer() {
         return FluidApi.BLOCK.find(this, null);
     }
 

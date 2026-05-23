@@ -11,6 +11,10 @@ import earth.terrarium.adastra.common.entities.vehicles.Lander;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.items.armor.JetSuitItem;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
+import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
+import earth.terrarium.common_storage_lib.energy.EnergyApi;
+import earth.terrarium.common_storage_lib.fluid.FluidApi;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -66,7 +70,9 @@ public class OverlayScreen {
         var chestStack = player.getInventory().getArmor(2);
         if (SpaceSuitItem.hasFullSet(player) && chestStack.getItem() instanceof SpaceSuitItem spaceSuit) {
             long amount = SpaceSuitItem.getOxygenAmount(player);
-            long capacity = spaceSuit.getFluidContainer(chestStack).getTankCapacity(0);
+            ModifyOnlyContext itemContext = new ModifyOnlyContext(chestStack);
+            var fluidContainer = itemContext.find(FluidApi.ITEM);
+            long capacity = fluidContainer.getLimit(0, FluidResource.BLANK);
             double ratio = (double) amount / capacity;
             int barHeight = (int) (ratio * 52);
 
@@ -92,8 +98,11 @@ public class OverlayScreen {
 
         // Battery overlay
         if (JetSuitItem.hasFullSet(player) && chestStack.getItem() instanceof JetSuitItem jetSuit) {
-            long amount = jetSuit.getEnergyStorage(chestStack).getStoredEnergy();
-            long capacity = jetSuit.getEnergyStorage(chestStack).getMaxCapacity();
+            ModifyOnlyContext itemContext = new ModifyOnlyContext(chestStack);
+            var energyStorage = itemContext.find(EnergyApi.ITEM);
+
+            long amount = energyStorage.getStoredAmount();
+            long capacity = energyStorage.getCapacity();
             double ratio = (double) amount / capacity;
             int barWidth = (int) (ratio * 49);
 

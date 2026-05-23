@@ -68,7 +68,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
         return null;
     }
 
-    private CommonStorage<FluidResource> getFluidContainer() {
+    public CommonStorage<FluidResource> getFluidContainer() {
         return FluidApi.BLOCK.find(this, null);
     }
 

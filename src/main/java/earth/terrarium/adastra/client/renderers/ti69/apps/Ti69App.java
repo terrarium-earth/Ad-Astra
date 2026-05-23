@@ -53,13 +53,12 @@ public interface Ti69App {
 
         RenderSystem.setShaderTexture(0, icon);
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-        bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        bufferBuilder.vertex(matrix4f, (float) x, (float) y, 0).uv(minU, minV).endVertex();
-        bufferBuilder.vertex(matrix4f, (float) x, (float) y2, 0).uv(minU, maxV).endVertex();
-        bufferBuilder.vertex(matrix4f, (float) x2, (float) y2, 0).uv(maxU, maxV).endVertex();
-        bufferBuilder.vertex(matrix4f, (float) x2, (float) y, 0).uv(maxU, minV).endVertex();
-        BufferUploader.drawWithShader(bufferBuilder.end());
+        BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        bufferBuilder.addVertex(matrix4f, (float) x, (float) y, 0).setUv(minU, minV);
+        bufferBuilder.addVertex(matrix4f, (float) x, (float) y2, 0).setUv(minU, maxV);
+        bufferBuilder.addVertex(matrix4f, (float) x2, (float) y2, 0).setUv(maxU, maxV);
+        bufferBuilder.addVertex(matrix4f, (float) x2, (float) y, 0).setUv(maxU, minV);
+        BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
     }
 
     /**

@@ -40,7 +40,7 @@ public sealed class RadioSoundInstance extends AbstractSoundInstance implements 
     public WeighedSoundEvents resolve(@NotNull SoundManager manager) {
         WeighedSoundEvents soundEvents = new WeighedSoundEvents(this.getLocation(), null);
         soundEvents.addSound(new Sound(
-            getLocation().toString(),
+            getLocation(),
             ConstantFloat.of(1f),
             ConstantFloat.of(1f),
             1,

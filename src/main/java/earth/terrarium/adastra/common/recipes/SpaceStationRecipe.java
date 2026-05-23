@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
+import earth.terrarium.adastra.common.container.InventoryRecipeInput;
 import earth.terrarium.adastra.common.recipes.base.IngredientHolder;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
@@ -76,7 +77,7 @@ public record SpaceStationRecipe(List<IngredientHolder> ingredients,
 
     public static boolean hasIngredients(Player player, Level level, SpaceStationRecipe recipe) {
         if (player.isCreative() || player.isSpectator()) return true;
-        return recipe.matches(player.getInventory(), level);
+        return recipe.matches(new InventoryRecipeInput(player.getInventory()), level);
     }
 
     public static void consumeIngredients(Player player, Level level) {
@@ -85,7 +86,7 @@ public record SpaceStationRecipe(List<IngredientHolder> ingredients,
         var recipe = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.SPACE_STATION_RECIPE.get()).stream()
             .filter(r -> level.dimension().equals(r.value().dimension())).findFirst().orElse(null);
         if (recipe == null) return;
-        if (!recipe.value().matches(player.getInventory(), level)) return;
+        if (!recipe.value().matches(new InventoryRecipeInput(player.getInventory()), level)) return;
 
         var inventory = player.getInventory();
         for (IngredientHolder holder : recipe.value().ingredients()) {

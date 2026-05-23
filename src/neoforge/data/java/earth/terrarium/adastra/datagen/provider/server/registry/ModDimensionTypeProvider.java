@@ -3,7 +3,8 @@ package earth.terrarium.adastra.datagen.provider.server.registry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.Planet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -34,7 +35,7 @@ public class ModDimensionTypeProvider {
         return ResourceKey.create(Registries.DIMENSION_TYPE, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 
-    public static void bootstrap(BootstapContext<DimensionType> context) {
+    public static void bootstrap(BootstrapContext<DimensionType> context) {
         orbit(context, EARTH_ORBIT, Planet.EARTH_ORBIT.location());
         orbit(context, MOON_ORBIT, Planet.MOON_ORBIT.location());
         orbit(context, MARS_ORBIT, Planet.MARS_ORBIT.location());
@@ -158,7 +159,7 @@ public class ModDimensionTypeProvider {
                     0)));
     }
 
-    private static void orbit(BootstapContext<DimensionType> context, ResourceKey<DimensionType> key, ResourceLocation dimensionSpecialEffects) {
+    private static void orbit(BootstrapContext<DimensionType> context, ResourceKey<DimensionType> key, ResourceLocation dimensionSpecialEffects) {
         context.register(
             key,
             create(

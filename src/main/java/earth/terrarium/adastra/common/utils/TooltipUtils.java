@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.utils;
 
+import earth.terrarium.adastra.client.ClientPlatformUtils;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.common_storage_lib.resources.ResourceStack;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
@@ -75,7 +76,7 @@ public class TooltipUtils {
             return Component.translatable("tooltip.ad_astra.fluid",
                 getFormattedAmount(0),
                 getFormattedAmount(FluidAmounts.toMillibuckets(capacity)),
-                ClientFluidHooks.getDisplayName(FluidHolder.ofMillibuckets(fallback, capacity))
+                ClientPlatformUtils.getDisplayName(new ResourceStack<>(FluidResource.of(fallback), capacity))
             ).withStyle(ChatFormatting.GOLD);
         }
 
@@ -86,7 +87,7 @@ public class TooltipUtils {
         return Component.translatable("tooltip.ad_astra.fluid",
             getFormattedAmount(FluidAmounts.toMillibuckets(fluid.amount())),
             getFormattedAmount(FluidAmounts.toMillibuckets(capacity)),
-            ClientFluidHooks.getDisplayName(fluid)
+            ClientPlatformUtils.getDisplayName(fluid)
         ).withStyle(ChatFormatting.GOLD);
     }
 

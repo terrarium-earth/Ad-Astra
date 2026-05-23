@@ -33,7 +33,7 @@ public class SolarPanelScreen extends MachineScreen<SolarPanelMenu, SolarPanelBl
         if (entity.isDay()) {
             graphics.blitSprite(GuiUtils.SUN, leftPos + 35, topPos + 59, 21, 21);
         }
-        boolean full = entity.getEnergyStorage().getStoredEnergy() >= entity.getEnergyStorage().getMaxCapacity();
+        boolean full = entity.getEnergyStorage().getStoredAmount() >= entity.getEnergyStorage().getCapacity();
         graphics.drawString(
             font,
             Component.translatable("tooltip.ad_astra.energy_per_tick", entity.isDay() && !full ? PlanetApi.API.getSolarPower(Minecraft.getInstance().level) : 0),

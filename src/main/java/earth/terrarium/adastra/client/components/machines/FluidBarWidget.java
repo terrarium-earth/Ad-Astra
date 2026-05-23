@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.teamresourceful.resourcefullib.client.components.CursorWidget;
 import com.teamresourceful.resourcefullib.client.screens.CursorScreen;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
+import earth.terrarium.adastra.client.ClientPlatformUtils;
 import earth.terrarium.adastra.client.components.base.TickableWidget;
 import earth.terrarium.adastra.client.screens.base.ConfigurationScreen;
 import earth.terrarium.adastra.client.utils.GuiUtils;
@@ -12,7 +13,6 @@ import earth.terrarium.adastra.common.menus.configuration.FluidConfiguration;
 import earth.terrarium.adastra.common.network.NetworkHandler;
 import earth.terrarium.adastra.common.network.packets.ServerboundClearFluidTankPacket;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import earth.terrarium.common_storage_lib.resources.ResourceStack;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
@@ -60,8 +60,8 @@ public class FluidBarWidget extends ConfigurationWidget implements CursorWidget,
         int y = this.getY();
 
         if (!holder.isEmpty()) {
-            TextureAtlasSprite sprite = ClientFluidHooks.getFluidSprite(holder);
-            int color = ClientFluidHooks.getFluidColor(holder);
+            TextureAtlasSprite sprite = ClientPlatformUtils.getFluidSprite(holder);
+            int color = ClientPlatformUtils.getFluidColor(holder);
             float r = FastColor.ARGB32.red(color) / 255f;
             float g = FastColor.ARGB32.green(color) / 255f;
             float b = FastColor.ARGB32.blue(color) / 255f;

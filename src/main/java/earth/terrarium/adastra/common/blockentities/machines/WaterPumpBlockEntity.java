@@ -75,7 +75,7 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
         if (canPump(pos, energyContainer)) pump(level, energyContainer);
     }
 
-    private CommonStorage<FluidResource> getFluidContainer() {
+    public CommonStorage<FluidResource> getFluidContainer() {
         return FluidApi.BLOCK.find(this, null);
     }
 

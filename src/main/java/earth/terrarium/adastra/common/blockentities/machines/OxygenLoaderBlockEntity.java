@@ -93,7 +93,7 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
 //                    .anyMatch(r -> r.value().result().matches(holder))));
     }
 
-    protected CommonStorage<FluidResource> getFluidContainer() {
+    public CommonStorage<FluidResource> getFluidContainer() {
         return FluidApi.BLOCK.find(this, null);
     }
 

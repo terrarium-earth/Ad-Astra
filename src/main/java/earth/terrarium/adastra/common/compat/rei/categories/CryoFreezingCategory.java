@@ -9,6 +9,7 @@ import earth.terrarium.adastra.common.compat.rei.widgets.ReiEtaWidget;
 import earth.terrarium.adastra.common.compat.rei.widgets.ReiFluidBarWidget;
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.registry.ModBlocks;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;

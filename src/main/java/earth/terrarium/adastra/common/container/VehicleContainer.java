@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.container;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.SimpleContainer;
@@ -15,19 +16,19 @@ public class VehicleContainer extends SimpleContainer {
     }
 
     @Override
-    public void fromTag(ListTag containerNbt) {
+    public void fromTag(ListTag containerNbt, HolderLookup.Provider provider) {
         for (int i = 0; i < containerNbt.size(); i++) {
-            var stack = ItemStack.of(containerNbt.getCompound(i));
+            var stack = ItemStack.parseOptional(provider, containerNbt.getCompound(i));
             setItem(i, stack);
         }
     }
 
     @Override
-    public ListTag createTag() {
+    public ListTag createTag(HolderLookup.Provider provider) {
         ListTag containerNbt = new ListTag();
         for (int i = 0; i < getContainerSize(); i++) {
             var stack = getItem(i);
-            containerNbt.add(stack.save(new CompoundTag()));
+            containerNbt.add(stack.save(provider));
         }
         return containerNbt;
     }

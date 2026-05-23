@@ -61,7 +61,7 @@ public class DetectorBlock extends MachineBlock implements Wrenchable {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         return InteractionResult.PASS;
     }
 

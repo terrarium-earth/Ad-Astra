@@ -117,7 +117,7 @@ public class CorruptedLunarianModel extends EntityModel<CorruptedLunarian> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, int color) {
         head.render(poseStack, vertices, packedLight, packedOverlay);
         body.render(poseStack, vertices, packedLight, packedOverlay);
         leg0.render(poseStack, vertices, packedLight, packedOverlay);

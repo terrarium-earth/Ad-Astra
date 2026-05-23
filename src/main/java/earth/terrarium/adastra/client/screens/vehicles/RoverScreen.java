@@ -4,6 +4,7 @@ import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.screens.base.VehicleScreen;
 import earth.terrarium.adastra.common.entities.vehicles.Rover;
 import earth.terrarium.adastra.common.menus.vehicles.RoverMenu;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +22,6 @@ public class RoverScreen extends VehicleScreen<RoverMenu, Rover> {
     @Override
     protected void renderBg(@NotNull GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         super.renderBg(graphics, partialTick, mouseX, mouseY);
-        this.drawFluidBar(graphics, mouseX, mouseY, 37, 57, entity.fluid(), entity.fluidContainer().getTankCapacity(0));
+        this.drawFluidBar(graphics, mouseX, mouseY, 37, 57, entity.fluid(), entity.fluidContainer().getLimit(0, FluidResource.BLANK));
     }
 }

@@ -12,7 +12,10 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -49,6 +52,11 @@ public class AdAstraClientFabric {
         ModBlocks.SLIDING_DOORS.stream().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block.get(), RenderType.cutout()));
         ModBlocks.INDUSTRIAL_LAMPS.stream().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block.get(), RenderType.cutout()));
         ModBlocks.SMALL_INDUSTRIAL_LAMPS.stream().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block.get(), RenderType.cutout()));
+        AdAstraClient.registerScreens(MenuScreens::register);
+        AdAstraClient.registerBlockEntityRenderers(BlockEntityRenderers::register);
+        AdAstraClient.registerEntityRenderers(EntityRendererRegistry::register);
+        AdAstraClient.registerRenderLayers(BlockRenderLayerMap.INSTANCE::putBlock);
+        AdAstraClient.registerItemProperties(ItemProperties::register);
     }
 
     public static void onAddReloadListener() {

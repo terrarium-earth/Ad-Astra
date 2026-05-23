@@ -4,6 +4,8 @@ import earth.terrarium.adastra.client.AdAstraClient;
 import earth.terrarium.adastra.common.entities.vehicles.Vehicle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
@@ -34,6 +36,10 @@ public class AdAstraClientNeoForge {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(AdAstraClient::init);
         AdAstraClient.onRegisterItemRenderers(ITEM_RENDERERS::put);
+        event.enqueueWork(() -> {
+            AdAstraClient.registerRenderLayers(ItemBlockRenderTypes::setRenderLayer);
+            AdAstraClient.registerItemProperties(ItemProperties::register);
+        });
     }
 
     @SubscribeEvent
@@ -62,6 +68,17 @@ public class AdAstraClientNeoForge {
     @SubscribeEvent
     public static void onClientReloadListeners(RegisterClientReloadListenersEvent event) {
         AdAstraClient.onAddReloadListener((id, listener) -> event.registerReloadListener(listener));
+    }
+
+    @SubscribeEvent
+    public static void onRegisterScreen(RegisterMenuScreensEvent event) {
+        AdAstraClient.registerScreens(event::register);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterScreen(EntityRenderersEvent.RegisterRenderers event) {
+        AdAstraClient.registerBlockEntityRenderers(event::registerBlockEntityRenderer);
+        AdAstraClient.registerEntityRenderers(event::registerEntityRenderer);
     }
 
     private static void onClientTick(ClientTickEvent.Pre event) {

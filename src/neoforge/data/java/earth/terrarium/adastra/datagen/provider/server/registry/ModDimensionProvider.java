@@ -3,7 +3,7 @@ package earth.terrarium.adastra.datagen.provider.server.registry;
 import earth.terrarium.adastra.AdAstra;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
@@ -36,7 +36,7 @@ public class ModDimensionProvider {
         return ResourceKey.create(Registries.NOISE_SETTINGS, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 
-    public static void bootstrap(BootstapContext<LevelStem> context) {
+    public static void bootstrap(BootstrapContext<LevelStem> context) {
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
         HolderGetter<DimensionType> dimensionTypes = context.lookup(Registries.DIMENSION_TYPE);
         HolderGetter<NoiseGeneratorSettings> noiseSettings = context.lookup(Registries.NOISE_SETTINGS);
@@ -49,7 +49,7 @@ public class ModDimensionProvider {
         space(context, GLACIO_ORBIT, ModDimensionTypeProvider.GLACIO_ORBIT, dimensionTypes, biomes, noiseSettings);
     }
 
-    private static void space(BootstapContext<LevelStem> context, ResourceKey<LevelStem> key, ResourceKey<DimensionType> type, HolderGetter<DimensionType> dimensionTypes, HolderGetter<Biome> biomes, HolderGetter<NoiseGeneratorSettings> noiseSettings) {
+    private static void space(BootstrapContext<LevelStem> context, ResourceKey<LevelStem> key, ResourceKey<DimensionType> type, HolderGetter<DimensionType> dimensionTypes, HolderGetter<Biome> biomes, HolderGetter<NoiseGeneratorSettings> noiseSettings) {
         context.register(key, new LevelStem(
             dimensionTypes.getOrThrow(type),
             new NoiseBasedChunkGenerator(

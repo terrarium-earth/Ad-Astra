@@ -69,12 +69,12 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ContentM
 
     @Override
     protected void readAdditionalSaveData(CompoundTag compound) {
-        inventory.fromTag(compound.getList("Inventory", Tag.TAG_COMPOUND));
+        inventory.fromTag(compound.getList("Inventory", Tag.TAG_COMPOUND), level().registryAccess());
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compound) {
-        compound.put("Inventory", inventory.createTag());
+        compound.put("Inventory", inventory.createTag(level().registryAccess()));
     }
 
     @Override

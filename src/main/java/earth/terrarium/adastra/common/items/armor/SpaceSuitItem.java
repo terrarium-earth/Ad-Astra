@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.common.items.armor;
 
 import earth.terrarium.adastra.api.systems.OxygenApi;
+import earth.terrarium.adastra.client.ClientPlatformUtils;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.items.armor.base.CustomDyeableArmorItem;
 import earth.terrarium.adastra.common.registry.ModDataManagers;
@@ -132,6 +133,6 @@ public class SpaceSuitItem extends CustomDyeableArmorItem implements FluidProvid
 
     @Override
     public int getBarColor(@NotNull ItemStack stack) {
-        return ClientFluidHooks.getFluidColor(FluidUtils.getTank(stack));
+        return ClientPlatformUtils.getFluidColor(FluidUtils.getTank(stack));
     }
 }

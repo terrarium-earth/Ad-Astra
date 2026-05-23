@@ -8,6 +8,7 @@ import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.recipes.machines.RefiningRecipe;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -65,7 +66,7 @@ public record RefiningCategory(IGuiHelper guiHelper) implements IRecipeCategory<
         int cookTime = recipe.cookingTime();
         long capacity = FluidAmounts.toPlatformAmount(MachineConfig.STEEL.fluidCapacity);
         new FluidBarDrawable(mouseX, mouseY, false, capacity, cookTime, recipe.input()
-            .getFluids().get(0).copyWithAmount(recipe.input().getFluidAmount()))
+            .getFluids().getFirst().withCount(recipe.input().getAmount()))
             .draw(graphics, 39, 49);
         new FluidBarDrawable(mouseX, mouseY, true, capacity, cookTime, recipe.result()).draw(graphics, 96, 49);
     }

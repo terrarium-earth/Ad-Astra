@@ -62,10 +62,10 @@ public class Ti69Renderer {
 
         VertexConsumer vertex = buffer.getBuffer(RenderType.text(TEXTURE));
         Matrix4f matrix4f = poseStack.last().pose();
-        vertex.vertex(matrix4f, -7.0F, 135.0F, 0.0F).color(255, 255, 255, 255).uv(0.0F, 1.0F).uv2(combinedLight).endVertex();
-        vertex.vertex(matrix4f, 135.0F, 135.0F, 0.0F).color(255, 255, 255, 255).uv(1.0F, 1.0F).uv2(combinedLight).endVertex();
-        vertex.vertex(matrix4f, 135.0F, -7.0F, 0.0F).color(255, 255, 255, 255).uv(1.0F, 0.0F).uv2(combinedLight).endVertex();
-        vertex.vertex(matrix4f, -7.0F, -7.0F, 0.0F).color(255, 255, 255, 255).uv(0.0F, 0.0F).uv2(combinedLight).endVertex();
+        vertex.addVertex(matrix4f, -7.0F, 135.0F, 0.0F).setColor(255, 255, 255, 255).setUv(0.0F, 1.0F).setLight(combinedLight);
+        vertex.addVertex(matrix4f, 135.0F, 135.0F, 0.0F).setColor(255, 255, 255, 255).setUv(1.0F, 1.0F).setLight(combinedLight);
+        vertex.addVertex(matrix4f, 135.0F, -7.0F, 0.0F).setColor(255, 255, 255, 255).setUv(1.0F, 0.0F).setLight(combinedLight);
+        vertex.addVertex(matrix4f, -7.0F, -7.0F, 0.0F).setColor(255, 255, 255, 255).setUv(0.0F, 0.0F).setLight(combinedLight);
 
         Ti69App app = Ti69Item.APP;
         texture(poseStack, buffer, app.color(), 0.01f, SCREEN);
@@ -88,10 +88,10 @@ public class Ti69Renderer {
             int red = (color >> 16) & 0xFF;
             int green = (color >> 8) & 0xFF;
             int blue = color & 0xFF;
-            screenVertex.vertex(matrix4f, -7.0F, 100.0F, 0.0F).color(red, green, blue, 255).uv(0.0F, 1.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
-            screenVertex.vertex(matrix4f, 100.0F, 100.0F, 0.0F).color(red, green, blue, 255).uv(1.0F, 1.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
-            screenVertex.vertex(matrix4f, 100.0F, -7.0F, 0.0F).color(red, green, blue, 255).uv(1.0F, 0.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
-            screenVertex.vertex(matrix4f, -7.0F, -7.0F, 0.0F).color(red, green, blue, 255).uv(0.0F, 0.0F).uv2(LightTexture.FULL_BRIGHT).endVertex();
+            screenVertex.addVertex(matrix4f, -7.0F, 100.0F, 0.0F).setColor(red, green, blue, 255).setUv(0.0F, 1.0F).setLight(LightTexture.FULL_BRIGHT);
+            screenVertex.addVertex(matrix4f, 100.0F, 100.0F, 0.0F).setColor(red, green, blue, 255).setUv(1.0F, 1.0F).setLight(LightTexture.FULL_BRIGHT);
+            screenVertex.addVertex(matrix4f, 100.0F, -7.0F, 0.0F).setColor(red, green, blue, 255).setUv(1.0F, 0.0F).setLight(LightTexture.FULL_BRIGHT);
+            screenVertex.addVertex(matrix4f, -7.0F, -7.0F, 0.0F).setColor(red, green, blue, 255).setUv(0.0F, 0.0F).setLight(LightTexture.FULL_BRIGHT);
         }
     }
 

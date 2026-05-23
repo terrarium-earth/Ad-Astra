@@ -38,7 +38,7 @@ public class EnergizerBlockItem extends BlockItem implements EnergyProvider.Item
 
         var itemEnergyContainer = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
         if (itemEnergyContainer == null) return super.updateCustomBlockEntityTag(pos, level, player, stack, state);
-        entity.getEnergyStorage().setEnergy(itemEnergyContainer.getStoredAmount());
+        entity.getEnergyStorage().insert(itemEnergyContainer.getStoredAmount(), false);
         entity.onEnergyChange();
 
         return super.updateCustomBlockEntityTag(pos, level, player, stack, state);

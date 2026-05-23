@@ -17,6 +17,7 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.SpawnPlacements;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -43,6 +44,7 @@ public class AdAstraFabric {
             }
             return InteractionResult.PASS;
         });
+        ModEntityTypes.registerSpawnPlacements(SpawnPlacements::register);
     }
 
     public static void onAddReloadListener() {

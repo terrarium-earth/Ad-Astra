@@ -98,7 +98,7 @@ public class MoglerModel<T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, int color) {
         if (this.young) {
             poseStack.scale(0.5f, 0.5f, 0.5f);
             poseStack.translate(0, 1.5f, 0);

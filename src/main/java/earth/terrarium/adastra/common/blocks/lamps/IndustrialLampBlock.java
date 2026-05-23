@@ -84,7 +84,7 @@ public class IndustrialLampBlock extends FaceAttachedHorizontalDirectionalBlock 
     }
 
     @Override
-    public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
+    protected boolean isPathfindable(BlockState blockState, PathComputationType pathComputationType) {
         return false;
     }
 }

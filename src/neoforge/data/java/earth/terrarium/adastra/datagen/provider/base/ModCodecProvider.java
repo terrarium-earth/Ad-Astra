@@ -2,7 +2,6 @@ package earth.terrarium.adastra.datagen.provider.base;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
-import earth.terrarium.adastra.AdAstra;
 import net.minecraft.core.Registry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -36,7 +35,7 @@ public abstract class ModCodecProvider<T> implements DataProvider {
         build((key, value) ->
             futures.add(DataProvider.saveStable(
                 output,
-                codec.encodeStart(JsonOps.INSTANCE, value).getOrThrow(false, AdAstra.LOGGER::error),
+                codec.encodeStart(JsonOps.INSTANCE, value).getOrThrow(),
                 pathProvider.json(key)
             ))
         );

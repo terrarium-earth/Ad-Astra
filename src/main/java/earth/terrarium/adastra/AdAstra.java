@@ -53,7 +53,7 @@ public class AdAstra {
         ModRecipeTypes.RECIPE_TYPES.init();
         ModRecipeSerializers.RECIPE_SERIALIZERS.init();
         ModParticleTypes.PARTICLE_TYPES.init();
-        ModPaintingVariants.PAINTING_VARIANTS.init();
+//        ModPaintingVariants.PAINTING_VARIANTS.init();
         ModSoundEvents.SOUND_EVENTS.init();
         ModStructures.STRUCTURE_TYPES.init();
         ModStructures.STRUCTURE_PROCESSORS.init();
@@ -69,7 +69,6 @@ public class AdAstra {
         map.put(ModItems.SPACE_SUIT.get(), CauldronInteraction.DYED_ITEM);
         map.put(ModItems.SPACE_PANTS.get(), CauldronInteraction.DYED_ITEM);
         map.put(ModItems.SPACE_BOOTS.get(), CauldronInteraction.DYED_ITEM);
-        ModEntityTypes.registerSpawnPlacements();
     }
 
     public static void onAddReloadListener(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {

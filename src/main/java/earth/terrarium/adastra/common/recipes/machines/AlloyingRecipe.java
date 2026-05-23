@@ -62,7 +62,7 @@ public record AlloyingRecipe(
         }
 
         if (!(container instanceof EtrionicBlastFurnaceBlockEntity entity)) return true;
-        if (entity.getEnergyStorage().internalExtract(energy, true) < energy) return false;
+        if (entity.getEnergyStorage().extract(energy, true) < energy) return false;
         return ItemUtils.canAddItem(container, result, 5, 6, 7, 8);
     }
 

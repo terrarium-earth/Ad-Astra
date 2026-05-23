@@ -33,29 +33,40 @@ import earth.terrarium.adastra.common.registry.*;
 import earth.terrarium.adastra.common.tags.ModItemTags;
 import earth.terrarium.adastra.common.utils.KeybindManager;
 import earth.terrarium.adastra.common.utils.radio.RadioHolder;
-import earth.terrarium.botarium.client.ClientHooks;
 import net.minecraft.client.Camera;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.particle.SplashParticle;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -77,11 +88,6 @@ public class AdAstraClient {
 
     public static void init() {
         AdAstra.CONFIGURATOR.register(AdAstraConfigClient.class);
-        registerScreens();
-        registerBlockEntityRenderers();
-        registerEntityRenderers();
-        registerItemProperties();
-        registerRenderLayers();
         registerArmor();
 
         AdAstra.setRegistryAccess(() -> {
@@ -91,57 +97,75 @@ public class AdAstraClient {
         });
     }
 
-    private static void registerScreens() {
-        MenuScreens.register(ModMenus.COAL_GENERATOR.get(), CoalGeneratorScreen::new);
-        MenuScreens.register(ModMenus.COMPRESSOR.get(), CompressorScreen::new);
-        MenuScreens.register(ModMenus.ETRIONIC_BLAST_FURNACE.get(), EtrionicBlastFurnaceScreen::new);
-        MenuScreens.register(ModMenus.OXYGEN_LOADER.get(), OxygenLoaderScreen::new);
-        MenuScreens.register(ModMenus.FUEL_REFINERY.get(), FuelRefineryScreen::new);
-        MenuScreens.register(ModMenus.WATER_PUMP.get(), WaterPumpScreen::new);
-        MenuScreens.register(ModMenus.SOLAR_PANEL.get(), SolarPanelScreen::new);
-        MenuScreens.register(ModMenus.OXYGEN_DISTRIBUTOR.get(), OxygenDistributorScreen::new);
-        MenuScreens.register(ModMenus.GRAVITY_NORMALIZER.get(), GravityNormalizerScreen::new);
-        MenuScreens.register(ModMenus.CRYO_FREEZER.get(), CryoFreezerScreen::new);
-        MenuScreens.register(ModMenus.NASA_WORKBENCH.get(), NasaWorkbenchScreen::new);
+    public static void registerScreens(ScreenRegistrar registrar) {
+        registrar.register(ModMenus.COAL_GENERATOR.get(), CoalGeneratorScreen::new);
+        registrar.register(ModMenus.COMPRESSOR.get(), CompressorScreen::new);
+        registrar.register(ModMenus.ETRIONIC_BLAST_FURNACE.get(), EtrionicBlastFurnaceScreen::new);
+        registrar.register(ModMenus.OXYGEN_LOADER.get(), OxygenLoaderScreen::new);
+        registrar.register(ModMenus.FUEL_REFINERY.get(), FuelRefineryScreen::new);
+        registrar.register(ModMenus.WATER_PUMP.get(), WaterPumpScreen::new);
+        registrar.register(ModMenus.SOLAR_PANEL.get(), SolarPanelScreen::new);
+        registrar.register(ModMenus.OXYGEN_DISTRIBUTOR.get(), OxygenDistributorScreen::new);
+        registrar.register(ModMenus.GRAVITY_NORMALIZER.get(), GravityNormalizerScreen::new);
+        registrar.register(ModMenus.CRYO_FREEZER.get(), CryoFreezerScreen::new);
+        registrar.register(ModMenus.NASA_WORKBENCH.get(), NasaWorkbenchScreen::new);
 
-        MenuScreens.register(ModMenus.ROCKET.get(), RocketScreen::new);
-        MenuScreens.register(ModMenus.ROVER.get(), RoverScreen::new);
-        MenuScreens.register(ModMenus.LANDER.get(), LanderScreen::new);
+        registrar.register(ModMenus.ROCKET.get(), RocketScreen::new);
+        registrar.register(ModMenus.ROVER.get(), RoverScreen::new);
+        registrar.register(ModMenus.LANDER.get(), LanderScreen::new);
 
-        MenuScreens.register(ModMenus.PLANETS.get(), PlanetsScreen::new);
+        registrar.register(ModMenus.PLANETS.get(), PlanetsScreen::new);
     }
 
-    private static void registerBlockEntityRenderers() {
-        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ENERGIZER.get(), c -> new EnergizerBlockEntityRenderer());
-        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.GLOBE.get(), c -> new GlobeBlockEntityRenderer());
-        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.OXYGEN_DISTRIBUTOR.get(), c -> new OxygenDistributorBlockEntityRenderer());
-        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.GRAVITY_NORMALIZER.get(), c -> new GravityNormalizerBlockEntityRenderer());
-        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.FLAG.get(), c -> new FlagBlockEntityRenderer());
-        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SLIDING_DOOR.get(), c -> new SlidingDoorBlockEntityRenderer());
+    public interface ScreenRegistrar {
+        <M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>> void register(
+            MenuType<? extends M> type, MenuScreens.ScreenConstructor<M, U> factory
+        );
     }
 
-    private static void registerEntityRenderers() {
-        ClientHooks.registerEntityRenderer(ModEntityTypes.AIR_VORTEX, NoopRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.ROVER, RoverRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_1_ROCKET, c -> new RocketRenderer(c, RocketModel.TIER_1_LAYER, RocketRenderer.TIER_1_TEXTURE));
-        ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_2_ROCKET, c -> new RocketRenderer(c, RocketModel.TIER_2_LAYER, RocketRenderer.TIER_2_TEXTURE));
-        ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_3_ROCKET, c -> new RocketRenderer(c, RocketModel.TIER_3_LAYER, RocketRenderer.TIER_3_TEXTURE));
-        ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_4_ROCKET, c -> new RocketRenderer(c, RocketModel.TIER_4_LAYER, RocketRenderer.TIER_4_TEXTURE));
-        ClientHooks.registerEntityRenderer(ModEntityTypes.LANDER, c -> new LanderRenderer(c, LanderModel.LAYER));
+    public static void registerBlockEntityRenderers(BlockEntityRegistrar registrar) {
+        registrar.register(ModBlockEntityTypes.ENERGIZER.get(), c -> new EnergizerBlockEntityRenderer());
+        registrar.register(ModBlockEntityTypes.GLOBE.get(), c -> new GlobeBlockEntityRenderer());
+        registrar.register(ModBlockEntityTypes.OXYGEN_DISTRIBUTOR.get(), c -> new OxygenDistributorBlockEntityRenderer());
+        registrar.register(ModBlockEntityTypes.GRAVITY_NORMALIZER.get(), c -> new GravityNormalizerBlockEntityRenderer());
+        registrar.register(ModBlockEntityTypes.FLAG.get(), c -> new FlagBlockEntityRenderer());
+        registrar.register(ModBlockEntityTypes.SLIDING_DOOR.get(), c -> new SlidingDoorBlockEntityRenderer());
+    }
 
-        ClientHooks.registerEntityRenderer(ModEntityTypes.LUNARIAN, LunarianRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.CORRUPTED_LUNARIAN, CorruptedLunarianRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.STAR_CRAWLER, StarCrawlerRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.MARTIAN_RAPTOR, MartianRaptorRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.PYGRO, PygroRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.ZOMBIFIED_PYGRO, ZombifiedPygroRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.PYGRO_BRUTE, PygroBruteRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.MOGLER, MoglerRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.ZOMBIFIED_MOGLER, ZombifiedMoglerRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.SULFUR_CREEPER, SulfurCreeperRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.LUNARIAN_WANDERING_TRADER, LunarianWanderingTraderRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.GLACIAN_RAM, GlacianRamRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.ICE_SPIT, ThrownItemRenderer::new);
+    public interface BlockEntityRegistrar {
+        <T extends BlockEntity, R extends BlockEntityRendererProvider<T>> void register(
+            BlockEntityType<T> type, R factory
+        );
+    }
+
+    public static void registerEntityRenderers(EntityRegistrar registrar) {
+        registrar.register(ModEntityTypes.AIR_VORTEX.get(), NoopRenderer::new);
+        registrar.register(ModEntityTypes.ROVER.get(), RoverRenderer::new);
+        registrar.register(ModEntityTypes.TIER_1_ROCKET.get(), c -> new RocketRenderer(c, RocketModel.TIER_1_LAYER, RocketRenderer.TIER_1_TEXTURE));
+        registrar.register(ModEntityTypes.TIER_2_ROCKET.get(), c -> new RocketRenderer(c, RocketModel.TIER_2_LAYER, RocketRenderer.TIER_2_TEXTURE));
+        registrar.register(ModEntityTypes.TIER_3_ROCKET.get(), c -> new RocketRenderer(c, RocketModel.TIER_3_LAYER, RocketRenderer.TIER_3_TEXTURE));
+        registrar.register(ModEntityTypes.TIER_4_ROCKET.get(), c -> new RocketRenderer(c, RocketModel.TIER_4_LAYER, RocketRenderer.TIER_4_TEXTURE));
+        registrar.register(ModEntityTypes.LANDER.get(), c -> new LanderRenderer(c, LanderModel.LAYER));
+
+        registrar.register(ModEntityTypes.LUNARIAN.get(), LunarianRenderer::new);
+        registrar.register(ModEntityTypes.CORRUPTED_LUNARIAN.get(), CorruptedLunarianRenderer::new);
+        registrar.register(ModEntityTypes.STAR_CRAWLER.get(), StarCrawlerRenderer::new);
+        registrar.register(ModEntityTypes.MARTIAN_RAPTOR.get(), MartianRaptorRenderer::new);
+        registrar.register(ModEntityTypes.PYGRO.get(), PygroRenderer::new);
+        registrar.register(ModEntityTypes.ZOMBIFIED_PYGRO.get(), ZombifiedPygroRenderer::new);
+        registrar.register(ModEntityTypes.PYGRO_BRUTE.get(), PygroBruteRenderer::new);
+        registrar.register(ModEntityTypes.MOGLER.get(), MoglerRenderer::new);
+        registrar.register(ModEntityTypes.ZOMBIFIED_MOGLER.get(), ZombifiedMoglerRenderer::new);
+        registrar.register(ModEntityTypes.SULFUR_CREEPER.get(), SulfurCreeperRenderer::new);
+        registrar.register(ModEntityTypes.LUNARIAN_WANDERING_TRADER.get(), LunarianWanderingTraderRenderer::new);
+        registrar.register(ModEntityTypes.GLACIAN_RAM.get(), GlacianRamRenderer::new);
+        registrar.register(ModEntityTypes.ICE_SPIT.get(), ThrownItemRenderer::new);
+    }
+
+    public interface EntityRegistrar {
+        <T extends Entity, R extends EntityRendererProvider<T>> void register(
+            EntityType<? extends T> entityType, R factory
+        );
     }
 
     public static void registerArmor() {
@@ -174,17 +198,29 @@ public class AdAstraClient {
         consumer.register(GlacianRamModel.LAYER_LOCATION, GlacianRamModel::createBodyLayer);
     }
 
-    private static void registerItemProperties() {
-        ClientHooks.registerItemProperty(ModItems.ETRIONIC_CAPACITOR.get(), ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "toggled"), (stack, level, entity, i) -> EtrionicCapacitorItem.active(stack) ? 0 : 1);
+    public static void registerItemProperties(ItemPropertyRegistrar registrar) {
+        registrar.register(ModItems.ETRIONIC_CAPACITOR.get(), ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "toggled"), (stack, level, entity, i) -> EtrionicCapacitorItem.active(stack) ? 0 : 1);
     }
 
-    public static void registerRenderLayers() {
-        ClientHooks.setRenderLayer(ModBlocks.VENT.get(), RenderType.cutout());
-        ClientHooks.setRenderLayer(ModBlocks.STEEL_DOOR.get(), RenderType.cutout());
-        ClientHooks.setRenderLayer(ModBlocks.STEEL_TRAPDOOR.get(), RenderType.cutout());
-        ClientHooks.setRenderLayer(ModBlocks.AERONOS_LADDER.get(), RenderType.cutout());
-        ClientHooks.setRenderLayer(ModBlocks.STROPHAR_LADDER.get(), RenderType.cutout());
-        ClientHooks.setRenderLayer(ModBlocks.GLACIAN_TRAPDOOR.get(), RenderType.cutout());
+    public interface ItemPropertyRegistrar {
+        <I extends Item> void register(
+            I item, ResourceLocation identifier, ClampedItemPropertyFunction propertyFunction
+        );
+    }
+
+    public static void registerRenderLayers(RenderLayerSetter setter) {
+        setter.setRenderLayer(ModBlocks.VENT.get(), RenderType.cutout());
+        setter.setRenderLayer(ModBlocks.STEEL_DOOR.get(), RenderType.cutout());
+        setter.setRenderLayer(ModBlocks.STEEL_TRAPDOOR.get(), RenderType.cutout());
+        setter.setRenderLayer(ModBlocks.AERONOS_LADDER.get(), RenderType.cutout());
+        setter.setRenderLayer(ModBlocks.STROPHAR_LADDER.get(), RenderType.cutout());
+        setter.setRenderLayer(ModBlocks.GLACIAN_TRAPDOOR.get(), RenderType.cutout());
+    }
+
+    public interface RenderLayerSetter {
+        <T extends Block> void setRenderLayer(
+            T block, RenderType type
+        );
     }
 
     public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientPlatformUtils.SpriteParticleRegistration<SimpleParticleType>> consumer) {

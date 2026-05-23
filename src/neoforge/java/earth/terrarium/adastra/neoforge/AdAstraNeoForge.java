@@ -6,7 +6,12 @@ import earth.terrarium.adastra.client.neoforge.AdAstraClientNeoForge;
 import earth.terrarium.adastra.common.commands.AdAstraCommands;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
 import earth.terrarium.adastra.common.tags.ModBlockTags;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.SpawnPlacementType;
+import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -16,6 +21,7 @@ import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
@@ -32,6 +38,7 @@ public class AdAstraNeoForge {
         NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onBlockPlace);
         NeoForge.EVENT_BUS.addListener(AdAstraNeoForge::onServerStarted);
         bus.addListener(AdAstraNeoForge::onAttributes);
+        bus.addListener(AdAstraNeoForge::registerSpawnPlacements);
         bus.addListener(AdAstraNeoForge::commonSetup);
         if (FMLEnvironment.dist.isClient()) {
             AdAstraClientNeoForge.init(bus);
@@ -62,6 +69,16 @@ public class AdAstraNeoForge {
 
     public static void commonSetup(FMLCommonSetupEvent event) {
         AdAstra.postInit();
+    }
+
+    public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
+        ModEntityTypes.registerSpawnPlacements(new ModEntityTypes.SpawnPlacementRegistrar() {
+            @Override
+            public <T extends Mob> void register(EntityType<T> entityType, SpawnPlacementType placementType,
+                                                 Heightmap.Types height, SpawnPlacements.SpawnPredicate<T> spawnPredicate) {
+                event.register(entityType, placementType, height, spawnPredicate, RegisterSpawnPlacementsEvent.Operation.AND);
+            }
+        });
     }
 
     private static void registerCommands(RegisterCommandsEvent event) {

@@ -8,8 +8,8 @@ import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.CoalGeneratorMenu;
 import earth.terrarium.adastra.common.registry.ModDataManagers;
+import earth.terrarium.adastra.common.utils.PlatformUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
-import earth.terrarium.botarium.util.CommonHooks;
 import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
@@ -93,7 +93,7 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
             if (time % 10 == 0) setLit(true);
         } else if (!input.isEmpty()
             && !(input.getItem() instanceof BucketItem)) {
-            int burnTime = Math.min(20_000, CommonHooks.getBurnTime(input));
+            int burnTime = Math.min(20_000, PlatformUtils.getBurnTime(input));
             if (burnTime > 0) {
                 input.shrink(1);
                 cookTimeTotal = burnTime;

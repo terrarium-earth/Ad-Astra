@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.common.registry;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.biome.BiomeSource;
 
 public class ModBiomeSources {
 
-    public static final ResourcefulRegistry<Codec<? extends BiomeSource>> BIOME_SOURCES = ResourcefulRegistries.create(BuiltInRegistries.BIOME_SOURCE, AdAstra.MOD_ID);
+    public static final ResourcefulRegistry<MapCodec<? extends BiomeSource>> BIOME_SOURCES = ResourcefulRegistries.create(BuiltInRegistries.BIOME_SOURCE, AdAstra.MOD_ID);
 
-    public static final RegistryEntry<Codec<CratersBiomeSource>> CRATERS = BIOME_SOURCES.register("craters", () -> CratersBiomeSource.CODEC);
+    public static final RegistryEntry<MapCodec<CratersBiomeSource>> CRATERS = BIOME_SOURCES.register("craters", () -> CratersBiomeSource.CODEC);
 }

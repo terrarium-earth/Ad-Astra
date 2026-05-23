@@ -130,7 +130,7 @@ public class GlacianRam extends Animal implements Shearable {
         if (itemStack.is(Items.SHEARS)) {
             if (!this.level().isClientSide && this.readyForShearing()) {
                 this.shear(player, SoundSource.PLAYERS);
-                itemStack.hurtAndBreak(1, player, playerx -> playerx.broadcastBreakEvent(hand));
+                itemStack.hurtAndBreak(1, player, Player.getSlotForHand(hand));
                 return InteractionResult.SUCCESS;
             } else {
                 return InteractionResult.CONSUME;

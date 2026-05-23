@@ -1,10 +1,10 @@
 package earth.terrarium.adastra.common.items;
 
+import earth.terrarium.adastra.client.ClientPlatformUtils;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
 import earth.terrarium.common_storage_lib.context.ItemContext;
 import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
 import earth.terrarium.common_storage_lib.fluid.FluidApi;
@@ -104,6 +104,6 @@ public class GasTankItem extends Item implements FluidProvider.Item {
 
     @Override
     public int getBarColor(@NotNull ItemStack stack) {
-        return ClientFluidHooks.getFluidColor(FluidUtils.getTank(stack));
+        return ClientPlatformUtils.getFluidColor(FluidUtils.getTank(stack));
     }
 }

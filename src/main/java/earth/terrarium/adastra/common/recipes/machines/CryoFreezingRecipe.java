@@ -50,7 +50,7 @@ public record CryoFreezingRecipe(
         if (!input.test(container.getItem(1))) return false;
         if (!(container instanceof CryoFreezerBlockEntity entity)) return true;
         if (entity.getEnergyStorage().extract(energy, true) < energy) return false;
-        return entity.getFluidContainer().getFirstFluid().getFluidAmount() < entity.getFluidContainer().getTankCapacity(0);
+        return entity.getFluidContainer().getAmount(0) < entity.getFluidContainer().getLimit(0, FluidResource.BLANK);
     }
 
     @Override
