@@ -82,45 +82,34 @@ public final class ModFluidProperties {
         .tintColor(0xff6cfffa)
         .canConvertToSource(false));
 
-    public static final RegistryEntry<FlowingFluid> OXYGEN_FLUID = FLUIDS.register("oxygen_still", () -> new ResourcefulFlowingFluid.Still(ModFluidProperties.OXYGEN.get()));
-    public static final RegistryEntry<FlowingFluid> OXYGEN_FLUID_FLOWING = FLUIDS.register("oxygen_flowing", () -> new ResourcefulFlowingFluid.Flowing(ModFluidProperties.OXYGEN.get()));
-    public static final RegistryEntry<FlowingFluid> HYDROGEN_FLUID = FLUIDS.register("hydrogen_still", () -> new ResourcefulFlowingFluid.Still(ModFluidProperties.HYDROGEN.get()));
-    public static final RegistryEntry<FlowingFluid> HYDROGEN_FLUID_FLOWING = FLUIDS.register("hydrogen_flowing", () -> new ResourcefulFlowingFluid.Flowing(ModFluidProperties.HYDROGEN.get()));
-    public static final RegistryEntry<FlowingFluid> OIL_FLUID = FLUIDS.register("oil_still", () -> new ResourcefulFlowingFluid.Still(ModFluidProperties.OIL.get()));
-    public static final RegistryEntry<FlowingFluid> OIL_FLUID_FLOWING = FLUIDS.register("oil_flowing", () -> new ResourcefulFlowingFluid.Flowing(ModFluidProperties.OIL.get()));
-    public static final RegistryEntry<FlowingFluid> FUEL_FLUID = FLUIDS.register("fuel_still", () -> new ResourcefulFlowingFluid.Still(ModFluidProperties.FUEL.get()));
-    public static final RegistryEntry<FlowingFluid> FUEL_FLUID_FLOWING = FLUIDS.register("fuel_flowing", () -> new ResourcefulFlowingFluid.Flowing(ModFluidProperties.FUEL.get()));
-    public static final RegistryEntry<FlowingFluid> CRYO_FUEL_FLUID = FLUIDS.register("cryo_fuel_still", () -> new ResourcefulFlowingFluid.Still(ModFluidProperties.CRYO_FUEL.get()));
-    public static final RegistryEntry<FlowingFluid> CRYO_FUEL_FLUID_FLOWING = FLUIDS.register("cryo_fuel_flowing", () -> new ResourcefulFlowingFluid.Flowing(ModFluidProperties.CRYO_FUEL.get()));
-
-    public static final RegistryEntry<Block> OXYGEN_BLOCK = ModBlocks.FLUIDS.register("oxygen", () -> new LiquidBlock(OXYGEN_FLUID.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
-    public static final RegistryEntry<Block> HYDROGEN_BLOCK = ModBlocks.FLUIDS.register("hydrogen", () -> new LiquidBlock(HYDROGEN_FLUID.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
-    public static final RegistryEntry<Block> OIL_BLOCK = ModBlocks.FLUIDS.register("oil", () -> new LiquidBlock(OIL_FLUID.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_BLACK)));
-    public static final RegistryEntry<Block> FUEL_BLOCK = ModBlocks.FLUIDS.register("fuel", () -> new LiquidBlock(FUEL_FLUID.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_RED)));
-    public static final RegistryEntry<Block> CRYO_FUEL_BLOCK = ModBlocks.FLUIDS.register("cryo_fuel", () -> new LiquidBlock(CRYO_FUEL_FLUID.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_CYAN)));
+    public static final RegistryEntry<Block> OXYGEN_BLOCK = ModBlocks.FLUIDS.register("oxygen", () -> new LiquidBlock(ModFluids.OXYGEN.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
+    public static final RegistryEntry<Block> HYDROGEN_BLOCK = ModBlocks.FLUIDS.register("hydrogen", () -> new LiquidBlock(ModFluids.HYDROGEN.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
+    public static final RegistryEntry<Block> OIL_BLOCK = ModBlocks.FLUIDS.register("oil", () -> new LiquidBlock(ModFluids.OIL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_BLACK)));
+    public static final RegistryEntry<Block> FUEL_BLOCK = ModBlocks.FLUIDS.register("fuel", () -> new LiquidBlock(ModFluids.FUEL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_RED)));
+    public static final RegistryEntry<Block> CRYO_FUEL_BLOCK = ModBlocks.FLUIDS.register("cryo_fuel", () -> new LiquidBlock(ModFluids.CRYO_FUEL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_CYAN)));
 
     public static final RegistryEntry<Item> OXYGEN_BUCKET = ModItems.BASIC_ITEMS.register("oxygen_bucket", () -> new BucketItem(
-        ModFluidProperties.OXYGEN_FLUID.get(),
+        ModFluids.OXYGEN.get(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
     public static final RegistryEntry<Item> HYDROGEN_BUCKET = ModItems.BASIC_ITEMS.register("hydrogen_bucket", () -> new BucketItem(
-        ModFluidProperties.HYDROGEN_FLUID.get(),
+        ModFluids.HYDROGEN.get(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
     public static final RegistryEntry<Item> OIL_BUCKET = ModItems.BASIC_ITEMS.register("oil_bucket", () -> new BucketItem(
-        ModFluidProperties.OIL_FLUID.get(),
+        ModFluids.OIL.get(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
     public static final RegistryEntry<Item> FUEL_BUCKET = ModItems.BASIC_ITEMS.register("fuel_bucket", () -> new BucketItem(
-        ModFluidProperties.FUEL_FLUID.get(),
+        ModFluids.FUEL.get(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
     public static final RegistryEntry<Item> CRYO_FUEL_BUCKET = ModItems.BASIC_ITEMS.register("cryo_fuel_bucket", () -> new BucketItem(
-        ModFluidProperties.CRYO_FUEL_FLUID.get(),
+        ModFluids.CRYO_FUEL.get(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 }

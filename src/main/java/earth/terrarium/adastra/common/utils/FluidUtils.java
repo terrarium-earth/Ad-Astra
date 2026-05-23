@@ -43,7 +43,7 @@ public class FluidUtils {
         return container.getLimit(tank, FluidResource.BLANK);
     }
 
-    public static ItemStack fluidFilledItem(RegistryEntry<Item> item, RegistryEntry<Fluid> fluid) {
+    public static ItemStack fluidFilledItem(RegistryEntry<Item> item, RegistryEntry<? extends Fluid> fluid) {
         ModifyOnlyContext itemContext = new ModifyOnlyContext(item.get().getDefaultInstance());
         var container = itemContext.find(FluidApi.ITEM);
         if (container == null) return ItemStack.EMPTY;
