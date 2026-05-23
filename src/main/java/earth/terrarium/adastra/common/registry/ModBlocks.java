@@ -77,12 +77,6 @@ public class ModBlocks {
     public static final RegistryEntry<Block> CRYO_FREEZER = MACHINES.register("cryo_freezer", () -> new MachineBlock(ostrumProperties()));
     public static final RegistryEntry<Block> OXYGEN_SENSOR = MACHINES.register("oxygen_sensor", () -> new DetectorBlock(ostrumProperties()));
 
-    public static final RegistryEntry<Block> OXYGEN = FLUIDS.register("oxygen", () -> new ResourcefulLiquidBlock(ModFluidProperties.OXYGEN.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
-    public static final RegistryEntry<Block> HYDROGEN = FLUIDS.register("hydrogen", () -> new ResourcefulLiquidBlock(ModFluidProperties.HYDROGEN.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
-    public static final RegistryEntry<Block> OIL = FLUIDS.register("oil", () -> new ResourcefulLiquidBlock(ModFluidProperties.OIL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_BLACK)));
-    public static final RegistryEntry<Block> FUEL = FLUIDS.register("fuel", () -> new ResourcefulLiquidBlock(ModFluidProperties.FUEL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_RED)));
-    public static final RegistryEntry<Block> CRYO_FUEL = FLUIDS.register("cryo_fuel", () -> new CryoFuelLiquidBlock(ModFluidProperties.CRYO_FUEL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_CYAN)));
-
     public static final RegistryEntry<Block> WHITE_FLAG = FLAGS.register("white_flag", () -> new FlagBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1)));
     public static final RegistryEntry<Block> BLACK_FLAG = FLAGS.register("black_flag", () -> new FlagBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1)));
     public static final RegistryEntry<Block> BLUE_FLAG = FLAGS.register("blue_flag", () -> new FlagBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(1)));

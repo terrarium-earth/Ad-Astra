@@ -1,18 +1,32 @@
 package earth.terrarium.adastra.common.registry;
 
 
+import com.teamresourceful.resourcefullib.common.fluid.ResourcefulBucketItem;
+import com.teamresourceful.resourcefullib.common.fluid.ResourcefulFlowingFluid;
 import com.teamresourceful.resourcefullib.common.fluid.data.FluidData;
 import com.teamresourceful.resourcefullib.common.fluid.data.FluidProperties;
 import com.teamresourceful.resourcefullib.common.fluid.registry.ResourcefulFluidRegistry;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
+import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistryType;
 import earth.terrarium.adastra.AdAstra;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.MapColor;
 
 @SuppressWarnings("UnstableApiUsage")
 public final class ModFluidProperties {
-
+    public static final ResourcefulRegistry<Fluid> FLUIDS = ResourcefulRegistries.create(BuiltInRegistries.FLUID, AdAstra.MOD_ID);
     public static final ResourcefulFluidRegistry FLUID_PROPERTIES = ResourcefulRegistries.create(ResourcefulRegistryType.FLUID, AdAstra.MOD_ID);
 
     public static final RegistryEntry<FluidData> OXYGEN = FLUID_PROPERTIES.register("oxygen", FluidProperties.builder()
@@ -67,4 +81,46 @@ public final class ModFluidProperties {
         .temperature(-196)
         .tintColor(0xff6cfffa)
         .canConvertToSource(false));
+
+    public static final RegistryEntry<FlowingFluid> OXYGEN_FLUID = FLUIDS.register("oxygen_still", () -> new ResourcefulFlowingFluid.Still(ModFluidProperties.OXYGEN.get()));
+    public static final RegistryEntry<FlowingFluid> OXYGEN_FLUID_FLOWING = FLUIDS.register("oxygen_flowing", () -> new ResourcefulFlowingFluid.Flowing(ModFluidProperties.OXYGEN.get()));
+    public static final RegistryEntry<FlowingFluid> HYDROGEN_FLUID = FLUIDS.register("hydrogen_still", () -> new ResourcefulFlowingFluid.Still(ModFluidProperties.HYDROGEN.get()));
+    public static final RegistryEntry<FlowingFluid> HYDROGEN_FLUID_FLOWING = FLUIDS.register("hydrogen_flowing", () -> new ResourcefulFlowingFluid.Flowing(ModFluidProperties.HYDROGEN.get()));
+    public static final RegistryEntry<FlowingFluid> OIL_FLUID = FLUIDS.register("oil_still", () -> new ResourcefulFlowingFluid.Still(ModFluidProperties.OIL.get()));
+    public static final RegistryEntry<FlowingFluid> OIL_FLUID_FLOWING = FLUIDS.register("oil_flowing", () -> new ResourcefulFlowingFluid.Flowing(ModFluidProperties.OIL.get()));
+    public static final RegistryEntry<FlowingFluid> FUEL_FLUID = FLUIDS.register("fuel_still", () -> new ResourcefulFlowingFluid.Still(ModFluidProperties.FUEL.get()));
+    public static final RegistryEntry<FlowingFluid> FUEL_FLUID_FLOWING = FLUIDS.register("fuel_flowing", () -> new ResourcefulFlowingFluid.Flowing(ModFluidProperties.FUEL.get()));
+    public static final RegistryEntry<FlowingFluid> CRYO_FUEL_FLUID = FLUIDS.register("cryo_fuel_still", () -> new ResourcefulFlowingFluid.Still(ModFluidProperties.CRYO_FUEL.get()));
+    public static final RegistryEntry<FlowingFluid> CRYO_FUEL_FLUID_FLOWING = FLUIDS.register("cryo_fuel_flowing", () -> new ResourcefulFlowingFluid.Flowing(ModFluidProperties.CRYO_FUEL.get()));
+
+    public static final RegistryEntry<Block> OXYGEN_BLOCK = ModBlocks.FLUIDS.register("oxygen", () -> new LiquidBlock(OXYGEN_FLUID.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
+    public static final RegistryEntry<Block> HYDROGEN_BLOCK = ModBlocks.FLUIDS.register("hydrogen", () -> new LiquidBlock(HYDROGEN_FLUID.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
+    public static final RegistryEntry<Block> OIL_BLOCK = ModBlocks.FLUIDS.register("oil", () -> new LiquidBlock(OIL_FLUID.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_BLACK)));
+    public static final RegistryEntry<Block> FUEL_BLOCK = ModBlocks.FLUIDS.register("fuel", () -> new LiquidBlock(FUEL_FLUID.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_RED)));
+    public static final RegistryEntry<Block> CRYO_FUEL_BLOCK = ModBlocks.FLUIDS.register("cryo_fuel", () -> new LiquidBlock(CRYO_FUEL_FLUID.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_CYAN)));
+
+    public static final RegistryEntry<Item> OXYGEN_BUCKET = ModItems.BASIC_ITEMS.register("oxygen_bucket", () -> new BucketItem(
+        ModFluidProperties.OXYGEN_FLUID.get(),
+        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
+    );
+
+    public static final RegistryEntry<Item> HYDROGEN_BUCKET = ModItems.BASIC_ITEMS.register("hydrogen_bucket", () -> new BucketItem(
+        ModFluidProperties.HYDROGEN_FLUID.get(),
+        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
+    );
+
+    public static final RegistryEntry<Item> OIL_BUCKET = ModItems.BASIC_ITEMS.register("oil_bucket", () -> new BucketItem(
+        ModFluidProperties.OIL_FLUID.get(),
+        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
+    );
+
+    public static final RegistryEntry<Item> FUEL_BUCKET = ModItems.BASIC_ITEMS.register("fuel_bucket", () -> new BucketItem(
+        ModFluidProperties.FUEL_FLUID.get(),
+        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
+    );
+
+    public static final RegistryEntry<Item> CRYO_FUEL_BUCKET = ModItems.BASIC_ITEMS.register("cryo_fuel_bucket", () -> new BucketItem(
+        ModFluidProperties.CRYO_FUEL_FLUID.get(),
+        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
+    );
 }

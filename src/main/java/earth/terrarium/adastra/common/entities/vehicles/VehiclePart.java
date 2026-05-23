@@ -96,7 +96,7 @@ public class VehiclePart extends Entity implements MultipartPartEntity<Vehicle> 
     }
 
     @Override
-    public Vehicle getParent() {
+    public Vehicle getMultiParts() {
         return this.vehicle;
     }
 }

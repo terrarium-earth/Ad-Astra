@@ -7,7 +7,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.msrandom.multiplatform.annotations.Actual;
 
@@ -22,7 +21,7 @@ public class PlatformUtilsActual {
 
     @Actual
     public static Supplier<Item> createSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, Item.Properties properties) {
-        return () -> new SpawnEggItem(type.get(), primaryColor, secondaryColor, properties);
+        return EggUtil.createEgg(type, primaryColor, secondaryColor, properties);
     }
 
     @Actual

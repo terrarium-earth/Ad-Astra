@@ -25,10 +25,10 @@ public class ModFluidTagProvider extends TagsProvider<Fluid> {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        add(ModFluidTags.OXYGEN, ModFluids.OXYGEN.get(), "oxygen", "oxygen");
-        add(ModFluidTags.HYDROGEN, ModFluids.HYDROGEN.get(), "hydrogen", "hydrogen");
-        add(ModFluidTags.OIL, ModFluids.OIL.get(), "oil", "oil");
-        add(ModFluidTags.FUEL, ModFluids.FUEL.get(), "fuel", "fuel");
+        add(ModFluidTags.OXYGEN, ModFluids.OXYGEN.get(), "oxygen");
+        add(ModFluidTags.HYDROGEN, ModFluids.HYDROGEN.get(), "hydrogen");
+        add(ModFluidTags.OIL, ModFluids.OIL.get(), "oil");
+        add(ModFluidTags.FUEL, ModFluids.FUEL.get(), "fuel");
         add(ModFluidTags.FUEL, ModFluids.CRYO_FUEL.get());
         add(ModFluidTags.EFFICIENT_FUEL, ModFluids.CRYO_FUEL.get());
 
@@ -63,23 +63,15 @@ public class ModFluidTagProvider extends TagsProvider<Fluid> {
         tag(tag).addTag(fluid);
     }
 
-    private void add(TagKey<Fluid> tag, Fluid fluid, String fabricCommonTag, String forgeCommonTag) {
+    private void add(TagKey<Fluid> tag, Fluid fluid, String commonTag) {
         add(tag, fluid);
-        addFabricTag(fluid, tag, fabricCommonTag);
-        addForgeTag(fluid, tag, forgeCommonTag);
+        addCommonTag(fluid, tag, commonTag);
     }
 
-    private void addFabricTag(Fluid fluid, TagKey<Fluid> tag, String fabricCommonTag) {
-        tag(tag).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("c", fabricCommonTag)));
+    private void addCommonTag(Fluid fluid, TagKey<Fluid> tag, String fabricCommonTag) {
+        tag(tag).add(TagEntry.optionalTag(ResourceLocation.fromNamespaceAndPath("c", fabricCommonTag)));
 
-        var commonTag = TagKey.create(Registries.FLUID, ResourceLocation.withDefaultNamespace("c", fabricCommonTag));
-        tag(commonTag).add(element(fluid));
-    }
-
-    private void addForgeTag(Fluid fluid, TagKey<Fluid> tag, String forgeCommonTag) {
-        tag(tag).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("forge", forgeCommonTag)));
-
-        var commonTag = TagKey.create(Registries.FLUID, ResourceLocation.withDefaultNamespace("forge", forgeCommonTag));
+        var commonTag = TagKey.create(Registries.FLUID, ResourceLocation.fromNamespaceAndPath("c", fabricCommonTag));
         tag(commonTag).add(element(fluid));
     }
 

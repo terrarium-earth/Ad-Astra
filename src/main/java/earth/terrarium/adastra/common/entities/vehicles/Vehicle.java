@@ -271,7 +271,7 @@ public abstract class Vehicle extends Entity implements PlayerRideable, ContentM
     }
 
     @Override
-    public List<MultipartPartEntity<?>> getParts() {
+    public List<MultipartPartEntity<?>> getMultiParts() {
         return multipartParts;
     }
 

@@ -2,7 +2,8 @@ package earth.terrarium.adastra.datagen.builder;
 
 import com.teamresourceful.resourcefullib.common.datagen.CodecRecipeBuilder;
 import earth.terrarium.adastra.common.recipes.machines.CryoFreezingRecipe;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
@@ -17,7 +18,7 @@ public class CryoFreezingRecipeBuilder extends CodecRecipeBuilder {
 
     private final CryoFreezingRecipe recipe;
 
-    public CryoFreezingRecipeBuilder(int cookingTime, int energy, Ingredient input, FluidHolder result) {
+    public CryoFreezingRecipeBuilder(int cookingTime, int energy, Ingredient input, ResourceStack<FluidResource> result) {
         recipe = new CryoFreezingRecipe(cookingTime, energy, input, result);
     }
 
@@ -34,6 +35,6 @@ public class CryoFreezingRecipeBuilder extends CodecRecipeBuilder {
             .requirements(AdvancementRequirements.Strategy.OR);
         criteria.forEach(builder::addCriterion);
         recipeOutput.accept(id, recipe, builder
-            .build(ResourceLocation.withDefaultNamespace(id.getNamespace(), "recipes/cryo_freezing/" + id.getPath())));
+            .build(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "recipes/cryo_freezing/" + id.getPath())));
     }
 }

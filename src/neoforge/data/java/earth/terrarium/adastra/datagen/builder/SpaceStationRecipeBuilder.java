@@ -37,6 +37,6 @@ public class SpaceStationRecipeBuilder extends CodecRecipeBuilder {
             .requirements(AdvancementRequirements.Strategy.OR);
         criteria.forEach(builder::addCriterion);
         recipeOutput.accept(id, recipe, builder
-            .build(ResourceLocation.withDefaultNamespace(id.getNamespace(), "recipes/space_stations/" + id.getPath())));
+            .build(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "recipes/space_stations/" + id.getPath())));
     }
 }

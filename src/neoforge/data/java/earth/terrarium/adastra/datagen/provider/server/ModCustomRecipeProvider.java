@@ -8,9 +8,12 @@ import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.tags.ModItemTags;
 import earth.terrarium.adastra.datagen.builder.*;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.utils.FluidIngredient;
-import earth.terrarium.botarium.common.fluid.utils.QuantifiedFluidIngredient;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
+import earth.terrarium.common_storage_lib.resources.fluid.ingredient.FluidIngredient;
+import earth.terrarium.common_storage_lib.resources.fluid.ingredient.SizedFluidIngredient;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -28,6 +31,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 public abstract class ModCustomRecipeProvider extends RecipeProvider {
@@ -35,8 +39,8 @@ public abstract class ModCustomRecipeProvider extends RecipeProvider {
     public static final ResourceLocation SPACE_STATION_STRUCTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "space_station");
     private static RecipeOutput output;
 
-    public ModCustomRecipeProvider(PackOutput packOutput) {
-        super(packOutput);
+    public ModCustomRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(packOutput, lookupProvider);
     }
 
     public static void createRecipes(RecipeOutput output) {
@@ -54,40 +58,40 @@ public abstract class ModCustomRecipeProvider extends RecipeProvider {
         createCompressing(800, 20, ModItemTags.CALORITE_BLOCKS, new ItemStack(ModItems.CALORITE_PLATE.get(), 9));
 
         createAlloying(100, 20,
-            List.of(Ingredient.of(Items.IRON_INGOT), new TagIngredient(ItemTags.COALS)),
+            List.of(Ingredient.of(Items.IRON_INGOT), Ingredient.of(ItemTags.COALS)), //TODO: Used to use TagIngredient
             ModItems.STEEL_INGOT.get().getDefaultInstance()
         );
 
         createOxygenLoading(1, 30,
-            new QuantifiedFluidIngredient(FluidIngredient.of(FluidTags.WATER), 100),
-            FluidHolder.ofMillibuckets(ModFluids.OXYGEN.get(), 4), "water");
+            new SizedFluidIngredient(FluidIngredient.of(FluidTags.WATER), 100),
+            new ResourceStack<>(FluidResource.of(ModFluids.OXYGEN.get()), 4), "water");
 
         createOxygenLoading(1, 30,
-            new QuantifiedFluidIngredient(FluidIngredient.of(ModFluidTags.OXYGEN), 25),
-            FluidHolder.ofMillibuckets(ModFluids.OXYGEN.get(), 25), "oxygen");
+            new SizedFluidIngredient(FluidIngredient.of(ModFluidTags.OXYGEN), 25),
+            new ResourceStack<>(FluidResource.of(ModFluids.OXYGEN.get()), 25), "oxygen");
 
         createRefining(1, 30,
-            new QuantifiedFluidIngredient(FluidIngredient.of(ModFluidTags.OIL), 5),
-            FluidHolder.ofMillibuckets(ModFluids.FUEL.get(), 5), "oil");
+            new SizedFluidIngredient(FluidIngredient.of(ModFluidTags.OIL), 5),
+            new ResourceStack<>(FluidResource.of(ModFluids.FUEL.get()), FluidAmounts.toMillibuckets(5)), "oil");
 
         createCryoFreezing(60, 40,
             ModItems.ICE_SHARD.get().getDefaultInstance(),
-            FluidHolder.ofMillibuckets(ModFluids.CRYO_FUEL.get(), 25)
+            new ResourceStack<>(FluidResource.of(ModFluids.CRYO_FUEL.get()), FluidAmounts.toMillibuckets(25))
         );
 
         createCryoFreezing(120, 40,
             Items.ICE.getDefaultInstance(),
-            FluidHolder.ofMillibuckets(ModFluids.CRYO_FUEL.get(), 1)
+            new ResourceStack<>(FluidResource.of(ModFluids.CRYO_FUEL.get()), FluidAmounts.toMillibuckets(1))
         );
 
         createCryoFreezing(120, 40,
             Items.PACKED_ICE.getDefaultInstance(),
-            FluidHolder.ofMillibuckets(ModFluids.CRYO_FUEL.get(), 2)
+            new ResourceStack<>(FluidResource.of(ModFluids.CRYO_FUEL.get()), FluidAmounts.toMillibuckets(2))
         );
 
         createCryoFreezing(120, 40,
             Items.BLUE_ICE.getDefaultInstance(),
-            FluidHolder.ofMillibuckets(ModFluids.CRYO_FUEL.get(), 10)
+            new ResourceStack<>(FluidResource.of(ModFluids.CRYO_FUEL.get()), FluidAmounts.toMillibuckets(10))
         );
 
         createNasaWorkbench(List.of(
@@ -243,36 +247,36 @@ public abstract class ModCustomRecipeProvider extends RecipeProvider {
             .unlockedBy("has_item", has(ModItems.ETRIONIC_BLAST_FURNACE.get()));
         List<String> ingredientNames = ingredients.stream()
             .map(ingredient -> {
-                if (ingredient instanceof TagIngredient recipeIngredient) {
-                    return recipeIngredient.name;
-                }
+//                if (ingredient instanceof TagIngredient recipeIngredient) { TODO: Check how to update this
+//                    return recipeIngredient.name;
+//                }
                 return Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(ingredient.getItems()[0].getItem())).getPath();
             })
             .toList();
 
-        builder.save(output, ResourceLocation.withDefaultNamespace(
+        builder.save(output, ResourceLocation.fromNamespaceAndPath(
             AdAstra.MOD_ID,
             "alloying/%s_from_alloying_%s".formatted(resultId.getPath(), String.join("_and_", ingredientNames))
         ));
     }
 
-    public static void createOxygenLoading(int cookingtime, int energy, QuantifiedFluidIngredient ingredient, FluidHolder resultFluid, String name) {
-        ResourceLocation resultFluidId = Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(resultFluid.getFluid()));
+    public static void createOxygenLoading(int cookingtime, int energy, SizedFluidIngredient ingredient, ResourceStack<FluidResource> resultFluid, String name) {
+        ResourceLocation resultFluidId = Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(resultFluid.resource().getType()));
 
         new OxygenLoadingRecipeBuilder(cookingtime, energy, ingredient, resultFluid)
             .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "oxygen_loading/%s_from_oxygen_loading_%s".formatted(resultFluidId.getPath(), name)));
     }
 
-    public static void createRefining(int cookingtime, int energy, QuantifiedFluidIngredient ingredient, FluidHolder resultFluid, String name) {
-        ResourceLocation resultFluidId = Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(resultFluid.getFluid()));
+    public static void createRefining(int cookingtime, int energy, SizedFluidIngredient ingredient, ResourceStack<FluidResource> resultFluid, String name) {
+        ResourceLocation resultFluidId = Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(resultFluid.resource().getType()));
 
         new RefiningRecipeBuilder(cookingtime, energy, ingredient, resultFluid)
             .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "refining/%s_from_refining_%s".formatted(resultFluidId.getPath(), name)));
     }
 
-    public static void createCryoFreezing(int cookingtime, int energy, ItemStack ingredient, FluidHolder resultFluid) {
+    public static void createCryoFreezing(int cookingtime, int energy, ItemStack ingredient, ResourceStack<FluidResource> resultFluid) {
         ResourceLocation ingredientId = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(ingredient.getItem()));
-        ResourceLocation resultFluidId = Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(resultFluid.getFluid()));
+        ResourceLocation resultFluidId = Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(resultFluid.resource().getType()));
 
         new CryoFreezingRecipeBuilder(cookingtime, energy, Ingredient.of(ingredient), resultFluid)
             .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "cryo_freezing/%s_from_cryo_freezing_%s".formatted(resultFluidId.getPath(), ingredientId.getPath())));
@@ -291,13 +295,13 @@ public abstract class ModCustomRecipeProvider extends RecipeProvider {
             .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "space_station/%s_space_station".formatted(dimension.location().getPath())));
     }
 
-    private static class TagIngredient extends Ingredient {
-
-        private final String name;
-
-        protected TagIngredient(TagKey<Item> tag) {
-            super(Stream.of(new TagValue(tag)));
-            this.name = tag.location().getPath();
-        }
-    }
+//    private static class TagIngredient extends Ingredient {  TODO: Check how to update this
+//
+//        private final String name;
+//
+//        protected TagIngredient(TagKey<Item> tag) {
+//            super(Stream.of(new TagValue(tag)));
+//            this.name = tag.location().getPath();
+//        }
+//    }
 }

@@ -16,7 +16,7 @@ public class ClientLevelEntityCallbacksMixin {
     private void adastra$onTrackingStart(Entity entity, CallbackInfo ci) {
         if (entity instanceof MultipartEntity multipartEntity) {
             MultipartPartsHolder holder = (MultipartPartsHolder) entity.level();
-            for (MultipartPartEntity<?> part : multipartEntity.getParts()) {
+            for (MultipartPartEntity<?> part : multipartEntity.getMultiParts()) {
                 Entity partEntity = ((Entity) part);
                 holder.adastra$getParts().put(partEntity.getId(), partEntity);
             }
@@ -27,7 +27,7 @@ public class ClientLevelEntityCallbacksMixin {
     private void adastra$onTrackingStop(Entity entity, CallbackInfo ci) {
         if (entity instanceof MultipartEntity multipartEntity) {
             MultipartPartsHolder holder = (MultipartPartsHolder) entity.level();
-            for (MultipartPartEntity<?> part : multipartEntity.getParts()) {
+            for (MultipartPartEntity<?> part : multipartEntity.getMultiParts()) {
                 Entity partEntity = ((Entity) part);
                 holder.adastra$getParts().remove(partEntity.getId());
             }

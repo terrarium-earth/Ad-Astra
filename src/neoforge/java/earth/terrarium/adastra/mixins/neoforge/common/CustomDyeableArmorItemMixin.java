@@ -1,7 +1,8 @@
 package earth.terrarium.adastra.mixins.neoforge.common;
 
 import earth.terrarium.adastra.client.models.armor.SpaceSuitModel;
-import earth.terrarium.adastra.client.ClientPlatformUtilsActual;
+import earth.terrarium.adastra.client.neoforge.AdAstraClientNeoForge;
+import earth.terrarium.adastra.client.renderers.ArmorRenderer;
 import earth.terrarium.adastra.common.items.armor.JetSuitItem;
 import earth.terrarium.adastra.common.items.armor.base.CustomDyeableArmorItem;
 import earth.terrarium.adastra.common.tags.ModItemTags;
@@ -32,7 +33,7 @@ public abstract class CustomDyeableArmorItemMixin extends Item {
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
-            private ClientPlatformUtilsActual.ArmorRenderer renderer;
+            private ArmorRenderer renderer;
 
             @SuppressWarnings("unchecked")
             private static <T extends LivingEntity> void uncheckedCopyTo(HumanoidModel<T> from, HumanoidModel<?> to) {
@@ -43,7 +44,7 @@ public abstract class CustomDyeableArmorItemMixin extends Item {
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> original) {
                 if (renderer == null) {
-                    renderer = ClientPlatformUtilsActual.ARMOR_RENDERERS.get(stack.getItem());
+                    renderer = AdAstraClientNeoForge.ARMOR_RENDERERS.get(stack.getItem());
                 }
                 if (renderer == null) return original;
 

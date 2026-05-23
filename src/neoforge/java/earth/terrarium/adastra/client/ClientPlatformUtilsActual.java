@@ -1,6 +1,8 @@
 package earth.terrarium.adastra.client;
 
 import earth.terrarium.adastra.client.dimension.ModDimensionSpecialEffects;
+import earth.terrarium.adastra.client.neoforge.AdAstraClientNeoForge;
+import earth.terrarium.adastra.client.renderers.ArmorRenderer;
 import earth.terrarium.common_storage_lib.resources.ResourceStack;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import net.minecraft.client.Minecraft;
@@ -18,13 +20,9 @@ import net.minecraft.world.level.Level;
 import net.msrandom.multiplatform.annotations.Actual;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class ClientPlatformUtilsActual {
-
-    public static final Map<Item, ArmorRenderer> ARMOR_RENDERERS = new HashMap<>();
-    public static final Map<ResourceKey<Level>, ModDimensionSpecialEffects> DIMENSION_RENDERERS = new HashMap<>();
 
     @Actual
     public static BakedModel getModel(ModelManager dispatcher, ResourceLocation id) {
@@ -34,14 +32,14 @@ public class ClientPlatformUtilsActual {
     @Actual
     public static void registerArmor(ResourceLocation texture, ModelLayerLocation layer, ClientPlatformUtils.ArmorFactory factory, Item... items) {
         for (Item item : items) {
-            ARMOR_RENDERERS.put(item, new ArmorRenderer(texture, layer, factory));
+            AdAstraClientNeoForge.ARMOR_RENDERERS.put(item, new ArmorRenderer(texture, layer, factory));
         }
     }
 
     @Actual
     public static void registerPlanetRenderers(Map<ResourceKey<Level>, ModDimensionSpecialEffects> renderers) {
-        DIMENSION_RENDERERS.clear();
-        DIMENSION_RENDERERS.putAll(renderers);
+        AdAstraClientNeoForge.DIMENSION_RENDERERS.clear();
+        AdAstraClientNeoForge.DIMENSION_RENDERERS.putAll(renderers);
     }
 
     @Actual
@@ -60,7 +58,4 @@ public class ClientPlatformUtilsActual {
     public static Component getDisplayName(ResourceStack<FluidResource> stack) {
         return stack.resource().getType().getFluidType().getDescription();
     }
-
-    public record ArmorRenderer(ResourceLocation texture, ModelLayerLocation layer,
-                                ClientPlatformUtils.ArmorFactory factory) {}
 }

@@ -3,6 +3,7 @@ package earth.terrarium.adastra.datagen.provider.server.tags;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.registry.ModBlocks;
+import earth.terrarium.adastra.common.registry.ModFluidProperties;
 import earth.terrarium.adastra.common.tags.ModBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -69,10 +70,10 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         ModBlocks.CHEESE_BLOCK,
         ModBlocks.GLACIAN_FUR,
         ModBlocks.GLACIAN_LEAVES,
-        ModBlocks.OIL,
-        ModBlocks.FUEL,
-        ModBlocks.CRYO_FUEL,
-        ModBlocks.HYDROGEN
+        ModFluidProperties.OIL_BLOCK,
+        ModFluidProperties.FUEL_BLOCK,
+        ModFluidProperties.CRYO_FUEL_BLOCK,
+        ModFluidProperties.HYDROGEN_BLOCK
     );
 
     public ModBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, ExistingFileHelper existingFileHelper) {
@@ -111,21 +112,21 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         add(ModBlockTags.GLACIO_STONE_REPLACEABLES, ModBlocks.GLACIO_STONE.get());
         add(ModBlockTags.GLACIO_STONE_REPLACEABLES, ModBlocks.PERMAFROST.get());
 
-        Arrays.asList(ModBlocks.MOON_ICE_SHARD_ORE.get(), ModBlocks.MARS_ICE_SHARD_ORE.get(), ModBlocks.GLACIO_ICE_SHARD_ORE.get(), ModBlocks.DEEPSLATE_ICE_SHARD_ORE.get()).forEach(item -> add(ModBlockTags.ICE_SHARD_ORES, item, "ice_shard_ores", "ores/ice_shard"));
+        Arrays.asList(ModBlocks.MOON_ICE_SHARD_ORE.get(), ModBlocks.MARS_ICE_SHARD_ORE.get(), ModBlocks.GLACIO_ICE_SHARD_ORE.get(), ModBlocks.DEEPSLATE_ICE_SHARD_ORE.get()).forEach(item -> add(ModBlockTags.ICE_SHARD_ORES, item, "ores/ice_shard"));
 
-        add(ModBlockTags.STEEL_BLOCKS, ModBlocks.STEEL_BLOCK.get(), "steel_blocks", "storage_blocks/steel");
+        add(ModBlockTags.STEEL_BLOCKS, ModBlocks.STEEL_BLOCK.get(), "storage_blocks/steel");
 
-        add(ModBlockTags.DESH_BLOCKS, ModBlocks.DESH_BLOCK.get(), "desh_blocks", "storage_blocks/desh");
-        add(ModBlockTags.RAW_DESH_BLOCKS, ModBlocks.RAW_DESH_BLOCK.get(), "raw_desh_blocks", "storage_blocks/raw_desh");
-        Arrays.asList(ModBlocks.MOON_DESH_ORE.get(), ModBlocks.DEEPSLATE_DESH_ORE.get()).forEach(block -> add(ModBlockTags.DESH_ORES, block, "desh_ores", "ores/desh"));
+        add(ModBlockTags.DESH_BLOCKS, ModBlocks.DESH_BLOCK.get(), "storage_blocks/desh");
+        add(ModBlockTags.RAW_DESH_BLOCKS, ModBlocks.RAW_DESH_BLOCK.get(), "storage_blocks/raw_desh");
+        Arrays.asList(ModBlocks.MOON_DESH_ORE.get(), ModBlocks.DEEPSLATE_DESH_ORE.get()).forEach(block -> add(ModBlockTags.DESH_ORES, block, "ores/desh"));
 
-        add(ModBlockTags.OSTRUM_BLOCKS, ModBlocks.OSTRUM_BLOCK.get(), "ostrum_blocks", "storage_blocks/ostrum");
-        add(ModBlockTags.RAW_OSTRUM_BLOCKS, ModBlocks.RAW_OSTRUM_BLOCK.get(), "raw_ostrum_blocks", "storage_blocks/raw_ostrum");
-        Arrays.asList(ModBlocks.MARS_OSTRUM_ORE.get(), ModBlocks.DEEPSLATE_OSTRUM_ORE.get()).forEach(block -> add(ModBlockTags.OSTRUM_ORES, block, "ostrum_ores", "ores/ostrum"));
+        add(ModBlockTags.OSTRUM_BLOCKS, ModBlocks.OSTRUM_BLOCK.get(), "storage_blocks/ostrum");
+        add(ModBlockTags.RAW_OSTRUM_BLOCKS, ModBlocks.RAW_OSTRUM_BLOCK.get(), "storage_blocks/raw_ostrum");
+        Arrays.asList(ModBlocks.MARS_OSTRUM_ORE.get(), ModBlocks.DEEPSLATE_OSTRUM_ORE.get()).forEach(block -> add(ModBlockTags.OSTRUM_ORES, block, "ores/ostrum"));
 
-        add(ModBlockTags.CALORITE_BLOCKS, ModBlocks.CALORITE_BLOCK.get(), "calorite_blocks", "storage_blocks/calorite");
-        add(ModBlockTags.RAW_CALORITE_BLOCKS, ModBlocks.RAW_CALORITE_BLOCK.get(), "raw_calorite_blocks", "storage_blocks/raw_calorite");
-        Arrays.asList(ModBlocks.VENUS_CALORITE_ORE.get(), ModBlocks.DEEPSLATE_CALORITE_ORE.get()).forEach(block -> add(ModBlockTags.CALORITE_ORES, block, "calorite_ores", "ores/calorite"));
+        add(ModBlockTags.CALORITE_BLOCKS, ModBlocks.CALORITE_BLOCK.get(), "storage_blocks/calorite");
+        add(ModBlockTags.RAW_CALORITE_BLOCKS, ModBlocks.RAW_CALORITE_BLOCK.get(), "storage_blocks/raw_calorite");
+        Arrays.asList(ModBlocks.VENUS_CALORITE_ORE.get(), ModBlocks.DEEPSLATE_CALORITE_ORE.get()).forEach(block -> add(ModBlockTags.CALORITE_ORES, block, "ores/calorite"));
 
         add(ModBlockTags.GLACIAN_LOGS, ModBlocks.GLACIAN_LOG.get());
         add(ModBlockTags.GLACIAN_LOGS, ModBlocks.STRIPPED_GLACIAN_LOG.get());
@@ -293,26 +294,18 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         tag(tag).add(element(block));
     }
 
-    private void add(TagKey<Block> tag, Block item, String fabricCommonTag, String forgeCommonTag) {
+    private void add(TagKey<Block> tag, Block item, String common) {
         add(tag, item);
-        addFabricTag(item, tag, fabricCommonTag);
-        addForgeTag(item, tag, forgeCommonTag);
+        addCommonTag(item, tag, common);
     }
 
-    private void addFabricTag(Block item, TagKey<Block> tag, String fabricCommonTag) {
-        tag(tag).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("c", fabricCommonTag)));
+    private void addCommonTag(Block item, TagKey<Block> tag, String common) {
+        tag(tag).add(TagEntry.optionalTag(ResourceLocation.fromNamespaceAndPath("c", common)));
 
-        var commonTag = TagKey.create(Registries.BLOCK, ResourceLocation.withDefaultNamespace("c", fabricCommonTag));
-        tag(commonTag).add(element(item));
-    }
-
-    private void addForgeTag(Block item, TagKey<Block> tag, String forgeCommonTag) {
-        tag(tag).add(TagEntry.optionalTag(ResourceLocation.withDefaultNamespace("forge", forgeCommonTag)));
-
-        var commonTag = TagKey.create(Registries.BLOCK, ResourceLocation.withDefaultNamespace("forge", forgeCommonTag));
+        var commonTag = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", common));
         tag(commonTag).add(element(item));
 
-        var folderTag = TagKey.create(Registries.BLOCK, ResourceLocation.withDefaultNamespace("forge", forgeCommonTag.split("/")[0]));
+        var folderTag = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", common.split("/")[0]));
         tag(folderTag).add(TagEntry.tag(commonTag.location()));
     }
 

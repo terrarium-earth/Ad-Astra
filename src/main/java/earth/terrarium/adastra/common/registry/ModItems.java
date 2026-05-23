@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.registry;
 
+import com.teamresourceful.resourcefullib.common.fluid.ResourcefulBucketItem;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
@@ -176,31 +177,6 @@ public class ModItems {
     public static final RegistryEntry<Item> ICE_SHARD = BASIC_ITEMS.register("ice_shard", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> AERONOS_MUSHROOM = BASIC_ITEMS.register("aeronos_mushroom", () -> new BlockItem(ModBlocks.AERONOS_MUSHROOM.get(), new Item.Properties()));
     public static final RegistryEntry<Item> STROPHAR_MUSHROOM = BASIC_ITEMS.register("strophar_mushroom", () -> new BlockItem(ModBlocks.STROPHAR_MUSHROOM.get(), new Item.Properties()));
-
-    public static final RegistryEntry<Item> OXYGEN_BUCKET = BASIC_ITEMS.register("oxygen_bucket", () -> new BucketItem(
-        ModFluidProperties.OXYGEN.get().data(),
-        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
-    );
-
-    public static final RegistryEntry<Item> HYDROGEN_BUCKET = BASIC_ITEMS.register("hydrogen_bucket", () -> new BucketItem(
-        ModFluidProperties.HYDROGEN.get().data(),
-        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
-    );
-
-    public static final RegistryEntry<Item> OIL_BUCKET = BASIC_ITEMS.register("oil_bucket", () -> new BucketItem(
-        ModFluidProperties.OIL.get().data(),
-        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
-    );
-
-    public static final RegistryEntry<Item> FUEL_BUCKET = BASIC_ITEMS.register("fuel_bucket", () -> new BucketItem(
-        ModFluidProperties.FUEL.get().data(),
-        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
-    );
-
-    public static final RegistryEntry<Item> CRYO_FUEL_BUCKET = BASIC_ITEMS.register("cryo_fuel_bucket", () -> new BucketItem(
-        ModFluidProperties.CRYO_FUEL.get().data(),
-        new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
-    );
 
     public static final RegistryEntry<Item> CHEESE_BLOCK = ITEMS.register("cheese_block", () -> new BlockItem(ModBlocks.CHEESE_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> SKY_STONE = ITEMS.register("sky_stone", () -> new BlockItem(ModBlocks.SKY_STONE.get(), new Item.Properties()));

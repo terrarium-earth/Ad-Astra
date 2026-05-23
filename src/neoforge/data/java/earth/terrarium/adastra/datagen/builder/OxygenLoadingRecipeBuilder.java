@@ -2,8 +2,9 @@ package earth.terrarium.adastra.datagen.builder;
 
 import com.teamresourceful.resourcefullib.common.datagen.CodecRecipeBuilder;
 import earth.terrarium.adastra.common.recipes.machines.OxygenLoadingRecipe;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.utils.QuantifiedFluidIngredient;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
+import earth.terrarium.common_storage_lib.resources.fluid.ingredient.SizedFluidIngredient;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
@@ -17,7 +18,7 @@ public class OxygenLoadingRecipeBuilder extends CodecRecipeBuilder {
 
     private final OxygenLoadingRecipe recipe;
 
-    public OxygenLoadingRecipeBuilder(int cookingTime, int energy, QuantifiedFluidIngredient input, FluidHolder result) {
+    public OxygenLoadingRecipeBuilder(int cookingTime, int energy, SizedFluidIngredient input, ResourceStack<FluidResource> result) {
         recipe = new OxygenLoadingRecipe(cookingTime, energy, input, result);
     }
 
@@ -34,6 +35,6 @@ public class OxygenLoadingRecipeBuilder extends CodecRecipeBuilder {
             .requirements(AdvancementRequirements.Strategy.OR);
         criteria.forEach(builder::addCriterion);
         recipeOutput.accept(id, recipe, builder
-            .build(ResourceLocation.withDefaultNamespace(id.getNamespace(), "recipes/oxygen_loading/" + id.getPath())));
+            .build(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "recipes/oxygen_loading/" + id.getPath())));
     }
 }

@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface MultipartEntity {
 
-    List<MultipartPartEntity<?>> getParts();
+    List<MultipartPartEntity<?>> getMultiParts();
 }

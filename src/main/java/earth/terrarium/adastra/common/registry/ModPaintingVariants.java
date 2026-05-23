@@ -30,20 +30,20 @@ public class ModPaintingVariants {
     public static final ResourceKey<PaintingVariant> SUN = create("sun");
 
     public static void bootstrap(BootstrapContext<PaintingVariant> context) {
-        register(context, MERCURY, 16, 16);
-        register(context, MOON, 16, 16);
-        register(context, PLUTO, 16, 16);
-        register(context, EARTH, 32, 32);
-        register(context, GLACIO, 32, 32);
-        register(context, MARS, 32, 32);
-        register(context, VENUS, 32, 32);
-        register(context, JUPITER, 48, 48);
-        register(context, NEPTUNE, 48, 48);
-        register(context, URANUS, 48, 48);
-        register(context, SATURN, 64, 48);
-        register(context, THE_MILKY_WAY, 64, 48);
-        register(context, ALPHA_CENTAURI, 64, 64);
-        register(context, SUN, 80, 80);
+        register(context, MERCURY, 1, 1);
+        register(context, MOON, 1, 1);
+        register(context, PLUTO, 1, 1);
+        register(context, EARTH, 2, 2);
+        register(context, GLACIO, 2, 2);
+        register(context, MARS, 2, 2);
+        register(context, VENUS, 2, 2);
+        register(context, JUPITER, 3, 3);
+        register(context, NEPTUNE, 3, 3);
+        register(context, URANUS, 3, 3);
+        register(context, SATURN, 4, 3);
+        register(context, THE_MILKY_WAY, 4, 3);
+        register(context, ALPHA_CENTAURI, 4, 4);
+        register(context, SUN, 5, 5);
     }
 
     private static void register(BootstrapContext<PaintingVariant> context, ResourceKey<PaintingVariant> key, int width, int height) {

@@ -8,7 +8,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.msrandom.multiplatform.annotations.Expect;
-import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.function.Supplier;
 

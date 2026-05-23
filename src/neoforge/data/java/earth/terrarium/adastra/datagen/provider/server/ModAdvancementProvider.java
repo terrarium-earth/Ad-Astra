@@ -3,6 +3,7 @@ package earth.terrarium.adastra.datagen.provider.server;
 
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.Planet;
+import earth.terrarium.adastra.common.registry.ModFluidProperties;
 import earth.terrarium.adastra.common.registry.ModItems;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.*;
@@ -108,7 +109,7 @@ public class ModAdvancementProvider extends AdvancementProvider {
             AdvancementHolder oceanCleanup = Advancement.Builder.advancement()
                 .parent(rocketScience)
                 .display(
-                    ModItems.OIL_BUCKET.get(),
+                    ModFluidProperties.OIL_BUCKET.get(),
                     Component.translatable("advancements.ad_astra.ocean_cleanup.title"),
                     Component.translatable("advancements.ad_astra.ocean_cleanup.description"),
                     null,
@@ -118,8 +119,8 @@ public class ModAdvancementProvider extends AdvancementProvider {
                     false
                 )
                 .addCriterion(
-                    ModItems.OIL_BUCKET.getId().getPath(),
-                    FilledBucketTrigger.TriggerInstance.filledBucket(ItemPredicate.Builder.item().of(ModItems.OIL_BUCKET.get())))
+                    ModFluidProperties.OIL_BUCKET.getId().getPath(),
+                    FilledBucketTrigger.TriggerInstance.filledBucket(ItemPredicate.Builder.item().of(ModFluidProperties.OIL_BUCKET.get())))
                 .save(consumer, path("ocean_cleanup"));
 
             AdvancementHolder astronaut = Advancement.Builder.advancement()
@@ -389,7 +390,7 @@ public class ModAdvancementProvider extends AdvancementProvider {
             AdvancementHolder cryoFuel = Advancement.Builder.advancement()
                 .parent(cryoFreezer)
                 .display(
-                    ModItems.CRYO_FUEL_BUCKET.get(),
+                    ModFluidProperties.CRYO_FUEL_BUCKET.get(),
                     Component.translatable("advancements.ad_astra.cryo_fuel.title"),
                     Component.translatable("advancements.ad_astra.cryo_fuel.description"),
                     null,
@@ -398,7 +399,7 @@ public class ModAdvancementProvider extends AdvancementProvider {
                     true,
                     false
                 )
-                .addCriterion("has_cryo_fuel", hasItem(ModItems.CRYO_FUEL_BUCKET.get()))
+                .addCriterion("has_cryo_fuel", hasItem(ModFluidProperties.CRYO_FUEL_BUCKET.get()))
                 .rewards(AdvancementRewards.Builder.experience(100))
                 .save(consumer, path("cryo_fuel"));
 

@@ -33,6 +33,6 @@ public class CompressingRecipeBuilder extends CodecRecipeBuilder {
             .requirements(AdvancementRequirements.Strategy.OR);
         criteria.forEach(builder::addCriterion);
         recipeOutput.accept(id, recipe, builder
-            .build(ResourceLocation.withDefaultNamespace(id.getNamespace(), "recipes/compressing/" + id.getPath())));
+            .build(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "recipes/compressing/" + id.getPath())));
     }
 }
