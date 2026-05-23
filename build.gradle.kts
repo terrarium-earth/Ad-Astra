@@ -8,7 +8,7 @@ plugins {
     id("earth.terrarium.cloche") version "0.18.14"
 }
 
-val stationsFile: String = file("stations.json").absolutePath
+//val stationsFile: String = file("stations.json").absolutePath
 
 val minecraftVersion: String by project
 val modId = project.name
@@ -160,11 +160,11 @@ cloche {
 
         runs {
             client {
-                jvmArgs("-Dadastra.stations=", stationsFile)
+//                jvmArgs("-Dadastra.stations=", stationsFile)
             }
 
             server {
-                jvmArgs("-Dadastra.stations=", stationsFile)
+//                jvmArgs("-Dadastra.stations=", stationsFile)
             }
         }
 
