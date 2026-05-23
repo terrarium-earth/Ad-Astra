@@ -521,7 +521,6 @@ public class ModLangProvider extends LanguageProvider {
     }
 
     public void addFluid(Supplier<? extends Fluid> key, String name) {
-        if (key.get() instanceof ResourcefulFlowingFluid) return;
         add("fluid_type.%s.%s".formatted(AdAstra.MOD_ID, Objects.requireNonNull(BuiltInRegistries.FLUID.getKey(key.get())).getPath()), name);
     }
 }
