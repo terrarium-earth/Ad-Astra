@@ -1,0 +1,9 @@
+{
+  "values": [
+    "ad_astra:raw_calorite",
+    {
+      "id": "#c:raw_materials/calorite",
+      "required": false
+    }
+  ]
+}

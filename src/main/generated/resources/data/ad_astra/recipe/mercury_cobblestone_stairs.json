@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "ad_astra:mercury_cobblestone"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "ad_astra:mercury_cobblestone_stairs"
+  }
+}

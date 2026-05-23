@@ -1,0 +1,9 @@
+{
+  "values": [
+    "ad_astra:iron_plate",
+    {
+      "id": "#c:plates/iron",
+      "required": false
+    }
+  ]
+}

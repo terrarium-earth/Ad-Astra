@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "ad_astra:permafrost_bricks"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "ad_astra:permafrost_brick_slab"
+  }
+}

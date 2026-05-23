@@ -1,0 +1,9 @@
+{
+  "values": [
+    "ad_astra:desh_block",
+    {
+      "id": "#c:storage_blocks/desh",
+      "required": false
+    }
+  ]
+}

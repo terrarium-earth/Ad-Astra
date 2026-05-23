@@ -1,0 +1,33 @@
+{
+  "parent": "ad_astra:tier_4_rocket",
+  "criteria": {
+    "entered_glacio": {
+      "conditions": {
+        "to": "ad_astra:glacio"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ad_astra.interstellar.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "ad_astra:glacio_globe"
+    },
+    "title": {
+      "translate": "advancements.ad_astra.interstellar.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered_glacio"
+    ]
+  ],
+  "rewards": {
+    "experience": 300
+  },
+  "sends_telemetry_event": true
+}

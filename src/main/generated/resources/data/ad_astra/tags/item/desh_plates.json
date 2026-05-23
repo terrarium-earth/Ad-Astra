@@ -1,0 +1,9 @@
+{
+  "values": [
+    "ad_astra:desh_plate",
+    {
+      "id": "#c:plates/desh",
+      "required": false
+    }
+  ]
+}

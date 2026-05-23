@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "ad_astra:venus_stone"
-  },
-  "result": "ad_astra:chiseled_venus_stone_bricks"
-}

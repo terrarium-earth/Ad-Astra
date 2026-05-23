@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "ad_astra:mars_stone"
+  },
+  "result": {
+    "count": 1,
+    "id": "ad_astra:mars_stone_stairs"
+  }
+}

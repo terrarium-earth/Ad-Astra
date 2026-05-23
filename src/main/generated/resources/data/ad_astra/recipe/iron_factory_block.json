@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:iron_plates"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "###",
+    "#I#",
+    "###"
+  ],
+  "result": {
+    "count": 64,
+    "id": "ad_astra:iron_factory_block"
+  }
+}

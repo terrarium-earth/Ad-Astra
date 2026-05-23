@@ -1,0 +1,24 @@
+{
+  "values": [
+    "ad_astra:moon_ice_shard_ore",
+    {
+      "id": "#c:ores/ice_shard",
+      "required": false
+    },
+    "ad_astra:mars_ice_shard_ore",
+    {
+      "id": "#c:ores/ice_shard",
+      "required": false
+    },
+    "ad_astra:glacio_ice_shard_ore",
+    {
+      "id": "#c:ores/ice_shard",
+      "required": false
+    },
+    "ad_astra:deepslate_ice_shard_ore",
+    {
+      "id": "#c:ores/ice_shard",
+      "required": false
+    }
+  ]
+}

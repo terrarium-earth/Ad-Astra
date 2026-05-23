@@ -1,0 +1,11 @@
+{
+  "values": [
+    "#c:storage_blocks/steel",
+    "#c:storage_blocks/desh",
+    "#c:storage_blocks/raw_desh",
+    "#c:storage_blocks/ostrum",
+    "#c:storage_blocks/raw_ostrum",
+    "#c:storage_blocks/calorite",
+    "#c:storage_blocks/raw_calorite"
+  ]
+}

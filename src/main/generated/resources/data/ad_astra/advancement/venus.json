@@ -1,0 +1,32 @@
+{
+  "parent": "ad_astra:tier_3_rocket",
+  "criteria": {
+    "entered_venus": {
+      "conditions": {
+        "to": "ad_astra:venus"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ad_astra.venus.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "ad_astra:venus_globe"
+    },
+    "title": {
+      "translate": "advancements.ad_astra.venus.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered_venus"
+    ]
+  ],
+  "rewards": {
+    "experience": 200
+  },
+  "sends_telemetry_event": true
+}

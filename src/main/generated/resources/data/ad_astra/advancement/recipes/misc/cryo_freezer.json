@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cryo_freezer": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#ad_astra:ostrum_plates"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:cryo_freezer"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cryo_freezer"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:cryo_freezer"
+    ]
+  }
+}

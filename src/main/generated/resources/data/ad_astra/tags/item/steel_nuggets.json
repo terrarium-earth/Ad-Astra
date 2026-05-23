@@ -1,0 +1,9 @@
+{
+  "values": [
+    "ad_astra:steel_nugget",
+    {
+      "id": "#c:nuggets/steel",
+      "required": false
+    }
+  ]
+}
