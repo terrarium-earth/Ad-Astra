@@ -11,6 +11,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -52,7 +53,7 @@ public class ClientPlatformUtils {
     }
 
     @Expect
-    public static BakedModel getModel(ModelManager dispatcher, ResourceLocation id) {
+    public static BakedModel getModel(ModelManager dispatcher, ModelResourceLocation id) {
         throw new NotImplementedException();
     }
 
