@@ -39,6 +39,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @SuppressWarnings("deprecation")
 public class FlagBlock extends BasicEntityBlock implements SimpleWaterloggedBlock {
@@ -91,7 +93,7 @@ public class FlagBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
 
     private InteractionResult action(Level level, BlockPos pos, Player player) {
         if (level.getBlockEntity(pos) instanceof FlagBlockEntity entity) {
-            if (entity.getOwner() != null && player.getUUID().equals(entity.getOwner().id())) {
+            if (entity.getOwner() != null && entity.getOwner().id().isPresent() && player.getUUID().equals(entity.getOwner().id().get())) {
                 FlagUrlScreen.open(pos);
             } else {
                 player.displayClientMessage(ConstantComponents.NOT_THE_OWNER, true);
