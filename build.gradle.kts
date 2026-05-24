@@ -72,6 +72,7 @@ cloche {
         contributor("Fizz")
         contributor("MsRandom", "ashley@terrarium.earth")
         contributor("ThatGravyBoat", "sophie@terrarium.earth")
+        contributor("Mrbysco")
 
         require("resourcefullib", "3.0.0")
         require("resourcefulconfig", "3.0.0")
