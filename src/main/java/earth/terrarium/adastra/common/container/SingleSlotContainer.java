@@ -3,10 +3,9 @@ package earth.terrarium.adastra.common.container;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeInput;
 import org.jetbrains.annotations.NotNull;
 
-public class SingleSlotContainer implements Container, RecipeInput {
+public class SingleSlotContainer implements Container {
 
     private final int slot;
     private ItemStack stack = ItemStack.EMPTY;
@@ -28,11 +27,6 @@ public class SingleSlotContainer implements Container, RecipeInput {
     @Override
     public @NotNull ItemStack getItem(int slot) {
         return slot == this.slot ? stack : ItemStack.EMPTY;
-    }
-
-    @Override
-    public int size() {
-        return getContainerSize();
     }
 
     @Override

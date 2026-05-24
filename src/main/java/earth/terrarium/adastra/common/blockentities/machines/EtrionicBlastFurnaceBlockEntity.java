@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
+import earth.terrarium.adastra.common.blockentities.base.ContainerRecipeWrapper;
 import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
@@ -132,7 +133,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
         if (energyStorage.extract(MachineConfig.etrionicBlastFurnaceBlastingEnergyPerItem, true) < MachineConfig.etrionicBlastFurnaceBlastingEnergyPerItem)
             return false;
         if (!recipe.getIngredients().get(0).test(getItem(slot))) return false;
-        return ItemUtils.canAddItem(this, recipe.getResultItem(level().registryAccess()), 5, 6, 7, 8);
+        return ItemUtils.canAddItem(new ContainerRecipeWrapper(this), recipe.getResultItem(level().registryAccess()), 5, 6, 7, 8);
     }
 
     protected void craft(BlastingRecipe recipe, int slot) {
@@ -160,7 +161,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean canCraftAlloying() {
-        return alloyingRecipe != null && alloyingRecipe.matches(this, level());
+        return alloyingRecipe != null && alloyingRecipe.matches(new ContainerRecipeWrapper(this), level());
     }
 
     public void craftAlloying() {
@@ -190,7 +191,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
                 createRecipe(i, i + 1);
             }
         } else {
-            alloyingQuickCheck.getRecipeFor(this, level()).ifPresent(r -> {
+            alloyingQuickCheck.getRecipeFor(new ContainerRecipeWrapper(this), level()).ifPresent(r -> {
                 alloyingRecipe = r.value();
                 cookTimeTotal = r.value().cookingTime();
             });

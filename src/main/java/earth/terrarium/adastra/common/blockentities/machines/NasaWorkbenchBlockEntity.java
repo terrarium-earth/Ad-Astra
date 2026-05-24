@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
+import earth.terrarium.adastra.common.blockentities.base.ContainerRecipeWrapper;
 import earth.terrarium.adastra.common.blockentities.base.RedstoneControl;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
@@ -84,11 +85,11 @@ public class NasaWorkbenchBlockEntity extends ContainerMachineBlockEntity {
     @Override
     public void update() {
         if (level().isClientSide()) return;
-        recipe = Optionull.map(quickCheck.getRecipeFor(this, level()).orElse(null), RecipeHolder::value);
+        recipe = Optionull.map(quickCheck.getRecipeFor(new ContainerRecipeWrapper(this), level()).orElse(null), RecipeHolder::value);
     }
 
     public boolean canCraft() {
-        return recipe != null && recipe.matches(this, level());
+        return recipe != null && recipe.matches(new ContainerRecipeWrapper(this), level());
     }
 
     public void craft() {

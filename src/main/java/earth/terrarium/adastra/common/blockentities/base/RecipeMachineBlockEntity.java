@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-public abstract class RecipeMachineBlockEntity<T extends Recipe<RecipeInput>> extends EnergyContainerMachineBlockEntity implements RecipeInput {
+public abstract class RecipeMachineBlockEntity<T extends Recipe<RecipeInput>> extends EnergyContainerMachineBlockEntity {
 
     @Nullable
     protected T recipe;
@@ -52,7 +52,7 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<RecipeInput>> ex
     public abstract void recipeTick(ServerLevel level, ValueStorage energyStorage);
 
     public boolean canCraft() {
-        return recipe != null && recipe.matches(this, level());
+        return recipe != null && recipe.matches(new ContainerRecipeWrapper(this), level());
     }
 
     public abstract void craft();
@@ -85,11 +85,6 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<RecipeInput>> ex
 
     public int cookTimeTotal() {
         return cookTimeTotal;
-    }
-
-    @Override
-    public int size() {
-        return getContainerSize();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
+import earth.terrarium.adastra.common.blockentities.base.ContainerRecipeWrapper;
 import earth.terrarium.adastra.common.blockentities.base.RecipeMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
@@ -138,7 +139,7 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
 
     @Override
     public void update() {
-        quickCheck.getRecipeFor(this, level()).ifPresent(r -> {
+        quickCheck.getRecipeFor(new ContainerRecipeWrapper(this), level()).ifPresent(r -> {
             recipe = r.value();
             cookTimeTotal = r.value().cookingTime();
         });
