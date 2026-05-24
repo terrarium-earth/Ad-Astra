@@ -8,9 +8,9 @@
 //import net.msrandom.classextensions.ExtensionInject;
 //
 //@ClassExtension(ZipGunItem.class)
-//public class ZipGunItemExtension {
+//public class ZipGunItemExtension extends Item{
 //
-//    public ZipGunItemExtension(Properties properties) {
+//    public ZipGunItemExtension(Item.Properties properties) {
 //        super(properties);
 //    }
 //
