@@ -19,6 +19,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.msrandom.multiplatform.annotations.Actual;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.Map;
 
@@ -56,6 +57,6 @@ public class ClientPlatformUtilsActual {
 
     @Actual
     public static Component getDisplayName(ResourceStack<FluidResource> stack) {
-        return stack.resource().getType().getFluidType().getDescription();
+        return new FluidStack(stack.resource().getType(), (int)stack.amount()).getHoverName();
     }
 }
