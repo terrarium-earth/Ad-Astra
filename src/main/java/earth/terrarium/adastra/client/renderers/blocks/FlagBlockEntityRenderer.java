@@ -44,12 +44,14 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 
             if (state.getValue(FlagBlock.HALF).equals(DoubleBlockHalf.LOWER)) {
                 var model = minecraft.getBlockRenderer().getBlockModel(state);
-                minecraft.getBlockRenderer().getModelRenderer().renderModel(poseStack.last(),
-                    buffer.getBuffer(Sheets.cutoutBlockSheet()),
-                    state,
-                    model,
-                    1f, 1f, 1f,
-                    packedLight, packedOverlay);
+                if (model != null) {
+                    minecraft.getBlockRenderer().getModelRenderer().renderModel(poseStack.last(),
+                        buffer.getBuffer(Sheets.cutoutBlockSheet()),
+                        state,
+                        model,
+                        1f, 1f, 1f,
+                        packedLight, packedOverlay);
+                }
             } else {
                 FlagContent content = entity.getContent();
                 if (content == null) {

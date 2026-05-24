@@ -62,13 +62,15 @@ public class OxygenDistributorBlockEntityRenderer implements BlockEntityRenderer
             poseStack.translate(0.5, 0, 0.5);
             poseStack.mulPose(Axis.YP.rotationDegrees(-yRot));
             poseStack.translate(-0.5, 0, -0.5);
-            Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
-                poseStack.last(),
-                buffer.getBuffer(Sheets.cutoutBlockSheet()),
-                state,
-                blockModel,
-                1, 1, 1,
-                packedLight, packedOverlay);
+            if (blockModel != null) {
+                Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
+                    poseStack.last(),
+                    buffer.getBuffer(Sheets.cutoutBlockSheet()),
+                    state,
+                    blockModel,
+                    1, 1, 1,
+                    packedLight, packedOverlay);
+            }
         }
     }
 
