@@ -56,11 +56,10 @@ public class RadioScreen extends BaseCursorScreen {
 
     @Override
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        super.renderBackground(graphics, mouseX, mouseY, partialTick);
+        super.render(graphics, mouseX, mouseY, partialTick);
         int left = (this.width - WIDTH) / 2;
         int top = (this.height - HEIGHT) / 2;
 
-        graphics.blit(TEXTURE, left, top, 0, 0, WIDTH, HEIGHT, 512, 256);
         renderClock(graphics, left + 29, top + 92);
         graphics.drawString(font, RadioConfig.volume + "%", left + 102 - font.width(RadioConfig.volume + "%"), top + 114, 0x189418);
         graphics.drawString(font, "Day " + getDayTime() / 24000L, left + 16, top + 114, 0x189418);
@@ -69,8 +68,15 @@ public class RadioScreen extends BaseCursorScreen {
         if (playing != null && stationNames.containsKey(playing.toLowerCase(Locale.ROOT))) {
             renderScrollingString(graphics, font, Component.literal(stationNames.get(playing.toLowerCase(Locale.ROOT))), left + 65, top + 37, left + 188, top + 46, 0x189418);
         }
+    }
 
-        super.render(graphics, mouseX, mouseY, partialTick);
+    @Override
+    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        super.renderBackground(graphics, mouseX, mouseY, partialTick);
+        int left = (this.width - WIDTH) / 2;
+        int top = (this.height - HEIGHT) / 2;
+
+        graphics.blit(TEXTURE, left, top, 0, 0, WIDTH, HEIGHT, 512, 256);
     }
 
     protected static void renderScrollingString(GuiGraphics graphics, Font font, Component text, int minX, int minY, int maxX, int maxY, int color) {
