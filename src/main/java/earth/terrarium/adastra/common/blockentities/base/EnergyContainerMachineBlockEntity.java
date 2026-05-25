@@ -30,7 +30,7 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
     }
 
     public ValueStorage getEnergyStorage() {
-        return getEnergy(null);
+        return this.getEnergy(null);
     }
 
     public long maxInsertExtract() {
@@ -40,23 +40,24 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
     public void extractBatterySlot() {
         ItemStack stack = this.getItem(0);
         if (stack.isEmpty()) return;
-        var container = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
-        if (container.getStoredAmount() <= 0) return;
+        ModifyOnlyContext modifyContext = new ModifyOnlyContext(stack.copy());
+        if (!modifyContext.isPresent(EnergyApi.ITEM)) return;
         EnergyUtils.moveEnergy(getEnergyStorage(), getEnergyStorage(), maxInsertExtract(), false);
-//        if (holder.isDirty()) {
-//            this.setItem(0, holder.getStack());
-//        }
+        if (ItemStack.isSameItemSameComponents(stack, modifyContext.stack())) {
+            this.setItem(0, modifyContext.stack());
+        }
     }
 
     public void insertBatterySlot() {
         ItemStack stack = this.getItem(0);
         if (stack.isEmpty()) return;
-        var container = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
-        if (container.getStoredAmount() <= 0) return;
+        ModifyOnlyContext modifyContext = new ModifyOnlyContext(stack.copy());
+        if (!modifyContext.isPresent(EnergyApi.ITEM)) return;
+        var container = modifyContext.find(EnergyApi.ITEM);
         EnergyUtils.moveEnergy(getEnergyStorage(), container, maxInsertExtract(), false);
-//        if (holder.isDirty()) {
-//            this.setItem(0, holder.getStack());
-//        }
+        if (ItemStack.isSameItemSameComponents(stack, modifyContext.stack())) {
+            this.setItem(0, modifyContext.stack());
+        }
     }
 
     public enum ChargeSlotType {

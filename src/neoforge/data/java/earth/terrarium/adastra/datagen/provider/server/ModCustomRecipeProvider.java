@@ -32,7 +32,6 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Stream;
 
 public abstract class ModCustomRecipeProvider extends RecipeProvider {
 

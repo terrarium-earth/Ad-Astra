@@ -51,6 +51,8 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         new ConfigurationEntry(ConfigurationType.FLUID, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID)
     );
 
+    private final SimpleValueStorage energy = new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.DESH.energyCapacity);
+
     private final Set<BlockPos> lastDistributedBlocks = new HashSet<>();
     private long energyPerTick;
     private float fluidPerTick;
@@ -101,7 +103,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
 
     @Override
     public ValueStorage getEnergy(Direction direction) {
-        return new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.DESH.energyCapacity);
+        return energy;
     }
 
     @Override

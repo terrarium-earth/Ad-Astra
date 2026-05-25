@@ -1,6 +1,5 @@
 package earth.terrarium.adastra.datagen.provider.client;
 
-import com.teamresourceful.resourcefullib.common.fluid.ResourcefulFlowingFluid;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.Planet;

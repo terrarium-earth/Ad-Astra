@@ -33,6 +33,7 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
     public static final List<ConfigurationEntry> SIDE_CONFIG = List.of(
         new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.PUSH, ConstantComponents.SIDE_CONFIG_ENERGY)
     );
+    private final SimpleValueStorage energy = new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.DESH.energyCapacity);
 
     public SolarPanelBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 1);
@@ -45,7 +46,7 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
 
     @Override
     public ValueStorage getEnergy(Direction direction) {
-        return new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.DESH.energyCapacity);
+        return energy;
     }
 
     @Override

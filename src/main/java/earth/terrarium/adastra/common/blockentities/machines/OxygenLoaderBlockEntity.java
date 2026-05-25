@@ -14,7 +14,6 @@ import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
-import earth.terrarium.common_storage_lib.fluid.FluidApi;
 import earth.terrarium.common_storage_lib.fluid.impl.SimpleFluidStorage;
 import earth.terrarium.common_storage_lib.fluid.util.FluidProvider;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
@@ -46,7 +45,15 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
         new ConfigurationEntry(ConfigurationType.FLUID, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID)
     );
 
-    private SimpleFluidStorage fluidContainer;
+    private final SimpleFluidStorage fluid = new SimpleFluidStorage(this, ModDataManagers.FLUID_CONTENTS, 2, FluidAmounts.toPlatformAmount(MachineConfig.STEEL.fluidCapacity))
+        .filter(0, f -> level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get())
+            .stream()
+            .anyMatch(r -> r.value().input().ingredient().test(f)))
+        .filter(1, f -> level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get())
+            .stream()
+            .anyMatch(r -> r.value().result().resource().isOf(f.getType())));
+
+    private final SimpleValueStorage energy = new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.STEEL.energyCapacity);
 
     public OxygenLoaderBlockEntity(BlockPos pos, BlockState state) {
         this(pos, state, 5);
@@ -63,7 +70,11 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
 
     @Override
     public ValueStorage getEnergy(Direction direction) {
-        return new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.STEEL.energyCapacity);
+        return energy;
+    }
+
+    public CommonStorage<FluidResource> getFluidContainer() {
+        return fluid;
     }
 
     @Override
@@ -73,13 +84,7 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
 
     @Override
     public CommonStorage<FluidResource> getFluids(Level level, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, Direction direction) {
-        return new SimpleFluidStorage(this, ModDataManagers.FLUID_CONTENTS, 2, FluidAmounts.toPlatformAmount(MachineConfig.STEEL.fluidCapacity))
-            .filter(0, f -> level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get())
-                .stream()
-                .anyMatch(r -> r.value().input().ingredient().test(f)))
-            .filter(1, f -> level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get())
-                .stream()
-                .anyMatch(r -> r.value().result().resource().isOf(f.getType())));
+        return fluid;
 //        return fluidContainer = new WrappedBlockFluidContainer( TODO: Implement fluid storage!
 //            this,
 //            new BiFluidContainer(
@@ -94,24 +99,19 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
 //                    .anyMatch(r -> r.value().result().matches(holder))));
     }
 
-    public CommonStorage<FluidResource> getFluidContainer() {
-        return FluidApi.BLOCK.find(this, null);
-    }
-
     @Override
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
         TransferUtils.pullItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
         TransferUtils.pullItemsNearby(this, pos, new int[]{3}, sideConfig.get(1), filter);
         TransferUtils.pushItemsNearby(this, pos, new int[]{2, 4}, sideConfig.get(2), filter);
         TransferUtils.pullEnergyNearby(this, pos, maxInsertExtract(), sideConfig.get(3), filter);
-        TransferUtils.pullFluidNearby(this, pos, getFluidContainer(), FluidAmounts.toPlatformAmount(200), 0, sideConfig.get(4), filter);
-        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidAmounts.toPlatformAmount(200), 1, sideConfig.get(5), filter);
+        TransferUtils.pullFluidNearby(this, pos, fluid, FluidAmounts.toPlatformAmount(200), 0, sideConfig.get(4), filter);
+        TransferUtils.pushFluidNearby(this, pos, fluid, FluidAmounts.toPlatformAmount(200), 1, sideConfig.get(5), filter);
     }
 
     @Override
     public void recipeTick(ServerLevel level, ValueStorage energyStorage) {
         if (recipe == null) return;
-        if (fluidContainer == null) getFluidContainer();
         if (!canCraft()) {
             clearRecipe();
             return;
@@ -128,13 +128,13 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
     public void craft() {
         if (recipe == null) return;
 
-        fluidContainer.extract(getFluidContainer().getResource(0), recipe.input().getAmount(), false);
-        fluidContainer.insert(recipe.result().resource(), recipe.result().amount(), false);
+        fluid.extract(fluid.getResource(0), recipe.input().getAmount(), false);
+        fluid.insert(recipe.result().resource(), recipe.result().amount(), false);
 
         updateSlots();
 
         cookTime = 0;
-        if (fluidContainer.getContents(0).isEmpty()) clearRecipe();
+        if (fluid.getContents(0).isEmpty()) clearRecipe();
     }
 
     @Override
@@ -148,8 +148,8 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
 
     @Override
     public void updateSlots() {
-        FluidUtils.moveItemToContainer(this, getFluidContainer(), 1, 2, 0);
-        FluidUtils.moveContainerToItem(this, getFluidContainer(), 3, 4, 1);
+        FluidUtils.moveItemToContainer(this, fluid, 1, 2, 0);
+        FluidUtils.moveContainerToItem(this, fluid, 3, 4, 1);
         sync();
     }
 

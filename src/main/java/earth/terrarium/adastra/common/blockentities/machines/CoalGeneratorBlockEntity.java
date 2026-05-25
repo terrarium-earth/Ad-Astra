@@ -33,6 +33,7 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
         new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
         new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.PUSH, ConstantComponents.SIDE_CONFIG_ENERGY)
     );
+    private final SimpleValueStorage energy = new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.IRON.energyCapacity);
 
     protected int cookTime;
     protected int cookTimeTotal;
@@ -48,7 +49,7 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
 
     @Override
     public ValueStorage getEnergy(Direction direction) {
-        return new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.IRON.energyCapacity);
+        return energy;
     }
 
     @Override

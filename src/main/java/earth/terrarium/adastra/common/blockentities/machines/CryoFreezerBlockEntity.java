@@ -14,7 +14,6 @@ import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
-import earth.terrarium.common_storage_lib.fluid.FluidApi;
 import earth.terrarium.common_storage_lib.fluid.impl.SimpleFluidStorage;
 import earth.terrarium.common_storage_lib.fluid.util.FluidProvider;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
@@ -44,6 +43,15 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
         new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.NONE, ConstantComponents.SIDE_CONFIG_ENERGY),
         new ConfigurationEntry(ConfigurationType.FLUID, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_FLUID)
     );
+    private final SimpleValueStorage energy = new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.OSTRUM.energyCapacity);
+    private final SimpleFluidStorage fluid = new SimpleFluidStorage(this, ModDataManagers.FLUID_CONTENTS, 1, FluidAmounts.toPlatformAmount(MachineConfig.OSTRUM.fluidCapacity)) {
+//            @Override
+//            public boolean allowsInsertion() {
+//                return false;
+//            }
+    }.filter(0, f -> level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYO_FREEZING.get())
+        .stream()
+        .anyMatch(r -> r.value().result().resource().isOf(f.getType())));
 
     public CryoFreezerBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 4, ModRecipeTypes.CRYO_FREEZING);
@@ -56,7 +64,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
 
     @Override
     public ValueStorage getEnergy(Direction direction) {
-        return new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.OSTRUM.energyCapacity);
+        return energy;
     }
 
     @Override
@@ -66,19 +74,11 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
 
     @Override
     public CommonStorage<FluidResource> getFluids(Level level, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, Direction direction) {
-        return new SimpleFluidStorage(this, ModDataManagers.FLUID_CONTENTS, 1, FluidAmounts.toPlatformAmount(MachineConfig.OSTRUM.fluidCapacity)) {
-//            @Override
-//            public boolean allowsInsertion() {
-//                return false;
-//            }
-        }
-            .filter(0, f -> level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYO_FREEZING.get())
-                .stream()
-                .anyMatch(r -> r.value().result().resource().isOf(f.getType())));
+        return fluid;
     }
 
     public CommonStorage<FluidResource> getFluidContainer() {
-        return FluidApi.BLOCK.find(this, null);
+        return fluid;
     }
 
     @Override
@@ -90,13 +90,12 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
         TransferUtils.pushItemsNearby(this, pos, new int[]{3}, sideConfig.get(2), filter);
         TransferUtils.pullItemsNearby(this, pos, new int[]{3}, sideConfig.get(2), filter);
         TransferUtils.pullEnergyNearby(this, pos, maxInsertExtract(), sideConfig.get(3), filter);
-        TransferUtils.pushFluidNearby(this, pos, getFluidContainer(), FluidAmounts.toPlatformAmount(200), 0, sideConfig.get(4), filter);
+        TransferUtils.pushFluidNearby(this, pos, fluid, FluidAmounts.toPlatformAmount(200), 0, sideConfig.get(4), filter);
     }
 
     @Override
     public void recipeTick(ServerLevel level, ValueStorage energyStorage) {
         if (recipe == null) return;
-        if (getFluidContainer() == null) return;
         if (!canCraft()) {
             clearRecipe();
             return;
@@ -114,13 +113,12 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
         if (recipe == null) return;
 
         getItem(1).shrink(1);
-        var fluidContainer = getFluidContainer();
-        fluidContainer.insert(recipe.result().resource(), recipe.result().amount(), false);
+        fluid.insert(recipe.result().resource(), recipe.result().amount(), false);
 
         updateSlots();
 
         cookTime = 0;
-        if (fluidContainer.getResource(0).isBlank()) clearRecipe();
+        if (fluid.getResource(0).isBlank()) clearRecipe();
     }
 
     @Override
@@ -135,8 +133,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
 
     @Override
     public void updateSlots() {
-        var fluidContainer = getFluidContainer();
-        FluidUtils.moveContainerToItem(this, fluidContainer, 2, 3, 0);
+        FluidUtils.moveContainerToItem(this, fluid, 2, 3, 0);
         sync();
     }
 

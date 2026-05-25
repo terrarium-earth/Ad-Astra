@@ -43,6 +43,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
         new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_SLOTS),
         new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.NONE, ConstantComponents.SIDE_CONFIG_ENERGY)
     );
+    private final SimpleValueStorage energy = new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.STEEL.energyCapacity);
 
     @Nullable
     private AlloyingRecipe alloyingRecipe;
@@ -65,7 +66,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
 
     @Override
     public ValueStorage getEnergy(Direction direction) {
-        return new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.STEEL.energyCapacity);
+        return energy;
     }
 
     @Override

@@ -34,6 +34,7 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
         new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_OUTPUT_SLOTS),
         new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.NONE, ConstantComponents.SIDE_CONFIG_ENERGY)
     );
+    private final SimpleValueStorage energy = new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.IRON.energyCapacity);
 
     public CompressorBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 3, ModRecipeTypes.COMPRESSING);
@@ -46,7 +47,7 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
 
     @Override
     public ValueStorage getEnergy(Direction direction) {
-        return new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.IRON.energyCapacity);
+        return energy;
     }
 
     @Override

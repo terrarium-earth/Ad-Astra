@@ -1,13 +1,11 @@
 package earth.terrarium.adastra.common.registry;
 
-import com.teamresourceful.resourcefullib.common.fluid.ResourcefulLiquidBlock;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blocks.*;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
-import earth.terrarium.adastra.common.blocks.fluids.CryoFuelLiquidBlock;
 import earth.terrarium.adastra.common.blocks.lamps.IndustrialLampBlock;
 import earth.terrarium.adastra.common.blocks.lamps.SmallIndustrialLampBlock;
 import earth.terrarium.adastra.common.blocks.machines.*;
