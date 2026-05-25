@@ -15,6 +15,7 @@ import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
 import earth.terrarium.common_storage_lib.energy.EnergyApi;
 import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -101,7 +102,7 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
         ModifyOnlyContext itemContext = new ModifyOnlyContext(stack);
         var container = itemContext.find(EnergyApi.ITEM);
         if (container.getStoredAmount() <= 0) return;
-        if (EnergyUtils.moveEnergy(getEnergyStorage(), container, maxInsertExtract(), false) == 0) return;
+        if (TransferUtil.moveValue(getEnergyStorage(), container, maxInsertExtract(), false) == 0) return;
         setItem(0, itemContext.stack());
         ModUtils.sendParticles(level,
             ParticleTypes.ELECTRIC_SPARK,

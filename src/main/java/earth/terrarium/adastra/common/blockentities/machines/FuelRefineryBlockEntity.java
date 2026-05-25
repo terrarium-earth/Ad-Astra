@@ -34,7 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRecipe> implements FluidProvider.Block {
+public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRecipe> implements FluidProvider.BlockEntity {
 
     public static final List<ConfigurationEntry> SIDE_CONFIG = List.of(
         new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
@@ -73,7 +73,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
     }
 
     @Override
-    public CommonStorage<FluidResource> getFluids(Level level, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, Direction direction) {
+    public CommonStorage<FluidResource> getFluids(Direction direction) {
         return fluid;
     }
 

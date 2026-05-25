@@ -9,7 +9,9 @@ import earth.terrarium.common_storage_lib.resources.ResourceStack;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
+import earth.terrarium.common_storage_lib.storage.base.UpdateManager;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
@@ -34,7 +36,7 @@ public class TransferUtils {
             if (nearbyEntity == null) continue;
             ValueStorage nearbyContainer = EnergyApi.BLOCK.find(nearbyEntity, direction.getOpposite());
             if (nearbyContainer == null) continue;
-            EnergyUtils.moveEnergy(container, nearbyContainer, amount, false);
+            TransferUtil.moveValue(container, nearbyContainer, amount, false);
         }
     }
 
@@ -51,7 +53,7 @@ public class TransferUtils {
             if (nearbyEntity == null) continue;
             ValueStorage nearbyContainer = EnergyApi.BLOCK.find(nearbyEntity, direction.getOpposite());
             if (nearbyContainer == null) continue;
-            EnergyUtils.moveEnergy(nearbyContainer, container, amount, false);
+            TransferUtil.moveValue(nearbyContainer, container, amount, false);
         }
     }
 
@@ -72,7 +74,8 @@ public class TransferUtils {
             ResourceStack<FluidResource> holder = container.getContents(tank);
             if (holder.isEmpty()) continue;
 
-            if (FluidUtils.moveFluid(container, nearbyContainer, holder.withCount(FluidAmounts.toMillibuckets(holder.amount())), false) > 0) {
+            if (FluidUtils.moveFluid(container, nearbyContainer, holder.withCount(FluidAmounts.toMillibuckets(amount)), false) > 0) {
+                UpdateManager.batch(container, nearbyContainer);
                 machine.sync();
             }
         }
@@ -92,7 +95,8 @@ public class TransferUtils {
             if (tank >= container.size()) continue;
             ResourceStack<FluidResource> holder = container.getContents(tank);
             if (holder.isEmpty()) continue;
-            if (FluidUtils.moveFluid(container, nearbyContainer, holder.withCount(FluidAmounts.toMillibuckets(holder.amount())), false) > 0) {
+            if (FluidUtils.moveFluid(container, nearbyContainer, holder.withCount(FluidAmounts.toMillibuckets(amount)), false) > 0) {
+                UpdateManager.batch(container, nearbyContainer);
                 machine.sync();
             }
         }

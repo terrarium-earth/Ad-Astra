@@ -86,11 +86,14 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
         if (getEnergyStorage().insert(MachineConfig.coalGeneratorEnergyGenerationPerTick, true) == 0) {
             if (time % 10 == 0) setLit(false);
             return;
+        } else {
+            energy.update();
         }
 
         if (cookTime > 0) {
             cookTime--;
             getEnergyStorage().insert(MachineConfig.coalGeneratorEnergyGenerationPerTick, false);
+            energy.update();
             if (time % 10 == 0) setLit(true);
         } else if (!input.isEmpty()
             && !(input.getItem() instanceof BucketItem)) {

@@ -3,6 +3,7 @@ package earth.terrarium.adastra.common.blockentities.pipes;
 import earth.terrarium.adastra.common.blocks.properties.PipeProperty;
 import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.common_storage_lib.energy.EnergyApi;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -35,7 +36,7 @@ public class CableBlockEntity extends PipeBlockEntity {
         if (sourceContainer == null) return;
         var consumerContainer = EnergyApi.BLOCK.find(consumer, direction.getOpposite());
         if (consumerContainer == null) return;
-        EnergyUtils.moveEnergy(sourceContainer, consumerContainer, Math.min(transferRate, sourceContainer.getStoredAmount()), false);
+        TransferUtil.moveValue(sourceContainer, consumerContainer, Math.min(transferRate, sourceContainer.getStoredAmount()), false);
     }
 
     @Override

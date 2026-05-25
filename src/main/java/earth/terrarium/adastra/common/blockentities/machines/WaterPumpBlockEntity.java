@@ -17,6 +17,7 @@ import earth.terrarium.common_storage_lib.fluid.util.FluidProvider;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
+import earth.terrarium.common_storage_lib.storage.base.UpdateManager;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,8 +26,6 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity implements FluidProvider.Block {
+public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity implements FluidProvider.BlockEntity {
 
     public static final List<ConfigurationEntry> SIDE_CONFIG = List.of(
         new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.NONE, ConstantComponents.SIDE_CONFIG_ENERGY),
@@ -64,7 +63,7 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
     }
 
     @Override
-    public CommonStorage<FluidResource> getFluids(Level level, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, Direction direction) {
+    public CommonStorage<FluidResource> getFluids(Direction direction) {
         return fluid;
     }
 
@@ -82,13 +81,19 @@ public class WaterPumpBlockEntity extends EnergyContainerMachineBlockEntity impl
         if (!level().getFluidState(pos.below()).is(Fluids.WATER)) return false;
         if (energyStorage.extract(MachineConfig.waterPumpEnergyPerTick, true) < MachineConfig.waterPumpEnergyPerTick)
             return false;
-        var fluidContainer = fluid;
-        return fluidContainer != null && fluidContainer.getAmount(0) < fluidContainer.getLimit(0, FluidResource.BLANK);
+        return fluid != null && fluid.getAmount(0) < fluid.getLimit(0, FluidResource.BLANK);
     }
 
     private void pump(ServerLevel level, ValueStorage energyStorage) {
         energyStorage.extract(MachineConfig.waterPumpEnergyPerTick, false);
-        fluid.insert(FluidResource.of(Fluids.WATER), FluidAmounts.toPlatformAmount(MachineConfig.waterPumpFluidGenerationPerTick), false);
+
+        FluidResource insertResource =
+            fluid.getResource(0).isBlank()
+                ? FluidResource.of(Fluids.WATER)
+                : fluid.getResource(0);
+        fluid.insert(insertResource, FluidAmounts.toPlatformAmount(MachineConfig.waterPumpFluidGenerationPerTick), false);
+        UpdateManager.batch(energyStorage, fluid);
+
         ModUtils.sendParticles(level,
             ModParticleTypes.OXYGEN_BUBBLE.get(),
             getBlockPos().getX() + 0.5,

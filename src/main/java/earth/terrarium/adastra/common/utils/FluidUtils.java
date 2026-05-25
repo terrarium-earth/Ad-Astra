@@ -7,6 +7,7 @@ import earth.terrarium.common_storage_lib.resources.ResourceStack;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import earth.terrarium.common_storage_lib.resources.item.ItemResource;
 import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
+import earth.terrarium.common_storage_lib.storage.base.UpdateManager;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -181,6 +182,7 @@ public class FluidUtils {
         if (!simulate && inserted > 0 && simulatedExtraction == inserted) {
             from.extract(toInsert.resource(), toInsert.amount(), false);
             to.extract(toInsert.resource(), toInsert.amount(), false);
+            UpdateManager.batch(from, to);
         }
         return Math.max(0, inserted);
     }

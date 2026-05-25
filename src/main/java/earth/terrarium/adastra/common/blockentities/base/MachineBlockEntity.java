@@ -1,7 +1,14 @@
 package earth.terrarium.adastra.common.blockentities.base;
 
+import com.teamresourceful.resourcefullib.common.fluid.data.FluidProperties;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
+import earth.terrarium.common_storage_lib.energy.EnergyProvider;
+import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.fluid.impl.SimpleFluidStorage;
+import earth.terrarium.common_storage_lib.fluid.util.FluidProvider;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -30,6 +37,16 @@ public abstract class MachineBlockEntity extends BlockEntity implements Tickable
     @Override
     public void firstTick(Level level, BlockPos pos, BlockState state) {
         this.initialized = true;
+    }
+
+    @Override
+    public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
+        if (this instanceof EnergyProvider.BlockEntity energyProvider && energyProvider.getEnergy(null) instanceof SimpleValueStorage valueStorage) {
+            valueStorage.readSnapshot(ModDataManagers.VALUE_CONTENT.get(this));
+        }
+        if (this instanceof FluidProvider.BlockEntity fluidProvider && fluidProvider.getFluids(null) instanceof SimpleFluidStorage fluidStorage) {
+            fluidStorage.readSnapshot(ModDataManagers.FLUID_CONTENTS.get(this));
+        }
     }
 
     @Override

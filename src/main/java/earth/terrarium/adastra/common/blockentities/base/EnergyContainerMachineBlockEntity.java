@@ -1,10 +1,10 @@
 package earth.terrarium.adastra.common.blockentities.base;
 
-import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
 import earth.terrarium.common_storage_lib.energy.EnergyApi;
 import earth.terrarium.common_storage_lib.energy.EnergyProvider;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -42,7 +42,7 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
         if (stack.isEmpty()) return;
         ModifyOnlyContext modifyContext = new ModifyOnlyContext(stack.copy());
         if (!modifyContext.isPresent(EnergyApi.ITEM)) return;
-        EnergyUtils.moveEnergy(getEnergyStorage(), getEnergyStorage(), maxInsertExtract(), false);
+        TransferUtil.moveValue(getEnergyStorage(), getEnergyStorage(), maxInsertExtract(), false);
         if (ItemStack.isSameItemSameComponents(stack, modifyContext.stack())) {
             this.setItem(0, modifyContext.stack());
         }
@@ -54,7 +54,7 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
         ModifyOnlyContext modifyContext = new ModifyOnlyContext(stack.copy());
         if (!modifyContext.isPresent(EnergyApi.ITEM)) return;
         var container = modifyContext.find(EnergyApi.ITEM);
-        EnergyUtils.moveEnergy(getEnergyStorage(), container, maxInsertExtract(), false);
+        TransferUtil.moveValue(getEnergyStorage(), container, maxInsertExtract(), false);
         if (ItemStack.isSameItemSameComponents(stack, modifyContext.stack())) {
             this.setItem(0, modifyContext.stack());
         }

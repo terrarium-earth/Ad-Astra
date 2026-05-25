@@ -19,6 +19,7 @@ import earth.terrarium.common_storage_lib.fluid.util.FluidProvider;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
+import earth.terrarium.common_storage_lib.storage.base.UpdateManager;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,7 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoadingRecipe> implements FluidProvider.Block {
+public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoadingRecipe> implements FluidProvider.BlockEntity {
 
     public static final List<ConfigurationEntry> SIDE_CONFIG = List.of(
         new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
@@ -83,7 +84,7 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
     }
 
     @Override
-    public CommonStorage<FluidResource> getFluids(Level level, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, Direction direction) {
+    public CommonStorage<FluidResource> getFluids(Direction direction) {
         return fluid;
 //        return fluidContainer = new WrappedBlockFluidContainer( TODO: Implement fluid storage!
 //            this,
@@ -118,6 +119,7 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
         }
 
         energyStorage.extract(recipe.energy(), false);
+        UpdateManager.batch(energyStorage);
 
         cookTime++;
         if (cookTime < cookTimeTotal) return;
@@ -130,6 +132,7 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
 
         fluid.extract(fluid.getResource(0), recipe.input().getAmount(), false);
         fluid.insert(recipe.result().resource(), recipe.result().amount(), false);
+        fluid.update();
 
         updateSlots();
 

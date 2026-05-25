@@ -3,7 +3,6 @@ package earth.terrarium.adastra.common.utils;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
 import earth.terrarium.common_storage_lib.energy.EnergyApi;
-import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -22,16 +21,5 @@ public class EnergyUtils {
 //                .putLong("Energy", container.getMaxCapacity());
         }
         return stack;
-    }
-
-    public static long moveEnergy(ValueStorage from, ValueStorage to, long amount, boolean simulate) {
-        long extracted = from.extract(amount, true);
-        long inserted = to.insert(extracted, true);
-        long simulatedExtraction = from.extract(inserted, true);
-        if (!simulate && inserted > 0 && simulatedExtraction == inserted) {
-            from.extract(inserted, false);
-            to.insert(inserted, false);
-        }
-        return Math.max(0, inserted);
     }
 }

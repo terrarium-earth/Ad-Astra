@@ -15,6 +15,7 @@ import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
 import earth.terrarium.common_storage_lib.energy.EnergyApi;
 import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -96,7 +97,7 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
         if (stack.isEmpty()) return;
         var container = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
         if (container.getStoredAmount() <= 0) return;
-        EnergyUtils.moveEnergy(getEnergyStorage(), container, maxInsertExtract(), false);
+        TransferUtil.moveValue(getEnergyStorage(), container, maxInsertExtract(), false);
 //        if (holder.isDirty()) {
 //            setItem(0, holder.getStack());
 //        }

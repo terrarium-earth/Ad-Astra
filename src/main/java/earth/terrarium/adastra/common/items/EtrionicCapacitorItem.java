@@ -12,6 +12,7 @@ import earth.terrarium.common_storage_lib.energy.EnergyApi;
 import earth.terrarium.common_storage_lib.energy.EnergyProvider;
 import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -116,7 +117,7 @@ public class EtrionicCapacitorItem extends Item implements EnergyProvider.Item {
             ItemStack stack = inventory.getItem(i);
             if (stack.isEmpty() || stack.is(this)) continue;
             var to = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
-            long moved = EnergyUtils.moveEnergy(from, to, maxExtract, false);
+            long moved = TransferUtil.moveValue(from, to, maxExtract, false);
             if (moved > 0) return;
         }
     }
@@ -134,7 +135,7 @@ public class EtrionicCapacitorItem extends Item implements EnergyProvider.Item {
             ItemStack stack = inventory.getItem(i);
             if (stack.isEmpty() || stack.is(this)) continue;
             var to = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
-            EnergyUtils.moveEnergy(from, to, maxExtract / energyItems, false);
+            TransferUtil.moveValue(from, to, maxExtract / energyItems, false);
         }
     }
 
