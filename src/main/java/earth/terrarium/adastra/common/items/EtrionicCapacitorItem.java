@@ -4,7 +4,6 @@ import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.registry.ModDataComponents;
 import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.adastra.common.utils.DistributionMode;
-import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.common_storage_lib.context.ItemContext;
 import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;

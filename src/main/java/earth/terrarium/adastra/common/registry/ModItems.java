@@ -20,7 +20,10 @@ import earth.terrarium.adastra.common.tags.ModPaintingVariantTags;
 import earth.terrarium.adastra.common.utils.PlatformUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 
 @SuppressWarnings("unused")
 public class ModItems {

@@ -8,7 +8,6 @@ import earth.terrarium.adastra.common.blocks.machines.EnergizerBlock;
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.registry.ModDataManagers;
-import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.ModUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;

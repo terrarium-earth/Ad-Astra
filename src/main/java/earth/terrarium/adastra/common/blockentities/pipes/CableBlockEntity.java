@@ -1,7 +1,6 @@
 package earth.terrarium.adastra.common.blockentities.pipes;
 
 import earth.terrarium.adastra.common.blocks.properties.PipeProperty;
-import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.common_storage_lib.energy.EnergyApi;
 import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.core.BlockPos;

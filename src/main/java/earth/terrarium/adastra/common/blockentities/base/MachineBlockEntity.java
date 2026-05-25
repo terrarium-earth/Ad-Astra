@@ -1,6 +1,5 @@
 package earth.terrarium.adastra.common.blockentities.base;
 
-import com.teamresourceful.resourcefullib.common.fluid.data.FluidProperties;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.registry.ModDataManagers;
