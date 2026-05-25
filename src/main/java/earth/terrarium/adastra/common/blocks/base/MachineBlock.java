@@ -49,7 +49,7 @@ public class MachineBlock extends BasicEntityBlock {
                 provider.openMenu((ServerPlayer) player);
             }
         }
-        return super.useWithoutItem(blockState, level, pos, player, hit);
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Override
