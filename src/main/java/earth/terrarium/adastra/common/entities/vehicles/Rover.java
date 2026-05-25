@@ -52,6 +52,9 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder, Fluid
     public static final EntityDataAccessor<Long> FUEL = SynchedEntityData.defineId(Rover.class, EntityDataSerializers.LONG);
     public static final EntityDataAccessor<String> FUEL_TYPE = SynchedEntityData.defineId(Rover.class, EntityDataSerializers.STRING);
 
+    private final SimpleFluidStorage fluid = new SimpleFluidStorage(this, ModDataManagers.FLUID_CONTENTS, 1, FluidAmounts.toPlatformAmount(3000))
+        .filter(0, f -> f.is(ModFluidTags.TIER_1_ROVER_FUEL));;
+
     private float speed;
     private float angle;
 
@@ -88,8 +91,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder, Fluid
 
     @Override
     public CommonStorage<FluidResource> getFluids(Direction direction) {
-        return new SimpleFluidStorage(this, ModDataManagers.FLUID_CONTENTS, 1, FluidAmounts.toPlatformAmount(3000))
-            .filter(0, f -> f.is(ModFluidTags.TIER_1_ROVER_FUEL));
+        return fluid;
     }
 
     @Override

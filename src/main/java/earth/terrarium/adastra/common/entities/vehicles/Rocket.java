@@ -76,6 +76,7 @@ public class Rocket extends Vehicle implements FluidProvider.Entity {
     public static final EntityDataAccessor<String> FUEL_TYPE = SynchedEntityData.defineId(Rocket.class, EntityDataSerializers.STRING);
 
     private final RocketProperties properties;
+    private final SimpleFluidStorage fluid;
 
     private boolean launchpadBound;
     private float speed = 0.05f;
@@ -91,6 +92,8 @@ public class Rocket extends Vehicle implements FluidProvider.Entity {
     public Rocket(EntityType<?> type, Level level, RocketProperties properties) {
         super(type, level);
         this.properties = properties;
+        this.fluid = new SimpleFluidStorage(this, ModDataManagers.FLUID_CONTENTS, 1, FluidAmounts.toPlatformAmount(3000))
+            .filter(0, f -> f.is(properties.fuel));
     }
 
     @Override
@@ -125,8 +128,7 @@ public class Rocket extends Vehicle implements FluidProvider.Entity {
 
     @Override
     public CommonStorage<FluidResource> getFluids(Direction direction) {
-        return new SimpleFluidStorage(this, ModDataManagers.FLUID_CONTENTS, 1, FluidAmounts.toPlatformAmount(3000))
-            .filter(0, f -> f.is(properties.fuel));
+        return fluid;
     }
 
     public CommonStorage<FluidResource> fluidContainer() {
