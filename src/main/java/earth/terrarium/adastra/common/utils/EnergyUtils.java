@@ -1,7 +1,6 @@
 package earth.terrarium.adastra.common.utils;
 
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
-import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
 import earth.terrarium.common_storage_lib.energy.EnergyApi;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;

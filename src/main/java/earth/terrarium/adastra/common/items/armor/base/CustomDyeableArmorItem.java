@@ -2,7 +2,6 @@ package earth.terrarium.adastra.common.items.armor.base;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.util.FastColor;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.component.DyedItemColor;
