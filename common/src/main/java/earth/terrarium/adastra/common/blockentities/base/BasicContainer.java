@@ -19,15 +19,12 @@ public interface BasicContainer extends Container {
 
     @Override
     default @NotNull ItemStack removeItem(int slot, int amount) {
-        ItemStack stack = ContainerHelper.removeItem(items(), slot, amount);
-        update();
-        return stack;
+        return ContainerHelper.removeItem(items(), slot, amount);
     }
 
     @Override
     default void setItem(int slot, @NotNull ItemStack stack) {
         items().set(slot, stack);
-        update();
     }
 
     @Override
@@ -48,6 +45,5 @@ public interface BasicContainer extends Container {
     @Override
     default void clearContent() {
         items().clear();
-        update();
     }
 }
