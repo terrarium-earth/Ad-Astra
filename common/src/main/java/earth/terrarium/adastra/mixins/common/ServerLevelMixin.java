@@ -1,6 +1,5 @@
 package earth.terrarium.adastra.mixins.common;
 
-import com.google.common.collect.ImmutableList;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.common.entities.mob.lunarians.LunarianWanderingTraderSpawner;
@@ -25,6 +24,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.BooleanSupplier;
@@ -52,11 +52,11 @@ public abstract class ServerLevelMixin {
         @Nullable RandomSequences randomSequences,
         CallbackInfo ci
     ) {
-        if (!PlanetApi.API.isPlanet(dimension)) return;
-        this.customSpawners = ImmutableList.<CustomSpawner>builder()
-            .addAll(customSpawners)
-            .add(new LunarianWanderingTraderSpawner(serverLevelData))
-            .build();
+        if (PlanetApi.API.isPlanet(dimension)) {
+            ArrayList<CustomSpawner> lunarianWanderingTraderSpawner = new ArrayList<>(this.customSpawners);
+            lunarianWanderingTraderSpawner.add(new LunarianWanderingTraderSpawner(serverLevelData));
+            this.customSpawners = lunarianWanderingTraderSpawner.stream().toList();
+        }
     }
 
     @Inject(method = "tickChunk", at = @At("TAIL"))
