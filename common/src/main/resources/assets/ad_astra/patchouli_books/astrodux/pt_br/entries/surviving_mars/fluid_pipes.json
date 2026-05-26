@@ -1,0 +1,29 @@
+{
+  "name": "Tubos de Fluidos",
+  "icon": "ad_astra:ostrum_fluid_pipe",
+  "sortnum": 4,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Tubos de Fluidos",
+      "item": "ad_astra:ostrum_fluid_pipe",
+      "text": "Os tubos de fluidos são semelhantes aos cabos, mas transferem fluidos em vez de energia. Para usá-los, fabrique alguns tubos de fluidos e uma chave inglesa. Em seguida, clique com o botão direito em um dos tubos com a chave para alternar entre os modos do tubo: 'nenhum', 'normal', 'inserir' e 'extrair'."
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "Tubos configurados como 'inserir' receberão fluidos da rede, enquanto tubos configurados como 'extrair' bombearão fluidos para a rede.",
+      "recipe": "ad_astra:desh_fluid_pipe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:ostrum_fluid_pipe",
+      "recipe2": "ad_astra:wrench"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:fluid_pipe_duct",
+      "text": "Assim como os cabos, os tubos de fluidos também possuem um bloco de duto para transferir fluidos com segurança dentro e fora de estruturas seladas."
+    }
+  ]
+}

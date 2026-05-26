@@ -1,0 +1,42 @@
+{
+  "name": "Seu Primeiro Foguete",
+  "icon": "ad_astra:nasa_workbench",
+  "sortnum": 3,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Bancada da NASA",
+      "item": "ad_astra:nasa_workbench",
+      "text": "Para construir um foguete, você deve primeiro coletar todas as partes: cone, placas, aletas, tanques e motor. Você pode então fazer o foguete em uma bancada da NASA, uma bancada especialmente projetada apenas para foguetes."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Bancada da NASA",
+      "recipe": "ad_astra:nasa_workbench"
+    },
+    {
+      "type": "multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "   ",
+            " 0 ",
+            "   "
+          ]
+        ],
+        "mapping": {
+          "0": "ad_astra:launch_pad"
+        },
+        "symmetrical": true
+      },
+      "text": "Para colocar seu foguete recém-criado, você deve construir uma plataforma de lançamento."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Plataforma de Lançamento",
+      "recipe": "ad_astra:launch_pad",
+      "text": "Após a construção da plataforma de lançamento, coloque o foguete no centro. Se desejar, você pode energizar qualquer parte da plataforma de lançamento para lançar automaticamente o foguete assim que for abastecido."
+    }
+  ]
+}

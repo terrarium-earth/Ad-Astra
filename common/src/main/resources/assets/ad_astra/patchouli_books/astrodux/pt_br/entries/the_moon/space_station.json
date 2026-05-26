@@ -1,0 +1,38 @@
+{
+  "name": "Estação Espacial",
+  "icon": "ad_astra:/textures/gui/sprites/space_station.png",
+  "sortnum": 0,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Estação Espacial",
+      "text": "Uma estação espacial é uma estrutura pré-construída que é criada na tela do planeta, desde que você tenha os materiais necessários. Estações espaciais estão sempre localizadas na órbita de uma lua ou planeta e fornecem a capacidade de colocar blocos nessa dimensão orbital."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Estação Espacial",
+      "text": "As estações espaciais são projetadas para serem expandidas, permitindo que você construa a base dos seus sonhos sobre uma lua/planeta. Todas as suas estações espaciais estão presentes na tela do planeta. Outros jogadores não podem gerar novas estações espaciais na mesma área que a sua, então sua estrutura está segura."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Movendo-se no Espaço",
+      "text": "A física no espaço é muito diferente da Terra. Neste ambiente de gravidade zero, você flutuará e não será afetado pela gravidade ou atrito. Isso pode dificultar a movimentação. Uma ferramenta que pode te ajudar é a arma zip. Ela usa oxigênio e o consumirá rapidamente para te impulsionar para frente. Isso permite que você se mova no espaço. Tenha cuidado para controlar sua velocidade. Como não há atrito, você pode sair voando e se perder."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Arma Zip",
+      "recipe": "ad_astra:zip_gun"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cadmus",
+      "text": "Se $(l:https://modrinth.com/mod/cadmus)Cadmus$(/l) estiver instalado, os chunks 3x3 em sua estação espacial serão reivindicados. Além disso, os jogadores não poderão criar novas estações espaciais em nenhum de seus chunks reivindicados."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Argonautas",
+      "text": "Se $(l:https://modrinth.com/mod/argonauts)Argonautas$(/l) estiver instalado, outros jogadores em seu grupo ou guilda poderão pousar em sua estação espacial, e você poderá pousar na deles."
+    }
+  ]
+}
