@@ -102,7 +102,7 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
     public void recipeTick(ServerLevel level, WrappedBlockEnergyContainer energyStorage) {
         if (recipe == null) return;
         if (fluidContainer == null) getFluidContainer();
-        if (!canCraft()) {
+        if (!canCraft() || recipe.result().getFluidAmount() != fluidContainer.internalInsert(recipe.result(), true)) {
             clearRecipe();
             return;
         }

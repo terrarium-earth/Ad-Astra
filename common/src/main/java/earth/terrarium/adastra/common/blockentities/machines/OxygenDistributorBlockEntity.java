@@ -82,7 +82,6 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         energyPerTick = tag.getLong("EnergyPerTick");
         fluidPerTick = tag.getFloat("FluidPerTick");
         distributedBlocksCount = tag.getInt("DistributedBlocksCount");
-        accumulatedFluid = tag.getDouble("AccumulatedFluid");
         limit = tag.getInt("Limit");
     }
 
@@ -92,7 +91,6 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         tag.putLong("EnergyPerTick", energyPerTick);
         tag.putFloat("FluidPerTick", fluidPerTick);
         tag.putInt("DistributedBlocksCount", distributedBlocksCount);
-        tag.putDouble("AccumulatedFluid", accumulatedFluid);
         tag.putInt("Limit", limit);
     }
 
@@ -123,12 +121,8 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         if (canFunction() && canDistribute) {
             getEnergyStorage().internalExtract(calculateEnergyPerTick(), false);
             setLit(true);
-            accumulatedFluid += fluidPerTick;
-            int wholeBuckets = (int) (accumulatedFluid / 1000f);
-            if (wholeBuckets > 0) {
-                consumeDistribution(FluidConstants.fromMillibuckets(Math.max(1, wholeBuckets / 1000)));
-                accumulatedFluid -= wholeBuckets;
-            }
+
+            consumeDistribution(FluidConstants.fromMillibuckets(Math.max(1, fluidPerTick)));
 
             if (time % MachineConfig.distributionRefreshRate == 0) tickOxygen(level, pos, state);
 
