@@ -51,7 +51,9 @@ public class EnvironmentEffects {
                         tickHot(level, pos, state);
                     } else if (temperature < PlanetConstants.FREEZE_TEMPERATURE) {
                         tickCold(level, pos, state);
-                    } else if (!OxygenApi.API.hasOxygen(level, pos)) {
+                    }
+                    
+                    if (!OxygenApi.API.hasOxygen(level, pos)) {
                         tickBlock(level, pos, state);
                     }
                 }
