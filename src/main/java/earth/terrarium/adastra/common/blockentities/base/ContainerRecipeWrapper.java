@@ -18,6 +18,6 @@ public record ContainerRecipeWrapper(Container container) implements RecipeInput
 
     @Override
     public boolean isEmpty() {
-        return container().isEmpty();
+        return false;
     }
 }
