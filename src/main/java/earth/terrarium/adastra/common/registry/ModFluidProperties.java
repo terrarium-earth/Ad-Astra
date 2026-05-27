@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.common.registry;
 
 
+import com.teamresourceful.resourcefullib.common.fluid.ResourcefulBucketItem;
 import com.teamresourceful.resourcefullib.common.fluid.data.FluidData;
 import com.teamresourceful.resourcefullib.common.fluid.data.FluidProperties;
 import com.teamresourceful.resourcefullib.common.fluid.registry.ResourcefulFluidRegistry;
@@ -90,28 +91,28 @@ public final class ModFluidProperties {
     public static final RegistryEntry<Block> FUEL_BLOCK = ModBlocks.FLUIDS.register("fuel", () -> new LiquidBlock(ModFluids.FUEL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_RED)));
     public static final RegistryEntry<Block> CRYO_FUEL_BLOCK = ModBlocks.FLUIDS.register("cryo_fuel", () -> new LiquidBlock(ModFluids.CRYO_FUEL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_CYAN)));
 
-    public static final RegistryEntry<Item> OXYGEN_BUCKET = ModItems.BASIC_ITEMS.register("oxygen_bucket", () -> new BucketItem(
-        ModFluids.OXYGEN.get(),
+    public static final RegistryEntry<Item> OXYGEN_BUCKET = ModItems.BASIC_ITEMS.register("oxygen_bucket", () -> new ResourcefulBucketItem(
+        ModFluidProperties.OXYGEN.get(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
-    public static final RegistryEntry<Item> HYDROGEN_BUCKET = ModItems.BASIC_ITEMS.register("hydrogen_bucket", () -> new BucketItem(
-        ModFluids.HYDROGEN.get(),
+    public static final RegistryEntry<Item> HYDROGEN_BUCKET = ModItems.BASIC_ITEMS.register("hydrogen_bucket", () -> new ResourcefulBucketItem(
+        ModFluidProperties.HYDROGEN.get(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
-    public static final RegistryEntry<Item> OIL_BUCKET = ModItems.BASIC_ITEMS.register("oil_bucket", () -> new BucketItem(
-        ModFluids.OIL.get(),
+    public static final RegistryEntry<Item> OIL_BUCKET = ModItems.BASIC_ITEMS.register("oil_bucket", () -> new ResourcefulBucketItem(
+        ModFluidProperties.OIL.get(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
-    public static final RegistryEntry<Item> FUEL_BUCKET = ModItems.BASIC_ITEMS.register("fuel_bucket", () -> new BucketItem(
-        ModFluids.FUEL.get(),
+    public static final RegistryEntry<Item> FUEL_BUCKET = ModItems.BASIC_ITEMS.register("fuel_bucket", () -> new ResourcefulBucketItem(
+        ModFluidProperties.FUEL.get(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 
-    public static final RegistryEntry<Item> CRYO_FUEL_BUCKET = ModItems.BASIC_ITEMS.register("cryo_fuel_bucket", () -> new BucketItem(
-        ModFluids.CRYO_FUEL.get(),
+    public static final RegistryEntry<Item> CRYO_FUEL_BUCKET = ModItems.BASIC_ITEMS.register("cryo_fuel_bucket", () -> new ResourcefulBucketItem(
+        ModFluidProperties.CRYO_FUEL.get(),
         new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))
     );
 }
