@@ -24,55 +24,60 @@ import net.minecraft.world.level.material.MapColor;
 @SuppressWarnings("UnstableApiUsage")
 public final class ModFluidProperties {
     public static final ResourcefulRegistry<Fluid> FLUIDS = ResourcefulRegistries.create(BuiltInRegistries.FLUID, AdAstra.MOD_ID);
-    public static final ResourcefulFluidRegistry FLUID_PROPERTIES = ResourcefulRegistries.create(ResourcefulRegistryType.FLUID, AdAstra.MOD_ID);
+    public static final ResourcefulFluidRegistry FLUID_TYPES = ResourcefulRegistries.create(ResourcefulRegistryType.FLUID, AdAstra.MOD_ID);
 
-    public static final RegistryEntry<FluidData> OXYGEN = FLUID_PROPERTIES.register("oxygen", FluidProperties.builder()
-        .still(ResourceLocation.withDefaultNamespace("block/water_still"))
-        .flowing(ResourceLocation.withDefaultNamespace("block/water_flow"))
-        .overlay(ResourceLocation.withDefaultNamespace("block/water_overlay"))
-        .screenOverlay(ResourceLocation.withDefaultNamespace("textures/misc/underwater.png"))
+    public static final ResourceLocation STILL = ResourceLocation.withDefaultNamespace("block/water_still");
+    public static final ResourceLocation FLOWING = ResourceLocation.withDefaultNamespace("block/water_flow");
+    public static final ResourceLocation OVERLAY = ResourceLocation.withDefaultNamespace("block/water_overlay");
+    public static final ResourceLocation SCREEN_OVERLAY = ResourceLocation.withDefaultNamespace("textures/misc/underwater.png");
+
+    public static final RegistryEntry<FluidData> OXYGEN = FLUID_TYPES.register("oxygen", FluidProperties.builder()
+        .still(STILL)
+        .flowing(FLOWING)
+        .overlay(OVERLAY)
+        .screenOverlay(SCREEN_OVERLAY)
         .viscosity(0)
         .density(-1)
         .disablePlacing()
         .tintColor(0xffdae6f0)
         .canConvertToSource(false));
 
-    public static final RegistryEntry<FluidData> HYDROGEN = FLUID_PROPERTIES.register("hydrogen", FluidProperties.builder()
-        .still(ResourceLocation.withDefaultNamespace("block/water_still"))
-        .flowing(ResourceLocation.withDefaultNamespace("block/water_flow"))
-        .overlay(ResourceLocation.withDefaultNamespace("block/water_overlay"))
-        .screenOverlay(ResourceLocation.withDefaultNamespace("textures/misc/underwater.png"))
+    public static final RegistryEntry<FluidData> HYDROGEN = FLUID_TYPES.register("hydrogen", FluidProperties.builder()
+        .still(STILL)
+        .flowing(FLOWING)
+        .overlay(OVERLAY)
+        .screenOverlay(SCREEN_OVERLAY)
         .viscosity(0)
         .density(-1)
         .disablePlacing()
         .tintColor(0xff89CFF0)
         .canConvertToSource(false));
 
-    public static final RegistryEntry<FluidData> OIL = FLUID_PROPERTIES.register("oil", FluidProperties.builder()
-        .still(ResourceLocation.withDefaultNamespace("block/water_still"))
-        .flowing(ResourceLocation.withDefaultNamespace("block/water_flow"))
-        .overlay(ResourceLocation.withDefaultNamespace("block/water_overlay"))
-        .screenOverlay(ResourceLocation.withDefaultNamespace("textures/misc/underwater.png"))
+    public static final RegistryEntry<FluidData> OIL = FLUID_TYPES.register("oil", FluidProperties.builder()
+        .still(STILL)
+        .flowing(FLOWING)
+        .overlay(OVERLAY)
+        .screenOverlay(SCREEN_OVERLAY)
         .viscosity(2000)
         .density(2000)
         .tintColor(0xff373A36)
         .canConvertToSource(false));
 
-    public static final RegistryEntry<FluidData> FUEL = FLUID_PROPERTIES.register("fuel", FluidProperties.builder()
-        .still(ResourceLocation.withDefaultNamespace("block/water_still"))
-        .flowing(ResourceLocation.withDefaultNamespace("block/water_flow"))
-        .overlay(ResourceLocation.withDefaultNamespace("block/water_overlay"))
-        .screenOverlay(ResourceLocation.withDefaultNamespace("textures/misc/underwater.png"))
+    public static final RegistryEntry<FluidData> FUEL = FLUID_TYPES.register("fuel", FluidProperties.builder()
+        .still(STILL)
+        .flowing(FLOWING)
+        .overlay(OVERLAY)
+        .screenOverlay(SCREEN_OVERLAY)
         .viscosity(1500)
         .density(1500)
         .tintColor(0xffE5292B)
         .canConvertToSource(false));
 
-    public static final RegistryEntry<FluidData> CRYO_FUEL = FLUID_PROPERTIES.register("cryo_fuel", FluidProperties.builder()
-        .still(ResourceLocation.withDefaultNamespace("block/water_still"))
-        .flowing(ResourceLocation.withDefaultNamespace("block/water_flow"))
-        .overlay(ResourceLocation.withDefaultNamespace("block/water_overlay"))
-        .screenOverlay(ResourceLocation.withDefaultNamespace("textures/misc/underwater.png"))
+    public static final RegistryEntry<FluidData> CRYO_FUEL = FLUID_TYPES.register("cryo_fuel", FluidProperties.builder()
+        .still(STILL)
+        .flowing(FLOWING)
+        .overlay(OVERLAY)
+        .screenOverlay(SCREEN_OVERLAY)
         .viscosity(71)
         .density(71)
         .temperature(-196)

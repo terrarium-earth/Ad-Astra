@@ -95,6 +95,8 @@ public class AdAstraClient {
             if (connection == null) return RegistryAccess.EMPTY;
             return connection.registryAccess();
         });
+
+        ModClientFluids.CLIENT_FLUIDS.init();
     }
 
     public static void registerScreens(ScreenRegistrar registrar) {

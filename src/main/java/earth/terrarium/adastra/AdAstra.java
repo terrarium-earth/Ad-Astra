@@ -43,7 +43,7 @@ public class AdAstra {
         ModDataManagers.REGISTRY.init();
         ModDataComponents.DATA_COMPONENT_TYPES.init();
         ModFluidProperties.FLUIDS.init();
-        ModFluidProperties.FLUID_PROPERTIES.init();
+        ModFluidProperties.FLUID_TYPES.init();
         ModFluids.FLUIDS.init();
         ModBlocks.BLOCKS.init();
         ModItems.ITEMS.init();
