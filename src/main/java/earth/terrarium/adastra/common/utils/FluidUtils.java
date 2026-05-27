@@ -181,7 +181,7 @@ public class FluidUtils {
         long simulatedExtraction = from.extract(toInsert.resource(), toInsert.amount(), true);
         if (!simulate && inserted > 0 && simulatedExtraction == inserted) {
             from.extract(toInsert.resource(), toInsert.amount(), false);
-            to.extract(toInsert.resource(), toInsert.amount(), false);
+            to.insert(toInsert.resource(), toInsert.amount(), false);
             UpdateManager.batch(from, to);
         }
         return Math.max(0, inserted);
