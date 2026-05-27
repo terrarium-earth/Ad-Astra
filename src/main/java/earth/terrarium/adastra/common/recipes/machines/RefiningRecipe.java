@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
+import earth.terrarium.adastra.common.blockentities.base.ContainerRecipeWrapper;
 import earth.terrarium.adastra.common.blockentities.machines.FuelRefineryBlockEntity;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
@@ -46,8 +47,9 @@ public record RefiningRecipe(
     );
 
     @Override
-    public boolean matches(@NotNull RecipeInput container, @NotNull Level level) {
-        if (!(container instanceof FuelRefineryBlockEntity entity)) return false;
+    public boolean matches(@NotNull RecipeInput recipeInput, @NotNull Level level) {
+        if (!(recipeInput instanceof ContainerRecipeWrapper wrapper)) return false;
+        if (!(wrapper.container() instanceof FuelRefineryBlockEntity entity)) return false;
         if (!input.test(entity.getFluidContainer().getContents(0))) return false;
         if (entity.getEnergyStorage().extract(energy, true) < energy) return false;
         if (entity.getFluidContainer().getAmount(1) >= entity.getFluidContainer().getLimit(1, FluidResource.BLANK)) {

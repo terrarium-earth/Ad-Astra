@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
+import earth.terrarium.adastra.common.blockentities.base.ContainerRecipeWrapper;
 import earth.terrarium.adastra.common.blockentities.machines.CryoFreezerBlockEntity;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
@@ -46,9 +47,10 @@ public record CryoFreezingRecipe(
     );
 
     @Override
-    public boolean matches(@NotNull RecipeInput container, @NotNull Level level) {
-        if (!input.test(container.getItem(1))) return false;
-        if (!(container instanceof CryoFreezerBlockEntity entity)) return true;
+    public boolean matches(@NotNull RecipeInput recipeInput, @NotNull Level level) {
+        if (!input.test(recipeInput.getItem(1))) return false;
+        if (!(recipeInput instanceof ContainerRecipeWrapper wrapper)) return false;
+        if (!(wrapper.container() instanceof CryoFreezerBlockEntity entity)) return false;
         if (entity.getEnergyStorage().extract(energy, true) < energy) return false;
         return entity.getFluidContainer().getAmount(0) < entity.getFluidContainer().getLimit(0, FluidResource.BLANK);
     }
