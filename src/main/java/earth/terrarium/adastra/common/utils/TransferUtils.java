@@ -74,7 +74,7 @@ public class TransferUtils {
             ResourceStack<FluidResource> holder = container.getContents(tank);
             if (holder.isEmpty()) continue;
 
-            if (FluidUtils.moveFluid(container, nearbyContainer, holder.withCount(FluidAmounts.toMillibuckets(amount)), false) > 0) {
+            if (TransferUtil.move(container, nearbyContainer, holder.resource(), FluidAmounts.toMillibuckets(amount), false) > 0) {
                 UpdateManager.batch(container, nearbyContainer);
                 machine.sync();
             }
@@ -95,7 +95,7 @@ public class TransferUtils {
             if (tank >= container.size()) continue;
             ResourceStack<FluidResource> holder = container.getContents(tank);
             if (holder.isEmpty()) continue;
-            if (FluidUtils.moveFluid(container, nearbyContainer, holder.withCount(FluidAmounts.toMillibuckets(amount)), false) > 0) {
+            if (TransferUtil.move(container, nearbyContainer, holder.resource(), FluidAmounts.toMillibuckets(amount), false) > 0) {
                 UpdateManager.batch(container, nearbyContainer);
                 machine.sync();
             }

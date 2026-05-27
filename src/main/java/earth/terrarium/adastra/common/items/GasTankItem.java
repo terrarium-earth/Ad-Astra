@@ -13,6 +13,7 @@ import earth.terrarium.common_storage_lib.fluid.util.FluidProvider;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -67,7 +68,7 @@ public class GasTankItem extends Item implements FluidProvider.Item {
             if (stack.isEmpty() || stack.is(this)) continue;
             var to = new ModifyOnlyContext(stack).find(FluidApi.ITEM);
             var toMove = from.getContents(0).withCount(FluidAmounts.toPlatformAmount(distributionAmount));
-            long moved = FluidUtils.moveFluid(from, to, toMove, false);
+            long moved = TransferUtil.move(from, to, toMove.resource(), toMove.amount(), false);
             if (moved > 0) return true;
         }
         return false;

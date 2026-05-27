@@ -4,6 +4,7 @@ import earth.terrarium.adastra.common.blocks.properties.PipeProperty;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.common_storage_lib.fluid.FluidApi;
 import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -44,8 +45,8 @@ public class FluidPipeBlockEntity extends PipeBlockEntity {
             var toTransfer = new ResourceStack<>(fluid.resource(), Math.min(transferRate, fluid.amount()));
             if (toTransfer.isEmpty()) continue;
             try {
-                FluidUtils.moveFluid(sourceContainer, consumerContainer, toTransfer, true);
-                FluidUtils.moveFluid(sourceContainer, consumerContainer, toTransfer, false);
+                TransferUtil.move(sourceContainer, consumerContainer, toTransfer.resource(), toTransfer.amount(), true);
+                TransferUtil.move(sourceContainer, consumerContainer, toTransfer.resource(), toTransfer.amount(), false);
             } catch (IllegalArgumentException ignored) {}
         }
     }

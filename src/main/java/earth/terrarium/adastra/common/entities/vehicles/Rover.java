@@ -18,6 +18,7 @@ import earth.terrarium.common_storage_lib.resources.ResourceStack;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -123,7 +124,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder, Fluid
         ModifyOnlyContext context = new ModifyOnlyContext(ModItems.ROVER.get().getDefaultInstance());
         var container = context.find(FluidApi.ITEM);
         if (container == null) return context.stack();
-        FluidUtils.moveFluid(fluidContainer(), container, fluidContainer().getContents(0), false);
+        TransferUtil.move(fluidContainer(), container, fluidContainer().getResource(0), fluidContainer().getAmount(0), false);
         return context.stack();
     }
 

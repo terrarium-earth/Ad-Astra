@@ -9,6 +9,7 @@ import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
 import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
 import earth.terrarium.common_storage_lib.fluid.FluidApi;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -50,7 +51,7 @@ public class RocketItem extends VehicleItem {
         if (vehicle instanceof Rocket rocket) {
             var fromContainer = new ModifyOnlyContext(stack).find(FluidApi.ITEM);
             if (fromContainer == null) return InteractionResult.PASS;
-            FluidUtils.moveFluid(fromContainer, rocket.fluidContainer(), fromContainer.getContents(0), false);
+            TransferUtil.move(fromContainer, rocket.fluidContainer(), fromContainer.getResource(0), fromContainer.getAmount(0), false);
         }
 
         stack.shrink(1);
