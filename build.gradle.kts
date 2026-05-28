@@ -76,7 +76,7 @@ cloche {
 
         require("resourcefullib", "3.0.0")
         require("resourcefulconfig", "3.0.0")
-        require("common_storage_lib", "0.0.7")
+        require("common_storage_lib", "0.0.6")
     }
 
     common {
