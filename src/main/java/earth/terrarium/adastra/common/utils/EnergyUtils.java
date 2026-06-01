@@ -20,6 +20,6 @@ public class EnergyUtils {
 //            stack.getOrCreateTagElement(Botarium.BOTARIUM_DATA)
 //                .putLong("Energy", container.getMaxCapacity());
         }
-        return stack;
+        return itemContext.stack();
     }
 }
