@@ -1,13 +1,16 @@
 package earth.terrarium.adastra.common.utils;
 
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
+import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
+import earth.terrarium.common_storage_lib.context.impl.IsolatedSlotContext;
 import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
 import earth.terrarium.common_storage_lib.fluid.FluidApi;
 import earth.terrarium.common_storage_lib.resources.ResourceStack;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import earth.terrarium.common_storage_lib.resources.item.ItemResource;
 import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
-import earth.terrarium.common_storage_lib.storage.base.UpdateManager;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -64,15 +67,15 @@ public class FluidUtils {
      */
     public static void moveItemToContainer(Container container, CommonStorage<FluidResource> fluidContainer, int slot, int resultSlot, int tank) {
         var stack = container.getItem(slot);
+        ModifyOnlyContext itemContext = new ModifyOnlyContext(stack.copyWithCount(1));
         // Don't do anything if the stack is empty or doesn't contain a fluid container.
-        if (stack.isEmpty() || fluidContainer.getResource(0).isBlank()) return;
+        if (stack.isEmpty() || !itemContext.isPresent(FluidApi.ITEM)) return;
         var resultStack = container.getItem(resultSlot);
 
         // Get the fluid container from the item
-        ModifyOnlyContext itemContext = new ModifyOnlyContext(stack.copyWithCount(1));
         var itemFluidContainer = itemContext.find(FluidApi.ITEM);
         if (itemFluidContainer == null) return;
-        var fluidStack = new ResourceStack<>(fluidContainer.getResource(tank), fluidContainer.getAmount(tank));
+        var fluidStack = itemFluidContainer.getContents(tank);
         if (fluidStack.isEmpty()) return;
 
         // Don't do anything if the resulting emptied stack can not be moved to the result slot.
@@ -82,8 +85,9 @@ public class FluidUtils {
         }
 
         // Move the fluid from the item to the container
-        if (moveFluid(itemFluidContainer, fluidContainer, fluidStack, true) == 0) return;
-        moveFluid(itemFluidContainer, fluidContainer, fluidStack, false);
+        if (TransferUtil.move(itemFluidContainer, fluidContainer, fluidStack.resource(), fluidStack.amount(), true) == 0)
+            return;
+        TransferUtil.move(itemFluidContainer, fluidContainer, fluidStack.resource(), fluidStack.amount(), false);
 
         var result = itemContext.stack();
 
@@ -96,6 +100,8 @@ public class FluidUtils {
             stack.shrink(1);
             resultStack.grow(1);
         }
+
+        container.setChanged();
     }
 
     /**
@@ -109,25 +115,26 @@ public class FluidUtils {
      */
     public static void moveContainerToItem(Container container, CommonStorage<FluidResource> fluidContainer, int slot, int resultSlot, int tank) {
         var stack = container.getItem(slot);
-        // Don't do anything if the stack is empty or doesn't contain a fluid container.
         ModifyOnlyContext itemContext = new ModifyOnlyContext(stack.copyWithCount(1));
+        // Don't do anything if the stack is empty or doesn't contain a fluid container.
         if (stack.isEmpty() || !itemContext.isPresent(FluidApi.ITEM)) return;
         var resultStack = container.getItem(resultSlot);
 
         // Get the fluid container from the item
         var itemFluidContainer = itemContext.find(FluidApi.ITEM);
         if (itemFluidContainer == null) return;
-        var fluidStack = new ResourceStack<>(fluidContainer.getResource(tank), fluidContainer.getAmount(tank));
+        var fluidStack = fluidContainer.getContents(tank);
         if (fluidStack.isEmpty()) return;
 
         // Don't do anything if the resulting filled stack can not be moved to the result slot.
         if (!resultStack.isEmpty()) {
-            var filledStack = getFilledStack(new ResourceStack<>(ItemResource.of(stack), 1), fluidStack);
+            var filledStack = getFilledStack(new ResourceStack<>(itemContext.getResource(), 1), fluidStack);
             if (!ItemUtils.canAddItem(filledStack, resultStack)) return;
         }
 
-        if (moveFluid(fluidContainer, itemFluidContainer, fluidStack, true) == 0) return;
-        moveFluid(fluidContainer, itemFluidContainer, fluidStack, false);
+        if (TransferUtil.move(fluidContainer, itemFluidContainer, fluidStack.resource(), fluidStack.amount(), true) == 0)
+            return;
+        TransferUtil.move(fluidContainer, itemFluidContainer, fluidStack.resource(), fluidStack.amount(), false);
 
         var result = itemContext.stack();
 
@@ -151,11 +158,11 @@ public class FluidUtils {
      */
     public static ItemStack getFilledStack(ResourceStack<ItemResource> emptyStack, ResourceStack<FluidResource> amount) {
         var copy = emptyStack.resource().toStack();
-        ModifyOnlyContext itemContext = new ModifyOnlyContext(copy);
+        IsolatedSlotContext itemContext = new IsolatedSlotContext(copy);
         var container = itemContext.find(FluidApi.ITEM);
         if (container == null) return ItemStack.EMPTY;
         container.insert(amount.resource(), amount.amount(), false);
-        return itemContext.stack();
+        return itemContext.mainSlot().toItemStack();
     }
 
     /**
@@ -167,23 +174,10 @@ public class FluidUtils {
      */
     public static ItemStack getEmptyStack(ResourceStack<ItemResource> filledStack, ResourceStack<FluidResource> amount) {
         var copy = filledStack.resource().toStack();
-        ModifyOnlyContext itemContext = new ModifyOnlyContext(copy);
+        IsolatedSlotContext itemContext = new IsolatedSlotContext(copy);
         var container = itemContext.find(FluidApi.ITEM);
         if (container == null) return ItemStack.EMPTY;
         container.extract(amount.resource(), amount.amount(), false);
-        return itemContext.stack();
-    }
-
-    public static long moveFluid(CommonStorage<FluidResource> from, CommonStorage<FluidResource> to, ResourceStack<FluidResource> amount, boolean simulate) {
-        long extracted = from.extract(amount.resource(), amount.amount(), true);
-        long inserted = to.insert(amount.resource(), extracted, true);
-        ResourceStack<FluidResource> toInsert = new ResourceStack<>(amount.resource(), inserted);
-        long simulatedExtraction = from.extract(toInsert.resource(), toInsert.amount(), true);
-        if (!simulate && inserted > 0 && simulatedExtraction == inserted) {
-            from.extract(toInsert.resource(), toInsert.amount(), false);
-            to.insert(toInsert.resource(), toInsert.amount(), false);
-            UpdateManager.batch(from, to);
-        }
-        return Math.max(0, inserted);
+        return itemContext.mainSlot().toItemStack();
     }
 }
