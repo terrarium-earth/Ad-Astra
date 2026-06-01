@@ -110,7 +110,7 @@ cloche {
         }
 
         runs {
-            data(){
+            data {
                 arguments("--existing", file("src/main/resources/").getAbsolutePath())
             }
         }
@@ -155,6 +155,22 @@ cloche {
 
             modLocalRuntime(module(group = "maven.modrinth", name = "jade", version = "15.10.5+fabric"))
             // modLocalRuntime(module(group = "maven.modrinth", name = "dcwa", version = "5.0")) // Disable custom world advice
+        }
+
+        // TODO
+        //  While fabric does not have datagen, Cloche 0.18.x only configures the datagen directory if a data run is registered.
+        //  This is a workaround for that.
+        //  https://github.com/terrarium-earth/cloche/issues/144
+        run {
+            data()
+
+            runs {
+                data {
+                    runTask.configure {
+                        enabled = false
+                    }
+                }
+            }
         }
     }
 
