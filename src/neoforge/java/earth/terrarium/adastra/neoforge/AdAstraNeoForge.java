@@ -1,21 +1,28 @@
 package earth.terrarium.adastra.neoforge;
 
+import com.teamresourceful.resourcefullib.common.fluid.ResourcefulBucketItem;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.systems.OxygenApi;
 import earth.terrarium.adastra.client.neoforge.AdAstraClientNeoForge;
 import earth.terrarium.adastra.common.commands.AdAstraCommands;
 import earth.terrarium.adastra.common.registry.ModEntityTypes;
+import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.adastra.common.tags.ModBlockTags;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacementType;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
@@ -25,6 +32,7 @@ import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
 
 @Mod(AdAstra.MOD_ID)
 public class AdAstraNeoForge {
@@ -40,6 +48,7 @@ public class AdAstraNeoForge {
         bus.addListener(AdAstraNeoForge::onAttributes);
         bus.addListener(AdAstraNeoForge::registerSpawnPlacements);
         bus.addListener(AdAstraNeoForge::commonSetup);
+        bus.addListener(AdAstraNeoForge::registerCapabilities);
         if (FMLEnvironment.dist.isClient()) {
             AdAstraClientNeoForge.init(bus);
         }
@@ -96,5 +105,13 @@ public class AdAstraNeoForge {
 
     private static void onServerStarted(ServerAboutToStartEvent event) {
         AdAstra.onServerStarted(event.getServer());
+    }
+
+    private static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        for (var item : ModItems.ITEMS.getEntries()) {
+            if (item.get() instanceof ResourcefulBucketItem) {
+                event.registerItem(Capabilities.FluidHandler.ITEM, (stack, ctx) -> new FluidBucketWrapper(stack), item.get());
+            }
+        }
     }
 }
