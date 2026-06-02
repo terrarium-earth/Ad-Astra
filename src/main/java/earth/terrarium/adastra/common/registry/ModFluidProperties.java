@@ -2,6 +2,7 @@ package earth.terrarium.adastra.common.registry;
 
 
 import com.teamresourceful.resourcefullib.common.fluid.ResourcefulBucketItem;
+import com.teamresourceful.resourcefullib.common.fluid.ResourcefulLiquidBlock;
 import com.teamresourceful.resourcefullib.common.fluid.data.FluidData;
 import com.teamresourceful.resourcefullib.common.fluid.data.FluidProperties;
 import com.teamresourceful.resourcefullib.common.fluid.registry.ResourcefulFluidRegistry;
@@ -10,6 +11,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistryType;
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.common.blocks.fluids.CryoFuelLiquidBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -84,11 +86,11 @@ public final class ModFluidProperties {
         .tintColor(0xff6cfffa)
         .canConvertToSource(false));
 
-    public static final RegistryEntry<Block> OXYGEN_BLOCK = ModBlocks.FLUIDS.register("oxygen", () -> new LiquidBlock(ModFluids.OXYGEN.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
-    public static final RegistryEntry<Block> HYDROGEN_BLOCK = ModBlocks.FLUIDS.register("hydrogen", () -> new LiquidBlock(ModFluids.HYDROGEN.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
-    public static final RegistryEntry<Block> OIL_BLOCK = ModBlocks.FLUIDS.register("oil", () -> new LiquidBlock(ModFluids.OIL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_BLACK)));
-    public static final RegistryEntry<Block> FUEL_BLOCK = ModBlocks.FLUIDS.register("fuel", () -> new LiquidBlock(ModFluids.FUEL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_RED)));
-    public static final RegistryEntry<Block> CRYO_FUEL_BLOCK = ModBlocks.FLUIDS.register("cryo_fuel", () -> new LiquidBlock(ModFluids.CRYO_FUEL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_CYAN)));
+    public static final RegistryEntry<Block> OXYGEN_BLOCK = ModBlocks.FLUIDS.register("oxygen", () -> new ResourcefulLiquidBlock(ModFluidProperties.OXYGEN.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
+    public static final RegistryEntry<Block> HYDROGEN_BLOCK = ModBlocks.FLUIDS.register("hydrogen", () -> new ResourcefulLiquidBlock(ModFluidProperties.HYDROGEN.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
+    public static final RegistryEntry<Block> OIL_BLOCK = ModBlocks.FLUIDS.register("oil", () -> new ResourcefulLiquidBlock(ModFluidProperties.OIL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_BLACK)));
+    public static final RegistryEntry<Block> FUEL_BLOCK = ModBlocks.FLUIDS.register("fuel", () -> new ResourcefulLiquidBlock(ModFluidProperties.FUEL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_RED)));
+    public static final RegistryEntry<Block> CRYO_FUEL_BLOCK = ModBlocks.FLUIDS.register("cryo_fuel", () -> new CryoFuelLiquidBlock(ModFluidProperties.CRYO_FUEL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(MapColor.COLOR_CYAN)));
 
     public static final RegistryEntry<Item> OXYGEN_BUCKET = ModItems.BASIC_ITEMS.register("oxygen_bucket", () -> new ResourcefulBucketItem(
         ModFluidProperties.OXYGEN.get(),
