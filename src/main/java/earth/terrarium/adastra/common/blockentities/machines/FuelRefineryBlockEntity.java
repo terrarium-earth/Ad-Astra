@@ -19,6 +19,7 @@ import earth.terrarium.common_storage_lib.fluid.util.FluidProvider;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
+import earth.terrarium.common_storage_lib.storage.base.UpdateManager;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -98,6 +99,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
         }
 
         energyStorage.extract(recipe.energy(), false);
+        UpdateManager.batch(energyStorage);
 
         cookTime++;
         if (cookTime < cookTimeTotal) return;
@@ -110,6 +112,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
 
         fluid.extract(fluid.getResource(0), recipe.input().getAmount(), false);
         fluid.insert(recipe.result().resource(), recipe.result().amount(), false);
+        fluid.update();
 
         updateSlots();
 
