@@ -65,7 +65,7 @@ public class FluidUtils {
      */
     public static void moveItemToContainer(Container container, CommonStorage<FluidResource> fluidContainer, int slot, int resultSlot, int tank) {
         var stack = container.getItem(slot);
-        ModifyOnlyContext itemContext = new ModifyOnlyContext(stack.copyWithCount(1));
+        IsolatedSlotContext itemContext = new IsolatedSlotContext(stack.copyWithCount(1));
         // Don't do anything if the stack is empty or doesn't contain a fluid container.
         if (stack.isEmpty() || !itemContext.isPresent(FluidApi.ITEM)) return;
         var resultStack = container.getItem(resultSlot);
@@ -87,7 +87,7 @@ public class FluidUtils {
             return;
         TransferUtil.move(itemFluidContainer, fluidContainer, fluidStack.resource(), fluidStack.amount(), false);
 
-        var result = itemContext.stack();
+        var result = itemContext.mainSlot().toItemStack();
 
         if (resultStack.isEmpty()) {
             // If the result slot is empty, move the item there.
@@ -113,7 +113,7 @@ public class FluidUtils {
      */
     public static void moveContainerToItem(Container container, CommonStorage<FluidResource> fluidContainer, int slot, int resultSlot, int tank) {
         var stack = container.getItem(slot);
-        ModifyOnlyContext itemContext = new ModifyOnlyContext(stack.copyWithCount(1));
+        IsolatedSlotContext itemContext = new IsolatedSlotContext(stack.copyWithCount(1));
         // Don't do anything if the stack is empty or doesn't contain a fluid container.
         if (stack.isEmpty() || !itemContext.isPresent(FluidApi.ITEM)) return;
         var resultStack = container.getItem(resultSlot);
@@ -134,7 +134,7 @@ public class FluidUtils {
             return;
         TransferUtil.move(fluidContainer, itemFluidContainer, fluidStack.resource(), fluidStack.amount(), false);
 
-        var result = itemContext.stack();
+        var result = itemContext.mainSlot().toItemStack();
 
         if (resultStack.isEmpty()) {
             // If the result slot is empty, move the item there.
