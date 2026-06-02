@@ -70,11 +70,11 @@ public class TransferUtils {
             if (!FluidApi.BLOCK.isPresent(nearbyEntity, direction)) continue;
             CommonStorage<FluidResource> nearbyContainer = FluidApi.BLOCK.find(nearbyEntity, direction.getOpposite());
             if (nearbyContainer == null) continue;
-            if (tank >= container.size()) continue;
-            ResourceStack<FluidResource> holder = container.getContents(tank);
+            if (tank >= nearbyContainer.size()) continue;
+            ResourceStack<FluidResource> holder = nearbyContainer.getContents(tank);
             if (holder.isEmpty()) continue;
 
-            if (TransferUtil.move(container, nearbyContainer, holder.resource(), FluidAmounts.toMillibuckets(amount), false) > 0) {
+            if (TransferUtil.move(nearbyContainer, container, holder.resource(), FluidAmounts.toMillibuckets(amount), false) > 0) {
                 UpdateManager.batch(container, nearbyContainer);
                 machine.sync();
             }
