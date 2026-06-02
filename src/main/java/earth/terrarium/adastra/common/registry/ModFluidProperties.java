@@ -12,7 +12,6 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistryTyp
 import earth.terrarium.adastra.AdAstra;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;

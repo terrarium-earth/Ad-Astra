@@ -1,8 +1,6 @@
 package earth.terrarium.adastra.common.utils;
 
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
-import earth.terrarium.adastra.AdAstra;
-import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.common_storage_lib.context.impl.IsolatedSlotContext;
 import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
 import earth.terrarium.common_storage_lib.fluid.FluidApi;
