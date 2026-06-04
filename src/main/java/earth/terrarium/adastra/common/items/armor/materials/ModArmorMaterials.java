@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.items.armor.materials;
 
+import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.tags.ModItemTags;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -65,7 +66,7 @@ public class ModArmorMaterials {
     );
 
     private static Holder<ArmorMaterial> register(String string, EnumMap<ArmorItem.Type, Integer> enumMap, int i, Holder<SoundEvent> arg, float f, float g, Supplier<Ingredient> supplier) {
-        List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(ResourceLocation.withDefaultNamespace(string)));
+        List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, string)));
         return register(string, enumMap, i, arg, f, g, supplier, list);
     }
 
@@ -79,6 +80,6 @@ public class ModArmorMaterials {
             enumMap2.put(type, (Integer) enumMap.get(type));
         }
 
-        return Registry.registerForHolder(BuiltInRegistries.ARMOR_MATERIAL, ResourceLocation.withDefaultNamespace(string), new ArmorMaterial(enumMap2, i, arg, supplier, list, f, g));
+        return Registry.registerForHolder(BuiltInRegistries.ARMOR_MATERIAL, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, string), new ArmorMaterial(enumMap2, i, arg, supplier, list, f, g));
     }
 }
