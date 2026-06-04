@@ -29,6 +29,10 @@ public record PlanetsContent(Set<ResourceLocation> disabledPlanets,
 
         @Override
         public @Nullable PlanetsContent from(FriendlyByteBuf buffer) {
+            if (buffer == null) {
+                return new PlanetsContent(Set.of(), Map.of(), Set.of());
+            }
+
             return new PlanetsContent(
                 PlanetsMenuProvider.createDisabledPlanetsFromBuf(buffer),
                 PlanetsMenuProvider.createSpaceStationsFromBuf(buffer),
