@@ -6,6 +6,7 @@ import earth.terrarium.adastra.common.blocks.LaunchPadBlock;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
+import earth.terrarium.adastra.common.menus.base.PlanetsMenuProvider;
 import earth.terrarium.adastra.common.menus.vehicles.RocketMenu;
 import earth.terrarium.adastra.common.planets.AdAstraData;
 import earth.terrarium.adastra.common.registry.*;
@@ -115,6 +116,7 @@ public class Rocket extends Vehicle implements FluidProvider.Entity {
         entityData.set(HAS_LAUNCHED, compound.getBoolean("HasLaunched"));
         speed = compound.getFloat("Speed");
         angle = compound.getFloat("Angle");
+        fluid.readSnapshot(ModDataManagers.FLUID_CONTENTS.get(this));
     }
 
     @Override
@@ -413,12 +415,12 @@ public class Rocket extends Vehicle implements FluidProvider.Entity {
 
     public ResourceStack<FluidResource> fluid() {
         return new ResourceStack<>(
-            FluidResource.of(BuiltInRegistries.FLUID.get(ResourceLocation.withDefaultNamespace(entityData.get(FUEL_TYPE)))),
+            FluidResource.of(BuiltInRegistries.FLUID.get(ResourceLocation.tryParse(entityData.get(FUEL_TYPE)))),
             entityData.get(FUEL));
     }
 
     public void openPlanetsScreen(ServerPlayer player) {
-        openMenu(player);
+        player.openMenu(new PlanetsMenuProvider());
         var packet = new ClientboundStopSoundPacket(BuiltInRegistries.SOUND_EVENT
             .getKey(ModSoundEvents.ROCKET.get()), SoundSource.AMBIENT);
         player.connection.send(packet);
