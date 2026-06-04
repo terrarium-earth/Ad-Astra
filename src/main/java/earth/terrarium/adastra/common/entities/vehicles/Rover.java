@@ -106,6 +106,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder, Fluid
         super.readAdditionalSaveData(compound);
         speed = compound.getFloat("Speed");
         angle = compound.getFloat("Angle");
+        fluid.readSnapshot(ModDataManagers.FLUID_CONTENTS.get(this));
     }
 
     @Override
@@ -167,7 +168,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder, Fluid
         if (!hasPassenger(passenger)) return;
 
         float zOffset = getControllingPassenger() == passenger ? -0.6f : 0.4f;
-        float yOffset = (float) ((this.isRemoved() ? 0.01f : 0.95f) + passenger.getPassengerRidingPosition(this).y());
+        float yOffset = (float) ((this.isRemoved() ? 0.01f : passenger.getVehicleAttachmentPoint(this).y()));
         Vec3 position = new Vec3(-0.5, 0, zOffset).yRot(-getYRot() * (float) (Math.PI / 180) - (float) (Math.PI / 2));
 
         clampRotation(passenger);
@@ -301,7 +302,7 @@ public class Rover extends Vehicle implements PlayerRideable, RadioHolder, Fluid
 
     public ResourceStack<FluidResource> fluid() {
         return new ResourceStack<>(
-            FluidResource.of(BuiltInRegistries.FLUID.get(ResourceLocation.withDefaultNamespace(entityData.get(FUEL_TYPE)))),
+            FluidResource.of(BuiltInRegistries.FLUID.get(ResourceLocation.tryParse(entityData.get(FUEL_TYPE)))),
             entityData.get(FUEL));
     }
 
