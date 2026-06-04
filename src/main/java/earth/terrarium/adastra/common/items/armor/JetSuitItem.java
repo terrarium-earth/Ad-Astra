@@ -108,7 +108,7 @@ public class JetSuitItem extends SpaceSuitItem implements EnergyProvider.Item {
         var container = itemContext.find(EnergyApi.ITEM);
         if (container == null) return;
         container.extract(amount, false);
-        player.getInventory().armor.set(slotId, itemContext.stack());
+        player.getInventory().setItem(slotId, itemContext.stack());
     }
 
     protected boolean isFullFlightEnabled(Player player) {
