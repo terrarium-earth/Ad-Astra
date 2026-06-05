@@ -115,7 +115,9 @@ public class EtrionicCapacitorItem extends Item implements EnergyProvider.Item {
         for (int i = inventory.getContainerSize() - 1; i >= 0; i--) {
             ItemStack stack = inventory.getItem(i);
             if (stack.isEmpty() || stack.is(this)) continue;
-            var to = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
+            var context = new ModifyOnlyContext(stack);
+            if (!context.isPresent(EnergyApi.ITEM)) continue;
+            var to = context.find(EnergyApi.ITEM);
             long moved = TransferUtil.moveValue(from, to, maxExtract, false);
             if (moved > 0) return;
         }
@@ -133,7 +135,9 @@ public class EtrionicCapacitorItem extends Item implements EnergyProvider.Item {
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             ItemStack stack = inventory.getItem(i);
             if (stack.isEmpty() || stack.is(this)) continue;
-            var to = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
+            var context = new ModifyOnlyContext(stack);
+            if (!context.isPresent(EnergyApi.ITEM)) continue;
+            var to = context.find(EnergyApi.ITEM);
             TransferUtil.moveValue(from, to, maxExtract / energyItems, false);
         }
     }
