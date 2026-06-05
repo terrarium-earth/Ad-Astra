@@ -69,7 +69,7 @@ public class FuelRefineryBlockEntity extends RecipeMachineBlockEntity<RefiningRe
                 1,
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())
                     .stream()
-                    .anyMatch(r -> r.input().test(holder)),
+                    .anyMatch(r -> r.input().getIngredient().test(holder)),
                 (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.REFINING.get())
                     .stream()
                     .anyMatch(r -> r.result().matches(holder))));
