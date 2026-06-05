@@ -70,7 +70,7 @@ public class PlanetsMenuProvider implements ContentMenuProvider<PlanetsContent> 
         Set<ResourceLocation> disabledPlanets = new HashSet<>();
         String[] planets = buf.readUtf().split(",");
         for (var planet : planets) {
-            disabledPlanets.add(ResourceLocation.withDefaultNamespace(planet));
+            disabledPlanets.add(ResourceLocation.tryParse(planet));
         }
         return Collections.unmodifiableSet(disabledPlanets);
     }
@@ -118,7 +118,7 @@ public class PlanetsMenuProvider implements ContentMenuProvider<PlanetsContent> 
         Set<ResourceLocation> disabledPlanets = new HashSet<>();
         String[] planets = AdAstraConfig.disabledPlanets.split(",");
         for (var planet : planets) {
-            disabledPlanets.add(ResourceLocation.withDefaultNamespace(planet));
+            disabledPlanets.add(ResourceLocation.tryParse(planet));
         }
 
         Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> spaceStationsMap = new HashMap<>();
