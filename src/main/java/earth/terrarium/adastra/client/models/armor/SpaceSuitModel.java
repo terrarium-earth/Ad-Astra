@@ -47,7 +47,7 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
     @Nullable
     private final HumanoidModel<LivingEntity> parentModel;
 
-    private float r, g, b;
+    private int color;
 
     public SpaceSuitModel(ModelPart root, EquipmentSlot slot, ItemStack stack, @Nullable HumanoidModel<LivingEntity> parentModel) {
         super(root, RenderType::entityTranslucent);
@@ -62,11 +62,7 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
         this.setVisible();
 
         if (stack.is(ItemTags.DYEABLE)) {
-            DyedItemColor itemColor = stack.getOrDefault(DataComponents.DYED_COLOR, new DyedItemColor(DyedItemColor.LEATHER_COLOR, false));
-            int color = itemColor.rgb();
-            r = FastColor.ARGB32.red(color) / 255f;
-            g = FastColor.ARGB32.green(color) / 255f;
-            b = FastColor.ARGB32.blue(color) / 255f;
+            color = DyedItemColor.getOrDefault(stack, DyedItemColor.LEATHER_COLOR);
         }
     }
 
@@ -84,7 +80,7 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
         this.leftBoot.copyFrom(parentModel.leftLeg);
         parentModel.copyPropertiesTo(this);
 
-        super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, color);
+        super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, this.color);
     }
 
     @Override

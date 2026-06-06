@@ -54,7 +54,7 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
         var spaceSuitModel = new SpaceSuitModel(root, EquipmentSlot.CHEST, stack, null);
         boolean isRightHand = rendererArm == spaceSuitModel.rightArm;
 
-        int color = stack.getOrDefault(DataComponents.DYED_COLOR, new DyedItemColor(DyedItemColor.LEATHER_COLOR, false)).rgb();
+        int color = DyedItemColor.getOrDefault(stack, DyedItemColor.LEATHER_COLOR);
         if (isRightHand) {
             spaceSuitModel.rightArm.copyFrom(rendererArm);
             spaceSuitModel.rightArm.render(poseStack, buffer.getBuffer(RenderType.entityTranslucent(texture)), combinedLight, OverlayTexture.NO_OVERLAY, color);

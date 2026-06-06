@@ -257,9 +257,9 @@ public class AdAstraClient {
     }
 
     public static void onAddItemColors(BiConsumer<ItemColor, ItemLike[]> consumer) {
-        consumer.accept((stack, i) -> i > 0 ? -1 : stack.getOrDefault(DataComponents.DYED_COLOR, new DyedItemColor(0xFFFFFFFF, false)).rgb(), new ItemLike[]{ModItems.SPACE_HELMET.get(), ModItems.SPACE_SUIT.get(), ModItems.SPACE_PANTS.get(), ModItems.SPACE_BOOTS.get()});
-        consumer.accept((stack, i) -> i > 0 ? -1 : stack.getOrDefault(DataComponents.DYED_COLOR, new DyedItemColor(0xFFFFFFFF, false)).rgb(), new ItemLike[]{ModItems.NETHERITE_SPACE_HELMET.get(), ModItems.NETHERITE_SPACE_SUIT.get(), ModItems.NETHERITE_SPACE_PANTS.get(), ModItems.NETHERITE_SPACE_BOOTS.get()});
-        consumer.accept((stack, i) -> i > 0 ? -1 : stack.getOrDefault(DataComponents.DYED_COLOR, new DyedItemColor(0xFFFFFFFF, false)).rgb(), new ItemLike[]{ModItems.JET_SUIT_HELMET.get(), ModItems.JET_SUIT.get(), ModItems.JET_SUIT_PANTS.get(), ModItems.JET_SUIT_BOOTS.get()});
+        consumer.accept((stack, i) -> i > 0 ? -1 : DyedItemColor.getOrDefault(stack, 0xFFFFFFFF), new ItemLike[]{ModItems.SPACE_HELMET.get(), ModItems.SPACE_SUIT.get(), ModItems.SPACE_PANTS.get(), ModItems.SPACE_BOOTS.get()});
+        consumer.accept((stack, i) -> i > 0 ? -1 : DyedItemColor.getOrDefault(stack, 0xFFFFFFFF), new ItemLike[]{ModItems.NETHERITE_SPACE_HELMET.get(), ModItems.NETHERITE_SPACE_SUIT.get(), ModItems.NETHERITE_SPACE_PANTS.get(), ModItems.NETHERITE_SPACE_BOOTS.get()});
+        consumer.accept((stack, i) -> i > 0 ? -1 : DyedItemColor.getOrDefault(stack, 0xFFFFFFFF), new ItemLike[]{ModItems.JET_SUIT_HELMET.get(), ModItems.JET_SUIT.get(), ModItems.JET_SUIT_PANTS.get(), ModItems.JET_SUIT_BOOTS.get()});
     }
 
     public static void renderOverlays(PoseStack stack, Camera camera) {
