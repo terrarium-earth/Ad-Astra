@@ -66,7 +66,9 @@ public class GasTankItem extends Item implements FluidProvider.Item {
         for (int i = inventory.getContainerSize() - 1; i >= 0; i--) {
             var stack = inventory.getItem(i);
             if (stack.isEmpty() || stack.is(this)) continue;
-            var to = new ModifyOnlyContext(stack).find(FluidApi.ITEM);
+            var context = new ModifyOnlyContext(stack);
+            if (!context.isPresent(FluidApi.ITEM)) continue;
+            var to = context.find(FluidApi.ITEM);
             var toMove = from.getContents(0).withCount(FluidAmounts.toPlatformAmount(distributionAmount));
             long moved = TransferUtil.move(from, to, toMove.resource(), toMove.amount(), false);
             if (moved > 0) return true;
