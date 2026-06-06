@@ -39,8 +39,8 @@ public class SpaceSuitItem extends CustomDyeableArmorItem implements FluidProvid
 
     protected final long tankSize;
 
-    public SpaceSuitItem(Holder<ArmorMaterial> material, Type type, long tankSize, Properties properties) {
-        super(material, type, properties);
+    public SpaceSuitItem(Holder<ArmorMaterial> material, Type type, long tankSize, Properties properties, int durabilityFactor) {
+        super(material, type, properties, durabilityFactor);
         this.tankSize = tankSize;
     }
 

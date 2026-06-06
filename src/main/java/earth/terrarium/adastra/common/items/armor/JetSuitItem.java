@@ -35,8 +35,8 @@ public class JetSuitItem extends SpaceSuitItem implements EnergyProvider.Item {
 
     private final long energyCapacity;
 
-    public JetSuitItem(Holder<ArmorMaterial> material, Type type, int tankSize, int energy, Item.Properties properties) {
-        super(material, type, tankSize, properties);
+    public JetSuitItem(Holder<ArmorMaterial> material, Type type, int tankSize, int energy, Item.Properties properties, int durabilityFactor) {
+        super(material, type, tankSize, properties, durabilityFactor);
         this.energyCapacity = energy;
     }
 

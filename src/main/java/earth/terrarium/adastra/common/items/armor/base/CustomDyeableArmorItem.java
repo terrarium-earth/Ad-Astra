@@ -8,9 +8,9 @@ import net.minecraft.world.item.component.DyedItemColor;
 
 public class CustomDyeableArmorItem extends ArmorItem {
 
-    public CustomDyeableArmorItem(Holder<ArmorMaterial> armorMaterial, Type type, Properties properties) {
+    public CustomDyeableArmorItem(Holder<ArmorMaterial> armorMaterial, Type type, Properties properties, int durabilityFactor) {
         super(armorMaterial, type, properties
-            .durability(type.getDurability(armorMaterial.value().getDefense(type)))
+            .durability(type.getDurability(durabilityFactor))
             .component(DataComponents.DYED_COLOR, new DyedItemColor(0xFFFFFFFF,false)));
     }
 

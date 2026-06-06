@@ -15,8 +15,8 @@ import java.util.List;
 
 public class NetheriteSpaceSuitItem extends SpaceSuitItem {
 
-    public NetheriteSpaceSuitItem(Holder<ArmorMaterial> material, Type type, long tankSize, Properties properties) {
-        super(material, type, tankSize, properties);
+    public NetheriteSpaceSuitItem(Holder<ArmorMaterial> material, Type type, long tankSize, Properties properties, int durabilityFactor) {
+        super(material, type, tankSize, properties, durabilityFactor);
     }
 
     @Override
