@@ -51,7 +51,6 @@ import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
@@ -87,6 +86,7 @@ public class AdAstraClient {
         ConstantComponents.AD_ASTRA_CATEGORY.getString());
 
     public static void init() {
+        ModClientFluids.CLIENT_FLUIDS.init();
         AdAstra.CONFIGURATOR.register(AdAstraConfigClient.class);
         registerArmor();
 
@@ -95,8 +95,6 @@ public class AdAstraClient {
             if (connection == null) return RegistryAccess.EMPTY;
             return connection.registryAccess();
         });
-
-        ModClientFluids.CLIENT_FLUIDS.init();
     }
 
     public static void registerScreens(ScreenRegistrar registrar) {

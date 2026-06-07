@@ -42,11 +42,10 @@ public class AdAstra {
 
         ModDataManagers.REGISTRY.init();
         ModDataComponents.DATA_COMPONENT_TYPES.init();
-        ModFluidProperties.FLUIDS.init();
-        ModFluidProperties.FLUID_TYPES.init();
-        ModFluids.FLUIDS.init();
-        ModBlocks.BLOCKS.init();
         ModItems.ITEMS.init();
+        ModBlocks.BLOCKS.init();
+        ModFluids.FLUIDS.init();
+        ModFluids.FLUID_TYPES.init();
         ModCreativeTab.TABS.init();
         ModEntityTypes.ENTITY_TYPES.init();
         ModBlockEntityTypes.BLOCK_ENTITY_TYPES.init();
@@ -54,7 +53,6 @@ public class AdAstra {
         ModRecipeTypes.RECIPE_TYPES.init();
         ModRecipeSerializers.RECIPE_SERIALIZERS.init();
         ModParticleTypes.PARTICLE_TYPES.init();
-//        ModPaintingVariants.PAINTING_VARIANTS.init();
         ModSoundEvents.SOUND_EVENTS.init();
         ModStructures.STRUCTURE_TYPES.init();
         ModStructures.STRUCTURE_PROCESSORS.init();

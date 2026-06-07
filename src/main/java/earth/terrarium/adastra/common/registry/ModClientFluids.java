@@ -22,24 +22,25 @@ public class ModClientFluids {
 
     public static ClientFluidProperties create(int tintColor) {
         return new ClientFluidProperties() {
+
             @Override
             public ResourceLocation still(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos, FluidState fluidState) {
-                return ModFluidProperties.STILL;
+                return ModFluids.STILL;
             }
 
             @Override
             public ResourceLocation flowing(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos, FluidState fluidState) {
-                return ModFluidProperties.FLOWING;
+                return ModFluids.FLOWING;
             }
 
             @Override
             public ResourceLocation overlay(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos, FluidState fluidState) {
-                return ModFluidProperties.OVERLAY;
+                return ModFluids.OVERLAY;
             }
 
             @Override
             public ResourceLocation screenOverlay() {
-                return ModFluidProperties.SCREEN_OVERLAY;
+                return ModFluids.SCREEN_OVERLAY;
             }
 
             @Override

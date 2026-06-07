@@ -3,7 +3,7 @@ package earth.terrarium.adastra.datagen.provider.server.tags;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.registry.ModBlocks;
-import earth.terrarium.adastra.common.registry.ModFluidProperties;
+import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.tags.ModBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -66,14 +66,14 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
         ModBlocks.GLACIAN_PRESSURE_PLATE
     );
 
-    private static final List<Supplier<Block>> NOT_MINED_WITH_PICKAXE = List.of(
+    private static final List<Supplier<? extends Block>> NOT_MINED_WITH_PICKAXE = List.of(
         ModBlocks.CHEESE_BLOCK,
         ModBlocks.GLACIAN_FUR,
         ModBlocks.GLACIAN_LEAVES,
-        ModFluidProperties.OIL_BLOCK,
-        ModFluidProperties.FUEL_BLOCK,
-        ModFluidProperties.CRYO_FUEL_BLOCK,
-        ModFluidProperties.HYDROGEN_BLOCK
+        ModFluids.OIL_BLOCK,
+        ModFluids.FUEL_BLOCK,
+        ModFluids.CRYO_FUEL_BLOCK,
+        ModFluids.HYDROGEN_BLOCK
     );
 
     public ModBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, ExistingFileHelper existingFileHelper) {
