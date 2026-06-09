@@ -84,18 +84,6 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
     @Override
     public CommonStorage<FluidResource> getFluids(Direction direction) {
         return fluid;
-//        return fluidContainer = new WrappedBlockFluidContainer( TODO: Implement fluid storage!
-//            this,
-//            new BiFluidContainer(
-//                FluidAmounts.toPlatformAmount(MachineConfig.STEEL.fluidCapacity),
-//                1,
-//                1,
-//                (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get())
-//                    .stream()
-//                    .anyMatch(r -> r.value().input().test(holder)),
-//                (tank, holder) -> level().getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_LOADING.get())
-//                    .stream()
-//                    .anyMatch(r -> r.value().result().matches(holder))));
     }
 
     @Override
