@@ -94,7 +94,9 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
     public void distributeToChargeSlots() {
         ItemStack stack = getItem(0);
         if (stack.isEmpty()) return;
-        var container = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
+        ModifyOnlyContext itemContext = new ModifyOnlyContext(stack);
+        if (!itemContext.isPresent(EnergyApi.ITEM)) return;
+        var container = itemContext.find(EnergyApi.ITEM);
         if (container.getStoredAmount() <= 0) return;
         TransferUtil.moveValue(getEnergyStorage(), container, maxInsertExtract(), false);
 //        if (holder.isDirty()) {
