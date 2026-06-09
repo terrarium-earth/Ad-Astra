@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
+import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
@@ -20,6 +21,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -37,6 +39,32 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
 
     protected int cookTime;
     protected int cookTimeTotal;
+    protected final ContainerData dataAccess = new ContainerData() {
+        @Override
+        public int get(int index) {
+            return switch (index) {
+                case 0 -> CoalGeneratorBlockEntity.this.cookTime;
+                case 1 -> CoalGeneratorBlockEntity.this.cookTimeTotal;
+                default -> 0;
+            };
+        }
+
+        @Override
+        public void set(int index, int value) {
+            switch (index) {
+                case 0:
+                    CoalGeneratorBlockEntity.this.cookTime = value;
+                    break;
+                case 1:
+                    CoalGeneratorBlockEntity.this.cookTimeTotal = value;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+    };
 
     public CoalGeneratorBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 2);
@@ -44,6 +72,7 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
 
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+        AdAstra.LOGGER.info("{}", this.dataAccess);
         return new CoalGeneratorMenu(id, inventory, this);
     }
 
@@ -131,5 +160,9 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
     @Override
     public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
         return new int[]{1};
+    }
+
+    public ContainerData getDataAccess() {
+        return dataAccess;
     }
 }

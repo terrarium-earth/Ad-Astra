@@ -22,6 +22,6 @@ public class CoalGeneratorScreen extends MachineScreen<CoalGeneratorMenu, CoalGe
     @Override
     protected void renderBg(@NotNull GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         super.renderBg(graphics, partialTick, mouseX, mouseY);
-        this.drawVerticalProgressBar(graphics, GuiUtils.FIRE, mouseX, mouseY, 78, 54, 15, 15, entity.cookTime(), entity.cookTimeTotal(), true);
+        this.drawVerticalProgressBar(graphics, GuiUtils.FIRE, mouseX, mouseY, 78, 54, 15, 15, menu.cookTime(), menu.cookTimeTotal(), true);
     }
 }

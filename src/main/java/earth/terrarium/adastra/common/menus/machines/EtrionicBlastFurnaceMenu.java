@@ -8,14 +8,20 @@ import earth.terrarium.adastra.common.menus.content.PositionContent;
 import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.Slot;
 
 import java.util.Optional;
 
 public class EtrionicBlastFurnaceMenu extends MachineMenu<EtrionicBlastFurnaceBlockEntity> {
 
+    private final ContainerData data;
+
     public EtrionicBlastFurnaceMenu(int id, Inventory inventory, EtrionicBlastFurnaceBlockEntity entity) {
         super(ModMenus.ETRIONIC_BLAST_FURNACE.get(), id, inventory, entity);
+        checkContainerDataCount(entity.getDataAccess(), 2);
+        this.data = entity.getDataAccess();
+        addDataSlots(this.data);
     }
 
     public EtrionicBlastFurnaceMenu(int id, Inventory inv, Optional<PositionContent> content) {
@@ -45,6 +51,14 @@ public class EtrionicBlastFurnaceMenu extends MachineMenu<EtrionicBlastFurnaceBl
     @Override
     public int getPlayerInvYOffset() {
         return 114;
+    }
+
+    public int cookTime() {
+        return data.get(0);
+    }
+
+    public int cookTimeTotal() {
+        return data.get(1);
     }
 
     @Override

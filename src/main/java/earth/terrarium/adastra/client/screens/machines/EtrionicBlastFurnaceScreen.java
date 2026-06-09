@@ -29,7 +29,7 @@ public class EtrionicBlastFurnaceScreen extends MachineScreen<EtrionicBlastFurna
     @Override
     protected void renderBg(@NotNull GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         super.renderBg(graphics, partialTick, mouseX, mouseY);
-        this.drawHorizontalProgressBar(graphics, GuiUtils.ARROW, mouseX, mouseY, 75, 50, 20, 12, entity.cookTime(), entity.cookTimeTotal(), false);
+        this.drawHorizontalProgressBar(graphics, GuiUtils.ARROW, mouseX, mouseY, 75, 50, 20, 12, menu.cookTime(), menu.cookTimeTotal(), false);
         if (entity.cookTimeTotal() > 0) {
             graphics.blitSprite(FURNACE_OVERLAY, leftPos + 30, topPos + 51, 32, 43);
         }

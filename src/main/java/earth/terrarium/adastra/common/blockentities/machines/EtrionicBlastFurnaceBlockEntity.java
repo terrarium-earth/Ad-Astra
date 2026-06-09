@@ -2,6 +2,7 @@ package earth.terrarium.adastra.common.blockentities.machines;
 
 import earth.terrarium.adastra.common.blockentities.base.ContainerRecipeWrapper;
 import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineBlockEntity;
+import earth.terrarium.adastra.common.blockentities.base.RecipeMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationType;
@@ -24,6 +25,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.crafting.BlastingRecipe;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -54,6 +56,32 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
     private Mode mode = Mode.ALLOYING;
     protected int cookTime;
     protected int cookTimeTotal;
+    protected final ContainerData dataAccess = new ContainerData() {
+        @Override
+        public int get(int index) {
+            return switch (index) {
+                case 0 -> EtrionicBlastFurnaceBlockEntity.this.cookTime;
+                case 1 -> EtrionicBlastFurnaceBlockEntity.this.cookTimeTotal;
+                default -> 0;
+            };
+        }
+
+        @Override
+        public void set(int index, int value) {
+            switch (index) {
+                case 0:
+                    EtrionicBlastFurnaceBlockEntity.this.cookTime = value;
+                    break;
+                case 1:
+                    EtrionicBlastFurnaceBlockEntity.this.cookTimeTotal = value;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+    };
 
     public EtrionicBlastFurnaceBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 9);
@@ -280,5 +308,9 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
         public Mode previous() {
             return values()[(ordinal() - 1 + values().length) % values().length];
         }
+    }
+
+    public ContainerData getDataAccess() {
+        return dataAccess;
     }
 }

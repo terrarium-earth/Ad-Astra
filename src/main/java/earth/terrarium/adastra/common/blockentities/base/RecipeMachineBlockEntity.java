@@ -5,11 +5,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,6 +25,32 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<RecipeInput>> ex
     protected int cookTime;
     protected int cookTimeTotal;
     protected final RecipeManager.CachedCheck<RecipeInput, T> quickCheck;
+    protected final ContainerData dataAccess = new ContainerData() {
+        @Override
+        public int get(int index) {
+            return switch (index) {
+                case 0 -> RecipeMachineBlockEntity.this.cookTime;
+                case 1 -> RecipeMachineBlockEntity.this.cookTimeTotal;
+                default -> 0;
+            };
+        }
+
+        @Override
+        public void set(int index, int value) {
+            switch (index) {
+                case 0:
+                    RecipeMachineBlockEntity.this.cookTime = value;
+                    break;
+                case 1:
+                    RecipeMachineBlockEntity.this.cookTimeTotal = value;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+    };
 
     public RecipeMachineBlockEntity(BlockPos pos, BlockState state, int containerSize, Supplier<RecipeType<T>> recipeType) {
         super(pos, state, containerSize);
@@ -95,5 +123,9 @@ public abstract class RecipeMachineBlockEntity<T extends Recipe<RecipeInput>> ex
     @Override
     public boolean isEmpty() {
         return super.isEmpty();
+    }
+
+    public ContainerData getDataAccess() {
+        return dataAccess;
     }
 }

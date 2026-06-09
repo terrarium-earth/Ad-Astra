@@ -11,14 +11,20 @@ import earth.terrarium.adastra.common.menus.slots.PredicateSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.Slot;
 
 import java.util.Optional;
 
 public class CryoFreezerMenu extends MachineMenu<CryoFreezerBlockEntity> {
 
+    private final ContainerData data;
+
     public CryoFreezerMenu(int id, Inventory inventory, CryoFreezerBlockEntity entity) {
         super(ModMenus.CRYO_FREEZER.get(), id, inventory, entity);
+        checkContainerDataCount(entity.getDataAccess(), 2);
+        this.data = entity.getDataAccess();
+        addDataSlots(this.data);
     }
 
     public CryoFreezerMenu(int id, Inventory inv, Optional<PositionContent> content) {
@@ -43,6 +49,14 @@ public class CryoFreezerMenu extends MachineMenu<CryoFreezerBlockEntity> {
     @Override
     public int getPlayerInvYOffset() {
         return 102;
+    }
+
+    public int cookTime() {
+        return data.get(0);
+    }
+
+    public int cookTimeTotal() {
+        return data.get(1);
     }
 
     @Override
