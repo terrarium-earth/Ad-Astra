@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
+import earth.terrarium.adastra.common.blockentities.base.ContainerRecipeWrapper;
 import earth.terrarium.adastra.common.blockentities.machines.CompressorBlockEntity;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
@@ -46,11 +47,12 @@ public record CompressingRecipe(
     );
 
     @Override
-    public boolean matches(RecipeInput container, Level level) {
-        if (!ingredient.test(container.getItem(1))) return false;
-        if (!(container instanceof CompressorBlockEntity entity)) return true;
+    public boolean matches(RecipeInput recipeInput, Level level) {
+        if (!(recipeInput instanceof ContainerRecipeWrapper wrapper)) return false;
+        if (!(wrapper.container() instanceof CompressorBlockEntity entity)) return false;
+        if (!ingredient.test(recipeInput.getItem(1))) return false;
         if (entity.getEnergyStorage().extract(energy, true) < energy) return false;
-        return ItemUtils.canAddItem(container.getItem(2), result);
+        return ItemUtils.canAddItem(recipeInput.getItem(2), result);
     }
 
     @Override
