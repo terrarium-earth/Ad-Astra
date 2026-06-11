@@ -14,6 +14,7 @@ import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.ItemUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.storage.base.UpdateManager;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -140,6 +141,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
                 shouldClear = false;
             }
             energyStorage.extract(MachineConfig.etrionicBlastFurnaceBlastingEnergyPerItem, false);
+            UpdateManager.batch(energyStorage);
             isCooking = true;
             if (cookTime < cookTimeTotal) continue;
             for (int j = 0; j < 4; j++) {
@@ -181,6 +183,7 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
         }
 
         energyStorage.extract(alloyingRecipe.energy(), false);
+        UpdateManager.batch(energyStorage);
 
         cookTime++;
         if (cookTime < cookTimeTotal) return;

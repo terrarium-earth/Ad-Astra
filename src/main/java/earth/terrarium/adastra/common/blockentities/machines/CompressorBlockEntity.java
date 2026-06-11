@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
+import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.base.ContainerRecipeWrapper;
 import earth.terrarium.adastra.common.blockentities.base.RecipeMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
@@ -14,6 +15,7 @@ import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.ItemUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.storage.base.UpdateManager;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -71,6 +73,7 @@ public class CompressorBlockEntity extends RecipeMachineBlockEntity<CompressingR
         }
 
         energyStorage.extract(recipe.energy(), false);
+        UpdateManager.batch(energyStorage);
 
         cookTime++;
         if (cookTime < cookTimeTotal) return;
