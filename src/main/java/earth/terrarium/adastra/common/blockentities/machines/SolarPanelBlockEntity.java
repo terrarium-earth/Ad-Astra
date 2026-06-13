@@ -13,6 +13,7 @@ import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
 import earth.terrarium.common_storage_lib.energy.EnergyApi;
 import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.storage.base.UpdateManager;
 import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.core.BlockPos;
@@ -89,6 +90,7 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
 
     public void generateEnergy(long generationRate) {
         this.getEnergyStorage().insert(generationRate, false);
+        UpdateManager.batch(this.getEnergyStorage());
     }
 
     public void distributeToChargeSlots() {
