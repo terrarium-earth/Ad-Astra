@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blockentities.base;
 
+import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.registry.ModDataManagers;
@@ -7,10 +8,12 @@ import earth.terrarium.common_storage_lib.energy.EnergyProvider;
 import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
 import earth.terrarium.common_storage_lib.fluid.impl.SimpleFluidStorage;
 import earth.terrarium.common_storage_lib.fluid.util.FluidProvider;
+import earth.terrarium.common_storage_lib.fluid.util.FluidStorageData;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -36,6 +39,51 @@ public abstract class MachineBlockEntity extends BlockEntity implements Tickable
     @Override
     public void firstTick(Level level, BlockPos pos, BlockState state) {
         this.initialized = true;
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
+
+        if (this instanceof EnergyProvider.BlockEntity energyProvider) {
+            var energy = energyProvider.getEnergy(null);
+            if (energy instanceof SimpleValueStorage valueStorage) {
+                tag.putLong("energy", valueStorage.getStoredAmount());
+            }
+        }
+
+        if (this instanceof FluidProvider.BlockEntity fluidProvider) {
+            var fluids = fluidProvider.getFluids(null);
+            if (fluids instanceof SimpleFluidStorage fluidStorage) {
+                tag.put("fluids", FluidStorageData.CODEC.encodeStart(NbtOps.INSTANCE, fluidStorage.createSnapshot()).getOrThrow());
+            }
+        }
+    }
+
+    @Override
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
+
+        if (this instanceof EnergyProvider.BlockEntity energyProvider) {
+            var energy = energyProvider.getEnergy(null);
+            if (energy instanceof SimpleValueStorage valueStorage) {
+                if (tag.contains("energy")) {
+                    valueStorage.readSnapshot(tag.getLong("energy"));
+                }
+            }
+        }
+
+        if (this instanceof FluidProvider.BlockEntity fluidProvider) {
+            var fluids = fluidProvider.getFluids(null);
+            if (fluids instanceof SimpleFluidStorage fluidStorage) {
+                if (tag.contains("fluids")) {
+                    FluidStorageData.CODEC
+                        .parse(NbtOps.INSTANCE, tag.get("fluids"))
+                        .resultOrPartial(result -> AdAstra.LOGGER.error("Failed to parse fluids: '{}'", result))
+                        .ifPresent(fluidStorage::readSnapshot);
+                }
+            }
+        }
     }
 
     @Override
