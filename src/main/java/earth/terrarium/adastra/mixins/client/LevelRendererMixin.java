@@ -160,6 +160,7 @@ public abstract class LevelRendererMixin {
                 RenderSystem.setShaderTexture(0, DimensionRenderingUtils.VENUS_CLOUDS);
                 FogRenderer.levelFogColor();
                 poseStack.pushPose();
+                poseStack.mulPose(frustumMatrix);
                 poseStack.scale(12.0F, 1.0F, 12.0F);
                 poseStack.translate(-f3, f4, -f5);
                 if (this.cloudBuffer != null) {
