@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
+import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
@@ -63,8 +64,8 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         if (canFunction()) {
-            distributeToChargeSlots();
             if (isDay()) generateEnergy(PlanetApi.API.getSolarPower(level));
+            distributeToChargeSlots();
         }
     }
 
@@ -99,10 +100,11 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
         ModifyOnlyContext itemContext = new ModifyOnlyContext(stack);
         if (!itemContext.isPresent(EnergyApi.ITEM)) return;
         var container = itemContext.find(EnergyApi.ITEM);
-        if (container.getStoredAmount() <= 0) return;
-        TransferUtil.moveValue(getEnergyStorage(), container, maxInsertExtract(), false);
-//        if (holder.isDirty()) {
-//            setItem(0, holder.getStack());
-//        }
+        if (container.getStoredAmount() >= container.getCapacity()) return;
+        AdAstra.LOGGER.info("Current charge in solar panel {}", getEnergyStorage().getStoredAmount());
+        long inserted = TransferUtil.moveValue(getEnergyStorage(), container, maxInsertExtract(), false);
+        if (inserted > 0) {
+            setItem(0, itemContext.stack());
+        }
     }
 }

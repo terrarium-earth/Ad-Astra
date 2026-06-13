@@ -101,7 +101,7 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
         ModifyOnlyContext itemContext = new ModifyOnlyContext(stack);
         if (!itemContext.isPresent(EnergyApi.ITEM)) return;
         var container = itemContext.find(EnergyApi.ITEM);
-        if (container.getStoredAmount() <= 0) return;
+        if (container.getStoredAmount() >= container.getCapacity()) return;
         if (TransferUtil.moveValue(getEnergyStorage(), container, maxInsertExtract(), false) == 0) return;
         setItem(0, itemContext.stack());
         ModUtils.sendParticles(level,
