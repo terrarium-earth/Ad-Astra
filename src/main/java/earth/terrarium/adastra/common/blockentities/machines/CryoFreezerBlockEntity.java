@@ -114,6 +114,7 @@ public class CryoFreezerBlockEntity extends RecipeMachineBlockEntity<CryoFreezin
 
         getItem(1).shrink(1);
         fluid.insert(recipe.result().resource(), recipe.result().amount(), false);
+        fluid.update();
 
         updateSlots();
 
