@@ -1,6 +1,5 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
-import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.base.ContainerRecipeWrapper;
 import earth.terrarium.adastra.common.blockentities.base.RecipeMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
