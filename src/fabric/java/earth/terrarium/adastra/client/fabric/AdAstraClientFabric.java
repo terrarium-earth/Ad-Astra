@@ -85,6 +85,7 @@ public class AdAstraClientFabric {
                         context.tickCounter().getGameTimeDeltaPartialTick(false),
                         context.matrixStack(),
                         camera.x, camera.y, camera.z,
+                        context.positionMatrix(),
                         context.projectionMatrix());
                 });
             }
@@ -94,10 +95,9 @@ public class AdAstraClientFabric {
                     context.world(),
                     DimensionRenderingUtils.getTicks(),
                     context.tickCounter().getGameTimeDeltaPartialTick(false),
-                    context.matrixStack(),
+                    context.positionMatrix(),
                     context.camera(),
                     context.projectionMatrix(),
-                    context.positionMatrix(),
                     false,
                     () -> {}
                 ));
