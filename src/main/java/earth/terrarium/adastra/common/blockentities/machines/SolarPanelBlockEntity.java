@@ -1,6 +1,5 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
-import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.PlanetApi;
 import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
@@ -101,7 +100,6 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
         if (!itemContext.isPresent(EnergyApi.ITEM)) return;
         var container = itemContext.find(EnergyApi.ITEM);
         if (container.getStoredAmount() >= container.getCapacity()) return;
-        AdAstra.LOGGER.info("Current charge in solar panel {}", getEnergyStorage().getStoredAmount());
         long inserted = TransferUtil.moveValue(getEnergyStorage(), container, maxInsertExtract(), false);
         if (inserted > 0) {
             setItem(0, itemContext.stack());
