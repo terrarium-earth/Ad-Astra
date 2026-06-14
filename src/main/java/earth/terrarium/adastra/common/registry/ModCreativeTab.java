@@ -44,6 +44,8 @@ public class ModCreativeTab {
         list.add(FluidUtils.fluidFilledItem(ModItems.GAS_TANK, ModFluids.OXYGEN));
         list.add(FluidUtils.fluidFilledItem(ModItems.LARGE_GAS_TANK, ModFluids.OXYGEN));
 
+        list.removeIf(stack -> stack.isEmpty());
+
         return list.stream();
     }
 }
