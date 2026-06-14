@@ -97,6 +97,7 @@ public class AdAstraClientFabric {
                     context.matrixStack(),
                     context.camera(),
                     context.projectionMatrix(),
+                    context.positionMatrix(),
                     false,
                     () -> {}
                 ));

@@ -33,7 +33,7 @@ public class ModSkyRenderer {
         this.renderer = renderer;
     }
 
-    public void render(ClientLevel level, float partialTick, PoseStack poseStack, Camera camera, Matrix4f projectionMatrix, boolean isFoggy, Runnable setupFog) {
+    public void render(ClientLevel level, float partialTick, PoseStack poseStack, Camera camera, Matrix4f projectionMatrix, Matrix4f frustrumMatrix, boolean isFoggy, Runnable setupFog) {
         setupFog.run();
         if (isFoggy || inFog(camera)) return;
         if (!renderer.renderInRain() && level.isRaining()) return;
@@ -50,7 +50,7 @@ public class ModSkyRenderer {
 
         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         poseStack.pushPose();
-
+        poseStack.mulPose(frustrumMatrix);
         renderStars(level, partialTick, poseStack, projectionMatrix, setupFog);
 
         RenderSystem.disableBlend();
@@ -269,6 +269,6 @@ public class ModSkyRenderer {
             }
         }
 
-        return bufferBuilder.build();
+        return bufferBuilder.buildOrThrow();
     }
 }
