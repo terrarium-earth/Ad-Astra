@@ -34,7 +34,7 @@ public class EnergizerBlockEntity extends EnergyContainerMachineBlockEntity {
     public static final List<ConfigurationEntry> SIDE_CONFIG = List.of(
         new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.PUSH_PULL, ConstantComponents.SIDE_CONFIG_ENERGY)
     );
-    private final SimpleValueStorage energy = new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.OSTRUM.energyCapacity) {
+    private final SimpleValueStorage energy = new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.energizerEnergyCapacity) {
         @Override
         public void set(long l) {
             super.set(l);
