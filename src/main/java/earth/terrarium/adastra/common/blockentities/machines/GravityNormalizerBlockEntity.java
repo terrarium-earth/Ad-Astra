@@ -167,6 +167,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
 
     @Override
     public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
+        super.clientTick(level, time, state, pos);
         if (time % 40 == 0) {
             if (AdAstraConfigClient.showGravityNormalizerArea) {
                 AdAstraClient.GRAVITY_OVERLAY_RENDERER.removePositions(pos);
