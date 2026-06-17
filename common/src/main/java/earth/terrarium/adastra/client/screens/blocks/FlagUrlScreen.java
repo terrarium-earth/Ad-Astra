@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 
 public class FlagUrlScreen extends Screen {
 
-    private static final Pattern URL_REGEX = Pattern.compile("^https://(i\\.imgur\\.com|i\\.ibb\\.co|images2\\.imgbox\\.com|i\\.postimg\\.cc|prnt\\.sc|files\\.catbox\\.moe|i\\.gyazo\\.com|cdn\\.nest\\.rip|raw\\.githubusercontent\\.com)/[\\w\\-._~:/?#\\[\\]@!$&'()*+,;=%]*\\.(png|jpeg|jpg|webp)$");
+    private static final Pattern URL_REGEX = Pattern.compile("^https://(i\\.imgur\\.com|i\\.ibb\\.co|images2\\.imgbox\\.com|i\\.postimg\\.cc|prnt\\.sc|files\\.catbox\\.moe|i\\.gyazo\\.com|cdn\\.nest\\.rip|raw\\.githubusercontent\\.com|i\\.ibb\\.co)/[\\w\\-._~:/?#\\[\\]@!$&'()*+,;=%]*\\.(png|jpeg|jpg|webp)$");
 
     private final BlockPos pos;
     private EditBox urlField;
