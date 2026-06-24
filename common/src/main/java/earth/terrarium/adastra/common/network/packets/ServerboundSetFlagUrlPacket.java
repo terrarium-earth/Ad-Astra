@@ -10,6 +10,7 @@ import com.teamresourceful.resourcefullib.common.network.defaults.CodecPacketTyp
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.flag.FlagBlockEntity;
 import earth.terrarium.adastra.common.blockentities.flag.content.UrlContent;
+import earth.terrarium.adastra.common.utils.ImageHostUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -19,8 +20,6 @@ import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 public record ServerboundSetFlagUrlPacket(BlockPos pos, String url) implements Packet<ServerboundSetFlagUrlPacket> {
-
-    private static final Pattern URL_REGEX = Pattern.compile("^https://(i\\.imgur\\.com|i\\.ibb\\.co|images2\\.imgbox\\.com|i\\.postimg\\.cc|prnt\\.sc|files\\.catbox\\.moe|i\\.gyazo\\.com|cdn\\.nest\\.rip|raw\\.githubusercontent\\.com|i\\.ibb\\.co)/[\\w\\-._~:/?#\\[\\]@!$&'()*+,;=%]*\\.(png|jpeg|jpg|webp)$");
 
     public static final ServerboundPacketType<ServerboundSetFlagUrlPacket> TYPE = new Type();
 
@@ -46,7 +45,7 @@ public record ServerboundSetFlagUrlPacket(BlockPos pos, String url) implements P
         @Override
         public Consumer<Player> handle(ServerboundSetFlagUrlPacket packet) {
             return player -> {
-                if (URL_REGEX.matcher(packet.url()).matches()
+                if (ImageHostUtils.isValidFlagImageURL(packet.url())
                     && player.distanceToSqr(packet.pos().getCenter()) <= 64
                     && player.level().getBlockEntity(packet.pos()) instanceof FlagBlockEntity flag
                     && flag.getOwner() != null

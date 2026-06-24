@@ -1,8 +1,10 @@
 package earth.terrarium.adastra.client.screens.blocks;
 
+import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.network.NetworkHandler;
 import earth.terrarium.adastra.common.network.packets.ServerboundSetFlagUrlPacket;
+import earth.terrarium.adastra.common.utils.ImageHostUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -15,8 +17,6 @@ import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 public class FlagUrlScreen extends Screen {
-
-    private static final Pattern URL_REGEX = Pattern.compile("^https://(i\\.imgur\\.com|i\\.ibb\\.co|images2\\.imgbox\\.com|i\\.postimg\\.cc|prnt\\.sc|files\\.catbox\\.moe|i\\.gyazo\\.com|cdn\\.nest\\.rip|raw\\.githubusercontent\\.com|i\\.ibb\\.co)/[\\w\\-._~:/?#\\[\\]@!$&'()*+,;=%]*\\.(png|jpeg|jpg|webp)$");
 
     private final BlockPos pos;
     private EditBox urlField;
@@ -36,16 +36,16 @@ public class FlagUrlScreen extends Screen {
         int x = this.width / 2 - 100;
         int y = this.height / 2 - 20;
         this.button = addRenderableWidget(new Button(x + 50, y + 30, 100, 20, ConstantComponents.CONFIRM, (button) -> {
-            var matcher = URL_REGEX.matcher(this.urlField.getValue());
-            if (matcher.matches()) {
-                NetworkHandler.CHANNEL.sendToServer(new ServerboundSetFlagUrlPacket(this.pos, matcher.group()));
+            String url = this.urlField.getValue();
+            if (ImageHostUtils.isValidFlagImageURL(url)) {
+                NetworkHandler.CHANNEL.sendToServer(new ServerboundSetFlagUrlPacket(this.pos, url));
                 this.onClose();
             }
         }, Supplier::get) {});
         button.active = false;
         urlField = addRenderableWidget(new EditBox(font, x, y, 200, 20, Component.literal("https://imgur.com/urURL")));
         urlField.setResponder(url -> {
-            if (URL_REGEX.matcher(url).matches()) {
+            if (ImageHostUtils.isValidFlagImageURL(url)) {
                 this.button.active = true;
                 this.urlField.setTextColor(0x00FF00);
             } else {
