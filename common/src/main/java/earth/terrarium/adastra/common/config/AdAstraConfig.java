@@ -25,6 +25,14 @@ public final class AdAstraConfig {
     public static boolean allowFlagImages = true;
 
     @ConfigEntry(
+        id = "allowedFlagHosts",
+        type = EntryType.STRING,
+        translation = "config.ad_astra.allowedFlagHosts"
+    )
+    @Comment("A comma-separated list of hostnames that are allowed for custom flag images. e.g. i.imgur.com, i.ibb.co, i.gyazo.com, raw.githubusercontent.com")
+    public static String allowedFlagHosts = "i.imgur.com, i.ibb.co, images2.imgbox.com, i.postimg.cc, prnt.sc, files.catbox.moe, i.gyazo.com, cdn.nest.rip, raw.githubusercontent.com, i.ibb.co";
+
+    @ConfigEntry(
         id = "launchAnywhere",
         type = EntryType.BOOLEAN,
         translation = "config.ad_astra.launchFromAnywhere"
