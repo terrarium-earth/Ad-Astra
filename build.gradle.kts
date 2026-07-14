@@ -5,7 +5,7 @@ plugins {
     java
     `maven-publish`
     id("com.teamresourceful.resourcefulgradle") version "0.0.+"
-    id("earth.terrarium.cloche") version "0.18.14"
+    id("earth.terrarium.cloche") version "0.18.15"
 }
 
 //val stationsFile: String = file("stations.json").absolutePath
