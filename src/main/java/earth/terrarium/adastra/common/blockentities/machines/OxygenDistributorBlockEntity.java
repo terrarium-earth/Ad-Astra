@@ -210,6 +210,7 @@ public class OxygenDistributorBlockEntity extends OxygenLoaderBlockEntity {
         clearOxygenBlocks();
         lastDistributedBlocks.addAll(positions);
         shouldSyncPositions = true;
+        sync();
     }
 
     protected void clearOxygenBlocks() {

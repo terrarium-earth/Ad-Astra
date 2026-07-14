@@ -158,6 +158,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
         clearGravityBlocks();
         lastDistributedBlocks.addAll(positions);
         shouldSyncPositions = true;
+        sync();
     }
 
     protected void clearGravityBlocks() {
