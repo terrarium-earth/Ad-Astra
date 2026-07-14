@@ -5,7 +5,7 @@ plugins {
     java
     `maven-publish`
     id("com.teamresourceful.resourcefulgradle") version "0.0.+"
-    id("earth.terrarium.cloche") version "0.18.15"
+    id("earth.terrarium.cloche") version "0.18.14"
 }
 
 //val stationsFile: String = file("stations.json").absolutePath
@@ -76,7 +76,7 @@ cloche {
 
         require("resourcefullib", "3.0.0")
         require("resourcefulconfig", "3.0.0")
-        require("common_storage_lib", "0.0.9")
+        require("common_storage_lib", "0.0.10")
     }
 
     common {
