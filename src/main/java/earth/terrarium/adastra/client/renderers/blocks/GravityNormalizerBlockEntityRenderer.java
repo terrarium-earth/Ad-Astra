@@ -104,7 +104,7 @@ public class GravityNormalizerBlockEntityRenderer implements BlockEntityRenderer
                 pose.mulPose(Axis.XP.rotationDegrees(Mth.sin(animation / 50 + i) * 10));
                 pose.translate(-0.27, -0.27, -0.27);
 
-                if (blockModel != null) {
+                if (toeModel != null) {
                     Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
                         pose.last(),
                         buffer.getBuffer(Sheets.cutoutBlockSheet()),
