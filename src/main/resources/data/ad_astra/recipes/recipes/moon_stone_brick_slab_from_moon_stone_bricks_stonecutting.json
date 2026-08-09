@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "ad_astra:moon_stone_bricks"
+  },
+  "result": "ad_astra:moon_stone_brick_slab"
+}
