@@ -1,23 +1,2 @@
-- Made etrionic blast furnace use alloying mode by default.
-- Added client config translations.
-- Fixed crash with PipeZ (#508).
-- Fixed REI crash.
-- Prevent sliding door blocks from being pushed with pistons.
-- Fixed crash when placing water on launchpads and sliding door blocks and updating them.
-- Added missing ore tags.
-- Fixed planet command not requiring OP
-- Fixed armor values for space suit chest and leggings reversed. (#551)
-- Fixed Etrionic Capacitor not draining when powering jet suit.
-- Fixed space suit not transparent on neoforge.
-- Fixed sliding door and flag blocks invisible on neoforge when looking at them in certain angles.
-- Fixed scrolling not resting in planet screen when navigating through the menu
-- Fixed planet buttons being clickable outside of the visible scroll area.
-- Fixed solar systems in the planet screen being ordered randomly. It's now sorted alphabetically.
-- Made planet names fallback to their IDs in title case if it can't find the translations
-- Added a client event for rendering the solar system in the planets screen.
-- Fixed Etrionic Blast Furnace Cheese (#494)
-- Fixed oxygen distributor and gravity normalizer always running from the position above regardless of the direction it's facing. (#502)
-- Added Russian translations (#509) - MaleSkam
-- Added Dutch translations (#525) - marlester-dev
-- Added Chinese translations (#523) - whyvo1
-- Added Japanese translations - てよくま
+Port to 1.21.1!
+Huge thanks to MrBysco for his work porting Ad Astra, it was a huge undertaking and appreciate all of his efforts to bringing this up to 1.21!!!
