@@ -17,6 +17,6 @@ public final class ModEntityTypeTags {
     public static final TagKey<EntityType<?>> IGNORES_AIR_VORTEX = tag("ignores_air_vortex");
 
     private static TagKey<EntityType<?>> tag(String name) {
-        return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(AdAstra.MOD_ID, name));
+        return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 }

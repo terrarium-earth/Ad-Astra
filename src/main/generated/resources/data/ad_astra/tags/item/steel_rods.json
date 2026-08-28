@@ -1,0 +1,9 @@
+{
+  "values": [
+    "ad_astra:steel_rod",
+    {
+      "id": "#c:rods/steel",
+      "required": false
+    }
+  ]
+}

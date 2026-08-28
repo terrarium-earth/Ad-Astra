@@ -15,7 +15,7 @@ public interface FlagContent {
     Tag toTag();
 
     default ResourceLocation toTexture() {
-        return new ResourceLocation(AdAstra.MOD_ID, "flagtextures/" + type() + "/" + hash());
+        return ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "flagtextures/" + type() + "/" + hash());
     }
 
     default CompoundTag toFullTag() {

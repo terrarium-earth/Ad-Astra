@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "ad_astra:venus_diamond_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:diamond"
+  }
+}

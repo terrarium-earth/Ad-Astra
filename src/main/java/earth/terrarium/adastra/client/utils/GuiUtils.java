@@ -4,9 +4,10 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
 import com.teamresourceful.resourcefullib.client.utils.ScreenUtils;
 import earth.terrarium.adastra.AdAstra;
+import earth.terrarium.adastra.client.ClientPlatformUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -24,20 +25,20 @@ import java.util.function.Function;
 
 public class GuiUtils {
 
-    public static final ResourceLocation ENERGY_BAR = new ResourceLocation(AdAstra.MOD_ID, "energy_bar");
+    public static final ResourceLocation ENERGY_BAR = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "energy_bar");
     public static final int ENERGY_BAR_WIDTH = 13;
     public static final int ENERGY_BAR_HEIGHT = 46;
 
-    public static final ResourceLocation FLUID_BAR = new ResourceLocation(AdAstra.MOD_ID, "fluid_bar");
+    public static final ResourceLocation FLUID_BAR = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "fluid_bar");
     public static final int FLUID_BAR_WIDTH = 12;
     public static final int FLUID_BAR_HEIGHT = 46;
 
-    public static final ResourceLocation HAMMER = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/hammer.png");
-    public static final ResourceLocation SNOWFLAKE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/snowflake.png");
-    public static final ResourceLocation FIRE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/fire.png");
-    public static final ResourceLocation ARROW = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/arrow.png");
-    public static final ResourceLocation SUN = new ResourceLocation(AdAstra.MOD_ID, "sun");
-    public static final ResourceLocation SLIDER = new ResourceLocation(AdAstra.MOD_ID, "slider");
+    public static final ResourceLocation HAMMER = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/sprites/hammer.png");
+    public static final ResourceLocation SNOWFLAKE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/sprites/snowflake.png");
+    public static final ResourceLocation FIRE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/sprites/fire.png");
+    public static final ResourceLocation ARROW = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/sprites/arrow.png");
+    public static final ResourceLocation SUN = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "sun");
+    public static final ResourceLocation SLIDER = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "slider");
 
     public static final WidgetSprites SETTINGS_BUTTON_SPRITES = createPressableButtonSprites("settings_button");
     public static final WidgetSprites RESET_BUTTON_SPRITES = createPressableButtonSprites("reset_button");
@@ -59,9 +60,9 @@ public class GuiUtils {
 
     public static WidgetSprites createPressableButtonSprites(String name) {
         return new WidgetSprites(
-            new ResourceLocation(AdAstra.MOD_ID, "buttons/" + name),
-            new ResourceLocation(AdAstra.MOD_ID, "buttons/" + name + "_pressed"),
-            new ResourceLocation(AdAstra.MOD_ID, "buttons/" + name + "_highlighted")
+            ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "buttons/" + name),
+            ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "buttons/" + name + "_pressed"),
+            ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "buttons/" + name + "_highlighted")
         );
     }
 
@@ -78,11 +79,11 @@ public class GuiUtils {
         });
     }
 
-    public static void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, int x, int y, FluidHolder fluid, long capacity, Component... tooltips) {
+    public static void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, int x, int y, ResourceStack<FluidResource> fluid, long capacity, Component... tooltips) {
         if (!fluid.isEmpty()) {
-            float ratio = fluid.getFluidAmount() / (float) capacity;
-            TextureAtlasSprite sprite = ClientFluidHooks.getFluidSprite(fluid);
-            int color = ClientFluidHooks.getFluidColor(fluid);
+            float ratio = fluid.amount() / (float) capacity;
+            TextureAtlasSprite sprite = ClientPlatformUtils.getFluidSprite(fluid);
+            int color = ClientPlatformUtils.getFluidColor(fluid);
             float r = FastColor.ARGB32.red(color) / 255f;
             float g = FastColor.ARGB32.green(color) / 255f;
             float b = FastColor.ARGB32.blue(color) / 255f;

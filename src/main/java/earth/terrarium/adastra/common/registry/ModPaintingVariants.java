@@ -1,29 +1,58 @@
 package earth.terrarium.adastra.common.registry;
 
-import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
-import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
-import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.decoration.PaintingVariant;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class ModPaintingVariants {
+    public static final List<ResourceKey<PaintingVariant>> PAINTING_VARIANTS = new ArrayList<>();
 
-    public static final ResourcefulRegistry<PaintingVariant> PAINTING_VARIANTS = ResourcefulRegistries.create(BuiltInRegistries.PAINTING_VARIANT, AdAstra.MOD_ID);
+    public static final ResourceKey<PaintingVariant> MERCURY = create("mercury");
+    public static final ResourceKey<PaintingVariant> MOON = create("moon");
+    public static final ResourceKey<PaintingVariant> PLUTO = create("pluto");
+    public static final ResourceKey<PaintingVariant> EARTH = create("earth");
+    public static final ResourceKey<PaintingVariant> GLACIO = create("glacio");
+    public static final ResourceKey<PaintingVariant> MARS = create("mars");
+    public static final ResourceKey<PaintingVariant> VENUS = create("venus");
+    public static final ResourceKey<PaintingVariant> JUPITER = create("jupiter");
+    public static final ResourceKey<PaintingVariant> NEPTUNE = create("neptune");
+    public static final ResourceKey<PaintingVariant> URANUS = create("uranus");
+    public static final ResourceKey<PaintingVariant> SATURN = create("saturn");
+    public static final ResourceKey<PaintingVariant> THE_MILKY_WAY = create("the_milky_way");
+    public static final ResourceKey<PaintingVariant> ALPHA_CENTAURI = create("alpha_centauri");
+    public static final ResourceKey<PaintingVariant> SUN = create("sun");
 
-    public static final RegistryEntry<PaintingVariant> MERCURY = PAINTING_VARIANTS.register("mercury", () -> new PaintingVariant(16, 16));
-    public static final RegistryEntry<PaintingVariant> MOON = PAINTING_VARIANTS.register("moon", () -> new PaintingVariant(16, 16));
-    public static final RegistryEntry<PaintingVariant> PLUTO = PAINTING_VARIANTS.register("pluto", () -> new PaintingVariant(16, 16));
-    public static final RegistryEntry<PaintingVariant> EARTH = PAINTING_VARIANTS.register("earth", () -> new PaintingVariant(32, 32));
-    public static final RegistryEntry<PaintingVariant> GLACIO = PAINTING_VARIANTS.register("glacio", () -> new PaintingVariant(32, 32));
-    public static final RegistryEntry<PaintingVariant> MARS = PAINTING_VARIANTS.register("mars", () -> new PaintingVariant(32, 32));
-    public static final RegistryEntry<PaintingVariant> VENUS = PAINTING_VARIANTS.register("venus", () -> new PaintingVariant(32, 32));
-    public static final RegistryEntry<PaintingVariant> JUPITER = PAINTING_VARIANTS.register("jupiter", () -> new PaintingVariant(48, 48));
-    public static final RegistryEntry<PaintingVariant> NEPTUNE = PAINTING_VARIANTS.register("neptune", () -> new PaintingVariant(48, 48));
-    public static final RegistryEntry<PaintingVariant> URANUS = PAINTING_VARIANTS.register("uranus", () -> new PaintingVariant(48, 48));
-    public static final RegistryEntry<PaintingVariant> SATURN = PAINTING_VARIANTS.register("saturn", () -> new PaintingVariant(64, 48));
-    public static final RegistryEntry<PaintingVariant> THE_MILKY_WAY = PAINTING_VARIANTS.register("the_milky_way", () -> new PaintingVariant(64, 48));
-    public static final RegistryEntry<PaintingVariant> ALPHA_CENTAURI = PAINTING_VARIANTS.register("alpha_centauri", () -> new PaintingVariant(64, 64));
-    public static final RegistryEntry<PaintingVariant> SUN = PAINTING_VARIANTS.register("sun", () -> new PaintingVariant(80, 80));
+    public static void bootstrap(BootstrapContext<PaintingVariant> context) {
+        register(context, MERCURY, 1, 1);
+        register(context, MOON, 1, 1);
+        register(context, PLUTO, 1, 1);
+        register(context, EARTH, 2, 2);
+        register(context, GLACIO, 2, 2);
+        register(context, MARS, 2, 2);
+        register(context, VENUS, 2, 2);
+        register(context, JUPITER, 3, 3);
+        register(context, NEPTUNE, 3, 3);
+        register(context, URANUS, 3, 3);
+        register(context, SATURN, 4, 3);
+        register(context, THE_MILKY_WAY, 4, 3);
+        register(context, ALPHA_CENTAURI, 4, 4);
+        register(context, SUN, 5, 5);
+    }
+
+    private static void register(BootstrapContext<PaintingVariant> context, ResourceKey<PaintingVariant> key, int width, int height) {
+        context.register(key, new PaintingVariant(width, height, key.location()));
+    }
+
+    private static ResourceKey<PaintingVariant> create(String name) {
+        ResourceKey<PaintingVariant> key = ResourceKey.create(Registries.PAINTING_VARIANT, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
+        PAINTING_VARIANTS.add(key);
+        return key;
+    }
 }

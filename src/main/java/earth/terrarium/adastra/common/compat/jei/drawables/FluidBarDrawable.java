@@ -2,7 +2,8 @@ package earth.terrarium.adastra.common.compat.jei.drawables;
 
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import mezz.jei.api.gui.drawable.IDrawable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -21,14 +22,14 @@ public class FluidBarDrawable implements IDrawable {
     private final long capacity;
     private final Fluid fluid;
 
-    public FluidBarDrawable(double mouseX, double mouseY, boolean generate, long capacity, int cookTime, FluidHolder fluid) {
+    public FluidBarDrawable(double mouseX, double mouseY, boolean generate, long capacity, int cookTime, ResourceStack<FluidResource> fluid) {
         this.mouseX = (int) mouseX;
         this.mouseY = (int) mouseY;
         this.gain = generate;
-        this.perTick = fluid.getFluidAmount();
+        this.perTick = fluid.amount();
         this.cookTime = cookTime;
         this.capacity = capacity;
-        this.fluid = fluid.getFluid();
+        this.fluid = fluid.resource().getType();
     }
 
     @Override
@@ -53,7 +54,7 @@ public class FluidBarDrawable implements IDrawable {
             mouseY,
             xOffset,
             yOffset,
-            FluidHolder.of(fluid, fluidAmount),
+            new ResourceStack<>(FluidResource.of(fluid), fluidAmount),
             capacity,
             TooltipUtils.getTicksPerIterationComponent(cookTime),
             gain ? TooltipUtils.getFluidGenerationPerIterationComponent(perTick) : TooltipUtils.getFluidUsePerIterationComponent(perTick)

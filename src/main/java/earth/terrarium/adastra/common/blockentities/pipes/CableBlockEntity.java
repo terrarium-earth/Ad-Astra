@@ -1,8 +1,8 @@
 package earth.terrarium.adastra.common.blockentities.pipes;
 
 import earth.terrarium.adastra.common.blocks.properties.PipeProperty;
-import earth.terrarium.botarium.common.energy.EnergyApi;
-import earth.terrarium.botarium.common.energy.base.EnergyContainer;
+import earth.terrarium.common_storage_lib.energy.EnergyApi;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,10 +18,11 @@ public class CableBlockEntity extends PipeBlockEntity {
     @Override
     public void addNode(@NotNull BlockEntity entity, PipeProperty pipeProperty, Direction direction, BlockPos pos) {
         if (pipeProperty.isNone()) return;
-        var container = EnergyContainer.of(entity, direction);
+
+        var container = EnergyApi.BLOCK.find(entity, direction);
         if (container == null) return;
 
-        if (!pipeProperty.isInsert() && (pipeProperty.isExtract() || container.extractEnergy(container.getStoredEnergy(), true) > 0)) {
+        if (!pipeProperty.isInsert() && (pipeProperty.isExtract() || container.extract(container.getStoredAmount(), true) > 0)) {
             sources.put(pos, direction);
         } else if (pipeProperty.isNormal() || pipeProperty.isInsert()) {
             consumers.put(pos, direction);
@@ -30,15 +31,15 @@ public class CableBlockEntity extends PipeBlockEntity {
 
     @Override
     public void moveContents(long transferRate, @NotNull BlockEntity source, @NotNull BlockEntity consumer, Direction direction) {
-        var sourceContainer = EnergyContainer.of(source, direction);
+        var sourceContainer = EnergyApi.BLOCK.find(source, direction);
         if (sourceContainer == null) return;
-        var consumerContainer = EnergyContainer.of(consumer, direction.getOpposite());
+        var consumerContainer = EnergyApi.BLOCK.find(consumer, direction.getOpposite());
         if (consumerContainer == null) return;
-        EnergyApi.moveEnergy(sourceContainer, consumerContainer, Math.min(transferRate, sourceContainer.getStoredEnergy()), false);
+        TransferUtil.moveValue(sourceContainer, consumerContainer, Math.min(transferRate, sourceContainer.getStoredAmount()), false);
     }
 
     @Override
     public boolean isValid(@NotNull BlockEntity entity, Direction direction) {
-        return EnergyContainer.holdsEnergy(entity, direction.getOpposite());
+        return EnergyApi.BLOCK.isPresent(entity, direction.getOpposite());
     }
 }

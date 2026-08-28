@@ -1,24 +1,33 @@
 package earth.terrarium.adastra.client.neoforge;
 
 import earth.terrarium.adastra.client.AdAstraClient;
+import earth.terrarium.adastra.client.renderers.ArmorRenderer;
+import earth.terrarium.adastra.client.dimension.ModDimensionSpecialEffects;
 import earth.terrarium.adastra.common.entities.vehicles.Vehicle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.TickEvent;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class AdAstraClientNeoForge {
+
+    public static final Map<Item, ArmorRenderer> ARMOR_RENDERERS = new HashMap<>();
+    public static final Map<ResourceKey<Level>, ModDimensionSpecialEffects> DIMENSION_RENDERERS = new HashMap<>();
 
     public static final Map<Item, BlockEntityWithoutLevelRenderer> ITEM_RENDERERS = new HashMap<>();
 
@@ -34,6 +43,10 @@ public class AdAstraClientNeoForge {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(AdAstraClient::init);
         AdAstraClient.onRegisterItemRenderers(ITEM_RENDERERS::put);
+        event.enqueueWork(() -> {
+            AdAstraClient.registerRenderLayers(ItemBlockRenderTypes::setRenderLayer);
+            AdAstraClient.registerItemProperties(ItemProperties::register);
+        });
     }
 
     @SubscribeEvent
@@ -49,7 +62,9 @@ public class AdAstraClientNeoForge {
 
     @SubscribeEvent
     public static void modelLoading(ModelEvent.RegisterAdditional event) {
-        AdAstraClient.onRegisterModels(event::register);
+        AdAstraClient.onRegisterModels((id) -> {
+            event.register(ModelResourceLocation.standalone(id));
+        });
     }
 
     @SubscribeEvent
@@ -62,10 +77,19 @@ public class AdAstraClientNeoForge {
         AdAstraClient.onAddReloadListener((id, listener) -> event.registerReloadListener(listener));
     }
 
-    private static void onClientTick(TickEvent.ClientTickEvent event) {
-        if (event.phase.equals(TickEvent.Phase.START)) {
-            AdAstraClient.clientTick(Minecraft.getInstance());
-        }
+    @SubscribeEvent
+    public static void onRegisterScreen(RegisterMenuScreensEvent event) {
+        AdAstraClient.registerScreens(event::register);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterScreen(EntityRenderersEvent.RegisterRenderers event) {
+        AdAstraClient.registerBlockEntityRenderers(event::registerBlockEntityRenderer);
+        AdAstraClient.registerEntityRenderers(event::registerEntityRenderer);
+    }
+
+    private static void onClientTick(ClientTickEvent.Pre event) {
+        AdAstraClient.clientTick(Minecraft.getInstance());
     }
 
     private static void onRenderLevelStage(RenderLevelStageEvent event) {
@@ -84,7 +108,7 @@ public class AdAstraClientNeoForge {
 
     private static void onCalculateCameraDistance(CalculateDetachedCameraDistanceEvent event) {
         if (event.getDistance() < 12.0 && event.getCamera().getEntity().getVehicle() instanceof Vehicle vehicle && vehicle.zoomOutCameraInThirdPerson()) {
-            event.setDistance(12.0);
+            event.setDistance(12.0F);
         }
     }
 }

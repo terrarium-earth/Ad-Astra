@@ -2,7 +2,8 @@ package earth.terrarium.adastra.common.compat.rei.widgets;
 
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.widgets.Widget;
@@ -24,13 +25,13 @@ public class ReiFluidBarWidget extends Widget {
     private final long capacity;
     private final Fluid fluid;
 
-    public ReiFluidBarWidget(Point point, boolean generate, long capacity, int cookTime, FluidHolder fluid) {
+    public ReiFluidBarWidget(Point point, boolean generate, long capacity, int cookTime, ResourceStack<FluidResource> fluid) {
         this.bounds = new Rectangle(new Rectangle(point.x, point.y, GuiUtils.FLUID_BAR_WIDTH, GuiUtils.FLUID_BAR_HEIGHT));
         this.gain = generate;
-        this.perTick = fluid.getFluidAmount();
+        this.perTick = fluid.amount();
         this.cookTime = cookTime;
         this.capacity = capacity;
-        this.fluid = fluid.getFluid();
+        this.fluid = fluid.resource().getType();
     }
 
     @Override
@@ -45,7 +46,7 @@ public class ReiFluidBarWidget extends Widget {
             mouseY,
             this.bounds.x,
             this.bounds.y,
-            FluidHolder.of(fluid, fluidAmount),
+            new ResourceStack<>(FluidResource.of(fluid), fluidAmount),
             capacity,
             TooltipUtils.getTicksPerIterationComponent(cookTime),
             gain ? TooltipUtils.getFluidGenerationPerIterationComponent(perTick) : TooltipUtils.getFluidUsePerIterationComponent(perTick)

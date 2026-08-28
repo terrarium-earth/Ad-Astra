@@ -1,12 +1,14 @@
 package earth.terrarium.adastra.common.menus.base;
 
+import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
+import com.teamresourceful.resourcefullib.common.menu.ContentMenuProvider;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.handlers.LaunchingDimensionHandler;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;
 import earth.terrarium.adastra.common.menus.PlanetsMenu;
+import earth.terrarium.adastra.common.menus.content.PlanetsContent;
 import earth.terrarium.adastra.common.planets.AdAstraData;
-import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -23,7 +25,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.*;
 
-public class PlanetsMenuProvider implements ExtraDataMenuProvider {
+public class PlanetsMenuProvider implements ContentMenuProvider<PlanetsContent> {
 
     @Override
     public Component getDisplayName() {
@@ -35,42 +37,40 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
         return new PlanetsMenu(containerId, inventory, Set.of(), Map.of(), Set.of());
     }
 
-    @Override
-    public void writeExtraData(ServerPlayer player, FriendlyByteBuf buffer) {
-        buffer.writeUtf(AdAstraConfig.disabledPlanets);
+    public static void writeDisabledPlanetsToBuf(FriendlyByteBuf buffer, Set<ResourceLocation> resourceLocations) {
+        StringBuilder builder = new StringBuilder();
+        for (ResourceLocation location : resourceLocations) {
+            builder.append(location.toString()).append(",");
+        }
+        buffer.writeUtf(builder.toString());
+    }
 
-        buffer.writeVarInt(AdAstraData.planets().size());
-        AdAstraData.planets().keySet().forEach(dimension -> {
+    public static void writeSpaceStationsToBuf(FriendlyByteBuf buffer, Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> resourceKeyMapMap) {
+        buffer.writeVarInt(resourceKeyMapMap.size());
+        resourceKeyMapMap.forEach((dimension, groupMap) -> {
             buffer.writeResourceKey(dimension);
-
-            ServerLevel targetLevel = player.server.getLevel(dimension);
-            if (targetLevel == null) throw new IllegalStateException("Dimension " + dimension + " does not exist.");
-            var spaceStations = SpaceStationHandler.getAllSpaceStations(targetLevel);
-            buffer.writeVarInt(spaceStations.size());
-
-            spaceStations.forEach((id, stations) -> {
+            buffer.writeVarInt(groupMap.size());
+            groupMap.forEach((id, stations) -> {
                 buffer.writeVarInt(stations.size());
                 stations.forEach(station -> {
-                    buffer.writeComponent(station.name());
+                    ExtraByteCodecs.COMPONENT.encode(station.name(), buffer);
                     buffer.writeChunkPos(station.position());
                 });
                 buffer.writeUUID(id);
             });
         });
+    }
 
-        List<GlobalPos> locations = new ArrayList<>();
-        AdAstraData.planets().forEach((dimension, planet) ->
-            LaunchingDimensionHandler.getSpawningLocation(player, player.serverLevel(), planet).ifPresent(locations::add));
-
-        buffer.writeVarInt(locations.size());
-        locations.forEach(buffer::writeGlobalPos);
+    public static void writeSpawnLocationsToBuf(FriendlyByteBuf buffer, Set<GlobalPos> globalPos) {
+        buffer.writeVarInt(globalPos.size());
+        globalPos.forEach(buffer::writeGlobalPos);
     }
 
     public static Set<ResourceLocation> createDisabledPlanetsFromBuf(FriendlyByteBuf buf) {
         Set<ResourceLocation> disabledPlanets = new HashSet<>();
         String[] planets = buf.readUtf().split(",");
         for (var planet : planets) {
-            disabledPlanets.add(new ResourceLocation(planet));
+            disabledPlanets.add(ResourceLocation.tryParse(planet));
         }
         return Collections.unmodifiableSet(disabledPlanets);
     }
@@ -89,7 +89,7 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
                 Set<SpaceStation> spaceStations = new HashSet<>();
 
                 for (int k = 0; k < stationGroupSize; k++) {
-                    Component stationName = buf.readComponent();
+                    Component stationName = ExtraByteCodecs.COMPONENT.decode(buf);
                     ChunkPos stationPos = buf.readChunkPos();
                     spaceStations.add(new SpaceStation(stationPos, stationName));
                 }
@@ -111,5 +111,32 @@ public class PlanetsMenuProvider implements ExtraDataMenuProvider {
             locations.add(buf.readGlobalPos());
         }
         return Collections.unmodifiableSet(locations);
+    }
+
+    @Override
+    public PlanetsContent createContent(ServerPlayer player) {
+        Set<ResourceLocation> disabledPlanets = new HashSet<>();
+        String[] planets = AdAstraConfig.disabledPlanets.split(",");
+        for (var planet : planets) {
+            disabledPlanets.add(ResourceLocation.tryParse(planet));
+        }
+
+        Map<ResourceKey<Level>, Map<UUID, Set<SpaceStation>>> spaceStationsMap = new HashMap<>();
+        AdAstraData.planets().forEach((dimension, planet) -> {
+            ServerLevel targetLevel = player.server.getLevel(dimension);
+            if (targetLevel == null) throw new IllegalStateException("Dimension " + dimension + " does not exist.");
+            var spaceStations = SpaceStationHandler.getAllSpaceStations(targetLevel);
+            spaceStationsMap.put(dimension, spaceStations);
+        });
+
+        Set<GlobalPos> locations = new HashSet<>();
+        AdAstraData.planets().forEach((dimension, planet) ->
+            LaunchingDimensionHandler.getSpawningLocation(player, player.serverLevel(), planet).ifPresent(locations::add));
+
+        return new PlanetsContent(
+            disabledPlanets,
+            spaceStationsMap,
+            locations
+        );
     }
 }

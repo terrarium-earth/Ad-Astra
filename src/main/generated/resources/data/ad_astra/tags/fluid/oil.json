@@ -1,0 +1,17 @@
+{
+  "values": [
+    "ad_astra:oil",
+    {
+      "id": "#c:oil",
+      "required": false
+    },
+    {
+      "id": "techreborn:oil",
+      "required": false
+    },
+    {
+      "id": "#c:crude_oil",
+      "required": false
+    }
+  ]
+}

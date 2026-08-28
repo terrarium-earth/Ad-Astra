@@ -39,8 +39,7 @@ public record ClientboundPlayStationPacket(String url,
 
         public Type() {
             super(
-                ClientboundPlayStationPacket.class,
-                new ResourceLocation(AdAstra.MOD_ID, "play_station"),
+                ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "play_station"),
                 ObjectByteCodec.create(
                     ByteCodec.STRING.fieldOf(ClientboundPlayStationPacket::url),
                     ExtraByteCodecs.BLOCK_POS.optionalFieldOf(ClientboundPlayStationPacket::pos),

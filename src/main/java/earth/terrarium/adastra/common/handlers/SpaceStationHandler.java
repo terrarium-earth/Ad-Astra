@@ -2,6 +2,7 @@ package earth.terrarium.adastra.common.handlers;
 
 import com.teamresourceful.resourcefullib.common.utils.SaveHandler;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -23,7 +24,7 @@ public class SpaceStationHandler extends SaveHandler {
             Set<SpaceStation> stations = new HashSet<>();
             stationsTag.forEach(stationTag -> {
                 CompoundTag stationCompoundTag = (CompoundTag) stationTag;
-                Component name = Component.Serializer.fromJson(stationCompoundTag.getString("Name"));
+                Component name = Component.Serializer.fromJson(stationCompoundTag.getString("Name"), RegistryAccess.EMPTY);
                 ChunkPos position = new ChunkPos(stationCompoundTag.getLong("Position"));
                 stations.add(new SpaceStation(position, name));
             });
@@ -37,7 +38,7 @@ public class SpaceStationHandler extends SaveHandler {
             ListTag ownerTag = new ListTag();
             for (var station : stations) {
                 CompoundTag stationsTag = new CompoundTag();
-                stationsTag.putString("Name", Component.Serializer.toJson(station.name()));
+                stationsTag.putString("Name", Component.Serializer.toJson(station.name(), RegistryAccess.EMPTY));
                 stationsTag.putLong("Position", station.position().toLong());
                 ownerTag.add(stationsTag);
             }

@@ -1,9 +1,9 @@
 package earth.terrarium.adastra.common.blockentities.pipes;
 
 import earth.terrarium.adastra.common.blocks.properties.PipeProperty;
-import earth.terrarium.botarium.common.fluid.FluidApi;
-import earth.terrarium.botarium.common.fluid.base.FluidContainer;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.common_storage_lib.fluid.FluidApi;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -19,10 +19,11 @@ public class FluidPipeBlockEntity extends PipeBlockEntity {
     @Override
     public void addNode(@NotNull BlockEntity entity, PipeProperty pipeProperty, Direction direction, BlockPos pos) {
         if (pipeProperty.isNone()) return;
-        var container = FluidContainer.of(entity, direction);
+        var container = FluidApi.BLOCK.find(entity, direction);
         if (container == null) return;
-        var toTransfer = container.getFirstFluid();
-        if (!pipeProperty.isInsert() && !toTransfer.isEmpty() && (pipeProperty.isExtract() || container.extractFluid(toTransfer, true).getFluidAmount() > 0)) {
+        var toTransfer = container.getContents(0);
+        if (!pipeProperty.isInsert() && !toTransfer.isEmpty() && (pipeProperty.isExtract() ||
+            container.extract(toTransfer.resource(), toTransfer.amount(), true) > 0)) {
             sources.put(pos, direction);
         } else if (pipeProperty.isNormal() || pipeProperty.isInsert()) {
             consumers.put(pos, direction);
@@ -31,25 +32,26 @@ public class FluidPipeBlockEntity extends PipeBlockEntity {
 
     @Override
     public void moveContents(long transferRate, @NotNull BlockEntity source, @NotNull BlockEntity consumer, Direction direction) {
-        if (!(FluidContainer.holdsFluid(source, direction))) return;
-        var sourceContainer = FluidContainer.of(source, direction);
+        if (!(FluidApi.BLOCK.isPresent(source, direction))) return;
+        var sourceContainer = FluidApi.BLOCK.find(source, direction);
         if (sourceContainer == null) return;
-        if (!(FluidContainer.holdsFluid(consumer, direction))) return;
-        var consumerContainer = FluidContainer.of(consumer, direction.getOpposite());
+        if (!(FluidApi.BLOCK.isPresent(consumer, direction))) return;
+        var consumerContainer = FluidApi.BLOCK.find(consumer, direction.getOpposite());
         if (consumerContainer == null) return;
-        for (var fluid : sourceContainer.getFluids()) {
+        for (int i = 0; i < sourceContainer.size(); i++) {
+            var fluid = sourceContainer.getContents(i);
             if (fluid.isEmpty()) continue;
-            var toTransfer = FluidHolder.ofMillibuckets(fluid.getFluid(), Math.min(transferRate, fluid.getFluidAmount()));
+            var toTransfer = new ResourceStack<>(fluid.resource(), Math.min(transferRate, fluid.amount()));
             if (toTransfer.isEmpty()) continue;
             try {
-                FluidApi.moveFluid(sourceContainer, consumerContainer, toTransfer, true);
-                FluidApi.moveFluid(sourceContainer, consumerContainer, toTransfer, false);
+                TransferUtil.move(sourceContainer, consumerContainer, toTransfer.resource(), toTransfer.amount(), true);
+                TransferUtil.move(sourceContainer, consumerContainer, toTransfer.resource(), toTransfer.amount(), false);
             } catch (IllegalArgumentException ignored) {}
         }
     }
 
     @Override
     public boolean isValid(@NotNull BlockEntity entity, Direction direction) {
-        return FluidContainer.holdsFluid(entity, direction.getOpposite());
+        return FluidApi.BLOCK.isPresent(entity, direction.getOpposite());
     }
 }

@@ -11,25 +11,24 @@ import earth.terrarium.adastra.common.blocks.machines.GravityNormalizerBlock;
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.GravityNormalizerMenu;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.adastra.common.registry.ModSoundEvents;
-import earth.terrarium.adastra.common.utils.EnergyUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
 import earth.terrarium.adastra.common.utils.floodfill.FloodFill3D;
-import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
+import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.List;
@@ -41,6 +40,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     public static final List<ConfigurationEntry> SIDE_CONFIG = List.of(
         new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.NONE, ConstantComponents.SIDE_CONFIG_ENERGY)
     );
+    private final SimpleValueStorage energy = new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.DESH.energyCapacity);
 
     private final Set<BlockPos> lastDistributedBlocks = new HashSet<>();
     private long energyPerTick;
@@ -59,8 +59,8 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
 
 
     @Override
-    public void load(@NotNull CompoundTag tag) {
-        super.load(tag);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
         if (tag.contains("LastDistributedBlocks")) {
             lastDistributedBlocks.clear();
             for (var pos : tag.getLongArray("LastDistributedBlocks")) {
@@ -74,8 +74,8 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
         tag.putLong("EnergyPerTick", energyPerTick);
         tag.putInt("DistributedBlocksCount", distributedBlocksCount);
         tag.putInt("Limit", limit);
@@ -88,12 +88,13 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
-        if (this.energyContainer != null) return this.energyContainer;
-        return this.energyContainer = new WrappedBlockEnergyContainer(
-            this,
-            EnergyUtils.machineInsertOnlyEnergy(MachineConfig.DESH)
-        );
+    public ValueStorage getEnergy(Direction direction) {
+        return energy;
+    }
+
+    @Override
+    public long maxInsertExtract() {
+        return MachineConfig.DESH.maxEnergyInOut;
     }
 
     @Override
@@ -106,7 +107,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
 
         boolean canDistribute = canCraftDistribution();
         if (canFunction() && canDistribute) {
-            getEnergyStorage().internalExtract(calculateEnergyPerTick(), false);
+            getEnergyStorage().extract(calculateEnergyPerTick(), false);
             setLit(true);
 
             if (time % MachineConfig.distributionRefreshRate == 0) tickGravity(level, pos, state);
@@ -126,7 +127,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
 
     @Override
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
-        TransferUtils.pullEnergyNearby(this, pos, getEnergyStorage().maxInsert(), sideConfig.get(0), filter);
+        TransferUtils.pullEnergyNearby(this, pos, maxInsertExtract(), sideConfig.get(0), filter);
     }
 
     @Override
@@ -136,7 +137,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
 
     private boolean canCraftDistribution() {
         long energy = calculateEnergyPerTick();
-        return getEnergyStorage().internalExtract(energy, true) >= energy;
+        return getEnergyStorage().extract(energy, true) >= energy;
     }
 
     protected void tickGravity(ServerLevel level, BlockPos pos, BlockState state) {
@@ -157,6 +158,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
         clearGravityBlocks();
         lastDistributedBlocks.addAll(positions);
         shouldSyncPositions = true;
+        sync();
     }
 
     protected void clearGravityBlocks() {
@@ -166,6 +168,7 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
 
     @Override
     public void clientTick(ClientLevel level, long time, BlockState state, BlockPos pos) {
+        super.clientTick(level, time, state, pos);
         if (time % 40 == 0) {
             if (AdAstraConfigClient.showGravityNormalizerArea) {
                 AdAstraClient.GRAVITY_OVERLAY_RENDERER.removePositions(pos);
@@ -227,8 +230,8 @@ public class GravityNormalizerBlockEntity extends EnergyContainerMachineBlockEnt
 
     // Only sync positions when recalculating the distributed blocks.
     @Override
-    public @NotNull CompoundTag getUpdateTag() {
-        var tag = super.getUpdateTag();
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        CompoundTag tag = super.getUpdateTag(provider);
         if (shouldSyncPositions) {
             tag.putLongArray("LastDistributedBlocks", lastDistributedBlocks.stream()
                 .mapToLong(BlockPos::asLong).toArray());

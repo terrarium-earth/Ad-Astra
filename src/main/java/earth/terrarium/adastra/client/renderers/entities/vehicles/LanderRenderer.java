@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 
 public class LanderRenderer extends EntityRenderer<Lander> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/lander/lander.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/lander/lander.png");
 
     protected final EntityModel<Lander> model;
 
@@ -39,7 +39,7 @@ public class LanderRenderer extends EntityRenderer<Lander> {
             pose.scale(-1.0F, -1.0F, 1.0F);
             model.setupAnim(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
             VertexConsumer consumer = buffer.getBuffer(model.renderType(getTextureLocation(entity)));
-            model.renderToBuffer(pose, consumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            model.renderToBuffer(pose, consumer, packedLight, OverlayTexture.NO_OVERLAY);
         }
     }
 

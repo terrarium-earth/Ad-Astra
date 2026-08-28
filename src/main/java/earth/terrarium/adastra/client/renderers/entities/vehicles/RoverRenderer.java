@@ -22,7 +22,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class RoverRenderer extends EntityRenderer<Rover> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/rover/tier_1_rover.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/rover/tier_1_rover.png");
 
     protected final EntityModel<Rover> model;
 
@@ -43,7 +43,7 @@ public class RoverRenderer extends EntityRenderer<Rover> {
             pose.scale(-1.0F, -1.0F, 1.0F);
             model.setupAnim(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
             VertexConsumer consumer = buffer.getBuffer(model.renderType(getTextureLocation(entity)));
-            model.renderToBuffer(pose, consumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            model.renderToBuffer(pose, consumer, packedLight, OverlayTexture.NO_OVERLAY);
         }
     }
 
@@ -70,7 +70,7 @@ public class RoverRenderer extends EntityRenderer<Rover> {
             try (var pose = new CloseablePoseStack(poseStack)) {
                 pose.mulPose(Axis.ZP.rotationDegrees(180));
                 pose.translate(0.0, -1.501, 0.0);
-                model.renderToBuffer(pose, consumer, packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f);
+                model.renderToBuffer(pose, consumer, packedLight, packedOverlay);
             }
         }
     }

@@ -1,0 +1,31 @@
+{
+  "parent": "ad_astra:dj",
+  "criteria": {
+    "has_zip_gun": {
+      "conditions": {
+        "item": {
+          "items": "ad_astra:zip_gun"
+        }
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ad_astra.zip_gun.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "ad_astra:zip_gun"
+    },
+    "title": {
+      "translate": "advancements.ad_astra.zip_gun.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_zip_gun"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class OptionsBarWidget extends ContainerWidget {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "options_bar");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "options_bar");
     public static final int PADDING = 6;
     public static final int SPACING = 3;
 

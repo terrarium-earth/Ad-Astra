@@ -1,0 +1,9 @@
+{
+  "values": [
+    "ad_astra:calorite_nugget",
+    {
+      "id": "#c:nuggets/calorite",
+      "required": false
+    }
+  ]
+}

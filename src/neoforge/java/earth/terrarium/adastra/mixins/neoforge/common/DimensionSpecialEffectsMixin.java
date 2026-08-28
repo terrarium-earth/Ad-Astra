@@ -1,6 +1,6 @@
 package earth.terrarium.adastra.mixins.neoforge.common;
 
-import earth.terrarium.adastra.client.neoforge.ClientPlatformUtilsImpl;
+import earth.terrarium.adastra.client.neoforge.AdAstraClientNeoForge;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -18,8 +18,8 @@ public abstract class DimensionSpecialEffectsMixin {
     @Inject(method = "forType", at = @At("HEAD"), cancellable = true)
     private static void adastra$forType(DimensionType type, CallbackInfoReturnable<DimensionSpecialEffects> cir) {
         ResourceKey<Level> dimension = ResourceKey.create(Registries.DIMENSION, type.effectsLocation());
-        if (ClientPlatformUtilsImpl.DIMENSION_RENDERERS.containsKey(dimension)) {
-            cir.setReturnValue(ClientPlatformUtilsImpl.DIMENSION_RENDERERS.get(dimension));
+        if (AdAstraClientNeoForge.DIMENSION_RENDERERS.containsKey(dimension)) {
+            cir.setReturnValue(AdAstraClientNeoForge.DIMENSION_RENDERERS.get(dimension));
         }
     }
 }

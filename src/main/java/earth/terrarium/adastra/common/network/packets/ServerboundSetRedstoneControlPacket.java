@@ -31,8 +31,7 @@ public record ServerboundSetRedstoneControlPacket(
 
         public Type() {
             super(
-                ServerboundSetRedstoneControlPacket.class,
-                new ResourceLocation(AdAstra.MOD_ID, "set_redstone_control"),
+                ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "set_redstone_control"),
                 ObjectByteCodec.create(
                     ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundSetRedstoneControlPacket::machine),
                     ByteCodec.ofEnum(RedstoneControl.class).fieldOf(ServerboundSetRedstoneControlPacket::redstoneControl),

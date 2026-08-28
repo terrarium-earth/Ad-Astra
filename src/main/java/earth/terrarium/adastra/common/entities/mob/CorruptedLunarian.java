@@ -8,7 +8,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
@@ -53,11 +52,6 @@ public class CorruptedLunarian extends Monster implements RangedAttackMob {
                 return this.canUse();
             }
         });
-    }
-
-    @Override
-    public MobType getMobType() {
-        return MobType.UNDEAD;
     }
 
     @Override

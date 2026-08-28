@@ -16,9 +16,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class EtrionicBlastFurnaceScreen extends MachineScreen<EtrionicBlastFurnaceMenu, EtrionicBlastFurnaceBlockEntity> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/etrionic_blast_furnace.png");
-    public static final ResourceLocation FURNACE_OVERLAY = new ResourceLocation(AdAstra.MOD_ID, "etrionic_blast_furnace_overlay");
-    public static final ResourceLocation FURNACE_OVERLAY_FULL_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/etrionic_blast_furnace_overlay.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/container/etrionic_blast_furnace.png");
+    public static final ResourceLocation FURNACE_OVERLAY = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "etrionic_blast_furnace_overlay");
+    public static final ResourceLocation FURNACE_OVERLAY_FULL_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/sprites/etrionic_blast_furnace_overlay.png");
     public static final Rect2i CLICK_AREA = new Rect2i(23, 79, 45, 19);
 
     public EtrionicBlastFurnaceScreen(EtrionicBlastFurnaceMenu menu, Inventory inventory, Component component) {
@@ -29,7 +29,7 @@ public class EtrionicBlastFurnaceScreen extends MachineScreen<EtrionicBlastFurna
     @Override
     protected void renderBg(@NotNull GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         super.renderBg(graphics, partialTick, mouseX, mouseY);
-        this.drawHorizontalProgressBar(graphics, GuiUtils.ARROW, mouseX, mouseY, 75, 50, 20, 12, entity.cookTime(), entity.cookTimeTotal(), false);
+        this.drawHorizontalProgressBar(graphics, GuiUtils.ARROW, mouseX, mouseY, 75, 50, 20, 12, menu.cookTime(), menu.cookTimeTotal(), false);
         if (entity.cookTimeTotal() > 0) {
             graphics.blitSprite(FURNACE_OVERLAY, leftPos + 30, topPos + 51, 32, 43);
         }

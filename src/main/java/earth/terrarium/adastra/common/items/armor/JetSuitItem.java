@@ -1,17 +1,20 @@
 package earth.terrarium.adastra.common.items.armor;
 
 import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.KeybindManager;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.energy.base.BotariumEnergyItem;
-import earth.terrarium.botarium.common.energy.base.EnergyContainer;
-import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
-import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
-import earth.terrarium.botarium.common.fluid.FluidConstants;
-import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.common_storage_lib.context.ItemContext;
+import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
+import earth.terrarium.common_storage_lib.energy.EnergyApi;
+import earth.terrarium.common_storage_lib.energy.EnergyProvider;
+import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
@@ -19,47 +22,39 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<WrappedItemEnergyContainer> {
+public class JetSuitItem extends SpaceSuitItem implements EnergyProvider.Item {
 
     private final long energyCapacity;
 
-    public JetSuitItem(ArmorMaterial material, Type type, int tankSize, int energy, Properties properties) {
-        super(material, type, tankSize, properties);
+    public JetSuitItem(Holder<ArmorMaterial> material, Type type, int tankSize, int energy, Item.Properties properties, int durabilityFactor) {
+        super(material, type, tankSize, properties, durabilityFactor);
         this.energyCapacity = energy;
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
-        tooltipComponents.add(TooltipUtils.getFluidComponent(
-            FluidUtils.getTank(stack),
-            FluidConstants.fromMillibuckets(tankSize),
-            ModFluids.OXYGEN.get()));
-        var energy = getEnergyStorage(stack);
-        tooltipComponents.add(TooltipUtils.getEnergyComponent(energy.getStoredEnergy(), energyCapacity));
-        tooltipComponents.add(TooltipUtils.getMaxEnergyInComponent(energy.maxInsert()));
-        TooltipUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.JET_SUIT_INFO);
+    public ValueStorage getEnergy(ItemStack itemStack, ItemContext context) {
+        return new SimpleValueStorage(context, ModDataManagers.VALUE_CONTENT.componentType(), energyCapacity);
     }
 
     @Override
-    public WrappedItemEnergyContainer getEnergyStorage(ItemStack holder) {
-        return new WrappedItemEnergyContainer(
-            holder,
-            new SimpleEnergyContainer(energyCapacity) {
-                @Override
-                public long maxInsert() {
-                    return 1000;
-                }
-            });
+    public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.add(TooltipUtils.getFluidComponent(
+            FluidUtils.getTank(stack),
+            FluidAmounts.toPlatformAmount(tankSize),
+            ModFluids.OXYGEN.get()));
+        var energy = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
+        tooltipComponents.add(TooltipUtils.getEnergyComponent(energy.getStoredAmount(), energyCapacity));
+//        tooltipComponents.add(TooltipUtils.getMaxEnergyInComponent(energy.maxInsert()));
+        TooltipUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.JET_SUIT_INFO);
     }
 
     @Override
@@ -103,16 +98,17 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
     }
 
     private boolean canFly(Player player, ItemStack stack) {
-        return player.isCreative() || getEnergyStorage(stack).getStoredEnergy() > 0;
+        var energy = new ModifyOnlyContext(stack).find(EnergyApi.ITEM);
+        return player.isCreative() || energy.getStoredAmount() > 0;
     }
 
     private void consume(Player player, ItemStack stack, int amount, int slotId) {
         if (player.isCreative() || player.isSpectator() || player.level().isClientSide()) return;
-        ItemStackHolder stackHolder = new ItemStackHolder(stack);
-        EnergyContainer container = EnergyContainer.of(stackHolder);
+        var itemContext = new ModifyOnlyContext(stack);
+        var container = itemContext.find(EnergyApi.ITEM);
         if (container == null) return;
-        container.internalExtract(amount, false);
-        player.getInventory().armor.set(slotId, stackHolder.getStack());
+        container.extract(amount, false);
+        player.getInventory().setItem(slotId, itemContext.stack());
     }
 
     protected boolean isFullFlightEnabled(Player player) {
@@ -160,7 +156,7 @@ public class JetSuitItem extends SpaceSuitItem implements BotariumEnergyItem<Wra
         if (nextFlightTick % 10 != 0) return true;
 
         if (nextFlightTick % 20 == 0) {
-            stack.hurtAndBreak(1, entity, e -> e.broadcastBreakEvent(EquipmentSlot.CHEST));
+            stack.hurtAndBreak(1, entity, EquipmentSlot.CHEST);
         }
 
         entity.gameEvent(GameEvent.ELYTRA_GLIDE);

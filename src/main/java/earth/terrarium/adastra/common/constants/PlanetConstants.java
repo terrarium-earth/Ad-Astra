@@ -6,8 +6,8 @@ import net.minecraft.resources.ResourceLocation;
 // Source: https://www.windows2universe.org/our_solar_system/planets_table.html
 public class PlanetConstants {
 
-    public static final ResourceLocation SOLAR_SYSTEM = new ResourceLocation(AdAstra.MOD_ID, "solar_system");
-    public static final ResourceLocation PROXIMA_CENTAURI = new ResourceLocation(AdAstra.MOD_ID, "proxima_centauri");
+    public static final ResourceLocation SOLAR_SYSTEM = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "solar_system");
+    public static final ResourceLocation PROXIMA_CENTAURI = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "proxima_centauri");
 
     public static final float EARTH_GRAVITY = 9.807f;
     public static final short EARTH_TEMPERATURE = 15;

@@ -5,10 +5,10 @@ plugins {
     java
     `maven-publish`
     id("com.teamresourceful.resourcefulgradle") version "0.0.+"
-    id("earth.terrarium.cloche") version "0.18.14"
+    id("earth.terrarium.cloche") version "0.18.15"
 }
 
-val stationsFile: String = file("stations.json").absolutePath
+//val stationsFile: String = file("stations.json").absolutePath
 
 val minecraftVersion: String by project
 val modId = project.name
@@ -72,10 +72,11 @@ cloche {
         contributor("Fizz")
         contributor("MsRandom", "ashley@terrarium.earth")
         contributor("ThatGravyBoat", "sophie@terrarium.earth")
+        contributor("Mrbysco")
 
         require("resourcefullib", "3.0.0")
         require("resourcefulconfig", "3.0.0")
-        require("common_storage_lib", "0.0.7")
+        require("common_storage_lib", "0.0.10")
     }
 
     common {
@@ -85,6 +86,7 @@ cloche {
             implementation(module(group = "javazoom", name = "jlayer", version = "1.0.1"))
             compileOnly(module(group = "me.shedaniel", name = "REIPluginCompatibilities-forge-annotations", version = "8.+"))
             compileOnly("org.jetbrains:annotations:26.1.0")
+            compileOnly("com.teamresourceful:bytecodecs:1.1.2")
         }
     }
 
@@ -101,14 +103,16 @@ cloche {
 //    modLocalRuntime(group = "maven.modrinth", name = "jade", version = "13.2.2")
 //    modLocalRuntime(group = "maven.modrinth", name = "mekanism", version = "10.4.2.16")
 
-            legacyClasspath("com.teamresourceful:yabn:1.0.3")
-            legacyClasspath("com.teamresourceful:bytecodecs:1.0.2")
+//            legacyClasspath("com.teamresourceful:yabn:1.0.3")
+//            legacyClasspath("com.teamresourceful:bytecodecsbytecodecs:1.1.2")
 
             legacyClasspath(module(group = "javazoom", name = "jlayer", version = "1.0.1"))
         }
 
         runs {
-            data()
+            data {
+                arguments("--existing", file("src/main/resources/").getAbsolutePath())
+            }
         }
     }
 
@@ -152,6 +156,22 @@ cloche {
             modLocalRuntime(module(group = "maven.modrinth", name = "jade", version = "15.10.5+fabric"))
             // modLocalRuntime(module(group = "maven.modrinth", name = "dcwa", version = "5.0")) // Disable custom world advice
         }
+
+        // TODO
+        //  While fabric does not have datagen, Cloche 0.18.x only configures the datagen directory if a data run is registered.
+        //  This is a workaround for that.
+        //  https://github.com/terrarium-earth/cloche/issues/144
+        run {
+            data()
+
+            runs {
+                data {
+                    runTask.configure {
+                        enabled = false
+                    }
+                }
+            }
+        }
     }
 
     targets.all {
@@ -159,11 +179,11 @@ cloche {
 
         runs {
             client {
-                jvmArgs("-Dadastra.stations=", stationsFile)
+//                jvmArgs("-Dadastra.stations=", stationsFile)
             }
 
             server {
-                jvmArgs("-Dadastra.stations=", stationsFile)
+//                jvmArgs("-Dadastra.stations=", stationsFile)
             }
         }
 
@@ -220,10 +240,11 @@ modCompileOnly(module(group = "earth.terrarium.argonauts", name = "argonauts-$lo
                 isTransitive = false
             }
 
-            modLocalRuntime(module(group = "mezz.jei", name = "jei-$minecraftVersion-$loaderName", version = jeiVersion)) {
+             */
+
+            modCompileOnly(module(group = "mezz.jei", name = "jei-${minecraftVersion.get()}-$loaderName", version = jeiVersion)) {
                 isTransitive = false
             }
-             */
 
             modLocalRuntime(
                 module(
@@ -317,5 +338,11 @@ resourcefulGradle {
                 )
             )
         }
+    }
+}
+
+tasks {
+    withType(JavaCompile::class).configureEach {
+        options.compilerArgs.addAll(listOf("-Xmaxerrs", "2000"))
     }
 }

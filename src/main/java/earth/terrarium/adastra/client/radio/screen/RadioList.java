@@ -26,7 +26,7 @@ import java.util.*;
 
 public class RadioList extends SelectionList<RadioList.RadioEntry> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/radio/ui.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/radio/ui.png");
 
     private List<StationInfo> stations = new ArrayList<>();
     private String playing = null;

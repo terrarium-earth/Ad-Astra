@@ -23,10 +23,10 @@ import net.minecraft.world.item.ItemStack;
 
 public class RocketRenderer extends EntityRenderer<Rocket> {
 
-    public static final ResourceLocation TIER_1_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/rocket/tier_1_rocket.png");
-    public static final ResourceLocation TIER_2_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/rocket/tier_2_rocket.png");
-    public static final ResourceLocation TIER_3_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/rocket/tier_3_rocket.png");
-    public static final ResourceLocation TIER_4_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/rocket/tier_4_rocket.png");
+    public static final ResourceLocation TIER_1_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/rocket/tier_1_rocket.png");
+    public static final ResourceLocation TIER_2_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/rocket/tier_2_rocket.png");
+    public static final ResourceLocation TIER_3_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/rocket/tier_3_rocket.png");
+    public static final ResourceLocation TIER_4_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/rocket/tier_4_rocket.png");
 
     protected final EntityModel<Rocket> model;
     private final ResourceLocation texture;
@@ -54,7 +54,7 @@ public class RocketRenderer extends EntityRenderer<Rocket> {
             pose.scale(-1.0F, -1.0F, 1.0F);
             model.setupAnim(entity, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
             VertexConsumer consumer = buffer.getBuffer(model.renderType(getTextureLocation(entity)));
-            model.renderToBuffer(pose, consumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            model.renderToBuffer(pose, consumer, packedLight, OverlayTexture.NO_OVERLAY);
         }
     }
 
@@ -86,7 +86,7 @@ public class RocketRenderer extends EntityRenderer<Rocket> {
             try (var pose = new CloseablePoseStack(poseStack)) {
                 pose.mulPose(Axis.ZP.rotationDegrees(180));
                 pose.translate(0.0, -1.501, 0.0);
-                model.renderToBuffer(pose, consumer, packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f);
+                model.renderToBuffer(pose, consumer, packedLight, packedOverlay);
             }
         }
     }

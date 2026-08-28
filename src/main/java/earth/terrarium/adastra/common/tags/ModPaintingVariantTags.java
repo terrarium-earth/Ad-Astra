@@ -11,6 +11,6 @@ public final class ModPaintingVariantTags {
     public static final TagKey<PaintingVariant> SPACE_PAINTINGS = tag("space_paintings");
 
     private static TagKey<PaintingVariant> tag(String name) {
-        return TagKey.create(Registries.PAINTING_VARIANT, new ResourceLocation(AdAstra.MOD_ID, name));
+        return TagKey.create(Registries.PAINTING_VARIANT, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 }

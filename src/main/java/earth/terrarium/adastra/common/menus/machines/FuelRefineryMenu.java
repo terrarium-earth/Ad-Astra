@@ -5,15 +5,22 @@ import earth.terrarium.adastra.common.menus.base.MachineMenu;
 import earth.terrarium.adastra.common.menus.configuration.EnergyConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.FluidConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.SlotConfiguration;
+import earth.terrarium.adastra.common.menus.content.PositionContent;
 import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 
+import java.util.Optional;
+
 public class FuelRefineryMenu extends MachineMenu<FuelRefineryBlockEntity> {
 
     public FuelRefineryMenu(int id, Inventory inventory, FuelRefineryBlockEntity entity) {
         super(ModMenus.FUEL_REFINERY.get(), id, inventory, entity);
+    }
+
+    public FuelRefineryMenu(int id, Inventory inv, Optional<PositionContent> content) {
+        this(id, inv, PositionContent.getOrNull(content, inv.player.level(), FuelRefineryBlockEntity.class));
     }
 
     @Override

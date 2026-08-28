@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    }
+  },
+  "pattern": [
+    "#P#",
+    "# #",
+    "#P#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ad_astra:compressor"
+  }
+}

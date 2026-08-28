@@ -6,6 +6,7 @@ import earth.terrarium.adastra.common.network.packets.ClientboundPlayStationPack
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.adastra.common.utils.radio.RadioHolder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.Packet;
@@ -25,8 +26,8 @@ public class RadioBlockEntity extends BlockEntity implements RadioHolder {
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
         if (tag.contains("Station", Tag.TAG_STRING)) {
             this.station = tag.getString("Station");
 
@@ -38,8 +39,8 @@ public class RadioBlockEntity extends BlockEntity implements RadioHolder {
     }
 
     @Override
-    public @NotNull CompoundTag getUpdateTag() {
-        CompoundTag tag = super.getUpdateTag();
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        CompoundTag tag = super.getUpdateTag(provider);
         tag.putString("Station", this.station);
         return tag;
     }

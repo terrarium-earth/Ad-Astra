@@ -26,6 +26,6 @@ public final class ModFluidTags {
     public static final TagKey<Fluid> EVAPORATES_IN_SPACE = tag("evaporates_in_space");
 
     private static TagKey<Fluid> tag(String name) {
-        return TagKey.create(Registries.FLUID, new ResourceLocation(AdAstra.MOD_ID, name));
+        return TagKey.create(Registries.FLUID, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 }

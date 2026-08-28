@@ -3,13 +3,12 @@ package earth.terrarium.adastra.common.blocks.machines;
 import earth.terrarium.adastra.common.blockentities.machines.EnergizerBlockEntity;
 import earth.terrarium.adastra.common.blocks.base.MachineBlock;
 import earth.terrarium.adastra.common.registry.ModItems;
-import earth.terrarium.botarium.Botarium;
-import earth.terrarium.botarium.common.energy.base.EnergyContainer;
-import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
+import earth.terrarium.common_storage_lib.energy.EnergyApi;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -39,10 +38,10 @@ public class EnergizerBlock extends MachineBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (level.isClientSide) return super.use(state, level, pos, player, hand, hit);
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockHitResult) {
+        if (level.isClientSide) return super.useItemOn(itemStack, blockState, level, pos, player, hand, blockHitResult);
         if (!(level.getBlockEntity(pos) instanceof EnergizerBlockEntity entity)) {
-            return super.use(state, level, pos, player, hand, hit);
+            return super.useItemOn(itemStack, blockState, level, pos, player, hand, blockHitResult);
         }
 
         var stack = player.getItemInHand(hand);
@@ -53,7 +52,7 @@ public class EnergizerBlock extends MachineBlock {
             player.setItemInHand(hand, entity.getItem(0));
             entity.clearContent();
         }
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.SUCCESS;
     }
 
     @Override
@@ -65,7 +64,7 @@ public class EnergizerBlock extends MachineBlock {
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         if (level.getBlockEntity(pos) instanceof EnergizerBlockEntity entity) {
-            return (int) (entity.getEnergyStorage().getStoredEnergy() / (float) entity.getEnergyStorage().getMaxCapacity() * 15);
+            return (int) (entity.getEnergyStorage().getStoredAmount() / (float) entity.getEnergyStorage().getCapacity() * 15);
         }
         return 0;
     }
@@ -74,12 +73,12 @@ public class EnergizerBlock extends MachineBlock {
     public List<ItemStack> getDrops(BlockState blockState, LootParams.Builder builder) {
         BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if (!(blockEntity instanceof EnergizerBlockEntity entity)) return super.getDrops(blockState, builder);
-        ItemStackHolder stack = new ItemStackHolder(ModItems.ENERGIZER.get().getDefaultInstance());
-        EnergyContainer itemEnergyContainer = EnergyContainer.of(stack);
+        ModifyOnlyContext itemContext = new ModifyOnlyContext(ModItems.ENERGIZER.get().getDefaultInstance());
+        var itemEnergyContainer = itemContext.find(EnergyApi.ITEM);
         if (itemEnergyContainer == null) return super.getDrops(blockState, builder);
-        itemEnergyContainer.setEnergy(entity.getEnergyStorage().getStoredEnergy());
-        stack.getStack().getOrCreateTagElement(Botarium.BOTARIUM_DATA)
-            .putLong("Energy", entity.getEnergyStorage().getStoredEnergy());
-        return List.of(stack.getStack());
+        itemEnergyContainer.insert(entity.getEnergyStorage().getStoredAmount(), false);
+//        stack.getStack().getOrCreateTagElement(Botarium.BOTARIUM_DATA)
+//            .putLong("Energy", entity.getEnergyStorage().getStoredEnergy());
+        return List.of(itemContext.stack());
     }
 }

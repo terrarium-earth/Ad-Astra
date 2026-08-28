@@ -8,7 +8,6 @@ import com.teamresourceful.resourcefullib.common.network.base.ServerboundPacketT
 import com.teamresourceful.resourcefullib.common.network.defaults.CodecPacketType;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.PlanetApi;
-import earth.terrarium.adastra.common.compat.argonauts.ArgonautsIntegration;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import earth.terrarium.adastra.common.handlers.SpaceStationHandler;
 import earth.terrarium.adastra.common.handlers.base.SpaceStation;
@@ -41,8 +40,7 @@ public record ServerboundLandOnSpaceStationPacket(ResourceKey<Level> dimension,
 
         public Type() {
             super(
-                ServerboundLandOnSpaceStationPacket.class,
-                new ResourceLocation(AdAstra.MOD_ID, "land_on_space_station"),
+                ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "land_on_space_station"),
                 ObjectByteCodec.create(
                     ExtraByteCodecs.DIMENSION.fieldOf(ServerboundLandOnSpaceStationPacket::dimension),
                     ExtraByteCodecs.CHUNK_POS.fieldOf(ServerboundLandOnSpaceStationPacket::spaceStationPos),
@@ -78,16 +76,16 @@ public record ServerboundLandOnSpaceStationPacket(ResourceKey<Level> dimension,
     private static boolean isAllowed(ServerPlayer player, ServerLevel level, ChunkPos targetPos) {
         Set<SpaceStation> stations = new HashSet<>(SpaceStationHandler.getOwnedSpaceStations(player, level));
 
-        if (!ArgonautsIntegration.argonautsLoaded()) return stations
-            .stream()
-            .anyMatch(station -> station.position().equals(targetPos));
-
-        for (var member : ArgonautsIntegration.getClientPartyMembers(player.getUUID())) {
-            stations.addAll(SpaceStationHandler.getOwnedSpaceStations(member.getId(), level));
-        }
-        for (var member : ArgonautsIntegration.getClientGuildMembers(player.getUUID())) {
-            stations.addAll(SpaceStationHandler.getOwnedSpaceStations(member.getId(), level));
-        }
+//        if (!ArgonautsIntegration.argonautsLoaded()) return stations
+//            .stream()
+//            .anyMatch(station -> station.position().equals(targetPos));
+//
+//        for (var member : ArgonautsIntegration.getClientPartyMembers(player.getUUID())) {
+//            stations.addAll(SpaceStationHandler.getOwnedSpaceStations(member.getId(), level));
+//        }
+//        for (var member : ArgonautsIntegration.getClientGuildMembers(player.getUUID())) {
+//            stations.addAll(SpaceStationHandler.getOwnedSpaceStations(member.getId(), level));
+//        }
 
         return stations
             .stream()

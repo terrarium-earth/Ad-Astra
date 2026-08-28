@@ -1,0 +1,33 @@
+{
+  "parent": "ad_astra:moon",
+  "criteria": {
+    "has_moon_cheese": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ad_astra:cheese"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ad_astra.moon_cheese.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "ad_astra:cheese"
+    },
+    "title": {
+      "translate": "advancements.ad_astra.moon_cheese.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_moon_cheese"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

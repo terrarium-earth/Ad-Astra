@@ -27,7 +27,6 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
 public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEntity> {
@@ -45,12 +44,14 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 
             if (state.getValue(FlagBlock.HALF).equals(DoubleBlockHalf.LOWER)) {
                 var model = minecraft.getBlockRenderer().getBlockModel(state);
-                minecraft.getBlockRenderer().getModelRenderer().renderModel(poseStack.last(),
-                    buffer.getBuffer(Sheets.cutoutBlockSheet()),
-                    state,
-                    model,
-                    1f, 1f, 1f,
-                    packedLight, packedOverlay);
+                if (model != null) {
+                    minecraft.getBlockRenderer().getModelRenderer().renderModel(poseStack.last(),
+                        buffer.getBuffer(Sheets.cutoutBlockSheet()),
+                        state,
+                        model,
+                        1f, 1f, 1f,
+                        packedLight, packedOverlay);
+                }
             } else {
                 FlagContent content = entity.getContent();
                 if (content == null) {
@@ -68,8 +69,8 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
                     SkullBlockRenderer.renderSkull(null, 0, 0, pose, buffer, packedLight, model, renderType);
                 } else {
                     var consumer = buffer.getBuffer(getFlagImage(content));
-                    Matrix4f matrix4f = poseStack.last().pose();
-                    Matrix3f matrix3fNormal = poseStack.last().normal();
+                    PoseStack.Pose last = poseStack.last();
+                    Matrix4f matrix4f = last.pose();
                     Vec3i normal = direction.normal();
 
                     pose.translate(0.5, 0, 0.5);
@@ -79,7 +80,7 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
                     pose.scale(1 + 5.8f / 16f, 1, 1);
 
                     pose.translate(-11 / 16f, -15 / 16f, 0.495);
-                    renderQuad(matrix4f, matrix3fNormal, normal, consumer, 1, 1, 0, 0, 1, 1, packedLight, packedOverlay);
+                    renderQuad(matrix4f, last, normal, consumer, 1, 1, 0, 0, 1, 1, packedLight, packedOverlay);
 
                     pose.translate(0.5, 0, 0.5);
                     pose.mulPose(Axis.YP.rotationDegrees(180));
@@ -87,17 +88,17 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 
                     pose.translate(0, 0, 0.99);
 
-                    renderQuad(matrix4f, matrix3fNormal, normal, consumer, 1, 1, 0, 0, 1, 1, packedLight, packedOverlay);
+                    renderQuad(matrix4f, last, normal, consumer, 1, 1, 0, 0, 1, 1, packedLight, packedOverlay);
                 }
             }
         }
     }
 
-    private static void renderQuad(Matrix4f pose, Matrix3f matrix3fNormal, Vec3i normal, VertexConsumer consumer, float width, float height, float u, float v, float uWidth, float vHeight, int light, int overlay) {
-        consumer.vertex(pose, 0, 0, 0).color(255, 255, 255, 255).uv(u, v).overlayCoords(overlay).uv2(light).normal(matrix3fNormal, normal.getX(), normal.getY(), normal.getZ()).endVertex();
-        consumer.vertex(pose, 0, height, 0).color(255, 255, 255, 255).uv(u, v + vHeight).overlayCoords(overlay).uv2(light).normal(matrix3fNormal, normal.getX(), normal.getY(), normal.getZ()).endVertex();
-        consumer.vertex(pose, width, height, 0).color(255, 255, 255, 255).uv(u + uWidth, v + vHeight).overlayCoords(overlay).uv2(light).normal(matrix3fNormal, normal.getX(), normal.getY(), normal.getZ()).endVertex();
-        consumer.vertex(pose, width, 0, 0).color(255, 255, 255, 255).uv(u + uWidth, v).overlayCoords(overlay).uv2(light).normal(matrix3fNormal, normal.getX(), normal.getY(), normal.getZ()).endVertex();
+    private static void renderQuad(Matrix4f pose, PoseStack.Pose matrix3fNormal, Vec3i normal, VertexConsumer consumer, float width, float height, float u, float v, float uWidth, float vHeight, int light, int overlay) {
+        consumer.addVertex(pose, 0, 0, 0).setColor(255, 255, 255, 255).setUv(u, v).setOverlay(overlay).setLight(light).setNormal(matrix3fNormal, normal.getX(), normal.getY(), normal.getZ());
+        consumer.addVertex(pose, 0, height, 0).setColor(255, 255, 255, 255).setUv(u, v + vHeight).setOverlay(overlay).setLight(light).setNormal(matrix3fNormal, normal.getX(), normal.getY(), normal.getZ());
+        consumer.addVertex(pose, width, height, 0).setColor(255, 255, 255, 255).setUv(u + uWidth, v + vHeight).setOverlay(overlay).setLight(light).setNormal(matrix3fNormal, normal.getX(), normal.getY(), normal.getZ());
+        consumer.addVertex(pose, width, 0, 0).setColor(255, 255, 255, 255).setUv(u + uWidth, v).setOverlay(overlay).setLight(light).setNormal(matrix3fNormal, normal.getX(), normal.getY(), normal.getZ());
     }
 
     private static RenderType getFlagImage(FlagContent content) {
@@ -113,4 +114,5 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
         }
         return RenderType.entitySolid(id);
     }
+
 }

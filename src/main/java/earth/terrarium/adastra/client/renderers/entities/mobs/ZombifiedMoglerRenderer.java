@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE.
 public class ZombifiedMoglerRenderer extends MobRenderer<ZombifiedMogler, MoglerModel<ZombifiedMogler>> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/zombified_mogler.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/zombified_mogler.png");
 
     public ZombifiedMoglerRenderer(EntityRendererProvider.Context context) {
         super(context, new MoglerModel<>(context.bakeLayer(MoglerModel.LAYER_LOCATION)), 0.7f);

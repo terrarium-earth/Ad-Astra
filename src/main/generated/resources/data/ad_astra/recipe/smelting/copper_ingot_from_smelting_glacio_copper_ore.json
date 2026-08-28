@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "ad_astra:glacio_copper_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:copper_ingot"
+  }
+}

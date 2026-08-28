@@ -6,7 +6,7 @@ import earth.terrarium.adastra.client.components.machines.OptionsBarWidget;
 import earth.terrarium.adastra.client.screens.base.MachineScreen;
 import earth.terrarium.adastra.common.blockentities.machines.OxygenDistributorBlockEntity;
 import earth.terrarium.adastra.common.menus.machines.OxygenDistributorMenu;
-import earth.terrarium.botarium.common.fluid.FluidConstants;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class OxygenDistributorScreen extends MachineScreen<OxygenDistributorMenu, OxygenDistributorBlockEntity> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/oxygen_distributor.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/container/oxygen_distributor.png");
     public static final Rect2i CLICK_AREA = new Rect2i(76, 95, 26, 25);
 
     public OxygenDistributorScreen(OxygenDistributorMenu menu, Inventory inventory, Component component) {
@@ -49,7 +49,7 @@ public class OxygenDistributorScreen extends MachineScreen<OxygenDistributorMenu
             0x68d975
         );
 
-        float fluidPerTick = entity.fluidPerTick() / (FluidConstants.getBucketAmount() / 1000f);
+        float fluidPerTick = entity.fluidPerTick() / (FluidAmounts.BUCKET / 1000f);
         graphics.drawString(
             font,
             Component.translatable("tooltip.ad_astra.fluid_per_tick", Math.round(fluidPerTick * 1000.0f) / 1000.0f),

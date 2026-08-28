@@ -2,6 +2,7 @@ package earth.terrarium.adastra.common.menus.machines;
 
 import earth.terrarium.adastra.common.blockentities.machines.NasaWorkbenchBlockEntity;
 import earth.terrarium.adastra.common.menus.base.BaseContainerMenu;
+import earth.terrarium.adastra.common.menus.content.PositionContent;
 import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.world.entity.player.Inventory;
@@ -10,10 +11,16 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
+
 public class NasaWorkbenchMenu extends BaseContainerMenu<NasaWorkbenchBlockEntity> {
 
     public NasaWorkbenchMenu(int id, Inventory inventory, NasaWorkbenchBlockEntity entity) {
         super(ModMenus.NASA_WORKBENCH.get(), id, inventory, entity);
+    }
+
+    public NasaWorkbenchMenu(int id, Inventory inv, Optional<PositionContent> content) {
+        this(id, inv, PositionContent.getOrNull(content, inv.player.level(), NasaWorkbenchBlockEntity.class));
     }
 
     @Override

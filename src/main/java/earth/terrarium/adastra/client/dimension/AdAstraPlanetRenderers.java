@@ -4,7 +4,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import com.teamresourceful.resourcefullib.common.lib.Constants;
-import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.ClientPlatformUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +27,7 @@ public class AdAstraPlanetRenderers extends SimpleJsonResourceReloadListener {
         Map<ResourceKey<Level>, ModDimensionSpecialEffects> effects = new HashMap<>();
         object.forEach((key, value) -> {
             JsonObject json = GsonHelper.convertToJsonObject(value, "planets");
-            PlanetRenderer renderer = PlanetRenderer.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow(false, AdAstra.LOGGER::error);
+            PlanetRenderer renderer = PlanetRenderer.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow();
             effects.put(renderer.dimension(), new ModDimensionSpecialEffects(renderer));
         });
         ClientPlatformUtils.registerPlanetRenderers(effects);

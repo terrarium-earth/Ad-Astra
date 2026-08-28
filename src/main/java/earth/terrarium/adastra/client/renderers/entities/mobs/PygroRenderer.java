@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE.
 public class PygroRenderer extends MobRenderer<Pygro, PygroModel> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/mob/pygro.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/mob/pygro.png");
 
     public PygroRenderer(EntityRendererProvider.Context context) {
         super(context, new PygroModel(context.bakeLayer(PygroModel.LAYER_LOCATION)), 0.5f);

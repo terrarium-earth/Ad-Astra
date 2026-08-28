@@ -1,0 +1,9 @@
+{
+  "values": [
+    "ad_astra:steel_ingot",
+    {
+      "id": "#c:ingots/steel",
+      "required": false
+    }
+  ]
+}

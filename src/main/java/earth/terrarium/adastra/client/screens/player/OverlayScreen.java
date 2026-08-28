@@ -11,6 +11,11 @@ import earth.terrarium.adastra.common.entities.vehicles.Lander;
 import earth.terrarium.adastra.common.entities.vehicles.Rocket;
 import earth.terrarium.adastra.common.items.armor.JetSuitItem;
 import earth.terrarium.adastra.common.items.armor.SpaceSuitItem;
+import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
+import earth.terrarium.common_storage_lib.energy.EnergyApi;
+import earth.terrarium.common_storage_lib.fluid.FluidApi;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -22,14 +27,14 @@ import java.util.Locale;
 
 public class OverlayScreen {
 
-    public static final ResourceLocation BATTERY_EMPTY = new ResourceLocation(AdAstra.MOD_ID, "overlay/battery_empty");
-    public static final ResourceLocation BATTERY = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/overlay/battery.png");
-    public static final ResourceLocation OXYGEN_TANK_EMPTY = new ResourceLocation(AdAstra.MOD_ID, "overlay/oxygen_tank_empty");
-    public static final ResourceLocation OXYGEN_TANK = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/sprites/overlay/oxygen_tank.png");
-    public static final ResourceLocation ROCKET_BAR = new ResourceLocation(AdAstra.MOD_ID, "overlay/rocket_bar");
-    public static final ResourceLocation ROCKET = new ResourceLocation(AdAstra.MOD_ID, "overlay/rocket");
+    public static final ResourceLocation BATTERY_EMPTY = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "overlay/battery_empty");
+    public static final ResourceLocation BATTERY = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/sprites/overlay/battery.png");
+    public static final ResourceLocation OXYGEN_TANK_EMPTY = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "overlay/oxygen_tank_empty");
+    public static final ResourceLocation OXYGEN_TANK = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/sprites/overlay/oxygen_tank.png");
+    public static final ResourceLocation ROCKET_BAR = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "overlay/rocket_bar");
+    public static final ResourceLocation ROCKET = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "overlay/rocket");
 
-    public static void render(GuiGraphics graphics, float partialTick) {
+    public static void render(GuiGraphics graphics, DeltaTracker deltaTracker) {
         var player = Minecraft.getInstance().player;
         if (player == null || player.isSpectator()) return;
         var level = player.level();
@@ -65,7 +70,9 @@ public class OverlayScreen {
         var chestStack = player.getInventory().getArmor(2);
         if (SpaceSuitItem.hasFullSet(player) && chestStack.getItem() instanceof SpaceSuitItem spaceSuit) {
             long amount = SpaceSuitItem.getOxygenAmount(player);
-            long capacity = spaceSuit.getFluidContainer(chestStack).getTankCapacity(0);
+            ModifyOnlyContext itemContext = new ModifyOnlyContext(chestStack);
+            var fluidContainer = itemContext.find(FluidApi.ITEM);
+            long capacity = fluidContainer.getLimit(0, FluidResource.BLANK);
             double ratio = (double) amount / capacity;
             int barHeight = (int) (ratio * 52);
 
@@ -91,8 +98,11 @@ public class OverlayScreen {
 
         // Battery overlay
         if (JetSuitItem.hasFullSet(player) && chestStack.getItem() instanceof JetSuitItem jetSuit) {
-            long amount = jetSuit.getEnergyStorage(chestStack).getStoredEnergy();
-            long capacity = jetSuit.getEnergyStorage(chestStack).getMaxCapacity();
+            ModifyOnlyContext itemContext = new ModifyOnlyContext(chestStack);
+            var energyStorage = itemContext.find(EnergyApi.ITEM);
+
+            long amount = energyStorage.getStoredAmount();
+            long capacity = energyStorage.getCapacity();
             double ratio = (double) amount / capacity;
             int barWidth = (int) (ratio * 49);
 

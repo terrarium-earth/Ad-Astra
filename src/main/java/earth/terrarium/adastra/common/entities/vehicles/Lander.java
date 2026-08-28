@@ -17,7 +17,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Vector3f;
 
 public class Lander extends Vehicle {
 
@@ -44,8 +43,8 @@ public class Lander extends Vehicle {
     }
 
     @Override
-    protected Vector3f getPassengerAttachmentPoint(Entity entity, EntityDimensions dimensions, float scale) {
-        return new Vector3f(0, 2.5f, 0);
+    protected Vec3 getPassengerAttachmentPoint(Entity entity, EntityDimensions dimensions, float scale) {
+        return new Vec3(0, 2.5f, 0);
     }
 
     @Override

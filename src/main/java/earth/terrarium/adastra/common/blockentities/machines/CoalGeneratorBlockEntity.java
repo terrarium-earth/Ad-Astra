@@ -1,5 +1,6 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
+import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.blockentities.base.EnergyContainerMachineBlockEntity;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
@@ -7,23 +8,23 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.CoalGeneratorMenu;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
+import earth.terrarium.adastra.common.utils.PlatformUtils;
 import earth.terrarium.adastra.common.utils.TransferUtils;
-import earth.terrarium.botarium.common.energy.impl.ExtractOnlyEnergyContainer;
-import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import earth.terrarium.botarium.util.CommonHooks;
+import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -34,9 +35,36 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
         new ConfigurationEntry(ConfigurationType.SLOT, Configuration.NONE, ConstantComponents.SIDE_CONFIG_INPUT_SLOTS),
         new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.PUSH, ConstantComponents.SIDE_CONFIG_ENERGY)
     );
+    private final SimpleValueStorage energy = new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.IRON.energyCapacity);
 
     protected int cookTime;
     protected int cookTimeTotal;
+    protected final ContainerData dataAccess = new ContainerData() {
+        @Override
+        public int get(int index) {
+            return switch (index) {
+                case 0 -> CoalGeneratorBlockEntity.this.cookTime;
+                case 1 -> CoalGeneratorBlockEntity.this.cookTimeTotal;
+                default -> 0;
+            };
+        }
+
+        @Override
+        public void set(int index, int value) {
+            switch (index) {
+                case 0:
+                    CoalGeneratorBlockEntity.this.cookTime = value;
+                    break;
+                case 1:
+                    CoalGeneratorBlockEntity.this.cookTimeTotal = value;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+    };
 
     public CoalGeneratorBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 2);
@@ -44,27 +72,30 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
 
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+        AdAstra.LOGGER.info("{}", this.dataAccess);
         return new CoalGeneratorMenu(id, inventory, this);
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
-        if (energyContainer != null) return energyContainer;
-        return energyContainer = new WrappedBlockEnergyContainer(
-            this,
-            new ExtractOnlyEnergyContainer(MachineConfig.IRON.energyCapacity, MachineConfig.IRON.maxEnergyInOut));
+    public ValueStorage getEnergy(Direction direction) {
+        return energy;
     }
 
     @Override
-    public void load(@NotNull CompoundTag tag) {
-        super.load(tag);
+    public long maxInsertExtract() {
+        return MachineConfig.IRON.maxEnergyInOut;
+    }
+
+    @Override
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
         cookTime = tag.getInt("CookTime");
         cookTimeTotal = tag.getInt("CookTimeTotal");
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
         tag.putInt("CookTime", cookTime);
         tag.putInt("CookTimeTotal", cookTimeTotal);
     }
@@ -81,18 +112,21 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
             return;
         }
         var input = getItem(1);
-        if (getEnergyStorage().internalInsert(MachineConfig.coalGeneratorEnergyGenerationPerTick, true) == 0) {
+        if (getEnergyStorage().insert(MachineConfig.coalGeneratorEnergyGenerationPerTick, true) == 0) {
             if (time % 10 == 0) setLit(false);
             return;
+        } else {
+            energy.update();
         }
 
         if (cookTime > 0) {
             cookTime--;
-            getEnergyStorage().internalInsert(MachineConfig.coalGeneratorEnergyGenerationPerTick, false);
+            getEnergyStorage().insert(MachineConfig.coalGeneratorEnergyGenerationPerTick, false);
+            energy.update();
             if (time % 10 == 0) setLit(true);
         } else if (!input.isEmpty()
             && !(input.getItem() instanceof BucketItem)) {
-            int burnTime = Math.min(20_000, CommonHooks.getBurnTime(input));
+            int burnTime = Math.min(20_000, PlatformUtils.getBurnTime(input));
             if (burnTime > 0) {
                 input.shrink(1);
                 cookTimeTotal = burnTime;
@@ -107,7 +141,7 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
         TransferUtils.pushItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
         TransferUtils.pullItemsNearby(this, pos, new int[]{1}, sideConfig.get(0), filter);
-        TransferUtils.pushEnergyNearby(this, pos, getEnergyStorage().maxExtract(), sideConfig.get(1), filter);
+        TransferUtils.pushEnergyNearby(this, pos, maxInsertExtract(), sideConfig.get(1), filter);
     }
 
     @Override
@@ -126,5 +160,9 @@ public class CoalGeneratorBlockEntity extends EnergyContainerMachineBlockEntity 
     @Override
     public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
         return new int[]{1};
+    }
+
+    public ContainerData getDataAccess() {
+        return dataAccess;
     }
 }

@@ -68,14 +68,16 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
                 String blockId = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
                 BakedModel blockModel = ClientPlatformUtils.getModel(
                     Minecraft.getInstance().getModelManager(),
-                    new ResourceLocation(AdAstra.MOD_ID, "block/%s_flipped".formatted(blockId)));
-                Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
-                    poseStack.last(),
-                    buffer.getBuffer(Sheets.cutoutBlockSheet()),
-                    state,
-                    blockModel,
-                    1f, 1f, 1f,
-                    packedLight, packedOverlay);
+                    ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "block/%s_flipped".formatted(blockId)));
+                if (blockModel != null) {
+                    Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
+                        poseStack.last(),
+                        buffer.getBuffer(Sheets.cutoutBlockSheet()),
+                        state,
+                        blockModel,
+                        1f, 1f, 1f,
+                        packedLight, packedOverlay);
+                }
             }
         }
     }

@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class LanderModel extends EntityModel<Lander> {
 
-    public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "lander"), "main");
+    public static final ModelLayerLocation LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "lander"), "main");
 
     private final ModelPart root;
 
@@ -112,7 +112,7 @@ public class LanderModel extends EntityModel<Lander> {
     public void setupAnim(Lander entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {}
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
         root.render(poseStack, buffer, packedLight, packedOverlay);
     }
 }

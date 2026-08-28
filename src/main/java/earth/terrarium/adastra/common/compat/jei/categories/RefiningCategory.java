@@ -8,7 +8,7 @@ import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.recipes.machines.RefiningRecipe;
 import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModItems;
-import earth.terrarium.botarium.common.fluid.FluidConstants;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -24,7 +24,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public record RefiningCategory(IGuiHelper guiHelper) implements IRecipeCategory<RefiningRecipe> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "refining");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "refining");
     public static final RecipeType<RefiningRecipe> RECIPE = new RecipeType<>(ID, RefiningRecipe.class);
 
     @Override
@@ -64,9 +64,9 @@ public record RefiningCategory(IGuiHelper guiHelper) implements IRecipeCategory<
         new EnergyBarDrawable(mouseX, mouseY, -recipe.energy(), MachineConfig.STEEL.energyCapacity, MachineConfig.STEEL.maxEnergyInOut, 0).draw(graphics, 146, 50);
 
         int cookTime = recipe.cookingTime();
-        long capacity = FluidConstants.fromMillibuckets(MachineConfig.STEEL.fluidCapacity);
+        long capacity = FluidAmounts.toPlatformAmount(MachineConfig.STEEL.fluidCapacity);
         new FluidBarDrawable(mouseX, mouseY, false, capacity, cookTime, recipe.input()
-            .getFluids().get(0).copyWithAmount(recipe.input().getFluidAmount()))
+            .getFluids().getFirst().withCount(recipe.input().getAmount()))
             .draw(graphics, 39, 49);
         new FluidBarDrawable(mouseX, mouseY, true, capacity, cookTime, recipe.result()).draw(graphics, 96, 49);
     }

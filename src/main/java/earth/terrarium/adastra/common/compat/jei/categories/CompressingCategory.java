@@ -24,7 +24,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public record CompressingCategory(IGuiHelper guiHelper) implements IRecipeCategory<CompressingRecipe> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "compressing");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "compressing");
     public static final RecipeType<CompressingRecipe> RECIPE = new RecipeType<>(ID, CompressingRecipe.class);
 
     @Override

@@ -27,7 +27,7 @@ public class ModBiomeTagProvider extends TagsProvider<Biome> {
 
         tag(ModBiomeTags.OIL_WELL).addTag(BiomeTags.HAS_OCEAN_MONUMENT);
         tag(ModBiomeTags.OIL_WELL).addTag(BiomeTags.IS_OCEAN);
-        tag(ModBiomeTags.OIL_WELL).addOptionalTag(new ResourceLocation("c:ocean"));
+        tag(ModBiomeTags.OIL_WELL).addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "ocean"));
 
         tag(ModBiomeTags.LUNARIAN_VILLAGE).addOptional(ModBiomeDataProvider.LUNAR_WASTELANDS.location());
         tag(ModBiomeTags.MOON_DUNGEON).addOptional(ModBiomeDataProvider.LUNAR_WASTELANDS.location());

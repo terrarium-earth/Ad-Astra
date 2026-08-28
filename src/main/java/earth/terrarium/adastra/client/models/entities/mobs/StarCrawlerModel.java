@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE.
 public class StarCrawlerModel extends EntityModel<StarCrawler> {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "star_crawler"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "star_crawler"), "main");
 
     private final ModelPart body;
     private final ModelPart leg1;
@@ -114,7 +114,7 @@ public class StarCrawlerModel extends EntityModel<StarCrawler> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, int color) {
         body.render(poseStack, vertices, packedLight, packedOverlay);
         leg1.render(poseStack, vertices, packedLight, packedOverlay);
         leg2.render(poseStack, vertices, packedLight, packedOverlay);

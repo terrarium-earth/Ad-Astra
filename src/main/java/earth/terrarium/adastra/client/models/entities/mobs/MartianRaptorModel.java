@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE
 public class MartianRaptorModel extends EntityModel<MartianRaptor> {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "martian_raptor"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "martian_raptor"), "main");
 
     private final ModelPart body;
     private final ModelPart left_leg;
@@ -88,7 +88,7 @@ public class MartianRaptorModel extends EntityModel<MartianRaptor> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, int color) {
         body.render(poseStack, vertices, packedLight, packedOverlay);
         left_leg.render(poseStack, vertices, packedLight, packedOverlay);
         right_leg.render(poseStack, vertices, packedLight, packedOverlay);

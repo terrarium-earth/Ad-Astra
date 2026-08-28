@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "ad_astra:desh_plates"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    "###",
+    "CCC",
+    "###"
+  ],
+  "result": {
+    "count": 16,
+    "id": "ad_astra:desh_cable"
+  }
+}

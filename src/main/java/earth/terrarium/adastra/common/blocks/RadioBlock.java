@@ -6,7 +6,6 @@ import earth.terrarium.adastra.common.blocks.base.BasicEntityBlock;
 import earth.terrarium.adastra.common.blocks.properties.EightDirectionProperty;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -49,8 +48,7 @@ public class RadioBlock extends BasicEntityBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos pos, Player player, BlockHitResult blockHitResult) {
         if (level.isClientSide()) {
             RadioHandler.open(pos);
         }

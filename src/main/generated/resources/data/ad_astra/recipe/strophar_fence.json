@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "ad_astra:strophar_planks"
+    },
+    "|": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "#|#",
+    "#|#"
+  ],
+  "result": {
+    "count": 3,
+    "id": "ad_astra:strophar_fence"
+  }
+}

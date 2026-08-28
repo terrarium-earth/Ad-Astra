@@ -1,0 +1,14 @@
+{
+  "values": [
+    "ad_astra:venus_calorite_ore",
+    {
+      "id": "#c:ores/calorite",
+      "required": false
+    },
+    "ad_astra:deepslate_calorite_ore",
+    {
+      "id": "#c:ores/calorite",
+      "required": false
+    }
+  ]
+}

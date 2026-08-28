@@ -3,7 +3,8 @@ package earth.terrarium.adastra.client.screens.base;
 import com.teamresourceful.resourcefullib.client.screens.AbstractContainerCursorScreen;
 import earth.terrarium.adastra.client.utils.GuiUtils;
 import earth.terrarium.adastra.common.menus.base.BaseEntityContainerMenu;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -47,7 +48,7 @@ public abstract class VehicleScreen<T extends BaseEntityContainerMenu<U>, U exte
         return 0x2a262b;
     }
 
-    public void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, int xOffset, int yOffset, FluidHolder fluid, long capacity) {
+    public void drawFluidBar(GuiGraphics graphics, int mouseX, int mouseY, int xOffset, int yOffset, ResourceStack<FluidResource> fluid, long capacity) {
         int x = this.leftPos + xOffset;
         int y = this.topPos + yOffset;
         GuiUtils.drawFluidBar(

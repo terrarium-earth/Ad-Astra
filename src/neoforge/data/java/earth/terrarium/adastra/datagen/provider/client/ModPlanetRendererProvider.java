@@ -24,7 +24,7 @@ import java.util.function.BiConsumer;
 
 public class ModPlanetRendererProvider extends ModCodecProvider<PlanetRenderer> {
 
-    public static final ResourceKey<Registry<PlanetRenderer>> PLANET_REGISTRY = ResourceKey.createRegistryKey(new ResourceLocation(AdAstra.MOD_ID, "planet_renderers"));
+    public static final ResourceKey<Registry<PlanetRenderer>> PLANET_REGISTRY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "planet_renderers"));
 
     public static final int DEFAULT_SUNRISE_COLOR = 0xd85f33;
 

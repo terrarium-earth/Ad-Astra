@@ -30,8 +30,7 @@ public record ServerboundResetSideConfigPacket(
 
         public Type() {
             super(
-                ServerboundResetSideConfigPacket.class,
-                new ResourceLocation(AdAstra.MOD_ID, "reset_side_config"),
+                ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "reset_side_config"),
                 ObjectByteCodec.create(
                     ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundResetSideConfigPacket::machine),
                     ByteCodec.INT.fieldOf(ServerboundResetSideConfigPacket::configIndex),

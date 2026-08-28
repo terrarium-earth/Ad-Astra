@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.teamresourceful.resourcefullib.client.components.CursorWidget;
 import com.teamresourceful.resourcefullib.client.screens.CursorScreen;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
+import earth.terrarium.adastra.client.ClientPlatformUtils;
 import earth.terrarium.adastra.client.components.base.TickableWidget;
 import earth.terrarium.adastra.client.screens.base.ConfigurationScreen;
 import earth.terrarium.adastra.client.utils.GuiUtils;
@@ -12,9 +13,9 @@ import earth.terrarium.adastra.common.menus.configuration.FluidConfiguration;
 import earth.terrarium.adastra.common.network.NetworkHandler;
 import earth.terrarium.adastra.common.network.packets.ServerboundClearFluidTankPacket;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.fluid.base.FluidContainer;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
+import earth.terrarium.common_storage_lib.resources.ResourceStack;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
+import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Tooltip;
@@ -24,11 +25,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.util.FastColor;
 
+import java.time.Duration;
+
 public class FluidBarWidget extends ConfigurationWidget implements CursorWidget, TickableWidget {
 
     protected final BlockPos tankPos;
     protected final int tank;
-    protected final FluidContainer container;
+    protected final CommonStorage<FluidResource> container;
     protected long lastFluidAmount;
     protected long difference;
 
@@ -41,24 +44,24 @@ public class FluidBarWidget extends ConfigurationWidget implements CursorWidget,
 
     @Override
     public void tick() {
-        FluidHolder holder = this.container.getFluids().get(this.tank);
-        this.difference = holder.getFluidAmount() - this.lastFluidAmount;
-        this.lastFluidAmount = holder.getFluidAmount();
+        ResourceStack<FluidResource> holder = this.container.getContents(this.tank);
+        this.difference = holder.amount() - this.lastFluidAmount;
+        this.lastFluidAmount = holder.amount();
     }
 
     @Override
     protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         super.renderWidget(graphics, mouseX, mouseY, partialTick);
-        FluidHolder holder = this.container.getFluids().get(this.tank);
-        long capacity = this.container.getTankCapacity(this.tank);
-        long amount = holder.getFluidAmount();
+        ResourceStack<FluidResource> holder = this.container.getContents(this.tank);
+        long capacity = this.container.getLimit(this.tank, FluidResource.BLANK);
+        long amount = holder.amount();
         float ratio = amount / (float) capacity;
         int x = this.getX();
         int y = this.getY();
 
         if (!holder.isEmpty()) {
-            TextureAtlasSprite sprite = ClientFluidHooks.getFluidSprite(holder);
-            int color = ClientFluidHooks.getFluidColor(holder);
+            TextureAtlasSprite sprite = ClientPlatformUtils.getFluidSprite(holder);
+            int color = ClientPlatformUtils.getFluidColor(holder);
             float r = FastColor.ARGB32.red(color) / 255f;
             float g = FastColor.ARGB32.green(color) / 255f;
             float b = FastColor.ARGB32.blue(color) / 255f;
@@ -87,7 +90,7 @@ public class FluidBarWidget extends ConfigurationWidget implements CursorWidget,
                     ConstantComponents.CLEAR_FLUID_TANK
                 )));
             }
-            setTooltipDelay(-1);
+            setTooltipDelay(Duration.ofMillis(0));
         }
     }
 

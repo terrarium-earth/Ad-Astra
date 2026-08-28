@@ -3,9 +3,9 @@ package earth.terrarium.adastra.common.items.vehicles;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.entities.vehicles.Rover;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.fluid.FluidApi;
-import earth.terrarium.botarium.common.fluid.base.FluidContainer;
-import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
+import earth.terrarium.common_storage_lib.fluid.FluidApi;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,7 +14,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -40,11 +39,9 @@ public class RoverItem extends VehicleItem {
         level.addFreshEntity(vehicle);
 
         if (vehicle instanceof Rover rover) {
-            ItemStackHolder holder = new ItemStackHolder(stack);
-            var container = getFluidContainer(stack).container();
-            var fromContainer = FluidContainer.of(holder);
+            var fromContainer = new ModifyOnlyContext(stack).find(FluidApi.ITEM);
             if (fromContainer == null) return InteractionResult.PASS;
-            FluidApi.moveFluid(fromContainer, rover.fluidContainer(), container.getFirstFluid(), false);
+            TransferUtil.move(fromContainer, rover.fluidContainer(), fromContainer.getResource(0), fromContainer.getAmount(0), false);
         }
 
         stack.shrink(1);
@@ -52,8 +49,8 @@ public class RoverItem extends VehicleItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
+        super.appendHoverText(stack, context, tooltipComponents, isAdvanced);
         TooltipUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.ROVER_INFO);
     }
 }

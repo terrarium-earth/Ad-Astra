@@ -26,8 +26,7 @@ public record ClientboundSyncLocalPlanetDataPacket(
 
         public Type() {
             super(
-                ClientboundSyncLocalPlanetDataPacket.class,
-                new ResourceLocation(AdAstra.MOD_ID, "sync_local_planet_data"),
+                ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "sync_local_planet_data"),
                 ObjectByteCodec.create(
                     ByteCodec.INT.map(PlanetData::unpack, PlanetData::pack).fieldOf(ClientboundSyncLocalPlanetDataPacket::localData),
                     ClientboundSyncLocalPlanetDataPacket::new

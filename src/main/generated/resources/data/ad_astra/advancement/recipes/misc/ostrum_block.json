@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ostrum_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#ad_astra:ostrum_ingots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:ostrum_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ostrum_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:ostrum_block"
+    ]
+  }
+}

@@ -1,20 +1,22 @@
 package earth.terrarium.adastra.common.recipes.machines;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.teamresourceful.bytecodecs.base.ByteCodec;
-import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
-import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
 import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
+import earth.terrarium.adastra.common.blockentities.base.ContainerRecipeWrapper;
 import earth.terrarium.adastra.common.blockentities.machines.CompressorBlockEntity;
 import earth.terrarium.adastra.common.registry.ModRecipeSerializers;
 import earth.terrarium.adastra.common.registry.ModRecipeTypes;
 import earth.terrarium.adastra.common.utils.ItemUtils;
-import net.minecraft.world.Container;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
@@ -22,9 +24,9 @@ import org.jetbrains.annotations.NotNull;
 public record CompressingRecipe(
     int cookingTime, int energy,
     Ingredient ingredient, ItemStack result
-) implements CodecRecipe<Container> {
+) implements CodecRecipe<RecipeInput> {
 
-    public static final Codec<CompressingRecipe> CODEC = RecordCodecBuilder.create(
+    public static final MapCodec<CompressingRecipe> CODEC = RecordCodecBuilder.mapCodec(
         instance -> instance.group(
             Codec.INT.fieldOf("cookingtime").forGetter(CompressingRecipe::cookingTime),
             Codec.INT.fieldOf("energy").forGetter(CompressingRecipe::energy),
@@ -32,24 +34,29 @@ public record CompressingRecipe(
             ItemStackCodec.CODEC.fieldOf("result").forGetter(CompressingRecipe::result)
         ).apply(instance, CompressingRecipe::new));
 
-    public static final ByteCodec<CompressingRecipe> NETWORK_CODEC = ObjectByteCodec.create(
-        ByteCodec.INT.fieldOf(CompressingRecipe::cookingTime),
-        ByteCodec.INT.fieldOf(CompressingRecipe::energy),
-        ExtraByteCodecs.INGREDIENT.fieldOf(CompressingRecipe::ingredient),
-        ExtraByteCodecs.ITEM_STACK.fieldOf(CompressingRecipe::result),
+    public static final StreamCodec<RegistryFriendlyByteBuf, CompressingRecipe> NETWORK_CODEC = StreamCodec.composite(
+        ByteBufCodecs.INT,
+        CompressingRecipe::cookingTime,
+        ByteBufCodecs.INT,
+        CompressingRecipe::energy,
+        Ingredient.CONTENTS_STREAM_CODEC,
+        CompressingRecipe::ingredient,
+        ItemStack.STREAM_CODEC,
+        CompressingRecipe::result,
         CompressingRecipe::new
     );
 
     @Override
-    public boolean matches(Container container, Level level) {
-        if (!ingredient.test(container.getItem(1))) return false;
-        if (!(container instanceof CompressorBlockEntity entity)) return true;
-        if (entity.getEnergyStorage().internalExtract(energy, true) < energy) return false;
-        return ItemUtils.canAddItem(container.getItem(2), result);
+    public boolean matches(RecipeInput recipeInput, Level level) {
+        if (!(recipeInput instanceof ContainerRecipeWrapper wrapper)) return false;
+        if (!(wrapper.container() instanceof CompressorBlockEntity entity)) return false;
+        if (!ingredient.test(recipeInput.getItem(1))) return false;
+        if (entity.getEnergyStorage().extract(energy, true) < energy) return false;
+        return ItemUtils.canAddItem(recipeInput.getItem(2), result);
     }
 
     @Override
-    public CodecRecipeSerializer<? extends CodecRecipe<Container>> serializer() {
+    public CodecRecipeSerializer<? extends CodecRecipe<RecipeInput>> serializer() {
         return ModRecipeSerializers.COMPRESSING.get();
     }
 

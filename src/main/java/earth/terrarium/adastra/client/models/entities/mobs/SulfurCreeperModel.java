@@ -15,7 +15,7 @@ import net.minecraft.world.entity.Entity;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE.
 public class SulfurCreeperModel<T extends Entity> extends EntityModel<T> {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "sulfur_creeper"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "sulfur_creeper"), "main");
 
     private final ModelPart body;
 
@@ -55,7 +55,7 @@ public class SulfurCreeperModel<T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+        body.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

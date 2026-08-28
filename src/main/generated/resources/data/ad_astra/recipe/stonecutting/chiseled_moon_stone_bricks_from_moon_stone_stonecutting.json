@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "ad_astra:moon_stone"
+  },
+  "result": {
+    "count": 1,
+    "id": "ad_astra:chiseled_moon_stone_bricks"
+  }
+}

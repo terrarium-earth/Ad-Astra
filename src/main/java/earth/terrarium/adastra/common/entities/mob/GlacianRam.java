@@ -34,7 +34,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -50,8 +50,8 @@ public class GlacianRam extends Animal implements Shearable {
     public GlacianRam(EntityType<? extends GlacianRam> entityType, Level level) {
         super(entityType, level);
         this.getNavigation().setCanFloat(true);
-        this.setPathfindingMalus(BlockPathTypes.POWDER_SNOW, -1.0f);
-        this.setPathfindingMalus(BlockPathTypes.DANGER_POWDER_SNOW, -1.0f);
+        this.setPathfindingMalus(PathType.POWDER_SNOW, -1.0f);
+        this.setPathfindingMalus(PathType.DANGER_POWDER_SNOW, -1.0f);
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -74,9 +74,9 @@ public class GlacianRam extends Animal implements Shearable {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(SHEARED, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(SHEARED, false);
     }
 
     @Override
@@ -130,7 +130,7 @@ public class GlacianRam extends Animal implements Shearable {
         if (itemStack.is(Items.SHEARS)) {
             if (!this.level().isClientSide && this.readyForShearing()) {
                 this.shear(player, SoundSource.PLAYERS);
-                itemStack.hurtAndBreak(1, player, playerx -> playerx.broadcastBreakEvent(hand));
+                itemStack.hurtAndBreak(1, player, Player.getSlotForHand(hand));
                 return InteractionResult.SUCCESS;
             } else {
                 return InteractionResult.CONSUME;

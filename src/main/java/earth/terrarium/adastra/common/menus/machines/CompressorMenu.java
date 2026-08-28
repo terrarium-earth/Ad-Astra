@@ -4,15 +4,28 @@ import earth.terrarium.adastra.common.blockentities.machines.CompressorBlockEnti
 import earth.terrarium.adastra.common.menus.base.MachineMenu;
 import earth.terrarium.adastra.common.menus.configuration.EnergyConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.SlotConfiguration;
+import earth.terrarium.adastra.common.menus.content.PositionContent;
 import earth.terrarium.adastra.common.menus.slots.CustomSlot;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.Slot;
+
+import java.util.Optional;
 
 public class CompressorMenu extends MachineMenu<CompressorBlockEntity> {
 
+    private final ContainerData data;
+
     public CompressorMenu(int id, Inventory inventory, CompressorBlockEntity entity) {
         super(ModMenus.COMPRESSOR.get(), id, inventory, entity);
+        checkContainerDataCount(entity.getDataAccess(), 2);
+        this.data = entity.getDataAccess();
+        addDataSlots(this.data);
+    }
+
+    public CompressorMenu(int id, Inventory inv, Optional<PositionContent> content) {
+        this(id, inv, PositionContent.getOrNull(content, inv.player.level(), CompressorBlockEntity.class));
     }
 
     @Override
@@ -38,6 +51,14 @@ public class CompressorMenu extends MachineMenu<CompressorBlockEntity> {
     @Override
     public int getPlayerInvYOffset() {
         return 114;
+    }
+
+    public int cookTime() {
+        return data.get(0);
+    }
+
+    public int cookTimeTotal() {
+        return data.get(1);
     }
 
     @Override

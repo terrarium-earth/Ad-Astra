@@ -24,7 +24,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public record AlloyingCategory(IGuiHelper guiHelper) implements IRecipeCategory<AlloyingRecipe> {
 
-    public static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "alloying");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "alloying");
     public static final RecipeType<AlloyingRecipe> RECIPE = new RecipeType<>(ID, AlloyingRecipe.class);
 
     @Override

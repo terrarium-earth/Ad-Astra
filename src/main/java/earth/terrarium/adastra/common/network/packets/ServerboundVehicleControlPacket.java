@@ -27,8 +27,7 @@ public record ServerboundVehicleControlPacket(float xxa, float zza) implements P
 
         public Type() {
             super(
-                ServerboundVehicleControlPacket.class,
-                new ResourceLocation(AdAstra.MOD_ID, "vehicle_control"),
+                ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "vehicle_control"),
                 ObjectByteCodec.create(
                     ByteCodec.FLOAT.fieldOf(ServerboundVehicleControlPacket::xxa),
                     ByteCodec.FLOAT.fieldOf(ServerboundVehicleControlPacket::zza),

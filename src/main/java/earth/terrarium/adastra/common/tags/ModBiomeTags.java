@@ -19,6 +19,6 @@ public final class ModBiomeTags {
     public static final TagKey<Biome> VENUS_BULLET = tag("has_structure/venus_bullet");
 
     private static TagKey<Biome> tag(String name) {
-        return TagKey.create(Registries.BIOME, new ResourceLocation(AdAstra.MOD_ID, name));
+        return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 }

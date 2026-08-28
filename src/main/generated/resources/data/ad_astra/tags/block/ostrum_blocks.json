@@ -1,0 +1,9 @@
+{
+  "values": [
+    "ad_astra:ostrum_block",
+    {
+      "id": "#c:storage_blocks/ostrum",
+      "required": false
+    }
+  ]
+}

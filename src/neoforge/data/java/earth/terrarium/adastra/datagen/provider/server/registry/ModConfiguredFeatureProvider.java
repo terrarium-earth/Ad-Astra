@@ -5,7 +5,7 @@ import earth.terrarium.adastra.common.registry.ModBlocks;
 import earth.terrarium.adastra.common.registry.ModFeatures;
 import earth.terrarium.adastra.common.tags.ModBlockTags;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -59,10 +59,10 @@ public class ModConfiguredFeatureProvider {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_INFERNAL_SPIRE_COLUMN = register("small_infernal_spire_column");
 
     private static ResourceKey<ConfiguredFeature<?, ?>> register(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(AdAstra.MOD_ID, name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 
-    public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
+    public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest moonRuleTest = new TagMatchTest(ModBlockTags.MOON_STONE_REPLACEABLES);
         RuleTest marsRuleTest = new TagMatchTest(ModBlockTags.MARS_STONE_REPLACEABLES);
         RuleTest venusRuleTest = new TagMatchTest(ModBlockTags.VENUS_STONE_REPLACEABLES);

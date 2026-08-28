@@ -2,9 +2,9 @@ package earth.terrarium.adastra.common.recipes.base;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.teamresourceful.bytecodecs.base.ByteCodec;
-import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
-import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public record IngredientHolder(Ingredient ingredient, int count) {
@@ -14,9 +14,11 @@ public record IngredientHolder(Ingredient ingredient, int count) {
         Codec.INT.fieldOf("count").orElse(1).forGetter(IngredientHolder::count)
     ).apply(instance, IngredientHolder::new));
 
-    public static final ByteCodec<IngredientHolder> NETWORK_CODEC = ObjectByteCodec.create(
-        ExtraByteCodecs.INGREDIENT.fieldOf(IngredientHolder::ingredient),
-        ByteCodec.INT.fieldOf(IngredientHolder::count),
+    public static final StreamCodec<RegistryFriendlyByteBuf, IngredientHolder> NETWORK_CODEC = StreamCodec.composite(
+        Ingredient.CONTENTS_STREAM_CODEC,
+        IngredientHolder::ingredient,
+        ByteBufCodecs.INT,
+        IngredientHolder::count,
         IngredientHolder::new
     );
 

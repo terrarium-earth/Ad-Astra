@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE.
 public class PygroModel extends HumanoidModel<Pygro> {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "pygro"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "pygro"), "main");
 
     public PygroModel(ModelPart modelPart) {
         super(modelPart);

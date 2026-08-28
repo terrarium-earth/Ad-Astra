@@ -39,7 +39,7 @@ public class Lunarian extends Villager {
     @Override
     public Villager getBreedOffspring(ServerLevel serverWorld, AgeableMob passiveEntity) {
         Lunarian entity = new Lunarian(ModEntityTypes.LUNARIAN.get(), serverWorld);
-        entity.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.BREEDING, null, null);
+        entity.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.BREEDING, null);
         return entity;
     }
 

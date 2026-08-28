@@ -31,8 +31,7 @@ public record ServerboundSetFurnaceModePacket(
 
         public Type() {
             super(
-                ServerboundSetFurnaceModePacket.class,
-                new ResourceLocation(AdAstra.MOD_ID, "set_furnace_mode"),
+                ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "set_furnace_mode"),
                 ObjectByteCodec.create(
                     ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundSetFurnaceModePacket::machine),
                     ByteCodec.ofEnum(EtrionicBlastFurnaceBlockEntity.Mode.class).fieldOf(ServerboundSetFurnaceModePacket::mode),

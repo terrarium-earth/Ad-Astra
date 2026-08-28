@@ -5,7 +5,7 @@ import earth.terrarium.adastra.common.registry.ModWorldCarvers;
 import earth.terrarium.adastra.common.tags.ModBlockTags;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantFloat;
@@ -20,10 +20,10 @@ public class ModConfiguredCarverProvider {
     public static final ResourceKey<ConfiguredWorldCarver<?>> MOON_CRATER = register("moon_crater");
 
     private static ResourceKey<ConfiguredWorldCarver<?>> register(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_CARVER, new ResourceLocation(AdAstra.MOD_ID, name));
+        return ResourceKey.create(Registries.CONFIGURED_CARVER, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, name));
     }
 
-    public static void bootstrap(BootstapContext<ConfiguredWorldCarver<?>> context) {
+    public static void bootstrap(BootstrapContext<ConfiguredWorldCarver<?>> context) {
         context.register(MOON_CRATER, new ConfiguredWorldCarver<>(
             ModWorldCarvers.CRATER.get(),
             new CarverConfiguration(

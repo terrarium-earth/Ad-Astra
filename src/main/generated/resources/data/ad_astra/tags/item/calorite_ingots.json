@@ -1,0 +1,9 @@
+{
+  "values": [
+    "ad_astra:calorite_ingot",
+    {
+      "id": "#c:ingots/calorite",
+      "required": false
+    }
+  ]
+}

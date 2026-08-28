@@ -3,7 +3,6 @@ package earth.terrarium.adastra.client.models.armor;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import dev.architectury.injectables.targets.ArchitecturyTarget;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.client.ClientPlatformUtils;
 import earth.terrarium.adastra.common.registry.ModItems;
@@ -18,22 +17,22 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.DyeableArmorItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.DyedItemColor;
 import org.jetbrains.annotations.Nullable;
 
 public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
 
-    public static final ModelLayerLocation SPACE_SUIT_LAYER = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "space_suit"), "main");
-    public static final ModelLayerLocation NETHERITE_SPACE_SUIT_LAYER = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "netherite_space_suit"), "main");
-    public static final ModelLayerLocation JET_SUIT_LAYER = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "jet_suit"), "main");
+    public static final ModelLayerLocation SPACE_SUIT_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "space_suit"), "main");
+    public static final ModelLayerLocation NETHERITE_SPACE_SUIT_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "netherite_space_suit"), "main");
+    public static final ModelLayerLocation JET_SUIT_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "jet_suit"), "main");
 
-    public static final ResourceLocation SPACE_SUIT_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armor/space_suit.png");
-    public static final ResourceLocation NETHERITE_SPACE_SUIT_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armor/netherite_space_suit.png");
-    public static final ResourceLocation JET_SUIT_TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armor/jet_suit.png");
+    public static final ResourceLocation SPACE_SUIT_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/armor/space_suit.png");
+    public static final ResourceLocation NETHERITE_SPACE_SUIT_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/armor/netherite_space_suit.png");
+    public static final ResourceLocation JET_SUIT_TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/entity/armor/jet_suit.png");
 
     private final ModelPart visor;
     private final ModelPart belt;
@@ -46,7 +45,7 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
     @Nullable
     private final HumanoidModel<LivingEntity> parentModel;
 
-    private float r, g, b;
+    private int color;
 
     public SpaceSuitModel(ModelPart root, EquipmentSlot slot, ItemStack stack, @Nullable HumanoidModel<LivingEntity> parentModel) {
         super(root, RenderType::entityTranslucent);
@@ -60,20 +59,17 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
         this.texture = getTextureLocation(stack);
         this.setVisible();
 
-        if (stack.getItem() instanceof DyeableArmorItem armor) {
-            int color = armor.getColor(stack);
-            r = FastColor.ARGB32.red(color) / 255f;
-            g = FastColor.ARGB32.green(color) / 255f;
-            b = FastColor.ARGB32.blue(color) / 255f;
+        if (stack.is(ItemTags.DYEABLE)) {
+            color = DyedItemColor.getOrDefault(stack, DyedItemColor.LEATHER_COLOR);
         }
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        if ("neoforge".equals(ArchitecturyTarget.getCurrentTarget()) && texture != null) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+//        if ("neoforge".equals(ArchitecturyTarget.getCurrentTarget()) && texture != null) {
             MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
             buffer = bufferSource.getBuffer(RenderType.entityTranslucent(texture));
-        }
+//        }
 
         if (this.parentModel == null) return;
         this.visor.copyFrom(parentModel.head);
@@ -82,7 +78,7 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
         this.leftBoot.copyFrom(parentModel.leftLeg);
         parentModel.copyPropertiesTo(this);
 
-        super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, r, g, b, alpha);
+        super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, this.color);
     }
 
     @Override

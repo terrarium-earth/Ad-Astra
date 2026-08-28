@@ -33,8 +33,7 @@ public record ServerboundSetFlagUrlPacket(BlockPos pos, String url) implements P
 
         public Type() {
             super(
-                ServerboundSetFlagUrlPacket.class,
-                new ResourceLocation(AdAstra.MOD_ID, "set_flag_url"),
+                ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "set_flag_url"),
                 ObjectByteCodec.create(
                     ExtraByteCodecs.BLOCK_POS.fieldOf(ServerboundSetFlagUrlPacket::pos),
                     ByteCodec.STRING.fieldOf(ServerboundSetFlagUrlPacket::url),
@@ -50,7 +49,7 @@ public record ServerboundSetFlagUrlPacket(BlockPos pos, String url) implements P
                     && player.distanceToSqr(packet.pos().getCenter()) <= 64
                     && player.level().getBlockEntity(packet.pos()) instanceof FlagBlockEntity flag
                     && flag.getOwner() != null
-                    && player.getUUID().equals(flag.getOwner().getId())
+                    && player.getUUID().equals(flag.getOwner().gameProfile().getId())
                 ) {
                     flag.setContent(UrlContent.of(packet.url()));
                     var blockState = player.level().getBlockState(packet.pos());

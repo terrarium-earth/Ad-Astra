@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class CoalGeneratorScreen extends MachineScreen<CoalGeneratorMenu, CoalGeneratorBlockEntity> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/container/coal_generator.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "textures/gui/container/coal_generator.png");
 
     public CoalGeneratorScreen(CoalGeneratorMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component, TEXTURE, IRON_SLOT, 176, 189);
@@ -22,6 +22,6 @@ public class CoalGeneratorScreen extends MachineScreen<CoalGeneratorMenu, CoalGe
     @Override
     protected void renderBg(@NotNull GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         super.renderBg(graphics, partialTick, mouseX, mouseY);
-        this.drawVerticalProgressBar(graphics, GuiUtils.FIRE, mouseX, mouseY, 78, 54, 15, 15, entity.cookTime(), entity.cookTimeTotal(), true);
+        this.drawVerticalProgressBar(graphics, GuiUtils.FIRE, mouseX, mouseY, 78, 54, 15, 15, menu.cookTime(), menu.cookTimeTotal(), true);
     }
 }

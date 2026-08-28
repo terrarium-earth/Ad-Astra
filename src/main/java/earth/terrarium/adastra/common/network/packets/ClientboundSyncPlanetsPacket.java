@@ -2,6 +2,7 @@ package earth.terrarium.adastra.common.network.packets;
 
 import com.teamresourceful.bytecodecs.base.ByteCodec;
 import com.teamresourceful.bytecodecs.base.object.ObjectByteCodec;
+import com.teamresourceful.resourcefullib.common.bytecodecs.ExtraByteCodecs;
 import com.teamresourceful.resourcefullib.common.network.Packet;
 import com.teamresourceful.resourcefullib.common.network.base.ClientboundPacketType;
 import com.teamresourceful.resourcefullib.common.network.base.PacketType;
@@ -9,14 +10,12 @@ import com.teamresourceful.resourcefullib.common.network.defaults.CodecPacketTyp
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.Planet;
 import earth.terrarium.adastra.common.planets.AdAstraData;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public record ClientboundSyncPlanetsPacket(
     Map<ResourceKey<Level>, Planet> planets
@@ -33,13 +32,9 @@ public record ClientboundSyncPlanetsPacket(
 
         public Type() {
             super(
-                ClientboundSyncPlanetsPacket.class,
-                new ResourceLocation(AdAstra.MOD_ID, "sync_planets"),
+                ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "sync_planets"),
                 ObjectByteCodec.create(
-                    ByteCodec.passthrough(
-                            (buf, planet) -> AdAstraData.encodePlanets(new FriendlyByteBuf(buf)),
-                            (buf) -> AdAstraData.decodePlanets(new FriendlyByteBuf(buf)).stream()
-                                .collect(Collectors.toUnmodifiableMap(Planet::dimension, Function.identity())))
+                    ByteCodec.mapOf(ExtraByteCodecs.resourceKey(Registries.DIMENSION), Planet.BYTE_CODEC)
                         .fieldOf(ClientboundSyncPlanetsPacket::planets),
                     ClientboundSyncPlanetsPacket::new));
         }

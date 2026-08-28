@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "ad_astra:glacian_planks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "ad_astra:glacian_button"
+  }
+}

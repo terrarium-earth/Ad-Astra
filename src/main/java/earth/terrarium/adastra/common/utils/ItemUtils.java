@@ -4,6 +4,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeInput;
 
 import java.util.stream.IntStream;
 
@@ -123,7 +124,7 @@ public class ItemUtils {
      */
     public static boolean canAddItem(ItemStack input, ItemStack output) {
         return input.isEmpty()
-            || (ItemStack.isSameItemSameTags(input, output)
+            || (ItemStack.isSameItemSameComponents(input, output)
             && output.getCount() + input.getCount() <= input.getMaxStackSize());
     }
 
@@ -135,7 +136,7 @@ public class ItemUtils {
      * @param slots     The potential slots to add the item to.
      * @return True if the item can be added, false otherwise.
      */
-    public static boolean canAddItem(Container container, ItemStack output, int... slots) {
+    public static boolean canAddItem(RecipeInput container, ItemStack output, int... slots) {
         for (int slot : slots) {
             ItemStack input = container.getItem(slot);
             if (canAddItem(input, output)) return true;

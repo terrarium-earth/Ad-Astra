@@ -1,14 +1,16 @@
 package earth.terrarium.adastra.common.blockentities.base;
 
-import earth.terrarium.botarium.energy.EnergyProvider;
-import earth.terrarium.botarium.storage.base.ValueStorage;
+import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
+import earth.terrarium.common_storage_lib.energy.EnergyApi;
+import earth.terrarium.common_storage_lib.energy.EnergyProvider;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class EnergyContainerMachineBlockEntity extends ContainerMachineBlockEntity implements EnergyProvider.BlockEntity {
-    protected ValueStorage energyContainer;
 
     public EnergyContainerMachineBlockEntity(BlockPos pos, BlockState state, int containerSize) {
         super(pos, state, containerSize);
@@ -28,28 +30,33 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
     }
 
     public ValueStorage getEnergyStorage() {
-        return getEnergy(null);
+        return this.getEnergy(null);
+    }
+
+    public long maxInsertExtract() {
+        return 250;
     }
 
     public void extractBatterySlot() {
         ItemStack stack = this.getItem(0);
         if (stack.isEmpty()) return;
-        if (!EnergyContainer.holdsEnergy(stack)) return;
-        ItemStackHolder holder = new ItemStackHolder(stack);
-        EnergyApi.moveEnergy(holder, this, null, energyContainer.maxInsert(), false);
-        if (holder.isDirty()) {
-            this.setItem(0, holder.getStack());
+        ModifyOnlyContext modifyContext = new ModifyOnlyContext(stack.copy());
+        if (!modifyContext.isPresent(EnergyApi.ITEM)) return;
+        TransferUtil.moveValue(getEnergyStorage(), getEnergyStorage(), maxInsertExtract(), false);
+        if (ItemStack.isSameItemSameComponents(stack, modifyContext.stack())) {
+            this.setItem(0, modifyContext.stack());
         }
     }
 
     public void insertBatterySlot() {
         ItemStack stack = this.getItem(0);
         if (stack.isEmpty()) return;
-        if (!EnergyContainer.holdsEnergy(stack)) return;
-        ItemStackHolder holder = new ItemStackHolder(stack);
-        EnergyApi.moveEnergy(this, null, holder, energyContainer.maxExtract(), false);
-        if (holder.isDirty()) {
-            this.setItem(0, holder.getStack());
+        ModifyOnlyContext modifyContext = new ModifyOnlyContext(stack.copy());
+        if (!modifyContext.isPresent(EnergyApi.ITEM)) return;
+        var container = modifyContext.find(EnergyApi.ITEM);
+        TransferUtil.moveValue(getEnergyStorage(), container, maxInsertExtract(), false);
+        if (ItemStack.isSameItemSameComponents(stack, modifyContext.stack())) {
+            this.setItem(0, modifyContext.stack());
         }
     }
 

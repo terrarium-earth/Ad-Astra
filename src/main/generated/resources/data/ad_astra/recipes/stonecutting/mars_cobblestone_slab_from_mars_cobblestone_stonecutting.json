@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "ad_astra:mars_cobblestone"
-  },
-  "result": "ad_astra:mars_cobblestone_slab"
-}

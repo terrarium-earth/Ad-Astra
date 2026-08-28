@@ -12,11 +12,11 @@ import org.jetbrains.annotations.Nullable;
 
 public final class ModDamageSources {
 
-    public static final ResourceKey<DamageType> OXYGEN = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(AdAstra.MOD_ID, "oxygen"));
-    public static final ResourceKey<DamageType> CRYO_FUEL = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(AdAstra.MOD_ID, "cryo_fuel"));
-    public static final ResourceKey<DamageType> RAN_OVER = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(AdAstra.MOD_ID, "ran_over"));
-    public static final ResourceKey<DamageType> ROCKET_FLAMES = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(AdAstra.MOD_ID, "rocket_flames"));
-    public static final ResourceKey<DamageType> ACID_RAIN = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(AdAstra.MOD_ID, "acid_rain"));
+    public static final ResourceKey<DamageType> OXYGEN = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "oxygen"));
+    public static final ResourceKey<DamageType> CRYO_FUEL = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "cryo_fuel"));
+    public static final ResourceKey<DamageType> RAN_OVER = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "ran_over"));
+    public static final ResourceKey<DamageType> ROCKET_FLAMES = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "rocket_flames"));
+    public static final ResourceKey<DamageType> ACID_RAIN = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "acid_rain"));
 
     public static DamageSource create(Level level, ResourceKey<DamageType> key) {
         return new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(key));

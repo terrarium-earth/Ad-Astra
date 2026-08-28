@@ -4,13 +4,20 @@ import earth.terrarium.adastra.common.blockentities.machines.WaterPumpBlockEntit
 import earth.terrarium.adastra.common.menus.base.MachineMenu;
 import earth.terrarium.adastra.common.menus.configuration.EnergyConfiguration;
 import earth.terrarium.adastra.common.menus.configuration.FluidConfiguration;
+import earth.terrarium.adastra.common.menus.content.PositionContent;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.world.entity.player.Inventory;
+
+import java.util.Optional;
 
 public class WaterPumpMenu extends MachineMenu<WaterPumpBlockEntity> {
 
     public WaterPumpMenu(int id, Inventory inventory, WaterPumpBlockEntity entity) {
         super(ModMenus.WATER_PUMP.get(), id, inventory, entity);
+    }
+
+    public WaterPumpMenu(int id, Inventory inv, Optional<PositionContent> content) {
+        this(id, inv, PositionContent.getOrNull(content, inv.player.level(), WaterPumpBlockEntity.class));
     }
 
     @Override

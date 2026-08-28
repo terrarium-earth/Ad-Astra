@@ -1,16 +1,19 @@
 package earth.terrarium.adastra.common.items;
 
+import earth.terrarium.adastra.client.ClientPlatformUtils;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.fluid.FluidApi;
-import earth.terrarium.botarium.common.fluid.FluidConstants;
-import earth.terrarium.botarium.common.fluid.base.BotariumFluidItem;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
-import earth.terrarium.botarium.common.fluid.impl.WrappedItemFluidContainer;
-import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
-import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.common_storage_lib.context.ItemContext;
+import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
+import earth.terrarium.common_storage_lib.fluid.FluidApi;
+import earth.terrarium.common_storage_lib.fluid.impl.SimpleFluidStorage;
+import earth.terrarium.common_storage_lib.fluid.util.FluidProvider;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
+import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -26,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFluidContainer> {
+public class GasTankItem extends Item implements FluidProvider.Item {
 
     private final long tankSize;
     private final long distributionAmount;
@@ -51,46 +54,42 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
         if (level.isClientSide()) return;
         if (!(entity instanceof Player player)) return;
         Inventory inventory = player.getInventory();
-        var container = FluidUtils.getTank(stack);
-        if (container.getFluidAmount() == 0) return;
-        ItemStackHolder from = new ItemStackHolder(stack);
-        if (!distributeSequential(from, container, inventory)) return;
-        inventory.setItem(inventory.selected, from.getStack());
+        var container = new ModifyOnlyContext(stack).find(FluidApi.ITEM);
+        if (container == null || container.getAmount(0) == 0) return;
+        if (!distributeSequential(container, inventory)) return;
         if (entity.tickCount % 4 == 0) {
             level.playSound(null, player.blockPosition(), SoundEvents.GENERIC_DRINK, player.getSoundSource(), 1.0F, 1.0F);
         }
     }
 
-    public boolean distributeSequential(ItemStackHolder from, FluidHolder container, Inventory inventory) {
+    public boolean distributeSequential(CommonStorage<FluidResource> from, Inventory inventory) {
         for (int i = inventory.getContainerSize() - 1; i >= 0; i--) {
             var stack = inventory.getItem(i);
             if (stack.isEmpty() || stack.is(this)) continue;
-            ItemStackHolder to = new ItemStackHolder(stack);
-            long moved = FluidApi.moveFluid(from, to, container.copyWithAmount(FluidConstants.fromMillibuckets(distributionAmount)), false);
-            inventory.setItem(i, to.getStack());
+            var context = new ModifyOnlyContext(stack);
+            if (!context.isPresent(FluidApi.ITEM)) continue;
+            var to = context.find(FluidApi.ITEM);
+            var toMove = from.getContents(0).withCount(FluidAmounts.toPlatformAmount(distributionAmount));
+            long moved = TransferUtil.move(from, to, toMove.resource(), toMove.amount(), false);
             if (moved > 0) return true;
         }
         return false;
     }
 
     @Override
-    public WrappedItemFluidContainer getFluidContainer(ItemStack holder) {
-        return new WrappedItemFluidContainer(
-            holder,
-            new SimpleFluidContainer(
-                FluidConstants.fromMillibuckets(tankSize),
-                1,
-                (t, f) -> true));
+    public CommonStorage<FluidResource> getFluids(ItemStack itemStack, ItemContext context) {
+        return new SimpleFluidStorage(context, ModDataManagers.FLUID_CONTENTS.componentType(), 1, FluidAmounts.toPlatformAmount(tankSize));
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         tooltipComponents.add(TooltipUtils.getFluidComponent(FluidUtils.getTank(stack), FluidUtils.getTankCapacity(stack)));
-        tooltipComponents.add(TooltipUtils.getMaxFluidOutComponent(FluidConstants.fromMillibuckets(distributionAmount)));
+        tooltipComponents.add(TooltipUtils.getMaxFluidOutComponent(FluidAmounts.toPlatformAmount(distributionAmount)));
         TooltipUtils.addDescriptionComponent(tooltipComponents, ConstantComponents.GAS_TANK_INFO);
     }
 
-    public int getUseDuration(@NotNull ItemStack stack) {
+    @Override
+    public int getUseDuration(ItemStack itemStack, LivingEntity livingEntity) {
         return 72_000;
     }
 
@@ -101,12 +100,13 @@ public class GasTankItem extends Item implements BotariumFluidItem<WrappedItemFl
 
     @Override
     public int getBarWidth(@NotNull ItemStack stack) {
-        var fluidContainer = getFluidContainer(stack);
-        return (int) (((double) fluidContainer.getFirstFluid().getFluidAmount() / fluidContainer.getTankCapacity(0)) * 13);
+        var fluidContainer = new ModifyOnlyContext(stack).find(FluidApi.ITEM);
+        if (fluidContainer == null) return 0;
+        return (int) (((double) fluidContainer.getAmount(0) / fluidContainer.getLimit(0, FluidResource.BLANK)) * 13);
     }
 
     @Override
     public int getBarColor(@NotNull ItemStack stack) {
-        return ClientFluidHooks.getFluidColor(FluidUtils.getTank(stack));
+        return ClientPlatformUtils.getFluidColor(FluidUtils.getTank(stack));
     }
 }

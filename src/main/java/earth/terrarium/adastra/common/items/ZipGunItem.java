@@ -1,21 +1,22 @@
 package earth.terrarium.adastra.common.items;
 
-import dev.architectury.injectables.annotations.PlatformOnly;
 import earth.terrarium.adastra.api.systems.GravityApi;
+import earth.terrarium.adastra.client.ClientPlatformUtils;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.constants.PlanetConstants;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.adastra.common.registry.ModFluids;
 import earth.terrarium.adastra.common.tags.ModFluidTags;
 import earth.terrarium.adastra.common.utils.FluidUtils;
 import earth.terrarium.adastra.common.utils.TooltipUtils;
-import earth.terrarium.botarium.common.fluid.FluidConstants;
-import earth.terrarium.botarium.common.fluid.base.BotariumFluidItem;
-import earth.terrarium.botarium.common.fluid.base.FluidContainer;
-import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
-import earth.terrarium.botarium.common.fluid.impl.WrappedItemFluidContainer;
-import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
-import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.common_storage_lib.context.ItemContext;
+import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
+import earth.terrarium.common_storage_lib.fluid.FluidApi;
+import earth.terrarium.common_storage_lib.fluid.impl.SimpleFluidStorage;
+import earth.terrarium.common_storage_lib.fluid.util.FluidProvider;
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
+import earth.terrarium.common_storage_lib.resources.fluid.util.FluidAmounts;
+import earth.terrarium.common_storage_lib.storage.base.CommonStorage;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -28,11 +29,10 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFluidContainer> {
+public class ZipGunItem extends Item implements FluidProvider.Item {
 
     public ZipGunItem(Properties properties) {
         super(properties);
@@ -110,12 +110,10 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
     public boolean consumeFuel(Player player, ItemStack stack, long amount) {
         if (!(stack.getItem() instanceof ZipGunItem)) return false;
         if (player.isCreative()) return true;
-        ItemStackHolder holder = new ItemStackHolder(stack);
-        var container = FluidContainer.of(holder);
+        var container = new ModifyOnlyContext(stack).find(FluidApi.ITEM);
         if (container == null) return false;
-        FluidHolder extracted = container.extractFluid(FluidHolder.ofMillibuckets(container.getFirstFluid().getFluid(), FluidConstants.fromMillibuckets(amount)), false);
-        stack.setTag(holder.getStack().getTag());
-        return extracted.getFluidAmount() > 0;
+        long extracted = container.extract(container.getContents(0).resource(), FluidAmounts.toPlatformAmount(amount), false);
+        return extracted > 0;
     }
 
     @Override
@@ -123,27 +121,23 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
         return UseAnim.BLOCK;
     }
 
-    public int getUseDuration(@NotNull ItemStack stack) {
+    @Override
+    public int getUseDuration(ItemStack itemStack, LivingEntity livingEntity) {
         return 72_000;
     }
 
     @Override
-    public WrappedItemFluidContainer getFluidContainer(ItemStack holder) {
-        return new WrappedItemFluidContainer(
-            holder,
-            new SimpleFluidContainer(
-                getCapacity(),
-                1,
-                (t, f) -> f.is(ModFluidTags.ZIP_GUN_PROPELLANTS)) {
-            });
+    public CommonStorage<FluidResource> getFluids(ItemStack itemStack, ItemContext context) {
+        return new SimpleFluidStorage(context, ModDataManagers.FLUID_CONTENTS.componentType(), 1, getCapacity())
+            .filter(0, f -> f.is(ModFluidTags.ZIP_GUN_PROPELLANTS));
     }
 
     public long getCapacity() {
-        return FluidConstants.fromMillibuckets(3000);
+        return FluidAmounts.toPlatformAmount(3000);
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced) {
+    public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         tooltipComponents.add(TooltipUtils.getFluidComponent(
             FluidUtils.getTank(stack),
             FluidUtils.getTankCapacity(stack),
@@ -158,25 +152,13 @@ public class ZipGunItem extends Item implements BotariumFluidItem<WrappedItemFlu
 
     @Override
     public int getBarWidth(@NotNull ItemStack stack) {
-        var fluidContainer = getFluidContainer(stack);
-        return (int) (((double) fluidContainer.getFirstFluid().getFluidAmount() / fluidContainer.getTankCapacity(0)) * 13);
+        var fluidContainer = new ModifyOnlyContext(stack).find(FluidApi.ITEM);
+        if (fluidContainer == null) return 0;
+        return (int) (((double) fluidContainer.getAmount(0) / fluidContainer.getLimit(0, FluidResource.BLANK)) * 13);
     }
 
     @Override
     public int getBarColor(@NotNull ItemStack stack) {
-        return ClientFluidHooks.getFluidColor(FluidUtils.getTank(stack));
-    }
-
-    // Fabric disabling of nbt change animation
-    @SuppressWarnings("unused")
-    @PlatformOnly(PlatformOnly.FABRIC)
-    public boolean allowNbtUpdateAnimation(Player player, InteractionHand hand, ItemStack oldStack, ItemStack newStack) {
-        return false;
-    }
-
-    // NeoForge disabling of nbt change animation
-    @SuppressWarnings("unused")
-    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-        return false;
+        return ClientPlatformUtils.getFluidColor(FluidUtils.getTank(stack));
     }
 }

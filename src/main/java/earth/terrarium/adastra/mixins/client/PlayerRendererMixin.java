@@ -13,8 +13,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.component.DyedItemColor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,9 +25,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
 
     @Shadow
-    protected abstract void setupRotations(AbstractClientPlayer entityLiving, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks);
-
-    @Shadow
     protected abstract void setModelProperties(AbstractClientPlayer clientPlayer);
 
     public PlayerRendererMixin(EntityRendererProvider.Context context, PlayerModel<AbstractClientPlayer> model, float shadowRadius) {
@@ -35,7 +32,7 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
     }
 
     @Inject(method = "renderHand", at = @At("HEAD"), cancellable = true)
-    private void adastra$renderHand(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AbstractClientPlayer player, ModelPart rendererArm, ModelPart rendererArmwear, CallbackInfo ci) {
+    private void adastra$renderHand(PoseStack poseStack, MultiBufferSource buffer, int combinedLight, AbstractClientPlayer player, ModelPart rendererArm, ModelPart rendererArmwear, CallbackInfo ci) {
         var stack = player.getItemBySlot(EquipmentSlot.CHEST);
         if (!(stack.getItem() instanceof SpaceSuitItem spaceSuit)) return;
         ci.cancel();
@@ -56,17 +53,13 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
         var spaceSuitModel = new SpaceSuitModel(root, EquipmentSlot.CHEST, stack, null);
         boolean isRightHand = rendererArm == spaceSuitModel.rightArm;
 
-        int color = spaceSuit.getColor(stack);
-        float r = FastColor.ARGB32.red(color) / 255f;
-        float g = FastColor.ARGB32.green(color) / 255f;
-        float b = FastColor.ARGB32.blue(color) / 255f;
-
+        int color = DyedItemColor.getOrDefault(stack, DyedItemColor.LEATHER_COLOR);
         if (isRightHand) {
             spaceSuitModel.rightArm.copyFrom(rendererArm);
-            spaceSuitModel.rightArm.render(poseStack, buffer.getBuffer(RenderType.entityTranslucent(texture)), packedLight, OverlayTexture.NO_OVERLAY, r, g, b, 1);
+            spaceSuitModel.rightArm.render(poseStack, buffer.getBuffer(RenderType.entityTranslucent(texture)), combinedLight, OverlayTexture.NO_OVERLAY, color);
         } else {
             spaceSuitModel.leftArm.copyFrom(rendererArm);
-            spaceSuitModel.leftArm.render(poseStack, buffer.getBuffer(RenderType.entityTranslucent(texture)), packedLight, OverlayTexture.NO_OVERLAY, r, g, b, 1);
+            spaceSuitModel.leftArm.render(poseStack, buffer.getBuffer(RenderType.entityTranslucent(texture)), combinedLight, OverlayTexture.NO_OVERLAY, color);
         }
     }
 }

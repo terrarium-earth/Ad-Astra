@@ -26,8 +26,8 @@ import org.joml.Quaternionf;
 
 public class GravityNormalizerBlockEntityRenderer implements BlockEntityRenderer<GravityNormalizerBlockEntity> {
 
-    public static final ResourceLocation TOP = new ResourceLocation(AdAstra.MOD_ID, "block/gravity_normalizer_top");
-    public static final ResourceLocation TOE = new ResourceLocation(AdAstra.MOD_ID, "block/gravity_normalizer_toe");
+    public static final ResourceLocation TOP = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "block/gravity_normalizer_top");
+    public static final ResourceLocation TOE = ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "block/gravity_normalizer_toe");
 
     private static final float SIN_45 = (float) Math.sin(Math.PI / 4);
 
@@ -81,13 +81,15 @@ public class GravityNormalizerBlockEntityRenderer implements BlockEntityRenderer
 
             pose.translate(-0.5, -0.7, -0.5);
 
-            Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
-                pose.last(),
-                buffer.getBuffer(Sheets.cutoutBlockSheet()),
-                state,
-                blockModel,
-                1, 1, 1,
-                packedLight, packedOverlay);
+            if (blockModel != null) {
+                Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
+                    pose.last(),
+                    buffer.getBuffer(Sheets.cutoutBlockSheet()),
+                    state,
+                    blockModel,
+                    1, 1, 1,
+                    packedLight, packedOverlay);
+            }
 
             pose.popPose();
 
@@ -102,13 +104,15 @@ public class GravityNormalizerBlockEntityRenderer implements BlockEntityRenderer
                 pose.mulPose(Axis.XP.rotationDegrees(Mth.sin(animation / 50 + i) * 10));
                 pose.translate(-0.27, -0.27, -0.27);
 
-                Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
-                    pose.last(),
-                    buffer.getBuffer(Sheets.cutoutBlockSheet()),
-                    state,
-                    toeModel,
-                    1, 1, 1,
-                    packedLight, packedOverlay);
+                if (toeModel != null) {
+                    Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(
+                        pose.last(),
+                        buffer.getBuffer(Sheets.cutoutBlockSheet()),
+                        state,
+                        toeModel,
+                        1, 1, 1,
+                        packedLight, packedOverlay);
+                }
 
                 poseStack.popPose();
             }

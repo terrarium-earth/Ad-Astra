@@ -8,7 +8,15 @@ import earth.terrarium.adastra.common.utils.FluidUtils;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.Util;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.EnchantmentTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
@@ -18,21 +26,24 @@ import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionBrewing;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.component.DyedItemColor;
+import net.minecraft.world.item.component.SuspiciousStewEffects;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SuspiciousEffectHolder;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE.
 public class LunarianMerchantOffers {
@@ -53,12 +64,12 @@ public class LunarianMerchantOffers {
                     new SellItemFactory(ModItems.CYAN_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.BROWN_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.YELLOW_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.ORANGE_FLAG.get(), 3, 1, 12, 25)},
                 5, new ItemListing[]{new SellItemFactory(ModItems.SPACE_PAINTING.get(), 64, 1, 2, 50)})));
         map.put(VillagerProfession.FLETCHER, copyToFastUtilMap(Map.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.IRON_ROD.get(), 8, 16, 6), new SellItemFactory(Items.ARROW, 1, 16, 1), new ProcessItemFactory(Blocks.GRAVEL, 10, Items.FLINT, 10, 12, 1)}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(Items.FLINT, 26, 12, 10), new SellItemFactory(Items.BOW, 2, 1, 5)}, 3, new ItemListing[]{new BuyForOneEmeraldFactory(Items.STRING, 14, 16, 20), new SellItemFactory(Items.CROSSBOW, 3, 1, 10)}, 4, new ItemListing[]{new BuyForOneEmeraldFactory(Items.FEATHER, 24, 16, 30), new SellEnchantedToolFactory(Items.BOW, 2, 3, 15)}, 5, new ItemListing[]{new BuyForOneEmeraldFactory(Items.TRIPWIRE_HOOK, 8, 12, 30), new SellEnchantedToolFactory(Items.CROSSBOW, 3, 3, 15), new SellPotionHoldingItemFactory(Items.ARROW, 5, Items.TIPPED_ARROW, 5, 2, 12, 30)})));
-        map.put(VillagerProfession.LIBRARIAN, copyToFastUtilMap(Map.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(Items.PAPER, 24, 16, 2), new EnchantBookFactory(1), new SellItemFactory(Blocks.BOOKSHELF, 9, 1, 12, 1)}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(Items.BOOK, 4, 12, 10), new EnchantBookFactory(5), new SellItemFactory(Items.LANTERN, 1, 1, 5)}, 3, new ItemListing[]{new BuyForOneEmeraldFactory(Items.INK_SAC, 5, 12, 20), new EnchantBookFactory(10), new SellItemFactory(Items.LIGHT_BLUE_STAINED_GLASS, 1, 8, 10)}, 4, new ItemListing[]{new BuyForOneEmeraldFactory(Items.WRITABLE_BOOK, 2, 12, 30), new EnchantBookFactory(15), new SellItemFactory(Items.CLOCK, 5, 1, 15), new SellItemFactory(Items.COMPASS, 4, 1, 15)}, 5, new ItemListing[]{new SellItemFactory(Items.NAME_TAG, 20, 1, 30)})));
+        map.put(VillagerProfession.LIBRARIAN, copyToFastUtilMap(Map.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(Items.PAPER, 24, 16, 2), new EnchantBookFactory(1, EnchantmentTags.TRADEABLE), new SellItemFactory(Blocks.BOOKSHELF, 9, 1, 12, 1)}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(Items.BOOK, 4, 12, 10), new EnchantBookFactory(5, EnchantmentTags.TRADEABLE), new SellItemFactory(Items.LANTERN, 1, 1, 5)}, 3, new ItemListing[]{new BuyForOneEmeraldFactory(Items.INK_SAC, 5, 12, 20), new EnchantBookFactory(10, EnchantmentTags.TRADEABLE), new SellItemFactory(Items.LIGHT_BLUE_STAINED_GLASS, 1, 8, 10)}, 4, new ItemListing[]{new BuyForOneEmeraldFactory(Items.WRITABLE_BOOK, 2, 12, 30), new EnchantBookFactory(15, EnchantmentTags.TRADEABLE), new SellItemFactory(Items.CLOCK, 5, 1, 15), new SellItemFactory(Items.COMPASS, 4, 1, 15)}, 5, new ItemListing[]{new SellItemFactory(Items.NAME_TAG, 20, 1, 30)})));
         map.put(VillagerProfession.CARTOGRAPHER,
             copyToFastUtilMap(Map.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(Items.PAPER, 24, 16, 2), new SellItemFactory(Items.MAP, 7, 1, 1)}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(Items.GLASS_PANE, 11, 16, 10)}, 3, new ItemListing[]{new BuyForOneEmeraldFactory(Items.COMPASS, 1, 12, 20),}, 4,
                 new ItemListing[]{new SellItemFactory(Items.ITEM_FRAME, 7, 1, 15), new SellItemFactory(ModItems.WHITE_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.BLUE_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.LIGHT_BLUE_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.RED_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.PINK_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.GREEN_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.LIME_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.GRAY_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.PURPLE_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.MAGENTA_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.CYAN_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.BROWN_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.YELLOW_FLAG.get(), 3, 1, 12, 25), new SellItemFactory(ModItems.ORANGE_FLAG.get(), 3, 1, 12, 25)}, 5,
                 new ItemListing[]{new SellItemFactory(Items.GLOBE_BANNER_PATTERN, 6, 1, 45)})));
-        map.put(VillagerProfession.CLERIC, copyToFastUtilMap(Map.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(Items.ROTTEN_FLESH, 32, 16, 2), new SellItemFactory(Items.REDSTONE, 1, 2, 1)}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.DESH_INGOT.get(), 3, 8, 10), new SellItemFactory(Items.LAPIS_LAZULI, 1, 1, 5)}, 3, new ItemListing[]{new BuyForOneEmeraldFactory(Items.RABBIT_FOOT, 2, 12, 20), new SellItemFactory(Blocks.GLOWSTONE, 4, 1, 12, 10)}, 4, new ItemListing[]{new BuyForOneEmeraldFactory(Items.SCUTE, 4, 12, 30), new BuyForOneEmeraldFactory(Items.GLASS_BOTTLE, 9, 12, 30), new SellItemFactory(Items.ENDER_PEARL, 5, 1, 15)}, 5, new ItemListing[]{new BuyForOneEmeraldFactory(Items.NETHER_WART, 22, 12, 30), new SellItemFactory(Items.EXPERIENCE_BOTTLE, 2, 1, 30), new SellItemFactory(ModItems.OXYGEN_BUCKET.get(), 32, 1, 1, 60)})));
+        map.put(VillagerProfession.CLERIC, copyToFastUtilMap(Map.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(Items.ROTTEN_FLESH, 32, 16, 2), new SellItemFactory(Items.REDSTONE, 1, 2, 1)}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.DESH_INGOT.get(), 3, 8, 10), new SellItemFactory(Items.LAPIS_LAZULI, 1, 1, 5)}, 3, new ItemListing[]{new BuyForOneEmeraldFactory(Items.RABBIT_FOOT, 2, 12, 20), new SellItemFactory(Blocks.GLOWSTONE, 4, 1, 12, 10)}, 4, new ItemListing[]{new BuyForOneEmeraldFactory(Items.TURTLE_SCUTE, 4, 12, 30), new BuyForOneEmeraldFactory(Items.GLASS_BOTTLE, 9, 12, 30), new SellItemFactory(Items.ENDER_PEARL, 5, 1, 15)}, 5, new ItemListing[]{new BuyForOneEmeraldFactory(Items.NETHER_WART, 22, 12, 30), new SellItemFactory(Items.EXPERIENCE_BOTTLE, 2, 1, 30), new SellItemFactory(ModItems.OXYGEN_BUCKET.get(), 32, 1, 1, 60)})));
         map.put(VillagerProfession.ARMORER, copyToFastUtilMap(Map.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.ICE_SHARD.get(), 12, 16, 2), new SellItemFactory(new ItemStack(ModItems.SPACE_PANTS.get()), 14, 1, 12, 4, 0.2f), new SellItemFactory(new ItemStack(ModItems.SPACE_BOOTS.get()), 8, 1, 12, 4, 0.2f), new SellItemFactory(new ItemStack(ModItems.SPACE_HELMET.get()), 10, 1, 12, 4, 0.2f), new SellItemFactory(new ItemStack(ModItems.SPACE_SUIT.get()), 36, 1, 12, 8, 0.2f)}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.DESH_INGOT.get(), 4, 8, 10), new SellItemFactory(new ItemStack(Items.BELL), 36, 1, 12, 5, 0.2f), new SellItemFactory(new ItemStack(ModItems.SPACE_BOOTS.get()), 8, 1, 12, 4, 0.2f), new SellItemFactory(new ItemStack(ModItems.SPACE_PANTS.get()), 14, 1, 12, 4, 0.2f)}, 3,
             new ItemListing[]{new BuyForOneEmeraldFactory(Items.LAVA_BUCKET, 1, 12, 20), new BuyForOneEmeraldFactory(Items.DIAMOND, 1, 12, 20), new SellItemFactory(new ItemStack(ModItems.SPACE_HELMET.get()), 10, 1, 12, 4, 0.2f), new SellItemFactory(new ItemStack(ModItems.SPACE_SUIT.get()), 36, 1, 12, 8, 0.2f), new SellItemFactory(new ItemStack(Items.SHIELD), 5, 1, 12, 10, 0.2f)}, 4, new ItemListing[]{new SellEnchantedToolFactory(ModItems.SPACE_PANTS.get(), 28, 3, 15, 0.2f), new SellEnchantedToolFactory(ModItems.SPACE_BOOTS.get(), 16, 3, 15, 0.2f)}, 5, new ItemListing[]{new SellEnchantedToolFactory(ModItems.SPACE_HELMET.get(), 16, 3, 30, 0.2f), new SellEnchantedToolFactory(ModItems.SPACE_SUIT.get(), 48, 3, 30, 0.2f), new SellItemFactory(FluidUtils.fluidFilledItem(ModItems.GAS_TANK, ModFluids.OXYGEN), 24, 1, 2, 40), new SellItemFactory(ModItems.OXYGEN_BUCKET.get(), 32, 1, 1, 60), new SellItemFactory(ModItems.OXYGEN_LOADER.get(), 48, 1, 1, 60), new SellItemFactory(ModItems.COAL_GENERATOR.get(), 32, 1, 1, 60)})));
         map.put(VillagerProfession.WEAPONSMITH,
@@ -66,7 +77,7 @@ public class LunarianMerchantOffers {
         map.put(VillagerProfession.TOOLSMITH, copyToFastUtilMap(Map.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.ICE_SHARD.get(), 12, 16, 2), new SellItemFactory(new ItemStack(Items.SOUL_TORCH), 3, 16, 8, 1, 0.2f), new SellItemFactory(ModItems.WRENCH.get(), 14, 1, 2, 2), new SellItemFactory(new ItemStack(Items.STONE_AXE), 1, 1, 12, 1, 0.2f), new SellItemFactory(new ItemStack(Items.STONE_SHOVEL), 1, 1, 12, 1, 0.2f), new SellItemFactory(new ItemStack(Items.STONE_PICKAXE), 1, 1, 12, 1, 0.2f), new SellItemFactory(new ItemStack(Items.STONE_HOE), 1, 1, 12, 1, 0.2f)}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.DESH_INGOT.get(), 4, 12, 10), new SellItemFactory(new ItemStack(Items.BELL), 36, 1, 12, 5, 0.2f)}, 3,
             new ItemListing[]{new BuyForOneEmeraldFactory(Items.FLINT, 30, 12, 20), new SellEnchantedToolFactory(Items.IRON_AXE, 1, 3, 10, 0.2f), new SellEnchantedToolFactory(Items.IRON_SHOVEL, 2, 3, 10, 0.2f), new SellEnchantedToolFactory(Items.IRON_PICKAXE, 3, 3, 10, 0.2f), new SellItemFactory(new ItemStack(Items.DIAMOND_HOE), 4, 1, 3, 10, 0.2f)}, 4, new ItemListing[]{new BuyForOneEmeraldFactory(Items.DIAMOND, 1, 12, 30), new SellEnchantedToolFactory(Items.DIAMOND_AXE, 12, 3, 15, 0.2f), new SellEnchantedToolFactory(Items.DIAMOND_SHOVEL, 5, 3, 15, 0.2f)}, 5, new ItemListing[]{new SellEnchantedToolFactory(Items.DIAMOND_PICKAXE, 13, 3, 30, 0.2f), new SellItemFactory(FluidUtils.fluidFilledItem(ModItems.GAS_TANK, ModFluids.OXYGEN), 24, 1, 2, 40), new SellItemFactory(ModItems.OXYGEN_BUCKET.get(), 32, 1, 1, 60), new SellItemFactory(ModItems.OXYGEN_LOADER.get(), 48, 1, 1, 60), new SellItemFactory(ModItems.COAL_GENERATOR.get(), 32, 1, 1, 60)})));
         map.put(VillagerProfession.BUTCHER, copyToFastUtilMap(Map.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.CHEESE.get(), 20, 20, 5), new BuyForOneEmeraldFactory(Items.CHICKEN, 14, 16, 2), new BuyForOneEmeraldFactory(Items.PORKCHOP, 7, 16, 2), new BuyForOneEmeraldFactory(Items.RABBIT, 4, 16, 2), new SellItemFactory(Items.RABBIT_STEW, 1, 1, 1)}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(Items.COAL, 15, 16, 2), new SellItemFactory(Items.COOKED_PORKCHOP, 1, 5, 16, 5), new SellItemFactory(Items.COOKED_CHICKEN, 1, 8, 16, 5)}, 3, new ItemListing[]{new BuyForOneEmeraldFactory(Items.MUTTON, 7, 16, 20), new BuyForOneEmeraldFactory(Items.BEEF, 10, 16, 20)}, 4, new ItemListing[]{new BuyForOneEmeraldFactory(Items.DRIED_KELP_BLOCK, 10, 12, 30)}, 5, new ItemListing[]{new BuyForOneEmeraldFactory(Items.SWEET_BERRIES, 10, 12, 30)})));
-        map.put(VillagerProfession.LEATHERWORKER, copyToFastUtilMap(Map.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(Items.LEATHER, 6, 16, 2), new SellDyedArmorFactory(Items.LEATHER_LEGGINGS, 3), new SellDyedArmorFactory(Items.LEATHER_CHESTPLATE, 7)}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(Items.FLINT, 26, 12, 10), new SellDyedArmorFactory(Items.LEATHER_HELMET, 5, 12, 5), new SellDyedArmorFactory(Items.LEATHER_BOOTS, 4, 12, 5)}, 3, new ItemListing[]{new BuyForOneEmeraldFactory(Items.RABBIT_HIDE, 9, 12, 20), new SellDyedArmorFactory(Items.LEATHER_CHESTPLATE, 7)}, 4, new ItemListing[]{new BuyForOneEmeraldFactory(Items.SCUTE, 4, 12, 30), new SellDyedArmorFactory(Items.LEATHER_HORSE_ARMOR, 6, 12, 15)}, 5, new ItemListing[]{new SellItemFactory(new ItemStack(Items.SADDLE), 6, 1, 12, 30, 0.2f), new SellDyedArmorFactory(Items.LEATHER_HELMET, 5, 12, 30)})));
+        map.put(VillagerProfession.LEATHERWORKER, copyToFastUtilMap(Map.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(Items.LEATHER, 6, 16, 2), new SellDyedArmorFactory(Items.LEATHER_LEGGINGS, 3), new SellDyedArmorFactory(Items.LEATHER_CHESTPLATE, 7)}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(Items.FLINT, 26, 12, 10), new SellDyedArmorFactory(Items.LEATHER_HELMET, 5, 12, 5), new SellDyedArmorFactory(Items.LEATHER_BOOTS, 4, 12, 5)}, 3, new ItemListing[]{new BuyForOneEmeraldFactory(Items.RABBIT_HIDE, 9, 12, 20), new SellDyedArmorFactory(Items.LEATHER_CHESTPLATE, 7)}, 4, new ItemListing[]{new BuyForOneEmeraldFactory(Items.TURTLE_SCUTE, 4, 12, 30), new SellDyedArmorFactory(Items.LEATHER_HORSE_ARMOR, 6, 12, 15)}, 5, new ItemListing[]{new SellItemFactory(new ItemStack(Items.SADDLE), 6, 1, 12, 30, 0.2f), new SellDyedArmorFactory(Items.LEATHER_HELMET, 5, 12, 30)})));
         map.put(VillagerProfession.MASON,
             copyToFastUtilMap(Map.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.CONGLOMERATE.get(), 10, 16, 2), new BuyForOneEmeraldFactory(ModItems.MOON_SAND.get(), 32, 32, 1), new SellItemFactory(ModItems.MOON_STONE_BRICKS.get(), 1, 10, 16, 1)}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.MOON_STONE.get(), 20, 16, 10), new SellItemFactory(ModItems.CHISELED_MOON_STONE_BRICKS.get(), 1, 4, 16, 5)}, 3, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.MARS_STONE.get(), 16, 16, 20), new BuyForOneEmeraldFactory(ModItems.VENUS_STONE.get(), 16, 16, 20), new BuyForOneEmeraldFactory(ModItems.MERCURY_STONE.get(), 16, 16, 20), new SellItemFactory(Blocks.DRIPSTONE_BLOCK, 1, 4, 16, 10), new SellItemFactory(ModItems.POLISHED_MARS_STONE.get(), 1, 4, 16, 10), new SellItemFactory(ModItems.POLISHED_VENUS_STONE.get(), 1, 4, 16, 10), new SellItemFactory(ModItems.POLISHED_MERCURY_STONE.get(), 1, 4, 16, 10)}, 4,
                 new ItemListing[]{new BuyForOneEmeraldFactory(Items.QUARTZ, 12, 12, 30), new SellItemFactory(Blocks.ORANGE_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.WHITE_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.BLUE_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.LIGHT_BLUE_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.GRAY_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.LIGHT_GRAY_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.BLACK_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.RED_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.PINK_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.MAGENTA_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.LIME_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.GREEN_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.CYAN_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.PURPLE_TERRACOTTA, 1, 1, 12, 15), new SellItemFactory(Blocks.YELLOW_TERRACOTTA, 1, 1, 12, 15),
@@ -100,7 +111,7 @@ public class LunarianMerchantOffers {
 
         @Override
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            ItemStack itemStack = new ItemStack(this.buy, this.price);
+            ItemCost itemStack = new ItemCost(this.buy, this.price);
             return new MerchantOffer(itemStack, new ItemStack(Items.EMERALD), this.maxUses, this.experience, this.multiplier);
         }
     }
@@ -142,20 +153,21 @@ public class LunarianMerchantOffers {
         @Override
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
             ItemStack stack = new ItemStack(this.sell.getItem(), this.count);
-            stack.setTag((this.sell.getTag()));
-            return new MerchantOffer(new ItemStack(Items.EMERALD, this.price), stack, this.maxUses, this.experience, this.multiplier);
+            stack.applyComponents(this.sell.getComponentsPatch());
+            return new MerchantOffer(new ItemCost(Items.EMERALD, this.price), stack, this.maxUses, this.experience, this.multiplier);
         }
     }
 
     static class SellSuspiciousStewFactory implements ItemListing {
 
-        private final List<SuspiciousEffectHolder.EffectEntry> effects;
+        private final SuspiciousStewEffects effects;
         final int duration;
         final int experience;
         private final float multiplier;
 
-        public SellSuspiciousStewFactory(MobEffect effect, int duration, int experience) {
-            this.effects = List.of(new SuspiciousEffectHolder.EffectEntry(effect, duration));
+        public SellSuspiciousStewFactory(Holder<MobEffect> effect, int duration, int experience) {
+            this.effects = SuspiciousStewEffects.EMPTY;
+            this.effects.withEffectAdded(new SuspiciousStewEffects.Entry(effect, duration));
             this.duration = duration;
             this.experience = experience;
             this.multiplier = 0.05f;
@@ -165,8 +177,8 @@ public class LunarianMerchantOffers {
         @Nullable
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
             ItemStack itemStack = new ItemStack(Items.SUSPICIOUS_STEW, 1);
-            SuspiciousStewItem.saveMobEffects(itemStack, effects);
-            return new MerchantOffer(new ItemStack(Items.EMERALD, 1), itemStack, 12, this.experience, this.multiplier);
+            itemStack.set(DataComponents.SUSPICIOUS_STEW_EFFECTS, this.effects);
+            return new MerchantOffer(new ItemCost(Items.EMERALD, 1), itemStack, 12, this.experience, this.multiplier);
         }
     }
 
@@ -199,7 +211,7 @@ public class LunarianMerchantOffers {
         @Override
         @Nullable
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            return new MerchantOffer(new ItemStack(Items.EMERALD, this.price), new ItemStack(this.secondBuy.getItem(), this.secondCount), new ItemStack(this.sell.getItem(), this.sellCount), this.maxUses, this.experience, this.multiplier);
+            return new MerchantOffer(new ItemCost(Items.EMERALD, this.price), Optional.of(new ItemCost(this.secondBuy.getItem(), this.secondCount)), new ItemStack(this.sell.getItem(), this.sellCount), this.maxUses, this.experience, this.multiplier);
         }
     }
 
@@ -226,9 +238,12 @@ public class LunarianMerchantOffers {
         @Override
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
             int i = 5 + random.nextInt(15);
-            ItemStack itemStack = EnchantmentHelper.enchantItem(random, new ItemStack(this.tool.getItem()), i, false);
+            RegistryAccess registryaccess = entity.level().registryAccess();
+            Optional<HolderSet.Named<Enchantment>> optional = registryaccess.registryOrThrow(Registries.ENCHANTMENT).getTag(EnchantmentTags.ON_TRADED_EQUIPMENT);
+            ItemStack itemStack = EnchantmentHelper.enchantItem(random, new ItemStack(this.tool.getItem()), i, registryaccess, optional);
+
             int j = Math.min(this.basePrice + i, 64);
-            ItemStack itemStack2 = new ItemStack(Items.EMERALD, j);
+            ItemCost itemStack2 = new ItemCost(Items.EMERALD, j);
             return new MerchantOffer(itemStack2, itemStack, this.maxUses, this.experience, this.multiplier);
         }
     }
@@ -257,36 +272,51 @@ public class LunarianMerchantOffers {
 
         @Override
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            ItemStack itemStack = new ItemStack(Items.EMERALD, this.price);
-            List<Potion> list = BuiltInRegistries.POTION.stream().filter(potion -> !potion.getEffects().isEmpty() && PotionBrewing.isBrewablePotion(potion)).toList();
-            Potion potion2 = list.get(random.nextInt(list.size()));
-            ItemStack itemStack2 = PotionUtils.setPotion(new ItemStack(this.sell.getItem(), this.sellCount), potion2);
-            return new MerchantOffer(itemStack, new ItemStack(this.secondBuy, this.secondCount), itemStack2, this.maxUses, this.experience, this.priceMultiplier);
+            ItemCost itemStack = new ItemCost(Items.EMERALD, this.price);
+            List list = BuiltInRegistries.POTION.holders().filter((value) -> !value.value().getEffects().isEmpty() && entity.level().potionBrewing().isBrewablePotion(value)).collect(Collectors.toList());
+            Holder<Potion> holder = (Holder)Util.getRandom(list, random);
+            ItemStack itemStack2 = new ItemStack(this.sell.getItem(), this.sellCount);
+            itemStack2.set(DataComponents.POTION_CONTENTS, new PotionContents(holder));
+            return new MerchantOffer(itemStack, Optional.of(new ItemCost(this.secondBuy, this.secondCount)), itemStack2, this.maxUses, this.experience, this.priceMultiplier);
         }
     }
 
     static class EnchantBookFactory implements ItemListing {
 
         private final int experience;
+        private final TagKey<Enchantment> tradeableEnchantments;
 
-        public EnchantBookFactory(int experience) {
+        public EnchantBookFactory(int experience, TagKey<Enchantment> tradeableEnchantments) {
             this.experience = experience;
+            this.tradeableEnchantments = tradeableEnchantments;
         }
 
         @Override
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            List<Enchantment> list = BuiltInRegistries.ENCHANTMENT.stream().filter(Enchantment::isTradeable).toList();
-            Enchantment enchantment = list.get(random.nextInt(list.size()));
-            int i = Mth.nextInt(random, enchantment.getMinLevel(), enchantment.getMaxLevel());
-            ItemStack itemStack = EnchantedBookItem.createForEnchantment(new EnchantmentInstance(enchantment, i));
-            int j = 2 + random.nextInt(5 + i * 10) + 3 * i;
-            if (enchantment.isTreasureOnly()) {
-                j *= 2;
+            Optional<Holder<Enchantment>> optional = entity.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT)
+                .getRandomElementOf(this.tradeableEnchantments, random);
+            int i;
+            ItemStack itemStack;
+            if (!optional.isEmpty()) {
+                Holder<Enchantment> holder = optional.get();
+                Enchantment enchantment = (Enchantment)holder.value();
+                int j = Math.max(enchantment.getMinLevel(), 0);
+                int k = Math.min(enchantment.getMaxLevel(), Integer.MAX_VALUE);
+                int l = Mth.nextInt(random, j, k);
+                itemStack = EnchantedBookItem.createForEnchantment(new EnchantmentInstance(holder, l));
+                i = 2 + random.nextInt(5 + l * 10) + 3 * l;
+                if (holder.is(EnchantmentTags.DOUBLE_TRADE_PRICE)) {
+                    i *= 2;
+                }
+
+                if (i > 64) {
+                    i = 64;
+                }
+            } else {
+                i = 1;
+                itemStack = new ItemStack(Items.BOOK);
             }
-            if (j > 64) {
-                j = 64;
-            }
-            return new MerchantOffer(new ItemStack(Items.EMERALD, j), new ItemStack(Items.BOOK), itemStack, 12, this.experience, 0.2f);
+            return new MerchantOffer(new ItemCost(Items.EMERALD, i), Optional.of(new ItemCost(Items.BOOK)), itemStack, 12, this.experience, 0.2f);
         }
     }
 
@@ -314,9 +344,9 @@ public class LunarianMerchantOffers {
 
         @Override
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            ItemStack itemStack = new ItemStack(Items.EMERALD, this.price);
+            ItemCost itemStack = new ItemCost(Items.EMERALD, this.price);
             ItemStack itemStack2 = new ItemStack(this.sell);
-            if (this.sell instanceof DyeableArmorItem) {
+            if (itemStack2.is(ItemTags.DYEABLE)) {
                 ArrayList<DyeItem> list = Lists.newArrayList();
                 list.add(SellDyedArmorFactory.getDye(random));
                 if (random.nextFloat() > 0.7f) {
@@ -325,7 +355,7 @@ public class LunarianMerchantOffers {
                 if (random.nextFloat() > 0.8f) {
                     list.add(SellDyedArmorFactory.getDye(random));
                 }
-                itemStack2 = DyeableLeatherItem.dyeArmor(itemStack2, list);
+                itemStack2 = DyedItemColor.applyDyes(itemStack2, list);
             }
             return new MerchantOffer(itemStack, itemStack2, this.maxUses, this.experience, 0.2f);
         }

@@ -1,0 +1,16 @@
+{
+  "type": "ad_astra:oxygen_loading",
+  "cookingtime": 1,
+  "energy": 30,
+  "input": {
+    "type": "common_storage_lib_resources:base",
+    "amount": 25,
+    "values": {
+      "tag": "ad_astra:oxygen"
+    }
+  },
+  "result": {
+    "amount": 25,
+    "id": "ad_astra:oxygen"
+  }
+}

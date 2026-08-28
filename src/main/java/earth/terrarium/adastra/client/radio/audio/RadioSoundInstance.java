@@ -29,7 +29,7 @@ public sealed class RadioSoundInstance extends AbstractSoundInstance implements 
     @SuppressWarnings("deprecation")
     public RadioSoundInstance(String url, RandomSource randomSource) {
         super(
-            new ResourceLocation(AdAstra.MOD_ID, "radio/" + Hashing.sha1().hashUnencodedChars(url)),
+            ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "radio/" + Hashing.sha1().hashUnencodedChars(url)),
             SoundSource.MASTER,
             randomSource
         );
@@ -40,7 +40,7 @@ public sealed class RadioSoundInstance extends AbstractSoundInstance implements 
     public WeighedSoundEvents resolve(@NotNull SoundManager manager) {
         WeighedSoundEvents soundEvents = new WeighedSoundEvents(this.getLocation(), null);
         soundEvents.addSound(new Sound(
-            getLocation().toString(),
+            getLocation(),
             ConstantFloat.of(1f),
             ConstantFloat.of(1f),
             1,

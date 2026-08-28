@@ -1,6 +1,7 @@
 package earth.terrarium.adastra.common.blockentities.machines;
 
 import earth.terrarium.adastra.common.blockentities.base.ContainerMachineBlockEntity;
+import earth.terrarium.adastra.common.blockentities.base.ContainerRecipeWrapper;
 import earth.terrarium.adastra.common.blockentities.base.RedstoneControl;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuration;
 import earth.terrarium.adastra.common.blockentities.base.sideconfig.ConfigurationEntry;
@@ -18,13 +19,13 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +41,7 @@ public class NasaWorkbenchBlockEntity extends ContainerMachineBlockEntity {
     );
 
     private static final int[] INPUT_SLOTS = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-    protected final RecipeManager.CachedCheck<Container, NasaWorkbenchRecipe> quickCheck = RecipeManager.createCheck(ModRecipeTypes.NASA_WORKBENCH.get());
+    protected final RecipeManager.CachedCheck<RecipeInput, NasaWorkbenchRecipe> quickCheck = RecipeManager.createCheck(ModRecipeTypes.NASA_WORKBENCH.get());
 
     @Nullable
     protected NasaWorkbenchRecipe recipe;
@@ -84,11 +85,11 @@ public class NasaWorkbenchBlockEntity extends ContainerMachineBlockEntity {
     @Override
     public void update() {
         if (level().isClientSide()) return;
-        recipe = Optionull.map(quickCheck.getRecipeFor(this, level()).orElse(null), RecipeHolder::value);
+        recipe = Optionull.map(quickCheck.getRecipeFor(new ContainerRecipeWrapper(this), level()).orElse(null), RecipeHolder::value);
     }
 
     public boolean canCraft() {
-        return recipe != null && recipe.matches(this, level());
+        return recipe != null && recipe.matches(new ContainerRecipeWrapper(this), level());
     }
 
     public void craft() {

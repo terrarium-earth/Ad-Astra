@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ad_astra:vent"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vent": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#ad_astra:steel_plates"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_vent"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ad_astra:vent"
+    ]
+  }
+}

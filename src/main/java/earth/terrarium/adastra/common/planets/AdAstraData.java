@@ -2,13 +2,9 @@ package earth.terrarium.adastra.common.planets;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import com.teamresourceful.resourcefullib.common.lib.Constants;
-import com.teamresourceful.resourcefullib.common.networking.PacketHelper;
-import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.api.planets.Planet;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -18,7 +14,9 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AdAstraData extends SimpleJsonResourceReloadListener {
@@ -36,29 +34,13 @@ public class AdAstraData extends SimpleJsonResourceReloadListener {
         DIMENSIONS_TO_PLANETS.clear();
         object.forEach((key, value) -> {
             JsonObject json = GsonHelper.convertToJsonObject(value, "planets");
-            Planet planet = Planet.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow(false, AdAstra.LOGGER::error);
+            Planet planet = Planet.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow();
             PLANETS.put(planet.dimension(), planet);
             DIMENSIONS_TO_PLANETS.put(planet.dimension(), planet.dimension());
             for (ResourceKey<Level> dimension : planet.additionalLaunchDimensions()) {
                 DIMENSIONS_TO_PLANETS.put(dimension, planet.dimension());
             }
         });
-    }
-
-    public static void encodePlanets(FriendlyByteBuf buf) {
-        PacketHelper.writeWithYabn(buf, Planet.CODEC.listOf(), planets().values().stream().toList(), true)
-            .get()
-            .mapRight(DataResult.PartialResult::message)
-            .ifRight(AdAstra.LOGGER::error);
-    }
-
-    public static Collection<Planet> decodePlanets(FriendlyByteBuf buf) {
-        return PacketHelper.readWithYabn(buf, Planet.CODEC.listOf(), true)
-            .get()
-            .mapRight(DataResult.PartialResult::message)
-            .ifRight(AdAstra.LOGGER::error)
-            .left()
-            .orElse(Collections.emptyList());
     }
 
     public static ResourceKey<Level> getPlanetLocation(ResourceKey<Level> dimension) {

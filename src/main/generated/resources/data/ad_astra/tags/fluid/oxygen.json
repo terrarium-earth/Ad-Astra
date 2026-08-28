@@ -1,0 +1,9 @@
+{
+  "values": [
+    "ad_astra:oxygen",
+    {
+      "id": "#c:oxygen",
+      "required": false
+    }
+  ]
+}

@@ -17,8 +17,8 @@ public abstract class ThrownPotionMixin extends Entity {
         super(entityType, level);
     }
 
-    @Inject(method = "getGravity", at = @At("HEAD"), cancellable = true)
-    public void adastra$getGravity(CallbackInfoReturnable<Float> cir) {
-        cir.setReturnValue(0.05f * GravityApi.API.getGravity(this));
+    @Inject(method = "getDefaultGravity", at = @At("HEAD"), cancellable = true)
+    public void adastra$getDefaultGravity(CallbackInfoReturnable<Double> cir) {
+        cir.setReturnValue(0.05 * GravityApi.API.getGravity(this));
     }
 }

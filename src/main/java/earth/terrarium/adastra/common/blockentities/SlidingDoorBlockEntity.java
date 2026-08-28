@@ -1,18 +1,17 @@
 package earth.terrarium.adastra.common.blockentities;
 
-import dev.architectury.injectables.annotations.PlatformOnly;
 import earth.terrarium.adastra.common.blockentities.base.TickableBlockEntity;
 import earth.terrarium.adastra.common.blocks.SlidingDoorBlock;
 import earth.terrarium.adastra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.adastra.common.registry.ModSoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 
 public class SlidingDoorBlockEntity extends BlockEntity implements TickableBlockEntity {
 
@@ -24,14 +23,14 @@ public class SlidingDoorBlockEntity extends BlockEntity implements TickableBlock
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
         slideTicks = tag.getInt("SlideTicks");
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
         tag.putInt("SlideTicks", slideTicks);
     }
 
@@ -56,11 +55,5 @@ public class SlidingDoorBlockEntity extends BlockEntity implements TickableBlock
             }
         }
         slideTicks = Mth.clamp(slideTicks + (isOpen ? 3 : -3), 0, 100);
-    }
-
-    @PlatformOnly("neoforge")
-    @SuppressWarnings("unused")
-    public AABB getRenderBoundingBox() {
-        return new AABB(this.getBlockPos()).inflate(3);
     }
 }

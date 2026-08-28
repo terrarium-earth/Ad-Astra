@@ -67,6 +67,9 @@ public class ModEntityTypeTagProvider extends TagsProvider<EntityType<?>> {
         surviveHeat(EntityType.MAGMA_CUBE);
         surviveHeat(EntityType.ZOMBIFIED_PIGLIN);
         surviveHeat(EntityType.ZOGLIN);
+
+        tag(EntityTypeTags.UNDEAD).add(TagEntry.element(BuiltInRegistries.ENTITY_TYPE.getKey(ModEntityTypes.MARTIAN_RAPTOR.get())));
+        tag(EntityTypeTags.UNDEAD).add(TagEntry.element(BuiltInRegistries.ENTITY_TYPE.getKey(ModEntityTypes.CORRUPTED_LUNARIAN.get())));
     }
 
     private void surviveHeat(EntityType<?> type) {

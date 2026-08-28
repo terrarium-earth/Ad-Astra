@@ -23,7 +23,7 @@ public record CryoFreezingDisplay(CryoFreezingRecipe recipe) implements Display 
 
     @Override
     public List<EntryIngredient> getOutputEntries() {
-        return List.of(EntryIngredients.of(recipe.result().getFluid()));
+        return List.of(EntryIngredients.of(recipe.result().resource().getType()));
     }
 
     @Override

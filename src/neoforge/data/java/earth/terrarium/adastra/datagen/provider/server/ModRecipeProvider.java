@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.adastra.AdAstra;
 import earth.terrarium.adastra.common.registry.ModItems;
 import earth.terrarium.adastra.common.tags.ModItemTags;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -22,8 +24,8 @@ public class ModRecipeProvider extends RecipeProvider {
 
     private RecipeOutput output;
 
-    public ModRecipeProvider(PackOutput packOutput) {
-        super(packOutput);
+    public ModRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(packOutput, lookupProvider);
     }
 
     @Override
@@ -1167,7 +1169,7 @@ public class ModRecipeProvider extends RecipeProvider {
         builder.apply(ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result.get(), count)
                 .requires(mainItem.get())
                 .unlockedBy("has_" + result.getId().getPath(), has(mainItem.get())))
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, file));
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, file));
     }
 
     private void shapeless(RegistryEntry<Item> result, int count, TagKey<Item> mainItem, Function<ShapelessRecipeBuilder, ShapelessRecipeBuilder> builder) {
@@ -1204,7 +1206,7 @@ public class ModRecipeProvider extends RecipeProvider {
         if (result.getId().getPath().contains("light_gray")) {
             return Items.LIGHT_GRAY_WOOL;
         }
-        return BuiltInRegistries.ITEM.get(new ResourceLocation(result.getId().getPath().split("_")[0] + "_wool"));
+        return BuiltInRegistries.ITEM.get(ResourceLocation.withDefaultNamespace(result.getId().getPath().split("_")[0] + "_wool"));
     }
 
     private Item getDye(RegistryEntry<Item> result, int splitPoint) {
@@ -1214,7 +1216,7 @@ public class ModRecipeProvider extends RecipeProvider {
         if (result.getId().getPath().contains("light_gray")) {
             return Items.LIGHT_GRAY_DYE;
         }
-        return BuiltInRegistries.ITEM.get(new ResourceLocation(result.getId().getPath().split("_")[splitPoint] + "_dye"));
+        return BuiltInRegistries.ITEM.get(ResourceLocation.withDefaultNamespace(result.getId().getPath().split("_")[splitPoint] + "_dye"));
     }
 
     private void oreSmelt(Supplier<Item> result, Supplier<Item> mainItem) {
@@ -1230,42 +1232,42 @@ public class ModRecipeProvider extends RecipeProvider {
     private void smelt(Supplier<Item> result, Supplier<Item> mainItem) {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(mainItem.get()), RecipeCategory.MISC, result.get(), 0.1f, 200)
             .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(result.get()).getPath(), has(mainItem.get()))
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, "smelting/%s_from_smelting_%s"
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "smelting/%s_from_smelting_%s"
                 .formatted(BuiltInRegistries.ITEM.getKey(result.get()).getPath(), BuiltInRegistries.ITEM.getKey(mainItem.get()).getPath())));
     }
 
     private void smelt(Supplier<Item> result, TagKey<Item> mainItem) {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(mainItem), RecipeCategory.MISC, result.get(), 0.1f, 200)
             .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(result.get()).getPath(), has(mainItem))
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, "smelting/%s_from_smelting_%s"
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "smelting/%s_from_smelting_%s"
                 .formatted(BuiltInRegistries.ITEM.getKey(result.get()).getPath(), mainItem.location().getPath())));
     }
 
     private void blast(Supplier<Item> result, Supplier<Item> mainItem) {
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(mainItem.get()), RecipeCategory.MISC, result.get(), 0.1f, 100)
             .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(result.get()).getPath(), has(mainItem.get()))
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, "blasting/%s_from_blasting_%s"
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "blasting/%s_from_blasting_%s"
                 .formatted(BuiltInRegistries.ITEM.getKey(result.get()).getPath(), BuiltInRegistries.ITEM.getKey(mainItem.get()).getPath())));
     }
 
     private void blast(Supplier<Item> result, TagKey<Item> mainItem) {
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(mainItem), RecipeCategory.MISC, result.get(), 0.1f, 100)
             .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(result.get()).getPath(), has(mainItem))
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, "blasting/%s_from_blasting_%s"
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "blasting/%s_from_blasting_%s"
                 .formatted(BuiltInRegistries.ITEM.getKey(result.get()).getPath(), mainItem.location().getPath())));
     }
 
     private void stoneCutting(Supplier<Item> result, int count, Supplier<Item> mainItem) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(mainItem.get()), RecipeCategory.MISC, result.get(), count)
             .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(result.get()).getPath(), has(mainItem.get()))
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, "stonecutting/%s_from_%s_stonecutting"
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "stonecutting/%s_from_%s_stonecutting"
                 .formatted(BuiltInRegistries.ITEM.getKey(result.get()).getPath(), BuiltInRegistries.ITEM.getKey(mainItem.get()).getPath())));
     }
 
     private void stoneCutting(Supplier<Item> result, int count, TagKey<Item> mainItem) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(mainItem), RecipeCategory.MISC, result.get(), count)
             .unlockedBy("has_" + BuiltInRegistries.ITEM.getKey(result.get()).getPath(), has(mainItem))
-            .save(output, new ResourceLocation(AdAstra.MOD_ID, "stonecutting/%s_from_%s_stonecutting"
+            .save(output, ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "stonecutting/%s_from_%s_stonecutting"
                 .formatted(BuiltInRegistries.ITEM.getKey(result.get()).getPath(), mainItem.location().getPath())));
     }
 }

@@ -32,7 +32,7 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
      *
      * @return true to prevent vanilla cloud rendering
      */
-    public boolean renderClouds(ClientLevel level, int ticks, float partialTick, PoseStack poseStack, double camX, double camY, double camZ, Matrix4f projectionMatrix) {
+    public boolean renderClouds(ClientLevel level, int ticks, float partialTick, PoseStack poseStack, double camX, double camY, double camZ, Matrix4f modelViewMatrix, Matrix4f projectionMatrix) {
         return renderer.customClouds();
     }
 
@@ -41,8 +41,8 @@ public class ModDimensionSpecialEffects extends DimensionSpecialEffects {
      *
      * @return true to prevent vanilla sky rendering
      */
-    public boolean renderSky(ClientLevel level, int ticks, float partialTick, PoseStack poseStack, Camera camera, Matrix4f projectionMatrix, boolean isFoggy, Runnable setupFog) {
-        skyRenderer.render(level, partialTick, poseStack, camera, projectionMatrix, isFoggy, setupFog);
+    public boolean renderSky(ClientLevel level, int ticks, float partialTick, Matrix4f modelViewMatrix, Camera camera, Matrix4f projectionMatrix, boolean isFoggy, Runnable setupFog) {
+        skyRenderer.render(level, partialTick, new PoseStack(), camera, projectionMatrix, modelViewMatrix, isFoggy, setupFog);
         return renderer.customSky();
     }
 

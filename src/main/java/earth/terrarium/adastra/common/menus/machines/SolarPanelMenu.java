@@ -3,13 +3,20 @@ package earth.terrarium.adastra.common.menus.machines;
 import earth.terrarium.adastra.common.blockentities.machines.SolarPanelBlockEntity;
 import earth.terrarium.adastra.common.menus.base.MachineMenu;
 import earth.terrarium.adastra.common.menus.configuration.EnergyConfiguration;
+import earth.terrarium.adastra.common.menus.content.PositionContent;
 import earth.terrarium.adastra.common.registry.ModMenus;
 import net.minecraft.world.entity.player.Inventory;
+
+import java.util.Optional;
 
 public class SolarPanelMenu extends MachineMenu<SolarPanelBlockEntity> {
 
     public SolarPanelMenu(int id, Inventory inventory, SolarPanelBlockEntity entity) {
         super(ModMenus.SOLAR_PANEL.get(), id, inventory, entity);
+    }
+
+    public SolarPanelMenu(int id, Inventory inv, Optional<PositionContent> content) {
+        this(id, inv, PositionContent.getOrNull(content, inv.player.level(), SolarPanelBlockEntity.class));
     }
 
     @Override

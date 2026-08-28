@@ -13,7 +13,7 @@ import net.minecraft.world.entity.npc.AbstractVillager;
 // LEGACY ENTITY. WILL BE REPLACED IN THE FUTURE.
 public class LunarianModel<T extends AbstractVillager> extends VillagerModel<T> {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(AdAstra.MOD_ID, "lunarian"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(AdAstra.MOD_ID, "lunarian"), "main");
 
     public LunarianModel(ModelPart root) {
         super(root);

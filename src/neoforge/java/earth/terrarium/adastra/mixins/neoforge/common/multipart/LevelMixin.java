@@ -36,7 +36,7 @@ public class LevelMixin implements MultipartPartsHolder {
     )
     private static void adastra$getEntities(Entity entity, Predicate<? super Entity> predicate, List<Entity> list, Entity entity2, CallbackInfo ci) {
         if (entity2 instanceof MultipartEntity multipartEntity) {
-            for (MultipartPartEntity<?> part : multipartEntity.getParts()) {
+            for (MultipartPartEntity<?> part : multipartEntity.getMultiParts()) {
                 Entity asEntity = (Entity) part;
                 if (entity != entity2 && predicate.test(asEntity)) {
                     list.add(asEntity);
@@ -55,7 +55,7 @@ public class LevelMixin implements MultipartPartsHolder {
     ) {
 
         if (entity instanceof MultipartEntity multipartEntity) {
-            for (MultipartPartEntity<?> part : multipartEntity.getParts()) {
+            for (MultipartPartEntity<?> part : multipartEntity.getMultiParts()) {
                 T entity2 = entityTypeTest.tryCast((Entity) part);
                 if (entity2 != null && predicate.test(entity2)) {
                     output.add(entity2);

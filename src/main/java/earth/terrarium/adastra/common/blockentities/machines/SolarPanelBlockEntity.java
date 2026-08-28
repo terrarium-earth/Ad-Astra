@@ -8,12 +8,14 @@ import earth.terrarium.adastra.common.blockentities.base.sideconfig.Configuratio
 import earth.terrarium.adastra.common.config.MachineConfig;
 import earth.terrarium.adastra.common.constants.ConstantComponents;
 import earth.terrarium.adastra.common.menus.machines.SolarPanelMenu;
-import earth.terrarium.adastra.common.utils.EnergyUtils;
+import earth.terrarium.adastra.common.registry.ModDataManagers;
 import earth.terrarium.adastra.common.utils.TransferUtils;
-import earth.terrarium.botarium.common.energy.EnergyApi;
-import earth.terrarium.botarium.common.energy.base.EnergyContainer;
-import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.common_storage_lib.context.impl.ModifyOnlyContext;
+import earth.terrarium.common_storage_lib.energy.EnergyApi;
+import earth.terrarium.common_storage_lib.energy.impl.SimpleValueStorage;
+import earth.terrarium.common_storage_lib.storage.base.UpdateManager;
+import earth.terrarium.common_storage_lib.storage.base.ValueStorage;
+import earth.terrarium.common_storage_lib.storage.util.TransferUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -21,11 +23,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -35,6 +34,7 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
     public static final List<ConfigurationEntry> SIDE_CONFIG = List.of(
         new ConfigurationEntry(ConfigurationType.ENERGY, Configuration.PUSH, ConstantComponents.SIDE_CONFIG_ENERGY)
     );
+    private final SimpleValueStorage energy = new SimpleValueStorage(this, ModDataManagers.VALUE_CONTENT, MachineConfig.DESH.energyCapacity);
 
     public SolarPanelBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, 1);
@@ -46,12 +46,13 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
     }
 
     @Override
-    public WrappedBlockEnergyContainer getEnergyStorage(Level level, BlockPos pos, BlockState state, @Nullable BlockEntity entity, @Nullable Direction direction) {
-        if (energyContainer != null) return energyContainer;
-        return energyContainer = new WrappedBlockEnergyContainer(
-            this,
-            EnergyUtils.machineExtractOnlyEnergy(MachineConfig.DESH)
-        );
+    public ValueStorage getEnergy(Direction direction) {
+        return energy;
+    }
+
+    @Override
+    public long maxInsertExtract() {
+        return MachineConfig.DESH.maxEnergyInOut;
     }
 
     @Override
@@ -62,14 +63,14 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
     @Override
     public void serverTick(ServerLevel level, long time, BlockState state, BlockPos pos) {
         if (canFunction()) {
-            distributeToChargeSlots();
             if (isDay()) generateEnergy(PlanetApi.API.getSolarPower(level));
+            distributeToChargeSlots();
         }
     }
 
     @Override
     public void tickSideInteractions(BlockPos pos, Predicate<Direction> filter, List<ConfigurationEntry> sideConfig) {
-        TransferUtils.pushEnergyNearby(this, pos, getEnergyStorage().maxExtract(), sideConfig.get(0), filter);
+        TransferUtils.pushEnergyNearby(this, pos, maxInsertExtract(), sideConfig.get(0), filter);
     }
 
     @Override
@@ -88,17 +89,20 @@ public class SolarPanelBlockEntity extends EnergyContainerMachineBlockEntity {
     }
 
     public void generateEnergy(long generationRate) {
-        this.energyContainer.internalInsert(generationRate, false);
+        this.getEnergyStorage().insert(generationRate, false);
+        UpdateManager.batch(this.getEnergyStorage());
     }
 
     public void distributeToChargeSlots() {
         ItemStack stack = getItem(0);
         if (stack.isEmpty()) return;
-        if (!EnergyContainer.holdsEnergy(stack)) return;
-        ItemStackHolder holder = new ItemStackHolder(stack);
-        EnergyApi.moveEnergy(this, null, holder, getEnergyStorage().maxExtract(), false);
-        if (holder.isDirty()) {
-            setItem(0, holder.getStack());
+        ModifyOnlyContext itemContext = new ModifyOnlyContext(stack);
+        if (!itemContext.isPresent(EnergyApi.ITEM)) return;
+        var container = itemContext.find(EnergyApi.ITEM);
+        if (container.getStoredAmount() >= container.getCapacity()) return;
+        long inserted = TransferUtil.moveValue(getEnergyStorage(), container, maxInsertExtract(), false);
+        if (inserted > 0) {
+            setItem(0, itemContext.stack());
         }
     }
 }
