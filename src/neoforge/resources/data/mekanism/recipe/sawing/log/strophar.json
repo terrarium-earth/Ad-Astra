@@ -7,16 +7,14 @@
 	],
 	"type": "mekanism:sawing",
 	"input": {
-		"ingredient": {
-			"tag": "ad_astra:strophar_caps"
-		}
+		"tag": "ad_astra:strophar_caps"
 	},
-	"mainOutput": {
+	"main_output": {
 		"count": 6,
-		"item": "ad_astra:strophar_planks"
+		"id": "ad_astra:strophar_planks"
 	},
-	"secondaryChance": 0.25,
-	"secondaryOutput": {
-		"item": "mekanism:sawdust"
+	"secondary_chance": 0.25,
+	"secondary_output": {
+		"id": "mekanism:sawdust"
 	}
 }

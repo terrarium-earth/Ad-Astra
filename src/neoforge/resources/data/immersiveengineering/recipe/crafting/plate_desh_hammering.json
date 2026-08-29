@@ -8,13 +8,13 @@
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
 		{
-			"tag": "forge:ingots/desh"
+			"tag": "c:ingots/desh"
 		},
 		{
 			"item": "immersiveengineering:hammer"
 		}
 	],
 	"result": {
-		"item": "ad_astra:desh_plate"
+		"id": "ad_astra:desh_plate"
 	}
 }

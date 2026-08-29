@@ -7,17 +7,15 @@
 	],
 	"type": "mekanism:sawing",
 	"input": {
-		"ingredient": {
-			"item": "ad_astra:aeronos_fence_gate"
-		}
+		"item": "ad_astra:aeronos_fence_gate"
 	},
-	"mainOutput": {
+	"main_output": {
 		"count": 2,
-		"item": "ad_astra:aeronos_planks"
+		"id": "ad_astra:aeronos_planks"
 	},
-	"secondaryChance": 1.0,
-	"secondaryOutput": {
+	"secondary_chance": 1.0,
+	"secondary_output": {
 		"count": 4,
-		"item": "minecraft:stick"
+		"id": "minecraft:stick"
 	}
 }

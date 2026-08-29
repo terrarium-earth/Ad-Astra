@@ -7,10 +7,11 @@
 	],
 	"type": "mekanism:sawing",
 	"input": {
-		"item": "ad_astra:aeronos_door"
+		"count": 6,
+		"item": "ad_astra:aeronos_ladder"
 	},
 	"main_output": {
-		"count": 2,
+		"count": 7,
 		"id": "ad_astra:aeronos_planks"
 	}
 }

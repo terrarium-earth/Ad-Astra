@@ -7,12 +7,10 @@
 	],
 	"type": "mekanism:sawing",
 	"input": {
-		"ingredient": {
-			"item": "ad_astra:strophar_door"
-		}
+		"item": "ad_astra:strophar_door"
 	},
-	"mainOutput": {
+	"main_output": {
 		"count": 2,
-		"item": "ad_astra:strophar_planks"
+		"id": "ad_astra:strophar_planks"
 	}
 }

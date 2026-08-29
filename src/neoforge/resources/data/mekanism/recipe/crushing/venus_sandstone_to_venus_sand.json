@@ -7,12 +7,10 @@
 	],
 	"type": "mekanism:crushing",
 	"input": {
-		"ingredient": {
-			"tag": "forge:sandstone/venus_sandstone"
-		}
+		"tag": "c:sandstone/venus_blocks"
 	},
 	"output": {
 		"count": 2,
-		"item": "ad_astra:venus_sand"
+		"id": "ad_astra:venus_sand"
 	}
 }

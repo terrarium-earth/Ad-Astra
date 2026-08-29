@@ -7,15 +7,11 @@
 	],
 	"type": "mekanism:sawing",
 	"input": {
-		"item": "ad_astra:strophar_fence_gate"
+		"count": 6,
+		"item": "ad_astra:strophar_ladder"
 	},
 	"main_output": {
-		"count": 2,
+		"count": 7,
 		"id": "ad_astra:strophar_planks"
-	},
-	"secondary_chance": 1.0,
-	"secondary_output": {
-		"count": 4,
-		"id": "minecraft:stick"
 	}
 }
