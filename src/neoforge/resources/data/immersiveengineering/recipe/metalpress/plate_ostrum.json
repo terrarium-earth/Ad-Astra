@@ -8,10 +8,10 @@
 	"type": "immersiveengineering:metal_press",
 	"energy": 2400,
 	"input": {
-		"tag": "forge:ingots/ostrum"
+		"tag": "c:ingots/ostrum"
 	},
 	"mold": "immersiveengineering:mold_plate",
 	"result": {
-		"tag": "forge:plates/ostrum"
+		"tag": "c:plates/ostrum"
 	}
 }

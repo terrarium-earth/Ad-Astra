@@ -7,12 +7,11 @@
 	],
 	"type": "mekanism:sawing",
 	"input": {
-		"ingredient": {
-			"item": "ad_astra:glacian_trapdoor"
-		}
+		"count": 1,
+		"item": "ad_astra:glacian_trapdoor"
 	},
-	"mainOutput": {
+	"main_output": {
 		"count": 3,
-		"item": "ad_astra:glacian_planks"
+		"id": "ad_astra:glacian_planks"
 	}
 }

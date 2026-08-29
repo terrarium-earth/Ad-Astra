@@ -21,18 +21,18 @@
   ],
   "results": [
     {
-      "item": "minecraft:diamond"
+      "id": "minecraft:diamond"
     },
     {
-      "item": "minecraft:diamond",
+      "id": "minecraft:diamond",
       "chance": 0.75
     },
     {
-      "item": "create:experience_nugget",
+      "id": "create:experience_nugget",
       "chance": 0.75
     },
     {
-      "item": "ad_astra:mars_cobblestone",
+      "id": "ad_astra:mars_cobblestone",
       "chance": 0.125
     }
   ],

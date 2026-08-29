@@ -7,16 +7,16 @@
 	],
 	"type": "mekanism:sawing",
 	"input": {
-		"ingredient": {
-			"tag": "ad_astra:aeronos_caps"
-		}
+		"count": 1,
+		"tag": "ad_astra:aeronos_caps"
 	},
-	"mainOutput": {
+	"main_output": {
 		"count": 6,
-		"item": "ad_astra:aeronos_planks"
+		"id": "ad_astra:aeronos_planks"
 	},
-	"secondaryChance": 0.25,
-	"secondaryOutput": {
-		"item": "mekanism:sawdust"
+	"secondary_chance": 0.25,
+	"secondary_output": {
+		"count": 1,
+		"id": "mekanism:sawdust"
 	}
 }

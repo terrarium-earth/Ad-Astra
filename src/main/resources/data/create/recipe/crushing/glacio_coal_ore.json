@@ -21,18 +21,18 @@
   ],
   "results": [
     {
-      "item": "minecraft:coal"
+      "id": "minecraft:coal"
     },
     {
-      "item": "minecraft:coal",
+      "id": "minecraft:coal",
       "chance": 0.75
     },
     {
-      "item": "create:experience_nugget",
+      "id": "create:experience_nugget",
       "chance": 0.75
     },
     {
-      "item": "ad_astra:glacio_cobblestone",
+      "id": "ad_astra:glacio_cobblestone",
       "chance": 0.125
     }
   ],

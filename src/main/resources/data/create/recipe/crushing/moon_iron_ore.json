@@ -21,18 +21,18 @@
   ],
   "results": [
     {
-      "item": "create:crushed_raw_iron"
+      "id": "create:crushed_raw_iron"
     },
     {
-      "item": "create:crushed_raw_iron",
+      "id": "create:crushed_raw_iron",
       "chance": 0.75
     },
     {
-      "item": "create:experience_nugget",
+      "id": "create:experience_nugget",
       "chance": 0.75
     },
     {
-      "item": "ad_astra:moon_cobblestone",
+      "id": "ad_astra:moon_cobblestone",
       "chance": 0.125
     }
   ],

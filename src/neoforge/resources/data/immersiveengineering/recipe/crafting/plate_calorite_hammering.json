@@ -8,13 +8,13 @@
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
 		{
-			"tag": "forge:ingots/calorite"
+			"tag": "c:ingots/calorite"
 		},
 		{
 			"item": "immersiveengineering:hammer"
 		}
 	],
 	"result": {
-		"item": "ad_astra:calorite_plate"
+		"id": "ad_astra:calorite_plate"
 	}
 }

@@ -7,7 +7,7 @@
 	],
 	"type": "thermal:press",
 	"ingredient": {
-		"tag": "forge:ingots/desh"
+		"tag": "c:ingots/desh"
 	},
 	"result": [
 		{

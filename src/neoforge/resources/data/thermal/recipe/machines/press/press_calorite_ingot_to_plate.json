@@ -7,7 +7,7 @@
 	],
 	"type": "thermal:press",
 	"ingredient": {
-		"tag": "forge:ingots/calorite"
+		"tag": "c:ingots/calorite"
 	},
 	"result": [
 		{

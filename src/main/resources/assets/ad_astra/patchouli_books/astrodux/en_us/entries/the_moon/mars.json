@@ -1,6 +1,6 @@
 {
   "name": "Mars",
-  "icon": "ad_astra:/textures/environment/mars.png",
+  "icon": "ad_astra:textures/environment/mars.png",
   "sortnum": 8,
   "category": "ad_astra:the_moon",
   "pages": [

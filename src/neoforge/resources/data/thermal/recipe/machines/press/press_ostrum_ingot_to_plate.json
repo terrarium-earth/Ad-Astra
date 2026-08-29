@@ -7,7 +7,7 @@
 	],
 	"type": "thermal:press",
 	"ingredient": {
-		"tag": "forge:ingots/ostrum"
+		"tag": "c:ingots/ostrum"
 	},
 	"result": [
 		{

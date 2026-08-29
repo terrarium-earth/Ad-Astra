@@ -420,7 +420,7 @@ public class Rocket extends Vehicle implements FluidProvider.Entity {
     }
 
     public void openPlanetsScreen(ServerPlayer player) {
-        player.openMenu(new PlanetsMenuProvider());
+        new PlanetsMenuProvider().openMenu(player);
         var packet = new ClientboundStopSoundPacket(BuiltInRegistries.SOUND_EVENT
             .getKey(ModSoundEvents.ROCKET.get()), SoundSource.AMBIENT);
         player.connection.send(packet);

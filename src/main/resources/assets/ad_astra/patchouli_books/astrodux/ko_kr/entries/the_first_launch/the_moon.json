@@ -1,6 +1,6 @@
 {
   "name": "달",
-  "icon": "ad_astra:/textures/environment/moon.png",
+  "icon": "ad_astra:textures/environment/moon.png",
   "sortnum": 5,
   "category": "ad_astra:the_first_launch",
   "pages": [

@@ -8,13 +8,13 @@
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
 		{
-			"tag": "forge:ingots/ostrum"
+			"tag": "c:ingots/ostrum"
 		},
 		{
 			"item": "immersiveengineering:hammer"
 		}
 	],
 	"result": {
-		"item": "ad_astra:ostrum_plate"
+		"id": "ad_astra:ostrum_plate"
 	}
 }

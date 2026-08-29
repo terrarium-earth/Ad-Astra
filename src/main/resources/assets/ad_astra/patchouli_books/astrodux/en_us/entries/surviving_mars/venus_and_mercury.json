@@ -1,6 +1,6 @@
 {
   "name": "Venus and Mercury",
-  "icon": "ad_astra:/textures/environment/venus.png",
+  "icon": "ad_astra:textures/environment/venus.png",
   "sortnum": 8,
   "category": "ad_astra:surviving_mars",
   "pages": [

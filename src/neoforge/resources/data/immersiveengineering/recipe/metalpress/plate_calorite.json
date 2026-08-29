@@ -8,10 +8,10 @@
 	"type": "immersiveengineering:metal_press",
 	"energy": 2400,
 	"input": {
-		"tag": "forge:ingots/calorite"
+		"tag": "c:ingots/calorite"
 	},
 	"mold": "immersiveengineering:mold_plate",
 	"result": {
-		"tag": "forge:plates/calorite"
+		"tag": "c:plates/calorite"
 	}
 }
