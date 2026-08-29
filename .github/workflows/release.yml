@@ -98,20 +98,18 @@ jobs:
             fabric-api | depends | *
             resourceful-lib | depends | *
             resourceful-config | depends | *
-            botarium | depends | *
-            cadmus | recommends | *
-            argonauts | recommends | *
+            common-storage-lib | depends | *
             athena | recommends | *
-            shimmer | recommends | *
+            odyssey-claims | recommends | *
+            odyssey-allies | recommends | *
           modrinth-dependencies: |
             fabric-api | depends | *
             resourceful-lib | depends | *
             resourceful-config | depends | *
-            botarium | depends | *
-            cadmus | recommends | *
-            argonauts | recommends | *
+            common-storage-lib | depends | *
             athena-ctm | recommends | *
-            shimmer! | recommends | *
+            odyssey-claims | recommends | *
+            odyssey-allies | recommends | *
 
       - name: Generate Discord Embed
         run: ./gradlew injectEmbed
