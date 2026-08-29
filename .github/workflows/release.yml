@@ -39,7 +39,6 @@ jobs:
 
       - name: Upload NeoForge Releases (Curse/Modrinth/Github)
         id: neoforge_release
-        if: contains(steps.properties.outputs.enabledPlatforms, 'neoforge')
         uses: Kir-Antipov/mc-publish@v3.3.0
         with:
           curseforge-id: ${{ vars.CURSE_ID }}
@@ -76,7 +75,6 @@ jobs:
 
       - name: Upload Fabric Releases (Curse/Modrinth/Github)
         id: fabric_release
-        if: contains(steps.properties.outputs.enabledPlatforms, 'fabric')
         uses: Kir-Antipov/mc-publish@v3.3.0
         with:
           curseforge-id: ${{ vars.CURSE_ID }}
