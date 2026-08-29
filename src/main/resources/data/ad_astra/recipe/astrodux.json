@@ -13,7 +13,7 @@
       "modid": "patchouli"
     }
   ],
-  "type": "patchouli:shaped_book_recipe",
+  "type": "minecraft:crafting_shaped",
   "pattern": [
     "#/#",
     "/B/",
@@ -30,5 +30,10 @@
       "item": "minecraft:book"
     }
   },
-  "book": "ad_astra:astrodux"
+  "result": {
+    "id": "patchouli:guide_book",
+    "components": {
+      "patchouli:book": "ad_astra:astrodux"
+    }
+  }
 }
