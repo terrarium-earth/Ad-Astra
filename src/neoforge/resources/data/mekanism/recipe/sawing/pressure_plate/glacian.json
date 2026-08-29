@@ -7,12 +7,11 @@
 	],
 	"type": "mekanism:sawing",
 	"input": {
-		"ingredient": {
-			"item": "ad_astra:glacian_pressure_plate"
-		}
+		"count": 1,
+		"item": "ad_astra:glacian_pressure_plate"
 	},
-	"mainOutput": {
+	"main_output": {
 		"count": 2,
-		"item": "ad_astra:glacian_planks"
+		"id": "ad_astra:glacian_planks"
 	}
 }

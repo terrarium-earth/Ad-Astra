@@ -8,17 +8,17 @@
 	"type": "immersiveengineering:crusher",
 	"energy": 3200,
 	"input": {
-		"tag": "forge:sandstone/venus_sandstone"
+		"tag": "c:sandstone/venus_sandstone"
 	},
 	"result": {
 		"count": 2,
-		"item": "ad_astra:venus_sand"
+		"id": "ad_astra:venus_sand"
 	},
 	"secondaries": [
 		{
 			"chance": 0.5,
 			"output": {
-				"tag": "forge:dusts/saltpeter"
+				"tag": "c:dusts/saltpeter"
 			}
 		}
 	]

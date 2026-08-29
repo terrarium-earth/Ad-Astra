@@ -8,11 +8,11 @@
 	"type": "immersiveengineering:crusher",
 	"energy": 3200,
 	"input": {
-		"tag": "forge:ores/ice_shard"
+		"tag": "c:ores/ice_shard"
 	},
 	"result": {
 		"count": 4,
-		"item": "ad_astra:ice_shard"
+		"id": "ad_astra:ice_shard"
 	},
 	"secondaries": []
 }
