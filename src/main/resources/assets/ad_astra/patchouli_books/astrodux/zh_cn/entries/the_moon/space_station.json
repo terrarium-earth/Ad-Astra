@@ -1,6 +1,6 @@
 {
   "name": "空间站",
-  "icon": "ad_astra:/textures/gui/sprites/space_station.png",
+  "icon": "ad_astra:textures/gui/sprites/space_station.png",
   "sortnum": 0,
   "category": "ad_astra:the_moon",
   "pages": [

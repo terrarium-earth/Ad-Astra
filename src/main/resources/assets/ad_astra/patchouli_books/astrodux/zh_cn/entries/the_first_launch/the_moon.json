@@ -1,6 +1,6 @@
 {
   "name": "月球",
-  "icon": "ad_astra:/textures/environment/moon.png",
+  "icon": "ad_astra:textures/environment/moon.png",
   "sortnum": 9,
   "category": "ad_astra:the_first_launch",
   "pages": [
