@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class DimensionTransitionMixin {
 
     @WrapWithCondition(
-        method = "playPortalSound",
+        method = "playPortalSound(Lnet/minecraft/world/entity/Entity;)V",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/server/network/ServerGamePacketListenerImpl;send(Lnet/minecraft/network/protocol/Packet;)V",
@@ -23,7 +23,7 @@ public abstract class DimensionTransitionMixin {
         )
     )
     // Prevent the portal teleportation sound from playing when leaving the atmosphere.
-    private static boolean adastra$changeDimension(ServerGamePacketListenerImpl instance, Packet<?> packet, @Local(argsOnly = true, name = "entity") Entity entity) {
+    private static boolean adastra$changeDimension(ServerGamePacketListenerImpl instance, Packet<?> packet, Entity entity) {
         return entity.getY() > AdAstraConfig.atmosphereLeave + 1 || entity.getY() < AdAstraConfig.atmosphereLeave - 1;
     }
 }
