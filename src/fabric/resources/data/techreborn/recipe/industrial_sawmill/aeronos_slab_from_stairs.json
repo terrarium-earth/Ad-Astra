@@ -15,20 +15,18 @@
     }
   ],
   "power": 30,
-  "results": [
+  "outputs": [
     {
-      "item": "ad_astra:aeronos_slab"
+      "id": "ad_astra:aeronos_slab"
     },
     {
       "count": 2,
-      "item": "techreborn:saw_dust"
+      "id": "techreborn:saw_dust"
     }
   ],
-  "tank": {
-    "amount": {
-      "droplets": 20250
-    },
-    "fluid": "minecraft:water"
+  "fluid": {
+    "amount": { "value": 20250 },
+    "fluid": { "fluid": "minecraft:water" }
   },
   "time": 100
 }

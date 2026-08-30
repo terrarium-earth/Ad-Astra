@@ -15,10 +15,10 @@
     }
   ],
   "power": 4,
-  "results": [
+  "outputs": [
     {
       "count": 4,
-      "item": "ad_astra:venus_sand"
+      "id": "ad_astra:venus_sand"
     }
   ],
   "time": 200
