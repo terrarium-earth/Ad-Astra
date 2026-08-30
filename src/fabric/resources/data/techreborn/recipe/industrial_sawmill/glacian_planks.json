@@ -14,21 +14,19 @@
     }
   ],
   "power": 40,
-  "results": [
+  "outputs": [
     {
       "count": 4,
-      "item": "ad_astra:glacian_planks"
+      "id": "ad_astra:glacian_planks"
     },
     {
       "count": 3,
-      "item": "techreborn:saw_dust"
+      "id": "techreborn:saw_dust"
     }
   ],
-  "tank": {
-    "amount": {
-      "droplets": 81000
-    },
-    "fluid": "minecraft:water"
+  "fluid": {
+    "amount": { "value": 81000 },
+    "fluid": { "fluid": "minecraft:water" }
   },
   "time": 200
 }

@@ -10,22 +10,22 @@
   "type": "techreborn:industrial_grinder",
   "power": 64,
   "time": 100,
-  "tank": {
-    "fluid": "minecraft:water",
-    "amount": 1000
+  "fluid": {
+    "amount": { "value": 1000 },
+    "fluid": { "fluid": "minecraft:water" }
   },
   "ingredients": [
     {
       "tag": "c:calorite_ores"
     }
   ],
-  "results": [
+  "outputs": [
     {
-      "item": "ad_astra:raw_calorite",
+      "id": "ad_astra:raw_calorite",
       "count": 3
     },
     {
-      "item": "ad_astra:calorite_nugget",
+      "id": "ad_astra:calorite_nugget",
       "count": 3
     }
   ]

@@ -16,9 +16,9 @@
       "count": 1
     }
   ],
-  "results": [
+  "outputs": [
     {
-      "item": "ad_astra:desh_plate",
+      "id": "ad_astra:desh_plate",
       "count": 9
     }
   ]

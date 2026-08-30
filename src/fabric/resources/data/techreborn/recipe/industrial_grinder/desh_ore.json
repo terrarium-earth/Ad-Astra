@@ -10,22 +10,22 @@
   "type": "techreborn:industrial_grinder",
   "power": 64,
   "time": 100,
-  "tank": {
-    "fluid": "minecraft:water",
-    "amount": 1000
+  "fluid": {
+    "amount": { "value": 1000 },
+    "fluid": { "fluid": "minecraft:water" }
   },
   "ingredients": [
     {
       "tag": "c:desh_ores"
     }
   ],
-  "results": [
+  "outputs": [
     {
-      "item": "ad_astra:raw_desh",
+      "id": "ad_astra:raw_desh",
       "count": 3
     },
     {
-      "item": "ad_astra:desh_nugget",
+      "id": "ad_astra:desh_nugget",
       "count": 3
     }
   ]
