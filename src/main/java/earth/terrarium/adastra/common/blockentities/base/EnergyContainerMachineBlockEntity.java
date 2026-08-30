@@ -42,8 +42,9 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
         if (stack.isEmpty()) return;
         ModifyOnlyContext modifyContext = new ModifyOnlyContext(stack.copy());
         if (!modifyContext.isPresent(EnergyApi.ITEM)) return;
-        TransferUtil.moveValue(getEnergyStorage(), getEnergyStorage(), maxInsertExtract(), false);
-        if (ItemStack.isSameItemSameComponents(stack, modifyContext.stack())) {
+        var container = modifyContext.find(EnergyApi.ITEM);
+        TransferUtil.moveValue(container, getEnergyStorage(), maxInsertExtract(), false);
+        if (!ItemStack.isSameItemSameComponents(stack, modifyContext.stack())) {
             this.setItem(0, modifyContext.stack());
         }
     }
@@ -55,7 +56,7 @@ public abstract class EnergyContainerMachineBlockEntity extends ContainerMachine
         if (!modifyContext.isPresent(EnergyApi.ITEM)) return;
         var container = modifyContext.find(EnergyApi.ITEM);
         TransferUtil.moveValue(getEnergyStorage(), container, maxInsertExtract(), false);
-        if (ItemStack.isSameItemSameComponents(stack, modifyContext.stack())) {
+        if (!ItemStack.isSameItemSameComponents(stack, modifyContext.stack())) {
             this.setItem(0, modifyContext.stack());
         }
     }
