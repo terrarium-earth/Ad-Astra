@@ -1,3 +1,1 @@
-- Fixed chest loot tables in structures (MrBysco)
-- Fixed Tech Reborn compat recipes (MrBysco)
-- Fixed battery slot not working in machines (MrBysco)
+- Fix Dimension Transition mixin that caused Fabric players to be unable to use portals (MrBysco)
