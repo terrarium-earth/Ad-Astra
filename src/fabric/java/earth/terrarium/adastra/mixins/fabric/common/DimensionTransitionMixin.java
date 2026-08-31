@@ -1,7 +1,6 @@
 package earth.terrarium.adastra.mixins.fabric.common;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import com.llamalad7.mixinextras.sugar.Local;
 import earth.terrarium.adastra.common.config.AdAstraConfig;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
