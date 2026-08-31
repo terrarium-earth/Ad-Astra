@@ -1,1 +1,1 @@
-- Fix Dimension Transition mixin that caused Fabric players to be unable to use portals (MrBysco)
+- Fix space suits rendering double when using shaders
