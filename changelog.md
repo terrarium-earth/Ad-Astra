@@ -1,1 +1,1 @@
-- Fix space suits rendering double when using shaders
+- Fix some block/item models not rendering correctly in Fabric (MrBysco)

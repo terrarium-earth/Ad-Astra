@@ -5,6 +5,7 @@ import earth.terrarium.adastra.client.fabric.AdAstraClientFabric;
 import earth.terrarium.adastra.common.items.armor.JetSuitItem;
 import earth.terrarium.common_storage_lib.resources.ResourceStack;
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource;
+import net.fabricmc.fabric.api.client.model.loading.v1.FabricBakedModelManager;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -16,7 +17,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -30,7 +30,7 @@ public class ClientPlatformUtilsActual {
 
     @Actual
     public static BakedModel getModel(ModelManager dispatcher, ResourceLocation id) {
-        return dispatcher.getModel(new ModelResourceLocation(id, "standalone"));
+        return ((FabricBakedModelManager) dispatcher).getModel(id);
     }
 
     @Actual
