@@ -1,1 +1,1 @@
-- Fix some block/item models not rendering correctly in Fabric (MrBysco)
+- Fix issues with the Etrionic Blast Furnace (MrBysco)
