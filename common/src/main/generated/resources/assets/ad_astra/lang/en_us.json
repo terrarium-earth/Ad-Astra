@@ -401,6 +401,7 @@
   "block.ad_astra.yellow_flag": "Yellow Flag",
   "block.ad_astra.yellow_industrial_lamp": "Yellow Industrial Lamp",
   "config.ad_astra.allowFlagImages": "Allow flag images",
+  "config.ad_astra.allowedFlagHosts": "Allowed flag hosts",
   "config.ad_astra.atmosphereLeave": "Atmosphere leave",
   "config.ad_astra.client.title": "Ad Astra Client",
   "config.ad_astra.clientConfig": "Client Config",
