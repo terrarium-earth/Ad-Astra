@@ -83,9 +83,8 @@ public class FluidUtils {
         }
 
         // Move the fluid from the item to the container
-        if (TransferUtil.move(itemFluidContainer, fluidContainer, fluidStack.resource(), fluidStack.amount(), true) == 0)
-            return;
-        TransferUtil.move(itemFluidContainer, fluidContainer, fluidStack.resource(), fluidStack.amount(), false);
+        if (fluidContainer.get(tank).insert(fluidStack.resource(), fluidStack.amount(), true) == 0) return;
+        TransferUtil.move(itemFluidContainer, fluidContainer.get(tank), fluidStack.resource(), fluidStack.amount(), false);
 
         var result = itemContext.mainSlot().toItemStack();
 
@@ -130,7 +129,7 @@ public class FluidUtils {
             if (!ItemUtils.canAddItem(filledStack, resultStack)) return;
         }
 
-        if (TransferUtil.move(fluidContainer, itemFluidContainer, fluidStack.resource(), fluidStack.amount(), true) == 0)
+        if (itemFluidContainer.insert(fluidStack.resource(), fluidStack.amount(), true) == 0)
             return;
         TransferUtil.move(fluidContainer, itemFluidContainer, fluidStack.resource(), fluidStack.amount(), false);
 
