@@ -91,7 +91,7 @@ var env = System.getenv()
                     required.project "fabric-api"
                     optional.project "modmenu"
                     optional.project "patchouli"
-                    optional.project "roughly-enough-items"
+                    optional.project "rei"
                     optional.project "emi"
                 }
             } else {
