@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-24T01:15:48.9638777	Tags for minecraft:item mod id ad_astra
+// 1.21.1	2026-09-08T22:31:53.2222977	Tags for minecraft:item mod id ad_astra
 375e4bc49d396a2ae2b2a9dcddc300ab07a3aa48 data/ad_astra/tags/item/aeronos_caps.json
 8030232b3adfa6e804799644b412d6697c9f985a data/ad_astra/tags/item/cable_ducts.json
 911713d0495bba21d55618ad4a338f5a2ed3d41c data/ad_astra/tags/item/calorite_blocks.json
@@ -81,16 +81,20 @@ eb291297801c6ab3ad1d141cbf1ff496b2c15da5 data/c/tags/item/storage_blocks/desh.js
 8624111f9360c939093cb5a4a19e2b9ef133f29d data/c/tags/item/storage_blocks/steel.json
 666dc63a1d291114353f901cbb1bb7b39d1fdf0c data/minecraft/tags/item/beacon_payment_items.json
 f1f2cbc4e0ade6ac0f4f9bff4f7d77ec2ec0078a data/minecraft/tags/item/buttons.json
+13f6a61639793ebe19fa57e5c8c99ee6f494cc00 data/minecraft/tags/item/chest_armor.json
 e7756a05d3658940079b4f65fc227c293ffca182 data/minecraft/tags/item/coal_ores.json
 d5a13d562c3fb7aed4f08127656dcd55b9669ec1 data/minecraft/tags/item/copper_ores.json
 86efe8ef378c07fd7a05ad44ac4a0e8830b9a8c0 data/minecraft/tags/item/diamond_ores.json
 2348e08e971793a343c2ed4527405754d6052382 data/minecraft/tags/item/doors.json
 0a8ee7cfae7f40b9f8a32b25b25cca9e0cdebe95 data/minecraft/tags/item/dyeable.json
 436d44368b8bcbca89efd576bd72cd644b2cb7b0 data/minecraft/tags/item/fence_gates.json
+3099c71ae7e6c3244e81cac052b40aa0d761d56f data/minecraft/tags/item/foot_armor.json
 63d5a371cfda84378a9891695b6462b7059f1775 data/minecraft/tags/item/gold_ores.json
+73e64cc18d542250ec567180905f1f0eb90b3b0b data/minecraft/tags/item/head_armor.json
 33e6dd9b13241b3c602a4ee8f0a63f3535da7895 data/minecraft/tags/item/iron_ores.json
 d64abb70838db795f8039bd9f88a42b2241a646b data/minecraft/tags/item/lapis_ores.json
 b220dfe6b8a3eba7159b1cecfde26b3dd6c9a55f data/minecraft/tags/item/leaves.json
+c7c89a68535752b2de4d6b3892677c51a1d9ac0e data/minecraft/tags/item/leg_armor.json
 fad1a2f6e701404905657b1d4cd73049b2722c81 data/minecraft/tags/item/logs_that_burn.json
 63d5a371cfda84378a9891695b6462b7059f1775 data/minecraft/tags/item/piglin_loved.json
 85ec1e10da0a245eb33efa95920b5eb6b5fc83c9 data/minecraft/tags/item/planks.json
@@ -104,10 +108,10 @@ aa092701693917f18e7ef32cdad274dbb7b9864b data/minecraft/tags/item/stairs.json
 892b3a6ca289bdebd74fcec309ef9b35b2f2b54e data/minecraft/tags/item/trapdoors.json
 a4002c0d36d1ca0635d5034d789fc9673c2981ca data/minecraft/tags/item/walls.json
 23af9eb135e31baad3fb7330ee4282867f808042 data/minecraft/tags/item/wooden_buttons.json
-8bb043dc0d310488b32864f321bafd7d48aa0e00 data/minecraft/tags/item/wooden_doors.json
-0eed343dac2d52d37db98dc036f3c4568faafff4 data/minecraft/tags/item/wooden_fences.json
+4d40fe636519c959fed720548474d6b76020640f data/minecraft/tags/item/wooden_doors.json
+e45bdcb758c931676f02d3ef7671edbbcbf57feb data/minecraft/tags/item/wooden_fences.json
 8e87c4dcce83d2412fd2f31bf337c90eeaf02c6d data/minecraft/tags/item/wooden_pressure_plates.json
 7941802c43d0d2305f949c90a908a755baca7d42 data/minecraft/tags/item/wooden_slabs.json
 36db88d413e820804d4d280b8ec4215488f94ff5 data/minecraft/tags/item/wooden_stairs.json
-0f0b45e4b811d090d7d3aff7393943bd9e5ec440 data/minecraft/tags/item/wooden_trapdoors.json
+7670d583716096531bf55ac749e7fdb263a31b46 data/minecraft/tags/item/wooden_trapdoors.json
 ecb7a0909135ee85bb6cf44d613e625b5eaf07f9 data/minecraft/tags/item/wool.json

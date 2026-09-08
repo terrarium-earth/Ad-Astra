@@ -1,1 +1,2 @@
-- Fix issues with the Etrionic Blast Furnace (MrBysco)
+- Fix ghost Jet Suit on Fabric (MrBysco)
+- Fix space suits not being enchantable (MrBysco)

@@ -235,6 +235,18 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         tag(ItemTags.WOODEN_STAIRS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STROPHAR_STAIRS.get())));
         tag(ItemTags.WOODEN_STAIRS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_STAIRS.get())));
 
+        tag(ItemTags.WOODEN_DOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_DOOR.get())));
+        tag(ItemTags.WOODEN_DOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STROPHAR_DOOR.get())));
+        tag(ItemTags.WOODEN_DOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_DOOR.get())));
+
+        tag(ItemTags.WOODEN_TRAPDOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_TRAPDOOR.get())));
+        tag(ItemTags.WOODEN_TRAPDOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STROPHAR_TRAPDOOR.get())));
+        tag(ItemTags.WOODEN_TRAPDOORS).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_TRAPDOOR.get())));
+
+        tag(ItemTags.WOODEN_FENCES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.AERONOS_FENCE.get())));
+        tag(ItemTags.WOODEN_FENCES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.STROPHAR_FENCE.get())));
+        tag(ItemTags.WOODEN_FENCES).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_FENCE.get())));
+
         tag(ItemTags.WOOL).add(TagEntry.element(BuiltInRegistries.BLOCK.getKey(ModBlocks.GLACIAN_FUR.get())));
 
         tag(ItemTags.DYEABLE).add(element(ModItems.SPACE_HELMET.get()));
@@ -249,6 +261,19 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         tag(ItemTags.DYEABLE).add(element(ModItems.JET_SUIT.get()));
         tag(ItemTags.DYEABLE).add(element(ModItems.JET_SUIT_PANTS.get()));
         tag(ItemTags.DYEABLE).add(element(ModItems.JET_SUIT_BOOTS.get()));
+
+        tag(ItemTags.HEAD_ARMOR).add(element(ModItems.SPACE_HELMET.get()));
+        tag(ItemTags.HEAD_ARMOR).add(element(ModItems.NETHERITE_SPACE_HELMET.get()));
+        tag(ItemTags.HEAD_ARMOR).add(element(ModItems.JET_SUIT_HELMET.get()));
+        tag(ItemTags.CHEST_ARMOR).add(element(ModItems.SPACE_SUIT.get()));
+        tag(ItemTags.CHEST_ARMOR).add(element(ModItems.NETHERITE_SPACE_SUIT.get()));
+        tag(ItemTags.CHEST_ARMOR).add(element(ModItems.JET_SUIT.get()));
+        tag(ItemTags.LEG_ARMOR).add(element(ModItems.SPACE_PANTS.get()));
+        tag(ItemTags.LEG_ARMOR).add(element(ModItems.NETHERITE_SPACE_PANTS.get()));
+        tag(ItemTags.LEG_ARMOR).add(element(ModItems.JET_SUIT_PANTS.get()));
+        tag(ItemTags.FOOT_ARMOR).add(element(ModItems.SPACE_BOOTS.get()));
+        tag(ItemTags.FOOT_ARMOR).add(element(ModItems.NETHERITE_SPACE_BOOTS.get()));
+        tag(ItemTags.FOOT_ARMOR).add(element(ModItems.JET_SUIT_BOOTS.get()));
     }
 
     private void add(TagKey<Item> tag, Item item) {
