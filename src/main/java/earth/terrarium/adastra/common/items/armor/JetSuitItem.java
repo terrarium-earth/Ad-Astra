@@ -73,10 +73,10 @@ public class JetSuitItem extends SpaceSuitItem implements EnergyProvider.Item {
 
         if (KeybindManager.sprintDown(player)) {
             fullFlight(player);
-            consume(player, stack, 100, slotId);
+            consume(player, stack, 100, EquipmentSlot.CHEST);
         } else {
             upwardsFlight(player);
-            consume(player, stack, 50, slotId);
+            consume(player, stack, 50, EquipmentSlot.CHEST);
         }
     }
 
@@ -102,13 +102,13 @@ public class JetSuitItem extends SpaceSuitItem implements EnergyProvider.Item {
         return player.isCreative() || energy.getStoredAmount() > 0;
     }
 
-    private void consume(Player player, ItemStack stack, int amount, int slotId) {
+    private void consume(Player player, ItemStack stack, int amount, EquipmentSlot slot) {
         if (player.isCreative() || player.isSpectator() || player.level().isClientSide()) return;
         var itemContext = new ModifyOnlyContext(stack);
         var container = itemContext.find(EnergyApi.ITEM);
         if (container == null) return;
         container.extract(amount, false);
-        player.getInventory().setItem(slotId, itemContext.stack());
+        player.setItemSlot(slot, itemContext.stack());
     }
 
     protected boolean isFullFlightEnabled(Player player) {
