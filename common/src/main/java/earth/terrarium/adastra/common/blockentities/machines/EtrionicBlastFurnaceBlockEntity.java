@@ -104,18 +104,20 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
         boolean shouldClear = true;
         for (int i = 0; i < 4; i++) {
             if (recipes[i] == null) continue;
-            if (canCraft(energyStorage, recipes[i], i + 1)) {
-                shouldClear = false;
-            }
+            if (!canCraft(energyStorage, recipes[i], i + 1)) continue;
+            shouldClear = false;
             energyStorage.internalExtract(MachineConfig.etrionicBlastFurnaceBlastingEnergyPerItem, false);
             isCooking = true;
-            if (cookTime < cookTimeTotal) continue;
-            for (int j = 0; j < 4; j++) {
-                craft(recipes[j], j + 1);
-            }
         }
         if (isCooking) {
             cookTime++;
+        }
+        if (cookTime >= cookTimeTotal && cookTimeTotal > 0) {
+            for (int j = 0; j < 4; j++) {
+                if (recipes[j] != null && canCraft(energyStorage, recipes[j], j + 1)) {
+                    craft(recipes[j], j + 1);
+                }
+            }
         }
         if (shouldClear) {
             for (int i = 0; i < 4; i++) {
@@ -196,7 +198,11 @@ public class EtrionicBlastFurnaceBlockEntity extends EnergyContainerMachineBlock
 
     @Nullable
     protected void createRecipe(int recipe, int slot) {
-        if (getItem(slot).isEmpty()) return;
+        if (getItem(slot).isEmpty() || (recipes[recipe] != null && !recipes[recipe].getIngredients().get(0).test(getItem(slot)))) {
+            recipes[recipe] = null;
+            return;
+        }
+        if (recipes[recipe] != null) return;
         level().getRecipeManager().getAllRecipesFor(RecipeType.BLASTING)
             .stream()
             .filter(r -> r.getIngredients().get(0).test(getItem(slot)))

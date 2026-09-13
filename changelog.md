@@ -1,1 +1,2 @@
-- Fix fluid container (#785 by DonaldDuckTheThird)
+- Fix Etrionic Blast Furnace dupe (MrBysco)
+- Fix Oxygen Loader / Distributor using the wrong fluid amounts on Fabric (MrBysco)

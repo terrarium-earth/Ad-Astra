@@ -109,8 +109,8 @@ public class OxygenLoaderBlockEntity extends RecipeMachineBlockEntity<OxygenLoad
     public void craft() {
         if (recipe == null) return;
 
-        fluidContainer.internalExtract(getFluidContainer().getFirstFluid().copyWithAmount(recipe.input().getFluidAmount()), false);
-        fluidContainer.internalInsert(recipe.result(), false);
+        fluidContainer.internalExtract(getFluidContainer().getFirstFluid().copyWithAmount(FluidConstants.fromMillibuckets(recipe.input().getFluidAmount())), false);
+        fluidContainer.internalInsert(recipe.result().copyWithAmount(FluidConstants.fromMillibuckets(recipe.result().getFluidAmount())), false);
 
         updateSlots();
 
