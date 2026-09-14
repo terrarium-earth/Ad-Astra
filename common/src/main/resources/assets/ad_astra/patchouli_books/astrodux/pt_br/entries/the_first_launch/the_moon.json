@@ -1,0 +1,24 @@
+{
+  "name": "A Lua",
+  "icon": "ad_astra:/textures/environment/moon.png",
+  "sortnum": 9,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "A Lua",
+      "item": "ad_astra:desh_ingot",
+      "text": "Parabéns por chegar à lua! A lua é um deserto árido, cinza e morto, até onde a vista alcança; no entanto, é no subsolo que você encontrará o próximo recurso importante em Ad Astra - Desh! Desh é usado para construir máquinas avançadas, estações espaciais e o foguete de nível dois."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "O ambiente",
+      "text": "O ambiente da lua é muito diferente da Terra. Como a lua não tem oxigênio e é congelante, tentar colocar água a congelará e blocos acesos como tochas se quebrarão. Qualquer vida vegetal e plantações também morrerão muito rapidamente. Para combater esses efeitos, você pode construir um distribuidor de oxigênio, que abordaremos mais tarde."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Voltando para Casa",
+      "text": "Para retornar à Terra, abra seu módulo de pouso (shift + clique direito) e colete o foguete, o combustível e a plataforma de lançamento. Para remover o módulo de pouso, soque-o. Monte a plataforma de lançamento, coloque o foguete e encha-o com combustível. Pressione $(k:jump) e voe de volta para a Terra."
+    }
+  ]
+}

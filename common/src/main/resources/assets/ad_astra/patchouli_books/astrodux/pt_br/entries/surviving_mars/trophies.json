@@ -1,0 +1,20 @@
+{
+  "name": "Troféus",
+  "icon": "ad_astra:mars_globe",
+  "sortnum": 0,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Globos",
+      "item": "ad_astra:earth_globe",
+      "text": "Globos são blocos de troféu encontrados como recompensa no final de uma dungeon. Eles não possuem nenhuma função prática, sendo apenas itens decorativos. Podem ser girados ao clicar com o botão direito ou girar continuamente quando alimentados por redstone. No momento, apenas o globo da Lua pode ser obtido no modo sobrevivência."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Pinturas Espaciais",
+      "item": "ad_astra:space_painting",
+      "text": "Pinturas espaciais podem ser encontradas em baús espalhados pelas dungeons. Elas funcionam exatamente como as pinturas normais, mas exibem apenas imagens deste mod. Existem 14 pinturas diferentes para colecionar."
+    }
+  ]
+}

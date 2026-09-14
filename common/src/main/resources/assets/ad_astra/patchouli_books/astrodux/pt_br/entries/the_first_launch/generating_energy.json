@@ -1,0 +1,18 @@
+{
+  "name": "Gerando Energia",
+  "icon": "ad_astra:coal_generator",
+  "sortnum": 0,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Gerador de Carvão",
+      "item": "ad_astra:coal_generator",
+      "text": "Energia é o recurso principal de Ad Astra. Ela é usada em todas as máquinas e é necessária para tudo. Existem várias maneiras de gerar energia, sendo a mais básica o gerador de carvão. Ele usa recursos combustíveis como madeira ou carvão para gerar energia."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:coal_generator"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "name": "Distribuidor de Oxigênio",
+  "icon": "ad_astra:oxygen_distributor",
+  "sortnum": 2,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Distribuidor de Oxigênio",
+      "item": "ad_astra:oxygen_distributor",
+      "text": "O distribuidor de oxigênio é uma máquina poderosa que distribui oxigênio em uma sala selada, permitindo que qualquer vida dentro sobreviva. Ele funciona exatamente como um carregador de oxigênio, onde você insere água no tanque, mas em vez de fornecer oxigênio, o oxigênio é distribuído no ar."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Bomba de Água",
+      "item": "ad_astra:water_pump",
+      "text": "A bomba de água é essencial para manter o distribuidor de oxigênio funcionando infinitamente. Para usá-la, coloque uma fonte de água infinita abaixo, depois coloque a bomba de água acima de um dos blocos de água e, em seguida, coloque o distribuidor de oxigênio adjacente a ela. Certifique-se de fornecer energia suficiente tanto para a bomba quanto para o distribuidor de oxigênio."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Distribuidor e Bomba",
+      "recipe": "ad_astra:oxygen_distributor",
+      "recipe2": "ad_astra:water_pump"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Usando o Distribuidor",
+      "text": "Depois de fornecer ao distribuidor de oxigênio uma fonte de água infinita, energia suficiente e uma sala completamente selada, ele distribuirá oxigênio nessa sala. Para verificar se o oxigênio está sendo distribuído, clique em \"mostrar\" na GUI do distribuidor. Se a sala estiver destacada, isso significa que o oxigênio foi distribuído com sucesso."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Se houver um buraco em sua estrutura que esteja causando a fuga de oxigênio, a GUI do distribuidor fornecerá um aviso. Tampe o buraco para evitar consumo desnecessário de energia e uso de oxigênio. Depois disso, você deve ser capaz de tirar seu traje de oxigênio e sobreviver. Cada distribuidor de oxigênio pode suportar até 6.000 blocos, permitindo que você construa uma estação espacial ou base de tamanho moderado. Se precisar de mais, você pode colocar mais distribuidores de oxigênio."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Ventilação",
+      "text": "Dentro de sua estrutura oxigenada, você deve fornecer ventilação adequada para garantir que o oxigênio não seja bloqueado quando uma porta estiver fechada. Para fazer isso, você pode criar um espaço de um bloco entre as paredes ou usar um bloco de ventilação para permitir o fluxo de oxigênio."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Despressurização rápida",
+      "text": "Quando sua estrutura estiver totalmente selada e um buraco for criado, sua estrutura despressurizará rapidamente. Isso pode ser um evento catastrófico. Todas as entidades dentro serão violentamente sugadas para fora do buraco e morrerão sem um traje espacial. O distribuidor de oxigênio também drenará rapidamente oxigênio e energia. Evite isso tampando os buracos o mais rápido possível e evitando que buracos acidentais sejam criados."
+    }
+  ]
+}

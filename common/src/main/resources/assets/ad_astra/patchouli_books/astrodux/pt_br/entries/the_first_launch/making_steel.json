@@ -1,0 +1,24 @@
+{
+  "name": "Fabricando Aço",
+  "icon": "ad_astra:etrionic_blast_furnace",
+  "sortnum": 2,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Alto-Forno Etrionico",
+      "item": "ad_astra:etrionic_blast_furnace",
+      "text": "O Alto-Forno Etrionico é uma versão aprimorada do alto-forno. Ele possui dois modos: fundição e liga. A fundição funciona como um alto-forno, mas com 4 slots para 4x de eficiência. A liga combina materiais para criar uma liga."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:etrionic_blast_furnace"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Aço",
+      "item": "ad_astra:steel_ingot",
+      "text": "O aço é feito em um alto-forno etrionico combinando ferro e carvão. Isso produzirá 1 lingote de aço por ferro e carvão. O aço é essencial para a maioria das receitas e é o material principal do seu primeiro foguete."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Rádio",
+  "icon": "ad_astra:radio",
+  "sortnum": 7,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Rádio",
+      "item": "ad_astra:radio",
+      "text": "Antes de lançar, por que não ouvir algumas músicas? O rádio é um bloco que reproduzirá estações de rádio transmitidas pela internet! Existem algumas estações que você pode ouvir, em vários gêneros. Além disso, qualquer pessoa nas proximidades ouvirá a mesma estação. Eventualmente, você poderá usar o rádio para construir o rover, que possui um rádio embutido para dirigir e ouvir música."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:radio"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Painel Solar",
+  "icon": "ad_astra:solar_panel",
+  "sortnum": 1,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Painel Solar",
+      "item": "ad_astra:solar_panel",
+      "text": "O painel solar é uma versão aprimorada do gerador de carvão, produzindo mais energia por tick enquanto é autossuficiente. Sua geração de energia depende da distância do planeta ao sol e da neblina. Por causa disso, é mais eficiente colocar painéis solares perto do sol. Os painéis solares também produzem mais energia em órbita, pois não há atmosfera bloqueando a luz."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Painel Solar",
+      "text": "Verifique a GUI para ver quanta energia está sendo produzida no mundo atual.",
+      "recipe": "ad_astra:solar_panel"
+    }
+  ]
+}

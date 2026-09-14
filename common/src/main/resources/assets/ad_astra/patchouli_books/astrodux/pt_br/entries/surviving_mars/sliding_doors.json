@@ -1,0 +1,29 @@
+{
+  "name": "Portas Deslizantes",
+  "icon": "ad_astra:ostrum_sliding_door",
+  "sortnum": 3,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Portas Deslizantes",
+      "item": "ad_astra:airlock",
+      "text": "As portas deslizantes são portas grandes de 3x3. Elas selam o oxigênio quando fechadas, tornando-as excelentes para câmaras de descompressão. Elas podem ser trancadas ao segurar Shift e clicar com o botão direito usando uma chave inglesa. Portas trancadas só podem ser abertas com redstone."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:iron_sliding_door",
+      "recipe2": "ad_astra:steel_sliding_door"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:desh_sliding_door",
+      "recipe2": "ad_astra:ostrum_sliding_door"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:airlock",
+      "recipe2": "ad_astra:reinforced_door"
+    }
+  ]
+}
