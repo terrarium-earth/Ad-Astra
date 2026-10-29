@@ -19,7 +19,7 @@
   "item_inputs": [
     {
       "amount": 1,
-      "tag": "c:ice_shard_ores"
+      "tag": "c:ores/ice_shard"
     }
   ],
   "item_outputs": [

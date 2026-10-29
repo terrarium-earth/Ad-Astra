@@ -19,7 +19,7 @@
   "item_inputs": [
     {
       "amount": 1,
-      "tag": "c:desh_ores"
+      "tag": "c:ores/desh"
     }
   ],
   "item_outputs": [

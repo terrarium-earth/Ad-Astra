@@ -19,7 +19,7 @@
   "item_inputs": [
     {
       "amount": 1,
-      "tag": "c:calorite_ingots"
+      "tag": "c:ingots/calorite"
     }
   ],
   "item_outputs": [

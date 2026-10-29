@@ -19,7 +19,7 @@
   "item_inputs": [
     {
       "amount": 1,
-      "tag": "c:ostrum_ores"
+      "tag": "c:ores/ostrum"
     }
   ],
   "item_outputs": [

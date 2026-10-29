@@ -19,7 +19,7 @@
   "item_inputs": [
     {
       "amount": 1,
-      "tag": "c:desh_ingots"
+      "tag": "c:ingots/desh"
     }
   ],
   "item_outputs": [

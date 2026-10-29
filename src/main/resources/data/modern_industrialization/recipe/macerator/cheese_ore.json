@@ -19,7 +19,7 @@
   "item_inputs": [
     {
       "amount": 1,
-      "tag": "c:cheese_ores"
+      "item": "ad_astra:moon_cheese_ore"
     }
   ],
   "item_outputs": [
